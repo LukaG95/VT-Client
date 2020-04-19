@@ -38,11 +38,10 @@
 
 .sbWrapper{
   display: flex;
-  background-color: whitesmoke;
+  background-color: #392C3E;
   flex-direction: column;
 
   width: 320px;
-  height: 95vh;
 }
 
 .sbSection{
@@ -52,5 +51,17 @@
 
 .sbSection ul li{
   display: inline;
-  margin-right: 15px;
+  margin-right: 10px;
+}
+
+.footerFirst, .footerSecond, .footerThird{
+  color: #F6F6F6;
+  text-decoration: none;
+  text-align: center; 
+  font-size: 11px;
+}
+
+.footerFirst li a, .footerSecond li a, .footerThird li a{
+  text-decoration: none;
+  color: white;
 }

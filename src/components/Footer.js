@@ -1,18 +1,22 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 function Footer() {
   return (
     <div className="sbSection">
 
-      <ul className="sbItem">
-        <li>Giveaway</li>
-        <li>Support</li>
-        <li>Terms of service</li>
-        <li>Privacy Policy</li>
-        <li>Contact us</li>
+      <ul className="sbItem footerFirst">
+        <li className="test"><a href="https://discord.gg/Qt6qKJx">Giveaway</a></li>
+        <li><a href="https://discord.gg/nqSgyCr">Support</a></li>
+        <li><Link to="/terms">Terms of service</Link></li>
       </ul>
 
-      <p className="SbItem">
+      <ul className="sbItem footerSecond">
+        <li><Link to="/privacy">Privacy policy</Link></li>
+        <li><Link to="/contactus">Contact us</Link></li>
+      </ul>
+
+      <p className="sbItem footerThird">
         © <b>VirTrade - All rights reserved</b>
       </p>
 

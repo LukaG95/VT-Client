@@ -1,13 +1,13 @@
 import React from 'react'
 
-function PrivacyPolicy() {
+function ContactUs() {
   return (
     <div className="secondaryWrapper">
 
-      <h1>Privacy policy page</h1>
+      <h1>Contact us page</h1>
       
     </div>
   )
 }
 
-export default PrivacyPolicy;
+export default ContactUs;
