@@ -25,8 +25,6 @@ function App() {
           <Route exact path="/prices"><Prices /></Route>
           <Route exact path="/reputation"><Reputation /></Route>
           <Route exact path="/premium"><Premium /></Route>
-          <Route exact path="/trading"><Trading /></Route>
-          <Route exact path="/trading"><Trading /></Route>
         </Switch>
 
         </div>

@@ -3,12 +3,13 @@
   padding: 0;
   box-sizing: border-box;
 
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI';
+  font-family: 'Poppins', sans-serif;
 }
 
 .secondaryWrapper{
   display: flex;
 }
+
 
 /*-----Navbar              ----*/
 
@@ -32,3 +33,13 @@
   margin-left: 30px;
 }
 
+
+/*-----Sidebar              ----*/
+
+.sbWrapper{
+  display: flex;
+  background-color: whitesmoke;
+
+  width: 320px;
+  height: 700px;
+}
