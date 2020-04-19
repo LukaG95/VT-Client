@@ -1,22 +1,36 @@
 import React from 'react'
 import {Link, Route, Switch} from 'react-router-dom'
 
-import Nav from './components/Nav.js'
-import Shop from './components/Shop.js'
-import About from './components/About.js'
+import Navbar from './components/Navbar'
+import Sidebar from './components/Sidebar'
 
-import './css/App.css'
+import Trading from './components/Trading'
+import Prices from './components/Prices'
+import Reputation from './components/Reputation'
+import Premium from './components/Premium'
 
 function App() {
   return (
-    <div className="App">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
+    <div className="mainWrapper">
+
+        <Navbar />
+
+      <div className="secondaryWrapper">
+
+        <Sidebar />
         
         <Switch>
-          <Route exact path="/"><Shop /></Route>
-          <Route path="/about"><About /></Route>
+          <Route exact path="/"><Trading /></Route>
+          <Route exact path="/trading"><Trading /></Route>
+          <Route exact path="/prices"><Prices /></Route>
+          <Route exact path="/reputation"><Reputation /></Route>
+          <Route exact path="/premium"><Premium /></Route>
+          <Route exact path="/trading"><Trading /></Route>
+          <Route exact path="/trading"><Trading /></Route>
         </Switch>
+
+        </div>
+        
     </div>
   )
 }
