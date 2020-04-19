@@ -39,7 +39,18 @@
 .sbWrapper{
   display: flex;
   background-color: whitesmoke;
+  flex-direction: column;
 
   width: 320px;
-  height: 700px;
+  height: 95vh;
+}
+
+.sbSection{
+  display: flex;
+  flex-direction: column;
+}
+
+.sbSection ul li{
+  display: inline;
+  margin-right: 15px;
 }

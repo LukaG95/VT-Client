@@ -1,9 +1,12 @@
 import React from 'react'
+import Sidebar from './Sidebar'
 
 function Prices() {
   return (
-    <div>
-      <h1>Prices Page</h1>
+    <div className="secondaryWrapper">
+
+      <h1>Coming Soon</h1>
+      
     </div>
   )
 }

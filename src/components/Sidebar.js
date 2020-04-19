@@ -1,17 +1,29 @@
 import React from 'react'
 import {Link, Route, Switch} from 'react-router-dom'
 
+import FiltersRL from './FiltersRL'
+import FiltersREP from './FiltersREP'
+import Footer from './Footer'
+
 function Sidebar() {
   return (
       <div className="sbWrapper">
 
+        <div className="sbSection">
+          <button>GO PREMIUM</button>
+        </div>
+
         <Switch>
-          <Route exact path="/">RL TRADING FILTERS</Route>
-          <Route exact path="/trading">RL TRADING FILTERS</Route>
-          <Route exact path="/prices">PRICES FILTERS</Route>
-          <Route exact path="/reputation">REP LEADERBOARDS</Route>
-          <Route exact path="/premium">PREMIUM</Route>
+          <Route exact path="/">               <FiltersRL />    </Route>
+          <Route exact path="/trading/rlpc">   <FiltersRL />    </Route>
+          <Route exact path="/reputation">     <FiltersREP />   </Route>
         </Switch>
+
+        <div className="sbSection">
+          SPONSOR
+        </div>
+
+        <Footer />
 
       </div>
   )

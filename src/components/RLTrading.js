@@ -1,12 +1,16 @@
 import React from 'react'
 import Sidebar from './Sidebar'
 
-function Trading() {
+function RLTrading() {
   return (
-    <div>
+    <div className="secondaryWrapper">
+
+      <Sidebar />
+      
       <h1>Trading page</h1>
+
     </div>
   )
 }
 
-export default Trading;
+export default RLTrading;

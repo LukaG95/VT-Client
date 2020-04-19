@@ -1,9 +1,12 @@
 import React from 'react'
+import Sidebar from './Sidebar'
 
 function Premium() {
   return (
-    <div>
-      <h1>Premium Page</h1>
+    <div className="secondaryWrapper">
+
+      <h1>Coming Soon</h1>
+      
     </div>
   )
 }
