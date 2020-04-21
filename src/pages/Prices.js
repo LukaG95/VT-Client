@@ -1,7 +1,7 @@
 import React from 'react'
-import Sidebar from './Sidebar'
+import Sidebar from '../components/Sidebar'
 
-function Premium() {
+function Prices() {
   return (
     <div className="secondaryWrapper">
 
@@ -11,4 +11,4 @@ function Premium() {
   )
 }
 
-export default Premium;
+export default Prices;

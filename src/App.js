@@ -2,13 +2,13 @@ import React from 'react'
 import {Route, Switch} from 'react-router-dom'
 
 import Navbar from './components/Navbar'
-import RLTrading from './components/RLTrading'
-import Prices from './components/Prices'
-import Reputation from './components/Reputation'
-import Premium from './components/Premium'
-import Terms from './components/Terms'
-import ContactUs from './components/ContactUs'
-import PrivacyPolicy from './components/PrivacyPolicy'
+import RLTrading from './pages/RLTrading'
+import Prices from './pages/Prices'
+import Reputation from './pages/Reputation'
+import Premium from './pages/Premium'
+import Terms from './pages/Terms'
+import ContactUs from './pages/ContactUs'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 
 
 function App() {

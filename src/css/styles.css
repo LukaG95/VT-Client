@@ -46,7 +46,13 @@
 
 .sbSection{
   display: flex;
+
   flex-direction: column;
+  align-self: center;
+}
+
+.sbSection button{
+  width: 250px;
 }
 
 .sbSection ul li{
@@ -64,4 +70,15 @@
 .footerFirst li a, .footerSecond li a, .footerThird li a{
   text-decoration: none;
   color: white;
+}
+
+
+
+
+
+
+
+#sponsor{
+  color: #F6F6F6;
+  text-align: center;
 }
