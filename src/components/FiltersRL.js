@@ -1,6 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
+
+import {ReactComponent as ArrowIcon} from '../images/other/down-arrow.svg'
+import {UserContext} from '../UserContext'
 
 function FiltersRL() {
+  const {userInfo, setUserInfo} = useContext(UserContext)
+
   const [game, setGame] = useState("All")
   const [searchType, setSearchType] = useState("I want to buy")
   const [name, setName] = useState("All")
@@ -9,27 +14,41 @@ function FiltersRL() {
   const [itemType, setItemType] = useState("All")
   const [platform, setPlatform] = useState("All")
 
-  function filterGame(){
-    setGame("Rocket League")
-  }
-
 
   return (
-    <div className="sbSection">
+    <div className="sbSection filtersRL">
 
-      <button onClick={() => filterGame()}>Game - {game}</button>
-      <button>Search Type - {itemType}</button>
-      <button>Name - {name}</button>
-      <button>Paint - {paint}</button>
-      <button>Certification - {cert}</button>
-      <button>Item Type - {searchType}</button>  
-      <button>Platform - {platform}</button>  
+      <FilterButton text={`Game`}          value={game} />
+      <FilterButton text={`Search`}        value={searchType}/>
+      <FilterButton text={`Name`}          value={name} />
+      <FilterButton text={`Paint`}         value={paint} />
+      <FilterButton text={`Certification`} value={cert} />
+      <FilterButton text={`Item Type`}     value={itemType} />
+      <FilterButton text={`Platform`}      value={platform} />
 
     </div>
   )
+
+
+  function handleChange(){
+    console.log("heh")
+  }
+
+
+  function FilterButton({text, value}){
+    return(
+      <div className="filterButton">
+        <div>{text}&nbsp;&nbsp; -<p id="fix">{value}</p></div>
+        <ArrowIcon />
+      </div>
+    )
+  }
+
+
 }
 
 export default FiltersRL;
 
 
-// Make this component save state of all filters, and on submittion rerender the trading page accordingly
+
+// this componenent / function (FiltersRL) will receive the userInfo from props (or imported) and store it in state 

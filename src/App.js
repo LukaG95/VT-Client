@@ -18,14 +18,14 @@ function App() {
         <Navbar />
 
         <Switch>
-          <Route exact path="/">                 <RLTrading />     </Route>
-          <Route exact path="/trading/rlpc">     <RLTrading />     </Route>
-          <Route exact path="/prices">           <Prices />        </Route>
-          <Route exact path="/reputation">       <Reputation />    </Route>
-          <Route exact path="/premium">          <Premium />       </Route>
-          <Route exact path="/terms">            <Terms />         </Route>
-          <Route exact path="/contactus">        <ContactUs />     </Route>
-          <Route exact path="/privacy">          <PrivacyPolicy />         </Route>
+          <Route exact path="/">                 <RLTrading />          </Route>
+          <Route exact path="/trading/rl">       <RLTrading />          </Route>
+          <Route exact path="/prices">           <Prices />             </Route>
+          <Route exact path="/reputation">       <Reputation />         </Route>
+          <Route exact path="/premium">          <Premium />            </Route>
+          <Route exact path="/terms">            <Terms />              </Route>
+          <Route exact path="/contactus">        <ContactUs />          </Route>
+          <Route exact path="/privacy">          <PrivacyPolicy />      </Route>
         </Switch>
 
         

@@ -7,13 +7,13 @@ function Navbar() {
 
       <div className="navLeft">     {/*BLUE*/}
 
-        <Link to="/trading/rlpc">
+        <Link to="/trading/rl">
           <div className="navLeftItem">
             <div>Home</div>
           </div>
         </Link>
 
-        <Link to="/trading/rlpc">
+        <Link to="/trading/rl">
           <div className="navLeftItem">
             <div></div>
             <div>Trading</div>
