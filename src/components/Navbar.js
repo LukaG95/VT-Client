@@ -13,11 +13,11 @@ function Navbar() {
 
       <div className="navLeft">     {/*BLUE*/}
 
-        <Link to="/trading/rl">
-          <div className="navLeftItem">
-            <Logo style={{height: "40px", width: "40px"}} />
+        
+          <div className="navLeftItem" id="logo">
+            <Link id="center" to="/trading/rl"> <Logo style={{height: "50px", width: "50px"}} /></Link>
           </div>
-        </Link>
+        
 
         <Link to="/trading/rl" id="removeDecoration">
           <div className="navLeftItem">
