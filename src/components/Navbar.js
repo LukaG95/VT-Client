@@ -1,5 +1,11 @@
 import React from 'react'
-import {Link, Route, Switch} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+
+import {ReactComponent as Logo} from '../images/logo/logo.svg'
+import {ReactComponent as TradingWhite} from '../images/other/tradingWhite.svg'
+import {ReactComponent as ReputationWhite} from '../images/other/reputationWhite.svg'
+import {ReactComponent as PricesWhite} from '../images/other/pricesWhite.svg'
+import {ReactComponent as CrownIcon} from '../images/other/crown.svg'
 
 function Navbar() {
   return (
@@ -9,35 +15,35 @@ function Navbar() {
 
         <Link to="/trading/rl">
           <div className="navLeftItem">
-            <div>Home</div>
+            <Logo style={{height: "40px", width: "40px"}} />
           </div>
         </Link>
 
-        <Link to="/trading/rl">
+        <Link to="/trading/rl" id="removeDecoration">
           <div className="navLeftItem">
-            <div></div>
-            <div>Trading</div>
+            <TradingWhite style={{height: "15px", width: "15px"}} className="navLeftContent" />
+            <div className="navLeftContent">Trading</div>
           </div>
         </Link>
 
-        <Link to="/prices">
+        <Link to="/prices" id="removeDecoration">
           <div className="navLeftItem">
-            <div></div>
-            <div>Prices</div>
+            <PricesWhite style={{height: "15px", width: "15px"}} className="navLeftContent" />
+            <div className="navLeftContent">Prices</div>
           </div>
         </Link>
 
-        <Link to="/reputation">
+        <Link to="/reputation" id="removeDecoration">
           <div className="navLeftItem">
-            <div></div>
-            <div>Reputation</div>
+            <ReputationWhite style={{height: "15px", width: "15px"}} className="navLeftContent" />
+            <div className="navLeftContent">Reputation</div>
           </div>
         </Link>
 
-        <Link to="/premium">
+        <Link to="/premium" id="removeDecoration">
           <div className="navLeftItem">
-            <div></div>
-            <div>Premium</div>
+            <CrownIcon style={{height: "15px", width: "15px"}} className="navLeftContent" />
+            <div className="navLeftContent">Premium</div>
           </div>
         </Link>
 
@@ -52,7 +58,7 @@ function Navbar() {
         </div>
 
         <div className="navRightItem">
-          <div>Profile</div>
+          <div className="navRightContent">Profile</div>
         </div>
 
       </div>                         {/*END BLUE*/}

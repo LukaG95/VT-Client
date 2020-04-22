@@ -5,7 +5,6 @@ const UserContext = React.createContext()
 function UserContextProvider({children}) {
     const [userInfo, setUserInfo] = useState([])
 
-
     useEffect(() => {
       
       /*-----Backend work              ----
@@ -16,26 +15,8 @@ function UserContextProvider({children}) {
         
       */
 
-      // Testing example
-      setUserInfo({
-        theme: "dark",
-        myTrades: {
-          RL: { /* ... */ },
-          CSGO: { /* ... */ },
-          TEMTEM: { /* ... */ }
-        },
-        profileSettings: {
-          name: { /* ... */ },
-          description: { /* ... */ },
-          other: { /* ... */ }
-        }
-      })
-      
-
     }, [])
-    
 
-    
     return (
         <UserContext.Provider value={{userInfo, setUserInfo}}>
             {children}

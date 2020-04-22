@@ -6,7 +6,7 @@ import {UserContext} from '../UserContext'
 function FiltersRL() {
   const {userInfo, setUserInfo} = useContext(UserContext)
 
-  const [game, setGame] = useState("All")
+  const [game, setGame] = useState("Rocket League")
   const [searchType, setSearchType] = useState("I want to buy")
   const [name, setName] = useState("All")
   const [paint, setPaint] = useState("All")
