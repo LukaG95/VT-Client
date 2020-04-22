@@ -42,12 +42,29 @@ body{
   align-items: center;
   background-color: #47384D;
   transition: filter 400ms;
-  
-
+  border-radius: 10px;
 }
 
 .navLeftItem:hover, .navRightItem:hover{
+  border-radius: 10px;
   filter: brightness(1.3);
+  border-bottom: 2px solid #E7AA0F;
+}
+
+.test{
+  filter: brightness(1.3);
+  border-bottom: 2px solid #E7AA0F;
+}
+
+.navLeftItem:active, .navRightItem:active{
+  border-radius: 10px;
+  filter: brightness(2);
+  border-bottom: 2px solid #E7AA0F;
+}
+
+.navLeftItem .active{
+  background-color: white;
+  color: black;
 }
 
 .navLeftContent, .navRightContent{
@@ -71,7 +88,7 @@ body{
   height: 75px;
   background-color: #564B68;
   padding-left: 58px;
-  
+  border-radius: 0px;
   
   width: 170px;
   clip-path: polygon(100% 0, 70% 100%, 0 100%, 0 0);
@@ -79,6 +96,8 @@ body{
 
 #logo:hover{
   filter: brightness(1);
+  border-bottom: none;
+  
 }
 
 #center{

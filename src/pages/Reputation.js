@@ -6,7 +6,7 @@ function Reputation() {
     <div className="secondaryWrapper">
 
       <Sidebar />
-      <h1>Reputation Page</h1>
+      <h1 style={{color: "white", margin: "10px 0px 0px 20px"}}>Reputation Page</h1>
       
     </div>
   )

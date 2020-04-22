@@ -6,7 +6,7 @@ function Footer() {
     <div className="sbSection">
 
       <ul className="sbItem footerFirst">
-        <li className="test"><a href="https://discord.gg/Qt6qKJx">Giveaway</a></li>
+        <li><a href="https://discord.gg/Qt6qKJx">Giveaway</a></li>
         <li><a href="https://discord.gg/nqSgyCr">Support</a></li>
         <li><Link to="/terms">Terms of service</Link></li>
       </ul>
