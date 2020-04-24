@@ -6,6 +6,8 @@ import {ReactComponent as TradingWhite} from '../images/other/tradingWhite.svg'
 import {ReactComponent as ReputationWhite} from '../images/other/reputationWhite.svg'
 import {ReactComponent as PricesWhite} from '../images/other/pricesWhite.svg'
 import {ReactComponent as CrownIcon} from '../images/other/crown.svg'
+import {ReactComponent as BellIcon} from '../images/other/bellWhite.svg'
+import {ReactComponent as ProfileIcon} from '../images/other/profile.svg'
 
 function Navbar() {
   let location = useLocation()
@@ -13,16 +15,16 @@ function Navbar() {
 
   switch(location.pathname) {
   case "/trading/rl":
-      trading = "test"
+      trading = "currentPage"
     break;
   case "/prices":
-      prices = "test"
+      prices = "currentPage"
     break;
   case "/reputation":
-      reputation = "test"
+      reputation = "currentPage"
     break;
   case "/premium":
-      premium = "test"
+      premium = "currentPage"
   break;
   default:
 } 
@@ -70,13 +72,13 @@ function Navbar() {
 
       <div className="navRight">     {/*BLUE*/}
 
-        <div className="navRightItem">
-          <div className="navRightContent">Add Trade</div>
-          <div className="navRightContent">Notifications</div>
+        <div className="navRightItem tradeBellSection">
+          <div className="navRightContent addTrade">+ New trade</div>
+          <BellIcon style={{height: "30px", width: "30px"}} className="navRightContent bell" />
         </div>
 
-        <div className="navRightItem">
-          <div className="navRightContent">Profile</div>
+        <div className="navRightItem profile">
+          <ProfileIcon style={{height: "50px", width: "50px"}} className="navRightContent" />
         </div>
 
       </div>                         {/*END BLUE*/}
