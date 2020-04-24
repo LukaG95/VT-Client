@@ -115,7 +115,7 @@ body{
   width: 250px;
 }
 
-.bell{
+.bell:hover{
   cursor: pointer;
   filter: brightness(1.2);
 }
@@ -151,7 +151,7 @@ body{
   background-color: #392C3E;
   flex-direction: column;
   
-  width: 320px;
+  width: 317px;
 }
 
 .sbSection{
@@ -196,19 +196,17 @@ body{
   height: 35px;
 }
 
-
 .filtersRL{
   height: 447px;
   justify-content: space-between;
 }
 
-.sbSection .filterButton {
+.filterButton {
   display: flex;
   height: 44px;
   width: 244.5px;
   font-size: 13px;
   color: #101010;
-
   background: linear-gradient(180deg, rgba(206, 198, 224, 0) 46.88%, rgba(0, 0, 0, 0.05) 52.08%), #CEC6E0;
   
   border: 2px solid #5D4E76;
@@ -219,12 +217,12 @@ body{
   transition: filter 300ms;
 }
 
-.sbSection .filterButton:hover {
+.filterButton:hover {
   filter: brightness(1.075);
 }
 
-.sbSection .filterButton div {
-  margin-left: 10px;
+.filterButtonContent {
+  padding-left: 10px;
 }
 
 .sbSection .filterButton svg {
@@ -243,6 +241,49 @@ body{
   margin-left: 8px;
 }
 
+.dropdown{
+  position: absolute;
+  top: 40px;
+  width: 244.5px;
+  
+  max-height: 176px;
+
+  background-color: #CEC6E0;
+  border-right: 2px solid #5D4E76;
+  border-left: 2px solid #5D4E76;
+  border-bottom: 2px solid #5D4E76;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.54);
+  transform: translateX(-2px);
+
+  padding: 10px;
+
+  overflow: auto;
+  scrollbar-color: #5D4E76 #CEC6E0;
+  scrollbar-width: thin;
+}
+
+.filterInput{
+  padding: 10px;
+  width: 100%;
+}
+
+.menu-item{
+  display: flex;
+  height: 44px;
+  align-items: center;
+  transition: background 0.2s;
+
+  padding-left: 8px;
+  transition: padding 0.3s;
+}
+
+.menu-item:hover{
+  color: #f6f6f6;
+  background-color: #5D4E76;
+  padding-left: 20px;
+  
+}
+
 .sbSection ul li{
   display: inline;
   margin-right: 10px;
@@ -259,8 +300,6 @@ body{
   text-decoration: none;
   color: white;
 }
-
-
 
 #removeDecoration{
   text-decoration: none;

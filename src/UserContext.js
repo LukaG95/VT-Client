@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 const UserContext = React.createContext()
 
 function UserContextProvider({children}) {
-    const [userInfo, setUserInfo] = useState([])
+    const [userInfo, setUserInfo] = useState(" ")
 
     useEffect(() => {
       
@@ -16,6 +16,8 @@ function UserContextProvider({children}) {
       */
 
     }, [])
+
+
 
     return (
         <UserContext.Provider value={{userInfo, setUserInfo}}>
