@@ -1,15 +1,10 @@
+const temp = ["lux", "re", "bic", "disco", "vine"]
+const temp2 = "ux"
 
+const newarr = temp.map(name => {
+  if (name.includes(temp2))
+  return name
 
-var person = {
-  verc: {
-    age: 21,
-    poklic: "programer"
-  },
+})
 
-  domen: {
-    age: 22,
-    poklic: "bedak"
-  }
-}
-
-console.log(person.domen.age)
+console.log(newarr)
