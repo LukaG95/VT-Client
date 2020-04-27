@@ -4,11 +4,13 @@ import {Route, Switch} from 'react-router-dom'
 import Navbar from './components/Navbar'
 import RLTrading from './pages/RLTrading'
 import Prices from './pages/Prices'
+import AddTradeRL from './pages/AddTradeRL'
 import Reputation from './pages/Reputation'
 import Premium from './pages/Premium'
 import Terms from './pages/Terms'
 import ContactUs from './pages/ContactUs'
 import PrivacyPolicy from './pages/PrivacyPolicy'
+
 
 
 function App() {
@@ -21,6 +23,7 @@ function App() {
           <Route exact path="/">                 <RLTrading />          </Route>
           <Route exact path="/trading/rl">       <RLTrading />          </Route>
           <Route exact path="/prices">           <Prices />             </Route>
+          <Route exact path="/trading/rl/new">   <AddTradeRL />         </Route>
           <Route exact path="/reputation">       <Reputation />         </Route>
           <Route exact path="/premium">          <Premium />            </Route>
           <Route exact path="/terms">            <Terms />              </Route>

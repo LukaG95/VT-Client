@@ -21,7 +21,7 @@ body{
   display: flex;
   background-color: #47384D;
   justify-content: space-between;
-  height: 75px;
+  height: 60px;
 
 }
 
@@ -35,39 +35,37 @@ body{
 
 .navLeftItem, .navRightItem{
   display: flex;
-  padding: 10px 15px 10px 15px;
+  padding: 3px 15px 3px 15px;
   align-items: center;
   
   background-color: #47384D;
-  transition: filter 400ms;
   border-radius: 10px;
 
+  transition: background-color 400ms;
   /*border: 2px solid pink;*/
 }
 
 .navLeftItem:hover{
   border-radius: 10px;
-  filter: brightness(1.3);
-  border-bottom: 2px solid #c48c00;
+  /*filter: brightness(1.3);*/
+  background-color: #5c4964;
+
+  border-bottom: 2px solid #e7aa0f;
 }
 
 .currentPage{
-  filter: brightness(1.3);
-  border-bottom: 2px solid #c48c00;
-}
-
-.currentPage .navLeftContent{
-  color: #c48c00;
+  background-color: #5c4964;
+  border-bottom: 2px solid #e7aa0f;
 }
 
 .navLeftItem:active{
   border-radius: 10px;
-  filter: brightness(2);
-  border-bottom: 2px solid #c48c00;
+  filter: brightness(1.3);
+  border-bottom: 2px solid #e7aa0f;
 }
 
 .navLeftContent, .navRightContent{
-  font-size: 21px;
+  font-size: 19px;
   font-weight: 500;
   color: #F6F6F6;
   text-decoration: none;
@@ -81,10 +79,10 @@ body{
 .navRightItem .addTrade{
   display: flex;
   background: linear-gradient(180deg, #2C8E54 83.32%, #267947 83.33%);
-  width: 152px;
-  height: 36px;
+  width: 135px;
+  height: 30px;
   font-weight: 600;
-  font-size: 19px;
+  font-size: 17px;
   justify-content: center;
   align-items: center;
 }
@@ -95,12 +93,13 @@ body{
 }
 
 #logo{
-  height: 75px;
+  height: 60px;
   background-color: #564B68;
-  padding-left: 58px;
+  padding-left: 45px;
+  margin-right: 20px;
   border-radius: 0px;
-  
-  width: 170px;
+
+  width: 130px;
   clip-path: polygon(100% 0, 70% 100%, 0 100%, 0 0);
 }
 
@@ -111,7 +110,7 @@ body{
 
 .tradeBellSection{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 250px;
 }
 
@@ -125,8 +124,8 @@ body{
   border-radius: 0px;
   background-color: #564B68;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
-  height: 75px;
-  width: 170px;
+  height: 60px;
+  width: 140px;
   justify-content: center;
 }
 
@@ -151,7 +150,7 @@ body{
   background-color: #392C3E;
   flex-direction: column;
   
-  width: 317px;
+  width: 280px;
 }
 
 .sbSection{
@@ -171,7 +170,7 @@ body{
 
 .premiumButton{
   display: flex;
-  width: 255px;
+  width: 230px;
   height: 53px;
   background-color: #2C8E54;
   color: #F6F6F6;
@@ -181,7 +180,7 @@ body{
   font-size: 19px;
   font-weight: 500;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  transition: filter 1000ms;
+  transition: filter 300ms;
 }
 
 .premiumButton:hover{
@@ -204,8 +203,8 @@ body{
 .filterButton {
   display: flex;
   height: 44px;
-  width: 244.5px;
-  font-size: 13px;
+  width: 220px;
+  font-size: 12px;
   color: #101010;
   background: linear-gradient(180deg, rgba(206, 198, 224, 0) 46.88%, rgba(0, 0, 0, 0.05) 52.08%), #CEC6E0;
   
@@ -246,7 +245,7 @@ body{
   flex-direction: column;
   position: absolute;
   top: 40px;
-  width: 244.5px;
+  width: 220px;
   
   max-height: 300px;
 
@@ -326,3 +325,148 @@ body{
   color: #F6F6F6;
   text-align: center;
 }
+
+
+/*-----Add RL Trade              ----*/
+
+.addRLWrapper{
+  display: flex;
+  flex-direction: column;
+  height: 1005px;
+
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.newTradeTitle{
+  color: #f6f6f6;
+  font-size: 40px;
+  font-weight: 500;
+  
+  padding: 0px;
+  margin: 0px;
+}
+
+
+
+
+
+.rlHaveWantSection{
+  width: 938px;
+  height: 405px;
+
+  border: 3px solid #47384D;
+}
+
+
+.h-wTopPlace{
+  display: flex;
+  background-color: #392C3E;
+  height: 40px;
+
+  justify-content: space-between;
+  transform: translateY(-3px);
+}
+
+.left-gameName, .right-gamePlatform{
+  display: flex;
+  color: #f6f6f6;
+  background-color: #47384D;
+
+  align-items: center;
+  justify-content: center;
+} 
+
+.left-gameName{
+  font-size: 21px;
+  font-weight: 500;
+
+  padding: 0px 40px 0px 20px;
+  clip-path: polygon(100% 0, 90% 100%, 0 100%, 0 0);
+}
+
+.right-gamePlatform{
+  font-size: 19px;
+
+  border-radius: 5px 0px 0px 5px;
+  padding: 0px 25px 0px 25px;
+}
+
+
+
+
+
+
+
+
+.rlChooseItemsSection{
+  width: 938px;
+  height: 405px;
+
+  border: 3px solid #47384D;
+}
+
+
+.choose-itemsTopPlace{
+  display: flex;
+  color: #c0c0c0;
+  background-color: #392C3E;
+  height: 31px; 
+
+  font-size: 12px; 
+  font-weight: 500; 
+  padding-left: 20px;
+  align-items: center;
+}
+
+
+
+
+
+
+.rlSubmitNotes{
+  display: flex;
+  align-items: flex-start;
+  width: 938px;
+}
+
+.rlSubmitButton{
+  display: flex;
+  color: #f6f6f6;
+  font-size: 12px;
+  height: 33px;
+  width: 107px;
+  border: 2px solid #2C8E54;
+  border-radius: 4px;
+
+  align-items: center;
+  justify-content: center;
+  transition: background-color 200ms;
+}
+
+.rlSubmitButton:hover{
+  background-color: #2C8E54;
+  cursor: pointer;
+}
+
+.rlNotesButton{
+  display: flex;
+  color: #f6f6f6;
+  font-size: 12px;
+  height: 33px;
+  width: 107px;
+  border: 2px solid #564B68;
+  border-radius: 4px;
+
+  margin-left: 15px;
+
+  align-items: center;
+  justify-content: center;
+  transition: background-color 200ms;
+}
+
+.rlNotesButton:hover{
+  background-color: #564B68;
+  cursor: pointer;
+}
+
