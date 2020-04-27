@@ -2,7 +2,7 @@ import rl_names from './rl_items.json'
 
 let rl_item_names = []
 
-const x = rl_names.Slots.map(type => {
+rl_names.Slots.map(type => {
   return type.Items.map(item => item.Name.length < 25 && (rl_item_names.push(item.Name)))
   }) 
 
