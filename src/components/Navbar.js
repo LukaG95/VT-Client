@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 
+import {UserContext} from '../UserContext'
 import {ReactComponent as Logo} from '../images/logo/logo.svg'
 import {ReactComponent as TradingWhite} from '../images/other/tradingWhite.svg'
 import {ReactComponent as ReputationWhite} from '../images/other/reputationWhite.svg'
@@ -59,6 +60,7 @@ function Navbar() {
             <div className="navLeftContent">Reputation</div>
           </div>
         </Link>
+        
 
         <Link to="/premium" id="removeDecoration">
           <div className={`navLeftItem ${premium}`}>
