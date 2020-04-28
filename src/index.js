@@ -9,9 +9,9 @@ import './css/styles.css'
 
 ReactDOM.render(
   <UserContextProvider>
-    <Router>
-      <App />
-    </Router>
+      <Router>
+        <App />
+      </Router>
   </UserContextProvider>,
   document.getElementById('root')
 )

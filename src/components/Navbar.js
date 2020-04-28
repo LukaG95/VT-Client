@@ -14,6 +14,8 @@ function Navbar() {
   let location = useLocation()
   let trading = "", prices = "", reputation ="", premium = ""
 
+  const {isLoggedIn, setOpenForm} = useContext(UserContext)
+
   switch(location.pathname) {
   case "/trading/rl":
       trading = "currentPage"
@@ -55,7 +57,7 @@ function Navbar() {
         </Link>
 
         <Link to="/reputation" id="removeDecoration">
-          <div className={`navLeftItem ${reputation}`}>
+          <div onClick={()=>setOpenForm(true)} className={`navLeftItem ${reputation}`}>
             <ReputationWhite style={{height: "13px", width: "13px"}} className="navLeftContent" />
             <div className="navLeftContent">Reputation</div>
           </div>
@@ -75,13 +77,14 @@ function Navbar() {
       <div className="navRight">     {/*BLUE*/}
 
         <div className="navRightItem tradeBellSection">
-          <Link id="removeDecoration" to="/trading/rl/new"><div className="navRightContent addTrade">+ New trade</div></Link>
+          <Link id="removeDecoration" to="/trading/rl/new"><div onClick={()=>setOpenForm(true)} className="navRightContent addTrade">+ New trade</div></Link>
           <BellIcon style={{height: "25px", width: "25px"}} className="navRightContent bell" />
         </div>
 
-        <div className="navRightItem profile">
+        {isLoggedIn ? <div className="navRightItem">
           <ProfileIcon style={{height: "40px", width: "40px"}} className="navRightContent" />
-        </div>
+        </div> : <div onClick={()=>setOpenForm(true)} className="navRightItem profile loginButton">Login</div>}
+        
 
       </div>                         {/*END BLUE*/}
 

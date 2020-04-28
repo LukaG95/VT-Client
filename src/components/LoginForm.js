@@ -1,20 +1,22 @@
 import React, {useState, useContext} from 'react'
 
+import {UserContext} from '../UserContext'
+
 function LoginForm() {
-  const [open, setOpen] = useState(false)
+  const {openForm, setOpenForm} = useContext(UserContext)
 
   return (
-    <div 
-    style={open ? {display: "flex"} : {display: "none"}}
-    className="shading" 
-    onClick={()=> setOpen(false)}
-    >
+      <div 
+      style={openForm ? {display: "flex"} : {display: "none"}}
+      className="shading" 
+      onClick={()=> setOpenForm(false)}
+      >
 
-      <div className="loginWrapper">
-          
+        <div className="loginWrapper">
+            
+        </div>
+
       </div>
-
-    </div>
   )
 }
 

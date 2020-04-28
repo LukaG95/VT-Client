@@ -8,6 +8,8 @@ function UserContextProvider({children}) {
   const [trades, setTrades] = useState("none")
   const [reputation, setReputation] = useState("none")
 
+  const [openForm, setOpenForm] = useState(false)
+
   useEffect(() => {
     
     /*-----Backend work              ----
@@ -22,7 +24,7 @@ function UserContextProvider({children}) {
 
 
   return (
-      <UserContext.Provider value={{username, setUsername, isLoggedIn, setIsLoggedIn, trades, setTrades, reputation, setReputation}}>
+      <UserContext.Provider value={{username, setUsername, isLoggedIn, setIsLoggedIn, trades, setTrades, reputation, setReputation, openForm, setOpenForm}}>
           {children}
       </UserContext.Provider>
   )

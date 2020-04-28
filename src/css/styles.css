@@ -490,3 +490,12 @@ body{
   width: 200px;
   height: 200px;
 }
+
+.loginButton{
+  color: #f6f6f6;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+
+  padding-left: 40px;
+}
