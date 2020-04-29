@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import axios from 'axios'
 
 function LoginInfo() {
   const [username, setUsername] = useState("")
@@ -9,7 +10,12 @@ function LoginInfo() {
   function handleSubmit(event){
     event.preventDefault()
     
-    
+  /*
+    axios.post('https://justlearningfront.website/auth/login', {
+      email: username,
+      password: password
+    }).then(res => console.log(res)).catch(err => console.log(err))
+  */
   }
 
   return (

@@ -57,7 +57,7 @@ function Navbar() {
         </Link>
 
         <Link to="/reputation" id="removeDecoration">
-          <div onClick={()=>setOpenForm(true)} className={`navLeftItem ${reputation}`}>
+          <div onClick={()=> !isLoggedIn && setOpenForm(true)} className={`navLeftItem ${reputation}`}>
             <ReputationWhite style={{height: "13px", width: "13px"}} className="navLeftContent" />
             <div className="navLeftContent">Reputation</div>
           </div>
@@ -77,13 +77,15 @@ function Navbar() {
       <div className="navRight">     {/*BLUE*/}
 
         <div className="navRightItem tradeBellSection">
-          <Link id="removeDecoration" to="/trading/rl/new"><div onClick={()=>setOpenForm(true)} className="navRightContent addTrade">+ New trade</div></Link>
+          <Link to="/trading/rl/new" id="removeDecoration"><div onClick={()=> !isLoggedIn && setOpenForm(true)} className="navRightContent addTrade">+ New trade</div></Link>
           <BellIcon style={{height: "25px", width: "25px"}} className="navRightContent bell" />
         </div>
 
-        {isLoggedIn ? <div className="navRightItem">
+        {isLoggedIn ? 
+        <div className="navRightItem profile">
           <ProfileIcon style={{height: "40px", width: "40px"}} className="navRightContent" />
-        </div> : <div onClick={()=>setOpenForm(true)} className="navRightItem profile loginButton">Login</div>}
+        </div> : 
+        <div onClick={()=>setOpenForm(true)} className="navRightItem profile loginButton">Login</div>}
         
 
       </div>                         {/*END BLUE*/}

@@ -12,7 +12,7 @@ function SignUpInfo() {
   function handleSubmit(event){
     event.preventDefault()
     
-    axios.post('https://justlearningfront.website/auth/signin', {
+    axios.post('https://justlearningfront.website/auth/signup', {
       username: username,
       email: email,
       password: password

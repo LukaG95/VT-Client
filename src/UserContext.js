@@ -12,9 +12,9 @@ function UserContextProvider({children}) {
   const [openForm, setOpenForm] = useState(false)
 
   useEffect(() => {
-    
+
     axios.get('https://justlearningfront.website/auth/getUser')
-      .then(res => console.log(res))
+      .then(setIsLoggedIn(true))
       .catch(err => console.log(err))
       
   }, [])

@@ -19,6 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "https://justlearningfront.website/",
   "eslintConfig": {
     "extends": "react-app"
   },
