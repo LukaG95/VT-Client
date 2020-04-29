@@ -38,7 +38,7 @@ function FilterButton({text, value, dd, setFunction}){
       onClick={event => {
           if(event.target.nodeName != "INPUT")
           setOpen(!open)
-          !open && setTimeout(async()=> await document.getElementById("heh").focus())
+          !open && setTimeout(async()=> await document.getElementById("dd").focus())
       }}
       onMouseLeave={()=> {
         setTimeout(()=> setOpen(false), 190)
@@ -66,7 +66,7 @@ function DropdownMenu({dd, setFunction}){
   return(
     <div className="dropdown">
       <input 
-        id = "heh"
+        id = "dd"
         onChange={event => {
           const searchName = dd.map(name =>{
             if (name.toLowerCase().includes(event.target.value.toLowerCase())){

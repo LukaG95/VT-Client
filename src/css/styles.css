@@ -138,6 +138,15 @@ body{
   margin-left: 35px;
 }
 
+.loginButton{
+  color: #f6f6f6;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+
+  padding-left: 40px;
+}
+
 #center{
   display: flex;
   align-items: center;
@@ -423,7 +432,6 @@ body{
 
 
 
-
 .rlSubmitNotes{
   display: flex;
   align-items: flex-start;
@@ -470,10 +478,12 @@ body{
   cursor: pointer;
 }
 
+/*-----Login popup             ----*/
+
 .shading{
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 
   z-index: 2;
 
@@ -484,18 +494,179 @@ body{
 
 .loginWrapper{
   display: flex;
-  position: absolute;
-  background-color: #f6f6f6;
+  flex-direction: column;
+  position: relative;
+  background-color: #47384D;
 
-  width: 200px;
-  height: 200px;
+  width: 440px;
+  height: 500px;
+
+  border-radius: 5px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
 }
 
-.loginButton{
-  color: #f6f6f6;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
+.loginHeader{
+  display: flex;
+  height: 57px;
+  width: 100%;
+}
 
-  padding-left: 40px;
+.loginHeader-left, .loginHeader-right{
+  display: flex;
+  color: #F6F6F6;
+  font-weight: 500;
+  font-size: 21px;
+  width: 50%;
+  height: 57px;
+
+  align-items: center;
+  justify-content: center;
+  
+  cursor: pointer;
+}
+
+.loginHeader-left{
+  border-radius: 5px 0px 0px 0px;
+}
+
+.loginHeader-right{
+  border-radius: 0px 5px 0px 0px;
+}
+
+.colorBG{
+  background-color: #564B68;
+}
+
+.loginHeader-left:hover, .loginHeader-right:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.loginHeader-left:active, .loginHeader-right:active{
+  border-bottom: 2px solid #e7aa0f;
+}
+
+
+/*Blue Bottom*/
+.loginHolder{ 
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.loginItem{
+  display: flex;
+  flex-direction: column;
+  width: 372px;
+  height: 63px;
+
+  justify-content: space-between;
+}
+
+.logFormText{
+  color: #B1B1B1;
+  padding-left: 8px;
+
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.logFormInput{
+  color: #f6f6f6;
+  width: 100%;
+  height: 33px;
+  background: #47384D;
+  font-size: 12px;
+
+  margin-bottom: 5px;
+  padding-left: 10px;
+  border: 1px solid #564B68;
+}
+
+.rememberMeSection{
+  height: 21px;
+  flex-direction: row;
+  align-items: center;
+}
+
+.rememberMeButton{
+  width: 24px;
+  height: auto;
+  text-decoration: none;
+
+  margin-right: 8px;
+  border-radius: 5px;
+  border: 2px solid #E7AA0F;
+}
+
+.rememberMeText{
+  color: #F6F6F6;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.forgotPassword{
+  color: #E7AA0F;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.loginNowButton{
+  display: flex;
+  color: #f6f6f6;
+  background-color: #E7AA0F;
+
+  font-weight: 500;
+  font-size: 21px;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+}
+
+.orLoginWith{
+  display: flex;
+  color: #807395;
+  height: auto;
+  font-weight: 500;
+  font-size: 13px;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
+.orLoginWith hr{
+  border: 1px solid #564B68;
+  width: 120px;
+}
+
+.loginSteamAndDiscord{
+  flex-direction: row;
+  align-items: center;
+  height: auto;
+}
+
+.loginSteam, .loginDiscord{
+  display: flex;
+  flex-direction: row;
+  color: #f6f6f6;
+  width: 175px;
+  height: 46px;
+
+  font-weight: 600;
+  font-size: 18px;
+  border: 2px solid #E7AA0F;
+  border-radius: 50px;
+
+  align-items: center;
+  justify-content: center;
+  transition: background-color 200ms;
+  cursor: pointer;
+}
+
+.loginSteam:hover, .loginDiscord:hover{
+  background-color: #E7AA0F;
 }
