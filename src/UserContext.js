@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 
 const UserContext = React.createContext()
 
@@ -12,14 +13,10 @@ function UserContextProvider({children}) {
 
   useEffect(() => {
     
-    /*-----Backend work              ----
-
-      fetch(<url>)
-          .then(res => res.json())
-          .then(data => setUserInfo(data))
+    axios.get('https://justlearningfront.website/auth/getUser')
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
       
-    */
-
   }, [])
 
 

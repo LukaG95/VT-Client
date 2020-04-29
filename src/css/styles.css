@@ -6,9 +6,16 @@
   font-family: 'Poppins', sans-serif;
 }
 
+*:focus, *:active{
+  outline: none;
+}
+
 body{
   background-color: #312635;
+  width: 100%;
+  position: absolute;
 }
+
 
 .secondaryWrapper{
   display: flex;
@@ -22,7 +29,6 @@ body{
   background-color: #47384D;
   justify-content: space-between;
   height: 60px;
-
 }
 
 .navLeft, .navRight{
@@ -499,7 +505,7 @@ body{
   background-color: #47384D;
 
   width: 440px;
-  height: 500px;
+  height: auto;
 
   border-radius: 5px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
@@ -552,18 +558,30 @@ body{
   flex-direction: column;
   height: 100%;
 
+  padding-bottom: 10px;
+  padding-top: 20px;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.loginItem{
+.formItem{
   display: flex;
   flex-direction: column;
   width: 372px;
   height: 63px;
 
+  margin-bottom: 15px;
   justify-content: space-between;
 }
+
+.formItem input:hover{
+  border: 1px solid rgb(88, 105, 117);
+}
+
+.formItem input:focus{
+  border: 2px solid #18A0FA;
+}
+
 
 .logFormText{
   color: #B1B1B1;
@@ -589,13 +607,19 @@ body{
   height: 21px;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .rememberMeButton{
+  display: flex;
   width: 24px;
-  height: auto;
-  text-decoration: none;
-
+  height: 21px;
+ 
+  color: #f6f6f6;
+  font-size: 20px;
+  font-weight: 900;
+  align-items: center;
+  justify-content: center;
   margin-right: 8px;
   border-radius: 5px;
   border: 2px solid #E7AA0F;
@@ -623,8 +647,16 @@ body{
   align-items: center;
   justify-content: center;
 
+  border: none;
   border-radius: 5px;
+  cursor: pointer;
+  transition: filter 200ms;
 }
+
+.loginNowButton:hover{
+  filter: brightness(1.05);
+}
+
 
 .orLoginWith{
   display: flex;
@@ -667,6 +699,12 @@ body{
   cursor: pointer;
 }
 
-.loginSteam:hover, .loginDiscord:hover{
-  background-color: #E7AA0F;
+.loginSteam:hover{
+  background-color: black;
+  border: rgb(17, 17, 17);
+}
+
+.loginDiscord:hover{
+  background-color: #7289da;
+  border: #7289da;
 }

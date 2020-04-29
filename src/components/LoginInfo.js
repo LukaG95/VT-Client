@@ -1,59 +1,67 @@
 import React, {useState} from 'react'
-import {ReactComponent as ArrowIcon} from '../images/other/SteamCircle.png'
 
 function LoginInfo() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [rememberMe, setRememberMe] = useState("")
+
+  const [rememberMe, setRememberMe] = useState(false)
+
+  function handleSubmit(event){
+    event.preventDefault()
+    
+    
+  }
 
   return (
-    <form className="loginHolder">
+    <form onSubmit={handleSubmit} className="loginHolder">
 
 
-      <div className="loginItem">
+      <div className="formItem">
         <p className="logFormText">Username or Email</p>
         <input 
           onChange={e => setUsername(e.target.value)}
           className="logFormInput"
+          value={username}
         >
         </input>
       </div>
 
 
-      <div className="loginItem">
+      <div className="formItem">
       <p className="logFormText">Password</p>
         <input 
           type="password"
           onChange={e => setPassword(e.target.value)}
           className="logFormInput"
+          value={password}
         >
         </input>
       </div>
 
 
-      <div className="loginItem rememberMeSection">
-          <div style={{display: "flex", flexDirection: "row"}}>
-            <div className="rememberMeButton"></div>
+      <div className="formItem rememberMeSection">
+          <div onClick={() => setRememberMe(!rememberMe)} style={{display: "flex", flexDirection: "row", cursor: "pointer"}}>
+            <div className="rememberMeButton">{rememberMe && <p> &#10004; </p>}</div>
             <div className="rememberMeText">Remember me</div>
           </div>
           <p className="forgotPassword">Forgot password?</p>
       </div>
 
 
-      <div className="loginItem loginNowButton">Log in now</div>
+      <button type="submit" className="formItem loginNowButton">Log in now</button>
 
 
-      <div className="loginItem orLoginWith"><hr />or log in with<hr /></div>
+      <div className="formItem orLoginWith"><hr />or log in with<hr /></div>
 
 
-      <div className="loginItem loginSteamAndDiscord">
+      <div className="formItem loginSteamAndDiscord">
         <div className="loginSteam">
-          <img src={require("../images/other/SteamCircle.png")} style={{marginRight: "10px"}}></img>
+          <img src={require("../images/other/SteamCircle.png")} alt="" style={{marginRight: "10px"}}></img>
           <p>STEAM</p>
         </div>
 
         <div className="loginDiscord">
-          <img src={require("../images/other/DiscordLogo.png")} style={{height: "28px", width: "35", marginRight: "8px"}}></img>
+          <img src={require("../images/other/DiscordLogo.png")} alt="" style={{height: "28px", width: "35", marginRight: "8px"}}></img>
           <p>DISCORD</p>
         </div>
       </div>

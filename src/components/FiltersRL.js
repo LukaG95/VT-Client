@@ -36,13 +36,11 @@ function FilterButton({text, value, dd, setFunction}){
       <div 
       className="filterButton" 
       onClick={event => {
-          if(event.target.nodeName != "INPUT")
+          if(event.target.nodeName !== "INPUT")
           setOpen(!open)
           !open && setTimeout(async()=> await document.getElementById("dd").focus())
       }}
-      onMouseLeave={()=> {
-        setTimeout(()=> setOpen(false), 190)
-      }}
+      onMouseLeave={()=> setTimeout(()=> setOpen(false), 190)}
       >
         <div className="filterButtonContent">{text}&nbsp;&nbsp; -<p id="fix">{value}</p></div>
         <ArrowIcon />

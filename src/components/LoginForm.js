@@ -17,7 +17,7 @@ function LoginForm() {
     style={openForm ? {display: "flex"} : {display: "none"}}
     className="shading" 
     onClick={event => {
-      if(event.target.className == "shading")
+      if(event.target.className === "shading")
         setOpenForm(false)
     }}
     >
