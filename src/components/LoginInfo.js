@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Link, Redirect} from 'react-router-dom'
 import axios from 'axios'
 
 function LoginInfo() {
@@ -68,15 +69,17 @@ function LoginInfo() {
 
 
       <div className="formItem loginSteamAndDiscord">
-        <div className="loginSteam">
+        <div onClick={()=> window.location.href='/auth/steam'} className="loginSteam">
           <img src={require("../images/other/SteamCircle.png")} alt="" style={{marginRight: "10px"}}></img>
           <p>STEAM</p>
         </div>
 
-        <div className="loginDiscord">
+
+        <div onClick={()=> window.location.href='/auth/discord'} className="loginDiscord">
           <img src={require("../images/other/DiscordLogo.png")} alt="" style={{height: "28px", width: "35", marginRight: "8px"}}></img>
           <p>DISCORD</p>
         </div>
+
       </div>
 
 
