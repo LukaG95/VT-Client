@@ -15,8 +15,6 @@ import ContactUs from './pages/ContactUs'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import LoginForm from './components/LoginForm'
 
-
-
 function App() {
 
   const {isLoggedIn} = useContext(UserContext)
@@ -32,14 +30,14 @@ function App() {
           <Route exact path="/">                 <RLTrading />          </Route>
           <Route exact path="/trading/rl">       <RLTrading />          </Route>
           <Route exact path="/prices">           <Prices />             </Route>
-          <Route exact path="/trading/rl/new">   {isLoggedIn ? <AddTradeRL/ > : <Redirect to="/" />}         </Route>
-          <Route exact path="/reputation">       {isLoggedIn ? <Reputation/ > : <Redirect to="/" />}         </Route>
           <Route exact path="/premium">          <Premium />            </Route>
-          <Route exact path="/account">          <MyAccount />          </Route>
-          <Route exact path="/account/privacy">  <AccountPrivacy />     </Route>
           <Route exact path="/terms">            <Terms />              </Route>
           <Route exact path="/contactus">        <ContactUs />          </Route>
           <Route exact path="/privacy">          <PrivacyPolicy />      </Route>
+          <Route exact path="/trading/rl/new">   {isLoggedIn ? <AddTradeRL />     : <Redirect to="/" />}         </Route>
+          <Route exact path="/reputation">       {isLoggedIn ? <Reputation />     : <Redirect to="/" />}         </Route>
+          <Route exact path="/account">          {isLoggedIn ? <MyAccount />      : <Redirect to="/" />}         </Route>
+          <Route exact path="/account/privacy">  {isLoggedIn ? <AccountPrivacy /> : <Redirect to="/" />}     </Route>
         </Switch>
 
         

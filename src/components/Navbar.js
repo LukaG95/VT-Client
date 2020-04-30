@@ -83,9 +83,12 @@ function Navbar() {
         </div>
 
         {isLoggedIn ? 
-        <div className="navRightItem profile">
-          <ProfileIcon style={{height: "40px", width: "40px"}} className="navRightContent" />
-        </div> : 
+        <Link to="/account">
+          <div className="navRightItem profile">
+            <ProfileIcon style={{height: "40px", width: "40px"}} className="navRightContent" />
+          </div> 
+        </Link>
+          : 
         <div onClick={()=>setOpenForm(true)} className="navRightItem profile loginButton">Login</div>}
         
 
