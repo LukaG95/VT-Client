@@ -32,6 +32,7 @@ function Navbar() {
   default:
 } 
 
+
   return (
     <nav className="navWrapper">     {/*RED*/}
 

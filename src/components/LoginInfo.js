@@ -10,12 +10,19 @@ function LoginInfo() {
   function handleSubmit(event){
     event.preventDefault()
     
-  /*
-    axios.post('https://justlearningfront.website/auth/login', {
+    axios.post('/auth/login', {
       email: username,
       password: password
-    }).then(res => console.log(res)).catch(err => console.log(err))
-  */
+    })
+    .then(res => {
+      if (res.data.response === "blocked"){
+        alert("Too many requests, please try again later")
+      }
+      else
+      window.location.reload(true)
+    })
+    .catch(err => console.log(err))  
+    
   }
 
   return (

@@ -94,8 +94,7 @@ body{
 }
 
 .addTrade:hover{
-  cursor: pointer;
-  filter: brightness(1.2);
+  background: linear-gradient(180deg, rgb(46, 148, 87) 83.32%, #28804b 83.33%);
 }
 
 #logo{

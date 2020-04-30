@@ -13,8 +13,11 @@ function UserContextProvider({children}) {
 
   useEffect(() => {
 
-    axios.get('https://justlearningfront.website/auth/getUser')
-      .then(setIsLoggedIn(true))
+    axios.get('/auth/getUser')
+      .then (res => {
+        if (res.data.status === "success") 
+        setIsLoggedIn(true)
+      })
       .catch(err => console.log(err))
       
   }, [])
