@@ -27,13 +27,13 @@ function AccountPrivacy() {
 			<div class="accountFieldsWrapper">
 			
 				<form onClick={(e)=>{e.preventDefault();handleUpdatePassword(password, newpass, newpass2)}}>
-					<label for="curpassInput">Current password</label>
+					<label for="curpassInput"><p>Current password</p></label>
 					<input required id="curpassInput" type="password" placeholder="old password" defaultValue={password} onChange={(e)=>setPassword(e.target.value)} />
 					
-					<label for="newpassInput">New password</label>
+					<label for="newpassInput"><p>New password</p></label>
 					<input required id="newpassInput" type="password" placeholder="new password" defaultValue={newpass} onChange={(e)=>setNewpass(e.target.value)} />
 					
-					<label for="newpass2Input">Confirm new password</label>
+					<label for="newpass2Input"><p>Confirm new password</p></label>
 					<input required id="newpass2Input" type="password" placeholder="new password" defaultValue={newpass2} onChange={(e)=>setNewpass2(e.target.value)} />
 					<button>Update password</button>
 				</form>
