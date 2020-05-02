@@ -10,6 +10,7 @@ import Reputation from './pages/Reputation'
 import Premium from './pages/Premium'
 import MyAccount from './pages/MyAccount'
 import AccountPrivacy from './pages/AccountPrivacy'
+import AccountPlatforms from './pages/AccountPlatforms'
 import Terms from './pages/Terms'
 import ContactUs from './pages/ContactUs'
 import PrivacyPolicy from './pages/PrivacyPolicy'
@@ -37,7 +38,8 @@ function App() {
           <Route exact path="/trading/rl/new">   {isLoggedIn ? <AddTradeRL />     : <Redirect to="/" />}         </Route>
           <Route exact path="/reputation">       {isLoggedIn ? <Reputation />     : <Redirect to="/" />}         </Route>
           <Route exact path="/account">          {isLoggedIn ? <MyAccount />      : <Redirect to="/" />}         </Route>
-          <Route exact path="/account/privacy">  {isLoggedIn ? <AccountPrivacy /> : <Redirect to="/" />}     </Route>
+          <Route exact path="/account/privacy">  {isLoggedIn ? <AccountPrivacy /> : <Redirect to="/" />}  	     </Route>
+          <Route exact path="/account/platforms">{isLoggedIn ? <AccountPlatforms /> : <Redirect to="/" />}         </Route>
         </Switch>
 
         
