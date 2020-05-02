@@ -1,5 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import AccountSidebar from '../components/AccountSidebar'
+import Tooltip from '../components/Tooltip'
+
+import {UserContext} from '../UserContext'
 
 function isEmptyOrSpaces(str) {
     return str === null || str.match(/^ *$/) !== null;
@@ -25,24 +28,25 @@ function handleUpdateEmail(email) {
 
 function MyAccount() {
 	
-	const [username, setUsername] = useState("Ryu")
-	const [email, setEmail] = useState("glukec4444@gmail.com")
+	const {username, setUsername} = useContext(UserContext);
+	const [email, setEmail] = useState("glukec4444@gmail.com");
 	
 	return (
 		<div className="secondaryWrapper accountWrapper">
 		
 			<AccountSidebar />
 			
-			<div class="accountFieldsWrapper">
+			<div className="accountFieldsWrapper">
 			
 				<form onSubmit={(e)=>{e.preventDefault();handleUpdateUsername(username)}}>
-					<label for="usernameInput">Username</label>
+					<label htmlFor="usernameInput"><p>Username</p></label>
+					<Tooltip tip="You can only change Username once every ..." />
 					<input required id="usernameInput" type="text" placeholder="username" defaultValue={username} onChange={(e)=>setUsername(e.target.value)} />
 					<button>Update username</button>
 				</form>
 				
 				<form onSubmit={(e)=>{e.preventDefault();handleUpdateEmail(email)}}>
-					<label for="emailInput">Email</label>
+					<label htmlFor="emailInput"><p>Email</p></label>
 					<input required id="emailInput" type="email" placeholder="email" defaultValue={email} onChange={(e)=>setEmail(e.target.value)} />
 					<button>Update email</button>
 				</form>

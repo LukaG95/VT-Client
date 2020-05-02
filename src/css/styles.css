@@ -751,6 +751,11 @@ body{
 }
 
 .accountFieldsWrapper label {
+	display: inline-flex;
+	margin-right: 5px;
+}
+
+.accountFieldsWrapper label>p {
 	margin-bottom: 7px;
 }
 
@@ -779,8 +784,58 @@ body{
 }
 
 .accountFieldsWrapper button:hover {
-  background-color: #564B68;
-  cursor: pointer;
+	background-color: #564B68;
+	cursor: pointer;
+}
+
+.tooltip {
+	position: relative;
+	display: inline-flex;
+	border: 2px solid white;
+	border-radius: 10px;
+	width: 20px;
+	height: 20px;
+	font-size: 13px;
+	text-align: center;
+}
+
+.tooltip:before {
+	content: "i";
+	width: 100%;
+}
+
+.tooltip>div {
+	position: absolute;
+	pointer-events: none;
+	filter: opacity(0);
+	transition: filter .5s;
+	bottom: 1em;
+	margin-left: 50%;
+	transform: translateX(-50%);
+	width: 200px;
+}
+
+.tooltip:hover>div {
+	pointer-events: unset;
+	filter: opacity(1);
+}
+
+.tooltip>div>.tooltip-tip>p {
+	background: black;
+	border-radius: 10px;
+	padding: 5px;
+	margin: 0 auto;
+	width: fit-content;
+}
+
+.tooltip .tooltip-bottom {
+	border: 10px solid black;
+	border-bottom-color: transparent;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	width: 0;
+	height: 0;
+	margin: 0 auto;
 }
 
 /*-----Account Sidebar              ----*/
