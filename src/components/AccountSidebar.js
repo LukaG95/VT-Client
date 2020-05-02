@@ -25,7 +25,7 @@ function AccountSidebar() {
 		<div className="accountSb">
 			
 			<p class="accountSb-nav"><a href="/account" className={`${account}`}>My Account</a></p>
-			<p class="accountSb-nav"><a href="/account/privacy" className={`${privacy}`}>Privacy & Security</a></p>
+			<p class="accountSb-nav"><Link to="/account/privacy"><a className={`${privacy}`}>Privacy & Security</a></Link></p>
 			<p class="accountSb-nav"><a href="/account/trades" className={`${trades}`}>My Trades</a></p>
 			<p class="accountSb-nav"><a href="/account/platforms" className={`${platforms}`}>Platforms</a></p>
 			

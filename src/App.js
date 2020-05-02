@@ -19,6 +19,13 @@ function App() {
 
   const {isLoggedIn} = useContext(UserContext)
 
+  function handleRedirectOnRefresh(component){
+    if (isLoggedIn === true) return component
+    else if (isLoggedIn === false) return <Redirect to="/" />
+    // else, loading animation -- optional
+    // else return <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+  }
+
   return (
     <div className="mainWrapper">
 
@@ -34,10 +41,10 @@ function App() {
           <Route exact path="/terms">            <Terms />              </Route>
           <Route exact path="/contactus">        <ContactUs />          </Route>
           <Route exact path="/privacy">          <PrivacyPolicy />      </Route>
-          <Route exact path="/trading/rl/new">   {isLoggedIn ? <AddTradeRL />     : <Redirect to="/" />}         </Route>
-          <Route exact path="/reputation">       {isLoggedIn ? <Reputation />     : <Redirect to="/" />}         </Route>
-          <Route exact path="/account">          {isLoggedIn ? <MyAccount />      : <Redirect to="/" />}         </Route>
-          <Route exact path="/account/privacy">  {isLoggedIn ? <AccountPrivacy /> : <Redirect to="/" />}     </Route>
+          <Route exact path="/trading/rl/new">   {handleRedirectOnRefresh(<AddTradeRL /> )}      </Route>
+          <Route exact path="/reputation">       {handleRedirectOnRefresh(<Reputation /> )}      </Route>
+          <Route exact path="/account">          {handleRedirectOnRefresh(<MyAccount /> )}       </Route>
+          <Route exact path="/account/privacy">  {handleRedirectOnRefresh(<AccountPrivacy /> )}  </Route>
         </Switch>
 
         

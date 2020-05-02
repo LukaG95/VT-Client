@@ -5,7 +5,7 @@ const UserContext = React.createContext()
 
 function UserContextProvider({children}) {
   const [username, setUsername] = useState("none")
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState()
   const [trades, setTrades] = useState("none")
   const [reputation, setReputation] = useState("none")
 
@@ -17,6 +17,9 @@ function UserContextProvider({children}) {
       .then (res => {
         if (res.data.status === "success") 
         setIsLoggedIn(true)
+        else 
+        setIsLoggedIn(false)
+  
       })
       .catch(err => console.log(err))
       
