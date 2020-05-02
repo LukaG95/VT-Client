@@ -36,17 +36,17 @@ function MyAccount() {
 		
 			<AccountSidebar />
 			
-			<div class="accountFieldsWrapper">
+			<div className="accountFieldsWrapper">
 			
 				<form onSubmit={(e)=>{e.preventDefault();handleUpdateUsername(username)}}>
-					<label for="usernameInput"><p>Username</p></label>
+					<label htmlFor="usernameInput"><p>Username</p></label>
 					<Tooltip tip="You can only change Username once every ..." />
 					<input required id="usernameInput" type="text" placeholder="username" defaultValue={username} onChange={(e)=>setUsername(e.target.value)} />
 					<button>Update username</button>
 				</form>
 				
 				<form onSubmit={(e)=>{e.preventDefault();handleUpdateEmail(email)}}>
-					<label for="emailInput"><p>Email</p></label>
+					<label htmlFor="emailInput"><p>Email</p></label>
 					<input required id="emailInput" type="email" placeholder="email" defaultValue={email} onChange={(e)=>setEmail(e.target.value)} />
 					<button>Update email</button>
 				</form>

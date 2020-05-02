@@ -17,7 +17,7 @@ function AccountPlatforms() {
 		
 			<AccountSidebar />
 			
-			<div class="accountFieldsWrapper">
+			<div className="accountFieldsWrapper">
 			
 				<form onSubmit={(e)=>{e.preventDefault();handleUpdateDiscord()}}>
 					<label><p>Discord</p></label>

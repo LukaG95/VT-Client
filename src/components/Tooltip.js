@@ -3,12 +3,12 @@ import React from 'react'
 function Tooltip({tip}) {
 	
 	return (
-		<div class="tooltip">
+		<div className="tooltip">
 			<div>
-				<div class="tooltip-tip">
+				<div className="tooltip-tip">
 					<p>{tip}</p>
 				</div>
-				<div class="tooltip-bottom"></div>
+				<div className="tooltip-bottom"></div>
 			</div>
 		</div>
 	)

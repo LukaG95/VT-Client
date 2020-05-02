@@ -24,16 +24,16 @@ function AccountPrivacy() {
 		
 			<AccountSidebar />
 			
-			<div class="accountFieldsWrapper">
+			<div className="accountFieldsWrapper">
 			
 				<form onClick={(e)=>{e.preventDefault();handleUpdatePassword(password, newpass, newpass2)}}>
-					<label for="curpassInput"><p>Current password</p></label>
+					<label htmlFor="curpassInput"><p>Current password</p></label>
 					<input required id="curpassInput" type="password" placeholder="old password" defaultValue={password} onChange={(e)=>setPassword(e.target.value)} />
 					
-					<label for="newpassInput"><p>New password</p></label>
+					<label htmlFor="newpassInput"><p>New password</p></label>
 					<input required id="newpassInput" type="password" placeholder="new password" defaultValue={newpass} onChange={(e)=>setNewpass(e.target.value)} />
 					
-					<label for="newpass2Input"><p>Confirm new password</p></label>
+					<label htmlFor="newpass2Input"><p>Confirm new password</p></label>
 					<input required id="newpass2Input" type="password" placeholder="new password" defaultValue={newpass2} onChange={(e)=>setNewpass2(e.target.value)} />
 					<button>Update password</button>
 				</form>

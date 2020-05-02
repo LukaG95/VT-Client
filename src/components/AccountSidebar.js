@@ -24,10 +24,10 @@ function AccountSidebar() {
 	return (
 		<div className="accountSb">
 			
-			<p class="accountSb-nav"><Link to="/account" className={`${account}`}>My Account</Link></p>
-			<p class="accountSb-nav"><Link to="/account/privacy" className={`${privacy}`}>Privacy & Security</Link></p>
-			<p class="accountSb-nav"><Link to="/account/trades" className={`${trades}`}>My Trades</Link></p>
-			<p class="accountSb-nav"><Link to="/account/platforms" className={`${platforms}`}>Platforms</Link></p>
+			<p className="accountSb-nav"><Link to="/account" className={account}>My Account</Link></p>
+			<p className="accountSb-nav"><Link to="/account/privacy" className={privacy}>Privacy & Security</Link></p>
+			<p className="accountSb-nav"><Link to="/account/trades" className={trades}>My Trades</Link></p>
+			<p className="accountSb-nav"><Link to="/account/platforms" className={platforms}>Platforms</Link></p>
 			
 		</div>
 	)
