@@ -1,5 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import RLitem_icon from '../components/RLitem_icon'
+import RLfilter_icon from '../components/RLfilter_icon'
+import Spinner from '../components/Spinner'
+import {RLitem_names} from '../info/RLitem_names'
 
 function AddTradeRL() {
   const [have, setHave] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}])
@@ -10,7 +13,11 @@ function AddTradeRL() {
   const [itemImages, setItemImages] = useState()
 
   useEffect(() => {
-    
+    const names = RLitem_names.map(name=> 
+      <img style={{height: "95px", width: "95px"}} src={require(`../images/RLimages/${name}`)} alt="" />
+    )
+
+    setItemImages(names)
   }, [])
 
   return (
@@ -34,9 +41,10 @@ function AddTradeRL() {
         <div className="choose-itemsSeachFiltersRL">
           <div><img style={{width: "11px", height: "11px"}} src={require("../images/other/MagnGlass.png")} /></div>
           <input placeholder="Search items..."></input>
+          <RLfilter_icon />
         </div>
         <div className="item-imagesRL">
-          {/*while images are loading we display spinner*/}
+          {itemImages === undefined ? <Spinner /> : itemImages}
         </div>
       </div>
 
