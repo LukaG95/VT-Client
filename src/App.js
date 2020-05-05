@@ -15,6 +15,7 @@ import Terms from './pages/Terms'
 import ContactUs from './pages/ContactUs'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import LoginForm from './components/LoginForm'
+import {TradeContextProvider} from './components/TradeContextProvider'
 
 function App() {
 
@@ -42,7 +43,7 @@ function App() {
           <Route exact path="/terms">             <Terms />           </Route>
           <Route exact path="/contactus">         <ContactUs />       </Route>
           <Route exact path="/privacy">           <PrivacyPolicy />   </Route>
-          <Route exact path="/trading/rl/new">    {handleRedirectOnRefresh(<AddTradeRL /> )}       </Route>
+          <Route exact path="/trading/rl/new">    {handleRedirectOnRefresh(<TradeContextProvider>  <AddTradeRL />  </TradeContextProvider>)}       </Route>
           <Route exact path="/reputation">        {handleRedirectOnRefresh(<Reputation /> )}       </Route>
           <Route exact path="/account">           {handleRedirectOnRefresh(<MyAccount /> )}        </Route>
           <Route exact path="/account/privacy">   {handleRedirectOnRefresh(<AccountPrivacy /> )}   </Route>

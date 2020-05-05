@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, Route, useLocation} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 
 function AccountSidebar() {
 	let location = useLocation();

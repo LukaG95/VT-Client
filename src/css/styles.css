@@ -365,8 +365,10 @@ body{
 
 
 .rlHaveWantSection{
+  display: flex;
   width: 938px;
-  height: 405px;
+  height: 395px;
+  flex-direction: column;
 
   border: 3px solid #47384D;
 }
@@ -406,11 +408,73 @@ body{
 }
 
 
+.allAddedItems{
+  display: flex;
+  height: 100%;
 
+  margin-top: 10px;
+  justify-content: space-between;
+}
 
+.hwLeftSection, .hwRightSection{
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 400px;
 
+  margin: 0px 14px 0px 14px;
+}
 
+.hTitle, .wTitle{
+  display: flex;
+  justify-content: space-between;
+  color: #f6f6f6;
+  font-size: 18px;
 
+  padding: 0px 6px 0px 6px;
+  margin-bottom: 10px;
+}
+
+.hTitle button, .wTitle button{
+  background: none;
+  color: #f6f6f6;
+  font-weight: 500;
+  font-size: 9px;
+  width: 84px;
+
+  border: 2px solid #564B68;
+  border-radius: 4px;
+}
+
+.haveItems, .wantItems{
+  display: grid;
+  grid-template-columns:  auto auto auto auto;
+  column-gap: 3px;
+  row-gap: 3px;
+  align-items: center;
+  justify-content: center;
+}
+
+.haveItems button, .wantItems button{
+  background-color: #392C3E;
+  height: 95px;
+  width: 95px;
+  justify-self: center;
+  border: 1px solid #564B68;
+  cursor: pointer;
+}
+
+.haveItems button:hover, .wantItems button:hover{
+  background-color: rgb(69, 55, 75);
+}
+
+#focusedButton{
+  color: #564B68;
+  font-style: normal;
+  font-size: 60px;
+  font-weight: 100;
+  border: 1px solid #8C7EA4;
+}
 
 .rlChooseItemsSection{
   width: 938px;
@@ -434,14 +498,14 @@ body{
 }
 
 
-.choose-itemsSeachFiltersRL{
+.choose-itemsSearchFiltersRL{
   display: flex;
   padding: 15px;
 
   align-items: center;
 }
 
-.choose-itemsSeachFiltersRL div{
+.choose-itemsSearchFiltersRL div{
   display: flex;
   width: 25px;
   height: 28px;
@@ -451,7 +515,7 @@ body{
   align-items: center;
 }
 
-.choose-itemsSeachFiltersRL input{
+.choose-itemsSearchFiltersRL input{
   background-color: #392C3E;
   color: #b1a9b4;
   height: 28px;
