@@ -1,14 +1,44 @@
-import React, {useState} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
+import {TradeContext} from '../components/TradeContextProvider'
 
-function RLitem_icon({url}) {
+function RLitem_icon({id, url}) {
   const [open, setOpen] = useState(false)
-	
+  
+  const {have, want, setHave, setWant} = useContext(TradeContext)
+
+  
+
+  const dropdown = have.map(item => {
+    if (item.id == id){
+      if (item.isDropdown === true) return <div name="enableDropdown" className="rl-attributes-dropdown"></div>
+      else return null
+    } 
+  })
+
+
 	return (
-    <div onClick={() => setOpen(!open)} style={{height: "95px", width: "95px"}}>
+    <div 
+    onClick={() => {
+      let temp = []
+      have.map(item => {
+        if (item.id == id){
+          item.isDropdown = !item.isDropdown
+          temp.push(item)
+        }
+        else {
+          item.isDropdown = false
+          temp.push(item)
+        }
+      })
+      setHave(temp)
+    }}
+    style={{height: "95px", width: "95px"}}>
       
       <div style={{height: "95px", width: "95px"}}>
 
         <img 
+        name="enableDropdown"
+        id={id}
         style={{height: "95px", width: "95px"}} 
         src={require(`../images/RLimages/${url}`)} 
         alt="" 
@@ -22,7 +52,7 @@ function RLitem_icon({url}) {
         
       </div>
 
-      {open && <div className="rl-attributes-dropdown"></div>}
+      {dropdown}
 
     </div>		
 	)

@@ -3,7 +3,7 @@ import RLitem_icon from '../components/RLitem_icon'
 import RLfilter_icon from '../components/RLfilter_icon'
 import Spinner from '../components/Spinner'
 import {RLitem_names, test_names} from '../info/RLitem_names'
-import {TradeContext} from '../components/TradeContextProvider'
+import {TradeContext, TradeContextProvider} from '../components/TradeContextProvider'
 
 
 function AddTradeRL() {
@@ -22,15 +22,18 @@ function AddTradeRL() {
       />
     )
     setItemImages(names)
+
   }, [])
-  
+
+
+ 
   
   const displayed_have_items = have.map(item => {
     if (item.url === ""){
       if (item.isFocused === false) return <button name={item.id} onClick={manageFocus}></button>
       else return <button name={item.id} onClick={manageFocus} id="focusedButton">+</button>
     } 
-    else return <RLitem_icon url={item.url} />
+    else return <RLitem_icon id={item.id} url={item.url} />
   })
 
   const displayed_want_items = want.map(item => {
@@ -38,7 +41,7 @@ function AddTradeRL() {
       if (item.isFocused === false) return <button name={item.id} onClick={manageFocus}></button>
       else return <button name={item.id} onClick={manageFocus} id="focusedButton">+</button>
     } 
-    else return <RLitem_icon url={item.url} />
+    else return <RLitem_icon id={item.id} url={item.url} />
   })
 
   return (

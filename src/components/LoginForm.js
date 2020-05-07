@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 
 import {UserContext} from '../UserContext'
 import LoginInfo from './LoginInfo'
@@ -12,13 +12,15 @@ function LoginForm() {
   let x,y = ""
   showLogin ? x = "colorBG" : y = "colorBG"
 
+
   return (
     <div 
     style={openForm ? {display: "flex"} : {display: "none"}}
     className="shading" 
-    onClick={event => {
+    onMouseDown={event => {
       if(event.target.className === "shading")
-        setOpenForm(false)
+      setOpenForm(false)
+      console.log(event.target)
     }}
     >
       <div className="loginWrapper">
