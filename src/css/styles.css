@@ -404,7 +404,7 @@ body{
   font-size: 19px;
 
   border-radius: 5px 0px 0px 5px;
-  padding: 0px 25px 0px 25px;
+  padding: 0px 18px 0px 18px;
 }
 
 
@@ -444,6 +444,11 @@ body{
 
   border: 2px solid #564B68;
   border-radius: 4px;
+  cursor: pointer;
+}
+
+.hTitle button:hover, .wTitle button:hover{
+  background-color: #564B68;
 }
 
 .haveItems, .wantItems{
@@ -476,6 +481,41 @@ body{
   border: 1px solid #8C7EA4;
 }
 
+.editIcon{
+  position: relative; 
+  height: 13px;
+  width: 13px; 
+  
+  bottom: 101px;
+  left: 6px;
+}
+
+.colorIcon{
+  position: relative; 
+  height: 15px;
+  width: 15px; 
+  
+  bottom: 101px;
+  left: 63px;
+}
+
+.rl-attributes-dropdown{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 220px;
+
+  background-color: #CEC6E0;
+  border-right: 2px solid #5D4E76;
+  border-left: 2px solid #5D4E76;
+  border-bottom: 2px solid #5D4E76;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.54);
+
+  padding: 10px;
+}
+
+
+
 .rlChooseItemsSection{
   width: 938px;
   height: 405px;
@@ -507,7 +547,7 @@ body{
 
 .choose-itemsSearchFiltersRL div{
   display: flex;
-  width: 25px;
+  width: 28px;
   height: 28px;
   background-color: #47384D;
 
@@ -517,13 +557,13 @@ body{
 
 .choose-itemsSearchFiltersRL input{
   background-color: #392C3E;
-  color: #b1a9b4;
+  color: #f6f6f6;
   height: 28px;
   width: 225px;
 
   padding-left: 10px;
   font-weight: 500;
-  font-size: 9px;
+  font-size: 10px;
   margin-right: 20px;
   border: none;
 }
@@ -563,6 +603,9 @@ body{
   overflow: auto;
 }
 
+.item-imagesRL img{
+  cursor: pointer;
+}
 
 
 .rlSubmitNotes{

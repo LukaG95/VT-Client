@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useState} from 'react'
 
 const TradeContext = React.createContext()
 
@@ -36,8 +36,98 @@ function TradeContextProvider({children}) {
   const [notes, setNotes] = useState("")
   const [platform, setPlatform] = useState("Steam")
 
+
+
+  function manageFocus(e){
+    if(e.target.id !== "focusedButton"){
+      let temp = []
+      have.map(item => {
+        if (item.isFocused === true){
+          item.isFocused = false
+          temp.push(item)
+        }
+        else if (e.target.name == item.id){
+          item.isFocused = true
+          temp.push(item)
+        }
+        else temp.push(item)
+        
+      })
+      setHave(temp)
+
+      temp = []
+
+      want.map(item => {
+        if (item.isFocused === true){
+          item.isFocused = false
+          temp.push(item)
+        }
+        else if (e.target.name == item.id){
+          item.isFocused = true
+          temp.push(item)
+        }
+        else temp.push(item)
+        
+      })
+      setWant(temp)
+    }
+
+  }
+
+  function pushItem(e){
+    let current = undefined
+        let temp = []
+        have.map(item => {
+          if (item.isFocused === true){
+            item.isFocused = false
+            item.url = e.target.name
+            current = item.id
+          } 
+          if (item.id === current + 1){
+            item.isFocused = true
+          }
+         temp.push(item)
+        })
+        setHave(temp)
+
+        temp = []
+
+        want.map(item => {
+          if (item.isFocused === true){
+            item.isFocused = false
+            item.url = e.target.name
+            current = item.id
+          } 
+          if (item.id === current + 1){
+            item.isFocused = true
+          }
+         temp.push(item)
+        })
+        setWant(temp)
+  }
+
+  // this should also set color and cert to "none" 
+  function clearHaveItems(){
+      let temp = []
+      have.map(item => {
+        item.url = ""
+        temp.push(item)
+      })
+      setHave(temp)
+  }
+
+  // this should also set color and cert to "none" 
+  function clearWantItems(){
+    let temp = []
+      want.map(item => {
+        item.url = ""
+        temp.push(item)
+      })
+      setWant(temp)
+  }
+
   return (
-    <TradeContext.Provider value={{have, setHave, want, setWant}}>
+    <TradeContext.Provider value={{have, setHave, want, setWant, manageFocus, pushItem, clearHaveItems, clearWantItems}}>
       {children}
     </TradeContext.Provider>
   )

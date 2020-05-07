@@ -9,25 +9,36 @@ import {TradeContext} from '../components/TradeContextProvider'
 function AddTradeRL() {
   const [itemImages, setItemImages] = useState()
 
-  const {have, setHave, want, setWant} = useContext(TradeContext)
+  const {have, setHave, want, setWant, manageFocus, pushItem, clearWantItems, clearHaveItems} = useContext(TradeContext)
 
   useEffect(() => {
     const names = test_names.map(name=> 
-      <img style={{height: "95px", width: "95px"}} src={require(`../images/RLimages/${name}`)} alt="" />
+      <img 
+      name={name} 
+      style={{height: "95px", width: "95px"}} 
+      src={require(`../images/RLimages/${name}`)} 
+      alt="" 
+      onClick={e => pushItem(e)} 
+      />
     )
-
     setItemImages(names)
   }, [])
-
+  
+  
   const displayed_have_items = have.map(item => {
     if (item.url === ""){
-      if (item.isFocused === false) return <button></button>
-      else return <button id="focusedButton">&#43;</button>
-    }
+      if (item.isFocused === false) return <button name={item.id} onClick={manageFocus}></button>
+      else return <button name={item.id} onClick={manageFocus} id="focusedButton">+</button>
+    } 
+    else return <RLitem_icon url={item.url} />
   })
 
   const displayed_want_items = want.map(item => {
-    return <button></button>
+    if (item.url === ""){
+      if (item.isFocused === false) return <button name={item.id} onClick={manageFocus}></button>
+      else return <button name={item.id} onClick={manageFocus} id="focusedButton">+</button>
+    } 
+    else return <RLitem_icon url={item.url} />
   })
 
   return (
@@ -42,7 +53,7 @@ function AddTradeRL() {
 
         <div className="h-wTopPlace">
           <div className="left-gameName">Rocket League PC</div>
-          <div className="right-gamePlatform">Steam</div>
+          <div className="right-gamePlatform"><img style={{height: "15px", width: "18px", marginRight: "10px"}} src={require("../images/other/Steam icon.png")} alt="" />Steam</div>
         </div>
 
         <div className="allAddedItems">
@@ -50,7 +61,7 @@ function AddTradeRL() {
           <div className="hwLeftSection">
             <div className="hTitle">
               <p>You <b>have</b></p>
-              <button>CLEAR ITEMS</button>
+              <button onClick={clearHaveItems}>CLEAR ITEMS</button>
             </div>
 
             <div className="haveItems">
@@ -61,7 +72,7 @@ function AddTradeRL() {
           <div className="hwRightSection">
             <div className="wTitle">
               <p>You <b>want</b></p>
-              <button>CLEAR ITEMS</button>
+              <button onClick={clearWantItems}>CLEAR ITEMS</button>
             </div>
 
             <div className="wantItems">
