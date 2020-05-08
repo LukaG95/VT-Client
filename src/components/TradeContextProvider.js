@@ -36,15 +36,14 @@ function TradeContextProvider({children}) {
   const [notes, setNotes] = useState("")
   const [platform, setPlatform] = useState("Steam")
   
-  /*
+  
   useEffect(()=>{
-    window.addEventListener("click", e => click(e))
-    return () => {window.removeEventListener("click", e => click(e))}
+    window.addEventListener("click", click)
+    return () => {window.removeEventListener("click", click)}
   },[])
  
 
   function click(e){
-    console.log(e.target)
     if(e.target.name !== "enableDropdown"){
       let temp=[] 
       have.map(item => {
@@ -54,7 +53,7 @@ function TradeContextProvider({children}) {
      setHave(temp)
     }
   }
-*/
+
 
   // deletes all the focuses and focuses on the clicked field
   function manageFocus(e){

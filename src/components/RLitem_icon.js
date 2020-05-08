@@ -6,7 +6,6 @@ function RLitem_icon({id, url}) {
   
   const {have, want, setHave, setWant} = useContext(TradeContext)
 
-  
 
   const dropdown = have.map(item => {
     if (item.id == id){

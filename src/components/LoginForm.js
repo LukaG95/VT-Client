@@ -20,7 +20,6 @@ function LoginForm() {
     onMouseDown={event => {
       if(event.target.className === "shading")
       setOpenForm(false)
-      console.log(event.target)
     }}
     >
       <div className="loginWrapper">
