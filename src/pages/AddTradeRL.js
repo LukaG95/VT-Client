@@ -5,11 +5,10 @@ import Spinner from '../components/Spinner'
 import {RLitem_names, test_names} from '../info/RLitem_names'
 import {TradeContext, TradeContextProvider} from '../components/TradeContextProvider'
 
-
 function AddTradeRL() {
   const [itemImages, setItemImages] = useState()
 
-  const {have, setHave, want, setWant, manageFocus, pushItem, clearWantItems, clearHaveItems} = useContext(TradeContext)
+  const {have, want, manageFocus, pushItem, clearWantItems, clearHaveItems} = useContext(TradeContext)
 
   useEffect(() => {
     const names = test_names.map(name=> 
@@ -22,12 +21,9 @@ function AddTradeRL() {
       />
     )
     setItemImages(names)
-
   }, [])
 
 
- 
-  
   const displayed_have_items = have.map(item => {
     if (item.url === ""){
       if (item.isFocused === false) return <button name={item.id} onClick={manageFocus}></button>
@@ -50,7 +46,6 @@ function AddTradeRL() {
       <div className="newTradeTitle">
         Create new trade
       </div>
-
 
       <div className="rlHaveWantSection">
 
@@ -87,7 +82,6 @@ function AddTradeRL() {
         </div>
 
       </div>
-
 
       <div className="rlChooseItemsSection">
         <div className="choose-itemsTopPlace">Choose the items</div>

@@ -1,44 +1,67 @@
 import React, {useState, useContext, useEffect} from 'react'
 import {TradeContext} from '../components/TradeContextProvider'
+import RLitem_icon_dropdown from './RLitem_icon_dropdown'
 
-function RLitem_icon({id, url}) {
-  const [open, setOpen] = useState(false)
-  
-  const {have, want, setHave, setWant} = useContext(TradeContext)
+function RLitem_icon({id, url}) { 
+  const {have, want, setIsDropdown} = useContext(TradeContext)
+  let all = [...have, ...want]
+
+  const [paint, setPaint] = useState("None")
+  const [cert, setCert] = useState("None")
+  const [amount, setAmount] = useState(1)
+
+  useEffect(()=> {
+    for (let i=0; i<all.length; i++){
+      if (all[i].id === id){
+        // console.log("test color")
+        setPaint(all[i].color)
+      }
+    }
+  }, [all[id-1].color])
+
+  useEffect(()=> {
+    for (let i=0; i<all.length; i++){
+      if (all[i].id === id){
+        // console.log("test color")
+        setCert(all[i].cert)
+      }
+    }
+  }, [all[id-1].cert])
 
 
-  const dropdown = have.map(item => {
-    if (item.id == id){
-      if (item.isDropdown === true) return <div name="enableDropdown" className="rl-attributes-dropdown"></div>
-      else return null
-    } 
-  })
+  function Dropdown(){
+    const Dropdown = [...have, ...want].map(item => {
+      if (item.id == id){
+        if (item.isDropdown === true) 
+          return <RLitem_icon_dropdown id={id}/>
+        else 
+          return null
+      }
+    })
+    return Dropdown
+  }
 
+  function CertIcon(){
+    if (cert !== "None")
+    return <div className="certIcon">{cert}</div>
+  }
+
+  function ColorIcon(){
+    if (paint !== "None")
+    return <img className="colorIcon" src={require(`../images/rl-colors/${paint}.png`)} alt="" /> 
+  }
 
 	return (
     <div 
-    onClick={() => {
-      let temp = []
-      have.map(item => {
-        if (item.id == id){
-          item.isDropdown = !item.isDropdown
-          temp.push(item)
-        }
-        else {
-          item.isDropdown = false
-          temp.push(item)
-        }
-      })
-      setHave(temp)
-    }}
+    
     style={{height: "95px", width: "95px"}}>
       
-      <div style={{height: "95px", width: "95px"}}>
+      <div onClick={() => setIsDropdown(id)} style={{height: "95px", width: "95px"}}>
 
         <img 
         name="enableDropdown"
         id={id}
-        style={{height: "95px", width: "95px"}} 
+        style={{height: "95px", width: "95px", cursor: "pointer"}} 
         src={require(`../images/RLimages/${url}`)} 
         alt="" 
         />
@@ -46,12 +69,13 @@ function RLitem_icon({id, url}) {
         {/*edit icon*/}
         <img className="editIcon" src={require(`../images/other/Edit-icon.png`)} alt="" />
 
-        {/*color icon*/}
-        <img className="colorIcon" src={require(`../images/rl-colors/purple.png`)} alt="" />
+        {CertIcon()}
+        {ColorIcon()}
+
         
       </div>
 
-      {dropdown}
+      <Dropdown />
 
     </div>		
 	)

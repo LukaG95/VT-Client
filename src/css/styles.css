@@ -447,7 +447,7 @@ body{
   cursor: pointer;
 }
 
-.hTitle button:hover, .wTitle button:hover{
+.hTitle button:active, .wTitle button:active{
   background-color: #564B68;
 }
 
@@ -495,20 +495,36 @@ body{
   height: 15px;
   width: 15px; 
   
-  bottom: 101px;
-  left: 63px;
+  bottom: 145px;
+  left: 74px;
 }
 
-.rl-attributes-dropdown{
+.certIcon{
+  display: flex;
+  position: relative; 
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #f6f6f6;
+  font-size: 12px;
+  height: 20px;
+  width: 100%;
+  
+  justify-content: center;
+  align-items: center;
+  bottom: 70px;
+  z-index: 2;
+}
+
+
+.rl-icon-dropdown{
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 220px;
+  width: 192px;
+  height: 230px;
 
-  background-color: #CEC6E0;
-  border-right: 2px solid #5D4E76;
-  border-left: 2px solid #5D4E76;
-  border-bottom: 2px solid #5D4E76;
+  justify-content: space-between;
+  background-color: #FFFFFF;
+  border: 1px solid #D8D8D8;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.54);
 
   padding: 10px;
@@ -516,6 +532,98 @@ body{
 }
 
 
+.rl-icon-dropdown-button-section{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  max-height: 100px;
+  
+}
+
+
+.rl-icon-dropdown button,  .rl-icon-dropdown input{
+  display: flex;
+  width: 100%;
+  height: 30px;
+  background: none;
+  font-size: 12px;
+  
+  padding-left: 10px;
+  align-items: center;  
+  border: 2px solid #B0C1FF;
+  border-radius: 4px;
+}
+
+.rl-icon-dropdown button:hover{
+  background-color: rgb(245, 246, 255);
+}
+
+.rl-icon-dropdown label {
+  color: rgb(173, 173, 173);
+  font-size: 10px;
+}
+
+.dd-arrow{
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  margin: 0px 10px 4px 0px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+#submit-rl-filters-button{
+  display: flex;
+  color: #f6f6f6;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0px;
+  font-weight: 500;
+  font-size: 12px;
+  margin-top: 8px;
+  background-color: #2C8E54; 
+  border: none;
+}
+
+#submit-rl-filters-button:hover{
+  background-color: rgb(55, 145, 91); 
+}
+
+.rl-dd-dd{
+  position: absolute;
+  width: 100%;
+  height: 200px;                                     
+  background-color: white;
+  top: 100%;
+
+  border-right: 2px solid #B0C1FF;
+  border-bottom: 2px solid #B0C1FF;
+  border-left: 2px solid #B0C1FF;
+  border-top: 2px solid #B0C1FF;
+  border-radius: 4px;
+
+  overflow: auto;
+  z-index: 1;
+}
+
+.rl-attribute-dd-item{
+    display: flex;
+    font-size: 12px;
+    min-height: 30px;
+    align-items: center;
+    transition: background 0.2s;
+  
+    padding-left: 8px;
+    transition: padding 0.3s;
+    cursor: pointer;
+  }
+  
+.rl-attribute-dd-item:hover{
+    background-color: rgb(245, 246, 255);
+    padding-left: 20px;
+  
+}
 
 .rlChooseItemsSection{
   width: 938px;
