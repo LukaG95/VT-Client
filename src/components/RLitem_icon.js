@@ -13,7 +13,7 @@ function RLitem_icon({id, url}) {
   useEffect(()=> {
     for (let i=0; i<all.length; i++){
       if (all[i].id === id){
-        // console.log("test color")
+        // console.log("test color loop")
         setPaint(all[i].color)
       }
     }
@@ -22,7 +22,7 @@ function RLitem_icon({id, url}) {
   useEffect(()=> {
     for (let i=0; i<all.length; i++){
       if (all[i].id === id){
-        // console.log("test color")
+        // console.log("test cert loop")
         setCert(all[i].cert)
       }
     }
@@ -44,17 +44,25 @@ function RLitem_icon({id, url}) {
   function CertIcon(){
     if (cert !== "None")
     return <div className="certIcon">{cert}</div>
+    else return null
   }
 
   function ColorIcon(){
     if (paint !== "None")
-    return <img className="colorIcon" src={require(`../images/rl-colors/${paint}.png`)} alt="" /> 
+    return (
+      <div className={`colorIcon ${paint.replace(/\s+/g, '')}`}>
+        <span className="paint-tooltip">{paint}</span>
+      </div>
+    )
+    else return null
+  }
+
+  function EditIcon(){
+    return <img className="editIcon" src={require(`../images/other/Edit-icon.png`)} alt="" />
   }
 
 	return (
-    <div 
-    
-    style={{height: "95px", width: "95px"}}>
+    <div className="RLicon" style={{height: "95px", width: "95px"}}>
       
       <div onClick={() => setIsDropdown(id)} style={{height: "95px", width: "95px"}}>
 
@@ -65,13 +73,10 @@ function RLitem_icon({id, url}) {
         src={require(`../images/RLimages/${url}`)} 
         alt="" 
         />
-
-        {/*edit icon*/}
-        <img className="editIcon" src={require(`../images/other/Edit-icon.png`)} alt="" />
-
-        {CertIcon()}
-        {ColorIcon()}
-
+        
+        <EditIcon />
+        <ColorIcon />
+        <CertIcon />
         
       </div>
 

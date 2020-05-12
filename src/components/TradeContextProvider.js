@@ -42,10 +42,11 @@ function TradeContextProvider({children}) {
     return () => {window.removeEventListener("click", click)}
   },[])
  
-
+  // sets all dropdowns to false on click
   function click(e){
-    // if e.target.name is a child of __
-    if(e.target.name !== "enableDropdown" && e.target.className !== "rl-icon-dropdown" && e.target.className !== "rl-attribute-dd-item"){
+    if (e.target.parentNode === null) return
+    if(e.target.name !== "enableDropdown" && e.target.className !== "rl-icon-dropdown" && e.target.className !== "rl-attribute-dd-item" && e.target.parentNode.name !== "enableDropdown"
+    && e.target.className !== "enableDropdown"){
       let temp=[] 
       have.map(item => {
         item.isDropdown = false
@@ -53,7 +54,7 @@ function TradeContextProvider({children}) {
       })
      setHave(temp)
     
-      // console.log(e.target)
+     // console.log(e.target)
 
      temp=[] 
       want.map(item => {
@@ -62,6 +63,34 @@ function TradeContextProvider({children}) {
       })
      setWant(temp)
     }
+  }
+
+  // removes target item from state
+  function deleteRLitem(id){
+    let temp = []
+    have.map(item => {
+      if (item.id === id){
+        item.url = ""
+        item.color = "None"
+        item.cert = "None"
+        temp.push(item)
+      }else
+      temp.push(item)
+    })
+    setHave(temp)
+
+    temp = []
+
+    want.map(item => {
+      if (item.id === id){
+        item.url = ""
+        item.color = "None"
+        item.cert = "None"
+        temp.push(item)
+      }else
+      temp.push(item)
+    })
+    setWant(temp)
   }
 
   // sets dropdown state to true on clicked item
@@ -190,7 +219,7 @@ function TradeContextProvider({children}) {
   }
 
   return (
-    <TradeContext.Provider value={{have, setHave, want, setWant, manageFocus, pushItem, clearHaveItems, clearWantItems, setIsDropdown}}>
+    <TradeContext.Provider value={{have, setHave, want, setWant, manageFocus, pushItem, clearHaveItems, clearWantItems, setIsDropdown, deleteRLitem}}>
       {children}
     </TradeContext.Provider>
   )

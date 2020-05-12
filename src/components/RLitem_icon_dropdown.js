@@ -9,7 +9,7 @@ function RLitem_icon_dropdown({id}) {
   const [certification, setCertification] = useState("None")
   const [amount, setAmount] = useState(1)
 
-  const {setHave, setWant, have, want} = useContext(TradeContext)
+  const {setHave, setWant, have, want, deleteRLitem} = useContext(TradeContext)
 
   useEffect(()=> {
     [...have, ...want].map(item=> {
@@ -43,8 +43,15 @@ function RLitem_icon_dropdown({id}) {
           else temp.push(item)
         })
         
-        setHave(temp)
+        setHave(temp) // this saves 24 things into have and never saves into want but somehow it works
+
       }}>Done</button>
+
+      <button
+        id="delete-rl-filters-button" 
+        onClick={()=> deleteRLitem(id)}
+      >
+      Delete </button>
       
     </div> 	
 	)
@@ -59,7 +66,7 @@ function FilterButton({dd, label, value, setFunction}){
       className="rl-icon-dropdown-button-section"
       onMouseLeave={()=> setTimeout(()=> setOpen(false), 190)}
       >
-        <label> {label} </label>
+        <label className="enableDropdown"> {label} </label>
   
         <button
           name="enableDropdown"
@@ -81,7 +88,7 @@ function FilterButton({dd, label, value, setFunction}){
       <div 
       className="rl-icon-dropdown-button-section"
       >
-        <label> {label} </label>
+        <label className="enableDropdown"> {label} </label>
   
         <input
           name="enableDropdown"

@@ -481,37 +481,117 @@ body{
   border: 1px solid #8C7EA4;
 }
 
+.RLicon{
+  position: relative;
+}
+
 .editIcon{
-  position: relative; 
+  position: absolute; 
   height: 13px;
   width: 13px; 
   
-  bottom: 101px;
+  bottom: 76px;
   left: 6px;
+  cursor: pointer;
 }
 
 .colorIcon{
-  position: relative; 
-  height: 15px;
-  width: 15px; 
+  position: absolute; 
+  height: 14px;
+  width: 14px; 
   
-  bottom: 145px;
-  left: 74px;
+  background: none;
+  border-radius: 50px;  
+  bottom: 76px;
+  left: 77px;
+  cursor: pointer;
 }
 
 .certIcon{
-  display: flex;
-  position: relative; 
+  position: absolute; 
   background-color: rgba(0, 0, 0, 0.5);
   color: #f6f6f6;
   font-size: 12px;
   height: 20px;
   width: 100%;
-  
-  justify-content: center;
-  align-items: center;
-  bottom: 70px;
-  z-index: 2;
+
+  bottom: 15px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.Black{
+  border: 1px solid #656565;
+  background: linear-gradient(90deg, #212121 43.66%, #0C0C0C 100%);
+}
+
+.Lime{
+  background: linear-gradient(90deg, #AAE470 43.66%, #64C900 100%);
+}
+
+.BurntSienna{
+  background: linear-gradient(90deg, #703727 43.66%, #4C1100 100%);
+}
+
+.Cobalt{
+  background: linear-gradient(90deg, #4859C8 43.66%, #0021FF 100%);
+}
+
+.Crimson{
+  background: linear-gradient(90deg, #B84D50 43.66%, #B50005 100%);
+}
+
+.ForestGreen{
+  background: linear-gradient(90deg, #088608 43.66%, rgba(8, 134, 8, 0.35) 100%);
+}
+
+.Grey{
+  background: linear-gradient(90deg, #CCCCCC 43.66%, rgba(189, 189, 189, 0.35) 100%);
+}
+
+.Orange{
+  background: linear-gradient(90deg, #F98600 43.66%, rgba(255, 77, 0, 0.49) 100%);
+}
+
+.Pink{
+  background: linear-gradient(90deg, #FA60C7 43.66%, rgba(250, 96, 199, 0.49) 100%);
+}
+
+.Purple{
+  background: linear-gradient(90deg, #7E26D2 43.66%, rgba(126, 38, 210, 0.2) 100%);
+}
+
+.Saffron{
+  background: linear-gradient(90deg, #F2EF14 43.66%, rgba(241, 238, 23, 0.57) 100%);
+}
+
+.SkyBlue{
+  background: linear-gradient(90deg, #40AFF4 43.66%, rgba(68, 180, 251, 0.43) 100%);
+}
+
+.TitaniumWhite{
+  background: linear-gradient(90deg, #FFFFFF 43.66%, rgba(255, 255, 255, 0.73) 100%);
+}
+
+.paint-tooltip{
+  visibility: hidden;
+  text-align: center;
+  font-size: 12px;
+  position: absolute;
+  color: black;
+  width: auto;
+  background-color: #F6F6F6;
+  padding-left: 3px;
+  padding-right: 3px;
+
+  top: 20px;
+  left: 18px;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.colorIcon:hover .paint-tooltip{
+  visibility: visible;
 }
 
 
@@ -520,14 +600,14 @@ body{
   flex-direction: column;
   position: relative;
   width: 192px;
-  height: 230px;
+  height: 250px;
 
   justify-content: space-between;
   background-color: #FFFFFF;
   border: 1px solid #D8D8D8;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.54);
 
-  padding: 10px;
+  padding: 5px 10px 0px 10px;
   z-index: 1;
 }
 
@@ -588,6 +668,24 @@ body{
 
 #submit-rl-filters-button:hover{
   background-color: rgb(55, 145, 91); 
+}
+
+#delete-rl-filters-button{
+  display: flex;
+  color: #f6f6f6;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0px;
+  font-weight: 500;
+  font-size: 12px;
+  margin-bottom: 10px;
+  background-color: #9F2727; 
+  border: none;
+
+}
+
+#delete-rl-filters-button:hover{
+  background-color: rgb(161, 48, 48); 
 }
 
 .rl-dd-dd{
@@ -688,6 +786,8 @@ body{
   height: 30px;
   width: 30px;
   margin-left: 12px;
+
+  cursor: pointer;
 }
 
 

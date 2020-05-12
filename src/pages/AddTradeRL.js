@@ -11,7 +11,7 @@ function AddTradeRL() {
   const {have, want, manageFocus, pushItem, clearWantItems, clearHaveItems} = useContext(TradeContext)
 
   useEffect(() => {
-    const names = test_names.map(name=> 
+    const names = RLitem_names.map(name=> 
       <img 
       name={name} 
       style={{height: "95px", width: "95px"}} 
@@ -87,8 +87,7 @@ function AddTradeRL() {
         <div className="choose-itemsTopPlace">Choose the items</div>
         <div className="choose-itemsSearchFiltersRL">
           <div><img style={{width: "11px", height: "11px"}} src={require("../images/other/MagnGlass.png")} /></div>
-          <input placeholder="Search items..."></input>
-          <RLfilter_icon />
+          <RLfilter_icon itemImages={itemImages} setItemImages={setItemImages} />
         </div>
         <div className="item-imagesRL">
           {itemImages === undefined ? <Spinner /> : itemImages}
