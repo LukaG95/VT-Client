@@ -3,6 +3,7 @@ import RLitem_icon from '../components/RLitem_icon'
 import RLfilter_icon from '../components/RLfilter_icon'
 import Spinner from '../components/Spinner'
 import {RLitem_names, test_names} from '../info/RLitem_names'
+import rl_items_all from '../info/virItemsFilteredAll.json' 
 import {TradeContext, TradeContextProvider} from '../components/TradeContextProvider'
 
 function AddTradeRL() {
@@ -11,15 +12,19 @@ function AddTradeRL() {
   const {have, want, manageFocus, pushItem, clearWantItems, clearHaveItems} = useContext(TradeContext)
 
   useEffect(() => {
-    const names = RLitem_names.map(name=> 
-      <img 
-      name={name} 
-      style={{height: "95px", width: "95px"}} 
-      src={require(`../images/RLimages/${name}`)} 
-      alt="" 
-      onClick={e => pushItem(e)} 
-      />
-    )
+    const names = rl_items_all.map(item => {
+      if (item.url.includes(".0.webp")){
+        return (
+          <img 
+            name={item.url} 
+            style={{height: "95px", width: "95px"}} 
+            src={require(`../images/RLimages/${item.url}`)} 
+            alt="" 
+            onClick={e => pushItem(e)} 
+          />
+        )
+      }
+    })
     setItemImages(names)
   }, [])
 
@@ -96,7 +101,7 @@ function AddTradeRL() {
 
 
       <div className="rlSubmitNotes">
-        <div className="rlSubmitButton">SUBMIT TRADE</div>
+        <button className="rlSubmitButton">SUBMIT TRADE</button>
         <div className="rlNotesButton">NOTES</div>
       </div>
 

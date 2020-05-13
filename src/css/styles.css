@@ -520,6 +520,20 @@ body{
   cursor: pointer;
 }
 
+.AmountIcon{
+  display: flex;
+  position: absolute; 
+  color: #f6f6f6;
+  font-size: 11px;
+  height: 20px;
+  width: 100%;
+
+  bottom: 73px;
+  left: 23px;
+  text-align: center;
+  cursor: pointer;
+}
+
 .Black{
   border: 1px solid #656565;
   background: linear-gradient(90deg, #212121 43.66%, #0C0C0C 100%);
@@ -806,10 +820,14 @@ body{
   height: 300px;
   grid-template-columns:  auto auto auto auto auto auto auto auto auto;
   column-gap: 3px;
-  row-gap: 5px;
+  row-gap: 3px;
 
-  margin-left: 13px;
+  padding-left: 13px;
   overflow: auto;
+
+  align-items: flex-start;
+  justify-content: flex-start;
+
 }
 
 .item-imagesRL img{
@@ -832,6 +850,7 @@ body{
   width: 107px;
   border: 2px solid #2C8E54;
   border-radius: 4px;
+  background: none;
 
   align-items: center;
   justify-content: center;
@@ -841,6 +860,10 @@ body{
 .rlSubmitButton:hover{
   background-color: #2C8E54;
   cursor: pointer;
+}
+
+.rlSubmitButton:active{
+  background: rgb(113, 168, 135);
 }
 
 .rlNotesButton{

@@ -1,38 +1,57 @@
 import React, {useContext} from 'react'
 import {RLitem_names} from '../info/RLitem_names'
-import rl_items from '../info/virItems.json' 
+import rl_items from '../info/virItemsFiltered.json' 
+import rl_items_all from '../info/virItemsFilteredAll.json' 
 import {TradeContext} from './TradeContextProvider'
 
 function RLfilter_icon({itemImages, setItemImages}) {
 
   const {pushItem} = useContext(TradeContext)
-
   function setNames(type){
-    let names = rl_items[`${type}`].map(item => {   // this is fine 
-      if (item.url.includes("0.webp")){
-        return (
-          <img 
-          name={item.name} 
-          style={{height: "95px", width: "95px"}} 
-          src={require(`../images/RLimages/${item.url}`)} 
-          alt={require(`../images/RLimages/round.png`)} 
-          onClick={e => pushItem(e)} 
-          />
-        )
-      }
-      else return null
-    })
-    setItemImages(names)
+    if (type === "all"){
+      const names = rl_items_all.map(item => {   
+        if (item.url.includes(".0.webp")){
+          return (
+            <img 
+            name={item.url} 
+            style={{height: "95px", width: "95px"}} 
+            src={require(`../images/RLimages/${item.url}`)} 
+            alt={require(`../images/RLimages/round.png`)} 
+            onClick={e => pushItem(e)} 
+            />
+          )
+        }
+        else return null
+      })
+      setItemImages(names)
+    }
+    else{
+      const names = rl_items[`${type}`].map(item => {   
+        if (item.url.includes(".0.webp")){
+          return (
+            <img 
+            name={item.url} 
+            style={{height: "95px", width: "95px"}} 
+            src={require(`../images/RLimages/${item.url}`)} 
+            alt={require(`../images/RLimages/round.png`)} 
+            onClick={e => pushItem(e)} 
+            />
+          )
+        }
+        else return null
+      })
+      setItemImages(names)
+   }
   }
 	
 	return (
     <>
       <input onChange={e=> {
-        let temp = rl_items.wheels.map(item => {   // this should be rl_items.all.map
-          if (item.name.includes(e.target.value)){
+        let temp = rl_items_all.map(item => {   
+          if (item.name.toLowerCase().includes(e.target.value.toLowerCase()) && item.url.includes(".0.webp")){
             return(
               <img 
-                name={item.name} 
+                name={item.url} 
                 style={{height: "95px", width: "95px"}} 
                 src={require(`../images/RLimages/${item.url}`)} 
                 alt={require(`../images/RLimages/round.png`)} 

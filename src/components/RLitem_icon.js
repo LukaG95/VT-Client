@@ -28,6 +28,15 @@ function RLitem_icon({id, url}) {
     }
   }, [all[id-1].cert])
 
+  useEffect(()=> {
+    for (let i=0; i<all.length; i++){
+      if (all[i].id === id){
+        // console.log("test amount loop")
+        setAmount(all[i].amount)
+      }
+    }
+  }, [all[id-1].amount])
+
 
   function Dropdown(){
     const Dropdown = [...have, ...want].map(item => {
@@ -45,6 +54,10 @@ function RLitem_icon({id, url}) {
     if (cert !== "None")
     return <div className="certIcon">{cert}</div>
     else return null
+  }
+
+  function AmountIcon(){
+    return <div className="AmountIcon">{`${amount}x`}</div>
   }
 
   function ColorIcon(){
@@ -75,6 +88,7 @@ function RLitem_icon({id, url}) {
         />
         
         <EditIcon />
+        <AmountIcon />
         <ColorIcon />
         <CertIcon />
         
