@@ -14,7 +14,7 @@ function AddTradeRL() {
 
   useEffect(() => {
     const names = rl_items_all.map(item => {
-      if (item.url.includes("3.0.webp")){
+      if (item.url.includes(".0.webp")){
         return (
           <img 
             name={item.url} 
