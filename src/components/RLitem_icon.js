@@ -1,15 +1,19 @@
 import React, {useState, useContext, useEffect} from 'react'
 import {TradeContext} from '../components/TradeContextProvider'
 import RLitem_icon_dropdown from './RLitem_icon_dropdown'
+import rl_items_all from '../info/virItemsFilteredAll.json' 
 
 function RLitem_icon({id, url}) { 
   const {have, want, setIsDropdown} = useContext(TradeContext)
   let all = [...have, ...want]
 
+  const [name, setName] = useState("")
   const [paint, setPaint] = useState("None")
   const [cert, setCert] = useState("None")
   const [amount, setAmount] = useState(1)
 
+
+  // join all useEffects? test loops
   useEffect(()=> {
     for (let i=0; i<all.length; i++){
       if (all[i].id === id){
@@ -37,6 +41,12 @@ function RLitem_icon({id, url}) {
     }
   }, [all[id-1].amount])
 
+  useEffect(()=> {
+    rl_items_all.map(item => {
+      if (item.url === url)
+        setName(item.name)
+    })
+  }, [])
 
   function Dropdown(){
     const Dropdown = [...have, ...want].map(item => {
@@ -92,6 +102,8 @@ function RLitem_icon({id, url}) {
         <ColorIcon />
         <CertIcon />
         
+        <span className="RLicon-name-hover"><p>{name}</p></span>
+
       </div>
 
       <Dropdown />

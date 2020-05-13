@@ -34,7 +34,7 @@ function TradeContextProvider({children}) {
   ])
 
   const [notes, setNotes] = useState("")
-  const [platform, setPlatform] = useState("Steam")
+  const [platform, setPlatform] = useState("PC")
   
   
   useEffect(()=>{
@@ -219,7 +219,7 @@ function TradeContextProvider({children}) {
   }
 
   return (
-    <TradeContext.Provider value={{have, setHave, want, setWant, manageFocus, pushItem, clearHaveItems, clearWantItems, setIsDropdown, deleteRLitem}}>
+    <TradeContext.Provider value={{have, setHave, want, setWant, platform, notes, manageFocus, pushItem, clearHaveItems, clearWantItems, setIsDropdown, deleteRLitem}}>
       {children}
     </TradeContext.Provider>
   )

@@ -5,15 +5,16 @@ import Spinner from '../components/Spinner'
 import {RLitem_names, test_names} from '../info/RLitem_names'
 import rl_items_all from '../info/virItemsFilteredAll.json' 
 import {TradeContext, TradeContextProvider} from '../components/TradeContextProvider'
+import axios from 'axios'
 
 function AddTradeRL() {
   const [itemImages, setItemImages] = useState()
 
-  const {have, want, manageFocus, pushItem, clearWantItems, clearHaveItems} = useContext(TradeContext)
+  const {have, want, platform, notes, manageFocus, pushItem, clearWantItems, clearHaveItems} = useContext(TradeContext)
 
   useEffect(() => {
     const names = rl_items_all.map(item => {
-      if (item.url.includes(".0.webp")){
+      if (item.url.includes("3.0.webp")){
         return (
           <img 
             name={item.url} 
@@ -27,6 +28,41 @@ function AddTradeRL() {
     })
     setItemImages(names)
   }, [])
+
+
+  
+  function handleTradeSubmit(){
+    let haveRefactor = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+    let wantRefactor = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+
+    have.map((item, i) => {
+      haveRefactor[i].itemID = item.url === "" ? 0 : parseInt(item.url.substr(0, item.url.indexOf('.')))     // reads url until dot (gets only the ID)
+      haveRefactor[i].paint = item.color
+      haveRefactor[i].cert = item.cert
+      haveRefactor[i].itemType = "item"  // needs work
+      haveRefactor[i].amount = item.amount
+    })
+    
+    want.map((item, i) => {
+      wantRefactor[i].itemID = item.url === "" ? 0 : parseInt(item.url.substr(0, item.url.indexOf('.')))    
+      wantRefactor[i].paint = item.color
+      wantRefactor[i].cert = item.cert
+      wantRefactor[i].itemType = "item"  // needs work
+      wantRefactor[i].amount = item.amount
+    })
+
+    axios.post('/trades/createTrade', {
+      have: haveRefactor,
+      want: wantRefactor, 
+      platform: platform,
+      notes: notes
+    })
+    .then(res => {
+      console.log(res.data.status)
+    })
+    .catch(err => console.log(err))
+  }
+  
 
 
   const displayed_have_items = have.map(item => {
@@ -101,7 +137,7 @@ function AddTradeRL() {
 
 
       <div className="rlSubmitNotes">
-        <button className="rlSubmitButton">SUBMIT TRADE</button>
+        <button onClick={()=> handleTradeSubmit()} className="rlSubmitButton">SUBMIT TRADE</button>        {/*submit trade - server reques*/} 
         <div className="rlNotesButton">NOTES</div>
       </div>
 

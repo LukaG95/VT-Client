@@ -7,6 +7,7 @@ import {TradeContext} from './TradeContextProvider'
 function RLfilter_icon({itemImages, setItemImages}) {
 
   const {pushItem} = useContext(TradeContext)
+
   function setNames(type){
     if (type === "all"){
       const names = rl_items_all.map(item => {   
@@ -16,7 +17,7 @@ function RLfilter_icon({itemImages, setItemImages}) {
             name={item.url} 
             style={{height: "95px", width: "95px"}} 
             src={require(`../images/RLimages/${item.url}`)} 
-            alt={require(`../images/RLimages/round.png`)} 
+            alt="" 
             onClick={e => pushItem(e)} 
             />
           )
@@ -33,7 +34,7 @@ function RLfilter_icon({itemImages, setItemImages}) {
             name={item.url} 
             style={{height: "95px", width: "95px"}} 
             src={require(`../images/RLimages/${item.url}`)} 
-            alt={require(`../images/RLimages/round.png`)} 
+            alt="" 
             onClick={e => pushItem(e)} 
             />
           )
@@ -43,7 +44,9 @@ function RLfilter_icon({itemImages, setItemImages}) {
       setItemImages(names)
    }
   }
-	
+  
+  
+  // components return
 	return (
     <>
       <input onChange={e=> {
