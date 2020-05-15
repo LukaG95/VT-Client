@@ -1,17 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {ReactComponent as ArrowIcon} from '../images/other/down-arrow.svg'
 import {rl_dd_names} from '../info/DropdownNames'
+import {FiltersRLContext} from './FiltersRL_Context'
 
 const {gameDD, searchTypeDD, namesDD, paintDD, certDD, itemTypeDD, platformDD} = rl_dd_names
 
 function FiltersRL() {
-  const [game, setGame] = useState("Rocket League")
-  const [searchType, setSearchType] = useState("I want to buy")
-  const [name, setName] = useState("All")
-  const [paint, setPaint] = useState("All")
-  const [cert, setCert] = useState("All")
-  const [itemType, setItemType] = useState("All")
-  const [platform, setPlatform] = useState("All")
+  const {game, setGame, searchType, setSearchType, name, setName, paint, setPaint, cert, setCert, itemType, setItemType, platform, setPlatform} = useContext(FiltersRLContext)
 
   return (
     <div className="sbSection filtersRL">

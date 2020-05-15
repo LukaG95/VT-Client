@@ -15,7 +15,8 @@ import Terms from './pages/Terms'
 import ContactUs from './pages/ContactUs'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import LoginForm from './components/LoginForm'
-import {TradeContextProvider} from './components/TradeContextProvider'
+import {TradeContextProvider} from './components/TradeContextRL'
+import {FiltersRLContextProvider} from './components/FiltersRL_Context'
 
 function App() {
 
@@ -37,8 +38,8 @@ function App() {
         <Navbar />
 
         <Switch>
-          <Route exact path="/">                  <RLTrading />       </Route>
-          <Route exact path="/trading/rl">        <RLTrading />       </Route>
+          <Route exact path="/">                  <FiltersRLContextProvider> <RLTrading /> </ FiltersRLContextProvider>       </Route>
+          <Route exact path="/trading/rl">        <FiltersRLContextProvider> <RLTrading /> </FiltersRLContextProvider>      </Route>
           <Route exact path="/prices">            <Prices />          </Route>
           <Route exact path="/premium">           <Premium />         </Route>
           <Route exact path="/terms">             <Terms />           </Route>

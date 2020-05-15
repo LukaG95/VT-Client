@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react'
-import {TradeContext} from '../components/TradeContextProvider'
+import {TradeContext} from './TradeContextRL'
 import {rl_dd_names} from '../info/DropdownNames'
 
 const {paintDD, certDD} = rl_dd_names

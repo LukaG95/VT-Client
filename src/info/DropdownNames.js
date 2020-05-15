@@ -1,10 +1,8 @@
-import rl_names from './rl_items.json' 
+import rl_names from './virItemsFilteredAll.json' 
 
 let rl_item_names = []
 
-rl_names.Slots.map(type => {
-  return type.Items.map(item => item.Name.length < 25 && (rl_item_names.push(item.Name)))
-  }) 
+rl_names.map(item => rl_item_names.push(item.name)) 
 
 const rl_dd_names = {
   gameDD: ["Rocket League", "CSGO"],

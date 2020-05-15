@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react'
-import {TradeContext} from '../components/TradeContextProvider'
+import {TradeContext} from './TradeContextRL'
 import RLitem_icon_dropdown from './RLitem_icon_dropdown'
 import rl_items_all from '../info/virItemsFilteredAll.json' 
 

@@ -4,7 +4,7 @@ import RLfilter_icon from '../components/RLfilter_icon'
 import Spinner from '../components/Spinner'
 import {RLitem_names, test_names} from '../info/RLitem_names'
 import rl_items_all from '../info/virItemsFilteredAll.json' 
-import {TradeContext, TradeContextProvider} from '../components/TradeContextProvider'
+import {TradeContext, TradeContextProvider} from '../components/TradeContextRL'
 import axios from 'axios'
 
 function AddTradeRL() {
