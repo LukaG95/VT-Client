@@ -2,7 +2,7 @@ import rl_names from './virItemsFilteredAll.json'
 
 let rl_item_names = []
 
-rl_names.map(item => rl_item_names.push(item.name)) 
+rl_names.map(item => item.url.includes(".0.webp") && rl_item_names.push(item.name)) 
 
 const rl_dd_names = {
   gameDD: ["Rocket League", "CSGO"],

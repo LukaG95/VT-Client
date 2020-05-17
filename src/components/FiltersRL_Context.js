@@ -5,11 +5,11 @@ const FiltersRLContext = React.createContext()
 function FiltersRLContextProvider({children}) {
   const [game, setGame] = useState("Rocket League")
   const [searchType, setSearchType] = useState("I want to buy")
-  const [name, setName] = useState("All")
-  const [paint, setPaint] = useState("All")
-  const [cert, setCert] = useState("All")
-  const [itemType, setItemType] = useState("All")
-  const [platform, setPlatform] = useState("All")
+  const [name, setName] = useState("Any")
+  const [paint, setPaint] = useState("Any")
+  const [cert, setCert] = useState("Any")
+  const [itemType, setItemType] = useState("Any")
+  const [platform, setPlatform] = useState("Any")
 
 
   return (

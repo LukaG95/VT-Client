@@ -1,11 +1,80 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import Sidebar from '../components/Sidebar'
 import {FiltersRLContext} from '../components/FiltersRL_Context'
+import Spinner from '../components/Spinner'
+import rl_items from '../info/rl_items.json'
+import RLTradeComponent from '../components/RLTradeComponent'
+import axios from 'axios'
+import test_tradeInfo from '../info/test_tradeInfo'
 
 function RLTrading() {
-  const [] = useState()
+  const [tradeInfo, setTradeInfo] = useState(test_tradeInfo)
+
+  const [pageAmount, setPageAmount] = useState(100)
+  const [currentPage, setCurrentPage] = useState(1)
 
   const {game, searchType, name, paint, cert, itemType, platform} = useContext(FiltersRLContext)
+
+  useEffect(()=> {
+    // convert names to IDs
+    let id = 0
+    rl_items.Slots.forEach(type => { type.Items.forEach(item => {
+        if (item.Name === name)
+          id = item.ItemID
+      })
+    })
+
+    // server request with given filters
+    axios.get(`/trades/getTrades?itemID=${id}&cert=${cert}&paint=${paint}`)
+    .then (res => {
+
+      // set state with response
+
+    })
+    .catch(err => console.log(err))
+
+  }, [game, searchType, name, paint, cert, itemType, platform, currentPage])
+
+  function PageNumbers(){
+    const pageButtons = []
+
+    const starting_number = () => {
+      if (currentPage <= 5) 
+        return 1 
+      else if (currentPage + 5 >= pageAmount)
+        return pageAmount - 9
+      else 
+        return currentPage - 5
+    }
+  
+    for (let i = starting_number(); i < starting_number() + 10; i++)
+      pageButtons.push(
+        i === currentPage ? 
+        <button className="pageButton highlighted-page">{i}</button> : 
+        <button className="pageButton" onClick={() => setCurrentPage(i)}>{i}</button>
+      )
+
+    return(
+      <section className="page-numbers">
+        <div onClick={()=> currentPage > 1 && setCurrentPage(prev => prev - 1)} className="page-left noUserInteraction"></div>
+         {pageButtons}
+        <div onClick={()=> currentPage < 100 && setCurrentPage(prev => prev + 1)} className="page-right noUserInteraction"></div>
+      </section>
+    )
+  }
+
+  function TradeComponents(){
+      if (tradeInfo){
+        var tradeComponents = tradeInfo.map(trade => <RLTradeComponent trade={trade} />)
+
+      }else return null // <Spinner />
+
+    return(
+      <div className="main-middle">
+        {tradeComponents}
+      </div>
+    )
+  }
 
   return (
     <div className="secondaryWrapper">  
@@ -15,13 +84,14 @@ function RLTrading() {
       <main className="main">
 
         <div className="main-top">
-          <p className="trading-title">Rocket League</p> 
-          <div></div>     {/* placeholder */}
-          <div></div>     {/* placeholder */}
+          <p className="trading-title">Rocket League PC</p> 
+          <PageNumbers />
+          <div></div>     {/* empty placeholder */}
         </div>
-        <section className="page-numbers"></section>
 
-        <div className="main-middle"></div>
+        <TradeComponents />
+        <TradeComponents />
+
         <section className="page-numbers"></section>
 
       </main>
@@ -30,19 +100,4 @@ function RLTrading() {
   )
 }
 
-export default RLTrading;
-
-
- /* 
- 1. useEffect will listen on change on state coming from context and will fetch new data every time there's a change
- 2. Info we need from the server 
-    - username
-    - reputation
-    - have & want items, notes and platform
-    - steam account link (if provided) & link to all of his other trades
-    - when that trade was created
-    - premium or non premium user
-
- ps:
- - if there's 10 or less trades matching those filters we will display 1 page but components, 11 - 20, 2 pages etc
- */
+export default RLTrading
