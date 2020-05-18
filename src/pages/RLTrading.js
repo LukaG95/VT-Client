@@ -86,10 +86,9 @@ function RLTrading() {
         <div className="main-top">
           <p className="trading-title">Rocket League PC</p> 
           <PageNumbers />
-          <div></div>     {/* empty placeholder */}
+          {/* placeholder */}
         </div>
 
-        <TradeComponents />
         <TradeComponents />
 
         <section className="page-numbers"></section>

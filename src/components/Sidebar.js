@@ -24,9 +24,7 @@ function Sidebar() {
           <Route exact path="/reputation">     <FiltersREP />   </Route>
         </Switch>
 
-        <div className="sbSection" id="sponsor">
-          AD SECTION
-        </div>
+        {/* placeholder - <div className="sbSection"></div>*/}
 
         <Footer />
 

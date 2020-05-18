@@ -46,7 +46,7 @@ function RLfilter_icon({itemImages, setItemImages}) {
   }
   
   
-  // components return
+ 
 	return (
     <>
       <input onChange={e=> {

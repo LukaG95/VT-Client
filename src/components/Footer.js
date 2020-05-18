@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 function Footer() {
   return (
-    <div className="sbSection">
+    <div className="sbSection footer">
 
       <ul className="sbItem footerFirst">
         <li><a href="https://discord.gg/Qt6qKJx">Giveaway</a></li>

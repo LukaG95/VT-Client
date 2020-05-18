@@ -33,9 +33,9 @@ function RLTradeComponent({trade}) {
   }
 
   return (
-      <div className="rltrade_container">
+      <div className="rltrade-container">
 
-        <div className="rltrade_cTopPlace">
+        <div className="rltrade-cTopPlace">
 
           <div className="flex">
             {userName()}
@@ -76,8 +76,18 @@ function RLTradeComponent({trade}) {
             <div className="want-items">{wantItems()}</div>
           </div>
 
-          <div className="flex-col rl_notes_container">
+          <div className="flex-col rl_notes_buttons_container">
 
+            <div className="notes-box">
+              <div className="notes-top">Notes</div>
+              <div className="notes">{trade.notes}</div>
+            </div>
+
+            <div className="buttons-box">
+              <button>Contact on Steam</button>
+              <button>All {trade.username}'s trades</button>
+            </div>
+            
           </div>
 
         </div>
