@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import RLitem_icon_tradePage from './RLitem_icon_tradePage.js'
 
 function RLTradeComponent({trade}) {
   const [notesHeight, setNotesHeight] = useState(()=> {
@@ -9,19 +10,6 @@ function RLTradeComponent({trade}) {
     else 
       return "35px"
   })
-
-  /*
-  useEffect(() => {
-    if (trade.have.length >= 9 || trade.want.length >= 9)
-      setNotesHeight("230px")
-    else if (trade.have.length >= 5 || trade.want.length >= 5)
-      setNotesHeight("132px")
-    else 
-      setNotesHeight("35px")
-
-      
-  }, [])
-  */
 
   function userName(){
     if (trade.premium){
@@ -37,18 +25,18 @@ function RLTradeComponent({trade}) {
 
   function handleDate(){
     return(
-      <div className="trade-post-time">5 seconds ago</div>
+      <div className="trade-post-time">{trade.createdAt}</div>
     )
   }
 
   function tradeItems(){
-    const itemComponents = trade.have.map(url => <img style={{height: "95px", width: "95px"}} src={require(`../images/RLimages/${url}`)} />)
+    const itemComponents = trade.have.map(item => <img style={{height: "95px", width: "95px"}} src={require(`../images/RLimages/${item.url}`)} />)
     
     return itemComponents
   }
 
   function wantItems(){
-    const itemComponents = trade.want.map(url => <img style={{height: "95px", width: "95px"}} src={require(`../images/RLimages/${url}`)} />)
+    const itemComponents = trade.want.map(item => <img style={{height: "95px", width: "95px"}} src={require(`../images/RLimages/${item.url}`)} />)
     
     return itemComponents
   }

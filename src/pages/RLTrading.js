@@ -8,7 +8,7 @@ import axios from 'axios'
 import test_tradeInfo from '../info/test_tradeInfo'
 
 function RLTrading() {
-  const [tradeInfo, setTradeInfo] = useState(test_tradeInfo)
+  const [tradeInfo, setTradeInfo] = useState()
 
   const [pageAmount, setPageAmount] = useState(100)
   const [currentPage, setCurrentPage] = useState(1)
@@ -24,12 +24,15 @@ function RLTrading() {
       })
     })
 
+    if (name === "Any")
+      id = "any"
+
     // server request with given filters
-    axios.get(`/trades/getTrades?itemID=${id}&cert=${cert}&paint=${paint}`)
+    axios.get(`/trades/getTrades?itemID=${id}&cert=${cert.toLowerCase()}&paint=${paint.toLowerCase()}`)
     .then (res => {
 
       // set state with response
-
+      setTradeInfo(res.data.trades)
     })
     .catch(err => console.log(err))
 
@@ -67,7 +70,7 @@ function RLTrading() {
       if (tradeInfo){
         var tradeComponents = tradeInfo.map(trade => <RLTradeComponent trade={trade} />)
 
-      }else return null // <Spinner />
+      }else return null // <Spinner className="newPosition" />
 
     return(
       <div className="main-middle">

@@ -32,23 +32,37 @@ function AddTradeRL() {
 
   
   function handleTradeSubmit(){
-    let haveRefactor = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
-    let wantRefactor = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+    let haveRefactor = []
+    let wantRefactor = []
 
-    have.map((item, i) => {
-      haveRefactor[i].itemID = item.url === "" ? 0 : parseInt(item.url.substr(0, item.url.indexOf('.')))     // reads url until dot (gets only the ID)
-      haveRefactor[i].paint = item.color
-      haveRefactor[i].cert = item.cert
-      haveRefactor[i].itemType = "item"  // needs work
-      haveRefactor[i].amount = item.amount
+    have.map((item) => {
+      
+      if(item.url !== "") {
+        let readyItem = {
+          itemID : item.url === "" ? 0 : parseInt(item.url.substr(0, item.url.indexOf('.'))),     // reads url until dot (gets only the ID)
+          paint : item.color,
+          cert : item.cert,
+          itemType : "item",  // needs work
+          amount : item.amount,
+          url : item.url
+        }
+        haveRefactor.push(readyItem)
+      } 
     })
     
-    want.map((item, i) => {
-      wantRefactor[i].itemID = item.url === "" ? 0 : parseInt(item.url.substr(0, item.url.indexOf('.')))    
-      wantRefactor[i].paint = item.color
-      wantRefactor[i].cert = item.cert
-      wantRefactor[i].itemType = "item"  // needs work
-      wantRefactor[i].amount = item.amount
+    want.map((item) => {
+      if(item.url !== "") {
+        let readyItem = {
+          itemID : item.url === "" ? 0 : parseInt(item.url.substr(0, item.url.indexOf('.'))),     // reads url until dot (gets only the ID)
+          paint : item.color,
+          cert : item.cert,
+          itemType : "item",  // needs work
+          amount : item.amount,
+          url : item.url
+        }
+        
+        wantRefactor.push(readyItem);
+      }
     })
 
     axios.post('/trades/createTrade', {
@@ -63,7 +77,6 @@ function AddTradeRL() {
     .catch(err => console.log(err))
   }
   
-
 
   const displayed_have_items = have.map(item => {
     if (item.url === ""){
