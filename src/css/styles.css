@@ -389,26 +389,29 @@ body{
   justify-content: center;
 }
 
-
 .pageButton{
   background: none;
   color: #938F8F;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 18px;
   border: none;
   cursor: pointer;
 
-  padding-left: 7px;
-  padding-right: 7px;
-
+  width: 30px;
 }
 
 .pageButton:hover{
   color: #F6F6F6;
+  background-color: #564b68;
+}
+
+.pageButton:active{
+  background-color: #595264;
 }
 
 .highlighted-page{
   color: #F6F6F6;
+  background-color: #564b68;
 }
 
 .page-left{
@@ -569,7 +572,7 @@ body{
 }
 
 .notes{
-  max-height: 135px;
+  
   font-weight: 300;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.95);

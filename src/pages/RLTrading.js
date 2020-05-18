@@ -57,7 +57,7 @@ function RLTrading() {
     return(
       <section className="page-numbers">
         <div onClick={()=> currentPage > 1 && setCurrentPage(prev => prev - 1)} className="page-left noUserInteraction"></div>
-         {pageButtons}
+          {pageButtons}
         <div onClick={()=> currentPage < 100 && setCurrentPage(prev => prev + 1)} className="page-right noUserInteraction"></div>
       </section>
     )

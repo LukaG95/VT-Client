@@ -1,6 +1,27 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 function RLTradeComponent({trade}) {
+  const [notesHeight, setNotesHeight] = useState(()=> {
+    if (trade.have.length >= 9 || trade.want.length >= 9)
+      return "230px"
+    else if (trade.have.length >= 5 || trade.want.length >= 5)
+      return "132px"
+    else 
+      return "35px"
+  })
+
+  /*
+  useEffect(() => {
+    if (trade.have.length >= 9 || trade.want.length >= 9)
+      setNotesHeight("230px")
+    else if (trade.have.length >= 5 || trade.want.length >= 5)
+      setNotesHeight("132px")
+    else 
+      setNotesHeight("35px")
+
+      
+  }, [])
+  */
 
   function userName(){
     if (trade.premium){
@@ -80,7 +101,7 @@ function RLTradeComponent({trade}) {
 
             <div className="notes-box">
               <div className="notes-top">Notes</div>
-              <div className="notes">{trade.notes}</div>
+              <div style={{height: `${notesHeight}`}} className="notes">{trade.notes}</div>
             </div>
 
             <div className="buttons-box">
