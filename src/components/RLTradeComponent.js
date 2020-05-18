@@ -30,13 +30,13 @@ function RLTradeComponent({trade}) {
   }
 
   function tradeItems(){
-    const itemComponents = trade.have.map(item => <img style={{height: "95px", width: "95px"}} src={require(`../images/RLimages/${item.url}`)} />)
+    const itemComponents = trade.have.map(item => <RLitem_icon_tradePage item={item} />)
     
     return itemComponents
   }
 
   function wantItems(){
-    const itemComponents = trade.want.map(item => <img style={{height: "95px", width: "95px"}} src={require(`../images/RLimages/${item.url}`)} />)
+    const itemComponents = trade.want.map(item => <RLitem_icon_tradePage item={item} />)
     
     return itemComponents
   }

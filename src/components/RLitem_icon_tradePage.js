@@ -1,24 +1,24 @@
-import React, {useState} from 'react'
+import React from 'react'
 
-function RLitem_icon({}) { 
+function RLitem_icon_tradePage({item}) { 
 
   function CertIcon(){
-    if (cert !== "None")
-    return <div className="certIcon">{cert}</div>
+    if (item.cert !== "None")
+      return <div className="certIcon">{item.cert}</div>
     else return null
   }
 
   function AmountIcon(){
-    return <div className="AmountIcon">{`${amount}x`}</div>
+    return <div style={{left: "6px"}} className="AmountIcon">{`${item.amount}x`}</div>
   }
 
   function ColorIcon(){
-    if (paint !== "None")
-    return (
-      <div className={`colorIcon ${paint.replace(/\s+/g, '')}`}>
-        <span className="paint-tooltip">{paint}</span>
-      </div>
-    )
+    if (item.paint !== "None")
+      return (
+        <div className={`colorIcon ${item.paint.replace(/\s+/g, '')}`}>
+          <span className="paint-tooltip">{item.paint}</span>
+        </div>
+      )
     else return null
   }
 
@@ -27,9 +27,8 @@ function RLitem_icon({}) {
 
       <img 
         name="enableDropdown"
-        id={id}
         style={{height: "95px", width: "95px", cursor: "pointer"}} 
-        src={require(`../images/RLimages/${url}`)} 
+        src={require(`../images/RLimages/${item.url}`)} 
         alt="" 
       />
       
@@ -37,11 +36,11 @@ function RLitem_icon({}) {
       <ColorIcon />
       <CertIcon />
       
-      <span className="RLicon-name-hover"><p>{name}</p></span>
+      <span className="RLicon-name-hover"><p>{item.itemName}</p></span>
 
 
     </div>		
 	)
 }
 
-export default RLitem_icon;
+export default RLitem_icon_tradePage
