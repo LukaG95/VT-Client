@@ -15,11 +15,12 @@ function UserContextProvider({children}) {
 
     axios.get('/auth/getUser')
       .then (res => {
+
         if (res.data.status === "success") 
         setIsLoggedIn(true)
         else 
         setIsLoggedIn(false)
-  
+
       })
       .catch(err => console.log(err))
       

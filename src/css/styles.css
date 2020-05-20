@@ -352,6 +352,10 @@ body{
   color: white;
 }
 
+.footerThird{
+  margin-top: 15px;
+}
+
 #removeDecoration{
   text-decoration: none;
 }
@@ -488,6 +492,8 @@ body{
   display: flex;
   flex-direction: column;
   margin-left: 10px;
+
+  justify-content: space-evenly;
 }
 
 .active-text{
@@ -496,12 +502,11 @@ body{
   font-size: 15px;
   color: #CEC6E0;
   line-height: 100%;
-
 }
 
 .trade-post-time{
   display: flex;
-  font-size: 12px; 
+  font-size: 11px; 
   color: #CEC6E0;
   line-height: 100%;
 }
@@ -599,6 +604,209 @@ body{
 .buttons-box button:active{
   background-color: #47384D;
 }
+
+/*-----Reputation              ----*/
+
+.repWrapper{
+  height: 500px;
+  width: 100%;
+  margin: 43px 43px 0px 43px;
+}
+
+.rep-search-input{
+  width: 400px;
+  height: 33px;
+  font-size: 12px;
+  background-color: #F6F6F6;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  border: none;
+}
+
+.repHeader{
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  background-color: #47384D;
+  border-radius: 4px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.rep-header-left{
+  justify-content: center;
+  margin-left: 15px;
+}
+
+.rep-username{
+  display: flex;
+  color: #F6F6F6;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 36px;
+}
+
+.rep-title{
+  display: flex;
+  font-size: 24px;
+  line-height: 24px;
+  color: #766495;
+  justify-content: flex-end;
+}
+
+.rep-grade{
+  display: flex;
+  font-weight: 500;
+  font-size: 48px;
+  color: #A2A2A2;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15px;
+}
+
+.rep-header-right{
+  align-items: center;
+}
+
+.rep-addrep-button{
+  display: flex;
+  align-items: center;
+  width: 159px;
+  height: 36px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #F6F6F6;
+  background: #564B68;
+  margin-right: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: ease-in;
+  transition: background 200ms;
+}
+
+.rep-addrep-button:hover{
+  width: 163px;
+  height: 40px;
+  font-size: 15px;
+  background: rgb(108, 94, 131);
+}
+
+.rep-addrep-button:active{
+  background: rgb(130, 113, 156);
+}
+
+.rep-icon-inButton{
+  margin: 0px 8px 0px 15px;
+  height: 13px;
+  width: 13px;
+}
+
+.rep-cutout{
+  height: 100%;
+  width: 55px;
+  background-color: #564b68;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.rep-ups-downs{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  background-color: #564b68;
+  padding-right: 20px;
+}
+
+.rep-ups{
+  font-weight: 500;
+  font-size: 28px;
+  color: #4BB156;
+  /*text-shadow: 3px 3px #3d3d3d;*/
+}
+
+.rep-middle{
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #312635;
+}
+
+.rep-downs{
+  font-weight: 500;
+  font-size: 28px;
+  color: #CE4646;
+  /*text-shadow: 3px 3px #3d3d3d;*/
+}
+
+.rep-inbetween-section{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+}
+
+.rep-inbetween-section-left{
+  display: flex;
+  margin-left: 80px;
+}
+
+.rep-inbetween-section-left p{
+  font-weight: 500;
+  font-size: 10px;
+  color: #F6F6F6;
+  margin-right: 60px;
+}
+
+.rep-inbetween-section-right{
+  display: flex;
+}
+
+.rep-inbetween-section-right button{
+  background: none;
+  font-weight: 500;
+  font-size: 14px;
+  color: #F6F6F6;
+  border: none;
+  cursor: pointer;
+}
+
+.rep-inbetween-section-right button:hover{
+  color: #E7AA0F;
+}
+
+.rep-container{
+  display: flex;
+  width: 100%;
+  height: 31px;
+  background-color: #47384D;
+  margin-bottom: 3px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  align-items: center;
+}
+
+.rep-container p{
+  color: #F6F6F6;
+  font-weight: 500;
+  font-size: 10px;
+}
+
+.rep-red{
+  background-color: #CE4646;
+}
+
+.rep-vote{
+  display: flex;
+  width: 62px;
+  height: 100%;
+  font-weight: bold;
+  font-size: 18px;
+  color: #F6F6F6;
+  border-radius: 4px 0px 0px 4px;
+  align-items: center;
+  justify-content: center;
+}
+
 
 /*-----Add RL Trade              ----*/
 

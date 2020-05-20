@@ -28,7 +28,7 @@ function RLTrading() {
       id = "any"
 
     // server request with given filters
-    axios.get(`/trades/getTrades?itemID=${id}&cert=${cert.toLowerCase()}&paint=${paint.toLowerCase()}`)
+    axios.get(`/trades/getTrades?itemID=${id}&itemName=${name.toLowerCase()}&cert=${cert.toLowerCase()}&paint=${paint.toLowerCase()}&page=${currentPage}`)
     .then (res => {
 
       // set state with response
