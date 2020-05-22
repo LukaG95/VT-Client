@@ -21,7 +21,7 @@ function Sidebar() {
         <Switch>
           <Route exact path="/">               <FiltersRL />    </Route>
           <Route exact path="/trading/rl">     <FiltersRL />    </Route>
-          <Route exact path="/reputation">     <FiltersREP />   </Route>
+          <Route path="/reputation">     <FiltersREP />   </Route>
         </Switch>
 
         {/* placeholder - <div className="sbSection"></div>*/}

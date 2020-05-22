@@ -1,6 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
+import {Link} from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
 import test_rep from '../info/test_reputation'
+import {ReputationContext} from '../components/ReputationContext'
 
 function Reputation() {
   const [repType, setRepType] = useState("all")
@@ -71,7 +73,11 @@ function Reputation() {
           </div>
 
           <div className="flex rep-header-right">
-            <button className="rep-addrep-button"><img src={require('../images/other/Reputation orange.png')} className="rep-icon-inButton"/>Add reputation</button>
+            <Link style={{textDecoration: "none"}} to={`/reputation/add/${test_rep.id}`}>
+              <button className="rep-addrep-button">
+                <img src={require('../images/other/Reputation orange.png')} className="rep-icon-inButton"/>Add reputation
+              </button>
+            </Link>
             <section className="rep-cutout"></section>
             <div className="rep-ups-downs">
               <span className="rep-ups">+{test_rep.ups}</span>

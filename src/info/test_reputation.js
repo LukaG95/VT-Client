@@ -1,5 +1,6 @@
 let rep = {
   username: "Ryu",
+  id: "95158203858288340282",
   ups: 1253,
   downs: 1,
   title: "Veteran",
@@ -31,13 +32,13 @@ let rep = {
     feedback: "Good trader!"
   },
   {
-    good: false,
+    good: true,
     createdBy: "Willy Wonka",
     dateTime: "2020-01-21 22:03:19",
     feedback: "Good trader!"
   },
   {
-    good: true,
+    good: false,
     createdBy: "Willy Wonka",
     dateTime: "2020-01-21 22:03:19",
     feedback: "Bad trader"
