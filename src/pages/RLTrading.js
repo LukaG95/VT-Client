@@ -5,7 +5,6 @@ import Spinner from '../components/Spinner'
 import rl_items from '../info/rl_items.json'
 import RLTradeComponent from '../components/RLTradeComponent'
 import axios from 'axios'
-import test_tradeInfo from '../info/test_tradeInfo'
 
 function RLTrading() {
   const [tradeInfo, setTradeInfo] = useState()
@@ -28,7 +27,7 @@ function RLTrading() {
       id = "any"
 
     // server request with given filters
-    axios.get(`/trades/getTrades?itemID=${id}&itemName=${name.toLowerCase()}&cert=${cert.toLowerCase()}&paint=${paint.toLowerCase()}&page=${currentPage}`)
+    axios.get(`/api/trades/getTrades?itemID=${id}&itemName=${name.toLowerCase()}&cert=${cert.toLowerCase()}&paint=${paint.toLowerCase()}&page=${currentPage}`)
     .then (res => {
 
       // set state with response

@@ -605,6 +605,95 @@ body{
   background-color: #47384D;
 }
 
+/*-----UserTrades              ----*/
+
+
+.userTrades-page-wrapper{
+  display: flex;
+  flex-direction: column;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.userTrades-top-section{
+  display: flex;
+  height: 100px;
+  min-width: 1350px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.userTrades-top-section button{
+  background: none;
+  color: #f6f6f6;
+  border: 1px solid #47384D;
+  width: 133px;
+  height: 30px;
+  margin-right: 10px;
+
+  cursor: pointer;
+}
+
+.userTrades-top-section button:hover{
+  background-color: #47384D;
+}
+
+.userTrades-top-section button:active{
+  background-color: rgb(83, 66, 90);
+}
+
+#del-all-trades-button{
+  background-color: #D10A0A;
+  width: 191px;
+  height: 37px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #f6f6f6;
+  margin-right: 0px;
+}
+
+.editDel-tradeButtons-section{
+  position: relative;
+  bottom: 20px;
+  margin-bottom: 15px;
+}
+
+.editTrade-button{
+  background: none;
+  width: 153px;
+  height: 37px;
+  border: 2px solid #2C8E54;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #f6f6f6;
+  cursor: pointer;
+  transition: background 200ms;
+
+  margin-right: 15px;
+}
+
+.deleteTrade-button{
+  background: none;
+  width: 153px;
+  height: 37px;
+  border: 2px solid #D10A0A;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #f6f6f6;
+  cursor: pointer;
+  transition: background 200ms;
+}
+
+.editTrade-button:hover{
+  background: #2C8E54;
+}
+
+.deleteTrade-button:hover{
+  background: #D10A0A;
+}
+
 /*-----Reputation              ----*/
 
 .repWrapper{
@@ -623,6 +712,12 @@ body{
   margin-bottom: 20px;
   padding-left: 10px;
   border: none;
+}
+
+.searchRep-button{
+  color: #f6f6f6;
+  margin-left: 20px;
+  text-decoration: none;
 }
 
 .repHeader{
@@ -717,13 +812,13 @@ body{
   height: 100%;
   background-color: #564b68;
   padding-right: 20px;
+  /*text-shadow: 4px 2px rgba(0, 0, 0, 1);*/
 }
 
 .rep-ups{
   font-weight: 500;
   font-size: 28px;
   color: #4BB156;
-  /*text-shadow: 3px 3px #3d3d3d;*/
 }
 
 .rep-middle{
@@ -736,7 +831,6 @@ body{
   font-weight: 500;
   font-size: 28px;
   color: #CE4646;
-  /*text-shadow: 3px 3px #3d3d3d;*/
 }
 
 .rep-inbetween-section{
@@ -748,14 +842,12 @@ body{
 
 .rep-inbetween-section-left{
   display: flex;
-  margin-left: 80px;
 }
 
 .rep-inbetween-section-left p{
   font-weight: 500;
   font-size: 10px;
   color: #F6F6F6;
-  margin-right: 60px;
 }
 
 .rep-inbetween-section-right{
@@ -784,6 +876,17 @@ body{
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   align-items: center;
+  transition: height 0.2s;
+  cursor: pointer;
+}
+
+.rep-container:hover{
+  background-color: rgb(80, 62, 87);
+  height: 40px;
+}
+
+.rep-container:active{
+  background-color: rgb(95, 73, 104);
 }
 
 .rep-container p{
@@ -832,6 +935,7 @@ body{
   display: flex;
   width: 588px;
   height: 227px;
+  font-size: 12px;
   background: #312635;
   border: 3px solid #47384D;
   border-radius: 4px;
@@ -849,7 +953,7 @@ body{
   font-size: 13px;
   color: #F6F6F6;
   background-color: #2C8E54;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   margin-right: 15px;
   border: none;
@@ -858,6 +962,7 @@ body{
 
 .rep-button:hover{
   background-color: rgb(49, 158, 93);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .negative{
@@ -875,6 +980,37 @@ body{
 .negative:active{
   background-color: rgb(214, 55, 55);
 }
+
+.rep-noUserFound-container{
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.rep-noUserFound-container p{
+  color: #f6f6f6;
+  font-weight: 500;
+  font-size: 30px;
+}
+
+.rep-noUserFound-container a{
+  color: #81658b;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.rep-noUserFound-container a:hover{
+  color: #a07eac;
+}
+
+.rep-noUserFound-container a:active{
+  color: #b992c7;
+}
+
 
 /*-----Add RL Trade              ----*/
 

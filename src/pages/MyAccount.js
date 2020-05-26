@@ -40,7 +40,7 @@ function MyAccount() {
 			
 				<form onSubmit={(e)=>{e.preventDefault();handleUpdateUsername(username)}}>
 					<label htmlFor="usernameInput"><p>Username</p></label>
-					<Tooltip tip="You can only change Username once every ..." />
+					<Tooltip tip="You can only change Username once every 10 years" />
 					<input required id="usernameInput" type="text" placeholder="username" defaultValue={username} onChange={(e)=>setUsername(e.target.value)} />
 					<button>Update username</button>
 				</form>

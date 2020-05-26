@@ -1,41 +1,73 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useLocation, Redirect} from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
 import test_rep from '../info/test_reputation'
 import {ReputationContext} from '../components/ReputationContext'
+import axios from 'axios'
+import { UserContext } from '../UserContext'
 
 function Reputation() {
+  const [repInfo, setRepInfo] = useState() 
+  const [userID, setUserID] = useState(useLocation().pathname.substring(12)) // reads url after /reputation/ till the end
+
   const [repType, setRepType] = useState("all")
   const [currentPage, setCurrentPage] = useState(1)
+  const [searchValue, setSearchValue] = useState("")
 
+  const {myID} = useContext(UserContext)
+  
   useEffect(()=> {
+    if (myID === undefined) return
 
-  }, [repType, currentPage])
+    let searchUserID = 0
+    if (userID === ""){
+      searchUserID = myID
+    }
+    else 
+      searchUserID = userID
+
+    
+    axios.get(`/api/reputation/${searchUserID}`)
+    .then (res => { console.log(res.data.rep)
+      if (res.data.status === "success")
+        setRepInfo(res.data.rep)
+      else /*if (res.data.status === "invalid")*/
+        setRepInfo("invalid")
+    })
+    .catch(err => console.log(err))
+  }, [myID, userID])
+
 
   function Reps(){
-    const reps = test_rep.reps.map(rep => 
-      <div className={"rep-container" }>
-        <div className="rep-vote" style={rep.good ? {backgroundColor: "#2C8E54"} : {backgroundColor: "#CE4646"}} >{rep.good ? "+ " : "- "}1</div>
-        <p style={{marginLeft: "19px", width: "114px"}}>{rep.createdBy}</p>
-        <p style={{width: "150px"}}>{rep.dateTime}</p>
-        <p>{rep.feedback}</p>
-      </div>
-    )
+    const reps = repInfo.repsByGame[repType].map((rep, i) => {
+      if (i >= currentPage * 17 - 17 && i <= currentPage * 17 - 1)
+        return(
+          <div className={"rep-container noUserInteraction" }>
+            <div className="rep-vote" style={rep.good ? {backgroundColor: "#2C8E54"} : {backgroundColor: "#CE4646"}} >{rep.good ? "+ " : "- "}1</div>
+            <p style={{marginLeft: "19px", width: "200px"}}>{rep.createdBy}</p>
+            <p style={{width: "150px"}}>{rep.dateTime}</p>
+            <p>{rep.feedback}</p>
+          </div>
+        )
+    })
     return reps
   }
 
   function PageNumbers(){
     const pageButtons = []
+    const pageAmount = Number.isInteger(repInfo.amount[repType] / 17) ? repInfo.amount[repType] / 17 : parseInt((repInfo.amount[repType] / 17).toFixed(0)) + 1
+  
+    console.log(pageAmount)
 
     const starting_number = () => {
       if (currentPage <= 5) 
         return 1 
-      else if (currentPage + 5 >= test_rep.pageAmount)
-        return test_rep.pageAmount - 9
+      else if (currentPage + 5 >= pageAmount)
+        return pageAmount - 9
       else 
         return currentPage - 5
     }
-  
+
     for (let i = starting_number(); i < starting_number() + 10; i++)
       pageButtons.push(
         i === currentPage ? 
@@ -52,6 +84,7 @@ function Reputation() {
     )
   }
 
+  if (repInfo !== undefined && repInfo !== "invalid")
   return (
     <div className="secondaryWrapper">
 
@@ -60,45 +93,51 @@ function Reputation() {
       <main className="repWrapper">
 
         <div>
-          <input placeholder="(SteamID, Discord or VT Name)" className="rep-search-input"></input>
+          <input 
+            onChange = {e => setSearchValue(e.target.value)}
+            placeholder="(SteamID, Discord or VT Name)" 
+            className="rep-search-input">
+          </input>
+          <a className="searchRep-button" href={`/reputation/${searchValue}`}>Search</a>
         </div>
 
         <div className="repHeader">
           <div className="flex">
             <div className="flex-col rep-header-left">
-              <p className="rep-username">{test_rep.username}'s Reputation</p>
-              <p className="rep-title">{test_rep.title}</p>
+              <p className="rep-username">{repInfo.username}'s Reputation</p>
+              <p className="rep-title">{repInfo.title}</p>
             </div>
-            <p className="rep-grade">{test_rep.grade}</p>
+            <p className="rep-grade">{repInfo.grade}</p>
           </div>
 
           <div className="flex rep-header-right">
-            <Link style={{textDecoration: "none"}} to={`/reputation/add/${test_rep.id}`}>
+            <Link style={{textDecoration: "none"}} to={`/reputation/add/${repInfo.userId}`}>
               <button className="rep-addrep-button">
                 <img src={require('../images/other/Reputation orange.png')} className="rep-icon-inButton"/>Add reputation
               </button>
             </Link>
+
             <section className="rep-cutout"></section>
             <div className="rep-ups-downs">
-              <span className="rep-ups">+{test_rep.ups}</span>
+              <span className="rep-ups">+{repInfo.ups}</span>
               <span className="rep-middle"> | </span>
-              <span className="rep-downs">-{test_rep.downs}</span>
+              <span className="rep-downs">-{repInfo.downs}</span>
             </div>
           </div>
         </div>
 
         <section className="rep-inbetween-section">
           <div className="rep-inbetween-section-left">
-            <p>Created By</p>
-            <p>Date &#38; Time (UTC)</p>
-            <p>Feedback</p>
+            <p style={{marginLeft: "80px"}}>Created By</p>
+            <p style={{marginLeft: "145px"}}>Date &#38; Time (UTC)</p>
+            <p style={{marginLeft: "60px"}}>Feedback</p>
           </div>
 
           <div className="rep-inbetween-section-right">
-            <button onClick={()=> setRepType("all")} style={repType==="all" ? {color: "#E7AA0F"} : null}> All ({test_rep.amount.all}) /&nbsp;</button>
-            <button onClick={()=> setRepType("csgo")} style={repType==="csgo" ? {color: "#E7AA0F"} : null}> CSGO ({test_rep.amount.csgo}) /&nbsp;</button>
-            <button onClick={()=> setRepType("rl")} style={repType==="rl" ? {color: "#E7AA0F"} : null}> RL ({test_rep.amount.rl}) /&nbsp;</button>
-            <button onClick={()=> setRepType("other")} style={repType==="other" ? {color: "#E7AA0F"} : null}> Other ({test_rep.amount.other})</button>
+            <button onClick={()=> setRepType("all")} style={repType==="all" ? {color: "#E7AA0F"} : null}> All ({repInfo.amount.all}) /&nbsp;</button>
+            <button onClick={()=> setRepType("csgo")} style={repType==="csgo" ? {color: "#E7AA0F"} : null}> CSGO ({repInfo.amount.csgo}) /&nbsp;</button>
+            <button onClick={()=> setRepType("rl")} style={repType==="rl" ? {color: "#E7AA0F"} : null}> RL ({repInfo.amount.rl}) /&nbsp;</button>
+            <button onClick={()=> setRepType("other")} style={repType==="other" ? {color: "#E7AA0F"} : null}> Other ({repInfo.amount.other})</button>
           </div>
         </section>
 
@@ -110,6 +149,14 @@ function Reputation() {
       
     </div>
   )
+  else if (repInfo === "invalid")
+    return (
+      <div className="rep-noUserFound-container">
+        <p>Whoops no user matches that ID :'(</p>
+        <a id="removeDecoration" href="/reputation">&#8617; Back to my reputation</a>
+      </div>
+    )
+    else return null // <Spinner className="newPosition"> 
 }
 
 export default Reputation;

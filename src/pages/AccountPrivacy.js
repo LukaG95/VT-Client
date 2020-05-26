@@ -14,7 +14,6 @@ function handleUpdatePassword(password, newpass, newpass2) {
 }
 
 function AccountPrivacy() {
-	
 	const [password, setPassword] = useState("")
 	const [newpass, setNewpass] = useState("")
 	const [newpass2, setNewpass2] = useState("")

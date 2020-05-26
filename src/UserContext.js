@@ -6,6 +6,7 @@ const UserContext = React.createContext()
 function UserContextProvider({children}) {
   const [username, setUsername] = useState("none")
   const [isLoggedIn, setIsLoggedIn] = useState()
+  const [myID, setMyID] = useState()
   const [trades, setTrades] = useState("none")
   const [reputation, setReputation] = useState("none")
 
@@ -13,22 +14,21 @@ function UserContextProvider({children}) {
 
   useEffect(() => {
 
-    axios.get('/auth/getUser')
+    axios.get('/api/auth/getUser')
       .then (res => {
-
-        if (res.data.status === "success") 
-        setIsLoggedIn(true)
+        if (res.data.status === "success"){
+          setIsLoggedIn(true)
+          setMyID(res.data.user._id)
+        }
         else 
         setIsLoggedIn(false)
 
       })
       .catch(err => console.log(err))
-      
   }, [])
 
-
   return (
-      <UserContext.Provider value={{username, setUsername, isLoggedIn, setIsLoggedIn, trades, setTrades, reputation, setReputation, openForm, setOpenForm}}>
+      <UserContext.Provider value={{username, setUsername, isLoggedIn, setIsLoggedIn, trades, setTrades, reputation, setReputation, openForm, setOpenForm, myID}}>
           {children}
       </UserContext.Provider>
   )
