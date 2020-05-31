@@ -33,6 +33,11 @@ body{
   display: flex;
 }
 
+.center {
+	justify-content: center;
+	display: flex;
+}
+
 .flex-col{
   display: flex;
   flex-direction: column;
@@ -2030,4 +2035,45 @@ body{
   100% {
     transform: rotate(360deg);
   }
+}
+
+
+/*-----ToS              ----*/
+.ToS {
+	
+}
+
+
+.ToS h1 {
+	color: white;
+	margin: 21px 0 0;
+	width: 100%;
+	text-align: center;
+	font-size: 48px;
+}
+
+.ToS-body {
+	max-width: 1278px;
+	background: #47384D;
+	border-radius: 4px;
+	padding: 30px 38px;
+	color: #F6F6F6;
+	margin: 21px 0;
+}
+
+.ToS-body h2:first-child {
+	margin-top: 0;
+}
+
+.ToS-body h2 {
+	font-size: 24px;
+	font-weight: 600;
+	display: list-item;
+	list-style: decimal inside;
+	margin: 51px 0 11px;
+}
+
+.ToS-body p {
+	font-size: 18px;
+	font-weight: 500;
 }
