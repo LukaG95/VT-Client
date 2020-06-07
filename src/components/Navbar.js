@@ -57,12 +57,10 @@ function Navbar() {
           </div>
         </Link>
 
-        <Link to="/reputation" id="removeDecoration">
-          <div onClick={()=> !isLoggedIn && setOpenForm(true)} className={`navLeftItem ${reputation}`}>
+          <a href="/reputation" className={`navLeftItem ${reputation}`} id="removeDecoration">
             <ReputationWhite style={{height: "13px", width: "13px"}} className="navLeftContent" />
             <div className="navLeftContent">Reputation</div>
-          </div>
-        </Link>
+          </a>
         
 
         <Link to="/premium" id="removeDecoration">

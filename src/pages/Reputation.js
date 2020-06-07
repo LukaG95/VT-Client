@@ -17,24 +17,24 @@ function Reputation() {
   const {myID} = useContext(UserContext)
   
   useEffect(()=> {
-    if (myID === undefined) return
+    if (myID === undefined && userID === "") return
 
-    let searchUserID = 0
-    if (userID === ""){
-      searchUserID = myID
-    }
-    else 
-      searchUserID = userID
+      let searchUserID = 0
+      if (userID === ""){
+        searchUserID = myID
+      }
+      else 
+        searchUserID = userID
 
-    
-    axios.get(`/api/reputation/${searchUserID}`)
-    .then (res => { 
-      if (res.data.status === "success")
-        setRepInfo(res.data.rep)
-      else /*if (res.data.status === "invalid")*/
-        setRepInfo("invalid")
-    })
-    .catch(err => console.log(err))
+      axios.get(`/api/reputation/${searchUserID}`)
+      .then (res => { 
+        if (res.data.status === "success")
+          setRepInfo(res.data.rep)
+        else /*if (res.data.status === "invalid")*/
+          setRepInfo("invalid")
+      })
+      .catch(err => console.log(err))
+
   }, [myID, userID])
 
 
@@ -45,7 +45,7 @@ function Reputation() {
           <div className={"rep-container noUserInteraction" }>
             <div className="rep-vote" style={rep.good ? {backgroundColor: "#2C8E54"} : {backgroundColor: "#CE4646"}} >{rep.good ? "+ " : "- "}1</div>
             <p style={{marginLeft: "19px", width: "200px"}}>{rep.createdBy}</p>
-            <p style={{width: "150px"}}>{rep.dateTime}</p>
+            <p style={{width: "150px"}}>{rep.createdAt}</p>
             <p>{rep.feedback}</p>
           </div>
         )
@@ -55,7 +55,8 @@ function Reputation() {
 
   function PageNumbers(){
     const pageButtons = []
-    const pageAmount = Number.isInteger(repInfo.amount[repType] / 17) ? repInfo.amount[repType] / 17 : parseInt((repInfo.amount[repType] / 17).toFixed(0)) + 1
+    const x = repInfo.amount[repType] / 17
+    const pageAmount = Number.isInteger(x) ? x : Math.floor(x + 1)
 
     const starting_number = () => {
       if (currentPage <= 5 || pageAmount <= 10) 
@@ -97,13 +98,13 @@ function Reputation() {
       
       <main className="repWrapper">
 
-        <div>
+        <div style={{marginBottom: "20px"}}>
           <input 
             onChange = {e => setSearchValue(e.target.value)}
             placeholder="(SteamID, Discord or VT Name)" 
             className="rep-search-input">
           </input>
-          <a className="searchRep-button" href={`/reputation/${searchValue}`}>Search</a>
+          <a style={{marginLeft: "15px"}} className="searchRep-button" href={`/reputation/${searchValue}`}>Search reputation</a>
         </div>
 
         <div className="repHeader">
@@ -161,7 +162,17 @@ function Reputation() {
         <a id="removeDecoration" href="/reputation">&#8617; Back to my reputation</a>
       </div>
     )
-    else return null // <Spinner className="newPosition"> 
+    else if (myID === undefined && userID === "") return (
+      <div className="repSearch_wrapper">
+          <input 
+            onChange = {e => setSearchValue(e.target.value)}
+            placeholder="(SteamID, Discord or VT Name)" 
+            className="rep-search-input">
+          </input>
+          <a className="searchRep-button" href={`/reputation/${searchValue}`}>Search reputation</a>
+      </div>
+    )  
+    else return null // <Spinner className="newPosition">
 }
 
 export default Reputation;

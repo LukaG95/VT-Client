@@ -14,7 +14,7 @@ function AddReputation() {
 
   const {myID} = useContext(UserContext)
 
-  useEffect(()=> {
+  useEffect(()=> {console.log("useEffect")
     if (myID === undefined) return
 
     let searchUserID = 0
@@ -32,7 +32,7 @@ function AddReputation() {
         setRepInfo("invalid")
     })
     .catch(err => console.log(err))
-
+    
     
   }, [myID])
 
@@ -51,10 +51,7 @@ function AddReputation() {
       alert("Your message has to be at least 5 characters long")
       return
     }
-    
-    /*console.log("good_bad: " + good_bad)
-    console.log("feedback: " + feedback)
-    console.log("repCategory: " + repCategory)*/
+  
 
     axios.post(`/api/reputation/addRep/${userID}`, {
       rep: {
@@ -64,7 +61,6 @@ function AddReputation() {
       }
     })
     .then(res => {
-      console.log(res)
     })
     .catch(err => console.log(err))
   }

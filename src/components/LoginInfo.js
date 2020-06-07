@@ -11,11 +11,11 @@ function LoginInfo() {
   function handleSubmit(event){
     event.preventDefault()
     
-    axios.post('/auth/login', {
+    axios.post('/api/auth/login', {
       email: username,
       password: password
     })
-    .then(res => {
+    .then(res => { console.log(res)
       if (res.data.response === "blocked"){
         alert("Too many requests, please try again later")
       }

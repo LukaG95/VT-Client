@@ -48,7 +48,7 @@ function App() {
           <Route exact path="/privacy">           <PrivacyPolicy />   </Route>
           <Route exact path="/trading/rl/new">    {handleRedirectOnRefresh(<TradeContextProvider>  <AddTradeRL />    </TradeContextProvider>)}       </Route>
           <Route path="/reputation/add">          {handleRedirectOnRefresh(<AddReputation />)}     </Route>
-          <Route path="/reputation">              {handleRedirectOnRefresh(<Reputation />)}        </Route>
+          <Route path="/reputation">              <Reputation />      </Route>
           <Route exact path="/account">           {handleRedirectOnRefresh(<MyAccount /> )}        </Route>
           <Route exact path="/account/privacy">   {handleRedirectOnRefresh(<AccountPrivacy /> )}   </Route>
           <Route exact path="/account/platforms"> {handleRedirectOnRefresh(<AccountPlatforms /> )} </Route>

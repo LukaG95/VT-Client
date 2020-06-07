@@ -4,7 +4,7 @@ import {UserContext} from '../UserContext'
 
 function AccountSidebar() {
 
-  const {userID} = useContext(UserContext)
+  const {myID} = useContext(UserContext)
 
 	let location = useLocation();
 	let account = "", privacy = "", trades = "", platforms = "";
@@ -30,7 +30,7 @@ function AccountSidebar() {
 			
 			<p className="accountSb-nav"><Link to="/account" className={account}>My Account</Link></p>
 			<p className="accountSb-nav"><Link to="/account/privacy" className={privacy}>Privacy & Security</Link></p>
-			<p className="accountSb-nav"><Link to={`/trades/${userID}`} className={trades}>My Trades</Link></p>
+			<p className="accountSb-nav"><Link to={`/trades/${myID}`} className={trades}>My Trades</Link></p>
 			<p className="accountSb-nav"><Link to="/account/platforms" className={platforms}>Platforms</Link></p>
 			
 		</div>

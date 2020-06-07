@@ -32,6 +32,7 @@ function RLTrading() {
 
       // set state with response
       setTradeInfo(res.data.trades)
+      console.log(res.data.trades)
     })
     .catch(err => console.log(err))
 
