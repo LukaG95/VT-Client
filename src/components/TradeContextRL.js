@@ -1,8 +1,12 @@
 import React, {useState, useEffect} from 'react'
+import {useLocation} from 'react-router-dom'
+import axios from 'axios'
 
 const TradeContext = React.createContext()
 
+
 function TradeContextProvider({children}) {
+  const pathID = useLocation().pathname.substring(17) 
   const [have, setHave] = useState([
     {id: 1, url: "", isFocused: true, isDropdown: false, color: "None", cert: "None", amount: 1}, 
     {id: 2, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1}, 
@@ -36,14 +40,28 @@ function TradeContextProvider({children}) {
   const [notes, setNotes] = useState("")
   const [platform, setPlatform] = useState("PC")
   
-  
-  useEffect(()=>{
+  /*useEffect(()=>{
     window.addEventListener("click", click)
     return () => {window.removeEventListener("click", click)}
-  },[])
+  },[])*/
+
+  useEffect(() => {
+    console.log("heh")
+    if (pathID !== ""){
+      axios.get(`/api/trades/getTrade/${pathID}`)
+      .then (res => { 
+        setHave(res.data.old.have[0])
+        console.log(res.data.old.have[0])
+        console.log(have)
+        setWant(res.data.old.want[0])
+      })
+      .catch(err => console.log("Error: " + err))
+    }
+  }, [])
  
   // sets all dropdowns to false on click
   function click(e){
+   
     if (e.target.parentNode === null) return
     if(e.target.name !== "enableDropdown" && e.target.className !== "rl-icon-dropdown" && e.target.className !== "rl-attribute-dd-item" && e.target.parentNode.name !== "enableDropdown"
     && e.target.className !== "enableDropdown"){
@@ -161,6 +179,7 @@ function TradeContextProvider({children}) {
 
   // pushes the clicked item on the focused field and focuses the next field
   function pushItem(e){
+    
     let current = undefined
         let temp = []
         have.map(item => {

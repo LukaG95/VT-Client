@@ -1,16 +1,19 @@
 import React, {useState, useEffect, useContext} from 'react'
+import {useLocation} from 'react-router-dom'
 import RLitem_icon from '../components/RLitem_icon'
 import RLfilter_icon from '../components/RLfilter_icon'
 import Spinner from '../components/Spinner'
 import {RLitem_names, test_names} from '../info/RLitem_names'
 import rl_items_all from '../info/virItemsFilteredAll.json' 
-import {TradeContext, TradeContextProvider} from '../components/TradeContextRL'
+import {TradeContext} from '../components/TradeContextRL'
 import axios from 'axios'
 
 function AddTradeRL() {
   const [itemImages, setItemImages] = useState()
 
-  const {have, want, platform, notes, manageFocus, pushItem, clearWantItems, clearHaveItems} = useContext(TradeContext)
+  const pathID = useLocation().pathname.substring(17)   // reads url after /trades/ till the end
+
+  const {have, setHave, want, setWant, platform, notes, manageFocus, pushItem, clearWantItems, clearHaveItems} = useContext(TradeContext)
 
   useEffect(() => {
     const names = rl_items_all.map(item => {
@@ -27,8 +30,8 @@ function AddTradeRL() {
       }
     })
     setItemImages(names)
-  }, [])
 
+  }, [])
 
   
   function handleTradeSubmit(){
@@ -65,14 +68,16 @@ function AddTradeRL() {
       }
     })
 
-    axios.post('/trades/createTrade', {
+    axios.post('/api/trades/createTrade', {
       have: haveRefactor,
       want: wantRefactor, 
       platform: platform,
-      notes: notes
+      notes: notes,
+      old: {have, want}
     })
     .then(res => {
-      console.log(res.data.status)
+      
+      window.location.reload(true)
     })
     .catch(err => console.log(err))
   }

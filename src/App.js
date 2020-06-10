@@ -47,12 +47,13 @@ function App() {
           <Route exact path="/terms">             <Terms />           </Route>
           <Route exact path="/privacy">           <PrivacyPolicy />   </Route>
           <Route exact path="/trading/rl/new">    {handleRedirectOnRefresh(<TradeContextProvider>  <AddTradeRL />    </TradeContextProvider>)}       </Route>
+          <Route path="/trading/rl/edit">         {handleRedirectOnRefresh(<TradeContextProvider>  <AddTradeRL />    </TradeContextProvider>)}       </Route>
           <Route path="/reputation/add">          {handleRedirectOnRefresh(<AddReputation />)}     </Route>
           <Route path="/reputation">              <Reputation />      </Route>
           <Route exact path="/account">           {handleRedirectOnRefresh(<MyAccount /> )}        </Route>
           <Route exact path="/account/privacy">   {handleRedirectOnRefresh(<AccountPrivacy /> )}   </Route>
           <Route exact path="/account/platforms"> {handleRedirectOnRefresh(<AccountPlatforms /> )} </Route>
-          <Route path="/trades">                  <UserTrades />  </Route>
+          <Route path="/trades">                  <TradeContextProvider> <UserTrades />  </TradeContextProvider></Route>
         </Switch>
 
         

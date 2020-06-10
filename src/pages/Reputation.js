@@ -14,7 +14,7 @@ function Reputation() {
   const [currentPage, setCurrentPage] = useState(1)
   const [searchValue, setSearchValue] = useState("")
 
-  const {myID} = useContext(UserContext)
+  const {myID, isLoggedIn} = useContext(UserContext)
   
   useEffect(()=> {
     if (myID === undefined && userID === "") return
@@ -162,7 +162,7 @@ function Reputation() {
         <a id="removeDecoration" href="/reputation">&#8617; Back to my reputation</a>
       </div>
     )
-    else if (myID === undefined && userID === "") return (
+    else if (isLoggedIn === false && userID === "") return (
       <div className="repSearch_wrapper">
           <input 
             onChange = {e => setSearchValue(e.target.value)}

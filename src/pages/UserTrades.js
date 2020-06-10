@@ -14,21 +14,38 @@ function UserTrades() {
 
   useEffect(() => {
     axios.get(`/api/trades/getTrades?userId=${pathID}`)
-    .then (res => { console.log(res, pathID)
+    .then (res => { 
       setUserTrades(res.data.trades)
     })
     .catch(err => console.log("Error: " + err))
   }, [])
+
+  function deleteTrade(trade){
+    axios.delete(`/api/trades/deleteTrade?id=${trade._id}`)
+    .then (res => { 
+      window.location.reload(true)
+    })
+    .catch(err => console.log("Error: " + err))
+  }
+
+  function editTrade(trade){
+    window.location.replace(`/trading/rl/edit/${trade._id}`)
+    
+  }
 
   function TradeComponents(){
     if (userTrades){
       var tradeComponents = userTrades.map(trade => 
       <>
         <RLTradeComponent trade={trade} />
-        <div className="editDel-tradeButtons-section">
-          <button className="editTrade-button">Edit trade</button>
-          <button className="deleteTrade-button">Delete trade</button>
-        </div>
+        { myID === pathID ? 
+          
+          <div className="editDel-tradeButtons-section">
+            <button onClick={() => editTrade(trade)} className="editTrade-button">Edit trade</button>
+            <button onClick={() => deleteTrade(trade)} className="deleteTrade-button">Delete trade</button>
+          </div> : null
+        }
+        
       </>
       )
 
@@ -51,7 +68,9 @@ function UserTrades() {
 
           <button id="del-all-trades-button" >Delete all trades</button>
         </div>
-         <TradeComponents />
+
+        <TradeComponents />
+
       </div>
   )
 }

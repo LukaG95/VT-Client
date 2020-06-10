@@ -32,7 +32,7 @@ function RLitem_icon_dropdown({id}) {
 
       <button id="submit-rl-filters-button" onClick={()=> {
         let temp = []
-        let all = [...have, ...want]
+        let all = [...have]
         all.map(item => {
           if (item.id === id){
             item.color = paint
@@ -42,8 +42,20 @@ function RLitem_icon_dropdown({id}) {
           }
           else temp.push(item)
         })
-        
-        setHave(temp) // this saves 24 things into have and never saves into want but somehow it works
+        setHave(temp)
+
+        temp = []
+        let all2 = [...want]
+        all2.map(item => {
+          if (item.id === id){
+            item.color = paint
+            item.cert = certification
+            item.amount = amount
+            temp.push(item)
+          }
+          else temp.push(item)
+        })
+        setWant(temp)
 
       }}>Done</button>
 
