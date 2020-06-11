@@ -5,10 +5,10 @@ function FiltersREP() {
   const [leadInfo, setLeadInfo] = useState()
   const [timeType, setTimeType] = useState("Week") 
 
-  const trophy = <img style={{height: "25px", width: "25px", marginLeft: "45px"}} src={require("../images/other/cup.png")} />
-  const goldTrophy = <img style={{height: "20px", width: "20px"}} src={require("../images/other/cup.png")} />
-  const silverTrophy = <img style={{height: "20px", width: "20px"}} src={require("../images/other/cup.png")} />
-  const bronzeTrophy = <img style={{height: "20px", width: "20px"}} src={require("../images/other/cup.png")} />
+  const trophy = <img style={{height: "25px", width: "25px", marginLeft: "45px"}} src={require("../images/other/icon-trophy.png")} />
+  const goldTrophy = <img style={{height: "25px", width: "25px"}} src={require("../images/other/icon-1st.png")} />
+  const silverTrophy = <img style={{height: "25px", width: "25px"}} src={require("../images/other/icon-2nd.png")} />
+  const bronzeTrophy = <img style={{height: "25px", width: "25px"}} src={require("../images/other/icon-3rd.png")} />
 
   const hr = <div id="hr-line"></div>
 
@@ -16,50 +16,10 @@ function FiltersREP() {
     axios.get(`/api/reputation/top10`)
       .then (res => { 
         setLeadInfo(res.data.top10)
-        console.log(res.data.top10)
       })
       .catch(err => console.log(err))
   }, [])
 
-/*function leadComponents(){
-    leadInfo.map((item, i) => {
-      if(i === 1) 
-        return (
-          <div> 
-            <div>{goldTrophy} {leadInfo ? leadInfo[0].username : null}</div> 
-            <p>+200</p>
-          </div>
-        ) 
-        else if(i === 2) 
-          return (
-            <div className="leaderboards-component"> 
-              <div>{silverTrophy} {leadInfo ? leadInfo[1].username : null}</div> 
-              <p>+200</p>
-            </div>
-          )
-        else if (i === 3)
-          return (
-            <div className="leaderboards-component"> 
-              <div>{silverTrophy} {leadInfo ? leadInfo[1].username : null}</div> 
-              <p>+200</p>
-            </div>
-          )
-    })
-
-    return(
-      <div className="leaderboards-body">
-        <div> {goldTrophy} first</div>
-        <div> {silverTrophy} second</div>
-        <div> {bronzetrophy} third</div>
-        <div> {leadInfo[0].username} </div>
-        <div> 5 </div>
-        <div> 6 </div>
-        <div> 7 </div>
-        <div> 8 </div>
-        <div> 9 </div>
-        <div> 10 </div>
-      </div>
-)}*/
 
   return (
     <div className="sbSection leaderboards-wrapper">

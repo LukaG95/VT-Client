@@ -32,6 +32,20 @@ function Navbar() {
   default:
 } 
 
+  function handleIconDisplay(){
+    if(isLoggedIn) return(
+      <Link to="/account">
+        <div className="navRightItem profile">
+          <ProfileIcon style={{height: "40px", width: "40px"}} className="navRightContent" />
+        </div> 
+      </Link>
+    )
+      else if (isLoggedIn === undefined) return (
+        <div className="navRightItem profile"></div>
+      )
+      else return <div onClick={()=>setOpenForm(true)} className="navRightItem profile loginButton">Login</div>
+  }
+
 
   return (
     <nav className="navWrapper">     {/*RED*/}
@@ -80,14 +94,7 @@ function Navbar() {
           <BellIcon style={{height: "25px", width: "25px"}} className="navRightContent bell" />
         </div>
 
-        {isLoggedIn ? 
-        <Link to="/account">
-          <div className="navRightItem profile">
-            <ProfileIcon style={{height: "40px", width: "40px"}} className="navRightContent" />
-          </div> 
-        </Link>
-          : 
-        <div onClick={()=>setOpenForm(true)} className="navRightItem profile loginButton">Login</div>}
+        {handleIconDisplay()}
         
 
       </div>                         {/*END BLUE*/}

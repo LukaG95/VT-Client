@@ -97,13 +97,16 @@ function Reputation() {
       
       <main className="repWrapper">
 
-        <div style={{marginBottom: "20px"}}>
+        <div className="flex" style={{marginBottom: "20px"}}>
           <input 
             onChange = {e => setSearchValue(e.target.value)}
             placeholder="(SteamID, Discord or VT Name)" 
             className="rep-search-input">
           </input>
-          <a style={{marginLeft: "15px"}} className="searchRep-button" href={`/reputation/${searchValue}`}>Search reputation</a>
+          <a className="searchRep-button" href={`/reputation/${searchValue}`}>
+            <img style={{width: "11px", height: "11px", marginRight: "6px"}} src={require("../images/other/MagnGlass.png")} /> 
+            SEARCH
+          </a>
         </div>
 
         <div className="repHeader">
@@ -125,7 +128,7 @@ function Reputation() {
             <section className="rep-cutout"></section>
             <div className="rep-ups-downs">
               <span className="rep-ups">+{repInfo.ups}</span>
-              <span className="rep-middle"> | </span>
+              <span className="rep-middle"> </span>
               <span className="rep-downs">-{repInfo.downs}</span>
             </div>
           </div>
@@ -168,7 +171,10 @@ function Reputation() {
             placeholder="(SteamID, Discord or VT Name)" 
             className="rep-search-input">
           </input>
-          <a className="searchRep-button" href={`/reputation/${searchValue}`}>Search reputation</a>
+          <a className="searchRep-button" href={`/reputation/${searchValue}`}>
+            <img style={{width: "11px", height: "11px", marginRight: "6px"}} src={require("../images/other/MagnGlass.png")} /> 
+            SEARCH
+          </a>
       </div>
     )  
     else return null // <Spinner className="newPosition">
