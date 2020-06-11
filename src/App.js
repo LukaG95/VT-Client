@@ -17,7 +17,6 @@ import LoginForm from './components/LoginForm'
 import AddReputation from './pages/AddReputation'
 import UserTrades from './pages/UserTrades'
 import {TradeContextProvider} from './components/TradeContextRL'
-import {RepContextProvider} from './components/ReputationContext'
 import {FiltersRLContextProvider} from './components/FiltersRL_Context'
 
 function App() {

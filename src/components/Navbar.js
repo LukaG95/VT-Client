@@ -76,7 +76,7 @@ function Navbar() {
       <div className="navRight">     {/*BLUE*/}
 
         <div className="navRightItem tradeBellSection">
-          <Link to="/trading/rl/new" id="removeDecoration"><div onClick={()=> !isLoggedIn && setOpenForm(true)} className="navRightContent addTrade">+ New trade</div></Link>
+          <a href="/trading/rl/new" id="removeDecoration"><div onClick={()=> !isLoggedIn && setOpenForm(true)} className="navRightContent addTrade">+ New trade</div></a>
           <BellIcon style={{height: "25px", width: "25px"}} className="navRightContent bell" />
         </div>
 

@@ -28,16 +28,23 @@ function UserTrades() {
     .catch(err => console.log("Error: " + err))
   }
 
+  function deleteAllTrades(){
+    axios.delete(`/api/trades/deleteTrade?all=true`)
+    .then (res => { 
+      window.location.reload(true)
+    })
+    .catch(err => console.log("Error: " + err))
+  }
+
   function editTrade(trade){
     window.location.replace(`/trading/rl/edit/${trade._id}`)
-    
   }
 
   function TradeComponents(){
     if (userTrades){
       var tradeComponents = userTrades.map(trade => 
       <>
-        <RLTradeComponent trade={trade} />
+        <RLTradeComponent trade={trade} userTradesPage={true}/>
         { myID === pathID ? 
           
           <div className="editDel-tradeButtons-section">
@@ -66,7 +73,8 @@ function UserTrades() {
             <button onClick={()=> setGame("csgo")} style={game==="csgo" ? {backgroundColor: "#47384D"} : null}>CSGO</button>
           </section>
 
-          <button id="del-all-trades-button" >Delete all trades</button>
+          { myID === pathID ? <button onClick={()=> deleteAllTrades()} id="del-all-trades-button" > Delete all trades</button> : null}
+          
         </div>
 
         <TradeComponents />

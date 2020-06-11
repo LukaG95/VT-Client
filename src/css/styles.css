@@ -126,7 +126,7 @@ body{
   border-radius: 0px;
 
   width: 130px;
-  clip-path: polygon(100% 0, 70% 100%, 0 100%, 0 0);
+  clip-path: polygon(100% 0, 76% 100%, 0 100%, 0 0);
 }
 
 #logo:hover{
@@ -149,7 +149,7 @@ body{
   display: flex;
   border-radius: 0px;
   background-color: #564B68;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 24% 100%);
   height: 60px;
   width: 140px;
   justify-content: center;
@@ -184,7 +184,8 @@ body{
   display: flex;
   background-color: #392C3E;
   flex-direction: column;
-  
+  align-items: center;
+
   min-width: 280px;
   height: 100%;
 }
@@ -201,7 +202,6 @@ body{
 .premiumSection{
   height: 115px;
   justify-content: center;
-  
 }
 
 .premiumButton{
@@ -333,6 +333,100 @@ body{
   background-color: #5D4E76;
   padding-left: 20px;
   
+}
+
+.leaderboards-wrapper{
+  display: flex;
+  width: 230px;
+}
+
+.leaderboards-header{
+  display: flex;
+  background-color: #47384d;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.leaderboards-header p{
+  color: #E7AA0F;
+  font-weight: 600;
+  font-size: 17px;
+  margin-left: 15px;
+}
+
+.leaderboards-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #564b68;
+  height: 100%;
+  width: 100%;
+  border-radius: 0px 0px 5px 5px;
+}
+
+.leaderboards-body div{
+  display: flex;
+  height: 30px;
+  width: 100%;
+  align-items: center;
+  font-weight: 300;
+  font-size: 13px;
+}
+
+.leaderboards-component{
+  width: 90%;
+  color: #948ca1;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 15px;
+}
+
+
+#firstPlace div, #firstPlace p{
+  color: #E7AA0F;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+#secondPlace div, #secondPlace p{
+  color: #CCCCCC;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+#thirdPlace div, #thirdPlace p{
+  color: rgb(206, 112, 24);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.leaderboards-component div, .leaderboards-component p{
+  font-weight: 400;
+  font-size: 13px;
+}
+
+#firstPlace, #secondPlace, #thirdPlace{
+  height: 40px;
+  padding-left: 15px;
+}
+
+.paddingBetween{
+  width: 8px;
+}
+
+.paddingBetween2{
+  width: 15px;
+}
+
+#hr-line{
+  width: 90%;
+  height: 2px;
+  margin-left: 5%;
+  margin-right: 5%;
+  background: linear-gradient(180deg, #47384D 52.59%, #66597B 52.59%);
 }
 
 .sbSection ul li{
@@ -834,7 +928,7 @@ body{
 
 .rep-cutout{
   height: 100%;
-  width: 55px;
+  width: 45px;
   background-color: #564b68;
   clip-path: polygon(0 0, 100% 0, 100% 100%);
 }

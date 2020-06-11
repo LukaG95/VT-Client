@@ -7,6 +7,7 @@ const TradeContext = React.createContext()
 
 function TradeContextProvider({children}) {
   const pathID = useLocation().pathname.substring(17) 
+  
   const [gotInfo, setGotInfo] = useState(false)
   const [have, setHave] = useState([
     {id: 1, url: "", isFocused: true, isDropdown: false, color: "None", cert: "None", amount: 1}, 

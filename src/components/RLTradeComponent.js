@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import RLitem_icon_tradePage from './RLitem_icon_tradePage.js'
 
-function RLTradeComponent({trade}) {
+function RLTradeComponent({trade, userTradesPage}) {
   const [notesHeight, setNotesHeight] = useState(()=> {
     if (trade.have.length >= 9 || trade.want.length >= 9)
       return "230px"
@@ -94,7 +94,7 @@ function RLTradeComponent({trade}) {
 
             <div className="buttons-box">
               <button>Contact on Steam</button>
-              <button>All {trade.username}'s trades</button>
+              {userTradesPage ? null : <button>All {trade.username}'s trades</button> }
             </div>
             
           </div>

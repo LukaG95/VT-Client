@@ -7,13 +7,36 @@ import {RLitem_names, test_names} from '../info/RLitem_names'
 import rl_items_all from '../info/virItemsFilteredAll.json' 
 import {TradeContext} from '../components/TradeContextRL'
 import axios from 'axios'
+import { UserContext } from '../UserContext'
 
 function AddTradeRL() {
   const [itemImages, setItemImages] = useState()
+  const [tradeIdMatch, setTradeIdMatch] = useState(false)
 
   const pathID = useLocation().pathname.substring(17)   // reads url after /trades/ till the end
+  const {myID} = useContext(UserContext)
 
   const {have, setHave, want, setWant, platform, notes, manageFocus, pushItem, clearWantItems, clearHaveItems, gotInfo} = useContext(TradeContext)
+
+  useEffect(() => {
+    if (pathID !== "" && myID){
+      let x = false
+      axios.get(`/api/trades/getTrades?userId=${myID}`)
+    .then (res => { 
+      console.log(res.data)
+      res.data.trades.map(trade => {
+        if (trade._id === pathID){
+          console.log("I saw")
+          setTradeIdMatch(true)
+          x = true
+        }
+      })
+      if (x === false) window.location.href = "/trading/rl"
+      
+    })
+    .catch(err => console.log("Error: " + err))
+    }else if (pathID === "") setTradeIdMatch(true)
+  }, [myID])
 
   useEffect(() => {
     const names = rl_items_all.map(item => {
@@ -31,7 +54,6 @@ function AddTradeRL() {
     })
     setItemImages(names)
   }, [gotInfo])
-
   
   function handleTradeSubmit(){
     let haveRefactor = []
@@ -67,16 +89,29 @@ function AddTradeRL() {
       }
     })
 
+    let temp=[] 
+      have.map(item => {
+        item.isDropdown = false
+        temp.push(item)
+      })
+      const oldHave = temp
+
+     temp=[] 
+      want.map(item => {
+        item.isDropdown = false
+        temp.push(item)
+      })
+      const oldWant = temp
+
     if (pathID === ""){
       axios.post('/api/trades/createTrade', {
         have: haveRefactor,
         want: wantRefactor, 
         platform: platform,
         notes: notes,
-        old: {have, want}
+        old: {have: oldHave, want: oldWant}
       })
       .then(res => {
-        
         window.location.reload(true)
       })
       .catch(err => console.log(err))
@@ -89,7 +124,6 @@ function AddTradeRL() {
         old: {have, want}
       })
       .then(res => {
-        console.log(res)
         window.location.reload(true)
       })
       .catch(err => console.log(err))
@@ -113,6 +147,7 @@ function AddTradeRL() {
     else return <RLitem_icon id={item.id} url={item.url} />
   })
 
+  if (tradeIdMatch)
   return (
     <div className="addRLWrapper">
       
@@ -169,12 +204,13 @@ function AddTradeRL() {
 
 
       <div className="rlSubmitNotes">
-        <button onClick={()=> handleTradeSubmit()} className="rlSubmitButton">SUBMIT TRADE</button>        {/*submit trade - server reques*/} 
+        <button onClick={()=> handleTradeSubmit()} className="rlSubmitButton">SUBMIT TRADE</button>   
         <div className="rlNotesButton">NOTES</div>
       </div>
 
     </div>
   )
+  else return null
 }
 
 export default AddTradeRL;

@@ -2,7 +2,6 @@ import React, {useState, useEffect, useContext} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
 import test_rep from '../info/test_reputation'
-import {ReputationContext} from '../components/ReputationContext'
 import axios from 'axios'
 import { UserContext } from '../UserContext'
 
