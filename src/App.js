@@ -53,7 +53,7 @@ function App() {
           <Route exact path="/account">           {handleRedirectOnRefresh(<MyAccount /> )}        </Route>
           <Route exact path="/account/privacy">   {handleRedirectOnRefresh(<AccountPrivacy /> )}   </Route>
           <Route exact path="/account/platforms"> {handleRedirectOnRefresh(<AccountPlatforms /> )} </Route>
-          <Route path="/trades">                  <TradeContextProvider> <UserTrades />  </TradeContextProvider></Route>
+          <Route path="/trades">                  <UserTrades /> </Route>
         </Switch>
 
         

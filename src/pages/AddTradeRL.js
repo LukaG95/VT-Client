@@ -13,7 +13,7 @@ function AddTradeRL() {
 
   const pathID = useLocation().pathname.substring(17)   // reads url after /trades/ till the end
 
-  const {have, setHave, want, setWant, platform, notes, manageFocus, pushItem, clearWantItems, clearHaveItems} = useContext(TradeContext)
+  const {have, setHave, want, setWant, platform, notes, manageFocus, pushItem, clearWantItems, clearHaveItems, gotInfo} = useContext(TradeContext)
 
   useEffect(() => {
     const names = rl_items_all.map(item => {
@@ -30,8 +30,7 @@ function AddTradeRL() {
       }
     })
     setItemImages(names)
-
-  }, [])
+  }, [gotInfo])
 
   
   function handleTradeSubmit(){
@@ -68,18 +67,33 @@ function AddTradeRL() {
       }
     })
 
-    axios.post('/api/trades/createTrade', {
-      have: haveRefactor,
-      want: wantRefactor, 
-      platform: platform,
-      notes: notes,
-      old: {have, want}
-    })
-    .then(res => {
-      
-      window.location.reload(true)
-    })
-    .catch(err => console.log(err))
+    if (pathID === ""){
+      axios.post('/api/trades/createTrade', {
+        have: haveRefactor,
+        want: wantRefactor, 
+        platform: platform,
+        notes: notes,
+        old: {have, want}
+      })
+      .then(res => {
+        
+        window.location.reload(true)
+      })
+      .catch(err => console.log(err))
+    }else{
+      axios.post(`/api/trades/createTrade?edit=${pathID}`, {
+        have: haveRefactor,
+        want: wantRefactor, 
+        platform: platform,
+        notes: notes,
+        old: {have, want}
+      })
+      .then(res => {
+        console.log(res)
+        window.location.reload(true)
+      })
+      .catch(err => console.log(err))
+    }
   }
   
 

@@ -14,7 +14,7 @@ function AddReputation() {
 
   const {myID} = useContext(UserContext)
 
-  useEffect(()=> {console.log("useEffect")
+  useEffect(()=> {
     if (myID === undefined) return
 
     let searchUserID = 0
@@ -61,6 +61,7 @@ function AddReputation() {
       }
     })
     .then(res => {
+      window.location.reload(true)
     })
     .catch(err => console.log(err))
   }

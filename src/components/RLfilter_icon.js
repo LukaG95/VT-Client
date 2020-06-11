@@ -25,6 +25,7 @@ function RLfilter_icon({itemImages, setItemImages}) {
         else return null
       })
       setItemImages(names)
+      
     }
     else{
       const names = rl_items[`${type}`].map(item => {   
@@ -42,9 +43,9 @@ function RLfilter_icon({itemImages, setItemImages}) {
         else return null
       })
       setItemImages(names)
+      console.log(names)
    }
   }
-  
   
  
 	return (
