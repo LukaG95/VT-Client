@@ -11,6 +11,8 @@ function RLTradeComponent({trade, userTradesPage}) {
       return "35px"
   })
 
+  const refPlatform = trade.platform === "PC" ? "Steam" : trade.platform
+
   function userName(){
     if (trade.premium){
       return (
@@ -67,7 +69,7 @@ function RLTradeComponent({trade, userTradesPage}) {
             </div>
 
             <div className="right-gamePlatform" style={{height: "100%"}}>
-              <img style={{height: "15px", width: "18px", marginRight: "10px"}} src={require("../images/other/Steam icon.png")} alt="" />{trade.platform}
+              <img style={{height: "17px", width: "17px", marginRight: "10px"}} src={require(`../images/other/${refPlatform} icon.png`)} alt="" />{refPlatform}
             </div>
           </div>
 

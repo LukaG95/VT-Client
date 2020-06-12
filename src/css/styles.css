@@ -431,7 +431,7 @@ body{
 
 .timeType{
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   height: 20px;
   width: 100%;
 }
@@ -1217,6 +1217,7 @@ body{
 
 .right-gamePlatform{
   font-size: 19px;
+  font-weight: 500;
 
   border-radius: 5px 0px 0px 5px;
   padding: 0px 18px 0px 18px;

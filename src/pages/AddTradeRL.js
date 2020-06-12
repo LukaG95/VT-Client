@@ -35,7 +35,6 @@ function AddTradeRL() {
     .catch(err => console.log("Error: " + err))
     }else if (pathID === "") setTradeIdMatch(true)
 
-    console.log("heh")
   }, [myID])
 
   useEffect(() => {
@@ -53,7 +52,6 @@ function AddTradeRL() {
       }
     })
     setItemImages(names)
-    console.log("aa")
   }, [gotInfo])
 
   
@@ -92,36 +90,40 @@ function AddTradeRL() {
     })
 
     let temp=[] 
-      have.map(item => {
-        item.isDropdown = false
-        temp.push(item)
-      })
-      const oldHave = temp
+    have.map(item => {
+      item.isDropdown = false
+      temp.push(item)
+    })
+    const oldHave = temp
 
      temp=[] 
-      want.map(item => {
-        item.isDropdown = false
-        temp.push(item)
-      })
-      const oldWant = temp
+
+    want.map(item => {
+      item.isDropdown = false
+      temp.push(item)
+    })
+    const oldWant = temp
+
+    const refactorPlatform = platform === "Steam" ? "PC" : platform
 
     if (pathID === ""){
       axios.post('/api/trades/createTrade', {
         have: haveRefactor,
         want: wantRefactor, 
-        platform: platform,
+        platform: refactorPlatform,
         notes: notes,
         old: {have: oldHave, want: oldWant}
       })
       .then(res => {
-        window.location.reload(true)
+        console.log(res)
+        
       })
       .catch(err => console.log(err))
     }else{
       axios.post(`/api/trades/createTrade?edit=${pathID}`, {
         have: haveRefactor,
         want: wantRefactor, 
-        platform: platform,
+        platform: refactorPlatform,
         notes: notes,
         old: {have, want}
       })
@@ -161,7 +163,9 @@ function AddTradeRL() {
 
         <div className="h-wTopPlace">
           <div className="left-gameName">Rocket League</div>
-          <div className="right-gamePlatform"><img style={{height: "15px", width: "18px", marginRight: "10px"}} src={require("../images/other/Steam icon.png")} alt="" />{platform}</div>
+          <div className="right-gamePlatform">
+            <img style={{height: "17px", width: "17px", marginRight: "10px"}} src={require(`../images/other/${platform} icon.png`)} alt="" />{platform}
+          </div>
         </div>
 
         <div className="allAddedItems">

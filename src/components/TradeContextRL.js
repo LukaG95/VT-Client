@@ -39,7 +39,6 @@ function TradeContextProvider({children}) {
     {id: 24, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1}
   ])
 
-
   const [notes, setNotes] = useState("")
   const [platform, setPlatform] = useState("Steam")
 
@@ -53,8 +52,10 @@ function TradeContextProvider({children}) {
     if (pathID !== ""){
       axios.get(`/api/trades/getTrade/${pathID}`)
       .then (res => { 
-        setHave(prev => res.data.old.have)
-        setWant(prev => res.data.old.want)
+        setHave(res.data.trade.old.have)
+        setWant(res.data.trade.old.want)
+        setPlatform(res.data.trade.platform)
+        setNotes(res.data.trade.notes)
         setGotInfo(true)
       })
       .catch(err => console.log("Error: " + err))
