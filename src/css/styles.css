@@ -380,7 +380,7 @@ body{
   width: 90%;
   color: #948ca1;
   justify-content: space-between;
-  padding-left: 20px;
+  padding-left: 23px;
   padding-right: 15px;
 }
 
@@ -418,7 +418,7 @@ body{
 }
 
 .paddingBetween2{
-  width: 15px;
+  width: 17px;
 }
 
 #hr-line{
@@ -427,6 +427,22 @@ body{
   margin-left: 5%;
   margin-right: 5%;
   background: linear-gradient(180deg, #47384D 52.59%, #66597B 52.59%);
+}
+
+.timeType{
+  display: flex;
+  justify-content: end;
+  height: 20px;
+  width: 100%;
+}
+
+.timeType button{
+  color: #f6f6f6;
+  font-weight: 500;
+  font-size: 11px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .sbSection ul li{
@@ -832,6 +848,7 @@ body{
   align-items: center;
   justify-content: center;
   color: #f6f6f6;
+  font-weight: 500;
   font-size: 12px;
   background-color: #47384d;
   height: 33px; 
@@ -1147,7 +1164,7 @@ body{
 .addRLWrapper{
   display: flex;
   flex-direction: column;
-  height: 1005px;
+  height: 1200px;
 
   align-items: center;
   justify-content: space-evenly;
@@ -1195,7 +1212,7 @@ body{
   font-weight: 500;
 
   padding: 0px 40px 0px 20px;
-  clip-path: polygon(100% 0, 90% 100%, 0 100%, 0 0);
+  clip-path: polygon(100% 0, 92% 100%, 0 100%, 0 0);
 }
 
 .right-gamePlatform{
@@ -1559,7 +1576,7 @@ body{
 
 .rlChooseItemsSection{
   width: 938px;
-  height: 405px;
+  height: 380px;
   background-color: #221C24;
 
   border: 3px solid #47384D;
@@ -1570,11 +1587,11 @@ body{
   display: flex;
   color: #c0c0c0;
   background-color: #392C3E;
-  height: 31px; 
+  min-height: 31px; 
 
   font-size: 12px; 
   font-weight: 500; 
-  padding-left: 20px;
+  padding-left: 15px;
   align-items: center;
 }
 
@@ -1588,16 +1605,17 @@ body{
 
 .choose-itemsSearchFiltersRL div{
   display: flex;
-  width: 28px;
+  width: 30px;
   height: 28px;
-  background-color: #47384D;
+  background-color: #392C3E;
+  border-radius: 31px 0px 0px 31px;
 
   justify-content: center;
   align-items: center;
 }
 
 .choose-itemsSearchFiltersRL input{
-  background-color: #392C3E;
+  background-color: #221C24;
   color: #f6f6f6;
   height: 28px;
   width: 225px;
@@ -1606,7 +1624,11 @@ body{
   font-weight: 500;
   font-size: 10px;
   margin-right: 20px;
-  border: none;
+  border-left: none;
+  border-top: 2px solid #392C3E;
+  border-right: 2px solid #392C3E;
+  border-bottom: 2px solid #392C3E;
+  border-radius: 0px 31px 31px 0px;
 }
 
 .RLfilter_icons_section{
@@ -1655,7 +1677,67 @@ body{
 }
 
 
-.rlSubmitNotes{
+.notesSection{
+  display: flex;
+  flex-direction: column;
+  width: 938px;
+  height: 230px;
+  background-color: #221C24;
+
+  border: 3px solid #47384D;
+}
+
+.notesArea{
+  color: #f6f6f6;
+  font-size: 12px;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  background-color: #221C24;
+  border: none;
+  padding: 9px 15px 0px 15px;
+}
+
+.platformSection{
+  display: flex;
+  align-items: center;
+  height: 50px;
+
+}
+
+.platformSection h4{
+  color: #F6F6F6;
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 15px;
+}
+
+.platf-button-container{
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  font-size: 12px;
+  height: 100%;
+
+  cursor: pointer;
+  margin-left: 12px;
+  color: #f6f6f6;
+  padding-bottom: 2px;
+}
+
+.platf-button-container p{
+  margin-left: 3px;
+}
+
+.platf-button-container input{
+  cursor: pointer;
+}
+
+.platf-button-container input:checked{
+  background-color: #2196F3;
+}
+
+.rlSubmit{
   display: flex;
   align-items: flex-start;
 
@@ -1684,27 +1766,6 @@ body{
 
 .rlSubmitButton:active{
   background: rgb(113, 168, 135);
-}
-
-.rlNotesButton{
-  display: flex;
-  color: #f6f6f6;
-  font-size: 12px;
-  height: 33px;
-  width: 107px;
-  border: 2px solid #564B68;
-  border-radius: 4px;
-
-  margin-left: 15px;
-
-  align-items: center;
-  justify-content: center;
-  transition: background-color 200ms;
-}
-
-.rlNotesButton:hover{
-  background-color: #564B68;
-  cursor: pointer;
 }
 
 /*-----Login popup             ----*/

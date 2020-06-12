@@ -16,17 +16,15 @@ function AddTradeRL() {
   const pathID = useLocation().pathname.substring(17)   // reads url after /trades/ till the end
   const {myID} = useContext(UserContext)
 
-  const {have, setHave, want, setWant, platform, notes, manageFocus, pushItem, clearWantItems, clearHaveItems, gotInfo} = useContext(TradeContext)
+  const {have, setHave, want, setWant, platform, setPlatform, notes, setNotes, manageFocus, pushItem, clearWantItems, clearHaveItems, gotInfo} = useContext(TradeContext)
 
   useEffect(() => {
     if (pathID !== "" && myID){
       let x = false
       axios.get(`/api/trades/getTrades?userId=${myID}`)
     .then (res => { 
-      console.log(res.data)
       res.data.trades.map(trade => {
         if (trade._id === pathID){
-          console.log("I saw")
           setTradeIdMatch(true)
           x = true
         }
@@ -36,6 +34,8 @@ function AddTradeRL() {
     })
     .catch(err => console.log("Error: " + err))
     }else if (pathID === "") setTradeIdMatch(true)
+
+    console.log("heh")
   }, [myID])
 
   useEffect(() => {
@@ -53,7 +53,9 @@ function AddTradeRL() {
       }
     })
     setItemImages(names)
+    console.log("aa")
   }, [gotInfo])
+
   
   function handleTradeSubmit(){
     let haveRefactor = []
@@ -158,8 +160,8 @@ function AddTradeRL() {
       <div className="rlHaveWantSection">
 
         <div className="h-wTopPlace">
-          <div className="left-gameName">Rocket League PC</div>
-          <div className="right-gamePlatform"><img style={{height: "15px", width: "18px", marginRight: "10px"}} src={require("../images/other/Steam icon.png")} alt="" />Steam</div>
+          <div className="left-gameName">Rocket League</div>
+          <div className="right-gamePlatform"><img style={{height: "15px", width: "18px", marginRight: "10px"}} src={require("../images/other/Steam icon.png")} alt="" />{platform}</div>
         </div>
 
         <div className="allAddedItems">
@@ -192,9 +194,8 @@ function AddTradeRL() {
       </div>
 
       <div className="rlChooseItemsSection">
-        <div className="choose-itemsTopPlace">Choose the items</div>
         <div className="choose-itemsSearchFiltersRL">
-          <div><img style={{width: "11px", height: "11px"}} src={require("../images/other/MagnGlass.png")} /></div>
+          <div><img style={{width: "11px", height: "11px", marginLeft: "2px"}} src={require("../images/other/MagnGlass.png")} /></div>
           <RLfilter_icon itemImages={itemImages} setItemImages={setItemImages} />
         </div>
         <div className="item-imagesRL">
@@ -202,10 +203,31 @@ function AddTradeRL() {
         </div>
       </div>
 
+      <div className="notesSection">
+        <textarea placeholder="Add notes..." className="notesArea" onChange={e => setNotes(e.target.value)}></textarea>
+        <div className="platformSection">
+          <h4>PLATFORM:</h4>
+          <label className="noUserInteraction platf-button-container">
+            <input type="radio" checked={platform==="Steam"} onChange={()=> setPlatform("Steam")} />
+            <p style={platform === "Steam" ? {color: "#2C8E54"} : null}>STEAM</p>
+          </label>
+          <label className="noUserInteraction platf-button-container">
+            <input type="radio" checked={platform==="PS4"} onChange={()=> setPlatform("PS4")}/>
+            <p style={platform === "PS4" ? {color: "#2C8E54"} : null}>PS4</p>
+          </label>
+          <label className="noUserInteraction platf-button-container">
+            <input type="radio" checked={platform==="XBOX"} onChange={()=> setPlatform("XBOX")}/>
+            <p style={platform === "XBOX" ? {color: "#2C8E54"} : null}>XBOX</p>
+          </label>
+          <label className="noUserInteraction platf-button-container">
+            <input type="radio" checked={platform==="SWITCH"} onChange={()=> setPlatform("SWITCH")}/>
+            <p style={platform === "SWITCH" ? {color: "#2C8E54"} : null}>SWITCH</p>
+          </label>
+        </div>
+      </div>
 
-      <div className="rlSubmitNotes">
+      <div className="rlSubmit">
         <button onClick={()=> handleTradeSubmit()} className="rlSubmitButton">SUBMIT TRADE</button>   
-        <div className="rlNotesButton">NOTES</div>
       </div>
 
     </div>
@@ -213,4 +235,4 @@ function AddTradeRL() {
   else return null
 }
 
-export default AddTradeRL;
+export default AddTradeRL

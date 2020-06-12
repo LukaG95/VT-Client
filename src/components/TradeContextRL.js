@@ -41,7 +41,7 @@ function TradeContextProvider({children}) {
 
 
   const [notes, setNotes] = useState("")
-  const [platform, setPlatform] = useState("PC")
+  const [platform, setPlatform] = useState("Steam")
 
   useEffect(()=>{
     window.addEventListener("click", click)
@@ -239,7 +239,7 @@ function TradeContextProvider({children}) {
   }
 
   return (
-    <TradeContext.Provider value={{have, setHave, want, setWant, platform, notes, manageFocus, pushItem, clearHaveItems, clearWantItems, setIsDropdown, deleteRLitem, gotInfo}}>
+    <TradeContext.Provider value={{have, setHave, want, setWant, platform, setPlatform, notes, setNotes, manageFocus, pushItem, clearHaveItems, clearWantItems, setIsDropdown, deleteRLitem, gotInfo}}>
       {children}
     </TradeContext.Provider>
   )
