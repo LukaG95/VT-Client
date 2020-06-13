@@ -87,7 +87,7 @@ function AddReputation() {
             <section className="rep-cutout"></section>
             <div className="rep-ups-downs">
               <span className="rep-ups">+{repInfo.ups}</span>
-              <span className="rep-middle"> | </span>
+              <span className="rep-middle"> </span>
               <span className="rep-downs">-{repInfo.downs}</span>
             </div>
           </div>

@@ -152,90 +152,95 @@ function AddTradeRL() {
   })
 
   if (tradeIdMatch)
-  return (
-    <div className="addRLWrapper">
-      
-      <div className="newTradeTitle">
-        Create new trade
-      </div>
-
-      <div className="rlHaveWantSection">
-
-        <div className="h-wTopPlace">
-          <div className="left-gameName">Rocket League</div>
-          <div className="right-gamePlatform">
-            <img style={{height: "17px", width: "17px", marginRight: "10px"}} src={require(`../images/other/${platform} icon.png`)} alt="" />{platform}
-          </div>
+    return (
+      <div className="addRLWrapper">
+        
+        <div className="newTradeTitle">
+          Create new trade
         </div>
 
-        <div className="allAddedItems">
+        <div className="rlHaveWantSection">
 
-          <div className="hwLeftSection">
-            <div className="hTitle">
-              <p>You <b>have</b></p>
-              <button onClick={clearHaveItems}>CLEAR ITEMS</button>
-            </div>
-
-            <div className="haveItems">
-              {displayed_have_items}
+          <div className="h-wTopPlace">
+            <div className="left-gameName">Rocket League</div>
+            <div className="right-gamePlatform">
+              <img 
+                style={{height: "17px", width: "17px", marginRight: "10px"}} 
+                src={require(`../images/other/${platform === "PC" ? "Steam" : platform} icon.png`)} 
+                alt="" 
+              />
+              {platform === "PC" ? "Steam" : platform}
             </div>
           </div>
 
-          <div className="hwRightSection">
-            <div className="wTitle">
-              <p>You <b>want</b></p>
-              <button onClick={clearWantItems}>CLEAR ITEMS</button>
+          <div className="allAddedItems">
+
+            <div className="hwLeftSection">
+              <div className="hTitle">
+                <p>You <b>have</b></p>
+                <button onClick={clearHaveItems}>CLEAR ITEMS</button>
+              </div>
+
+              <div className="haveItems">
+                {displayed_have_items}
+              </div>
             </div>
 
-            <div className="wantItems">
-              {displayed_want_items}
+            <div className="hwRightSection">
+              <div className="wTitle">
+                <p>You <b>want</b></p>
+                <button onClick={clearWantItems}>CLEAR ITEMS</button>
+              </div>
+
+              <div className="wantItems">
+                {displayed_want_items}
+              </div>
+
             </div>
 
           </div>
 
         </div>
 
-      </div>
-
-      <div className="rlChooseItemsSection">
-        <div className="choose-itemsSearchFiltersRL">
-          <div><img style={{width: "11px", height: "11px", marginLeft: "2px"}} src={require("../images/other/MagnGlass.png")} /></div>
-          <RLfilter_icon itemImages={itemImages} setItemImages={setItemImages} />
+        <div className="rlChooseItemsSection">
+          <div className="choose-itemsSearchFiltersRL">
+            <div><img style={{width: "11px", height: "11px", marginLeft: "2px"}} src={require("../images/other/MagnGlass.png")} /></div>
+            <RLfilter_icon itemImages={itemImages} setItemImages={setItemImages} />
+          </div>
+          <div className="item-imagesRL">
+            {itemImages === undefined ? <Spinner /> : itemImages}
+          </div>
         </div>
-        <div className="item-imagesRL">
-          {itemImages === undefined ? <Spinner /> : itemImages}
+
+        <div className="notesSection">
+          <textarea placeholder="Add notes..." className="notesArea" onChange={e => setNotes(e.target.value)}></textarea>
+          <div className="platformSection">
+            <h4>PLATFORM:</h4>
+            <label className="noUserInteraction platf-button-container">
+              <input type="radio" checked={platform==="Steam"} onChange={()=> setPlatform("Steam")} />
+              <p style={platform === "Steam" ? {color: "#2C8E54"} : null}>STEAM</p>
+            </label>
+            <label className="noUserInteraction platf-button-container">
+              <input type="radio" checked={platform==="PS4"} onChange={()=> setPlatform("PS4")}/>
+              <p style={platform === "PS4" ? {color: "#2C8E54"} : null}>PS4</p>
+            </label>
+            <label className="noUserInteraction platf-button-container">
+              <input type="radio" checked={platform==="XBOX"} onChange={()=> setPlatform("XBOX")}/>
+              <p style={platform === "XBOX" ? {color: "#2C8E54"} : null}>XBOX</p>
+            </label>
+            <label className="noUserInteraction platf-button-container">
+              <input type="radio" checked={platform==="SWITCH"} onChange={()=> setPlatform("SWITCH")}/>
+              <p style={platform === "SWITCH" ? {color: "#2C8E54"} : null}>SWITCH</p>
+            </label>
+          </div>
         </div>
-      </div>
 
-      <div className="notesSection">
-        <textarea placeholder="Add notes..." className="notesArea" onChange={e => setNotes(e.target.value)}></textarea>
-        <div className="platformSection">
-          <h4>PLATFORM:</h4>
-          <label className="noUserInteraction platf-button-container">
-            <input type="radio" checked={platform==="Steam"} onChange={()=> setPlatform("Steam")} />
-            <p style={platform === "Steam" ? {color: "#2C8E54"} : null}>STEAM</p>
-          </label>
-          <label className="noUserInteraction platf-button-container">
-            <input type="radio" checked={platform==="PS4"} onChange={()=> setPlatform("PS4")}/>
-            <p style={platform === "PS4" ? {color: "#2C8E54"} : null}>PS4</p>
-          </label>
-          <label className="noUserInteraction platf-button-container">
-            <input type="radio" checked={platform==="XBOX"} onChange={()=> setPlatform("XBOX")}/>
-            <p style={platform === "XBOX" ? {color: "#2C8E54"} : null}>XBOX</p>
-          </label>
-          <label className="noUserInteraction platf-button-container">
-            <input type="radio" checked={platform==="SWITCH"} onChange={()=> setPlatform("SWITCH")}/>
-            <p style={platform === "SWITCH" ? {color: "#2C8E54"} : null}>SWITCH</p>
-          </label>
+        <div className="rlSubmit">
+          <button onClick={()=> handleTradeSubmit()} className="rlSubmitButton">SUBMIT TRADE</button>   
         </div>
-      </div>
 
-      <div className="rlSubmit">
-        <button onClick={()=> handleTradeSubmit()} className="rlSubmitButton">SUBMIT TRADE</button>   
       </div>
-
-    </div>
-  )
+    )
   else return null
 }
 

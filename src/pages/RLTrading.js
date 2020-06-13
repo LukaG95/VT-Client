@@ -27,44 +27,55 @@ function RLTrading() {
       id = "any"
 
     // server request with given filters
-    axios.get(`/api/trades/getTrades?itemID=${id}&itemName=${name.toLowerCase()}&cert=${cert.toLowerCase()}&paint=${paint.toLowerCase()}&page=${currentPage}`)
+    axios.get(`/api/trades/getTrades?itemID=${id}&itemName=${name.toLowerCase()}&cert=${cert.toLowerCase()}&paint=${paint.toLowerCase()}&page=${currentPage}&limit=2`)
     .then (res => {
 
       // set state with response
       setTradeInfo(res.data.trades)
-      console.log(res.data.trades)
+      setPageAmount(res.data.pages)
     })
     .catch(err => console.log(err))
 
   }, [game, searchType, name, paint, cert, itemType, platform, currentPage])
 
+
   function PageNumbers(){
-    const pageButtons = []
+    if (tradeInfo){
+      const pageButtons = []
 
-    const starting_number = () => {
-      if (currentPage <= 5) 
-        return 1 
-      else if (currentPage + 5 >= pageAmount)
-        return pageAmount - 9
-      else 
-        return currentPage - 5
-    }
-  
-    for (let i = starting_number(); i < starting_number() + 10; i++)
-      pageButtons.push(
-        i === currentPage ? 
-        <button className="pageButton highlighted-page">{i}</button> : 
-        <button className="pageButton" onClick={() => setCurrentPage(i)}>{i}</button>
+      const starting_number = () => {
+        if (currentPage <= 5 || pageAmount <= 10) 
+          return 1 
+        else if (currentPage + 5 >= pageAmount)
+          return pageAmount - 9
+        else 
+          return currentPage - 5
+      }
+
+      const ending_number = () => {
+        if (pageAmount < 10)
+          return pageAmount + 1
+        else
+          return starting_number() + 10
+      }
+
+      for (let i = starting_number(); i < ending_number(); i++)
+        pageButtons.push(
+          i === currentPage ? 
+          <button className="pageButton highlighted-page">{i}</button> : 
+          <button className="pageButton" onClick={() => setCurrentPage(i)}>{i}</button>
+        )
+
+      return(
+        <section style={{marginTop: "20px"}} className="page-numbers">
+          <div onClick={()=> currentPage > 1 && setCurrentPage(prev => prev - 1)} className="page-left noUserInteraction"></div>
+            {pageButtons}
+          <div onClick={()=> currentPage < pageAmount && setCurrentPage(prev => prev + 1)} className="page-right noUserInteraction"></div>
+        </section>
       )
-
-    return(
-      <section className="page-numbers">
-        <div onClick={()=> currentPage > 1 && setCurrentPage(prev => prev - 1)} className="page-left noUserInteraction"></div>
-          {pageButtons}
-        <div onClick={()=> currentPage < 100 && setCurrentPage(prev => prev + 1)} className="page-right noUserInteraction"></div>
-      </section>
-    )
+    }else return null
   }
+
 
   function TradeComponents(){
       if (tradeInfo){
@@ -79,6 +90,7 @@ function RLTrading() {
     )
   }
 
+
   return (
     <div className="secondaryWrapper">  
 
@@ -87,7 +99,7 @@ function RLTrading() {
       <main className="main">
 
         <div className="main-top">
-          <p className="trading-title">Rocket League PC</p> 
+          <p className="trading-title">Rocket League</p> 
           <PageNumbers />
           {/* placeholder */}
         </div>
