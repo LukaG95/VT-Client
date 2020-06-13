@@ -192,6 +192,7 @@ body{
 
 .sbSection{
   display: flex;
+  height: 100%;
   
   flex-direction: column;
   align-items: center;
@@ -232,8 +233,15 @@ body{
 }
 
 .filtersRL{
+  display: flex;
+  flex-direction: column;
   height: 447px;
+  max-height: 447px;
   justify-content: space-between;
+}
+
+.filterButtonWrapper{
+  position: relative;
 }
 
 .filterButton {
@@ -254,6 +262,10 @@ body{
 
 .filterButton:hover {
   filter: brightness(1.075)
+}
+
+.filterButton:active {
+  filter: brightness(0.8)
 }
 
 .filterButtonContent {
@@ -280,7 +292,7 @@ body{
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 40px;
+  top: 41px;
   width: 220px;
   
   max-height: 300px;
@@ -290,10 +302,8 @@ body{
   border-left: 2px solid #5D4E76;
   border-bottom: 2px solid #5D4E76;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.54);
-  transform: translateX(-2px);
 
   padding: 10px;
-  overflow: hidden;
   z-index: 1;
   cursor: pointer;
 }

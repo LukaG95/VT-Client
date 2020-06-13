@@ -26,9 +26,9 @@ function RLitem_icon_dropdown({id}) {
     name="enableDropdown"
     className="rl-icon-dropdown"
     >
-        <FilterButton label="Paint"         value={paint}           setFunction={setPaint}         dd={paintDD}/>
-        <FilterButton label="Certification" value={certification}   setFunction={setCertification} dd={certDD}/>
-        <FilterButton label="Amount"        value={amount}          setFunction={setAmount}/>
+      <FilterButton label="Paint"         value={paint}           setFunction={setPaint}         dd={paintDD}/>
+      <FilterButton label="Certification" value={certification}   setFunction={setCertification} dd={certDD}/>
+      <FilterButton label="Amount"        value={amount}          setFunction={setAmount}/>
 
       <button id="submit-rl-filters-button" onClick={()=> {
         let temp = []

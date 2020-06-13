@@ -12,7 +12,7 @@ function Sidebar() {
       <div className="sbWrapper">
 
         <div className="sbSection premiumSection">
-          <Link to="/premium" className="premiumButton">
+          <Link to="/premium" className="noUserInteraction premiumButton">
               <CrownIcon />
               <div>Go premium</div>
           </Link>
