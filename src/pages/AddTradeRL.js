@@ -151,7 +151,7 @@ function AddTradeRL() {
     else return <RLitem_icon id={item.id} url={item.url} />
   })
 
-  if (tradeIdMatch)
+  if (pathID === "" || tradeIdMatch)
     return (
       <div className="addRLWrapper">
         

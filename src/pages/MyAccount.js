@@ -57,4 +57,4 @@ function MyAccount() {
 	)
 }
 
-export default MyAccount;
+export default MyAccount

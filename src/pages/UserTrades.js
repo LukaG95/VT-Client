@@ -41,7 +41,6 @@ function UserTrades() {
   }
 
   function TradeComponents(){
-    if (userTrades){
       var tradeComponents = userTrades.map(trade => 
       <>
         <RLTradeComponent trade={trade} userTradesPage={true}/>
@@ -56,8 +55,6 @@ function UserTrades() {
       </>
       )
 
-    }else return null // <Spinner className="newPosition" />
-
   return(
     <>
       {tradeComponents}
@@ -65,6 +62,7 @@ function UserTrades() {
   )
 }
 
+if (userTrades)
   return (
       <div className="userTrades-page-wrapper">
         <div className="userTrades-top-section">
@@ -81,6 +79,7 @@ function UserTrades() {
 
       </div>
   )
+  else return null
 }
 
 export default UserTrades

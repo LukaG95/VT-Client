@@ -10,6 +10,34 @@
   outline: none;
 }
 
+@keyframes transitionIn {
+  from{
+    opacity: 0;
+    transform: translateY(100px);
+
+  }
+
+  to{
+    opacity: 1;
+    transform: translateY(0);
+
+  }
+}
+
+@keyframes transitionFade {
+  from{
+    opacity: 0;
+
+
+  }
+
+  to{
+    opacity: 1;
+
+
+  }
+}
+
 body{
   background-color: #312635;
   width: 100%;
@@ -392,6 +420,12 @@ body{
   justify-content: space-between;
   padding-left: 23px;
   padding-right: 15px;
+
+ 
+}
+
+.leaderboards-component p{
+  animation: transitionFade 0.4s;
 }
 
 
@@ -568,6 +602,8 @@ body{
   display: flex;
   flex-direction: column;
   margin-top: 40px;
+
+  animation: transitionIn 0.4s;
 }
 
 
@@ -738,6 +774,8 @@ body{
   flex-direction: column;
   margin-left: 200px;
   margin-right: 200px;
+
+  animation: transitionIn 0.4s;
 }
 
 .userTrades-top-section{
@@ -826,7 +864,11 @@ body{
   width: 100%;
   min-width: 800px;
   margin: 43px 43px 0px 43px;
+
+  animation: transitionIn 0.4s;
 }
+
+
 
 .repSearch_wrapper{
   display: flex;
@@ -1178,6 +1220,8 @@ body{
 
   align-items: center;
   justify-content: space-evenly;
+
+  animation: transitionIn 0.4s;
 }
 
 .newTradeTitle{
@@ -1439,10 +1483,10 @@ body{
   display: flex;
   flex-direction: column;
   position: relative;
-  background-color: #b72c30;
+  background-color: #221c24;
   color: #f6f6f6;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 700;
   width: 100%;
   max-height: 100%;
 
@@ -2009,12 +2053,14 @@ body{
 
 .accountWrapper {
 	color: #F6F6F6;
-	margin-top: 130px;
+  margin-top: 130px;
 }
 
 .accountFieldsWrapper {
 	margin: 13px 0 0 56px;
-	font-size: 20px
+  font-size: 20px;
+  
+  animation: transitionIn 0.4s;
 }
 
 .accountFieldsWrapper label {
