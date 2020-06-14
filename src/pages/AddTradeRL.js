@@ -39,7 +39,7 @@ function AddTradeRL() {
   }, [myID])
 
   useEffect(() => {
-    const names = rl_items_all.map((item, i) => {         // remove i % ... for all images
+    const names = rl_items_all.map((item, i) => {          // remove i % ... for all images
       if (item.url.includes(".0.webp") && i % 4 === 0){    // remove i % ... for all images
         return (
           <img 

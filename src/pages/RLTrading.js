@@ -90,28 +90,28 @@ function RLTrading() {
     )
   }
 
+  if(tradeInfo){
+    return (
+      <div className="secondaryWrapper">  
 
-  return (
-    <div className="secondaryWrapper">  
+        <Sidebar />
+        
+        <main className="main">
 
-      <Sidebar />
-      
-      <main className="main">
+          <div className="main-top">
+            <p className="trading-title">Rocket League</p> 
+            <PageNumbers />
+            {/* placeholder */}
+          </div>
 
-        <div className="main-top">
-          <p className="trading-title">Rocket League</p> 
-          <PageNumbers />
-          {/* placeholder */}
-        </div>
+          <TradeComponents />
 
-        <TradeComponents />
+          <section className="page-numbers"></section>
 
-        <section className="page-numbers"></section>
+        </main>
 
-      </main>
-
-    </div>
-  )
+      </div>
+  )} else return null
 }
 
 export default RLTrading

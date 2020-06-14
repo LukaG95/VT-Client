@@ -528,7 +528,8 @@ body{
   width: 100%;
   height: 100%;
   margin: 40px 50px 0px 50px;
-
+  animation: transitionIn 0.4s;
+  
 }
 
 .main-top{
@@ -602,8 +603,7 @@ body{
   display: flex;
   flex-direction: column;
   margin-top: 40px;
-
-  animation: transitionIn 0.4s;
+  
 }
 
 
