@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useContext, Suspense, lazy} from 'react'
 import {useLocation} from 'react-router-dom'
 import RLitem_icon from '../components/RLitem_icon'
 import RLfilter_icon from '../components/RLfilter_icon'
@@ -8,6 +8,7 @@ import rl_items_all from '../info/virItemsFilteredAll.json'
 import {TradeContext} from '../components/TradeContextRL'
 import axios from 'axios'
 import { UserContext } from '../UserContext'
+import Observer from '@researchgate/react-intersection-observer';
 
 function AddTradeRL() {
   const [itemImages, setItemImages] = useState()
@@ -38,8 +39,8 @@ function AddTradeRL() {
   }, [myID])
 
   useEffect(() => {
-    const names = rl_items_all.map(item => {
-      if (item.url.includes(".0.webp")){
+    const names = rl_items_all.map((item, i) => {         // remove i % ... for all images
+      if (item.url.includes(".0.webp") && i % 4 === 0){    // remove i % ... for all images
         return (
           <img 
             name={item.url} 
@@ -53,7 +54,7 @@ function AddTradeRL() {
     })
     setItemImages(names)
   }, [gotInfo])
-
+  
   
   function handleTradeSubmit(){
     let haveRefactor = []
@@ -208,7 +209,7 @@ function AddTradeRL() {
             <RLfilter_icon itemImages={itemImages} setItemImages={setItemImages} />
           </div>
           <div className="item-imagesRL">
-            {itemImages === undefined ? <Spinner /> : itemImages}
+          {itemImages === undefined ? <Spinner /> : itemImages}
           </div>
         </div>
 

@@ -112,4 +112,4 @@ function RLitem_icon({id, url}) {
 	)
 }
 
-export default RLitem_icon;
+export default RLitem_icon

@@ -6,6 +6,7 @@ rl_names.map(item => item.url.includes(".0.webp") && rl_item_names.push(item.nam
 let ref_rl_item_names = rl_item_names.sort()
 ref_rl_item_names.splice(0, 0, "Any")
 
+
 const rl_dd_names = {
   gameDD: ["Rocket League", "CSGO"],
   searchTypeDD: ["I want to buy", "I want to sell"],
