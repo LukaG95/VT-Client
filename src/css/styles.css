@@ -278,9 +278,9 @@ body{
   width: 220px;
   font-size: 12px;
   color: #101010;
-  background: linear-gradient(180deg, rgba(206, 198, 224, 0) 46.88%, rgba(0, 0, 0, 0.05) 52.08%), #CEC6E0;
+  background: linear-gradient(180deg, #392C3E 50%, #332838 50%);
   
-  border: 2px solid #5D4E76;
+  border: 1px solid #E7AA0F;
 
   align-items: center;
   justify-content: space-between;
@@ -298,6 +298,9 @@ body{
 
 .filterButtonContent {
   padding-left: 10px;
+  color: #f6f6f6;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .sbSection .filterButton svg {
@@ -311,7 +314,7 @@ body{
 #fix{
   display: inline;
   font-size: 11px;
-  color: #5D4E76;
+  color: #CECECE;
 
   margin-left: 8px;
 }
@@ -325,10 +328,10 @@ body{
   
   max-height: 300px;
 
-  background-color: #CEC6E0;
-  border-right: 2px solid #5D4E76;
-  border-left: 2px solid #5D4E76;
-  border-bottom: 2px solid #5D4E76;
+  background-color: #392C3E;
+  border-right: 1px solid #E7AA0F;
+  border-left: 1px solid #E7AA0F;
+  border-bottom: 1px solid #E7AA0F;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.54);
 
   padding: 10px;
@@ -343,6 +346,10 @@ body{
 }
 
 .filterInput{
+  background: #1E1E1E;
+  font-size: 10px;
+  color: #CDCDCD;
+  border: 1px solid #676767;
   padding: 10px;
   width: 100%;
   box-shadow: 0px 0px 4px #5D4E76;
@@ -352,12 +359,15 @@ body{
   width: 100%;
   font-size: 12px;
   overflow: auto;
-  scrollbar-color: #5D4E76 #CEC6E0;
+  scrollbar-color: #E7AA0F #312635;
   scrollbar-width: thin;
 }
 
 .menu-item{
   display: flex;
+  color: #CCCCCC;
+  font-weight: 500;
+  font-size: 12px;
   min-height: 44px;
   align-items: center;
   transition: background 0.2s;
@@ -368,6 +378,7 @@ body{
 
 .menu-item:hover{
   color: #f6f6f6;
+  font-weight: 500;
   background-color: #5D4E76;
   padding-left: 20px;
   
