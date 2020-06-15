@@ -55,7 +55,7 @@ function RLTradeComponent({trade, userTradesPage}) {
               <div style={{fontSize: "12px", color: "#CEC6E0"}}>Reputation</div>
               <div className="flex">
                 <span style={{fontSize: "12px", color: "#5FD86B"}}>+{trade.reputation.ups}</span> 
-                <span style={{fontSize: "12px", color: "#766495", marginLeft: "3px"}}> </span> 
+                <span style={{fontSize: "12px", color: "#766495", marginLeft: "3px"}}>   </span> 
                 <span style={{fontSize: "12px", color: "#C03030", marginLeft: "3px"}}>-{trade.reputation.downs} </span> 
                 <span style={{fontSize: "12px", color: "#766495", marginLeft: "5px"}}>Trading Expert</span>
               </div>

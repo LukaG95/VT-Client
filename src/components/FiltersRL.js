@@ -1,5 +1,4 @@
 import React, {useState, useContext, useEffect} from 'react'
-import {ReactComponent as ArrowIcon} from '../images/other/down-arrow.svg'
 import {rl_dd_names} from '../info/DropdownNames'
 import {FiltersRLContext} from './FiltersRL_Context'
 
@@ -59,7 +58,8 @@ function FilterButton({text, value, dd, setFunction}){
         className="noUserInteraction filterButton" 
       >
         <div className="filterButtonContent">{text}&nbsp;&nbsp; -<p id="fix">{value}</p></div>
-        <ArrowIcon />
+        
+        <div className={`${open ? "openArrow" : "dropdownArrow"}`} ></div>
         
       </div> 
       {open && <DropdownMenu dd={dd} setFunction={setFunction}/>}

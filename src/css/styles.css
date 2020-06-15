@@ -45,6 +45,22 @@
   }
 }
 
+
+@keyframes fallDown {
+  from{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  to{
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+
+
 body{
   background-color: #312635;
   width: 100%;
@@ -310,12 +326,22 @@ body{
   font-weight: 600;
 }
 
-.sbSection .filterButton svg {
+.dropdownArrow{
+  background-color: #E7AA0F;
   margin-right: 10px;
-  margin-top: 3px;
+  height: 15px;
+  width: 15px;
+  clip-path: polygon(50% 100%, 0 30%, 100% 30%);
+}
 
-  height: 22px;
-  width: 22px;
+.openArrow{
+  background-color: #E7AA0F;
+  visibility: hidden;
+  margin-right: 10px;
+  height: 15px;
+  width: 15px;
+  clip-path: polygon(50% 100%, 0 30%, 100% 30%);
+  animation: fallDown 0.2s;
 }
 
 #fix{
@@ -636,7 +662,7 @@ body{
   border-left: 3px solid #47384D;
   border-right: 3px solid #47384D;
   margin-bottom: 40px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 }
 
 .rltrade-cTopPlace{
