@@ -16,7 +16,6 @@
     transform: translateY(100px);
 
   }
-
   to{
     opacity: 1;
     transform: translateY(0);
@@ -27,14 +26,22 @@
 @keyframes transitionFade {
   from{
     opacity: 0;
-
-
   }
 
   to{
     opacity: 1;
+  }
+}
 
+@keyframes transitionDown {
+  from{
+    opacity: 0;
+    transform: translateY(-20px);
+  }
 
+  to{
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -337,6 +344,7 @@ body{
   padding: 10px;
   z-index: 1;
   cursor: pointer;
+  animation: transitionDown 0.2s;
 }
 
 .filterWrapper{
