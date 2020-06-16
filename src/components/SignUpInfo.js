@@ -60,7 +60,7 @@ function SignUpInfo() {
       }
       else alert("Oops, something went wrong...")
     })
-    .catch(err => console.log(err))ž
+    .catch(err => console.log(err))
     
   }
 
