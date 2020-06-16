@@ -48,9 +48,9 @@ function Navbar() {
 
 
   return (
-    <nav className="navWrapper">     {/*RED*/}
+    <nav className="navWrapper">     
 
-      <div className="navLeft">     {/*BLUE*/}
+      <div className="navLeft">    
 
           <div className="navLeftItem" id="logo">
             <Link id="center" to="/trading/rl"> <Logo style={{height: "40px", width: "40px"}} /></Link>
@@ -64,40 +64,44 @@ function Navbar() {
           </div>
         </Link>
 
+        <a href="/reputation" className={`navLeftItem ${reputation}`} id="removeDecoration">
+          <ReputationWhite style={{height: "13px", width: "13px"}} className="navLeftContent" />
+          <div className="navLeftContent">Reputation</div>
+        </a>
+
+      {/*
         <Link to="/prices" id="removeDecoration">
           <div className={`navLeftItem ${prices}`}>
             <PricesWhite style={{height: "13px", width: "13px"}} className="navLeftContent" />
             <div className="navLeftContent">Prices</div>
           </div>
         </Link>
-
-          <a href="/reputation" className={`navLeftItem ${reputation}`} id="removeDecoration">
-            <ReputationWhite style={{height: "13px", width: "13px"}} className="navLeftContent" />
-            <div className="navLeftContent">Reputation</div>
-          </a>
+      */}
         
-
+      {/*
         <Link to="/premium" id="removeDecoration">
           <div className={`navLeftItem ${premium}`}>
             <CrownIcon style={{height: "13px", width: "13px"}} className="navLeftContent" />
             <div className="navLeftContent">Premium</div>
           </div>
         </Link>
+      */}
 
-      </div>                         {/*END BLUE*/}
+      </div>                         
 
 
-      <div className="navRight">     {/*BLUE*/}
+      <div className="navRight">     
 
-        <div className="navRightItem tradeBellSection">
-          <a href="/trading/rl/new" id="removeDecoration"><div onClick={()=> !isLoggedIn && setOpenForm(true)} className="navRightContent addTrade">+ New trade</div></a>
-          <BellIcon style={{height: "25px", width: "25px"}} className="navRightContent bell" />
-        </div>
+        <Link to={isLoggedIn ? "/trading/rl/new" : location.pathname} id="removeDecoration">
+          <div className="navRightItem tradeBellSection">
+            <a id="removeDecoration"><div onClick={()=> !isLoggedIn && setOpenForm(true)} className="navRightContent addTrade">+ New trade</div></a>
+            <BellIcon style={{height: "25px", width: "25px"}} className="navRightContent bell" />
+          </div>
+        </Link>
 
         {handleIconDisplay()}
-        
 
-      </div>                         {/*END BLUE*/}
+      </div>                         
 
 
     </nav>

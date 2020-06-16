@@ -8,19 +8,30 @@ function LoginInfo() {
 
   const [rememberMe, setRememberMe] = useState(false)
 
+  const [unPassErrorMsg, setUnPassErrorMsg] = useState("")
+
   function handleSubmit(event){
     event.preventDefault()
-    
+
+    /*setUnPassErrorMsg("Wrong username or password")*/
+
     axios.post('/api/auth/login', {
       email: username,
       password: password
     })
     .then(res => { console.log(res)
-      if (res.data.response === "blocked"){
+      if (res.data.status === "blocked"){
         alert("Too many requests, please try again later")
       }
-      else
-      window.location.reload(true)
+      else if (res.data.status === "logorpass"){
+        setUnPassErrorMsg("Wrong username or password")
+      }
+      else if (res.data.status === "success"){
+        // handle this
+        window.location.reload(true)
+      }
+      else console.log(res.data) // alert("Oops, something went wrong...")
+      
     })
     .catch(err => console.log(err))  
     
@@ -29,24 +40,28 @@ function LoginInfo() {
   return (
     <form onSubmit={handleSubmit} className="loginHolder">
 
-
       <div className="formItem">
         <p className="logFormText">Username or Email</p>
         <input 
+          onClick={()=> setUnPassErrorMsg("")}
           onChange={e => setUsername(e.target.value)}
           className="logFormInput"
+          style={unPassErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
           value={username}
         >
         </input>
+        <p className="formErrorMessage">{unPassErrorMsg}</p>
       </div>
 
 
       <div className="formItem">
       <p className="logFormText">Password</p>
         <input 
+          onClick={()=> setUnPassErrorMsg("")}
           type="password"
           onChange={e => setPassword(e.target.value)}
           className="logFormInput"
+          style={unPassErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
           value={password}
         >
         </input>

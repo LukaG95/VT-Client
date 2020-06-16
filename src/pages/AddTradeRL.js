@@ -14,6 +14,8 @@ function AddTradeRL() {
   const [itemImages, setItemImages] = useState()
   const [tradeIdMatch, setTradeIdMatch] = useState(false)
 
+  const [tradeErrorMsg, setTradeErrorMsg] = useState("")
+
   const pathID = useLocation().pathname.substring(17)   // reads url after /trades/ till the end
   const {myID} = useContext(UserContext)
 
@@ -47,7 +49,7 @@ function AddTradeRL() {
             style={{height: "95px", width: "95px"}} 
             src={require(`../images/RLimages/${item.url}`)} 
             alt="" 
-            onClick={e => pushItem(e)} 
+            onClick={e => {setTradeErrorMsg(""); pushItem(e)}} 
           />
         )
       }
@@ -55,83 +57,101 @@ function AddTradeRL() {
     setItemImages(names)
   }, [gotInfo])
   
-  
-  function handleTradeSubmit(){
-    let haveRefactor = []
-    let wantRefactor = []
-
-    have.map((item) => {
-      
-      if(item.url !== "") {
-        let readyItem = {
-          itemID : item.url === "" ? 0 : parseInt(item.url.substr(0, item.url.indexOf('.'))),     // reads url until dot (gets only the ID)
-          paint : item.color,
-          cert : item.cert,
-          itemType : "item",  // needs work
-          amount : item.amount,
-          url : item.url
-        }
-        haveRefactor.push(readyItem)
-      } 
-    })
-    
-    want.map((item) => {
-      if(item.url !== "") {
-        let readyItem = {
-          itemID : item.url === "" ? 0 : parseInt(item.url.substr(0, item.url.indexOf('.'))),     // reads url until dot (gets only the ID)
-          paint : item.color,
-          cert : item.cert,
-          itemType : "item",  // needs work
-          amount : item.amount,
-          url : item.url
-        }
-        
-        wantRefactor.push(readyItem);
+  function checkAddedItems(){
+    let x = false, y=false;
+    have.forEach(item=> {
+      if (item.url !== ""){
+        x = true
+        return
       }
     })
-
-    let temp=[] 
-    have.map(item => {
-      item.isDropdown = false
-      temp.push(item)
+    want.forEach(item=> {
+      if (item.url !== ""){
+        y = true
+        return
+      }
     })
-    const oldHave = temp
+    return (x && y)
+  }
+  
+  function handleTradeSubmit(){
+    if (have && want){
+      if (checkAddedItems()){
+        let haveRefactor = []
+        let wantRefactor = []
 
-     temp=[] 
-
-    want.map(item => {
-      item.isDropdown = false
-      temp.push(item)
-    })
-    const oldWant = temp
-
-    const refactorPlatform = platform === "Steam" ? "PC" : platform
-
-    if (pathID === ""){
-      axios.post('/api/trades/createTrade', {
-        have: haveRefactor,
-        want: wantRefactor, 
-        platform: refactorPlatform,
-        notes: notes,
-        old: {have: oldHave, want: oldWant}
-      })
-      .then(res => {
-        console.log(res)
+        have.map((item) => {
+          if (item.url !== ""){
+            let readyItem = {
+              itemID : item.url === "" ? 0 : parseInt(item.url.substr(0, item.url.indexOf('.'))),     // reads url until dot (gets only the ID)
+              paint : item.color,
+              cert : item.cert,
+              itemType : "item",  // needs work
+              amount : item.amount,
+              url : item.url
+            }
+            haveRefactor.push(readyItem)
+          } 
+        })
         
-      })
-      .catch(err => console.log(err))
-    }else{
-      axios.post(`/api/trades/createTrade?edit=${pathID}`, {
-        have: haveRefactor,
-        want: wantRefactor, 
-        platform: refactorPlatform,
-        notes: notes,
-        old: {have, want}
-      })
-      .then(res => {
-        window.location.reload(true)
-      })
-      .catch(err => console.log(err))
+        want.map((item) => {
+          if (item.url !== ""){
+            let readyItem = {
+              itemID : item.url === "" ? 0 : parseInt(item.url.substr(0, item.url.indexOf('.'))),     // reads url until dot (gets only the ID)
+              paint : item.color,
+              cert : item.cert,
+              itemType : "item",  // needs work
+              amount : item.amount,
+              url : item.url
+            }
+            wantRefactor.push(readyItem);
+          }
+        })
+
+        let temp=[] 
+        have.map(item => {
+          item.isDropdown = false
+          temp.push(item)
+        })
+        const oldHave = temp
+
+        temp=[] 
+
+        want.map(item => {
+          item.isDropdown = false
+          temp.push(item)
+        })
+        const oldWant = temp
+
+        const refactorPlatform = platform === "Steam" ? "PC" : platform
+
+        if (pathID === ""){
+          axios.post('/api/trades/createTrade', {
+            have: haveRefactor,
+            want: wantRefactor, 
+            platform: refactorPlatform,
+            notes: notes,
+            old: {have: oldHave, want: oldWant}
+          })
+          .then(res => {
+            console.log(res)
+            
+          })
+          .catch(err => console.log(err))
+        }else{
+          axios.post(`/api/trades/createTrade?edit=${pathID}`, {
+            have: haveRefactor,
+            want: wantRefactor, 
+            platform: refactorPlatform,
+            notes: notes,
+            old: {have, want}
+          })
+          .then(res => {
+            window.location.reload(true)
+          })
+          .catch(err => console.log(err))
+        }
+      }else setTradeErrorMsg("You have to select at least 1 item in have and want")
     }
   }
   
@@ -203,7 +223,7 @@ function AddTradeRL() {
 
         </div>
 
-        <div className="rlChooseItemsSection">
+        <div className="rlChooseItemsSection" style={tradeErrorMsg !== "" ? {outline: "2px solid #ff4645"} : null}>
           <div className="choose-itemsSearchFiltersRL">
             <div><img style={{width: "11px", height: "11px", marginLeft: "2px"}} src={require("../images/other/MagnGlass.png")} /></div>
             <RLfilter_icon itemImages={itemImages} setItemImages={setItemImages} />
@@ -234,6 +254,7 @@ function AddTradeRL() {
               <p style={platform === "SWITCH" ? {color: "#2C8E54"} : null}>SWITCH</p>
             </label>
           </div>
+        <p className="addRLTradeErrorMsg">{tradeErrorMsg}</p>
         </div>
 
         <div className="rlSubmit">

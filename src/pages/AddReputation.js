@@ -11,6 +11,7 @@ function AddReputation() {
 
   const [repCategory, setRepCategory] = useState()
   const [feedback, setFeedback] = useState()
+  const [repErrorMessage, setRepErrorMessage] = useState("")
 
   const {myID} = useContext(UserContext)
 
@@ -38,17 +39,17 @@ function AddReputation() {
 
   function handleRepSubmit(good_bad){
     if (myID === userID){
-      alert("You can't rep yourself")
+      setRepErrorMessage("You can't rep yourself")
       return
     }
 
     if (repCategory === undefined){
-      alert("You have to pick a rep category 1st")
+      setRepErrorMessage("You have to pick a rep category 1st")
       return
     }
 
     if (feedback === undefined || feedback.replace(/\s/g, '').length < 5) {
-      alert("Your message has to be at least 5 characters long")
+      setRepErrorMessage("Your message has to be at least 5 characters long")
       return
     }
   
@@ -61,7 +62,7 @@ function AddReputation() {
       }
     })
     .then(res => {
-      window.location.reload(true)
+      window.location.href = `/reputation/${userID}`
     })
     .catch(err => console.log(err))
   }
@@ -108,8 +109,11 @@ function AddReputation() {
          
         </textarea>
 
+        <p className="repErrorText">{repErrorMessage}</p>
+
         <button onClick={()=> handleRepSubmit(true)} className="rep-button">Complete as positive</button>
         <button onClick={()=> handleRepSubmit(false)} className="rep-button negative">Complete as negative</button>
+        {/*<button className="rep-button-back">Back to reputation</button>*/}
 
       </main>
       
@@ -125,4 +129,4 @@ function AddReputation() {
     else return null // <Spinner className="newPosition"> 
 }
 
-export default AddReputation;
+export default AddReputation

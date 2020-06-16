@@ -41,8 +41,8 @@ function App() {
         <Switch>
           <Route exact path="/">                  <FiltersRLContextProvider> <RLTrading /> </ FiltersRLContextProvider>       </Route>
           <Route exact path="/trading/rl">        <FiltersRLContextProvider> <RLTrading /> </FiltersRLContextProvider>      </Route>
-          <Route exact path="/prices">            <Prices />          </Route>
-          <Route exact path="/premium">           <Premium />         </Route>
+          {/*<Route exact path="/prices">            <Prices />          </Route>*/} 
+          {/*<Route exact path="/premium">           <Premium />         </Route>*/}
           <Route exact path="/terms">             <Terms />           </Route>
           <Route exact path="/privacy">           <PrivacyPolicy />   </Route>
           <Route exact path="/trading/rl/new">    {handleRedirectOnRefresh(<TradeContextProvider>  <AddTradeRL />    </TradeContextProvider>)}       </Route>
