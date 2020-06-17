@@ -4,7 +4,8 @@ import axios from 'axios'
 const UserContext = React.createContext()
 
 function UserContextProvider({children}) {
-  const [username, setUsername] = useState("none")
+  const [username, setUsername] = useState()
+  const [email, setEmail] = useState()
   const [isLoggedIn, setIsLoggedIn] = useState()
   const [myID, setMyID] = useState()
   const [trades, setTrades] = useState("none")
@@ -19,6 +20,8 @@ function UserContextProvider({children}) {
         if (res.data.status === "success"){
           setIsLoggedIn(true)
           setMyID(res.data.user._id)
+          setUsername(res.data.user.username)
+          setEmail(res.data.user.email)
         }
         else 
         setIsLoggedIn(false)
@@ -28,7 +31,7 @@ function UserContextProvider({children}) {
   }, [])
 
   return (
-      <UserContext.Provider value={{username, setUsername, isLoggedIn, setIsLoggedIn, trades, setTrades, reputation, setReputation, openForm, setOpenForm, myID}}>
+      <UserContext.Provider value={{username, email, isLoggedIn, setIsLoggedIn, trades, setTrades, reputation, setReputation, openForm, setOpenForm, myID}}>
           {children}
       </UserContext.Provider>
   )

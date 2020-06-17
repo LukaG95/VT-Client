@@ -33,13 +33,11 @@ function RLTradeComponent({trade, userTradesPage}) {
 
   function tradeItems(){
     const itemComponents = trade.have.map(item => <RLitem_icon_tradePage item={item} />)
-    
     return itemComponents
   }
 
   function wantItems(){
     const itemComponents = trade.want.map(item => <RLitem_icon_tradePage item={item} />)
-
     return itemComponents
   }
 

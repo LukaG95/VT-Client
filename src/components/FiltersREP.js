@@ -5,7 +5,7 @@ function FiltersREP() {
   const [leadInfo, setLeadInfo] = useState()
   const [timeType, setTimeType] = useState("Week") 
 
-  const trophy = <img style={{height: "25px", width: "25px", marginLeft: "45px"}} src={require("../images/other/icon-trophy.png")} />
+  const trophy = <img style={{height: "25px", width: "25px", marginLeft: "50px"}} src={require("../images/other/icon-trophy.png")} />
   const goldTrophy = <img style={{height: "25px", width: "25px"}} src={require("../images/other/icon-1st.png")} />
   const silverTrophy = <img style={{height: "25px", width: "25px"}} src={require("../images/other/icon-2nd.png")} />
   const bronzeTrophy = <img style={{height: "25px", width: "25px"}} src={require("../images/other/icon-3rd.png")} />

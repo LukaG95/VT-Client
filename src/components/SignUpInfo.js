@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import axios from 'axios'
+import Filter from 'bad-words'
+const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 
 function SignUpInfo() {
   const [username, setUsername] = useState("")
@@ -22,6 +24,10 @@ function SignUpInfo() {
     }
     else if (!username.match(/^(?!.*[ ]{2,})[a-zA-Z0-9 _-]{2,15}$/gm)){
       setUsernameErrorMsg("Username can only contain characters a-z, 0-9, or '- _'")
+      return
+    }
+    else if (profanityFilter.isProfane(username)){
+      setUsernameErrorMsg("Username contains innapropriate words")
       return
     }
     if (password.length < 4 || password.length > 30){

@@ -4,6 +4,10 @@ import Sidebar from '../components/Sidebar'
 import test_rep from '../info/test_reputation'
 import axios from 'axios'
 import { UserContext } from '../UserContext'
+import Filter from 'bad-words'
+import validator from 'validator'
+
+const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 
 function AddReputation() {
   const [repInfo, setRepInfo] = useState() 
@@ -38,6 +42,7 @@ function AddReputation() {
   }, [myID])
 
   function handleRepSubmit(good_bad){
+
     if (myID === userID){
       setRepErrorMessage("You can't rep yourself")
       return
@@ -52,12 +57,22 @@ function AddReputation() {
       setRepErrorMessage("Your message has to be at least 5 characters long")
       return
     }
-  
 
+    if (feedback.length > 100) {
+      setRepErrorMessage("Your message is too long, max 100 characters")
+      return
+    }
+
+    if (!feedback.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9 ]{5,100}$/gm)) {
+      setRepErrorMessage("Your message includes inappropriate characters")
+      return
+    }
+
+  
     axios.post(`/api/reputation/addRep/${userID}`, {
       rep: {
         good: good_bad,
-        feedback: feedback,
+        feedback: profanityFilter.clean(feedback),
         game: repCategory
       }
     })

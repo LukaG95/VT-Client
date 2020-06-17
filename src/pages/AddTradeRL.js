@@ -8,7 +8,9 @@ import rl_items_all from '../info/virItemsFilteredAll.json'
 import {TradeContext} from '../components/TradeContextRL'
 import axios from 'axios'
 import { UserContext } from '../UserContext'
-import Observer from '@researchgate/react-intersection-observer';
+import Filter from 'bad-words'
+
+const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 
 function AddTradeRL() {
   const [itemImages, setItemImages] = useState()
@@ -130,7 +132,7 @@ function AddTradeRL() {
             have: haveRefactor,
             want: wantRefactor, 
             platform: refactorPlatform,
-            notes: notes,
+            notes: profanityFilter.clean(notes),
             old: {have: oldHave, want: oldWant}
           })
           .then(res => {
@@ -143,7 +145,7 @@ function AddTradeRL() {
             have: haveRefactor,
             want: wantRefactor, 
             platform: refactorPlatform,
-            notes: notes,
+            notes: profanityFilter.clean(notes),
             old: {have, want}
           })
           .then(res => {
