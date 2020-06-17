@@ -753,15 +753,17 @@ body{
 
 
 .rl_notes_buttons_container{
-  max-height: 100%;
-  min-width: 500px;
-  padding: 20px;
+  width: 500px;
+  padding: 20px 20px 17px 20px;
 
   justify-content: space-between;
+
 }
 
 .notes-box{
-  border: 4px solid #47384D; 
+  background: #251D28;
+  border: 1px solid #47384D;
+  border-radius: 5px;
 }
 
 .notes-top{
@@ -786,20 +788,29 @@ body{
   text-align: justify;
 }
 
+.buttons-box{
+
+}
+
 .buttons-box button{
-  background: none;
+  background: #251D28;
   font-weight: 500;
   font-size: 11px;
   color: #F6F6F6;
-  border: 2px solid #47384D;
+  border: 1px solid #47384D;
   border-radius: 5px;
   padding: 3px 10px 3px 10px;
   cursor: pointer;
   margin-right: 10px;
+  transition: background-color 100ms;
+}
+
+.buttons-box button:hover{
+  background-color: #47384D;
 }
 
 .buttons-box button:active{
-  background-color: #47384D;
+  background: #251D28;
 }
 
 /*-----UserTrades              ----*/
@@ -2142,7 +2153,7 @@ body{
 .accountFieldsWrapper label {
 	display: inline-flex;
   margin-right: 5px;
-  margin-left: 11px;
+  margin-left: 5px;
 }
 
 .accountFieldsWrapper label>p {

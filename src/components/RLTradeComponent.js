@@ -4,11 +4,11 @@ import RLitem_icon_tradePage from './RLitem_icon_tradePage.js'
 function RLTradeComponent({trade, userTradesPage}) {
   const [notesHeight, setNotesHeight] = useState(()=> {
     if (trade.have.length >= 9 || trade.want.length >= 9)
-      return "230px"
+      return "277px"
     else if (trade.have.length >= 5 || trade.want.length >= 5)
-      return "132px"
+      return "179px"
     else 
-      return "35px"
+      return "82px"
   })
 
   const refPlatform = trade.platform === "PC" ? "Steam" : trade.platform
@@ -88,7 +88,7 @@ function RLTradeComponent({trade, userTradesPage}) {
           <div className="flex-col rl_notes_buttons_container">
 
             <div className="notes-box">
-              <div className="notes-top">Notes</div>
+              {/*<div className="notes-top">Notes</div>*/}
               <div style={{height: `${notesHeight}`}} className="notes">{trade.notes}</div>
             </div>
 

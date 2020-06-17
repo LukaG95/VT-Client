@@ -27,17 +27,17 @@ function AddTradeRL() {
     if (pathID !== "" && myID){
       let x = false
       axios.get(`/api/trades/getTrades?userId=${myID}`)
-    .then (res => { 
-      res.data.trades.map(trade => {
-        if (trade._id === pathID){
-          setTradeIdMatch(true)
-          x = true
-        }
+      .then (res => { 
+        res.data.trades.map(trade => {
+          if (trade._id === pathID){
+            setTradeIdMatch(true)
+            x = true
+          }
+        })
+        if (x === false) window.location.href = "/trading/rl"
+        
       })
-      if (x === false) window.location.href = "/trading/rl"
-      
-    })
-    .catch(err => console.log("Error: " + err))
+      .catch(err => console.log("Error: " + err))
     }else if (pathID === "") setTradeIdMatch(true)
 
   }, [myID])
@@ -236,7 +236,7 @@ function AddTradeRL() {
         </div>
 
         <div className="notesSection">
-          <textarea placeholder="Add notes..." className="notesArea" onChange={e => setNotes(e.target.value)}></textarea>
+          <textarea placeholder="Add notes..." className="notesArea" defaultValue={notes} onChange={e => setNotes(e.target.value)}></textarea>
           <div className="platformSection">
             <h4>PLATFORM:</h4>
             <label className="noUserInteraction platf-button-container">

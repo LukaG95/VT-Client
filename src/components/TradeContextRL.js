@@ -54,7 +54,7 @@ function TradeContextProvider({children}) {
       .then (res => { 
         setHave(res.data.trade.old.have)
         setWant(res.data.trade.old.want)
-        setPlatform(res.data.trade.platform)
+        setPlatform(res.data.trade.platform === "PC" ? "Steam" : res.data.trade.platform) // refactor
         setNotes(res.data.trade.notes)
         setGotInfo(true)
       })
