@@ -19,10 +19,10 @@ function AddTradeRL() {
   const [tradeErrorMsg, setTradeErrorMsg] = useState("")
   const [notesErrorMsg, setNotesErrorMsg] = useState("")
 
-  const [notice, setNotice] = useState(false)
+  const [openNotice, setOpenNotice] = useState(false)
 
   const pathID = useLocation().pathname.substring(17)   // reads url after /trades/ till the end
-  const {myID} = useContext(UserContext)
+  const {myID, setOpenForm, setOpenTradeNotice} = useContext(UserContext)
 
   const {have, setHave, want, setWant, platform, setPlatform, notes, setNotes, manageFocus, pushItem, clearWantItems, clearHaveItems, gotInfo} = useContext(TradeContext)
 
@@ -154,8 +154,9 @@ function AddTradeRL() {
             old: {have: oldHave, want: oldWant}
           })
           .then(res => {
-            console.log(res)
-            
+            if (res.data.status === "success")
+              setOpenTradeNotice(true)
+          
           })
           .catch(err => console.log(err))
         }else{
@@ -167,7 +168,8 @@ function AddTradeRL() {
             old: {have, want}
           })
           .then(res => {
-            window.location.reload(true)
+            if (res.data.status === "success")
+              setOpenTradeNotice(true)
           })
           .catch(err => console.log(err))
         }
@@ -281,7 +283,7 @@ function AddTradeRL() {
         <div className="rlSubmit">
           <button onClick={()=> handleTradeSubmit()} className="rlSubmitButton">SUBMIT TRADE</button>   
         </div>
-
+        
       </div>
     )
   else return null

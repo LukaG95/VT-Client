@@ -1306,6 +1306,61 @@ body{
 
 /*-----Add RL Trade              ----*/
 
+.tradeNotice{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 440px;
+  height: 201px;
+  background: linear-gradient(270deg, #2A212E 0%, #312635 100%);
+  box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+
+  animation: transitionFade 0.2s;
+}
+
+.tradeNotice div{
+  display: flex;
+  justify-content: center;
+}
+
+.tradeNotice p{
+  font-weight: 800;
+  font-size: 20px;
+  color: #f6f6f6;
+}
+
+.tradeNoticeLeftButton{
+  color: #f6f6f6;
+  width: 156px;
+  height: 34px;
+  border: none;
+  background: linear-gradient(180deg, #2C8E54 49.02%, #2A8750 49.03%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tradeNoticeLeftButton:hover{
+  background: linear-gradient(180deg, rgb(48, 153, 90) 49.02%, rgb(47, 150, 90) 49.03%);
+}
+
+.tradeNoticeRightButton{
+  color: #f6f6f6;
+  width: 156px;
+  height: 34px;
+  border: none;
+  background: linear-gradient(180deg, #47384D 49.01%, #433549 49.03%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tradeNoticeRightButton:hover{
+  background: linear-gradient(180deg, rgb(82, 64, 88) 49.01%, #4e3e55 49.03%);
+}
+
+
 .addRLWrapper{
   display: flex;
   flex-direction: column;
@@ -1937,26 +1992,29 @@ body{
 /*-----Login popup             ----*/
 
 .shading{
-  position: absolute;
+  display: flex;
+  position: fixed;
   width: 100%;
-  height: 100vh;
+  height: 100%;
 
   z-index: 2;
 
   background-color: rgba(0,0,0,0.7);
   justify-content: center;
   align-items: center;
+
+  animation: transitionFade 0.2s;
 }
 
 .loginWrapper{
   display: flex;
   flex-direction: column;
-  position: relative;
+  position: fixed;
   background-color: #47384D;
 
   width: 440px;
-  height: auto;
 
+  margin: auto;
   border-radius: 5px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
 }

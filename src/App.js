@@ -15,6 +15,7 @@ import AccountLogout from './pages/AccountLogout'
 import Terms from './pages/Terms'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import LoginForm from './components/LoginForm'
+import Popups from './components/Popups'
 import AddReputation from './pages/AddReputation'
 import UserTrades from './pages/UserTrades'
 import {TradeContextProvider} from './components/TradeContextRL'
@@ -36,6 +37,7 @@ function App() {
     <div className="mainWrapper">
 
         <LoginForm />
+        <Popups />
         
         <Navbar />
 

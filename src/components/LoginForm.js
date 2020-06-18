@@ -15,7 +15,7 @@ function LoginForm() {
 
   return (
     <div 
-    style={openForm ? {display: "flex"} : {display: "none"}}
+    style={openForm ? {visibility: "visible"} : {visibility: "hidden"}}
     className="shading" 
     onMouseDown={event => {
       if(event.target.className === "shading")
