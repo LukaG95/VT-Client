@@ -19,6 +19,8 @@ function AddTradeRL() {
   const [tradeErrorMsg, setTradeErrorMsg] = useState("")
   const [notesErrorMsg, setNotesErrorMsg] = useState("")
 
+  const [notice, setNotice] = useState(false)
+
   const pathID = useLocation().pathname.substring(17)   // reads url after /trades/ till the end
   const {myID} = useContext(UserContext)
 

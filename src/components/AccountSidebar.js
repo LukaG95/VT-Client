@@ -7,7 +7,7 @@ function AccountSidebar() {
   const {myID} = useContext(UserContext)
 
 	let location = useLocation();
-	let account = "", privacy = "", trades = "", platforms = "";
+	let account = "", privacy = "", trades = "", platforms = "", logout = "";
 	
 	switch(location.pathname) {
 		case "/account":
@@ -21,7 +21,10 @@ function AccountSidebar() {
 			break;
 		case "/account/platforms":
 			platforms = "currentPage";
-			break;
+      break;
+    case "/account/logout":
+      logout = "currentPage";
+      break;
 		default:
 	}
 	
@@ -32,6 +35,7 @@ function AccountSidebar() {
 			<p className="accountSb-nav"><Link to="/account/privacy" className={privacy}>Privacy & Security</Link></p>
 			<p className="accountSb-nav"><Link to={`/trades/${myID}`} className={trades}>My Trades</Link></p>
 			<p className="accountSb-nav"><Link to="/account/platforms" className={platforms}>Platforms</Link></p>
+      <p className="accountSb-nav"><Link to="/account/logout" className={logout}>Logout</Link></p>
 			
 		</div>
 	)

@@ -844,6 +844,7 @@ body{
   min-width: 1350px;
   align-items: center;
   justify-content: space-between;
+
 }
 
 .userTrades-top-section button{
@@ -2253,7 +2254,7 @@ body{
 
 .NewPassError2{
   position: absolute;
-  top: 273px;
+  top: 275px;
   left: 2px;
   color: rgb(255, 61, 61);
   font-size: 12px;
@@ -2362,6 +2363,31 @@ body{
 	background: #47384D;
 }
 
+/*-----Logout               ----*/
+
+.underLogout{
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-evenly;
+}
+
+#logoutCancelButton{
+  border: 1px solid #564B68;
+}
+
+#logoutCancelButton:active{
+  background-color: #564B68;
+}
+
+#logoutAcceptButton{
+  background: #CF0000;
+  border-radius: 5px;
+  border: none;
+}
+
+#logoutAcceptButton:hover{
+  background: rgb(212, 21, 21);
+}
 
 /*-----Spinner              ----*/
 

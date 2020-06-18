@@ -15,6 +15,7 @@ function UserTrades() {
   useEffect(() => {
     axios.get(`/api/trades/getTrades?userId=${pathID}`)
     .then (res => { 
+      console.log(res.data)
       setUserTrades(res.data.trades)
     })
     .catch(err => console.log("Error: " + err))
@@ -64,17 +65,26 @@ function UserTrades() {
 
 if (userTrades)
   return (
-      <div className={`userTrades-page-wrapper`}>
+      <div className="userTrades-page-wrapper">
         <div className="userTrades-top-section">
           <section>
             <button onClick={()=> setGame("rl")} style={game==="rl" ? {backgroundColor: "#47384D"} : null}>Rocket League</button>
-            <button onClick={()=> setGame("csgo")} style={game==="csgo" ? {backgroundColor: "#47384D"} : null}>CSGO</button>
+            {/*<button onClick={()=> setGame("csgo")} style={game==="csgo" ? {backgroundColor: "#47384D"} : null}>CSGO</button>*/}
           </section>
 
-          { myID === pathID ? <button onClick={()=> deleteAllTrades()} id="del-all-trades-button" > Delete all trades</button> : null}
+          { myID === pathID ? userTrades.length > 0 && <button onClick={()=> deleteAllTrades()} id="del-all-trades-button" > Delete all trades</button> : null}
           
         </div>
-
+        
+        {userTrades.length <= 0 && 
+          <div style={{color: "#f6f6f6", marginTop: "30px"}}>
+          No active Rocket League trades. Create your 
+          <a href={`/trading/rl/new`} className="addRepButton2" id="removeDecoration"> first trade</a>
+        
+        </div>
+        }
+        
+        
         <TradeComponents />
 
       </div>

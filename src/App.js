@@ -11,6 +11,7 @@ import Premium from './pages/Premium'
 import MyAccount from './pages/MyAccount'
 import AccountPrivacy from './pages/AccountPrivacy'
 import AccountPlatforms from './pages/AccountPlatforms'
+import AccountLogout from './pages/AccountLogout'
 import Terms from './pages/Terms'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import LoginForm from './components/LoginForm'
@@ -52,6 +53,7 @@ function App() {
           <Route exact path="/account">           {handleRedirectOnRefresh(<MyAccount /> )}        </Route>
           <Route exact path="/account/privacy">   {handleRedirectOnRefresh(<AccountPrivacy /> )}   </Route>
           <Route exact path="/account/platforms"> {handleRedirectOnRefresh(<AccountPlatforms /> )} </Route>
+          <Route exact path="/account/logout">    {handleRedirectOnRefresh(<AccountLogout /> )}    </Route>
           <Route path="/trades">                  <UserTrades /> </Route>
         </Switch>
 

@@ -30,7 +30,7 @@ function LoginInfo() {
         // handle this
         window.location.reload(true)
       }
-      else console.log(res.data) // alert("Oops, something went wrong...")
+      else alert("Oops, something went wrong...")
       
     })
     .catch(err => console.log(err))  
