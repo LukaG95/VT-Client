@@ -1302,7 +1302,7 @@ body{
   height: 395px;
   flex-direction: column;
 
-  border: 3px solid #47384D;
+  border: 2px solid #47384D;
 }
 
 
@@ -1693,11 +1693,12 @@ body{
 }
 
 .rlChooseItemsSection{
+  position: relative;
   width: 938px;
   height: 380px;
   background-color: #221C24;
 
-  border: 3px solid #47384D;
+  border: 2px solid #47384D;
 }
 
 
@@ -1803,7 +1804,7 @@ body{
   height: 230px;
   background-color: #221C24;
 
-  border: 3px solid #47384D;
+  border: 2px solid #47384D;
 }
 
 .notesArea{
@@ -1858,10 +1859,18 @@ body{
 
 .addRLTradeErrorMsg{
   position: absolute;
-  top: 225px;
+  top: 376px;
   right: 0px;
   color: rgb(255, 61, 61);
-  font-size: 14px;
+  font-size: 11px;
+}
+
+.addNotesErrorMsg{
+  position: absolute;
+  top: 226px;
+  right: 0px;
+  color: rgb(255, 61, 61);
+  font-size: 11px;
 }
 
 .rlSubmit{
@@ -2213,7 +2222,7 @@ body{
   font-size: 12px;
 }
 
-.cNewPassError{
+.NewPassError2{
   position: absolute;
   top: 273px;
   left: 2px;

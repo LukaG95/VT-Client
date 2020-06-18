@@ -3,12 +3,12 @@ import AccountSidebar from '../components/AccountSidebar'
 
 function AccountPrivacy() {
 	const [password, setPassword] = useState("")
-	const [newpass, setNewpass] = useState("")
-  const [newpass2, setNewpass2] = useState("")
+	const [newPass, setNewpass] = useState("")
+  const [newPass2, setNewpass2] = useState("")
   
   const [passErrorMsg, setPassErrorMsg] = useState("")
   const [newPassErrorMsg, setNewPassErrorMsg] = useState("")
-  const [cNewPassErrorMsg, setCNewPassErrorMsg] = useState("")
+  const [newPass2ErrorMsg, setNewPass2ErrorMsg] = useState("")
 	
 	return (
 		<div className="secondaryWrapper accountWrapper">
@@ -37,7 +37,7 @@ function AccountPrivacy() {
             id="newpassInput" 
             type="password" 
             style={newPassErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
-            defaultValue={newpass} 
+            defaultValue={newPass} 
             onChange={(e)=>setNewpass(e.target.value)} 
             onClick={()=> setNewPassErrorMsg("")}
           />
@@ -48,12 +48,12 @@ function AccountPrivacy() {
             required 
             id="newpass2Input" 
             type="password" 
-            style={cNewPassErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
-            defaultValue={newpass2} 
+            style={newPass2ErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
+            defaultValue={newPass2} 
             onChange={(e)=>setNewpass2(e.target.value)} 
-            onClick={()=> setCNewPassErrorMsg("")}
+            onClick={()=> setNewPass2ErrorMsg("")}
           />
-          <p className="cNewPassError">{cNewPassErrorMsg}</p>
+          <p className="NewPassError2">{newPass2ErrorMsg}</p>
 
 					<button type="submit" >Update password</button>
 				</form>
@@ -66,12 +66,16 @@ function AccountPrivacy() {
   function handleUpdatePassword(e){
     e.preventDefault()
 
-    if (password.length < 4 || password.length > 30){
-      setPassErrorMsg("Password must be between 4 and 30 characters long")
+    if (newPass !== newPass2){
+      setNewPass2ErrorMsg("Passwords don't match")
       return
     }
-    else if (!password.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{4,30}$/gm)){
-      setPassErrorMsg("Passwords contains inappropriate characters")
+    else if (newPass.length < 4 || password.length > 30){
+      setNewPassErrorMsg("Password must be between 4 and 30 characters long")
+      return
+    }
+    else if (!newPass.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{4,30}$/gm)){
+      setNewPassErrorMsg("Password contains inappropriate characters")
       return
     }
     // server request and validation

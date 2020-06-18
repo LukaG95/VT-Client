@@ -67,6 +67,10 @@ function AddReputation() {
       setRepErrorMessage("Your message includes inappropriate characters")
       return
     }
+    if (feedback.match(/\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm)) {
+      setRepErrorMessage("Your message must not inlcude links")
+      return
+    }
 
   
     axios.post(`/api/reputation/addRep/${userID}`, {

@@ -85,7 +85,7 @@ function RLitem_icon({id, url}) {
   }
 
 	return (
-    <div className="RLicon" style={{height: "95px", width: "95px"}}>
+    <div className="RLicon noUserInteraction" style={{height: "95px", width: "95px"}}>
       
       <div onClick={() => setIsDropdown(id)} style={{height: "95px", width: "95px"}}>
 

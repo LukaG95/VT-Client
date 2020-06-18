@@ -17,6 +17,7 @@ function AddTradeRL() {
   const [tradeIdMatch, setTradeIdMatch] = useState(false)
 
   const [tradeErrorMsg, setTradeErrorMsg] = useState("")
+  const [notesErrorMsg, setNotesErrorMsg] = useState("")
 
   const pathID = useLocation().pathname.substring(17)   // reads url after /trades/ till the end
   const {myID} = useContext(UserContext)
@@ -43,20 +44,23 @@ function AddTradeRL() {
   }, [myID])
 
   useEffect(() => {
-    const names = rl_items_all.map((item, i) => {          // remove i % ... for all images
-      if (item.url.includes(".0.webp") && i % 4 === 0){    // remove i % ... for all images
-        return (
-          <img 
-            name={item.url} 
-            style={{height: "95px", width: "95px"}} 
-            src={require(`../images/RLimages/${item.url}`)} 
-            alt="" 
-            onClick={e => {setTradeErrorMsg(""); pushItem(e)}} 
-          />
-        )
-      }
-    })
-    setItemImages(names)
+    setTimeout(()=> {
+      const names = rl_items_all.map((item, i) => {         
+        if (item.url.includes(".0.webp")){   
+          return (
+            <img 
+              name={item.url} 
+              style={{height: "95px", width: "95px"}} 
+              src={require(`../images/RLimages/${item.url}`)} 
+              alt="" 
+              onClick={e => {setTradeErrorMsg(""); pushItem(e)}} 
+            />
+          )
+        }
+      })
+      setItemImages(names)
+    }, 500)
+    
   }, [gotInfo])
   
   function checkAddedItems(){
@@ -75,10 +79,22 @@ function AddTradeRL() {
     })
     return (x && y)
   }
+
+  function checkNotes(){
+    return (notes.match(/\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm))
+  }
   
   function handleTradeSubmit(){
     if (have && want){
-      if (checkAddedItems()){
+      if (!checkAddedItems()){
+        setTradeErrorMsg("You have to select at least 1 item in have and want")
+        return
+      }
+      else if (checkNotes()){
+        setNotesErrorMsg("Your notes must not include links")
+        return
+      }
+      else {
         let haveRefactor = []
         let wantRefactor = []
 
@@ -153,7 +169,7 @@ function AddTradeRL() {
           })
           .catch(err => console.log(err))
         }
-      }else setTradeErrorMsg("You have to select at least 1 item in have and want")
+      }
     }
   }
   
@@ -225,7 +241,7 @@ function AddTradeRL() {
 
         </div>
 
-        <div className="rlChooseItemsSection" style={tradeErrorMsg !== "" ? {outline: "2px solid #ff4645"} : null}>
+        <div className="rlChooseItemsSection" style={tradeErrorMsg !== "" ? {border: "2px solid #ff4645"} : null}>
           <div className="choose-itemsSearchFiltersRL">
             <div><img style={{width: "11px", height: "11px", marginLeft: "2px"}} src={require("../images/other/MagnGlass.png")} /></div>
             <RLfilter_icon itemImages={itemImages} setItemImages={setItemImages} />
@@ -233,9 +249,10 @@ function AddTradeRL() {
           <div className="item-imagesRL">
           {itemImages === undefined ? <Spinner /> : itemImages}
           </div>
+          <p className="addRLTradeErrorMsg">{tradeErrorMsg}</p>
         </div>
 
-        <div className="notesSection">
+        <div className="notesSection" style={notesErrorMsg !== "" ? {border: "2px solid #ff4645"} : null} onClick={()=> setNotesErrorMsg("")}>
           <textarea placeholder="Add notes..." className="notesArea" defaultValue={notes} onChange={e => setNotes(e.target.value)}></textarea>
           <div className="platformSection">
             <h4>PLATFORM:</h4>
@@ -256,7 +273,7 @@ function AddTradeRL() {
               <p style={platform === "SWITCH" ? {color: "#2C8E54"} : null}>SWITCH</p>
             </label>
           </div>
-        <p className="addRLTradeErrorMsg">{tradeErrorMsg}</p>
+          <p className="addNotesErrorMsg">{notesErrorMsg}</p>
         </div>
 
         <div className="rlSubmit">
