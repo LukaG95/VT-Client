@@ -92,12 +92,12 @@ function Navbar() {
 
       <div className="navRight">     
 
-        <Link to={isLoggedIn ? "/trading/rl/new" : location.pathname} id="removeDecoration">
+        <a href={isLoggedIn ? "/trading/rl/new" : location.pathname} id="removeDecoration">
           <div className="navRightItem tradeBellSection">
             <a id="removeDecoration"><div onClick={()=> !isLoggedIn && setOpenForm(true)} className="navRightContent addTrade">+ New trade</div></a>
             <BellIcon style={{height: "25px", width: "25px"}} className="navRightContent bell" />
           </div>
-        </Link>
+        </a>
 
         {handleIconDisplay()}
 

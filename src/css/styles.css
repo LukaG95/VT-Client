@@ -59,6 +59,19 @@
   }
 }
 
+/*
+@keyframes leaveLeft {
+  from{
+    opacity: 1;
+    transform: translateX(0px);
+  }
+
+  to{
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}*/
+
 
 
 body{
@@ -1241,6 +1254,22 @@ body{
   cursor: pointer;
   background: none;
   border: 2px solid #47384d;
+}
+
+.noReputationMsg{
+  color: #f6f6f6;
+  font-weight: 400;
+  margin-top: 15px;
+  padding-left: 5px;
+}
+
+.addRepButton2{
+  color: #E7AA0F;
+  cursor: pointer;
+}
+
+.addRepButton2:hover{
+  color: rgb(243, 181, 24);
 }
 
 .rep-noUserFound-container{
@@ -2438,7 +2467,7 @@ body{
 	margin: 21px 0 0;
 	width: 100%;
 	text-align: center;
-	font-size: 48px;
+	font-size: 44px;
 }
 
 .ToS-body {
@@ -2455,7 +2484,7 @@ body{
 }
 
 .ToS-body h2 {
-	font-size: 24px;
+	font-size: 21px;
 	font-weight: 600;
 	display: list-item;
 	list-style: decimal inside;
@@ -2463,6 +2492,6 @@ body{
 }
 
 .ToS-body p {
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 500;
 }

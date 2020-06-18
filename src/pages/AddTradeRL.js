@@ -44,23 +44,23 @@ function AddTradeRL() {
   }, [myID])
 
   useEffect(() => {
-    setTimeout(()=> {
-      const names = rl_items_all.map((item, i) => {         
-        if (item.url.includes(".0.webp")){   
-          return (
-            <img 
-              name={item.url} 
-              style={{height: "95px", width: "95px"}} 
-              src={require(`../images/RLimages/${item.url}`)} 
-              alt="" 
-              onClick={e => {setTradeErrorMsg(""); pushItem(e)}} 
-            />
-          )
-        }
-      })
-      setItemImages(names)
-    }, 500)
-    
+      setTimeout(()=> {
+        const names = rl_items_all.map(item => {   
+          if (item.url.includes(".0.webp")){   
+            return (
+              <img 
+                name={item.url} 
+                style={{height: "95px", width: "95px"}} 
+                src={require(`../images/RLimages/${item.url}`)} 
+                alt="" 
+                onClick={e => {setTradeErrorMsg(""); pushItem(e)}} 
+              />
+            )
+          }
+        })
+        setItemImages(names)
+      }, 1000)
+
   }, [gotInfo])
   
   function checkAddedItems(){

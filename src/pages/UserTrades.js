@@ -64,7 +64,7 @@ function UserTrades() {
 
 if (userTrades)
   return (
-      <div className="userTrades-page-wrapper">
+      <div className={`userTrades-page-wrapper`}>
         <div className="userTrades-top-section">
           <section>
             <button onClick={()=> setGame("rl")} style={game==="rl" ? {backgroundColor: "#47384D"} : null}>Rocket League</button>

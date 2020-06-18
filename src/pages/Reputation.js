@@ -134,24 +134,31 @@ function Reputation() {
           </div>
         </div>
 
-        <section className="rep-inbetween-section">
-          <div className="rep-inbetween-section-left">
-            <p style={{marginLeft: "80px"}}>Created By</p>
-            <p style={{marginLeft: "145px"}}>Date &#38; Time (UTC)</p>
-            <p style={{marginLeft: "60px"}}>Feedback</p>
-          </div>
+        {repInfo.amount.all > 0 ? 
+        <>
+          <section className="rep-inbetween-section">
+            <div className="rep-inbetween-section-left">
+              <p style={{marginLeft: "80px"}}>Created By</p>
+              <p style={{marginLeft: "145px"}}>Date &#38; Time (UTC)</p>
+              <p style={{marginLeft: "60px"}}>Feedback</p>
+            </div>
 
-          <div className="rep-inbetween-section-right">
-            <button onClick={()=> {setCurrentPage(1); setRepType("all")}} style={repType==="all" ? {color: "#E7AA0F"} : null}> All ({repInfo.amount.all}) /&nbsp;</button>
-            <button onClick={()=> {setCurrentPage(1); setRepType("csgo")}} style={repType==="csgo" ? {color: "#E7AA0F"} : null}> CSGO ({repInfo.amount.csgo}) /&nbsp;</button>
-            <button onClick={()=> {setCurrentPage(1); setRepType("rl")}} style={repType==="rl" ? {color: "#E7AA0F"} : null}> RL ({repInfo.amount.rl}) /&nbsp;</button>
-            <button onClick={()=> {setCurrentPage(1); setRepType("other")}} style={repType==="other" ? {color: "#E7AA0F"} : null}> Other ({repInfo.amount.other})</button>
-          </div>
-        </section>
+            <div className="rep-inbetween-section-right">
+              <button onClick={()=> {setCurrentPage(1); setRepType("all")}} style={repType==="all" ? {color: "#E7AA0F"} : null}> All ({repInfo.amount.all}) /&nbsp;</button>
+              <button onClick={()=> {setCurrentPage(1); setRepType("csgo")}} style={repType==="csgo" ? {color: "#E7AA0F"} : null}> CSGO ({repInfo.amount.csgo}) /&nbsp;</button>
+              <button onClick={()=> {setCurrentPage(1); setRepType("rl")}} style={repType==="rl" ? {color: "#E7AA0F"} : null}> RL ({repInfo.amount.rl}) /&nbsp;</button>
+              <button onClick={()=> {setCurrentPage(1); setRepType("other")}} style={repType==="other" ? {color: "#E7AA0F"} : null}> Other ({repInfo.amount.other})</button>
+            </div>
+          </section>
 
-        <Reps />
-       
-        <PageNumbers />
+          <Reps />
+        
+          <PageNumbers />
+        </>
+        : <div className="noReputationMsg">User has no reputation in the database. Be the 1st one to 
+        <Link to={`/reputation/add/${repInfo.userId}`} className="addRepButton2" id="removeDecoration"> add reputation</Link>
+          </div>
+        }
 
       </main>
       
