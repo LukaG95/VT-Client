@@ -1,11 +1,11 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {useLocation, Redirect} from 'react-router-dom'
+import {useLocation, Link} from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
 import test_rep from '../info/test_reputation'
 import axios from 'axios'
 import { UserContext } from '../UserContext'
 import Filter from 'bad-words'
-import validator from 'validator'
+import {NotificationContainer, NotificationManager} from 'react-notifications'
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 
@@ -41,34 +41,44 @@ function AddReputation() {
     
   }, [myID])
 
+  function createNotification(type, message){
+    NotificationManager[type](message, type.charAt(0).toUpperCase() + type.slice(1))
+  }
+
   function handleRepSubmit(good_bad){
 
     if (myID === userID){
       setRepErrorMessage("You can't rep yourself")
+      repErrorMessage === "" && createNotification("error", "You can't rep yourself")
       return
     }
 
     if (repCategory === undefined){
       setRepErrorMessage("You have to pick a rep category 1st")
+      repErrorMessage === "" && createNotification("error", "Pick a rep category 1st")
       return
     }
 
     if (feedback === undefined || feedback.replace(/\s/g, '').length < 5) {
       setRepErrorMessage("Your message has to be at least 5 characters long")
+      repErrorMessage === "" && createNotification("error", "Your message has to be at least 5 characters long")
       return
     }
 
     if (feedback.length > 100) {
       setRepErrorMessage("Your message is too long, max 100 characters")
+      repErrorMessage === "" && createNotification("error", "Your message is too long")
       return
     }
 
     if (!feedback.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9 ]{5,100}$/gm)) {
       setRepErrorMessage("Your message includes inappropriate characters")
+      repErrorMessage === "" && createNotification("error", "Your message includes inappropriate characters")
       return
     }
     if (feedback.match(/\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm)) {
       setRepErrorMessage("Your message must not inlcude links")
+      repErrorMessage === "" && createNotification("error", "Your message must not inlcude links")
       return
     }
 
@@ -81,7 +91,12 @@ function AddReputation() {
       }
     })
     .then(res => {
-      window.location.href = `/reputation/${userID}`
+      if (res.data.status === "success"){
+        setFeedback("")
+        setRepCategory()
+        setRepErrorMessage("")
+        createNotification("success", "Reputation was submitted")
+      }
     })
     .catch(err => console.log(err))
   }
@@ -104,6 +119,12 @@ function AddReputation() {
           </div>
 
           <div className="flex rep-header-right">
+          <Link style={{textDecoration: "none"}} to={`/reputation/${repInfo.userId}`}>
+              <button className="rep-addrep-button">
+                <img src={require('../images/other/Reputation orange.png')} className="rep-icon-inButton"/>Full reputation
+              </button>
+            </Link>
+
             <section className="rep-cutout"></section>
             <div className="rep-ups-downs">
               <span className="rep-ups">+{repInfo.ups}</span>
@@ -124,9 +145,9 @@ function AddReputation() {
             setFeedback(e.target.value)
           }} 
           placeholder="Add a comment..." 
-          className="rep-comment-input">
-         
-        </textarea>
+          className="rep-comment-input" 
+          value = {feedback}
+        />
 
         <p className="repErrorText">{repErrorMessage}</p>
 
@@ -135,6 +156,8 @@ function AddReputation() {
         {/*<button className="rep-button-back">Back to reputation</button>*/}
 
       </main>
+
+      <NotificationContainer/>
       
     </div>
   )

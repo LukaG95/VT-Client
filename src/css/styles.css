@@ -2098,6 +2098,7 @@ body{
   font-weight: 500;
   font-size: 13px;
   cursor: pointer;
+  
 }
 
 .loginNowButton{
@@ -2172,6 +2173,26 @@ body{
   border: #7289da;
 }
 
+
+.resetPassButton{
+  display: flex;
+  color: #f6f6f6;
+  background-color: #E7AA0F;
+
+  font-weight: 500;
+  font-size: 16px;
+  padding: 10px 20px 10px 20px;
+  margin-bottom: 20px;
+
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: filter 200ms;
+}
+
+.resetPassButton:hover{
+  filter: brightness(1.05);
+}
 
 /*-----My Account              ----*/
 

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import axios from 'axios'
 
-function LoginInfo() {
+function LoginInfo({setForgotPassword}) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
@@ -28,7 +28,7 @@ function LoginInfo() {
       }
       else if (res.data.status === "success"){
         // handle this
-        window.location.reload(true)
+        // window.location.reload(true)
       }
       else alert("Oops, something went wrong...")
       
@@ -73,7 +73,7 @@ function LoginInfo() {
             <div className="rememberMeButton">{rememberMe && <p> &#10004; </p>}</div>
             <div className="rememberMeText">Remember me</div>
           </div>
-          <p className="forgotPassword">Forgot password?</p>
+          <p onClick={() => setForgotPassword(true)} className="forgotPassword">Forgot password?</p>
       </div>
 
 
