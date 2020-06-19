@@ -4,7 +4,7 @@ import rl_items from '../info/virItemsFiltered.json'
 import rl_items_all from '../info/virItemsFilteredAll.json' 
 import {TradeContext} from './TradeContextRL'
 
-function RLfilter_icon({itemImages, setItemImages}) {
+function RLfilter_icon({itemImages, setItemImages, setTradeErrorMsg}) {
 
   const {pushItem} = useContext(TradeContext)
 
@@ -18,7 +18,7 @@ function RLfilter_icon({itemImages, setItemImages}) {
             style={{height: "95px", width: "95px"}} 
             src={require(`../images/RLimages/${item.url}`)} 
             alt="" 
-            onClick={e => pushItem(e)} 
+            onClick={e => { setTradeErrorMsg(""); pushItem(e)}} 
             />
           )
         }
@@ -36,7 +36,7 @@ function RLfilter_icon({itemImages, setItemImages}) {
             style={{height: "95px", width: "95px"}} 
             src={require(`../images/RLimages/${item.url}`)} 
             alt="" 
-            onClick={e => pushItem(e)} 
+            onClick={e => { setTradeErrorMsg(""); pushItem(e)}} 
             />
           )
         }
@@ -59,7 +59,7 @@ function RLfilter_icon({itemImages, setItemImages}) {
                 style={{height: "95px", width: "95px"}} 
                 src={require(`../images/RLimages/${item.url}`)} 
                 alt={require(`../images/RLimages/round.png`)} 
-                onClick={e => pushItem(e)} 
+                onClick={e => { setTradeErrorMsg(""); pushItem(e)}} 
               />
             )
           }else return null

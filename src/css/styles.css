@@ -10,70 +10,6 @@
   outline: none;
 }
 
-@keyframes transitionIn {
-  from{
-    opacity: 0;
-    transform: translateY(100px);
-
-  }
-  to{
-    opacity: 1;
-    transform: translateY(0);
-
-  }
-}
-
-@keyframes transitionFade {
-  from{
-    opacity: 0;
-  }
-
-  to{
-    opacity: 1;
-  }
-}
-
-@keyframes transitionDown {
-  from{
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-
-  to{
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-@keyframes fallDown {
-  from{
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0px);
-  }
-
-  to{
-    opacity: 0;
-    transform: translateY(20px);
-  }
-}
-
-/*
-@keyframes leaveLeft {
-  from{
-    opacity: 1;
-    transform: translateX(0px);
-  }
-
-  to{
-    opacity: 0;
-    transform: translateX(20px);
-  }
-}*/
-
-
-
 body{
   background-color: #312635;
   width: 100%;
@@ -1309,7 +1245,6 @@ body{
 .tradeNotice{
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   width: 440px;
   height: 201px;
   background: linear-gradient(270deg, #2A212E 0%, #312635 100%);
@@ -1317,6 +1252,15 @@ body{
   border-radius: 5px;
 
   animation: transitionFade 0.2s;
+}
+
+.tradeNoticeTop{
+  margin-top: 50px;
+  text-shadow: -2px 3px 2px rgba(0, 0, 0, 0.25);
+}
+
+.tradeNoticeBottom{
+  margin-top: 55px;
 }
 
 .tradeNotice div{
@@ -1944,7 +1888,7 @@ body{
 
 .addRLTradeErrorMsg{
   position: absolute;
-  top: 376px;
+  top: 377px;
   right: 0px;
   color: rgb(255, 61, 61);
   font-size: 11px;
@@ -1999,7 +1943,7 @@ body{
 
   z-index: 2;
 
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.8);
   justify-content: center;
   align-items: center;
 

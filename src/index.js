@@ -6,6 +6,9 @@ import App from './App'
 import {UserContextProvider} from './UserContext'
 
 import './css/styles.css'
+import './css/animations.css'
+import './css/template.css'
+import 'react-notifications/lib/notifications.css';
 
 ReactDOM.render(
   <UserContextProvider>

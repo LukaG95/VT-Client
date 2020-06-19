@@ -9,6 +9,7 @@ import {TradeContext} from '../components/TradeContextRL'
 import axios from 'axios'
 import { UserContext } from '../UserContext'
 import Filter from 'bad-words'
+import {NotificationContainer, NotificationManager} from 'react-notifications'
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 
@@ -46,15 +47,18 @@ function AddTradeRL() {
   }, [myID])
 
   useEffect(() => {
+    let x = 0
       setTimeout(()=> {
-        const names = rl_items_all.map(item => {   
-          if (item.url.includes(".0.webp")){   
+        const names = rl_items_all.map(item => {  
+          if (item.url.includes(".0.webp")){ 
+            x++  
             return (
               <img 
                 name={item.url} 
-                style={{height: "95px", width: "95px"}} 
+                width="95"
+                height="95"
                 src={require(`../images/RLimages/${item.url}`)} 
-                alt="" 
+                alt=""
                 onClick={e => {setTradeErrorMsg(""); pushItem(e)}} 
               />
             )
@@ -66,7 +70,7 @@ function AddTradeRL() {
   }, [gotInfo])
   
   function checkAddedItems(){
-    let x = false, y=false;
+    let x = false, y = false;
     have.forEach(item=> {
       if (item.url !== ""){
         x = true
@@ -85,15 +89,21 @@ function AddTradeRL() {
   function checkNotes(){
     return (notes.match(/\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm))
   }
+
+  function createNotification(type, message){
+    NotificationManager[type](message, type.charAt(0).toUpperCase() + type.slice(1))
+  }
   
   function handleTradeSubmit(){
     if (have && want){
       if (!checkAddedItems()){
         setTradeErrorMsg("You have to select at least 1 item in have and want")
+        tradeErrorMsg === "" && createNotification("error", "Choose items")
         return
       }
       else if (checkNotes()){
         setNotesErrorMsg("Your notes must not include links")
+        notesErrorMsg === "" && createNotification("error", "No links")
         return
       }
       else {
@@ -154,9 +164,13 @@ function AddTradeRL() {
             old: {have: oldHave, want: oldWant}
           })
           .then(res => {
-            if (res.data.status === "success")
-              setOpenTradeNotice(true)
-          
+            if (res.data.status === "success"){
+              clearWantItems()
+              clearHaveItems()
+              createNotification("success", "Created a new trade")
+              setTimeout(()=>createNotification("info", "8 / 10 RL trades"), 1000)
+              //setOpenTradeNotice(true)  
+            }          
           })
           .catch(err => console.log(err))
         }else{
@@ -168,8 +182,11 @@ function AddTradeRL() {
             old: {have, want}
           })
           .then(res => {
-            if (res.data.status === "success")
-              setOpenTradeNotice(true)
+            if (res.data.status === "success"){
+              clearWantItems()
+              clearHaveItems()
+              createNotification("success", "You have edited your trade")
+            }
           })
           .catch(err => console.log(err))
         }
@@ -248,7 +265,7 @@ function AddTradeRL() {
         <div className="rlChooseItemsSection" style={tradeErrorMsg !== "" ? {border: "2px solid #ff4645"} : null}>
           <div className="choose-itemsSearchFiltersRL">
             <div><img style={{width: "11px", height: "11px", marginLeft: "2px"}} src={require("../images/other/MagnGlass.png")} /></div>
-            <RLfilter_icon itemImages={itemImages} setItemImages={setItemImages} />
+            <RLfilter_icon itemImages={itemImages} setItemImages={setItemImages} setTradeErrorMsg={setTradeErrorMsg}/>
           </div>
           <div className="item-imagesRL">
           {itemImages === undefined ? <Spinner /> : itemImages}
@@ -283,7 +300,8 @@ function AddTradeRL() {
         <div className="rlSubmit">
           <button onClick={()=> handleTradeSubmit()} className="rlSubmitButton">SUBMIT TRADE</button>   
         </div>
-        
+
+        <NotificationContainer/>
       </div>
     )
   else return null

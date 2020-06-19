@@ -1,0 +1,61 @@
+@keyframes transitionIn {
+  from{
+    opacity: 0;
+    transform: translateY(100px);
+
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+
+  }
+}
+
+@keyframes transitionFade {
+  from{
+    opacity: 0;
+  }
+
+  to{
+    opacity: 1;
+  }
+}
+
+@keyframes transitionDown {
+  from{
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fallDown {
+  from{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  to{
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/*
+@keyframes leaveLeft {
+  from{
+    opacity: 1;
+    transform: translateX(0px);
+  }
+
+  to{
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}*/
