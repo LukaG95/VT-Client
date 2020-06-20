@@ -27,8 +27,7 @@ function LoginInfo({setForgotPassword}) {
         setUnPassErrorMsg("Wrong username or password")
       }
       else if (res.data.status === "success"){
-        // handle this
-        // window.location.reload(true)
+        window.location.reload(true)
       }
       else alert("Oops, something went wrong...")
       

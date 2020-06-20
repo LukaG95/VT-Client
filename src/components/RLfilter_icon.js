@@ -1,5 +1,4 @@
 import React, {useContext} from 'react'
-import {RLitem_names} from '../info/RLitem_names'
 import rl_items from '../info/virItemsFiltered.json' 
 import rl_items_all from '../info/virItemsFilteredAll.json' 
 import {TradeContext} from './TradeContextRL'

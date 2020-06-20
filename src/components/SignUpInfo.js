@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import Filter from 'bad-words'
+import {NotificationContainer, NotificationManager} from 'react-notifications'
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 
 function SignUpInfo() {
@@ -14,6 +15,10 @@ function SignUpInfo() {
   const [passwordErrorMsg, setPasswordErrorMsg] = useState("")
 
   const [readAndAgreed, setReadAndAgreed] = useState(false)
+
+  function createNotification(type, message){
+    NotificationManager[type](message, type.charAt(0).toUpperCase() + type.slice(1))
+  }
 
   function handleSubmit(event){
     event.preventDefault()
@@ -42,6 +47,10 @@ function SignUpInfo() {
       setPasswordErrorMsg("Passwords don't match")
       return
     }
+    else if (!readAndAgreed){
+      createNotification("warning", "Agree to Terms of service")
+      return
+    }
 
     axios.post('/api/auth/signup', {
       username: username,
@@ -61,10 +70,10 @@ function SignUpInfo() {
         setEmailErrorMsg("Email is already in use")
       }
       else if (res.data.status === "success"){
-        // handle this
-        window.location.reload(true)
+        createNotification("success", "You have signed up")
+        setTimeout(()=> {createNotification("info", "Check your email for a confirmation link")}, 2000)
       }
-      else alert("Oops, something went wrong...")
+      else createNotification("error", "Oops, something went wrong...") // alert("Oops, something went wrong...")
     })
     .catch(err => console.log(err))
     
@@ -108,7 +117,7 @@ function SignUpInfo() {
         <p className="logFormText">Password</p>
         <input 
           type="password"
-          onClick={()=> setPasswordErrorMsg("")}
+          onClick={()=> {setPasswordErrorMsg("")}}
           onChange={e => setPassword(e.target.value)}
           className="logFormInput"
           style={passwordErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
@@ -118,14 +127,16 @@ function SignUpInfo() {
         </input>
         <p className="formErrorMessage">{passwordErrorMsg}</p>
       </div>
-
+      
 
       <div className="formItem">
       <p className="logFormText">Confirm password</p>
         <input 
           type="password"
+          onClick={()=> {setPasswordErrorMsg("")}}
           onChange={e => setConfirmPassword(e.target.value)}
           className="logFormInput"
+          style={passwordErrorMsg === "Passwords don't match" ? {border: "1px solid rgb(255, 61, 61)"} : null}
           value={confirmPassword}
           required={true}
         >
@@ -143,6 +154,7 @@ function SignUpInfo() {
 
       <button type="submit" className="formItem loginNowButton">Sign Up</button>
 
+      <NotificationContainer/>
 
     </form>
   )

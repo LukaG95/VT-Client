@@ -10,7 +10,7 @@ function UserTrades() {
   
   const pathID = useLocation().pathname.substring(8)   // reads url after /trades/ till the end
 
-  const {myID} = useContext(UserContext)
+  const {myID, openDeleteAllTrades, setOpenDeleteAllTrades} = useContext(UserContext)
 
   useEffect(() => {
     axios.get(`/api/trades/getTrades?userId=${pathID}`)
@@ -30,11 +30,8 @@ function UserTrades() {
   }
 
   function deleteAllTrades(){
-    axios.delete(`/api/trades/deleteTrade?all=true`)
-    .then (res => { 
-      window.location.reload(true)
-    })
-    .catch(err => console.log("Error: " + err))
+    setOpenDeleteAllTrades(true)
+    
   }
 
   function editTrade(trade){

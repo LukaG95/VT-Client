@@ -13,6 +13,7 @@ function UserContextProvider({children}) {
 
   const [openForm, setOpenForm] = useState(false)
   const [openTradeNotice, setOpenTradeNotice] = useState(false)
+  const [openDeleteAllTrades, setOpenDeleteAllTrades] = useState(false)
 
   useEffect(() => {
 
@@ -32,7 +33,7 @@ function UserContextProvider({children}) {
   }, [])
 
   return (
-      <UserContext.Provider value={{username, email, isLoggedIn, setIsLoggedIn, trades, setTrades, reputation, setReputation, openForm, setOpenForm, openTradeNotice, setOpenTradeNotice, myID}}>
+      <UserContext.Provider value={{username, email, isLoggedIn, setIsLoggedIn, trades, setTrades, reputation, setReputation, openForm, setOpenForm, openTradeNotice, setOpenTradeNotice, openDeleteAllTrades, setOpenDeleteAllTrades, myID}}>
           {children}
       </UserContext.Provider>
   )

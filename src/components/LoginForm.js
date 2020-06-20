@@ -25,7 +25,7 @@ function LoginForm() {
         setShowLogin(true)
         setForgotPassword(false)
       }
-    }}
+    }} 
     >
       <div className="loginWrapper">
           
@@ -34,7 +34,7 @@ function LoginForm() {
           <div onClick={() => {setForgotPassword(false); setShowLogin(false)}} className={`loginHeader-right ${x}`}>Sign up</div>
         </div>
 
-        {forgotPassword ? <ForgotPassword/> : showLogin ? <LoginInfo setForgotPassword={setForgotPassword}/> : <SignUpInfo />}
+        {forgotPassword ? <ForgotPassword/> : showLogin ? <LoginInfo setForgotPassword={setForgotPassword}/> : <SignUpInfo/>}
 
       </div>
 

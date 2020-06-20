@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {useLocation, Link} from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
-import test_rep from '../info/test_reputation'
 import axios from 'axios'
 import { UserContext } from '../UserContext'
 import Filter from 'bad-words'

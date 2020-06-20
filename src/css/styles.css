@@ -518,7 +518,7 @@ body{
   height: 100%;
   margin: 40px 50px 0px 50px;
   animation: transitionIn 0.4s;
-  
+
 }
 
 .main-top{
@@ -1256,6 +1256,7 @@ body{
 
 .tradeNoticeTop{
   margin-top: 50px;
+  text-align: center;
   text-shadow: -2px 3px 2px rgba(0, 0, 0, 0.25);
 }
 

@@ -46,8 +46,8 @@ function FilterButton({text, value, dd, setFunction}){
         setOpen(false)
       }
     }
+    
     !open && setTimeout(async()=> document.getElementById("dd") ? document.getElementById("dd").focus() : null)
-
   }
 
   return(
@@ -66,8 +66,6 @@ function FilterButton({text, value, dd, setFunction}){
     </div>
   )
 }
-
-
 
 function DropdownMenu({dd, setFunction}){
 
