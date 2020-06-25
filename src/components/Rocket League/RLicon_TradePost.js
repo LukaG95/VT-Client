@@ -1,6 +1,6 @@
 import React from 'react'
-import info from '../info/items.json'
-import imageExists from '../misc/func'
+import info from '../../info/items.json'
+import imageExists from '../../misc/func'
 
 function RLicon_TradePost({item}) { 
 

@@ -1,7 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react'
 import {TradeContext} from './TradeContextRL'
 import RLitem_icon_dropdown from './RLitem_icon_dropdown'
-import rl_items_all from '../info/virItemsFilteredAll.json' 
+import rl_items_all from '../../info/virItemsFilteredAll.json' 
 
 function RLitem_icon({id, url}) { 
   const {have, want, setIsDropdown} = useContext(TradeContext)
@@ -81,7 +81,7 @@ function RLitem_icon({id, url}) {
   }
 
   function EditIcon(){
-    return <img className="editIcon" src={require(`../images/other/Edit-icon.png`)} alt="" />
+    return <img className="editIcon" src={require(`../../images/other/Edit-icon.png`)} alt="" />
   }
 
 
@@ -94,7 +94,7 @@ function RLitem_icon({id, url}) {
         name="enableDropdown"
         id={id}
         style={{height: "95px", width: "95px", cursor: "pointer"}} 
-        src={require(`../images/RLimages/${url}`)} 
+        src={require(`../../images/RLimages/${url}`)} 
         alt="" 
         />
 

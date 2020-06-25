@@ -1,9 +1,9 @@
 import React, {useState, useContext, useEffect} from 'react'
-import Sidebar from '../components/Sidebar'
-import {FiltersRLContext} from '../components/FiltersRL_Context'
-import Spinner from '../components/Spinner'
-import rl_items from '../info/rl_items.json'
-import RLTradeComponent from '../components/RLTradeComponent'
+import Sidebar from '../../components/Sidebar'
+import {FiltersRLContext} from '../../components/Rocket League/FiltersRLContext'
+import Spinner from '../../components/Spinner'
+import rl_items from '../../info/rl_items.json'
+import RLTradeComponent from '../../components/Rocket League/RLTradeComponent'
 import axios from 'axios'
 
 function RLTrading() {
@@ -31,7 +31,6 @@ function RLTrading() {
     .then (res => {
 
       // set state with response
-      console.log(res.data.trades)
       setTradeInfo(res.data.trades)
       setPageAmount(res.data.pages)
     })

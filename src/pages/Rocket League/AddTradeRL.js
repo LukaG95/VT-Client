@@ -1,12 +1,12 @@
-import React, {useState, useEffect, useContext, Suspense, lazy} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {useLocation} from 'react-router-dom'
-import RLitem_icon from '../components/RLitem_icon'
-import RLfilter_icon from '../components/RLfilter_icon'
-import Spinner from '../components/Spinner'
-import rl_items_all from '../info/virItemsFilteredAll.json' 
-import {TradeContext} from '../components/TradeContextRL'
+import RLitem_icon from '../../components/Rocket League/RLitem_icon'
+import RLfilter_icon from '../../components/Rocket League/RLfilter_icon'
+import Spinner from '../../components/Spinner'
+import rl_items_all from '../../info/virItemsFilteredAll.json' 
+import {TradeContext} from '../../components/Rocket League/TradeContextRL'
 import axios from 'axios'
-import { UserContext } from '../UserContext'
+import { UserContext } from '../../UserContext'
 import Filter from 'bad-words'
 import {NotificationContainer, NotificationManager} from 'react-notifications'
 
@@ -55,7 +55,7 @@ function AddTradeRL() {
                 name={item.url} 
                 width="95"
                 height="95"
-                src={require(`../images/RLimages/${item.url}`)} 
+                src={require(`../../images/RLimages/${item.url}`)} 
                 alt=""
                 onClick={e => {setTradeErrorMsg(""); pushItem(e)}} 
               />
@@ -224,7 +224,7 @@ function AddTradeRL() {
             <div className="right-gamePlatform">
               <img 
                 style={{height: "17px", width: "17px", marginRight: "10px"}} 
-                src={require(`../images/other/${platform === "PC" ? "Steam" : platform} icon.png`)} 
+                src={require(`../../images/other/${platform === "PC" ? "Steam" : platform} icon.png`)} 
                 alt="" 
               />
               {platform === "PC" ? "Steam" : platform}
@@ -262,7 +262,7 @@ function AddTradeRL() {
 
         <div className="rlChooseItemsSection" style={tradeErrorMsg !== "" ? {border: "2px solid #ff4645"} : null}>
           <div className="choose-itemsSearchFiltersRL">
-            <div><img style={{width: "11px", height: "11px", marginLeft: "2px"}} src={require("../images/other/MagnGlass.png")} /></div>
+            <div><img style={{width: "11px", height: "11px", marginLeft: "2px"}} src={require("../../images/other/MagnGlass.png")} /></div>
             <RLfilter_icon itemImages={itemImages} setItemImages={setItemImages} setTradeErrorMsg={setTradeErrorMsg}/>
           </div>
           <div className="item-imagesRL">

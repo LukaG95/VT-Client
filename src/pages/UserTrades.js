@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {useLocation} from 'react-router-dom'
 import axios from 'axios'
-import RLTradeComponent from '../components/RLTradeComponent'
+import RLTradeComponent from '../components/Rocket League/RLTradeComponent'
 import { UserContext } from '../UserContext'
 
 function UserTrades() {
@@ -15,7 +15,6 @@ function UserTrades() {
   useEffect(() => {
     axios.get(`/api/trades/getTrades?userId=${pathID}`)
     .then (res => { 
-      console.log(res.data)
       setUserTrades(res.data.trades)
     })
     .catch(err => console.log("Error: " + err))
@@ -27,10 +26,6 @@ function UserTrades() {
       window.location.reload(true)
     })
     .catch(err => console.log("Error: " + err))
-  }
-
-  function deleteAllTrades(){ // ????
-    setOpenDeleteAllTrades(true)
   }
 
   function editTrade(trade){
@@ -67,13 +62,14 @@ function UserTrades() {
 if (userTrades)
   return (
       <div className="userTrades-page-wrapper">
+        
         <div className="userTrades-top-section">
           <section>
             <button onClick={()=> setGame("rl")} style={game==="rl" ? {backgroundColor: "#47384D"} : null}>Rocket League</button>
             {/*<button onClick={()=> setGame("csgo")} style={game==="csgo" ? {backgroundColor: "#47384D"} : null}>CSGO</button>*/}
           </section>
 
-          { myID === pathID ? userTrades.length > 0 && <button onClick={()=> deleteAllTrades()} id="del-all-trades-button" > Delete all trades</button> : null}
+          { myID === pathID ? userTrades.length > 0 && <button onClick={()=> setOpenDeleteAllTrades(true)} id="del-all-trades-button" > Delete all trades</button> : null}
           
         </div>
         

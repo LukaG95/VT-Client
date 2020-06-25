@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react'
-import {rl_dd_names} from '../info/DropdownNames'
-import {FiltersRLContext} from './FiltersRL_Context'
+import {rl_dd_names} from '../../info/DropdownNames'
+import {FiltersRLContext} from './FiltersRLContext'
 
 const {gameDD, searchTypeDD, namesDD, paintDD, certDD, itemTypeDD, platformDD} = rl_dd_names
 

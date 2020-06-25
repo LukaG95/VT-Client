@@ -52,9 +52,9 @@ function Navbar() {
 
       <div className="navLeft">    
 
-          <div className="navLeftItem" id="logo">
-            <Link id="center" to="/trading/rl"> <Logo style={{height: "40px", width: "40px"}} /></Link>
-          </div>
+        <div className="navLeftItem" id="logo">
+          <Link id="center" to="/trading/rl"> <Logo style={{height: "40px", width: "40px"}} /></Link>
+        </div>
         
 
         <Link to="/trading/rl" id="removeDecoration">

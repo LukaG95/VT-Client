@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useContext} from 'react'
 import axios from 'axios'
 
 import {UserContext} from '../UserContext'
@@ -7,12 +7,13 @@ function Popups() {
 
   const {openTradeNotice, setOpenTradeNotice, openDeleteAllTrades, setOpenDeleteAllTrades} = useContext(UserContext)
 
+  // create a function, pass in setOpenTradeNotice as a parameter
   if (openTradeNotice)
     return (
       <div 
       className="shading" 
-      onMouseDown={event => {
-        if(event.target.className === "shading")
+      onMouseDown={e => {
+        if(e.target.className === "shading")
         setOpenTradeNotice(false)
       }}
       >
@@ -35,8 +36,8 @@ function Popups() {
       return (
         <div 
         className="shading" 
-        onMouseDown={event => {
-          if(event.target.className === "shading")
+        onMouseDown={e => {
+          if(e.target.className === "shading")
           setOpenDeleteAllTrades(false)
         }}
         >

@@ -17,7 +17,7 @@ function RLTradeComponent({trade, userTradesPage}) {
     if (trade.premium){
       return (
         <div className="username premium">
-          <img style={{marginTop: "4px", marginRight: "6px", width: "17px", height: "17px"}} src={require("../images/other/crown.svg")} />
+          <img style={{marginTop: "4px", marginRight: "6px", width: "17px", height: "17px"}} src={require("../../images/other/crown.svg")} />
           <p>{trade.username}</p>
         </div>
       )
@@ -60,7 +60,7 @@ function RLTradeComponent({trade, userTradesPage}) {
             </div>
 
             <div className="right-gamePlatform" style={{height: "100%"}}>
-              <img style={{height: "17px", width: "17px", marginRight: "10px"}} src={require(`../images/other/${refPlatform} icon.png`)} alt="" />{refPlatform}
+              <img style={{height: "17px", width: "17px", marginRight: "10px"}} src={require(`../../images/other/${refPlatform} icon.png`)} alt="" />{refPlatform}
             </div>
           </div>
 

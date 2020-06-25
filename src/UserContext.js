@@ -8,15 +8,13 @@ function UserContextProvider({children}) {
   const [email, setEmail] = useState()
   const [isLoggedIn, setIsLoggedIn] = useState()
   const [myID, setMyID] = useState()
-  const [trades, setTrades] = useState("none")
-  const [reputation, setReputation] = useState("none")
 
+  // REFACTOR - move or remove this
   const [openForm, setOpenForm] = useState(false)
   const [openTradeNotice, setOpenTradeNotice] = useState(false)
   const [openDeleteAllTrades, setOpenDeleteAllTrades] = useState(false)
 
   useEffect(() => {
-
     axios.get('/api/auth/getUser')
       .then (res => {
         if (res.data.status === "success"){
@@ -33,7 +31,7 @@ function UserContextProvider({children}) {
   }, [])
 
   return (
-      <UserContext.Provider value={{username, email, isLoggedIn, setIsLoggedIn, trades, setTrades, reputation, setReputation, openForm, setOpenForm, openTradeNotice, setOpenTradeNotice, openDeleteAllTrades, setOpenDeleteAllTrades, myID}}>
+      <UserContext.Provider value={{username, email, isLoggedIn, setIsLoggedIn, openForm, setOpenForm, openTradeNotice, setOpenTradeNotice, openDeleteAllTrades, setOpenDeleteAllTrades, myID}}>
           {children}
       </UserContext.Provider>
   )

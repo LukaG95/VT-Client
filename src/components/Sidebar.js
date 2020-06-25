@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link, Route, Switch} from 'react-router-dom'
 
-import FiltersRL from './FiltersRL'
+import FiltersRL from './Rocket League/FiltersRL'
 import FiltersREP from './FiltersREP'
 import Footer from './Footer'
 
