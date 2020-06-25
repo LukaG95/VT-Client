@@ -84,11 +84,12 @@ function RLitem_icon({id, url}) {
     return <img className="editIcon" src={require(`../images/other/Edit-icon.png`)} alt="" />
   }
 
+
 	return (
-    <div className="RLicon noUserInteraction" style={{height: "95px", width: "95px"}}>
+    <div className="RLicon noUserInteraction">
       
       <div onClick={() => setIsDropdown(id)} style={{height: "95px", width: "95px"}}>
-
+        
         <img 
         name="enableDropdown"
         id={id}
@@ -96,7 +97,7 @@ function RLitem_icon({id, url}) {
         src={require(`../images/RLimages/${url}`)} 
         alt="" 
         />
-        
+
         <EditIcon />
         <AmountIcon />
         <ColorIcon />

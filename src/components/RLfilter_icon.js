@@ -42,7 +42,7 @@ function RLfilter_icon({itemImages, setItemImages, setTradeErrorMsg}) {
         else return null
       })
       setItemImages(names)
-      console.log(names)
+
    }
   }
   
@@ -57,7 +57,7 @@ function RLfilter_icon({itemImages, setItemImages, setTradeErrorMsg}) {
                 name={item.url} 
                 style={{height: "95px", width: "95px"}} 
                 src={require(`../images/RLimages/${item.url}`)} 
-                alt={require(`../images/RLimages/round.png`)} 
+                alt=""
                 onClick={e => { setTradeErrorMsg(""); pushItem(e)}} 
               />
             )
@@ -70,7 +70,7 @@ function RLfilter_icon({itemImages, setItemImages, setTradeErrorMsg}) {
 
       <section className="RLfilter_icons_section">		
         <button onClick={()=> setNames("all")}><img className="RLfilter_icon" src={require("../images/rl_filter_icons/Transparent/All.png")} /></button>
-        <button onClick={()=> setNames("bluprints")}><img className="RLfilter_icon" src={require("../images/rl_filter_icons/Transparent/Blueprints.png")} /></button>
+        <button onClick={()=> setNames("blueprints")}><img className="RLfilter_icon" src={require("../images/rl_filter_icons/Transparent/Blueprints.png")} /></button>
         <button onClick={()=> setNames("crates")}><img className="RLfilter_icon" src={require("../images/rl_filter_icons/Transparent/Gift_Packs.png")} /></button>
         <button onClick={()=> setNames("bodies")}><img className="RLfilter_icon" src={require("../images/rl_filter_icons/Transparent/Bodies.png")} /></button>
         <button onClick={()=> setNames("decals")}><img className="RLfilter_icon" src={require("../images/rl_filter_icons/Transparent/Decals.png")} /></button>

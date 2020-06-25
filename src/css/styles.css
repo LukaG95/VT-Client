@@ -844,6 +844,26 @@ body{
   color: #f6f6f6;
   cursor: pointer;
   transition: background 200ms;
+
+  margin-right: 15px;
+}
+
+.bumpTrade-button{
+  background: none;
+  width: 153px;
+  height: 37px;
+  border: 2px solid #E7AA0F;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #f6f6f6;
+  cursor: pointer;
+  transition: background 200ms;
+}
+
+
+.bumpTrade-button:hover{
+  background: #E7AA0F;
 }
 
 .editTrade-button:hover{
@@ -853,6 +873,8 @@ body{
 .deleteTrade-button:hover{
   background: #D10A0A;
 }
+
+
 
 /*-----Reputation              ----*/
 
@@ -1446,6 +1468,8 @@ body{
 
 .RLicon{
   position: relative;
+  height: 95px;
+  width: 95px;
 }
 
 .editIcon{
@@ -1465,35 +1489,35 @@ body{
   
   background: none;
   border-radius: 50px;  
-  bottom: 76px;
-  left: 77px;
+  top: 7px;
+  right: 7px;
   cursor: pointer;
 }
 
 .certIcon{
   position: absolute; 
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.35);
   color: #f6f6f6;
   font-size: 12px;
   height: 20px;
   width: 100%;
 
-  bottom: 15px;
+  bottom: 10px;
   text-align: center;
   cursor: pointer;
 }
 
 .AmountIcon{
-  display: flex;
   position: absolute; 
   color: #f6f6f6;
+  background-color: #251d28;
   font-size: 11px;
-  height: 20px;
-  width: 100%;
+  border-radius: 50px;
+  font-weight: 600;
 
-  bottom: 73px;
-  left: 23px;
-  text-align: center;
+  padding: 1px 6px 1px 6px;
+  top: 4px; 
+  left: 4px;
   cursor: pointer;
 }
 

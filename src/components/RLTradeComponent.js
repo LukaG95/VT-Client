@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import RLitem_icon_tradePage from './RLitem_icon_tradePage.js'
+import RLicon_TradePost from './RLicon_TradePost'
 
 function RLTradeComponent({trade, userTradesPage}) {
   const [notesHeight, setNotesHeight] = useState(()=> {
@@ -25,20 +25,13 @@ function RLTradeComponent({trade, userTradesPage}) {
     else return <p className="username">{trade.username}</p>
   }
 
-  function handleDate(){
-    return(
-      <div className="trade-post-time">{trade.createdAt}</div>
-    )
-  }
 
   function tradeItems(){
-    const itemComponents = trade.have.map(item => <RLitem_icon_tradePage item={item} />)
-    return itemComponents
+    return trade.have.map(item => <RLicon_TradePost item={item} />)
   }
 
   function wantItems(){
-    const itemComponents = trade.want.map(item => <RLitem_icon_tradePage item={item} />)
-    return itemComponents
+    return trade.want.map(item => <RLicon_TradePost item={item} />)
   }
 
   return (
@@ -63,7 +56,7 @@ function RLTradeComponent({trade, userTradesPage}) {
           <div className="flex">
             <div className="flex-col" style={{marginRight: "10px", justifyContent: "space-evenly"}}>
               <div className="active-text">Active</div>
-              {handleDate()}
+              <div className="trade-post-time">{trade.createdAt}</div>
             </div>
 
             <div className="right-gamePlatform" style={{height: "100%"}}>

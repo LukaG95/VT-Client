@@ -1,16 +1,15 @@
-import rl_names from './virItemsFilteredAll.json' 
+import rln from './rl_names.json'
 
-let rl_item_names = []
-
-rl_names.map(item => item.url.includes(".0.webp") && rl_item_names.push(item.name)) 
-let ref_rl_item_names = rl_item_names.sort()
-ref_rl_item_names.splice(0, 0, "Any")
+const rl_names = 
+rln.Wheels.concat(rln.Wheels).concat(rln.Trails).concat(rln.Banners).concat(rln["Goal Explosions"])
+.concat(rln.Bodies).concat(rln["Rocket Boosts"]).concat(rln.Antennas).concat(rln.Toppers).concat(rln.Decals).concat(rln["Paint Finishes"])
+.concat(rln["Engine Audio"]).concat(rln["Avatar Borders"])
 
 
 const rl_dd_names = {
-  gameDD: ["Rocket League", "CSGO"],
+  gameDD: ["Rocket League"],
   searchTypeDD: ["I want to buy", "I want to sell"],
-  namesDD: ref_rl_item_names,
+  namesDD: rl_names,
   paintDD: ["Any", "Crimson", "Lime", "Black", "Sky Blue", "Cobalt", "Burnt Sienna", "Forest Green", "Purple", "Pink", "Orange", "Grey", "Titanium White", "Saffron"],
   certDD: ["Any", "Playmaker", "Acrobat", "Aviator", "Goalkeeper", "Guardian", "Juggler", "Paragon", "Scorer", "Show-Off", "Sniper", "Striker", "Sweeper", "Tactician", "Turtle", "Victor"],
   itemTypeDD: ["Items", "Blueprints"],

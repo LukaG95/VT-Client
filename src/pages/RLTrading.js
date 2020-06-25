@@ -31,6 +31,7 @@ function RLTrading() {
     .then (res => {
 
       // set state with response
+      console.log(res.data.trades)
       setTradeInfo(res.data.trades)
       setPageAmount(res.data.pages)
     })
@@ -78,11 +79,8 @@ function RLTrading() {
 
 
   function TradeComponents(){
-      if (tradeInfo){
-        var tradeComponents = tradeInfo.map(trade => <RLTradeComponent trade={trade} />)
-
-      }else return null // <Spinner className="newPosition" />
-
+    const tradeComponents =  tradeInfo.map(trade => <RLTradeComponent trade={trade} />)
+ 
     return(
       <div className="main-middle">
         {tradeComponents}
@@ -90,7 +88,7 @@ function RLTrading() {
     )
   }
 
-  if(tradeInfo){
+  if (tradeInfo){
     return (
       <div className="secondaryWrapper">  
 

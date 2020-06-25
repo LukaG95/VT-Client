@@ -45,12 +45,11 @@ function AddTradeRL() {
 
   }, [myID])
 
+  // create initial images for selection
   useEffect(() => {
-    let x = 0
       setTimeout(()=> {
         const names = rl_items_all.map(item => {  
           if (item.url.includes(".0.webp")){ 
-            x++  
             return (
               <img 
                 name={item.url} 
@@ -197,7 +196,7 @@ function AddTradeRL() {
   const displayed_have_items = have.map(item => {
     if (item.url === ""){
       if (item.isFocused === false) return <button name={item.id} onClick={manageFocus}></button>
-      else return <button name={item.id} onClick={manageFocus} id="focusedButton">+</button>
+      else return <button name={item.id} onClick={manageFocus} id={`${item.isFocused ? "focusedButton" : null}`}>+</button>
     } 
     else return <RLitem_icon id={item.id} url={item.url} />
   })

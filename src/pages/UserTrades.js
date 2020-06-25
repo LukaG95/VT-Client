@@ -29,13 +29,16 @@ function UserTrades() {
     .catch(err => console.log("Error: " + err))
   }
 
-  function deleteAllTrades(){
+  function deleteAllTrades(){ // ????
     setOpenDeleteAllTrades(true)
-    
   }
 
   function editTrade(trade){
     window.location.replace(`/trading/rl/edit/${trade._id}`)
+  }
+
+  function bumpTrade(trade){
+    window.location.reload(true)
   }
 
   function TradeComponents(){
@@ -47,6 +50,7 @@ function UserTrades() {
           <div className="editDel-tradeButtons-section">
             <button onClick={() => editTrade(trade)} className="editTrade-button">Edit trade</button>
             <button onClick={() => deleteTrade(trade)} className="deleteTrade-button">Delete trade</button>
+            <button onClick={() => bumpTrade(trade)} className="bumpTrade-button">Bump trade</button> 
           </div> : null
         }
         
