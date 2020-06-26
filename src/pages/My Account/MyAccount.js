@@ -1,9 +1,9 @@
 import React, {useState, useContext, useEffect} from 'react'
-import AccountSidebar from '../components/AccountSidebar'
-import Tooltip from '../components/Tooltip'
+import AccountSidebar from '../../components/AccountSidebar'
+import Tooltip from '../../components/Tooltip'
 import Filter from 'bad-words'
 
-import {UserContext} from '../UserContext'
+import {UserContext} from '../../UserContext'
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 

@@ -1,25 +1,26 @@
 import React, {useContext, useEffect} from 'react'
 import {Redirect, Route, Switch} from 'react-router-dom'
 
+// import Premium from './pages/Premium'
+// import Prices from './pages/Prices'
 import {UserContext} from './UserContext'
 import Navbar from './components/Navbar'
 import RLTrading from './pages/Rocket League/RLTrading'
-import Prices from './pages/Prices'
 import AddTradeRL from './pages/Rocket League/AddTradeRL'
 import Reputation from './pages/Reputation'
-import Premium from './pages/Premium'
-import MyAccount from './pages/MyAccount'
-import AccountPrivacy from './pages/AccountPrivacy'
-import AccountPlatforms from './pages/AccountPlatforms'
-import AccountLogout from './pages/AccountLogout'
+import MyAccount from './pages/My Account/MyAccount'
+import AccountPrivacy from './pages/My Account/AccountPrivacy'
+import AccountPlatforms from './pages/My Account/AccountPlatforms'
+import AccountLogout from './pages/My Account/AccountLogout'
 import Terms from './pages/Terms'
 import PrivacyPolicy from './pages/PrivacyPolicy'
-import LoginForm from './components/LoginForm'
+import LoginForm from './components/SignInUp/LoginForm'
 import Popups from './components/Popups'
 import AddReputation from './pages/AddReputation'
 import UserTrades from './pages/UserTrades'
+import ResetPassword from './components/SignInUp/ResetPassword'
 import {TradeContextProvider} from './components/Rocket League/TradeContextRL'
-import {FiltersRLContextProvider} from './components/Rocket League/FiltersRLContext'
+import {SbFiltersRLContextProvider} from './components/Rocket League/SbFiltersRLContext'
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
     // else return <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
   }
 
+
   return (
     <>
       <LoginForm />
@@ -43,19 +45,20 @@ function App() {
       <Switch>
         {/*<Route exact path="/prices">         <Prices />          </Route>*/} 
         {/*<Route exact path="/premium">        <Premium />         </Route>*/}
-        <Route exact path="/">                  <FiltersRLContextProvider> <RLTrading /> </ FiltersRLContextProvider>     </Route>
-        <Route exact path="/trading/rl">        <FiltersRLContextProvider> <RLTrading /> </ FiltersRLContextProvider>     </Route>
+        <Route exact path="/">                  <SbFiltersRLContextProvider> <RLTrading /> </ SbFiltersRLContextProvider>     </Route>
+        <Route exact path="/trading/rl">        <SbFiltersRLContextProvider> <RLTrading /> </ SbFiltersRLContextProvider>     </Route>
         <Route exact path="/terms">             <Terms />           </Route>
         <Route exact path="/privacy">           <PrivacyPolicy />   </Route>
         <Route exact path="/trading/rl/new">    {handleRedirectOnRefresh(<TradeContextProvider>  <AddTradeRL />    </TradeContextProvider>)}       </Route>
         <Route path="/trading/rl/edit">         {handleRedirectOnRefresh(<TradeContextProvider>  <AddTradeRL />    </TradeContextProvider>)}       </Route>
         <Route path="/reputation/add">          {handleRedirectOnRefresh(<AddReputation />)}     </Route>
-        <Route path="/reputation">              <Reputation />      </Route>
+        <Route path="/reputation">              <Reputation />     </Route>
         <Route exact path="/account">           {handleRedirectOnRefresh(<MyAccount /> )}        </Route>
         <Route exact path="/account/privacy">   {handleRedirectOnRefresh(<AccountPrivacy /> )}   </Route>
         <Route exact path="/account/platforms"> {handleRedirectOnRefresh(<AccountPlatforms /> )} </Route>
         <Route exact path="/account/logout">    {handleRedirectOnRefresh(<AccountLogout /> )}    </Route>
-        <Route path="/trades">                  <UserTrades />  </Route>
+        <Route path="/passwordreset">           <ResetPassword /> </Route>
+        <Route path="/trades">                  <UserTrades />     </Route>
       </Switch>
     </>
   )

@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 
-const FiltersRLContext = React.createContext()
+const SbFiltersRLContext = React.createContext()
 
-function FiltersRLContextProvider({children}) {
+function SbFiltersRLContextProvider({children}) {
   const [game, setGame] = useState("Rocket League")
   const [searchType, setSearchType] = useState("I want to buy")
   const [name, setName] = useState("Any")
@@ -13,10 +13,10 @@ function FiltersRLContextProvider({children}) {
 
 
   return (
-      <FiltersRLContext.Provider value={{game, setGame, searchType, setSearchType, name, setName, paint, setPaint, cert, setCert, itemType, setItemType, platform, setPlatform}}>
+      <SbFiltersRLContext.Provider value={{game, setGame, searchType, setSearchType, name, setName, paint, setPaint, cert, setCert, itemType, setItemType, platform, setPlatform}}>
           {children}
-      </FiltersRLContext.Provider>
+      </SbFiltersRLContext.Provider>
   )
 }
 
-export {FiltersRLContextProvider, FiltersRLContext}
+export {SbFiltersRLContextProvider, SbFiltersRLContext}

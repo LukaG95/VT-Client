@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import AccountSidebar from '../components/AccountSidebar'
+import AccountSidebar from '../../components/AccountSidebar'
 
 function AccountPrivacy() {
 	const [password, setPassword] = useState("")

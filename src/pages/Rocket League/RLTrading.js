@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react'
 import Sidebar from '../../components/Sidebar'
-import {FiltersRLContext} from '../../components/Rocket League/FiltersRLContext'
+import {SbFiltersRLContext} from '../../components/Rocket League/SbFiltersRLContext'
 import Spinner from '../../components/Spinner'
 import rl_items from '../../info/rl_items.json'
 import RLTradeComponent from '../../components/Rocket League/RLTradeComponent'
@@ -12,7 +12,7 @@ function RLTrading() {
   const [pageAmount, setPageAmount] = useState(100)
   const [currentPage, setCurrentPage] = useState(1)
 
-  const {game, searchType, name, paint, cert, itemType, platform} = useContext(FiltersRLContext)
+  const {game, searchType, name, paint, cert, itemType, platform} = useContext(SbFiltersRLContext)
 
   useEffect(()=> {
     // convert names to IDs

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import RLicon_TradePost from './RLicon_TradePost'
+import TradePostIconRL from './TradePostIconRL'
 
 function RLTradeComponent({trade, userTradesPage}) {
   const [notesHeight, setNotesHeight] = useState(()=> {
@@ -27,11 +27,11 @@ function RLTradeComponent({trade, userTradesPage}) {
 
 
   function tradeItems(){
-    return trade.have.map(item => <RLicon_TradePost item={item} />)
+    return trade.have.map(item => <TradePostIconRL item={item} />)
   }
 
   function wantItems(){
-    return trade.want.map(item => <RLicon_TradePost item={item} />)
+    return trade.want.map(item => <TradePostIconRL item={item} />)
   }
 
   return (

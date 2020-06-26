@@ -17,11 +17,12 @@ function handleSubmit(e){
   return (
     <form onSubmit={handleSubmit} className="loginHolder">
 
-      <p className="logFormText" style={{marginBottom: "10px"}}>Enter email to reset your password</p>
+      <p className="forgotPasswordText" style={{marginBottom: "10px"}}>Enter your email address that you used to register and we will send you a password reset link</p>
 
       <div style={{marginBottom: "0px"}} className="formItem">
         <input 
           required
+          placeholder="Enter your email address"
           type="email"
           onChange={e => setUnOrEmail(e.target.value)}
           className="logFormInput"
@@ -30,7 +31,7 @@ function handleSubmit(e){
         </input>
       </div>
 
-      <button type="submit" className="form item resetPassButton">Reset password</button>
+      <button type="submit" className="resetPassButton">Send password reset email</button>
 
       <NotificationContainer/>
 

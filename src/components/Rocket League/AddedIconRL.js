@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react'
 import {TradeContext} from './TradeContextRL'
-import RLitem_icon_dropdown from './RLitem_icon_dropdown'
+import AddedIconRLdropdown from './AddedIconRLdropdown'
 import rl_items_all from '../../info/virItemsFilteredAll.json' 
 
 function RLitem_icon({id, url}) { 
@@ -52,7 +52,7 @@ function RLitem_icon({id, url}) {
     const Dropdown = [...have, ...want].map(item => {
       if (item.id == id){
         if (item.isDropdown === true) 
-          return <RLitem_icon_dropdown id={id}/>
+          return <AddedIconRLdropdown id={id}/>
         else 
           return null
       }

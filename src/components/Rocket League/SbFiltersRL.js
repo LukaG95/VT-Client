@@ -1,11 +1,11 @@
 import React, {useState, useContext, useEffect} from 'react'
 import {rl_dd_names} from '../../info/DropdownNames'
-import {FiltersRLContext} from './FiltersRLContext'
+import {SbFiltersRLContext} from './SbFiltersRLContext'
 
 const {gameDD, searchTypeDD, namesDD, paintDD, certDD, itemTypeDD, platformDD} = rl_dd_names
 
 function FiltersRL() {
-  const {game, setGame, searchType, setSearchType, name, setName, paint, setPaint, cert, setCert, itemType, setItemType, platform, setPlatform} = useContext(FiltersRLContext)
+  const {game, setGame, searchType, setSearchType, name, setName, paint, setPaint, cert, setCert, itemType, setItemType, platform, setPlatform} = useContext(SbFiltersRLContext)
 
   return (
     <div className="sbSection filtersRL">
@@ -68,9 +68,8 @@ function FilterButton({text, value, dd, setFunction}){
 }
 
 function DropdownMenu({dd, setFunction}){
-
   const [dropNames, setDropNames] = useState(()=> dd.map(name => name.length < 25 && <DropdownItem>{name}</DropdownItem>))
-  
+
   return(
     <div className="dropdown">
       <input 

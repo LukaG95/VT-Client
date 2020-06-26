@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {useLocation} from 'react-router-dom'
-import RLitem_icon from '../../components/Rocket League/RLitem_icon'
-import RLfilter_icon from '../../components/Rocket League/RLfilter_icon'
+import AddedIconRL from '../../components/Rocket League/AddedIconRL'
+import AddTradeFiltersRL from '../../components/Rocket League/AddTradeFiltersRL'
 import Spinner from '../../components/Spinner'
 import rl_items_all from '../../info/virItemsFilteredAll.json' 
 import {TradeContext} from '../../components/Rocket League/TradeContextRL'
@@ -198,7 +198,7 @@ function AddTradeRL() {
       if (item.isFocused === false) return <button name={item.id} onClick={manageFocus}></button>
       else return <button name={item.id} onClick={manageFocus} id={`${item.isFocused ? "focusedButton" : null}`}>+</button>
     } 
-    else return <RLitem_icon id={item.id} url={item.url} />
+    else return <AddedIconRL id={item.id} url={item.url} />
   })
 
   const displayed_want_items = want.map(item => {
@@ -206,7 +206,7 @@ function AddTradeRL() {
       if (item.isFocused === false) return <button name={item.id} onClick={manageFocus}></button>
       else return <button name={item.id} onClick={manageFocus} id="focusedButton">+</button>
     } 
-    else return <RLitem_icon id={item.id} url={item.url} />
+    else return <AddedIconRL id={item.id} url={item.url} />
   })
 
   if (pathID === "" || tradeIdMatch)
@@ -263,7 +263,7 @@ function AddTradeRL() {
         <div className="rlChooseItemsSection" style={tradeErrorMsg !== "" ? {border: "2px solid #ff4645"} : null}>
           <div className="choose-itemsSearchFiltersRL">
             <div><img style={{width: "11px", height: "11px", marginLeft: "2px"}} src={require("../../images/other/MagnGlass.png")} /></div>
-            <RLfilter_icon itemImages={itemImages} setItemImages={setItemImages} setTradeErrorMsg={setTradeErrorMsg}/>
+            <AddTradeFiltersRL itemImages={itemImages} setItemImages={setItemImages} setTradeErrorMsg={setTradeErrorMsg}/>
           </div>
           <div className="item-imagesRL">
           {itemImages === undefined ? <Spinner /> : itemImages}

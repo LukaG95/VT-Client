@@ -1,5 +1,5 @@
 import React from 'react'
-import AccountSidebar from '../components/AccountSidebar'
+import AccountSidebar from '../../components/AccountSidebar'
 import {Link} from 'react-router-dom'
 
 function AccountPlatforms() {

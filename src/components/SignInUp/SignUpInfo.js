@@ -90,7 +90,7 @@ function SignUpInfo() {
           className="logFormInput"
           style={usernameErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
           value={username}
-          required={true}
+          required
         >
         </input>
         <p className="formErrorMessage">{usernameErrorMsg}</p>
@@ -106,7 +106,7 @@ function SignUpInfo() {
           className="logFormInput"
           style={emailErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
           value={email}
-          required={true}
+          required
         >
         </input>
         <p className="formErrorMessage">{emailErrorMsg}</p>
@@ -122,7 +122,7 @@ function SignUpInfo() {
           className="logFormInput"
           style={passwordErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
           value={password}
-          required={true}
+          required
         >
         </input>
         <p className="formErrorMessage">{passwordErrorMsg}</p>
@@ -138,7 +138,7 @@ function SignUpInfo() {
           className="logFormInput"
           style={passwordErrorMsg === "Passwords don't match" ? {border: "1px solid rgb(255, 61, 61)"} : null}
           value={confirmPassword}
-          required={true}
+          required
         >
         </input>
       </div>

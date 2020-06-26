@@ -53,7 +53,7 @@ function LoginInfo({setForgotPassword}) {
 
 
       <div className="formItem">
-      <p className="logFormText">Password</p>
+        <p className="logFormText">Password</p>
         <input 
           onClick={()=> setUnPassErrorMsg("")}
           type="password"
@@ -67,11 +67,11 @@ function LoginInfo({setForgotPassword}) {
 
 
       <div className="formItem rememberMeSection">
-          <div onClick={() => setRememberMe(!rememberMe)} style={{display: "flex", flexDirection: "row", cursor: "pointer"}}>
-            <div className="rememberMeButton">{rememberMe && <p> &#10004; </p>}</div>
-            <div className="rememberMeText">Remember me</div>
-          </div>
-          <p onClick={() => setForgotPassword(true)} className="forgotPassword">Forgot password?</p>
+        <div onClick={() => setRememberMe(!rememberMe)} style={{display: "flex", flexDirection: "row", cursor: "pointer"}}>
+          <div className="rememberMeButton">{rememberMe && <p> &#10004; </p>}</div>
+          <div className="rememberMeText">Remember me</div>
+        </div>
+        <p onClick={() => setForgotPassword(true)} className="forgotPassword">Forgot password?</p>
       </div>
 
 
@@ -83,13 +83,13 @@ function LoginInfo({setForgotPassword}) {
 
       <div className="formItem loginSteamAndDiscord">
         <div onClick={()=> window.location.href='/auth/steam'} className="loginSteam">
-          <img src={require("../images/other/SteamCircle.png")} alt="" style={{marginRight: "10px"}}></img>
+          <img src={require("../../images/other/SteamCircle.png")} alt="" style={{marginRight: "10px"}}></img>
           <p>STEAM</p>
         </div>
 
 
         <div onClick={()=> window.location.href='/auth/discord'} className="loginDiscord">
-          <img src={require("../images/other/DiscordLogo.png")} alt="" style={{height: "28px", width: "35", marginRight: "8px"}}></img>
+          <img src={require("../../images/other/DiscordLogo.png")} alt="" style={{height: "28px", width: "35", marginRight: "8px"}}></img>
           <p>DISCORD</p>
         </div>
 

@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react'
 
-import {UserContext} from '../UserContext'
+import {UserContext} from '../../UserContext'
 import LoginInfo from './LoginInfo'
 import SignUpInfo from './SignUpInfo'
 import ForgotPassword from './ForgotPassword'
@@ -9,7 +9,7 @@ function LoginForm() {
   const [showLogin, setShowLogin] = useState(true)
   const [forgotPassword, setForgotPassword] = useState(false)
 
-  const {openForm, setOpenForm} = useContext(UserContext)
+  const {openForm, setOpenForm} = useContext(UserContext) 
 
   let x,y = ""
   showLogin ? x = "colorBG" : y = "colorBG"
