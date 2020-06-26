@@ -1,8 +1,7 @@
 import React from 'react'
-import info from '../../info/items.json'
 import imageExists from '../../misc/func'
 
-function RLicon_TradePost({item}) { 
+function TradepostIconRL({item}) { 
 
   function CertIcon(){
     if (item.cert !== "None")
@@ -24,46 +23,15 @@ function RLicon_TradePost({item}) {
     else return null
   }
 
-  function ItemImage(){
-    let x = null
-    info.Colors.map(color => {
-      if (color.Name === item.paint)
-        x = color.ID
-    })
+	return (
+    <div className="RLicon">
 
-    if (item.paint === "None")
-      return (
-        <img 
-          name="enableDropdown"
-          style={{height: "95px", width: "95px", cursor: "pointer"}} 
-          src={imageExists(item.url)} 
-          alt="" 
-        />
-      )
-    else return (
-        <img 
-          name="enableDropdown"
-          style={{height: "95px", width: "95px", cursor: "pointer"}} 
-          src={imageExists(`${item.itemID}.${x}.webp`)} 
-          alt="" 
-        />
-    )
-
-  }
-    // tole namest <ItemImage /> pa zbrisat to funkcijo zgori
-  /*
-  <img 
+<img 
         name="enableDropdown"
         style={{height: "95px", width: "95px", cursor: "pointer"}} 
         src={imageExists(item.url)} 
         alt="" 
       />
-  */
-
-	return (
-    <div className="RLicon">
-
-      <ItemImage />
       
       <AmountIcon />
       <ColorIcon />
@@ -76,7 +44,7 @@ function RLicon_TradePost({item}) {
 	)
 }
 
-export default RLicon_TradePost
+export default TradepostIconRL
 
 
 

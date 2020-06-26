@@ -4,7 +4,6 @@ import axios from 'axios'
 
 const TradeContext = React.createContext()
 
-
 function TradeContextProvider({children}) {
   const pathID = useLocation().pathname.substring(17) 
   

@@ -1,31 +1,48 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {useLocation} from 'react-router-dom'
+import {NotificationContainer, NotificationManager} from 'react-notifications'
+import Filter from 'bad-words'
+import axios from 'axios'
+
 import AddedIconRL from '../../components/Rocket League/AddedIconRL'
 import AddTradeFiltersRL from '../../components/Rocket League/AddTradeFiltersRL'
 import Spinner from '../../components/Spinner'
-import rl_items_all from '../../info/virItemsFilteredAll.json' 
 import {TradeContext} from '../../components/Rocket League/TradeContextRL'
-import axios from 'axios'
-import { UserContext } from '../../UserContext'
-import Filter from 'bad-words'
-import {NotificationContainer, NotificationManager} from 'react-notifications'
+import {UserContext} from '../../UserContext'
+import rl_items_all from '../../info/virItemsFilteredAll.json' 
+import infoRL from '../../info/infoRL.json' 
+import imageExists from '../../misc/func'
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 
 function AddTradeRL() {
   const [itemImages, setItemImages] = useState()
   const [tradeIdMatch, setTradeIdMatch] = useState(false)
-
   const [tradeErrorMsg, setTradeErrorMsg] = useState("")
   const [notesErrorMsg, setNotesErrorMsg] = useState("")
 
-  const [openNotice, setOpenNotice] = useState(false)
+  const {myID} = useContext(UserContext)
+  const {have, want, platform, setPlatform, notes, setNotes, manageFocus, pushItem, clearWantItems, clearHaveItems, gotInfo} = useContext(TradeContext)
 
   const pathID = useLocation().pathname.substring(17)   // reads url after /trades/ till the end
-  const {myID, setOpenForm, setOpenTradeNotice} = useContext(UserContext)
+  
+  const displayed_have_items = have.map(item => {
+    if (item.url === ""){
+      if (item.isFocused === false) return <button name={item.id} onClick={manageFocus}></button>
+      else return <button name={item.id} onClick={manageFocus} id={`${item.isFocused ? "focusedButton" : null}`}>+</button>
+    } 
+    else return <AddedIconRL id={item.id} url={item.url} />
+  })
 
-  const {have, setHave, want, setWant, platform, setPlatform, notes, setNotes, manageFocus, pushItem, clearWantItems, clearHaveItems, gotInfo} = useContext(TradeContext)
+  const displayed_want_items = want.map(item => {
+    if (item.url === ""){
+      if (item.isFocused === false) return <button name={item.id} onClick={manageFocus}></button>
+      else return <button name={item.id} onClick={manageFocus} id="focusedButton">+</button>
+    } 
+    else return <AddedIconRL id={item.id} url={item.url} />
+  })
 
+  // checks if we're editing a trade, gets the userID and maps over his trades to find if it matches any, if not it redirects to home page
   useEffect(() => {
     if (pathID !== "" && myID){
       let x = false
@@ -47,26 +64,143 @@ function AddTradeRL() {
 
   // create initial images for selection
   useEffect(() => {
-      setTimeout(()=> {
-        const names = rl_items_all.map(item => {  
-          if (item.url.includes(".0.webp")){ 
-            return (
-              <img 
-                name={item.url} 
-                width="95"
-                height="95"
-                src={require(`../../images/RLimages/${item.url}`)} 
-                alt=""
-                onClick={e => {setTradeErrorMsg(""); pushItem(e)}} 
-              />
-            )
-          }
-        })
-        setItemImages(names)
-      }, 1000)
-
-  }, [gotInfo])
   
+    setTimeout(()=> {
+      let thumbnails = []
+      infoRL.Slots.map(Slot => Slot.Items.map(item => {
+        item.Tradable && thumbnails.push(
+          <div className="RLicon noUserInteraction">
+            <img 
+              name={`${item.ItemID}.0.webp`} 
+              width="95"
+              height="95"
+              src={imageExists(`${item.ItemID}.0.webp`)}
+              onClick={e => {setTradeErrorMsg(""); pushItem(e)}} 
+            />
+            <span className="RLicon-name-hover"><p>{item.Name}</p></span>
+          </div>
+        )
+      }))
+      setItemImages(thumbnails)
+    }, 1000)
+
+    /*setTimeout(()=> {
+      const thumbnails = rl_items_all.map(item => {  
+        if (item.url.includes(".0.webp")){ 
+          return (
+            <img 
+              name={item.url} 
+              width="95"
+              height="95"
+              src={require(`../../images/RLimages/${item.url}`)} 
+              alt=""
+              onClick={e => {setTradeErrorMsg(""); pushItem(e)}} 
+            />
+          )
+        }
+      })
+      setItemImages(thumbnails)
+    }, 1000)
+*/
+  }, [gotInfo])
+
+
+  if (pathID === "" || tradeIdMatch)
+    return (
+      <div className="addRLWrapper">
+        
+        <div className="newTradeTitle">
+          Create new trade
+        </div>
+
+        <div className="rlHaveWantSection">
+
+          <div className="h-wTopPlace">
+            <div className="left-gameName">Rocket League</div>
+            <div className="right-gamePlatform">
+              <img 
+                style={{height: "17px", width: "17px", marginRight: "10px"}} 
+                src={require(`../../images/other/${platform === "PC" ? "Steam" : platform} icon.png`)} 
+                alt="" 
+              />
+              {platform === "PC" ? "Steam" : platform}
+            </div>
+          </div>
+
+          <div className="allAddedItems">
+
+            <div className="hwLeftSection">
+              <div className="hTitle">
+                <p>You <b>have</b></p>
+                <button onClick={clearHaveItems}>CLEAR ITEMS</button>
+              </div>
+
+              <div className="haveItems">
+                {displayed_have_items}
+              </div>
+            </div>
+
+            <div className="hwRightSection">
+              <div className="wTitle">
+                <p>You <b>want</b></p>
+                <button onClick={clearWantItems}>CLEAR ITEMS</button>
+              </div>
+
+              <div className="wantItems">
+                {displayed_want_items}
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div className="rlChooseItemsSection" style={tradeErrorMsg !== "" ? {border: "2px solid #ff4645"} : null}>
+          <div className="choose-itemsSearchFiltersRL">
+            <div><img style={{width: "11px", height: "11px", marginLeft: "2px"}} src={require("../../images/other/MagnGlass.png")} /></div>
+            <AddTradeFiltersRL itemImages={itemImages} setItemImages={setItemImages} setTradeErrorMsg={setTradeErrorMsg}/>
+          </div>
+          <div className="item-imagesRL">
+            {itemImages === undefined ? <Spinner /> : itemImages}
+          </div>
+          <p className="addRLTradeErrorMsg">{tradeErrorMsg}</p>
+        </div>
+
+        <div className="notesSection" style={notesErrorMsg !== "" ? {border: "2px solid #ff4645"} : null} onClick={()=> setNotesErrorMsg("")}>
+          <textarea placeholder="Add notes..." className="notesArea" defaultValue={notes} onChange={e => setNotes(e.target.value)}></textarea>
+          <div className="platformSection">
+            <h4>PLATFORM:</h4>
+            <label className="noUserInteraction platf-button-container">
+              <input type="radio" checked={platform==="Steam"} onChange={()=> setPlatform("Steam")} />
+              <p style={platform === "Steam" ? {color: "#2C8E54"} : null}>STEAM</p>
+            </label>
+            <label className="noUserInteraction platf-button-container">
+              <input type="radio" checked={platform==="PS4"} onChange={()=> setPlatform("PS4")}/>
+              <p style={platform === "PS4" ? {color: "#2C8E54"} : null}>PS4</p>
+            </label>
+            <label className="noUserInteraction platf-button-container">
+              <input type="radio" checked={platform==="XBOX"} onChange={()=> setPlatform("XBOX")}/>
+              <p style={platform === "XBOX" ? {color: "#2C8E54"} : null}>XBOX</p>
+            </label>
+            <label className="noUserInteraction platf-button-container">
+              <input type="radio" checked={platform==="SWITCH"} onChange={()=> setPlatform("SWITCH")}/>
+              <p style={platform === "SWITCH" ? {color: "#2C8E54"} : null}>SWITCH</p>
+            </label>
+          </div>
+          <p className="addNotesErrorMsg">{notesErrorMsg}</p>
+        </div>
+
+        <div className="rlSubmit">
+          <button onClick={()=> handleTradeSubmit()} className="rlSubmitButton">SUBMIT TRADE</button>   
+        </div>
+
+        <NotificationContainer/>
+      </div>
+    )
+  else return null
+
+
   function checkAddedItems(){
     let x = false, y = false;
     have.forEach(item=> {
@@ -191,118 +325,6 @@ function AddTradeRL() {
       }
     }
   }
-  
-
-  const displayed_have_items = have.map(item => {
-    if (item.url === ""){
-      if (item.isFocused === false) return <button name={item.id} onClick={manageFocus}></button>
-      else return <button name={item.id} onClick={manageFocus} id={`${item.isFocused ? "focusedButton" : null}`}>+</button>
-    } 
-    else return <AddedIconRL id={item.id} url={item.url} />
-  })
-
-  const displayed_want_items = want.map(item => {
-    if (item.url === ""){
-      if (item.isFocused === false) return <button name={item.id} onClick={manageFocus}></button>
-      else return <button name={item.id} onClick={manageFocus} id="focusedButton">+</button>
-    } 
-    else return <AddedIconRL id={item.id} url={item.url} />
-  })
-
-  if (pathID === "" || tradeIdMatch)
-    return (
-      <div className="addRLWrapper">
-        
-        <div className="newTradeTitle">
-          Create new trade
-        </div>
-
-        <div className="rlHaveWantSection">
-
-          <div className="h-wTopPlace">
-            <div className="left-gameName">Rocket League</div>
-            <div className="right-gamePlatform">
-              <img 
-                style={{height: "17px", width: "17px", marginRight: "10px"}} 
-                src={require(`../../images/other/${platform === "PC" ? "Steam" : platform} icon.png`)} 
-                alt="" 
-              />
-              {platform === "PC" ? "Steam" : platform}
-            </div>
-          </div>
-
-          <div className="allAddedItems">
-
-            <div className="hwLeftSection">
-              <div className="hTitle">
-                <p>You <b>have</b></p>
-                <button onClick={clearHaveItems}>CLEAR ITEMS</button>
-              </div>
-
-              <div className="haveItems">
-                {displayed_have_items}
-              </div>
-            </div>
-
-            <div className="hwRightSection">
-              <div className="wTitle">
-                <p>You <b>want</b></p>
-                <button onClick={clearWantItems}>CLEAR ITEMS</button>
-              </div>
-
-              <div className="wantItems">
-                {displayed_want_items}
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <div className="rlChooseItemsSection" style={tradeErrorMsg !== "" ? {border: "2px solid #ff4645"} : null}>
-          <div className="choose-itemsSearchFiltersRL">
-            <div><img style={{width: "11px", height: "11px", marginLeft: "2px"}} src={require("../../images/other/MagnGlass.png")} /></div>
-            <AddTradeFiltersRL itemImages={itemImages} setItemImages={setItemImages} setTradeErrorMsg={setTradeErrorMsg}/>
-          </div>
-          <div className="item-imagesRL">
-          {itemImages === undefined ? <Spinner /> : itemImages}
-          </div>
-          <p className="addRLTradeErrorMsg">{tradeErrorMsg}</p>
-        </div>
-
-        <div className="notesSection" style={notesErrorMsg !== "" ? {border: "2px solid #ff4645"} : null} onClick={()=> setNotesErrorMsg("")}>
-          <textarea placeholder="Add notes..." className="notesArea" defaultValue={notes} onChange={e => setNotes(e.target.value)}></textarea>
-          <div className="platformSection">
-            <h4>PLATFORM:</h4>
-            <label className="noUserInteraction platf-button-container">
-              <input type="radio" checked={platform==="Steam"} onChange={()=> setPlatform("Steam")} />
-              <p style={platform === "Steam" ? {color: "#2C8E54"} : null}>STEAM</p>
-            </label>
-            <label className="noUserInteraction platf-button-container">
-              <input type="radio" checked={platform==="PS4"} onChange={()=> setPlatform("PS4")}/>
-              <p style={platform === "PS4" ? {color: "#2C8E54"} : null}>PS4</p>
-            </label>
-            <label className="noUserInteraction platf-button-container">
-              <input type="radio" checked={platform==="XBOX"} onChange={()=> setPlatform("XBOX")}/>
-              <p style={platform === "XBOX" ? {color: "#2C8E54"} : null}>XBOX</p>
-            </label>
-            <label className="noUserInteraction platf-button-container">
-              <input type="radio" checked={platform==="SWITCH"} onChange={()=> setPlatform("SWITCH")}/>
-              <p style={platform === "SWITCH" ? {color: "#2C8E54"} : null}>SWITCH</p>
-            </label>
-          </div>
-          <p className="addNotesErrorMsg">{notesErrorMsg}</p>
-        </div>
-
-        <div className="rlSubmit">
-          <button onClick={()=> handleTradeSubmit()} className="rlSubmitButton">SUBMIT TRADE</button>   
-        </div>
-
-        <NotificationContainer/>
-      </div>
-    )
-  else return null
 }
 
 export default AddTradeRL
