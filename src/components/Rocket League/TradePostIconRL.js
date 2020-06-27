@@ -1,7 +1,15 @@
 import React from 'react'
 import imageExists from '../../misc/func'
+import infoRL from '../../info/infoRL.json' 
 
 function TradepostIconRL({item}) { 
+
+  var paintID = 0
+  infoRL.Colors.map(Color => { console.log(item)
+    if (Color.Name === item.paint)
+    paintID = Color.ID
+  }) 
+  console.log(paintID)
 
   function CertIcon(){
     if (item.cert !== "None")
@@ -26,11 +34,11 @@ function TradepostIconRL({item}) {
 	return (
     <div className="RLicon">
 
-<img 
+      <img 
         name="enableDropdown"
         style={{height: "95px", width: "95px", cursor: "pointer"}} 
-        src={imageExists(item.url)} 
-        alt="" 
+        src={imageExists(`${item.itemID}.${paintID}.webp`, item.itemID)}  // pass in 2 params, if the painted image doesn't exist check if regular exists, 
+        alt=""                                                                                         // and then if both don't exist return questionmark
       />
       
       <AmountIcon />
