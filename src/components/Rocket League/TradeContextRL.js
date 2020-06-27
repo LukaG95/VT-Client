@@ -9,33 +9,33 @@ function TradeContextProvider({children}) {
   
   const [gotInfo, setGotInfo] = useState(false)
   const [have, setHave] = useState([
-    {id: 1, url: "", isFocused: true, isDropdown: false, color: "None", cert: "None", amount: 1}, 
-    {id: 2, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1}, 
-    {id: 3, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},  
-    {id: 4, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},  
-    {id: 5, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},  
-    {id: 6, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},  
-    {id: 7, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1}, 
-    {id: 8, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1}, 
-    {id: 9, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1}, 
-    {id: 10, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1}, 
-    {id: 11, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},   
-    {id: 12, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1}
+    {id: 0, url: "", isFocused: true, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1}, 
+    {id: 1, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1}, 
+    {id: 2, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},  
+    {id: 3, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},  
+    {id: 4, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},  
+    {id: 5, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},  
+    {id: 6, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1}, 
+    {id: 7, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1}, 
+    {id: 8, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1}, 
+    {id: 9, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1}, 
+    {id: 10, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},   
+    {id: 11, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1}
   ])
 
   const [want, setWant] = useState([
-    {id: 13, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},  
-    {id: 14, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},  
-    {id: 15, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},  
-    {id: 16, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},  
-    {id: 17, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},  
-    {id: 18, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},  
-    {id: 19, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},  
-    {id: 20, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},  
-    {id: 21, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},  
-    {id: 22, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1}, 
-    {id: 23, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1},   
-    {id: 24, url: "", isFocused: false, isDropdown: false, color: "None", cert: "None", amount: 1}
+    {id: 12, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},  
+    {id: 13, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},  
+    {id: 14, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},  
+    {id: 15, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},  
+    {id: 16, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},  
+    {id: 17, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},  
+    {id: 18, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},  
+    {id: 19, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},  
+    {id: 20, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},  
+    {id: 21, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1}, 
+    {id: 22, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1},   
+    {id: 23, url: "", isFocused: false, isDropdown: false, itemID: "None", color: "None", cert: "None", amount: 1}
   ])
 
   const [notes, setNotes] = useState("")
@@ -180,36 +180,37 @@ function TradeContextProvider({children}) {
   }
 
   // pushes the clicked item on the focused field and focuses the next field
-  function pushItem(e){
+  function pushItem({ItemID}){ 
     let current = undefined
-        let temp = []
-        have.map(item => {
-          if (item.isFocused === true){
-            item.isFocused = false
-            item.url = e.target.name
-            current = item.id
-          } 
-          if (item.id === current + 1){
-            item.isFocused = true
-          }
-         temp.push(item)
-        })
-        setHave(temp)
+    let temp = []
+    have.map(item => {
+      if (item.isFocused === true){
+        item.isFocused = false
+        item.url = `${ItemID}.0.webp`
+        item.itemID = ItemID
+        current = item.id
+      } 
+      if (item.id === current + 1){
+        item.isFocused = true
+      }
+      temp.push(item)
+    })
+    setHave(temp)
 
-        temp = []
-
-        want.map(item => {
-          if (item.isFocused === true){
-            item.isFocused = false
-            item.url = e.target.name
-            current = item.id
-          } 
-          if (item.id === current + 1){
-            item.isFocused = true
-          }
-         temp.push(item)
-        })
-        setWant(temp)
+    temp = []
+    want.map(item => {
+      if (item.isFocused === true){
+        item.isFocused = false
+        item.url = `${ItemID}.0.webp`
+        item.itemID = ItemID
+        current = item.id
+      } 
+      if (item.id === current + 1){
+        item.isFocused = true
+      }
+      temp.push(item)
+    })
+    setWant(temp)
   }
 
   // clears all have items

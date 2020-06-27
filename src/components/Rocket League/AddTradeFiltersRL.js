@@ -1,88 +1,87 @@
 import React, {useContext} from 'react'
-import rl_items from '../../info/virItemsFiltered.json' 
-import rl_items_all from '../../info/virItemsFilteredAll.json' 
 import {TradeContext} from './TradeContextRL'
+import infoRL from '../../info/infoRL.json' 
+import imageExists from '../../misc/func'
 
-function RLfilter_icon({itemImages, setItemImages, setTradeErrorMsg}) {
+function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
 
   const {pushItem} = useContext(TradeContext)
 
   function setNames(type){
-    if (type === "all"){
-      const names = rl_items_all.map(item => {   
-        if (item.url.includes(".0.webp")){
-          return (
+    if (type === "All"){
+      let thumbnails = []
+      infoRL.Slots.map(Slot => Slot.Items.map(item => {
+        item.Tradable && thumbnails.push(
+          <div className="RLicon noUserInteraction">
             <img 
-            name={item.url} 
-            style={{height: "95px", width: "95px"}} 
-            src={require(`../../images/RLimages/${item.url}`)} 
-            alt="" 
-            onClick={e => { setTradeErrorMsg(""); pushItem(e)}} 
+              width="95"
+              height="95"
+              src={imageExists(`${item.ItemID}.0.webp`)}
+              onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
             />
-          )
-        }
-        else return null
-      })
-      setItemImages(names)
-      
+            <span className="RLicon-name-hover"><p>{item.Name}</p></span>
+          </div>
+        )
+      }))
+      setItemImages(thumbnails)
+
     }
     else{
-      const names = rl_items[`${type}`].map(item => {   
-        if (item.url.includes(".0.webp")){
-          return (
+      let thumbnails = []
+      infoRL.Slots.map(Slot => Slot.Name === type && Slot.Items.map(item => {
+        item.Tradable && thumbnails.push(
+          <div className="RLicon noUserInteraction">
             <img 
-            name={item.url} 
-            style={{height: "95px", width: "95px"}} 
-            src={require(`../../images/RLimages/${item.url}`)} 
-            alt="" 
-            onClick={e => { setTradeErrorMsg(""); pushItem(e)}} 
+              width="95"
+              height="95"
+              src={imageExists(`${item.ItemID}.0.webp`)}
+              onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
             />
-          )
-        }
-        else return null
-      })
-      setItemImages(names)
-
+            <span className="RLicon-name-hover"><p>{item.Name}</p></span>
+          </div>
+        )
+      }))
+      setItemImages(thumbnails)
    }
   }
   
- 
 	return (
     <>
       <input onChange={e=> {
-        let temp = rl_items_all.map(item => {   
-          if (item.name.toLowerCase().includes(e.target.value.toLowerCase()) && item.url.includes(".0.webp")){
-            return(
-              <img 
-                name={item.url} 
-                style={{height: "95px", width: "95px"}} 
-                src={require(`../../images/RLimages/${item.url}`)} 
-                alt=""
-                onClick={e => { setTradeErrorMsg(""); pushItem(e)}} 
-              />
+        let thumbnails = []
+        infoRL.Slots.map(Slot => Slot.Items.map(item => {
+          if (item.Tradable && item.Name.toLowerCase().includes(e.target.value.toLowerCase())) 
+            thumbnails.push(
+              <div className="RLicon noUserInteraction">
+                <img 
+                  width="95"
+                  height="95"
+                  src={imageExists(`${item.ItemID}.0.webp`)}
+                  onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
+                />
+                <span className="RLicon-name-hover"><p>{item.Name}</p></span>
+              </div>
             )
-          }else return null
-        })
-        
-        setItemImages(temp)
+        }))
+        setItemImages(thumbnails)
 
       }}placeholder="Search items..."></input>
 
       <section className="RLfilter_icons_section">		
-        <button onClick={()=> setNames("all")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/All.png")} /></button>
-        <button onClick={()=> setNames("blueprints")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Blueprints.png")} /></button>
-        <button onClick={()=> setNames("crates")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Gift_Packs.png")} /></button>
-        <button onClick={()=> setNames("bodies")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Bodies.png")} /></button>
-        <button onClick={()=> setNames("decals")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Decals.png")} /></button>
-        <button onClick={()=> setNames("paints")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Paint_Finishes.png")} /></button>
-        <button onClick={()=> setNames("wheels")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Wheels.png")} /></button>
-        <button onClick={()=> setNames("boosts")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Boosts.png")} /></button>
-        <button onClick={()=> setNames("toppers")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Toppers.png")} /></button>
-        <button onClick={()=> setNames("antennas")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Antennas.png")} /></button>
-        <button onClick={()=> setNames("explosions")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Goal_Explosions.png")} /></button>
-        <button onClick={()=> setNames("trails")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Trails.png")} /></button>
-        <button onClick={()=> setNames("banners")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Banners.png")} /></button>
-        <button onClick={()=> setNames("borders")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Avatar_Borders.png")} /></button>
+        <button onClick={()=> setNames("All")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/All.png")} /></button>
+        <button onClick={()=> setNames("Blueprint")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Blueprints.png")} /></button>
+        <button onClick={()=> setNames("Crate")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Gift_Packs.png")} /></button>
+        <button onClick={()=> setNames("Body")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Bodies.png")} /></button>
+        <button onClick={()=> setNames("Decal")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Decals.png")} /></button>
+        <button onClick={()=> setNames("Paint Finish")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Paint_Finishes.png")} /></button>
+        <button onClick={()=> setNames("Wheels")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Wheels.png")} /></button>
+        <button onClick={()=> setNames("Rocket Boost")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Boosts.png")} /></button>
+        <button onClick={()=> setNames("Topper")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Toppers.png")} /></button>
+        <button onClick={()=> setNames("Antenna")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Antennas.png")} /></button>
+        <button onClick={()=> setNames("Goal Explosion")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Goal_Explosions.png")} /></button>
+        <button onClick={()=> setNames("Trail")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Trails.png")} /></button>
+        <button onClick={()=> setNames("Player Banner")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Banners.png")} /></button>
+        <button onClick={()=> setNames("Avatar Border")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Avatar_Borders.png")} /></button>
       </section>
     </>
 	)

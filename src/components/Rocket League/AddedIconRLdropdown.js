@@ -32,8 +32,7 @@ function RLitem_icon_dropdown({id}) {
 
       <button id="submit-rl-filters-button" onClick={()=> {
         let temp = []
-        let all = [...have]
-        all.map(item => {
+        have.map(item => {
           if (item.id === id){
             item.color = paint
             item.cert = certification
@@ -45,8 +44,7 @@ function RLitem_icon_dropdown({id}) {
         setHave(temp)
 
         temp = []
-        let all2 = [...want]
-        all2.map(item => {
+        want.map(item => {
           if (item.id === id){
             item.color = paint
             item.cert = certification
@@ -136,4 +134,4 @@ function DropdownMenu({dd, setFunction, setOpen}){
 }
 
 
-export default RLitem_icon_dropdown;
+export default RLitem_icon_dropdown

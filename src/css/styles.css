@@ -741,10 +741,6 @@ body{
   text-align: justify;
 }
 
-.buttons-box{
-
-}
-
 .buttons-box button{
   background: #251D28;
   font-weight: 500;
@@ -1481,8 +1477,8 @@ body{
   height: 13px;
   width: 13px; 
   
-  bottom: 76px;
-  left: 6px;
+  top: 30px;
+  left: 7px;
   cursor: pointer;
 }
 
@@ -1515,13 +1511,14 @@ body{
   position: absolute; 
   color: #f6f6f6;
   background-color: #251d28;
-  font-size: 11px;
+  font-size: 9px;
   border-radius: 50px;
   font-weight: 600;
+  border: 1px solid #6e6e6e;
 
-  padding: 1px 6px 1px 6px;
-  top: 4px; 
-  left: 4px;
+  padding: 1px 3px 1px 4px;
+  top: 6px; 
+  left: 5px;
   cursor: pointer;
 }
 
@@ -1823,6 +1820,11 @@ body{
   cursor: pointer;
 }
 
+.RLfilter_icon:hover{
+  filter: brightness(0.75);
+}
+
+
 
 .RLfilter_icons_section button {
   display: flex;
@@ -1838,15 +1840,15 @@ body{
   position: relative;
   height: 300px;
   grid-template-columns:  auto auto auto auto auto auto auto auto auto;
+  grid-template-rows: max-content;
   column-gap: 3px;
   row-gap: 3px;
 
   padding-left: 13px;
-  overflow: auto;
+  overflow-y: scroll;
 
   align-items: flex-start;
   justify-content: flex-start;
-
 }
 
 .item-imagesRL img{

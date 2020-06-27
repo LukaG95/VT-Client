@@ -9,7 +9,6 @@ import AddTradeFiltersRL from '../../components/Rocket League/AddTradeFiltersRL'
 import Spinner from '../../components/Spinner'
 import {TradeContext} from '../../components/Rocket League/TradeContextRL'
 import {UserContext} from '../../UserContext'
-import rl_items_all from '../../info/virItemsFilteredAll.json' 
 import infoRL from '../../info/infoRL.json' 
 import imageExists from '../../misc/func'
 
@@ -26,12 +25,13 @@ function AddTradeRL() {
 
   const pathID = useLocation().pathname.substring(17)   // reads url after /trades/ till the end
   
+  // maybe this and want items should be state
   const displayed_have_items = have.map(item => {
     if (item.url === ""){
       if (item.isFocused === false) return <button name={item.id} onClick={manageFocus}></button>
       else return <button name={item.id} onClick={manageFocus} id={`${item.isFocused ? "focusedButton" : null}`}>+</button>
     } 
-    else return <AddedIconRL id={item.id} url={item.url} />
+    else return <AddedIconRL id={item.id} url={item.url} itemID={item.itemID}/>
   })
 
   const displayed_want_items = want.map(item => {
@@ -39,7 +39,7 @@ function AddTradeRL() {
       if (item.isFocused === false) return <button name={item.id} onClick={manageFocus}></button>
       else return <button name={item.id} onClick={manageFocus} id="focusedButton">+</button>
     } 
-    else return <AddedIconRL id={item.id} url={item.url} />
+    else return <AddedIconRL id={item.id} url={item.url} itemID={item.itemID}/>
   })
 
   // checks if we're editing a trade, gets the userID and maps over his trades to find if it matches any, if not it redirects to home page
@@ -64,44 +64,25 @@ function AddTradeRL() {
 
   // create initial images for selection
   useEffect(() => {
-  
+    
     setTimeout(()=> {
       let thumbnails = []
       infoRL.Slots.map(Slot => Slot.Items.map(item => {
         item.Tradable && thumbnails.push(
           <div className="RLicon noUserInteraction">
             <img 
-              name={`${item.ItemID}.0.webp`} 
               width="95"
               height="95"
               src={imageExists(`${item.ItemID}.0.webp`)}
-              onClick={e => {setTradeErrorMsg(""); pushItem(e)}} 
+              onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
             />
             <span className="RLicon-name-hover"><p>{item.Name}</p></span>
           </div>
         )
       }))
       setItemImages(thumbnails)
-    }, 1000)
+    }, 750)
 
-    /*setTimeout(()=> {
-      const thumbnails = rl_items_all.map(item => {  
-        if (item.url.includes(".0.webp")){ 
-          return (
-            <img 
-              name={item.url} 
-              width="95"
-              height="95"
-              src={require(`../../images/RLimages/${item.url}`)} 
-              alt=""
-              onClick={e => {setTradeErrorMsg(""); pushItem(e)}} 
-            />
-          )
-        }
-      })
-      setItemImages(thumbnails)
-    }, 1000)
-*/
   }, [gotInfo])
 
 
@@ -121,7 +102,6 @@ function AddTradeRL() {
               <img 
                 style={{height: "17px", width: "17px", marginRight: "10px"}} 
                 src={require(`../../images/other/${platform === "PC" ? "Steam" : platform} icon.png`)} 
-                alt="" 
               />
               {platform === "PC" ? "Steam" : platform}
             </div>

@@ -1,51 +1,20 @@
 import React, {useState, useContext, useEffect} from 'react'
 import {TradeContext} from './TradeContextRL'
 import AddedIconRLdropdown from './AddedIconRLdropdown'
-import rl_items_all from '../../info/virItemsFilteredAll.json' 
+import infoRL from '../../info/infoRL.json' 
+import imageExists from '../../misc/func'
 
-function RLitem_icon({id, url}) { 
+function AddedIconRL({id, itemID, url}) { 
   const {have, want, setIsDropdown} = useContext(TradeContext)
   let all = [...have, ...want]
 
   const [name, setName] = useState("")
-  const [paint, setPaint] = useState("None")
-  const [cert, setCert] = useState("None")
-  const [amount, setAmount] = useState(1)
-
-
-  // join all useEffects? test loops
-  useEffect(()=> {
-    for (let i=0; i<all.length; i++){
-      if (all[i].id === id){
-        // console.log("test color loop")
-        setPaint(all[i].color)
-      }
-    }
-  }, [all[id-1].color])
 
   useEffect(()=> {
-    for (let i=0; i<all.length; i++){
-      if (all[i].id === id){
-        // console.log("test cert loop")
-        setCert(all[i].cert)
-      }
-    }
-  }, [all[id-1].cert])
-
-  useEffect(()=> {
-    for (let i=0; i<all.length; i++){
-      if (all[i].id === id){
-        // console.log("test amount loop")
-        setAmount(all[i].amount)
-      }
-    }
-  }, [all[id-1].amount])
-
-  useEffect(()=> {
-    rl_items_all.map(item => {
-      if (item.url === url)
-        setName(item.name)
-    })
+    infoRL.Slots.map(Slot => Slot.Items.map(item => {
+      if (item.ItemID === itemID)
+        setName(item.Name)
+    }))
   }, [])
 
   function Dropdown(){
@@ -61,20 +30,20 @@ function RLitem_icon({id, url}) {
   }
 
   function CertIcon(){
-    if (cert !== "None")
-    return <div className="certIcon">{cert}</div>
+    if (all[id].cert !== "None")
+    return <div className="certIcon">{all[id].cert}</div>
     else return null
   }
 
   function AmountIcon(){
-    return <div className="AmountIcon">{`${amount}x`}</div>
+    return <div className="AmountIcon">{`${all[id].amount}x`}</div>
   }
 
   function ColorIcon(){
-    if (paint !== "None")
+    if (all[id].color !== "None")
     return (
-      <div className={`colorIcon ${paint.replace(/\s+/g, '')}`}>
-        <span className="paint-tooltip">{paint}</span>
+      <div className={`colorIcon ${all[id].color.replace(/\s+/g, '')}`}>
+        <span className="paint-tooltip">{all[id].color}</span>
       </div>
     )
     else return null
@@ -94,7 +63,7 @@ function RLitem_icon({id, url}) {
         name="enableDropdown"
         id={id}
         style={{height: "95px", width: "95px", cursor: "pointer"}} 
-        src={require(`../../images/RLimages/${url}`)} 
+        src={imageExists(url)} 
         alt="" 
         />
 
@@ -113,4 +82,4 @@ function RLitem_icon({id, url}) {
 	)
 }
 
-export default RLitem_icon
+export default AddedIconRL

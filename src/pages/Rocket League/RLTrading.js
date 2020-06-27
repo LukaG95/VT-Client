@@ -2,7 +2,7 @@ import React, {useState, useContext, useEffect} from 'react'
 import Sidebar from '../../components/Sidebar'
 import {SbFiltersRLContext} from '../../components/Rocket League/SbFiltersRLContext'
 import Spinner from '../../components/Spinner'
-import rl_items from '../../info/rl_items.json'
+import infoRL from '../../info/infoRL.json'
 import RLTradeComponent from '../../components/Rocket League/RLTradeComponent'
 import axios from 'axios'
 
@@ -17,7 +17,7 @@ function RLTrading() {
   useEffect(()=> {
     // convert names to IDs
     let id = 0
-    rl_items.Slots.forEach(type => { type.Items.forEach(item => {
+    infoRL.Slots.forEach(type => { type.Items.forEach(item => {
         if (item.Name === name)
           id = item.ItemID
       })
