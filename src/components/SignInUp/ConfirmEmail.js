@@ -3,8 +3,7 @@ import {useLocation, Redirect} from 'react-router-dom'
 import axios from 'axios'
 
 import { UserContext } from '../../UserContext'
-
-import {NotificationContainer, NotificationManager} from 'react-notifications'
+import {createNotification} from '../../App'
 
 function ConfirmEmail() {
   const pathID = useLocation().pathname.substring(14)  // reads url after /emailconfirm/ till the end
@@ -19,6 +18,7 @@ function ConfirmEmail() {
     .catch(err => console.log(err))
   }, [])
 
+  
   if (isLoggedIn === false)
   return (
     <div className="confirmEmailWrapper">
@@ -39,17 +39,16 @@ function ConfirmEmail() {
         </div>
       </div>
 
-      <NotificationContainer/>
-
     </div>
   )
   else if (isLoggedIn === true)
   return <Redirect to="/" />
   else return null
 
-  function createNotification(type, message){
-    NotificationManager[type](message, type.charAt(0).toUpperCase() + type.slice(1))
-  }
+
+  /*-----Functions                -------------*/
+
+
 
 }
 

@@ -1,10 +1,11 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {useLocation, Link} from 'react-router-dom'
-import Sidebar from '../components/Sidebar'
 import axios from 'axios'
-import { UserContext } from '../UserContext'
 import Filter from 'bad-words'
-import {NotificationContainer, NotificationManager} from 'react-notifications'
+
+import {createNotification} from '../App'
+import Sidebar from '../components/Sidebar'
+import {UserContext} from '../UserContext'
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 
@@ -37,68 +38,7 @@ function AddReputation() {
     })
     .catch(err => console.log(err))
     
-    
   }, [myID])
-
-  function createNotification(type, message){
-    NotificationManager[type](message, type.charAt(0).toUpperCase() + type.slice(1))
-  }
-
-  function handleRepSubmit(good_bad){
-
-    if (myID === userID){
-      setRepErrorMessage("You can't rep yourself")
-      repErrorMessage === "" && createNotification("error", "You can't rep yourself")
-      return
-    }
-
-    if (repCategory === undefined){
-      setRepErrorMessage("You have to pick a rep category 1st")
-      repErrorMessage === "" && createNotification("error", "Pick a rep category 1st")
-      return
-    }
-
-    if (feedback === undefined || feedback.replace(/\s/g, '').length < 5) {
-      setRepErrorMessage("Your message has to be at least 5 characters long")
-      repErrorMessage === "" && createNotification("error", "Your message has to be at least 5 characters long")
-      return
-    }
-
-    if (feedback.length > 100) {
-      setRepErrorMessage("Your message is too long, max 100 characters")
-      repErrorMessage === "" && createNotification("error", "Your message is too long")
-      return
-    }
-
-    if (!feedback.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9 ]{5,100}$/gm)) {
-      setRepErrorMessage("Your message includes inappropriate characters")
-      repErrorMessage === "" && createNotification("error", "Your message includes inappropriate characters")
-      return
-    }
-    if (feedback.match(/\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm)) {
-      setRepErrorMessage("Your message must not inlcude links")
-      repErrorMessage === "" && createNotification("error", "Your message must not inlcude links")
-      return
-    }
-
-  
-    axios.post(`/api/reputation/addRep/${userID}`, {
-      rep: {
-        good: good_bad,
-        feedback: profanityFilter.clean(feedback),
-        game: repCategory
-      }
-    })
-    .then(res => {
-      if (res.data.status === "success"){
-        setFeedback("")
-        setRepCategory()
-        setRepErrorMessage("")
-        createNotification("success", "Reputation was submitted")
-      }
-    })
-    .catch(err => console.log(err))
-  }
 
   if (repInfo !== undefined && repInfo !== "invalid")
   return (
@@ -155,8 +95,6 @@ function AddReputation() {
         {/*<button className="rep-button-back">Back to reputation</button>*/}
 
       </main>
-
-      <NotificationContainer/>
       
     </div>
   )
@@ -168,6 +106,65 @@ function AddReputation() {
       </div>
     )
     else return null // <Spinner className="newPosition"> 
+
+  
+  /*-----Functions                -------------*/
+
+  function handleRepSubmit(good_bad){
+
+    if (myID === userID){
+      setRepErrorMessage("You can't rep yourself")
+      repErrorMessage === "" && createNotification("error", "You can't rep yourself")
+      return
+    }
+
+    if (repCategory === undefined){
+      setRepErrorMessage("You have to pick a rep category 1st")
+      repErrorMessage === "" && createNotification("error", "Pick a rep category 1st")
+      return
+    }
+
+    if (feedback === undefined || feedback.replace(/\s/g, '').length < 5) {
+      setRepErrorMessage("Your message has to be at least 5 characters long")
+      repErrorMessage === "" && createNotification("error", "Your message has to be at least 5 characters long")
+      return
+    }
+
+    if (feedback.length > 100) {
+      setRepErrorMessage("Your message is too long, max 100 characters")
+      repErrorMessage === "" && createNotification("error", "Your message is too long")
+      return
+    }
+
+    if (!feedback.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9 ]{5,100}$/gm)) {
+      setRepErrorMessage("Your message includes inappropriate characters")
+      repErrorMessage === "" && createNotification("error", "Your message includes inappropriate characters")
+      return
+    }
+    if (feedback.match(/\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm)) {
+      setRepErrorMessage("Your message must not inlcude links")
+      repErrorMessage === "" && createNotification("error", "Your message must not inlcude links")
+      return
+    }
+
+  
+    axios.post(`/api/reputation/addRep/${userID}`, {
+      rep: {
+        good: good_bad,
+        feedback: profanityFilter.clean(feedback),
+        game: repCategory
+      }
+    })
+    .then(res => {
+      if (res.data.status === "success"){
+        setFeedback("")
+        setRepCategory()
+        setRepErrorMessage("")
+        createNotification("success", "Reputation was submitted")
+      }
+    })
+    .catch(err => console.log(err))
+  }
 }
 
 export default AddReputation

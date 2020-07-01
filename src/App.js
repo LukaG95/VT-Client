@@ -1,5 +1,6 @@
 import React, {useContext, useEffect} from 'react'
 import {Redirect, Route, Switch} from 'react-router-dom'
+import {NotificationContainer, NotificationManager} from 'react-notifications'
 
 // import Premium from './pages/Premium'
 // import Prices from './pages/Prices'
@@ -22,25 +23,16 @@ import ResetPassword from './components/SignInUp/ResetPassword'
 import ConfirmEmail from './components/SignInUp/ConfirmEmail'
 import {TradeContextProvider} from './components/Rocket League/TradeContextRL'
 import {SbFiltersRLContextProvider} from './components/Rocket League/SbFiltersRLContext'
-import {NotificationContainer, NotificationManager} from 'react-notifications'
+
 
 function App() {
 
   const {isLoggedIn} = useContext(UserContext)
 
-  function handleRedirectOnRefresh(component){
-    if (isLoggedIn === true) return component
-    else if (isLoggedIn === false) return <Redirect to="/" />
-    // else, loading animation -- optional
-    // else return <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-  }
-  
   return (
     <>
       <LoginForm />
-
       <Popups />
-      
       <Navbar />
 
       <Switch>
@@ -64,15 +56,24 @@ function App() {
       </Switch>
 
       <NotificationContainer/>
-
     </>
   )
+
+/*-----Functions                -------------*/
+
+  function handleRedirectOnRefresh(component){
+    if (isLoggedIn === true) return component
+    else if (isLoggedIn === false) return <Redirect to="/" />
+    // else, loading animation -- optional
+    // else return <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+  }
   
 }
 
-function CreateNotification(type, message){
+/*-----Export Functions                -------------*/
+
+function createNotification(type, message){
   NotificationManager[type](message, type.charAt(0).toUpperCase() + type.slice(1))
 }
 
-
-export {App, CreateNotification}
+export {App, createNotification}

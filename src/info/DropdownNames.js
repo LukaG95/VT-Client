@@ -5,7 +5,6 @@ rln.Wheels.concat(rln.Wheels).concat(rln.Trails).concat(rln.Banners).concat(rln[
 .concat(rln.Bodies).concat(rln["Rocket Boosts"]).concat(rln.Antennas).concat(rln.Toppers).concat(rln.Decals).concat(rln["Paint Finishes"])
 .concat(rln["Engine Audio"]).concat(rln["Avatar Borders"])
 
-
 const rl_dd_names = {
   gameDD: ["Rocket League"],
   searchTypeDD: ["I want to buy", "I want to sell"],

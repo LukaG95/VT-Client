@@ -32,21 +32,6 @@ function Navbar() {
   default:
 } 
 
-  function handleIconDisplay(){
-    if(isLoggedIn) return(
-      <Link to="/account">
-        <div className="navRightItem profile">
-          <ProfileIcon style={{height: "40px", width: "40px"}} className="navRightContent" />
-        </div> 
-      </Link>
-    )
-      else if (isLoggedIn === undefined) return (
-        <div className="navRightItem profile"></div>
-      )
-      else return <div onClick={()=>setOpenForm(true)} className="navRightItem profile loginButton">Login</div>
-  }
-
-
   return (
     <nav className="navWrapper">     
 
@@ -89,23 +74,36 @@ function Navbar() {
 
       </div>                         
 
-
       <div className="navRight">     
 
-      
         <div className="navRightItem tradeBellSection">
           <div onClick={()=> isLoggedIn ? window.location.href = "/trading/rl/new" : setOpenForm(true)} className="navRightContent addTrade">+ New trade</div>
           <BellIcon style={{height: "25px", width: "25px"}} className="navRightContent bell" />
         </div>
        
-
         {handleIconDisplay()}
 
       </div>                         
 
-
     </nav>
   )
+
+
+  /*-----Functions                -------------*/
+  
+  function handleIconDisplay(){
+    if(isLoggedIn) return(
+      <Link to="/account">
+        <div className="navRightItem profile">
+          <ProfileIcon style={{height: "40px", width: "40px"}} className="navRightContent" />
+        </div> 
+      </Link>
+    )
+      else if (isLoggedIn === undefined) return (
+        <div className="navRightItem profile"></div>
+      )
+      else return <div onClick={()=>setOpenForm(true)} className="navRightItem profile loginButton">Login</div>
+  }
 }
 
 

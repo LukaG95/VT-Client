@@ -1,4 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react'
+
 import {rl_dd_names} from '../../info/DropdownNames'
 import {SbFiltersRLContext} from './SbFiltersRLContext'
 
@@ -21,6 +22,9 @@ function FiltersRL() {
     </div>
   )
 }
+
+
+/*-----Functions                -------------*/
 
 function FilterButton({text, value, dd, setFunction}){
 

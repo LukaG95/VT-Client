@@ -109,6 +109,10 @@ function FiltersREP() {
 
     </div>
   )
+
+
+   /*-----Functions                -------------*/
+   
 }
 
 export default FiltersREP

@@ -1,4 +1,5 @@
 import React, {useContext} from 'react'
+
 import {TradeContext} from './TradeContextRL'
 import infoRL from '../../info/infoRL.json' 
 import imageExists from '../../misc/func'
@@ -7,43 +8,6 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
 
   const {pushItem} = useContext(TradeContext)
 
-  function setNames(type){
-    if (type === "All"){
-      let thumbnails = []
-      infoRL.Slots.map(Slot => Slot.Items.map(item => {
-        item.Tradable && thumbnails.push(
-          <div className="RLicon noUserInteraction">
-            <img 
-              width="95"
-              height="95"
-              src={imageExists(`${item.ItemID}.0.webp`)}
-              onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
-            />
-            <span className="RLicon-name-hover"><p>{item.Name}</p></span>
-          </div>
-        )
-      }))
-      setItemImages(thumbnails)
-
-    }
-    else{
-      let thumbnails = []
-      infoRL.Slots.map(Slot => Slot.Name === type && Slot.Items.map(item => {
-        item.Tradable && thumbnails.push(
-          <div className="RLicon noUserInteraction">
-            <img 
-              width="95"
-              height="95"
-              src={imageExists(`${item.ItemID}.0.webp`)}
-              onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
-            />
-            <span className="RLicon-name-hover"><p>{item.Name}</p></span>
-          </div>
-        )
-      }))
-      setItemImages(thumbnails)
-   }
-  }
   
 	return (
     <>
@@ -84,7 +48,48 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
         <button onClick={()=> setNames("Avatar Border")}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Avatar_Borders.png")} /></button>
       </section>
     </>
-	)
+  )
+  
+
+  /*-----Functions                -------------*/
+
+  function setNames(type){
+    if (type === "All"){
+      let thumbnails = []
+      infoRL.Slots.map(Slot => Slot.Items.map(item => {
+        item.Tradable && thumbnails.push(
+          <div className="RLicon noUserInteraction">
+            <img 
+              width="95"
+              height="95"
+              src={imageExists(`${item.ItemID}.0.webp`)}
+              onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
+            />
+            <span className="RLicon-name-hover"><p>{item.Name}</p></span>
+          </div>
+        )
+      }))
+      setItemImages(thumbnails)
+
+    }
+    else{
+      let thumbnails = []
+      infoRL.Slots.map(Slot => Slot.Name === type && Slot.Items.map(item => {
+        item.Tradable && thumbnails.push(
+          <div className="RLicon noUserInteraction">
+            <img 
+              width="95"
+              height="95"
+              src={imageExists(`${item.ItemID}.0.webp`)}
+              onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
+            />
+            <span className="RLicon-name-hover"><p>{item.Name}</p></span>
+          </div>
+        )
+      }))
+      setItemImages(thumbnails)
+   }
+  }
 }
 
 export default RLfilter_icon;

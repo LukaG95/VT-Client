@@ -1,6 +1,7 @@
 import React from 'react'
 
 function Snipper() {
+
   return (
       <div className="lds-roller">
         <div></div>
@@ -15,4 +16,4 @@ function Snipper() {
   )
 }
 
-export default Snipper;
+export default Snipper

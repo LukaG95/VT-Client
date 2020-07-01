@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useLocation} from 'react-router-dom'
 import axios from 'axios'
 
-import {NotificationContainer, NotificationManager} from 'react-notifications'
+import {createNotification} from '../../App'
 
 function ResetPassword() {
   const [password, setPassword] = useState("")
@@ -46,14 +46,11 @@ function ResetPassword() {
 
       </form>
 
-      <NotificationContainer/>
-
     </div>
   )
 
-  function createNotification(type, message){
-    NotificationManager[type](message, type.charAt(0).toUpperCase() + type.slice(1))
-  }
+
+  /*-----Functions                -------------*/
 
   function handleNewPassSubmit(e){
     e.preventDefault()

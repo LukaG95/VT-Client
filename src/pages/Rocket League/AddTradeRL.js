@@ -1,12 +1,12 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {useLocation} from 'react-router-dom'
-import {NotificationContainer, NotificationManager} from 'react-notifications'
-import Filter from 'bad-words'
 import axios from 'axios'
+import Filter from 'bad-words'
+import Spinner from '../../components/Spinner'
 
+import {createNotification} from '../../App'
 import AddedIconRL from '../../components/Rocket League/AddedIconRL'
 import AddTradeFiltersRL from '../../components/Rocket League/AddTradeFiltersRL'
-import Spinner from '../../components/Spinner'
 import {TradeContext} from '../../components/Rocket League/TradeContextRL'
 import {UserContext} from '../../UserContext'
 import infoRL from '../../info/infoRL.json' 
@@ -175,11 +175,12 @@ function AddTradeRL() {
           <button onClick={()=> handleTradeSubmit()} className="rlSubmitButton">SUBMIT TRADE</button>   
         </div>
 
-        <NotificationContainer/>
       </div>
     )
   else return null
 
+
+  /*-----Functions                -------------*/
 
   function checkAddedItems(){
     let x = false, y = false;
@@ -202,10 +203,6 @@ function AddTradeRL() {
     return (notes.match(/\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm))
   }
 
-  function createNotification(type, message){
-    NotificationManager[type](message, type.charAt(0).toUpperCase() + type.slice(1))
-  }
-  
   function handleTradeSubmit(){
     if (have && want){
       if (!checkAddedItems()){

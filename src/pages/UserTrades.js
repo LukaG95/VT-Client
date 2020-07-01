@@ -1,9 +1,10 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {useLocation} from 'react-router-dom'
 import axios from 'axios'
+
+import {createNotification} from '../App'
 import RLTradeComponent from '../components/Rocket League/RLTradeComponent'
-import { UserContext } from '../UserContext'
-import {NotificationContainer, NotificationManager} from 'react-notifications'
+import {UserContext} from '../UserContext'
 
 function UserTrades() {
   const [userTrades, setUserTrades] = useState()
@@ -21,9 +22,35 @@ function UserTrades() {
     .catch(err => console.log("Error: " + err))
   }, [])
 
-  function createNotification(type, message){
-    NotificationManager[type](message, type.charAt(0).toUpperCase() + type.slice(1))
-  }
+  if (userTrades)
+  return (
+    <div className="userTrades-page-wrapper">
+      
+      <div className="userTrades-top-section">
+        <section>
+          <button onClick={()=> setGame("rl")} style={game==="rl" ? {backgroundColor: "#47384D"} : null}>Rocket League</button>
+          {/*<button onClick={()=> setGame("csgo")} style={game==="csgo" ? {backgroundColor: "#47384D"} : null}>CSGO</button>*/}
+        </section>
+
+        {myID === pathID ? userTrades.length > 0 && <button onClick={()=> setOpenDeleteAllTrades(true)} id="del-all-trades-button" > Delete all trades</button> : null}
+        
+      </div>
+      
+      {userTrades.length <= 0 && 
+        <div style={{color: "#f6f6f6", marginTop: "30px"}}>
+          No active Rocket League trades. Create your 
+          <a href={`/trading/rl/new`} className="addRepButton2" id="removeDecoration"> first trade</a>
+        </div>
+      }
+      
+      <TradeComponents />
+
+    </div>
+  )
+  else return null
+
+
+/*-----Functions                -------------*/
 
   function deleteTrade(trade){
     axios.delete(`/api/trades/deleteTrade?id=${trade._id}`)
@@ -42,65 +69,33 @@ function UserTrades() {
     .then (res => { 
       if (res.data.status === "success"){
         createNotification("success", "Trade was bumped")
-        console.log("hih")
       }
     })
     .catch(err => console.log("Error: " + err))
-    
-     console.log("heh")
   }
 
   function TradeComponents(){
-      var tradeComponents = userTrades.map(trade => 
-        <>
-          <RLTradeComponent trade={trade} userTradesPage={true}/>
-          { myID === pathID ? 
-            
-            <div className="editDel-tradeButtons-section">
-              <button onClick={() => editTrade(trade)} className="editTrade-button">Edit trade</button>
-              <button onClick={() => deleteTrade(trade)} className="deleteTrade-button">Delete trade</button>
-              <button onClick={() => bumpTrade(trade)} className="bumpTrade-button">Bump trade</button> 
-            </div> : null
-          }
-        </>
-      )
-
-  return(
-    <>
-      {tradeComponents}
-    </>
-  )
-}
-
-if (userTrades)
-  return (
-      <div className="userTrades-page-wrapper">
-        
-        <div className="userTrades-top-section">
-          <section>
-            <button onClick={()=> setGame("rl")} style={game==="rl" ? {backgroundColor: "#47384D"} : null}>Rocket League</button>
-            {/*<button onClick={()=> setGame("csgo")} style={game==="csgo" ? {backgroundColor: "#47384D"} : null}>CSGO</button>*/}
-          </section>
-
-          { myID === pathID ? userTrades.length > 0 && <button onClick={()=> setOpenDeleteAllTrades(true)} id="del-all-trades-button" > Delete all trades</button> : null}
+    var tradeComponents = userTrades.map(trade => 
+      <>
+        <RLTradeComponent trade={trade} userTradesPage={true}/>
+        { myID === pathID ? 
           
-        </div>
-        
-        {userTrades.length <= 0 && 
-          <div style={{color: "#f6f6f6", marginTop: "30px"}}>
-          No active Rocket League trades. Create your 
-          <a href={`/trading/rl/new`} className="addRepButton2" id="removeDecoration"> first trade</a>
-        
-        </div>
+          <div className="editDel-tradeButtons-section">
+            <button onClick={() => editTrade(trade)} className="editTrade-button">Edit trade</button>
+            <button onClick={() => deleteTrade(trade)} className="deleteTrade-button">Delete trade</button>
+            <button onClick={() => bumpTrade(trade)} className="bumpTrade-button">Bump trade</button> 
+          </div> : null
         }
-        
-        <TradeComponents />
+      </>
+    )
 
-        <NotificationContainer/>
+    return(
+      <>
+        {tradeComponents}
+      </>
+    )
+  }
 
-      </div>
-  )
-  else return null
 }
 
 export default UserTrades

@@ -1,6 +1,7 @@
 import React from 'react'
 
 function Prices() {
+
   return (
     <div className="secondaryWrapper">
 
@@ -10,4 +11,4 @@ function Prices() {
   )
 }
 
-export default Prices;
+export default Prices

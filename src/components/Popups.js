@@ -58,6 +58,7 @@ function Popups() {
     else return null
 
 
+  /*-----Functions                -------------*/
 
   function handleDeleteAll(){
     axios.delete(`/api/trades/deleteTrade?all=true`)

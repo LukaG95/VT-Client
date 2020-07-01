@@ -1,9 +1,9 @@
 import React, {useState, useContext, useEffect} from 'react'
 import axios from 'axios'
-import AccountSidebar from '../../components/AccountSidebar'
-import Tooltip from '../../components/Tooltip'
 import Filter from 'bad-words'
 
+import AccountSidebar from '../../components/AccountSidebar'
+import Tooltip from '../../components/Tooltip'
 import {UserContext} from '../../UserContext'
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
@@ -56,6 +56,9 @@ function MyAccount() {
 		
 		</div>
   )
+
+
+  /*-----Functions                -------------*/
   
   function handleUpdateUsername(e) {
     e.preventDefault()

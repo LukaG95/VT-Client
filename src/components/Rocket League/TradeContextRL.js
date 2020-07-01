@@ -61,6 +61,16 @@ function TradeContextProvider({children}) {
     }
   }, [])
  
+
+  return (
+    <TradeContext.Provider value={{have, setHave, want, setWant, platform, setPlatform, notes, setNotes, manageFocus, pushItem, clearHaveItems, clearWantItems, setIsDropdown, deleteRLitem, gotInfo}}>
+      {children}
+    </TradeContext.Provider>
+  )
+  
+
+  /*-----Functions                -------------*/
+
   // sets all dropdowns to false on click
   function click(e){
     if (e.target.parentNode === null) return
@@ -71,16 +81,16 @@ function TradeContextProvider({children}) {
         item.isDropdown = false
         temp.push(item)
       })
-     setHave(temp)
+      setHave(temp)
     
-     // console.log(e.target)
+      // console.log(e.target)
 
-     temp=[] 
+      temp=[] 
       want.map(item => {
         item.isDropdown = false
         temp.push(item)
       })
-     setWant(temp)
+      setWant(temp)
     }
   }
 
@@ -238,12 +248,6 @@ function TradeContextProvider({children}) {
       })
       setWant(temp)
   }
-
-  return (
-    <TradeContext.Provider value={{have, setHave, want, setWant, platform, setPlatform, notes, setNotes, manageFocus, pushItem, clearHaveItems, clearWantItems, setIsDropdown, deleteRLitem, gotInfo}}>
-      {children}
-    </TradeContext.Provider>
-  )
 }
 
-export {TradeContextProvider, TradeContext};
+export {TradeContextProvider, TradeContext}

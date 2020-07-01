@@ -1,4 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react'
+
 import {TradeContext} from './TradeContextRL'
 import AddedIconRLdropdown from './AddedIconRLdropdown'
 import infoRL from '../../info/infoRL.json' 
@@ -17,7 +18,38 @@ function AddedIconRL({id, itemID, url}) {
     }))
   }, [])
 
-  function Dropdown(){
+
+	return (
+    <div className="RLicon noUserInteraction">
+      
+      <div onClick={() => setIsDropdown(id)} style={{height: "95px", width: "95px"}}>
+        
+        <img 
+        name="enableDropdown"
+        id={id}
+        style={{height: "95px", width: "95px", cursor: "pointer"}} 
+        src={imageExists(url)} 
+        alt="" 
+        />
+
+        <EditIcon />
+        <AmountIcon />
+        <ColorIcon />
+        <CertIcon />
+        
+        <span className="RLicon-name-hover"><p>{name}</p></span>
+
+      </div>
+
+      <Dropdown />
+
+    </div>		
+  )
+  
+
+   /*-----Functions                -------------*/
+
+   function Dropdown(){
     const Dropdown = [...have, ...want].map(item => {
       if (item.id == id){
         if (item.isDropdown === true) 
@@ -52,34 +84,6 @@ function AddedIconRL({id, itemID, url}) {
   function EditIcon(){
     return <img className="editIcon" src={require(`../../images/other/Edit-icon.png`)} alt="" />
   }
-
-
-	return (
-    <div className="RLicon noUserInteraction">
-      
-      <div onClick={() => setIsDropdown(id)} style={{height: "95px", width: "95px"}}>
-        
-        <img 
-        name="enableDropdown"
-        id={id}
-        style={{height: "95px", width: "95px", cursor: "pointer"}} 
-        src={imageExists(url)} 
-        alt="" 
-        />
-
-        <EditIcon />
-        <AmountIcon />
-        <ColorIcon />
-        <CertIcon />
-        
-        <span className="RLicon-name-hover"><p>{name}</p></span>
-
-      </div>
-
-      <Dropdown />
-
-    </div>		
-	)
 }
 
 export default AddedIconRL

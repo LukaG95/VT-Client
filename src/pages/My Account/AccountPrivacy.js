@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import axios from 'axios'
+
 import AccountSidebar from '../../components/AccountSidebar'
 
 function AccountPrivacy() {
@@ -63,6 +64,8 @@ function AccountPrivacy() {
 		
 		</div>
   )
+
+  /*-----Functions                -------------*/
   
   function handleUpdatePassword(e){
     e.preventDefault()

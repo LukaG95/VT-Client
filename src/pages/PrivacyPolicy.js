@@ -1,6 +1,7 @@
 import React from 'react'
 
-function PrivacyPolicy() {
+function PrivacyPolicy() 
+{
   return (
     <div className="secondaryWrapper">
 
@@ -10,4 +11,4 @@ function PrivacyPolicy() {
   )
 }
 
-export default PrivacyPolicy;
+export default PrivacyPolicy

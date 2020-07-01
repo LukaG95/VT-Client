@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 function Footer() {
+  
   return (
     <div className="sbSection footer">
 
@@ -24,4 +25,4 @@ function Footer() {
   )
 }
 
-export default Footer;
+export default Footer

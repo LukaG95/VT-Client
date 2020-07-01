@@ -1,15 +1,6 @@
 import React from 'react'
+
 import AccountSidebar from '../../components/AccountSidebar'
-
-function handleUpdateDiscord() {
-	console.log('Discord button was clicked');
-	alert('Discord button was clicked');
-}
-
-function handleUpdateSteam() {
-	console.log('Steam button was clicked');
-	alert('Steam button was clicked');
-}
 
 function AccountPlatforms() {
 	return (
@@ -32,7 +23,19 @@ function AccountPlatforms() {
 			</div>
 		
 		</div>
-	)
+  )
+  
+  /*-----Functions                -------------*/
+
+  function handleUpdateDiscord() {
+    console.log('Discord button was clicked');
+    alert('Discord button was clicked');
+  }
+  
+  function handleUpdateSteam() {
+    console.log('Steam button was clicked');
+    alert('Steam button was clicked');
+  }
 }
 
 export default AccountPlatforms;

@@ -40,6 +40,10 @@ function LoginForm() {
 
     </div>
   )
+
+
+  /*-----Functions                -------------*/
+
 }
 
 export default LoginForm

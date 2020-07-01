@@ -1,10 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+
 import AccountSidebar from '../../components/AccountSidebar'
 
-
 function AccountPlatforms() {
+  
 	return (
 		<div className="secondaryWrapper accountWrapper">
 		
@@ -24,6 +25,9 @@ function AccountPlatforms() {
 		
 		</div>
   )
+
+
+  /*-----Functions                -------------*/
   
   function handleLogout(){
     axios.delete(`/api/auth/logout`)

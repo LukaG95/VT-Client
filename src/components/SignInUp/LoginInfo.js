@@ -9,31 +9,6 @@ function LoginInfo({setForgotPassword}) {
 
   const [unPassErrorMsg, setUnPassErrorMsg] = useState("")
 
-  function handleSubmit(event){
-    event.preventDefault()
-
-    /*setUnPassErrorMsg("Wrong username or password")*/
-
-    axios.post('/api/auth/login', {
-      email: username,
-      password: password
-    })
-    .then(res => { console.log(res)
-      if (res.data.status === "blocked"){
-        alert("Too many requests, please try again later")
-      }
-      else if (res.data.status === "logorpass"){
-        setUnPassErrorMsg("Wrong username or password")
-      }
-      else if (res.data.status === "success"){
-        window.location.reload(true)
-      }
-      else alert("Oops, something went wrong...")
-      
-    })
-    .catch(err => console.log(err))  
-    
-  }
 
   return (
     <form onSubmit={handleSubmit} className="loginHolder">
@@ -98,6 +73,35 @@ function LoginInfo({setForgotPassword}) {
 
     </form>
   )
+
+
+  /*-----Functions                -------------*/
+  
+  function handleSubmit(event){
+    event.preventDefault()
+
+    /*setUnPassErrorMsg("Wrong username or password")*/
+
+    axios.post('/api/auth/login', {
+      email: username,
+      password: password
+    })
+    .then(res => { console.log(res)
+      if (res.data.status === "blocked"){
+        alert("Too many requests, please try again later")
+      }
+      else if (res.data.status === "logorpass"){
+        setUnPassErrorMsg("Wrong username or password")
+      }
+      else if (res.data.status === "success"){
+        window.location.reload(true)
+      }
+      else alert("Oops, something went wrong...")
+      
+    })
+    .catch(err => console.log(err))  
+    
+  }
 }
 
 export default LoginInfo

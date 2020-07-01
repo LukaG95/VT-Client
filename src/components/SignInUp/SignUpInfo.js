@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import Filter from 'bad-words'
-import {NotificationContainer, NotificationManager} from 'react-notifications'
+
+import {createNotification} from '../../App'
+
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 
 function SignUpInfo() {
@@ -16,69 +18,7 @@ function SignUpInfo() {
 
   const [readAndAgreed, setReadAndAgreed] = useState(false)
 
-  function createNotification(type, message){
-    NotificationManager[type](message, type.charAt(0).toUpperCase() + type.slice(1))
-  }
-
-  function handleSubmit(event){
-    event.preventDefault()
-    
-    if (username.replace(/\s/g, '').length < 2 || username.length > 15){
-      setUsernameErrorMsg("Username must be between 2 and 15 characters long")
-      return
-    }
-    else if (!username.match(/^(?!.*[ ]{2,})[a-zA-Z0-9 _-]{2,15}$/gm)){
-      setUsernameErrorMsg("Username can only contain characters a-z, 0-9, or '- _'")
-      return
-    }
-    else if (profanityFilter.isProfane(username)){
-      setUsernameErrorMsg("Username contains innapropriate words")
-      return
-    }
-    if (password.length < 6 || password.length > 30){
-      setPasswordErrorMsg("Password must be between 6 and 30 characters long")
-      return
-    }
-    else if (!password.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{6,30}$/gm)){
-      setPasswordErrorMsg("Passwords contains inappropriate characters")
-      return
-    }
-    else if (password !== confirmPassword){
-      setPasswordErrorMsg("Passwords don't match")
-      return
-    }
-    else if (!readAndAgreed){
-      createNotification("warning", "Agree to Terms of service")
-      return
-    }
-
-    axios.post('/api/auth/signup', {
-      username: username,
-      email: email,
-      password: password,
-      passwordConfirm: confirmPassword
-    })
-    .then(res => {
-      console.log(res.data)
-      if (res.data.status === "blocked"){
-        alert("Too many requests, please try again later")
-      }
-      else if (res.data.status === "username"){
-        setUsernameErrorMsg("Username is taken")
-      }
-      else if (res.data.status === "email"){
-        setEmailErrorMsg("Email is already in use")
-      }
-      else if (res.data.status === "success"){
-        createNotification("success", "You have signed up")
-        setTimeout(()=> {createNotification("info", "Check your email for a confirmation link")}, 2000)
-      }
-      else createNotification("error", "Oops, something went wrong...") // alert("Oops, something went wrong...")
-    })
-    .catch(err => console.log(err))
-    
-  }
-
+  
   return (
     <form onSubmit={handleSubmit} className="loginHolder">
 
@@ -154,10 +94,71 @@ function SignUpInfo() {
 
       <button type="submit" className="formItem loginNowButton">Sign Up</button>
 
-      <NotificationContainer/>
-
     </form>
   )
+
+
+  /*-----Functions                -------------*/
+
+  function handleSubmit(event){
+    event.preventDefault()
+    
+    if (username.replace(/\s/g, '').length < 2 || username.length > 15){
+      setUsernameErrorMsg("Username must be between 2 and 15 characters long")
+      return
+    }
+    else if (!username.match(/^(?!.*[ ]{2,})[a-zA-Z0-9 _-]{2,15}$/gm)){
+      setUsernameErrorMsg("Username can only contain characters a-z, 0-9, or '- _'")
+      return
+    }
+    else if (profanityFilter.isProfane(username)){
+      setUsernameErrorMsg("Username contains innapropriate words")
+      return
+    }
+    if (password.length < 6 || password.length > 30){
+      setPasswordErrorMsg("Password must be between 6 and 30 characters long")
+      return
+    }
+    else if (!password.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{6,30}$/gm)){
+      setPasswordErrorMsg("Passwords contains inappropriate characters")
+      return
+    }
+    else if (password !== confirmPassword){
+      setPasswordErrorMsg("Passwords don't match")
+      return
+    }
+    else if (!readAndAgreed){
+      createNotification("warning", "Agree to Terms of service")
+      return
+    }
+
+    axios.post('/api/auth/signup', {
+      username: username,
+      email: email,
+      password: password,
+      passwordConfirm: confirmPassword
+    })
+    .then(res => {
+      console.log(res.data)
+      if (res.data.status === "blocked"){
+        alert("Too many requests, please try again later")
+      }
+      else if (res.data.status === "username"){
+        setUsernameErrorMsg("Username is taken")
+      }
+      else if (res.data.status === "email"){
+        setEmailErrorMsg("Email is already in use")
+      }
+      else if (res.data.status === "success"){
+        createNotification("success", "You have signed up")
+        setTimeout(()=> {createNotification("info", "Check your email for a confirmation link")}, 2000)
+      }
+      else createNotification("error", "Oops, something went wrong...") // alert("Oops, something went wrong...")
+    })
+    .catch(err => console.log(err))
+    
+  }
+
 }
 
 export default SignUpInfo

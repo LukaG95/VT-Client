@@ -1,8 +1,9 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {Link, useLocation} from 'react-router-dom'
-import Sidebar from '../components/Sidebar'
 import axios from 'axios'
-import { UserContext } from '../UserContext'
+
+import Sidebar from '../components/Sidebar'
+import {UserContext} from '../UserContext'
 
 function Reputation() {
   const [repInfo, setRepInfo] = useState() 
@@ -17,76 +18,24 @@ function Reputation() {
   useEffect(()=> {
     if (myID === undefined && userID === "") return
 
-      let searchUserID = 0
-      if (userID === ""){
-        searchUserID = myID
-      }
-      else 
-        searchUserID = userID
+    let searchUserID = 0
+    if (userID === ""){
+      searchUserID = myID
+    }
+    else 
+      searchUserID = userID
 
-      axios.get(`/api/reputation/${searchUserID}`)
-      .then (res => { 
-        if (res.data.status === "success")
-          setRepInfo(res.data.rep)
-        else /*if (res.data.status === "invalid")*/
-          setRepInfo("invalid")
-      })
-      .catch(err => console.log(err))
+    axios.get(`/api/reputation/${searchUserID}`)
+    .then (res => { 
+      if (res.data.status === "success")
+        setRepInfo(res.data.rep)
+      else /*if (res.data.status === "invalid")*/
+        setRepInfo("invalid")
+    })
+    .catch(err => console.log(err))
 
   }, [myID, userID])
 
-
-  function Reps(){
-    const reps = repInfo.repsByGame[repType].map((rep, i) => {
-      if (i >= currentPage * 17 - 17 && i <= currentPage * 17 - 1)
-        return(
-          <div className={"rep-container noUserInteraction" }>
-            <div className="rep-vote" style={rep.good ? {backgroundColor: "#2C8E54"} : {backgroundColor: "#CE4646"}} >{rep.good ? "+ " : "- "}1</div>
-            <p style={{marginLeft: "19px", width: "200px"}}>{rep.createdBy}</p>
-            <p style={{width: "150px"}}>{rep.createdAt}</p>
-            <p>{rep.feedback}</p>
-          </div>
-        )
-    })
-    return reps
-  }
-
-  function PageNumbers(){
-    const pageButtons = []
-    const x = repInfo.amount[repType] / 17
-    const pageAmount = Number.isInteger(x) ? x : Math.floor(x + 1)
-
-    const starting_number = () => {
-      if (currentPage <= 5 || pageAmount <= 10) 
-        return 1 
-      else if (currentPage + 5 >= pageAmount)
-        return pageAmount - 9
-      else 
-        return currentPage - 5
-    }
-
-    const ending_number = () => {
-      if (pageAmount < 10)
-        return pageAmount + 1
-      else
-        return starting_number() + 10
-    }
-
-    for (let i = starting_number(); i < ending_number(); i++)
-      pageButtons.push(
-        i === currentPage ? 
-        <button className="pageButton highlighted-page">{i}</button> : 
-        <button className="pageButton" onClick={() => setCurrentPage(i)}>{i}</button>
-      )
-
-    return(
-      <section style={{marginTop: "20px"}} className="page-numbers">
-        <div onClick={()=> currentPage > 1 && setCurrentPage(prev => prev - 1)} className="page-left noUserInteraction"></div>
-          {pageButtons}
-        <div onClick={()=> currentPage < pageAmount && setCurrentPage(prev => prev + 1)} className="page-right noUserInteraction"></div>
-      </section>
-    )
-  }
 
   if (repInfo !== undefined && repInfo !== "invalid")
   return (
@@ -184,6 +133,61 @@ function Reputation() {
       </div>
     )  
     else return null // <Spinner className="newPosition">
+
+
+  /*-----Functions                -------------*/
+
+  function Reps(){
+    const reps = repInfo.repsByGame[repType].map((rep, i) => {
+      if (i >= currentPage * 17 - 17 && i <= currentPage * 17 - 1)
+        return(
+          <div className={"rep-container noUserInteraction" }>
+            <div className="rep-vote" style={rep.good ? {backgroundColor: "#2C8E54"} : {backgroundColor: "#CE4646"}} >{rep.good ? "+ " : "- "}1</div>
+            <p style={{marginLeft: "19px", width: "200px"}}>{rep.createdBy}</p>
+            <p style={{width: "150px"}}>{rep.createdAt}</p>
+            <p>{rep.feedback}</p>
+          </div>
+        )
+    })
+    return reps
+  }
+
+  function PageNumbers(){
+    const pageButtons = []
+    const x = repInfo.amount[repType] / 17
+    const pageAmount = Number.isInteger(x) ? x : Math.floor(x + 1)
+
+    const starting_number = () => {
+      if (currentPage <= 5 || pageAmount <= 10) 
+        return 1 
+      else if (currentPage + 5 >= pageAmount)
+        return pageAmount - 9
+      else 
+        return currentPage - 5
+    }
+
+    const ending_number = () => {
+      if (pageAmount < 10)
+        return pageAmount + 1
+      else
+        return starting_number() + 10
+    }
+
+    for (let i = starting_number(); i < ending_number(); i++)
+      pageButtons.push(
+        i === currentPage ? 
+        <button className="pageButton highlighted-page">{i}</button> : 
+        <button className="pageButton" onClick={() => setCurrentPage(i)}>{i}</button>
+      )
+
+    return(
+      <section style={{marginTop: "20px"}} className="page-numbers">
+        <div onClick={()=> currentPage > 1 && setCurrentPage(prev => prev - 1)} className="page-left noUserInteraction"></div>
+          {pageButtons}
+        <div onClick={()=> currentPage < pageAmount && setCurrentPage(prev => prev + 1)} className="page-right noUserInteraction"></div>
+      </section>
+    )
+  }
 }
 
 export default Reputation;

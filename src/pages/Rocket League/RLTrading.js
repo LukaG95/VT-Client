@@ -1,10 +1,12 @@
 import React, {useState, useContext, useEffect} from 'react'
+import axios from 'axios'
+import Spinner from '../../components/Spinner'
+
+import infoRL from '../../info/infoRL.json'
 import Sidebar from '../../components/Sidebar'
 import {SbFiltersRLContext} from '../../components/Rocket League/SbFiltersRLContext'
-import Spinner from '../../components/Spinner'
-import infoRL from '../../info/infoRL.json'
 import RLTradeComponent from '../../components/Rocket League/RLTradeComponent'
-import axios from 'axios'
+
 
 function RLTrading() {
   const [tradeInfo, setTradeInfo] = useState()
@@ -38,6 +40,31 @@ function RLTrading() {
 
   }, [game, searchType, name, paint, cert, itemType, platform, currentPage])
 
+
+  if (tradeInfo){
+    return (
+      <div className="secondaryWrapper">  
+
+        <Sidebar />
+        
+        <main className="main">
+
+          <div className="main-top">
+            <p className="trading-title">Rocket League</p> 
+            <PageNumbers />
+            {/* placeholder */}
+          </div>
+
+          <TradeComponents />
+
+          <section className="page-numbers"></section>
+
+        </main>
+
+      </div>
+  )} else return null
+
+  /*-----Functions                -------------*/
 
   function PageNumbers(){
     if (tradeInfo){
@@ -86,29 +113,6 @@ function RLTrading() {
       </div>
     )
   }
-
-  if (tradeInfo){
-    return (
-      <div className="secondaryWrapper">  
-
-        <Sidebar />
-        
-        <main className="main">
-
-          <div className="main-top">
-            <p className="trading-title">Rocket League</p> 
-            <PageNumbers />
-            {/* placeholder */}
-          </div>
-
-          <TradeComponents />
-
-          <section className="page-numbers"></section>
-
-        </main>
-
-      </div>
-  )} else return null
 }
 
 export default RLTrading

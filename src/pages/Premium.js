@@ -1,6 +1,7 @@
 import React from 'react'
 
 function Premium() {
+  
   return (
     <div className="secondaryWrapper">
 
@@ -10,4 +11,4 @@ function Premium() {
   )
 }
 
-export default Premium;
+export default Premium

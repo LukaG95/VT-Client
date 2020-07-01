@@ -1,18 +1,10 @@
 import React, {useState} from 'react'
-import {NotificationContainer, NotificationManager} from 'react-notifications'
+
+import {createNotification} from '../../App'
 
 function ForgotPassword() {
   const [unOrEmail, setUnOrEmail] = useState("")
 
-
-function createNotification(type, message){
-  NotificationManager[type](message, type.charAt(0).toUpperCase() + type.slice(1))
-}
-  
-function handleSubmit(e){
-  e.preventDefault()
-  createNotification("success", "Password reset sent")
-}
 
   return (
     <form onSubmit={handleSubmit} className="loginHolder">
@@ -33,10 +25,16 @@ function handleSubmit(e){
 
       <button type="submit" className="resetPassButton">Send password reset email</button>
 
-      <NotificationContainer/>
-
     </form>
   )
+
+
+  /*-----Functions                -------------*/
+
+  function handleSubmit(e){
+    e.preventDefault()
+    createNotification("success", "Password reset sent")
+  }
 }
 
 export default ForgotPassword

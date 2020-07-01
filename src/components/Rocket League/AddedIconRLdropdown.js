@@ -1,4 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react'
+
 import {TradeContext} from './TradeContextRL'
 import {rl_dd_names} from '../../info/DropdownNames'
 
@@ -20,6 +21,7 @@ function RLitem_icon_dropdown({id}) {
       }
     })
   }, [])
+  
 
 	return (
     <div 
@@ -66,6 +68,9 @@ function RLitem_icon_dropdown({id}) {
     </div> 	
 	)
 }
+
+
+ /*-----Functions                -------------*/
 
 function FilterButton({dd, label, value, setFunction}){
   const [open, setOpen] = useState(false)

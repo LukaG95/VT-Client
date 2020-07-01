@@ -1,4 +1,5 @@
 import React from 'react'
+
 import imageExists from '../../misc/func'
 import infoRL from '../../info/infoRL.json' 
 
@@ -9,6 +10,29 @@ function TradepostIconRL({item}) {
     if (Color.Name === item.paint)
     paintID = Color.ID
   }) 
+
+
+	return (
+    <div className="RLicon">
+
+      <img 
+        name="enableDropdown"
+        style={{height: "95px", width: "95px", cursor: "pointer"}} 
+        src={imageExists(`${item.itemID}.${paintID}.webp`, item.itemID)}  // pass in 2 params, if the painted image doesn't exist check if regular exists, 
+        alt=""                                                                                         // and then if both don't exist return questionmark
+      />
+      
+      <AmountIcon />
+      <ColorIcon />
+      <CertIcon />
+      
+      <span className="RLicon-name-hover"><p>{item.itemName}</p></span>
+
+    </div>		
+  )
+  
+
+  /*-----Functions                -------------*/
 
   function CertIcon(){
     if (item.cert !== "None")
@@ -29,26 +53,6 @@ function TradepostIconRL({item}) {
       )
     else return null
   }
-
-	return (
-    <div className="RLicon">
-
-      <img 
-        name="enableDropdown"
-        style={{height: "95px", width: "95px", cursor: "pointer"}} 
-        src={imageExists(`${item.itemID}.${paintID}.webp`, item.itemID)}  // pass in 2 params, if the painted image doesn't exist check if regular exists, 
-        alt=""                                                                                         // and then if both don't exist return questionmark
-      />
-      
-      <AmountIcon />
-      <ColorIcon />
-      <CertIcon />
-      
-      <span className="RLicon-name-hover"><p>{item.itemName}</p></span>
-
-
-    </div>		
-	)
 }
 
 export default TradepostIconRL

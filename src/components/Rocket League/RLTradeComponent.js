@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+
 import TradePostIconRL from './TradePostIconRL'
 
 function RLTradeComponent({trade, userTradesPage}) {
@@ -13,27 +14,7 @@ function RLTradeComponent({trade, userTradesPage}) {
 
   const refPlatform = trade.platform === "PC" ? "Steam" : trade.platform
 
-  function userName(){
-    if (trade.premium){
-      return (
-        <div className="username premium">
-          <img style={{marginTop: "4px", marginRight: "6px", width: "17px", height: "17px"}} src={require("../../images/other/crown.svg")} />
-          <p>{trade.username}</p>
-        </div>
-      )
-    }
-    else return <p className="username">{trade.username}</p>
-  }
-
-
-  function tradeItems(){
-    return trade.have.map(item => <TradePostIconRL item={item} />)
-  }
-
-  function wantItems(){
-    return trade.want.map(item => <TradePostIconRL item={item} />)
-  }
-
+  
   return (
       <div className="rltrade-container">
 
@@ -96,6 +77,30 @@ function RLTradeComponent({trade, userTradesPage}) {
 
       </div>
   )
+
+
+  /*-----Functions                -------------*/
+
+  function userName(){
+    if (trade.premium){
+      return (
+        <div className="username premium">
+          <img style={{marginTop: "4px", marginRight: "6px", width: "17px", height: "17px"}} src={require("../../images/other/crown.svg")} />
+          <p>{trade.username}</p>
+        </div>
+      )
+    }
+    else return <p className="username">{trade.username}</p>
+  }
+
+
+  function tradeItems(){
+    return trade.have.map(item => <TradePostIconRL item={item} />)
+  }
+
+  function wantItems(){
+    return trade.want.map(item => <TradePostIconRL item={item} />)
+  }
 }
 
 export default RLTradeComponent
