@@ -3,6 +3,7 @@ import {useLocation} from 'react-router-dom'
 import axios from 'axios'
 import RLTradeComponent from '../components/Rocket League/RLTradeComponent'
 import { UserContext } from '../UserContext'
+import {NotificationContainer, NotificationManager} from 'react-notifications'
 
 function UserTrades() {
   const [userTrades, setUserTrades] = useState()
@@ -20,6 +21,10 @@ function UserTrades() {
     .catch(err => console.log("Error: " + err))
   }, [])
 
+  function createNotification(type, message){
+    NotificationManager[type](message, type.charAt(0).toUpperCase() + type.slice(1))
+  }
+
   function deleteTrade(trade){
     axios.delete(`/api/trades/deleteTrade?id=${trade._id}`)
     .then (res => { 
@@ -33,23 +38,31 @@ function UserTrades() {
   }
 
   function bumpTrade(trade){
-    window.location.reload(true)
+    axios.put(`/api/trades/bumpTrade/${trade._id}`)
+    .then (res => { 
+      if (res.data.status === "success"){
+        createNotification("success", "Trade was bumped")
+        console.log("hih")
+      }
+    })
+    .catch(err => console.log("Error: " + err))
+    
+     console.log("heh")
   }
 
   function TradeComponents(){
       var tradeComponents = userTrades.map(trade => 
-      <>
-        <RLTradeComponent trade={trade} userTradesPage={true}/>
-        { myID === pathID ? 
-          
-          <div className="editDel-tradeButtons-section">
-            <button onClick={() => editTrade(trade)} className="editTrade-button">Edit trade</button>
-            <button onClick={() => deleteTrade(trade)} className="deleteTrade-button">Delete trade</button>
-            <button onClick={() => bumpTrade(trade)} className="bumpTrade-button">Bump trade</button> 
-          </div> : null
-        }
-        
-      </>
+        <>
+          <RLTradeComponent trade={trade} userTradesPage={true}/>
+          { myID === pathID ? 
+            
+            <div className="editDel-tradeButtons-section">
+              <button onClick={() => editTrade(trade)} className="editTrade-button">Edit trade</button>
+              <button onClick={() => deleteTrade(trade)} className="deleteTrade-button">Delete trade</button>
+              <button onClick={() => bumpTrade(trade)} className="bumpTrade-button">Bump trade</button> 
+            </div> : null
+          }
+        </>
       )
 
   return(
@@ -81,8 +94,9 @@ if (userTrades)
         </div>
         }
         
-        
         <TradeComponents />
+
+        <NotificationContainer/>
 
       </div>
   )

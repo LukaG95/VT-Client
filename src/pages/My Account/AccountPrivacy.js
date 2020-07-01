@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import axios from 'axios'
 import AccountSidebar from '../../components/AccountSidebar'
 
 function AccountPrivacy() {
@@ -70,15 +71,25 @@ function AccountPrivacy() {
       setNewPass2ErrorMsg("Passwords don't match")
       return
     }
-    else if (newPass.length < 4 || password.length > 30){
-      setNewPassErrorMsg("Password must be between 4 and 30 characters long")
+    else if (newPass.length < 6 || password.length > 30){
+      setNewPassErrorMsg("Password must be between 6 and 30 characters long")
       return
     }
-    else if (!newPass.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{4,30}$/gm)){
+    else if (!newPass.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{6,30}$/gm)){
       setNewPassErrorMsg("Password contains inappropriate characters")
       return
     }
-    // server request and validation
+
+    // server request for password upate
+    axios.put(`/api/auth/updatePassword`, {
+      password: password,
+      newPassword: newPass,
+      passwordConfirm: newPass2
+    })
+    .then(res => { 
+      console.log(res)
+    })
+    .catch(err => console.log(err))
 
   }
 }

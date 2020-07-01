@@ -4,16 +4,14 @@ import axios from 'axios'
 
 import {NotificationContainer, NotificationManager} from 'react-notifications'
 
-function LoginForm() {
+function ResetPassword() {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
 
   const pathID = useLocation().pathname.substring(15)  // reads url after /passwordreset/ till the end
 
-  // createNotification("warning", "Agree to Terms of service")
-
   return (
-    <div className="resetPassWrapper" style={{background: "none"}}>
+    <div className="resetPassWrapper">
 
       <form onSubmit={handleNewPassSubmit} className="resetPassForm">
             
@@ -94,4 +92,4 @@ function LoginForm() {
   }
 }
 
-export default LoginForm
+export default ResetPassword

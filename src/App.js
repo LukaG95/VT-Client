@@ -19,8 +19,10 @@ import Popups from './components/Popups'
 import AddReputation from './pages/AddReputation'
 import UserTrades from './pages/UserTrades'
 import ResetPassword from './components/SignInUp/ResetPassword'
+import ConfirmEmail from './components/SignInUp/ConfirmEmail'
 import {TradeContextProvider} from './components/Rocket League/TradeContextRL'
 import {SbFiltersRLContextProvider} from './components/Rocket League/SbFiltersRLContext'
+import {NotificationContainer, NotificationManager} from 'react-notifications'
 
 function App() {
 
@@ -32,8 +34,7 @@ function App() {
     // else, loading animation -- optional
     // else return <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
   }
-
-
+  
   return (
     <>
       <LoginForm />
@@ -57,11 +58,21 @@ function App() {
         <Route exact path="/account/privacy">   {handleRedirectOnRefresh(<AccountPrivacy /> )}   </Route>
         <Route exact path="/account/platforms"> {handleRedirectOnRefresh(<AccountPlatforms /> )} </Route>
         <Route exact path="/account/logout">    {handleRedirectOnRefresh(<AccountLogout /> )}    </Route>
-        <Route path="/passwordreset">           <ResetPassword /> </Route>
+        <Route path="/passwordreset">           <ResetPassword />  </Route>
+        <Route path="/emailconfirm">            <ConfirmEmail />   </Route>
         <Route path="/trades">                  <UserTrades />     </Route>
       </Switch>
+
+      <NotificationContainer/>
+
     </>
   )
+  
 }
 
-export default App
+function CreateNotification(type, message){
+  NotificationManager[type](message, type.charAt(0).toUpperCase() + type.slice(1))
+}
+
+
+export {App, CreateNotification}

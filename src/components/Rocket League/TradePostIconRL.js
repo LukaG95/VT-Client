@@ -5,11 +5,10 @@ import infoRL from '../../info/infoRL.json'
 function TradepostIconRL({item}) { 
 
   var paintID = 0
-  infoRL.Colors.map(Color => { console.log(item)
+  infoRL.Colors.map(Color => { 
     if (Color.Name === item.paint)
     paintID = Color.ID
   }) 
-  console.log(paintID)
 
   function CertIcon(){
     if (item.cert !== "None")

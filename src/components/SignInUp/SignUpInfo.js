@@ -35,11 +35,11 @@ function SignUpInfo() {
       setUsernameErrorMsg("Username contains innapropriate words")
       return
     }
-    if (password.length < 4 || password.length > 30){
-      setPasswordErrorMsg("Password must be between 4 and 30 characters long")
+    if (password.length < 6 || password.length > 30){
+      setPasswordErrorMsg("Password must be between 6 and 30 characters long")
       return
     }
-    else if (!password.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{4,30}$/gm)){
+    else if (!password.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{6,30}$/gm)){
       setPasswordErrorMsg("Passwords contains inappropriate characters")
       return
     }

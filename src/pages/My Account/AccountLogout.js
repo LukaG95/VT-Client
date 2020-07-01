@@ -1,6 +1,8 @@
 import React from 'react'
-import AccountSidebar from '../../components/AccountSidebar'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
+import AccountSidebar from '../../components/AccountSidebar'
+
 
 function AccountPlatforms() {
 	return (
@@ -14,14 +16,22 @@ function AccountPlatforms() {
             <label><p>Are you sure you want to Logout?</p></label>
             <div className="underLogout">
               <Link to="/account" id="removeDecoration"><button id="logoutCancelButton">Cancel</button></Link>
-              <button id="logoutAcceptButton">Logout</button>
+              <button onClick={()=> handleLogout()} id="logoutAcceptButton">Logout</button>
             </div>
         </div>
 				
 			</div>
 		
 		</div>
-	)
+  )
+  
+  function handleLogout(){
+    axios.delete(`/api/auth/logout`)
+    .then (res => { 
+      window.location.reload()
+    })
+    .catch(err => console.log("Error: " + err))
+  }
 }
 
 export default AccountPlatforms

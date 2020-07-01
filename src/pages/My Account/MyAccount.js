@@ -1,4 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react'
+import axios from 'axios'
 import AccountSidebar from '../../components/AccountSidebar'
 import Tooltip from '../../components/Tooltip'
 import Filter from 'bad-words'
@@ -73,13 +74,26 @@ function MyAccount() {
     }
 
     // server request for username update
-  
+    axios.put(`/api/auth/updateUsername`, {
+      newUsername: newUsername
+    })
+    .then(res => { 
+      console.log(res)
+    })
+    .catch(err => console.log(err))
   }
 
   function handleUpdateEmail(e) {
     e.preventDefault()
 
     // server request for email update
+    axios.put(`/api/auth/updateEmail`, {
+      newEmail: newEmail
+    })
+    .then(res => { 
+      console.log(res)
+    })
+    .catch(err => console.log(err))
   }
 
 }
