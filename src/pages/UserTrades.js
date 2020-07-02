@@ -12,7 +12,7 @@ function UserTrades() {
   
   const pathID = useLocation().pathname.substring(8)   // reads url after /trades/ till the end
 
-  const {myID, openDeleteAllTrades, setOpenDeleteAllTrades} = useContext(UserContext)
+  const {myID, setOpenDeleteAllTrades} = useContext(UserContext)
 
   useEffect(() => {
     axios.get(`/api/trades/getTrades?userId=${pathID}`)

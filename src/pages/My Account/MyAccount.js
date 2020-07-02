@@ -15,7 +15,7 @@ function MyAccount() {
   const [newUsername, setNewUsername] = useState()
   const [newEmail, setNewEmail] = useState()
 	
-  const {username, email} = useContext(UserContext);
+  const {username, email} = useContext(UserContext)
   
   useEffect(() => {
     setNewUsername(username)
