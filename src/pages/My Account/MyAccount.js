@@ -5,6 +5,7 @@ import Filter from 'bad-words'
 import AccountSidebar from '../../components/AccountSidebar'
 import Tooltip from '../../components/Tooltip'
 import {UserContext} from '../../UserContext'
+import {createNotification} from '../../App'
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 
@@ -16,7 +17,7 @@ function MyAccount() {
   const [newEmail, setNewEmail] = useState()
 	
   const {username, email} = useContext(UserContext)
-  
+
   useEffect(() => {
     setNewUsername(username)
     setNewEmail(email)
@@ -81,7 +82,16 @@ function MyAccount() {
       newUsername: newUsername
     })
     .then(res => { 
-      console.log(res)
+      if (res.data.status === "success"){
+        createNotification("success", "You have updated your username")
+      }
+      else if (res.data.status === "username"){ 
+        setUsernameErrorMsg("Username is taken")
+      }
+      else if (res.data.status === "days30"){
+        setUsernameErrorMsg("You can only change your username once per month")
+      }
+      else createNotification("error", "Oops something went wrong...")
     })
     .catch(err => console.log(err))
   }
@@ -94,7 +104,11 @@ function MyAccount() {
       newEmail: newEmail
     })
     .then(res => { 
-      console.log(res)
+      if (res.data.status === "success"){
+        createNotification("success", "You have updated your email")
+        setTimeout(()=> {createNotification("info", "Check your email for a confirmation link")}, 2000)
+      }
+      else createNotification("error", "Oops something went wrong...")
     })
     .catch(err => console.log(err))
   }

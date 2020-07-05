@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
+import {Link, Redirect} from 'react-router-dom'
 import axios from 'axios'
 
 import AccountSidebar from '../../components/AccountSidebar'
+import {createNotification} from '../../App'
 
 function AccountPrivacy() {
 	const [password, setPassword] = useState("")
@@ -23,37 +25,34 @@ function AccountPrivacy() {
 
 					<label htmlFor="curpassInput"><p>Current password</p></label>
           <input 
-            required 
             id="curpassInput" 
             type="password" 
             style={passErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
-            defaultValue={password} 
             onChange={(e)=>setPassword(e.target.value)} 
             onClick={()=> setPassErrorMsg("")}
+            value={password}
             />
           <p className="currentPassError">{passErrorMsg}</p>
 					
 					<label htmlFor="newpassInput"><p>New password</p></label>
           <input 
-            required 
             id="newpassInput" 
             type="password" 
             style={newPassErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
-            defaultValue={newPass} 
             onChange={(e)=>setNewpass(e.target.value)} 
             onClick={()=> setNewPassErrorMsg("")}
+            value={newPass}
           />
           <p className="newPassError">{newPassErrorMsg}</p>
 					
 					<label htmlFor="newpass2Input"><p>Confirm new password</p></label>
           <input 
-            required 
             id="newpass2Input" 
             type="password" 
             style={newPass2ErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
-            defaultValue={newPass2} 
             onChange={(e)=>setNewpass2(e.target.value)} 
             onClick={()=> setNewPass2ErrorMsg("")}
+            value={newPass2}
           />
           <p className="NewPassError2">{newPass2ErrorMsg}</p>
 
@@ -70,7 +69,17 @@ function AccountPrivacy() {
   function handleUpdatePassword(e){
     e.preventDefault()
 
-    if (newPass !== newPass2){
+    if (password === "" || newPass === "" || newPass2 === ""){
+      if (password === "")
+      setPassErrorMsg("Please fill this field")
+      if (newPass === "")
+      setNewPassErrorMsg("Please fill this field")
+      if (newPass2 === "")
+      setNewPass2ErrorMsg("Please fill this field")
+      return
+    }
+    
+    else if (newPass !== newPass2){
       setNewPass2ErrorMsg("Passwords don't match")
       return
     }
@@ -90,11 +99,17 @@ function AccountPrivacy() {
       passwordConfirm: newPass2
     })
     .then(res => { 
-      console.log(res)
+      if (res.data.status === "success"){
+        createNotification("success", "Password was updated")
+        setPassword("")
+        setNewpass("")
+        setNewpass2("")
+      }
+      else createNotification("error", "Oops something went wrong...")
     })
     .catch(err => console.log(err))
 
   }
 }
 
-export default AccountPrivacy;
+export default AccountPrivacy

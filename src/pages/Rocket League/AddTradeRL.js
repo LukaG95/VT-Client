@@ -15,6 +15,7 @@ import imageExists from '../../misc/func'
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 
 function AddTradeRL() {
+  const [tradesAmount, setTradesAmount] = useState()
   const [itemImages, setItemImages] = useState()
   const [tradeIdMatch, setTradeIdMatch] = useState(false)
   const [tradeErrorMsg, setTradeErrorMsg] = useState("")
@@ -44,17 +45,18 @@ function AddTradeRL() {
 
   // checks if we're editing a trade, gets the userID and maps over his trades to find if it matches any, if not it redirects to home page
   useEffect(() => {
-    if (pathID !== "" && myID){
+    if (myID){
       let x = false
       axios.get(`/api/trades/getTrades?userId=${myID}`)
       .then (res => { 
+        setTradesAmount(res.data.trades.length)
         res.data.trades.map(trade => {
           if (trade._id === pathID){
             setTradeIdMatch(true)
             x = true
           }
         })
-        if (x === false) window.location.href = "/trading/rl"
+        if (pathID !== "" && x === false) window.location.href = "/trading/rl"
         
       })
       .catch(err => console.log("Error: " + err))
@@ -204,7 +206,7 @@ function AddTradeRL() {
   }
 
   function handleTradeSubmit(){
-    if (have && want){
+    if (have && want && tradesAmount){
       if (!checkAddedItems()){
         setTradeErrorMsg("You have to select at least 1 item in have and want")
         tradeErrorMsg === "" && createNotification("error", "Choose items")
@@ -264,6 +266,10 @@ function AddTradeRL() {
 
         const refactorPlatform = platform === "Steam" ? "PC" : platform
 
+        if (tradesAmount >= 15){
+          createNotification("error", "You can only create 15 RL trades")
+        }
+
         if (pathID === ""){
           axios.post('/api/trades/createTrade', {
             have: haveRefactor,
@@ -277,8 +283,8 @@ function AddTradeRL() {
               clearWantItems()
               clearHaveItems()
               createNotification("success", "Created a new trade")
-              setTimeout(()=>createNotification("info", "8 / 10 RL trades"), 1000)
-              //setOpenTradeNotice(true)  
+              setTimeout(()=>createNotification("info", `${tradesAmount + 1} / 15 RL trades created`), 1000)
+              setTradesAmount(prev => prev+1)  
             }          
           })
           .catch(err => console.log(err))
@@ -288,7 +294,7 @@ function AddTradeRL() {
             want: wantRefactor, 
             platform: refactorPlatform,
             notes: profanityFilter.clean(notes),
-            old: {have, want}
+            old: {have: oldHave, want: oldWant}
           })
           .then(res => {
             if (res.data.status === "success"){

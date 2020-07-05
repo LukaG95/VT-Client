@@ -1,15 +1,19 @@
-import React, {useState} from 'react'
-import {useLocation} from 'react-router-dom'
+import React, {useState, useContext} from 'react'
+import {useLocation, Redirect} from 'react-router-dom'
 import axios from 'axios'
 
 import {createNotification} from '../../App'
+import {UserContext} from '../../UserContext'
 
 function ResetPassword() {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
 
-  const pathID = useLocation().pathname.substring(15)  // reads url after /passwordreset/ till the end
+  const {isLoggedIn} = useContext(UserContext)
 
+  const pathID = useLocation().pathname.substring(16)  // reads url after /password/reset/ till the end
+
+  if (isLoggedIn === false)
   return (
     <div className="resetPassWrapper">
 
@@ -48,6 +52,9 @@ function ResetPassword() {
 
     </div>
   )
+  else if (isLoggedIn === true)
+  return <Redirect to="/" />
+  else return null
 
 
   /*-----Functions                -------------*/
@@ -55,8 +62,8 @@ function ResetPassword() {
   function handleNewPassSubmit(e){
     e.preventDefault()
 
-    if (password.length < 4 || password.length > 30){
-      createNotification("warning", "Password must be between 4 and 30 characters long")
+    if (password.length < 6 || password.length > 30){
+      createNotification("warning", "Password must be between 6 and 30 characters long")
       return
     }
     else if (!password.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{4,30}$/gm)){
@@ -68,11 +75,12 @@ function ResetPassword() {
       return
     }
 
-    /*axios.post('/api/', {
+    axios.put('/api/auth/resetPassword', {
+      code: pathID,
       password: password,
-      confirmPassword: confirmPassword
+      passwordConfirm: confirmPassword
     })
-    .then(res => {
+    .then(res => { console.log(res)
       if (res.data.status === "blocked"){
         alert("Too many requests, please try again later")
       }
@@ -85,7 +93,6 @@ function ResetPassword() {
     })
     .catch(err => console.log(err))
 
-*/
   }
 }
 

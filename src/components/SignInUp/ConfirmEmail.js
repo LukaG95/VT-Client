@@ -2,24 +2,27 @@ import React, {useState, useEffect, useContext} from 'react'
 import {useLocation, Redirect} from 'react-router-dom'
 import axios from 'axios'
 
-import { UserContext } from '../../UserContext'
-import {createNotification} from '../../App'
-
 function ConfirmEmail() {
-  const pathID = useLocation().pathname.substring(14)  // reads url after /emailconfirm/ till the end
-
-  const {isLoggedIn} = useContext(UserContext)
+  const [emailConfirmed, setEmailConfirmed] = useState(false)
+  
+  const pathID = useLocation().pathname.substring(15)  // reads url after /emailconfirm/ till the end
 
   useEffect(() => {
-    axios.put(`/api/reg/${pathID}`)
+    axios.put(`/api/auth/confirmEmail/`, {
+      code: pathID
+    })
     .then(res => {
-      console.log(res)
+      if (res.data.status === "success"){
+        setEmailConfirmed(true)
+        console.log(res)
+      }
+      // else if (res.data.status === "OldOrInvalid")
     })
     .catch(err => console.log(err))
   }, [])
 
   
-  if (isLoggedIn === false)
+  if (emailConfirmed)
   return (
     <div className="confirmEmailWrapper">
 
@@ -41,9 +44,9 @@ function ConfirmEmail() {
 
     </div>
   )
-  else if (isLoggedIn === true)
-  return <Redirect to="/" />
-  else return null
+  else return <Redirect to="/" />
+
+  
 
 
   /*-----Functions                -------------*/

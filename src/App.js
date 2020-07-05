@@ -50,8 +50,8 @@ function App() {
         <Route exact path="/account/privacy">   {handleRedirectOnRefresh(<AccountPrivacy /> )}   </Route>
         <Route exact path="/account/platforms"> {handleRedirectOnRefresh(<AccountPlatforms /> )} </Route>
         <Route exact path="/account/logout">    {handleRedirectOnRefresh(<AccountLogout /> )}    </Route>
-        <Route path="/passwordreset">           <ResetPassword />  </Route>
-        <Route path="/emailconfirm">            <ConfirmEmail />   </Route>
+        <Route path="/password/reset">          <ResetPassword />  </Route>
+        <Route path="/email/confirm">           <ConfirmEmail />   </Route>
         <Route path="/trades">                  <UserTrades />     </Route>
       </Switch>
 

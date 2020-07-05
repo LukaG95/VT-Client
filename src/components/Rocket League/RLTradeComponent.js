@@ -12,6 +12,8 @@ function RLTradeComponent({trade, userTradesPage}) {
       return "82px"
   })
 
+  console.log(trade)
+
   const refPlatform = trade.platform === "PC" ? "Steam" : trade.platform
 
   
@@ -67,8 +69,8 @@ function RLTradeComponent({trade, userTradesPage}) {
             </div>
 
             <div className="buttons-box">
-              <button>Contact on Steam</button>
-              {userTradesPage ? null : <button>All {trade.username}'s trades</button> }
+              <button onClick={() => window.open(trade.steamAccount)}>Contact on Steam</button>
+              {userTradesPage ? null : <button onClick={() => window.open(`/trades/${trade.userId}`)}>All {trade.username}'s trades</button> }
             </div>
             
           </div>

@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import axios from 'axios'
 
 import {createNotification} from '../../App'
 
@@ -34,6 +35,15 @@ function ForgotPassword() {
   function handleSubmit(e){
     e.preventDefault()
     createNotification("success", "Password reset sent")
+
+    axios.post(`/api/auth/sendResetEmail`, {
+      email: unOrEmail
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err))
+    
   }
 }
 
