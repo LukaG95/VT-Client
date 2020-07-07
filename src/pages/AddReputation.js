@@ -114,36 +114,36 @@ function AddReputation() {
 
     if (myID === userID){
       setRepErrorMessage("You can't rep yourself")
-      repErrorMessage === "" && createNotification("error", "You can't rep yourself")
+      repErrorMessage !== "You can't rep yourself" && createNotification("error", "You can't rep yourself")
       return
     }
 
     if (repCategory === undefined){
       setRepErrorMessage("You have to pick a rep category 1st")
-      repErrorMessage === "" && createNotification("error", "Pick a rep category 1st")
+      repErrorMessage !== "You have to pick a rep category 1st" && createNotification("error", "Pick a rep category 1st")
       return
     }
 
     if (feedback === undefined || feedback.replace(/\s/g, '').length < 5) {
       setRepErrorMessage("Your message has to be at least 5 characters long")
-      repErrorMessage === "" && createNotification("error", "Your message has to be at least 5 characters long")
+      repErrorMessage !== "Your message has to be at least 5 characters long" && createNotification("error", "Your message has to be at least 5 characters long")
       return
     }
 
     if (feedback.length > 100) {
       setRepErrorMessage("Your message is too long, max 100 characters")
-      repErrorMessage === "" && createNotification("error", "Your message is too long")
+      repErrorMessage !== "Your message is too long, max 100 characters" && createNotification("error", "Your message is too long")
       return
     }
 
     if (!feedback.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9 ]{5,100}$/gm)) {
       setRepErrorMessage("Your message includes inappropriate characters")
-      repErrorMessage === "" && createNotification("error", "Your message includes inappropriate characters")
+      repErrorMessage !== "Your message includes inappropriate characters" && createNotification("error", "Your message includes inappropriate characters")
       return
     }
     if (feedback.match(/\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm)) {
       setRepErrorMessage("Your message must not inlcude links")
-      repErrorMessage === "" && createNotification("error", "Your message must not inlcude links")
+      repErrorMessage !== "Your message must not inlcude links" && createNotification("error", "Your message must not inlcude links")
       return
     }
 
@@ -155,12 +155,17 @@ function AddReputation() {
         game: repCategory
       }
     })
-    .then(res => {
+    .then(res => {console.log(res)
       if (res.data.status === "success"){
         setFeedback("")
         setRepCategory()
         setRepErrorMessage("")
         createNotification("success", "Reputation was submitted")
+      }
+      else if (res.data.status === "hours24"){
+        setRepErrorMessage("You can only leave a rep for the same person once in 24 hours")
+        repErrorMessage !== "You can only leave a rep for the same person once in 24 hours" && createNotification("error", `You have already repped ${repInfo.username}`)
+        return
       }
     })
     .catch(err => console.log(err))

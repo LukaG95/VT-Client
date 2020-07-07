@@ -82,7 +82,7 @@ function ResetPassword() {
     })
     .then(res => { console.log(res)
       if (res.data.status === "blocked"){
-        alert("Too many requests, please try again later")
+        createNotification("error", "Too many requests, please try again later") 
       }
       else if (res.data.status === "success"){
         createNotification("success", "Your password has been changed") 

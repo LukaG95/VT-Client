@@ -141,7 +141,7 @@ function SignUpInfo() {
     .then(res => {
       console.log(res.data)
       if (res.data.status === "blocked"){
-        alert("Too many requests, please try again later")
+        createNotification("error", "Too many requests, please try again later") 
       }
       else if (res.data.status === "username"){
         setUsernameErrorMsg("Username is taken")
@@ -153,7 +153,7 @@ function SignUpInfo() {
         createNotification("success", "You have signed up")
         setTimeout(()=> {createNotification("info", "Check your email for a confirmation link")}, 2000)
       }
-      else createNotification("error", "Oops, something went wrong...") // alert("Oops, something went wrong...")
+      else createNotification("error", "Oops, something went wrong...") 
     })
     .catch(err => console.log(err))
     

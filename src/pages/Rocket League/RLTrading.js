@@ -31,7 +31,7 @@ function RLTrading() {
     // server request with given filters
     axios.get(`/api/trades/getTrades?itemID=${id}&itemName=${name.toLowerCase()}&cert=${cert.toLowerCase()}&paint=${paint.toLowerCase()}&page=${currentPage}&limit=4`)
     .then (res => {
-
+      console.log(res.data.trades)
       // set state with response
       setTradeInfo(res.data.trades)
       setPageAmount(res.data.pages)

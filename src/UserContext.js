@@ -8,11 +8,7 @@ function UserContextProvider({children}) {
   const [email, setEmail] = useState()
   const [isLoggedIn, setIsLoggedIn] = useState()
   const [myID, setMyID] = useState()
-
-  // REFACTOR - move or remove this
-  const [openForm, setOpenForm] = useState(false)
-  const [openTradeNotice, setOpenTradeNotice] = useState(false)
-  const [openDeleteAllTrades, setOpenDeleteAllTrades] = useState(false)
+  const [role, setRole] = useState()
 
   useEffect(() => {
     axios.get('/api/auth/getUser')
@@ -30,8 +26,9 @@ function UserContextProvider({children}) {
       .catch(err => console.log(err))
   }, [])
 
+  
   return (
-      <UserContext.Provider value={{username, email, isLoggedIn, setIsLoggedIn, openForm, setOpenForm, openTradeNotice, setOpenTradeNotice, openDeleteAllTrades, setOpenDeleteAllTrades, myID}}>
+      <UserContext.Provider value={{username, email, isLoggedIn, setIsLoggedIn, myID, role}}>
           {children}
       </UserContext.Provider>
   )

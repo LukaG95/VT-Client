@@ -1,11 +1,11 @@
 import React, {useContext} from 'react'
 import axios from 'axios'
 
-import {UserContext} from '../UserContext'
+import {PopupContext} from './PopupContext'
 
 function Popups() {
 
-  const {openTradeNotice, setOpenTradeNotice, openDeleteAllTrades, setOpenDeleteAllTrades} = useContext(UserContext)
+  const {openTradeNotice, setOpenTradeNotice, openDeleteAllTrades, setOpenDeleteAllTrades} = useContext(PopupContext)
 
   // create a function, pass in setOpenTradeNotice as a parameter
   if (openTradeNotice)
@@ -67,6 +67,7 @@ function Popups() {
     })
     .catch(err => console.log("Error: " + err))
   }
+
 }
 
 export default Popups

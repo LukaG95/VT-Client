@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 
+import {createNotification} from '../../App'
+
 function LoginInfo({setForgotPassword}) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -57,13 +59,13 @@ function LoginInfo({setForgotPassword}) {
 
 
       <div className="formItem loginSteamAndDiscord">
-        <div onClick={()=> window.location.href='/auth/steam'} className="loginSteam">
+        <div onClick={()=> window.location.href='/api/auth/steam'} className="loginSteam">
           <img src={require("../../images/other/SteamCircle.png")} alt="" style={{marginRight: "10px"}}></img>
           <p>STEAM</p>
         </div>
 
 
-        <div onClick={()=> window.location.href='/auth/discord'} className="loginDiscord">
+        <div onClick={()=> window.location.href='/api/auth/discord'} className="loginDiscord">
           <img src={require("../../images/other/DiscordLogo.png")} alt="" style={{height: "28px", width: "35", marginRight: "8px"}}></img>
           <p>DISCORD</p>
         </div>
@@ -88,7 +90,7 @@ function LoginInfo({setForgotPassword}) {
     })
     .then(res => { console.log(res)
       if (res.data.status === "blocked"){
-        alert("Too many requests, please try again later")
+        createNotification("error", "Too many requests, please try again later") 
       }
       else if (res.data.status === "logorpass"){
         setUnPassErrorMsg("Wrong username or password")
@@ -96,7 +98,7 @@ function LoginInfo({setForgotPassword}) {
       else if (res.data.status === "success"){
         window.location.reload(true)
       }
-      else alert("Oops, something went wrong...")
+      else createNotification("error", "Oops, something went wrong...") 
       
     })
     .catch(err => console.log(err))  

@@ -48,7 +48,7 @@ function Reputation() {
         <div className="flex" style={{marginBottom: "20px"}}>
           <input 
             onChange = {e => setSearchValue(e.target.value)}
-            placeholder="(SteamID, Discord or VT Name)" 
+            placeholder="Search by VT id..." 
             className="rep-search-input">
           </input>
           <a className="searchRep-button" href={`/reputation/${searchValue}`}>
@@ -101,7 +101,7 @@ function Reputation() {
 
           <Reps />
         
-          <PageNumbers />
+          {repInfo.amount[repType] > 17 && <PageNumbers />}
         </>
         : <div className="noReputationMsg">User has no reputation in the database. Be the 1st one to 
         <Link to={`/reputation/add/${repInfo.userId}`} className="addRepButton2" id="removeDecoration"> add reputation</Link>
@@ -123,7 +123,7 @@ function Reputation() {
       <div className="repSearch_wrapper">
           <input 
             onChange = {e => setSearchValue(e.target.value)}
-            placeholder="(SteamID, Discord or VT Name)" 
+            placeholder="Search by VT id..." 
             className="rep-search-input">
           </input>
           <a className="searchRep-button" href={`/reputation/${searchValue}`}>

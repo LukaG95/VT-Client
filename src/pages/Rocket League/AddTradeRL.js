@@ -206,7 +206,7 @@ function AddTradeRL() {
   }
 
   function handleTradeSubmit(){
-    if (have && want && tradesAmount){
+    if (have && want){
       if (!checkAddedItems()){
         setTradeErrorMsg("You have to select at least 1 item in have and want")
         tradeErrorMsg === "" && createNotification("error", "Choose items")
@@ -266,11 +266,11 @@ function AddTradeRL() {
 
         const refactorPlatform = platform === "Steam" ? "PC" : platform
 
-        if (tradesAmount >= 15){
-          createNotification("error", "You can only create 15 RL trades")
-        }
-
         if (pathID === ""){
+          if (tradesAmount >= 15){
+            createNotification("error", "You can only create 15 RL trades")
+            return
+          }
           axios.post('/api/trades/createTrade', {
             have: haveRefactor,
             want: wantRefactor, 
@@ -278,7 +278,7 @@ function AddTradeRL() {
             notes: profanityFilter.clean(notes),
             old: {have: oldHave, want: oldWant}
           })
-          .then(res => {
+          .then(res => { console.log(res)
             if (res.data.status === "success"){
               clearWantItems()
               clearHaveItems()

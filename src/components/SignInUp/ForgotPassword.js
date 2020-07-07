@@ -34,9 +34,9 @@ function ForgotPassword() {
 
   function handleSubmit(e){
     e.preventDefault()
-    createNotification("success", "Password reset sent")
+    createNotification("success", "Password reset email sent")
 
-    axios.post(`/api/auth/sendResetEmail`, {
+    axios.post(`/api/auth/sendResetPasswordToken`, {
       email: unOrEmail
     })
     .then(res => {

@@ -3,19 +3,19 @@ import {useLocation, Redirect} from 'react-router-dom'
 import axios from 'axios'
 
 function ConfirmEmail() {
-  const [emailConfirmed, setEmailConfirmed] = useState(false)
+  const [emailConfirmed, setEmailConfirmed] = useState()
   
-  const pathID = useLocation().pathname.substring(15)  // reads url after /emailconfirm/ till the end
+  const pathID = useLocation().pathname.substring(15)  // reads url after /email/confirm/ till the end
 
   useEffect(() => {
     axios.put(`/api/auth/confirmEmail/`, {
       code: pathID
     })
-    .then(res => {
-      if (res.data.status === "success"){
+    .then(res => { console.log(res)
+      if (res.data.status === "success")
         setEmailConfirmed(true)
-        console.log(res)
-      }
+      else 
+        setEmailConfirmed(false)
       // else if (res.data.status === "OldOrInvalid")
     })
     .catch(err => console.log(err))
@@ -28,7 +28,7 @@ function ConfirmEmail() {
 
       <div className="displayTextWrapper">
         <h2>Success! You have confirmed your email</h2>
-        <p>
+        <p> 
           Make sure you are familiar with our <a href="/">trading rules</a> and <a href="/">reputation rules</a>. <br /> 
           Be careful when clicking on links when trading with others. <br /> 
           List of <a href="/">scamming methods</a> and how to prevent them <br />
@@ -44,9 +44,9 @@ function ConfirmEmail() {
 
     </div>
   )
+  else if (emailConfirmed === undefined) return null
   else return <Redirect to="/" />
 
-  
 
 
   /*-----Functions                -------------*/

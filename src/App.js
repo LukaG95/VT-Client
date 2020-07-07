@@ -19,8 +19,10 @@ import LoginForm from './components/SignInUp/LoginForm'
 import Popups from './components/Popups'
 import AddReputation from './pages/AddReputation'
 import UserTrades from './pages/UserTrades'
+import AdminPage from './pages/AdminPage'
 import ResetPassword from './components/SignInUp/ResetPassword'
 import ConfirmEmail from './components/SignInUp/ConfirmEmail'
+import UpdateEmail from './components/SignInUp/UpdateEmail'
 import {TradeContextProvider} from './components/Rocket League/TradeContextRL'
 import {SbFiltersRLContextProvider} from './components/Rocket League/SbFiltersRLContext'
 
@@ -52,7 +54,10 @@ function App() {
         <Route exact path="/account/logout">    {handleRedirectOnRefresh(<AccountLogout /> )}    </Route>
         <Route path="/password/reset">          <ResetPassword />  </Route>
         <Route path="/email/confirm">           <ConfirmEmail />   </Route>
+        <Route path="/email/update">            <UpdateEmail />    </Route>
         <Route path="/trades">                  <UserTrades />     </Route>
+
+        <Route path="/admin">                   <AdminPage />       </Route> {/*if myID is the same as my id*/}
       </Switch>
 
       <NotificationContainer/>

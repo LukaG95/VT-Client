@@ -12,8 +12,6 @@ function RLTradeComponent({trade, userTradesPage}) {
       return "82px"
   })
 
-  console.log(trade)
-
   const refPlatform = trade.platform === "PC" ? "Steam" : trade.platform
 
   

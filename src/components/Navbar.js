@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 
 import {UserContext} from '../UserContext'
+import {PopupContext} from './PopupContext'
 import {ReactComponent as Logo} from '../images/logo/logo.svg'
 import {ReactComponent as TradingWhite} from '../images/other/tradingWhite.svg'
 import {ReactComponent as ReputationWhite} from '../images/other/reputationWhite.svg'
@@ -14,7 +15,8 @@ function Navbar() {
   let location = useLocation()
   let trading = "", prices = "", reputation ="", premium = ""
 
-  const {isLoggedIn, setOpenForm} = useContext(UserContext)
+  const {isLoggedIn} = useContext(UserContext)
+  const {openForm, setOpenForm} = useContext(PopupContext)
 
   switch(location.pathname) {
   case "/trading/rl":

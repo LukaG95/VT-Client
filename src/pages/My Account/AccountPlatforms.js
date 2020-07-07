@@ -29,12 +29,10 @@ function AccountPlatforms() {
 
   function handleUpdateDiscord() {
     console.log('Discord button was clicked');
-    alert('Discord button was clicked');
   }
   
   function handleUpdateSteam() {
     console.log('Steam button was clicked');
-    alert('Steam button was clicked');
   }
 }
 

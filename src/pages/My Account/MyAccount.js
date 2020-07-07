@@ -5,6 +5,7 @@ import Filter from 'bad-words'
 import AccountSidebar from '../../components/AccountSidebar'
 import Tooltip from '../../components/Tooltip'
 import {UserContext} from '../../UserContext'
+import {PopupContext} from '../../components/PopupContext'
 import {createNotification} from '../../App'
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
@@ -64,6 +65,8 @@ function MyAccount() {
   function handleUpdateUsername(e) {
     e.preventDefault()
 
+    if (username === newUsername) return
+
     if (newUsername.replace(/\s/g, '').length < 2 || newUsername.length > 15){
       setUsernameErrorMsg("Username must be between 2 and 15 characters long")
       return
@@ -99,16 +102,17 @@ function MyAccount() {
   function handleUpdateEmail(e) {
     e.preventDefault()
 
+    if (email === newEmail) return
+
     // server request for email update
-    axios.put(`/api/auth/updateEmail`, {
+    axios.post(`/api/auth/sendResetEmailToken `, {
       newEmail: newEmail
     })
     .then(res => { 
-      if (res.data.status === "success"){
-        createNotification("success", "You have updated your email")
-        setTimeout(()=> {createNotification("info", "Check your email for a confirmation link")}, 2000)
-      }
-      else createNotification("error", "Oops something went wrong...")
+      if (res.data.status === "success")
+        createNotification("info", "Check your email for a confirmation link")
+      else 
+        createNotification("error", "Oops something went wrong...")
     })
     .catch(err => console.log(err))
   }

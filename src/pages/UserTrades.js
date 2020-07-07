@@ -5,6 +5,7 @@ import axios from 'axios'
 import {createNotification} from '../App'
 import RLTradeComponent from '../components/Rocket League/RLTradeComponent'
 import {UserContext} from '../UserContext'
+import {PopupContext} from '../components/PopupContext'
 
 function UserTrades() {
   const [userTrades, setUserTrades] = useState()
@@ -12,7 +13,8 @@ function UserTrades() {
   
   const pathID = useLocation().pathname.substring(8)   // reads url after /trades/ till the end
 
-  const {myID, setOpenDeleteAllTrades} = useContext(UserContext)
+  const {myID} = useContext(UserContext)
+  const {setOpenDeleteAllTrades} = useContext(PopupContext)
 
   useEffect(() => {
     axios.get(`/api/trades/getTrades?userId=${pathID}`)
