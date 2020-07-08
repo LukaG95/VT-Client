@@ -8,6 +8,9 @@ function UserContextProvider({children}) {
   const [email, setEmail] = useState()
   const [isLoggedIn, setIsLoggedIn] = useState()
   const [myID, setMyID] = useState()
+
+  // testing
+  const [displayWebsite, setDisplayWebsite] = useState()
   const [role, setRole] = useState()
 
   useEffect(() => {
@@ -24,11 +27,25 @@ function UserContextProvider({children}) {
 
       })
       .catch(err => console.log(err))
+
+
+      axios.get('/api/test/getUser')
+      .then (res => { 
+        if (res.data.status === "success"){
+          setDisplayWebsite(true)
+          setRole(res.data.user.role)
+        }
+        else if (res.data.status === "unauthorized")
+        setDisplayWebsite(false)
+
+      })
+      .catch(err => console.log(err))
+
   }, [])
 
   
   return (
-      <UserContext.Provider value={{username, email, isLoggedIn, setIsLoggedIn, myID, role}}>
+      <UserContext.Provider value={{username, email, isLoggedIn, setIsLoggedIn, myID, role, displayWebsite}}>
           {children}
       </UserContext.Provider>
   )

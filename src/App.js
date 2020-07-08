@@ -26,11 +26,14 @@ import UpdateEmail from './components/SignInUp/UpdateEmail'
 import {TradeContextProvider} from './components/Rocket League/TradeContextRL'
 import {SbFiltersRLContextProvider} from './components/Rocket League/SbFiltersRLContext'
 
+import AlphaForm from './components/SignInUp/AlphaForm'
+
 
 function App() {
 
-  const {isLoggedIn} = useContext(UserContext)
+  const {isLoggedIn, displayWebsite} = useContext(UserContext)
 
+  if (displayWebsite === true)
   return (
     <>
       <LoginForm />
@@ -57,12 +60,18 @@ function App() {
         <Route path="/email/update">            <UpdateEmail />    </Route>
         <Route path="/trades">                  <UserTrades />     </Route>
 
-        <Route path="/admin">                   <AdminPage />       </Route> {/*if myID is the same as my id*/}
+        <Route path="/admin">                   <AdminPage />       </Route> 
       </Switch>
 
       <NotificationContainer/>
     </>
   )
+
+  else if (displayWebsite === false)
+  return(
+    <AlphaForm />
+  )
+  else return null
 
 /*-----Functions                -------------*/
 
