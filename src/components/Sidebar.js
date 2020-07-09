@@ -4,6 +4,7 @@ import {Link, Route, Switch} from 'react-router-dom'
 import SbFiltersRL from './Rocket League/SbFiltersRL'
 import FiltersREP from './FiltersREP'
 import SbFooter from './SbFooter'
+import {SbFiltersRLContextProvider} from './Rocket League/SbFiltersRLContext'
 
 import {ReactComponent as CrownIcon} from '../images/other/crown.svg'
 

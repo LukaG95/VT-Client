@@ -51,11 +51,12 @@ function Navbar() {
           </div>
         </Link>
 
-        <a href="/reputation" className={`navLeftItem ${reputation}`} id="removeDecoration">
-          <ReputationWhite style={{height: "13px", width: "13px"}} className="navLeftContent" />
-          <div className="navLeftContent">Reputation</div>
-        </a>
-
+        <Link to="/reputation" id="removeDecoration">
+          <div className={`navLeftItem ${reputation}`} id="removeDecoration">
+            <ReputationWhite style={{height: "13px", width: "13px"}} className="navLeftContent" />
+            <div className="navLeftContent">Reputation</div>
+          </div>
+        </Link>
       {/*
         <Link to="/prices" id="removeDecoration">
           <div className={`navLeftItem ${prices}`}>

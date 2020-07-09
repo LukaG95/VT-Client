@@ -4,6 +4,7 @@ import axios from 'axios'
 const UserContext = React.createContext()
 
 function UserContextProvider({children}) {
+  const [user, setUser] = useState()
   const [username, setUsername] = useState()
   const [email, setEmail] = useState()
   const [isLoggedIn, setIsLoggedIn] = useState()
@@ -17,6 +18,7 @@ function UserContextProvider({children}) {
     axios.get('/api/auth/getUser')
       .then (res => {
         if (res.data.status === "success"){
+          setUser(res.data.user)
           setIsLoggedIn(true)
           setMyID(res.data.user._id)
           setUsername(res.data.user.username)
@@ -45,7 +47,7 @@ function UserContextProvider({children}) {
 
   
   return (
-      <UserContext.Provider value={{username, email, isLoggedIn, setIsLoggedIn, myID, role, displayWebsite}}>
+      <UserContext.Provider value={{user, username, email, isLoggedIn, setIsLoggedIn, myID, role, displayWebsite}}>
           {children}
       </UserContext.Provider>
   )

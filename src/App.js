@@ -14,6 +14,7 @@ import AccountPrivacy from './pages/My Account/AccountPrivacy'
 import AccountPlatforms from './pages/My Account/AccountPlatforms'
 import AccountLogout from './pages/My Account/AccountLogout'
 import Terms from './pages/Terms'
+import Sidebar from './components/Sidebar'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import LoginForm from './components/SignInUp/LoginForm'
 import Popups from './components/Popups'
@@ -40,17 +41,24 @@ function App() {
       <Popups />
       <Navbar />
 
+      <div className="flex"> 
+
+        <Switch>
+          <Route exact path="/">                <SbFiltersRLContextProvider> <Sidebar /><RLTrading /> </ SbFiltersRLContextProvider>     </Route>
+          <Route exact path="/trading/rl">      <SbFiltersRLContextProvider> <Sidebar /><RLTrading /> </ SbFiltersRLContextProvider>     </Route>
+          <Route path="/reputation/add">        {handleRedirectOnRefresh(<><Sidebar /><AddReputation /></>)}     </Route>
+          <Route path="/reputation">            <><Sidebar /><Reputation /></>     </Route>
+        </Switch>
+
+      </div>
+
       <Switch>
         {/*<Route exact path="/prices">         <Prices />          </Route>*/} 
         {/*<Route exact path="/premium">        <Premium />         </Route>*/}
-        <Route exact path="/">                  <SbFiltersRLContextProvider> <RLTrading /> </ SbFiltersRLContextProvider>     </Route>
-        <Route exact path="/trading/rl">        <SbFiltersRLContextProvider> <RLTrading /> </ SbFiltersRLContextProvider>     </Route>
         <Route exact path="/terms">             <Terms />           </Route>
         <Route exact path="/privacy">           <PrivacyPolicy />   </Route>
         <Route exact path="/trading/rl/new">    {handleRedirectOnRefresh(<TradeContextProvider>  <AddTradeRL />    </TradeContextProvider>)}       </Route>
         <Route path="/trading/rl/edit">         {handleRedirectOnRefresh(<TradeContextProvider>  <AddTradeRL />    </TradeContextProvider>)}       </Route>
-        <Route path="/reputation/add">          {handleRedirectOnRefresh(<AddReputation />)}     </Route>
-        <Route path="/reputation">              <Reputation />     </Route>
         <Route exact path="/account">           {handleRedirectOnRefresh(<MyAccount /> )}        </Route>
         <Route exact path="/account/privacy">   {handleRedirectOnRefresh(<AccountPrivacy /> )}   </Route>
         <Route exact path="/account/platforms"> {handleRedirectOnRefresh(<AccountPlatforms /> )} </Route>
@@ -59,9 +67,10 @@ function App() {
         <Route path="/email/confirm">           <ConfirmEmail />   </Route>
         <Route path="/email/update">            <UpdateEmail />    </Route>
         <Route path="/trades">                  <UserTrades />     </Route>
-
         <Route path="/admin">                   <AdminPage />       </Route> 
       </Switch>
+
+
 
       <NotificationContainer/>
     </>

@@ -521,7 +521,7 @@ body{
   width: 100%;
   height: 100%;
   margin: 40px 50px 0px 50px;
-  animation: transitionIn 0.4s;
+  animation: transitionFade 0.25s;
 
 }
 
@@ -883,7 +883,7 @@ body{
   width: 100%;
   min-width: 800px;
   margin: 43px 43px 0px 43px;
-
+  position: static;
   animation: transitionIn 0.4s;
 }
 
@@ -892,6 +892,9 @@ body{
   margin-top: 43px;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  padding-bottom: 600px;
+  padding-right: 280px;
 }
 
 .rep-search-input{
@@ -1237,7 +1240,10 @@ body{
 
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  width: 100%;
+  padding-bottom: 200px;
+  padding-right: 280px;
+
 }
 
 .rep-noUserFound-container p{

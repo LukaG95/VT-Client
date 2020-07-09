@@ -2,7 +2,7 @@ import React, {useState, useContext, useEffect} from 'react'
 import axios from 'axios'
 import Filter from 'bad-words'
 
-import AccountSidebar from '../../components/AccountSidebar'
+import AccountSidebar from './AccountSidebar'
 import Tooltip from '../../components/Tooltip'
 import {UserContext} from '../../UserContext'
 import {PopupContext} from '../../components/PopupContext'

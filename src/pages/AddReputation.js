@@ -42,9 +42,8 @@ function AddReputation() {
 
   if (repInfo !== undefined && repInfo !== "invalid")
   return (
-    <div className="secondaryWrapper">
 
-      <Sidebar />
+
 
       <main className="repWrapper">
         
@@ -96,7 +95,6 @@ function AddReputation() {
 
       </main>
       
-    </div>
   )
   else if (repInfo === "invalid")
     return (

@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 
-import AccountSidebar from '../../components/AccountSidebar'
+import AccountSidebar from './AccountSidebar'
 
 function AccountPlatforms() {
   

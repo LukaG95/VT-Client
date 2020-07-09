@@ -2,28 +2,30 @@ import React, {useState, useEffect, useContext} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 import axios from 'axios'
 
-import Sidebar from '../components/Sidebar'
 import {UserContext} from '../UserContext'
 
 function Reputation() {
   const [repInfo, setRepInfo] = useState() 
-  const [userID, setUserID] = useState(useLocation().pathname.substring(12)) // reads url after /reputation/ till the end
-
   const [repType, setRepType] = useState("all")
   const [currentPage, setCurrentPage] = useState(1)
   const [searchValue, setSearchValue] = useState("")
 
   const {myID, isLoggedIn} = useContext(UserContext)
+
+  const pathID = useLocation().pathname.substring(12) // reads url after /reputation/ till the end 
   
   useEffect(()=> {
-    if (myID === undefined && userID === "") return
+    if (myID === undefined && pathID === "") {
+      setRepInfo(undefined)
+      return
+    }
 
     let searchUserID = 0
-    if (userID === ""){
+    if (pathID === ""){
       searchUserID = myID
     }
     else 
-      searchUserID = userID
+      searchUserID = pathID
 
     axios.get(`/api/reputation/${searchUserID}`)
     .then (res => { 
@@ -34,83 +36,78 @@ function Reputation() {
     })
     .catch(err => console.log(err))
 
-  }, [myID, userID])
+  }, [myID, pathID])
 
 
   if (repInfo !== undefined && repInfo !== "invalid")
   return (
-    <div className="secondaryWrapper">
+    <main className="repWrapper">
 
-      <Sidebar />
-      
-      <main className="repWrapper">
+      <div className="flex" style={{marginBottom: "20px"}}>
+        <input 
+          onChange = {e => setSearchValue(e.target.value)}
+          placeholder="Search by VT id..." 
+          className="rep-search-input">
+        </input>
+        <a className="searchRep-button" href={`/reputation/${searchValue}`}>
+          <img style={{width: "11px", height: "11px", marginRight: "6px"}} src={require("../images/other/MagnGlass.png")} /> 
+          SEARCH
+        </a>
+      </div>
 
-        <div className="flex" style={{marginBottom: "20px"}}>
-          <input 
-            onChange = {e => setSearchValue(e.target.value)}
-            placeholder="Search by VT id..." 
-            className="rep-search-input">
-          </input>
-          <a className="searchRep-button" href={`/reputation/${searchValue}`}>
-            <img style={{width: "11px", height: "11px", marginRight: "6px"}} src={require("../images/other/MagnGlass.png")} /> 
-            SEARCH
-          </a>
+      <div className="repHeader">
+        <div className="flex">
+          <div className="flex-col rep-header-left">
+            <p className="rep-username">{repInfo.username}'s Reputation</p>
+            <p className="rep-title">{repInfo.title}</p>
+          </div>
+          <p className="rep-grade">{repInfo.grade}</p>
         </div>
 
-        <div className="repHeader">
-          <div className="flex">
-            <div className="flex-col rep-header-left">
-              <p className="rep-username">{repInfo.username}'s Reputation</p>
-              <p className="rep-title">{repInfo.title}</p>
-            </div>
-            <p className="rep-grade">{repInfo.grade}</p>
-          </div>
+        <div className="flex rep-header-right">
+          <Link style={{textDecoration: "none"}} to={`/reputation/add/${repInfo.userId}`}>
+            {isLoggedIn && 
+            <button className="rep-addrep-button">
+              <img src={require('../images/other/Reputation orange.png')} className="rep-icon-inButton"/>Add reputation
+            </button>}
+          </Link>
 
-          <div className="flex rep-header-right">
-            <Link style={{textDecoration: "none"}} to={`/reputation/add/${repInfo.userId}`}>
-              <button className="rep-addrep-button">
-                <img src={require('../images/other/Reputation orange.png')} className="rep-icon-inButton"/>Add reputation
-              </button>
-            </Link>
-
-            <section className="rep-cutout"></section>
-            <div className="rep-ups-downs">
-              <span className="rep-ups">+{repInfo.ups}</span>
-              <span className="rep-middle"> </span>
-              <span className="rep-downs">-{repInfo.downs}</span>
-            </div>
+          <section className="rep-cutout"></section>
+          <div className="rep-ups-downs">
+            <span className="rep-ups">+{repInfo.ups}</span>
+            <span className="rep-middle"> </span>
+            <span className="rep-downs">-{repInfo.downs}</span>
           </div>
         </div>
+      </div>
 
-        {repInfo.amount.all > 0 ? 
-        <>
-          <section className="rep-inbetween-section">
-            <div className="rep-inbetween-section-left">
-              <p style={{marginLeft: "80px"}}>Created By</p>
-              <p style={{marginLeft: "145px"}}>Date &#38; Time (UTC)</p>
-              <p style={{marginLeft: "60px"}}>Feedback</p>
-            </div>
-
-            <div className="rep-inbetween-section-right">
-              <button onClick={()=> {setCurrentPage(1); setRepType("all")}} style={repType==="all" ? {color: "#E7AA0F"} : null}> All ({repInfo.amount.all}) /&nbsp;</button>
-              <button onClick={()=> {setCurrentPage(1); setRepType("csgo")}} style={repType==="csgo" ? {color: "#E7AA0F"} : null}> CSGO ({repInfo.amount.csgo}) /&nbsp;</button>
-              <button onClick={()=> {setCurrentPage(1); setRepType("rl")}} style={repType==="rl" ? {color: "#E7AA0F"} : null}> RL ({repInfo.amount.rl}) /&nbsp;</button>
-              <button onClick={()=> {setCurrentPage(1); setRepType("other")}} style={repType==="other" ? {color: "#E7AA0F"} : null}> Other ({repInfo.amount.other})</button>
-            </div>
-          </section>
-
-          <Reps />
-        
-          {repInfo.amount[repType] > 17 && <PageNumbers />}
-        </>
-        : <div className="noReputationMsg">User has no reputation in the database. Be the 1st one to 
-        <Link to={`/reputation/add/${repInfo.userId}`} className="addRepButton2" id="removeDecoration"> add reputation</Link>
+      {repInfo.amount.all > 0 ? 
+      <>
+        <section className="rep-inbetween-section">
+          <div className="rep-inbetween-section-left">
+            <p style={{marginLeft: "80px"}}>Created By</p>
+            <p style={{marginLeft: "145px"}}>Date &#38; Time (UTC)</p>
+            <p style={{marginLeft: "60px"}}>Feedback</p>
           </div>
-        }
 
-      </main>
+          <div className="rep-inbetween-section-right">
+            <button onClick={()=> {setCurrentPage(1); setRepType("all")}} style={repType==="all" ? {color: "#E7AA0F"} : null}> All ({repInfo.amount.all}) /&nbsp;</button>
+            <button onClick={()=> {setCurrentPage(1); setRepType("csgo")}} style={repType==="csgo" ? {color: "#E7AA0F"} : null}> CSGO ({repInfo.amount.csgo}) /&nbsp;</button>
+            <button onClick={()=> {setCurrentPage(1); setRepType("rl")}} style={repType==="rl" ? {color: "#E7AA0F"} : null}> RL ({repInfo.amount.rl}) /&nbsp;</button>
+            <button onClick={()=> {setCurrentPage(1); setRepType("other")}} style={repType==="other" ? {color: "#E7AA0F"} : null}> Other ({repInfo.amount.other})</button>
+          </div>
+        </section>
+
+        <Reps />
       
-    </div>
+        {repInfo.amount[repType] > 17 && <PageNumbers />}
+      </>
+      : <div className="noReputationMsg">User has no reputation in the database. Be the 1st one to 
+      <Link to={`/reputation/add/${repInfo.userId}`} className="addRepButton2" id="removeDecoration"> add reputation</Link>
+        </div>
+      }
+
+    </main> 
   )
   else if (repInfo === "invalid")
     return (
@@ -119,7 +116,7 @@ function Reputation() {
         <a id="removeDecoration" href="/reputation">&#8617; Back to my reputation</a>
       </div>
     )
-    else if (isLoggedIn === false && userID === "") return (
+    else if (isLoggedIn === false && pathID === "") return (
       <div className="repSearch_wrapper">
           <input 
             onChange = {e => setSearchValue(e.target.value)}
@@ -190,4 +187,4 @@ function Reputation() {
   }
 }
 
-export default Reputation;
+export default Reputation

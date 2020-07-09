@@ -45,8 +45,7 @@ function FilterButton({text, value, dd, setFunction}){
       && e.target.parentNode.parentNode.parentNode.parentNode.parentNode.id !== text
       && e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id !== text
       && e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id !== text
-      && e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id !== text
-      && e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id !== text){
+      && e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id !== text){
         setOpen(false)
       }
     }

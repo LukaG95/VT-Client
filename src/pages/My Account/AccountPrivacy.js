@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import axios from 'axios'
 
-import AccountSidebar from '../../components/AccountSidebar'
+import AccountSidebar from './AccountSidebar'
 import {createNotification} from '../../App'
 
 function AccountPrivacy() {

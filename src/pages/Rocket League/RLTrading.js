@@ -43,10 +43,6 @@ function RLTrading() {
 
   if (tradeInfo){
     return (
-      <div className="secondaryWrapper">  
-
-        <Sidebar />
-        
         <main className="main">
 
           <div className="main-top">
@@ -60,8 +56,6 @@ function RLTrading() {
           <section className="page-numbers"></section>
 
         </main>
-
-      </div>
   )} else return null
 
   /*-----Functions                -------------*/
