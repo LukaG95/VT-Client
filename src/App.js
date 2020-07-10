@@ -70,8 +70,6 @@ function App() {
         <Route path="/admin">                   <AdminPage />       </Route> 
       </Switch>
 
-
-
       <NotificationContainer/>
     </>
   )

@@ -13,7 +13,7 @@
 body{
   background-color: #312635;
   width: 100%;
-  position: absolute;
+  min-width: fit-content;
 }
 
 .secondaryWrapper{
@@ -43,8 +43,8 @@ body{
   flex-direction: column;
 }
 
-/*-----Navbar             ----*/
 
+/*-----Navbar             ----*/
 .navWrapper{
   display: flex;
   background-color: #47384D;
@@ -521,8 +521,21 @@ body{
   width: 100%;
   height: 100%;
   margin: 40px 50px 0px 50px;
-  animation: transitionFade 0.25s;
+  animation: transitionIn 0.25s;
+  
+}
 
+.main-middle{
+  display: flex;
+  flex-direction: column;
+  margin-top: 27px;
+  height: 80vh;
+  overflow: auto;
+  scrollbar-color: #392C3E #47384D;
+}
+
+#root{
+  height: 100vh; 
 }
 
 .main-top{
@@ -588,12 +601,6 @@ body{
   background-color: #f6f6f6;
   clip-path: polygon(100% 50%, 0 0, 0 100%);
   cursor: pointer;
-}
-
-.main-middle{
-  display: flex;
-  flex-direction: column;
-  margin-top: 27px;
 }
 
 
@@ -760,6 +767,11 @@ body{
 
 .buttons-box button:active{
   background: #251D28;
+}
+
+.no-trades-text{
+  color: #f6f6f6;
+  margin-top: 32px;
 }
 
 /*-----UserTrades              ----*/

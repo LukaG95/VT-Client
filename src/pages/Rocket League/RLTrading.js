@@ -29,9 +29,8 @@ function RLTrading() {
       id = "any"
 
     // server request with given filters
-    axios.get(`/api/trades/getTrades?itemID=${id}&itemName=${name.toLowerCase()}&cert=${cert.toLowerCase()}&paint=${paint.toLowerCase()}&page=${currentPage}&limit=4`)
+    axios.get(`/api/trades/getTrades?itemID=${id}&itemName=${name.toLowerCase()}&cert=${cert.toLowerCase()}&paint=${paint.toLowerCase()}&page=${currentPage}&limit=10`)
     .then (res => {
-      console.log(res.data.trades)
       // set state with response
       setTradeInfo(res.data.trades)
       setPageAmount(res.data.pages)
@@ -47,13 +46,13 @@ function RLTrading() {
 
           <div className="main-top">
             <p className="trading-title">Rocket League</p> 
-            <PageNumbers />
+            {tradeInfo.length > 0 && <PageNumbers />}
             {/* placeholder */}
           </div>
 
-          <TradeComponents />
+          {tradeInfo.length > 0 ? <TradeComponents /> : <p className="no-trades-text">No trades were found with the given filters</p>}
 
-          <section className="page-numbers"></section>
+          {/* placeholder */}
 
         </main>
   )} else return null
@@ -102,7 +101,7 @@ function RLTrading() {
     const tradeComponents =  tradeInfo.map(trade => <RLTradeComponent trade={trade} />)
  
     return(
-      <div className="main-middle">
+      <div style={tradeInfo.length > 3 ? {paddingRight: "15px"} : null} className="main-middle"> {/*this padding is for the scrollbar*/}
         {tradeComponents}
       </div>
     )
