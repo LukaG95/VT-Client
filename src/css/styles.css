@@ -530,6 +530,7 @@ body{
   flex-direction: column;
   margin-top: 27px;
   height: 80vh;
+  min-height: 577px;
   overflow: auto;
   scrollbar-color: #392C3E #47384D;
 }
