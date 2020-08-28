@@ -278,7 +278,7 @@ function AddTradeRL() {
             notes: profanityFilter.clean(notes),
             old: {have: oldHave, want: oldWant}
           })
-          .then(res => { console.log(res)
+          .then(res => {
             if (res.data.status === "success"){
               clearWantItems()
               clearHaveItems()

@@ -6,7 +6,7 @@ function UpdateEmail() {
   const [emailConfirmed, setEmailConfirmed] = useState()
   
   const pathID = useLocation().pathname.substring(14)  // reads url after /email/update/ till the end
-  console.log(pathID)
+  
   useEffect(() => {
     axios.put(`/api/auth/updateEmail`, {
       code: pathID

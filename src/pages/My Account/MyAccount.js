@@ -105,7 +105,7 @@ function MyAccount() {
     if (email === newEmail) return
 
     // server request for email update
-    axios.post(`/api/auth/sendResetEmailToken `, {
+    axios.post(`/api/auth/sendResetEmailToken`, {
       newEmail: newEmail
     })
     .then(res => { 

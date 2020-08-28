@@ -1,6 +1,5 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
-
 module.exports = function(app) {
-    app.use('/api', createProxyMiddleware({ target: 'https://justlearningfront.website/', changeOrigin: true }));
+    app.use('/api', createProxyMiddleware({ target: 'https://virtrade-backend.herokuapp.com/', changeOrigin: true }));
 };

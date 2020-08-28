@@ -44,8 +44,8 @@ function App() {
       <div className="flex"> 
 
         <Switch>
-          <Route exact path="/">                <SbFiltersRLContextProvider> <Sidebar /><RLTrading /> </ SbFiltersRLContextProvider>     </Route>
-          <Route exact path="/trading/rl">      <SbFiltersRLContextProvider> <Sidebar /><RLTrading /> </ SbFiltersRLContextProvider>     </Route>
+          <Route exact path="/">                <SbFiltersRLContextProvider> <Sidebar /><RLTrading /> </ SbFiltersRLContextProvider>    </Route>
+          <Route exact path="/trading/rl">      <SbFiltersRLContextProvider> <Sidebar /><RLTrading /> </ SbFiltersRLContextProvider>    </Route>
           <Route path="/reputation/add">        {handleRedirectOnRefresh(<><Sidebar /><AddReputation /></>)}     </Route>
           <Route path="/reputation">            <><Sidebar /><Reputation /></>     </Route>
         </Switch>
@@ -53,21 +53,21 @@ function App() {
       </div>
 
       <Switch>
-        {/*<Route exact path="/prices">         <Prices />          </Route>*/} 
-        {/*<Route exact path="/premium">        <Premium />         </Route>*/}
-        <Route exact path="/terms">             <Terms />           </Route>
-        <Route exact path="/privacy">           <PrivacyPolicy />   </Route>
-        <Route exact path="/trading/rl/new">    {handleRedirectOnRefresh(<TradeContextProvider>  <AddTradeRL />    </TradeContextProvider>)}       </Route>
-        <Route path="/trading/rl/edit">         {handleRedirectOnRefresh(<TradeContextProvider>  <AddTradeRL />    </TradeContextProvider>)}       </Route>
-        <Route exact path="/account">           {handleRedirectOnRefresh(<MyAccount /> )}        </Route>
-        <Route exact path="/account/privacy">   {handleRedirectOnRefresh(<AccountPrivacy /> )}   </Route>
-        <Route exact path="/account/platforms"> {handleRedirectOnRefresh(<AccountPlatforms /> )} </Route>
-        <Route exact path="/account/logout">    {handleRedirectOnRefresh(<AccountLogout /> )}    </Route>
+        {/*<Route exact path="/prices">         <Prices />         </Route>*/} 
+        {/*<Route exact path="/premium">        <Premium />        </Route>*/}
+        <Route exact path="/terms">             <Terms />          </Route>
+        <Route exact path="/privacy">           <PrivacyPolicy />  </Route>
+        <Route exact path="/trading/rl/new">    {handleRedirectOnRefresh(<TradeContextProvider>  <AddTradeRL />    </TradeContextProvider>)}    </Route>
+        <Route path="/trading/rl/edit">         {handleRedirectOnRefresh(<TradeContextProvider>  <AddTradeRL />    </TradeContextProvider>)}    </Route>
+        <Route exact path="/account">           {handleRedirectOnRefresh(<MyAccount /> )}         </Route>
+        <Route exact path="/account/privacy">   {handleRedirectOnRefresh(<AccountPrivacy /> )}    </Route>
+        <Route exact path="/account/platforms"> {handleRedirectOnRefresh(<AccountPlatforms /> )}  </Route>
+        <Route exact path="/account/logout">    {handleRedirectOnRefresh(<AccountLogout /> )}     </Route>
         <Route path="/password/reset">          <ResetPassword />  </Route>
         <Route path="/email/confirm">           <ConfirmEmail />   </Route>
         <Route path="/email/update">            <UpdateEmail />    </Route>
         <Route path="/trades">                  <UserTrades />     </Route>
-        <Route path="/admin">                   <AdminPage />       </Route> 
+        <Route path="/admin">                   <AdminPage />      </Route> 
       </Switch>
 
       <NotificationContainer/>

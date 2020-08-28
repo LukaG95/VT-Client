@@ -11,7 +11,7 @@ import RLTradeComponent from '../../components/Rocket League/RLTradeComponent'
 function RLTrading() {
   const [tradeInfo, setTradeInfo] = useState()
 
-  const [pageAmount, setPageAmount] = useState(100)
+  const [pageAmount, setPageAmount] = useState()
   const [currentPage, setCurrentPage] = useState(1)
 
   const {game, searchType, name, paint, cert, itemType, platform} = useContext(SbFiltersRLContext)
@@ -44,15 +44,17 @@ function RLTrading() {
     return (
         <main className="main">
 
-          <div className="main-top">
-            <p className="trading-title">Rocket League</p> 
-            {tradeInfo.length > 0 && <PageNumbers />}
-            {/* placeholder */}
-          </div>
+          {/*
+            <div className="main-top">
+              <p className="trading-title">Rocket League</p> 
+              {tradeInfo.length > 0 && <PageNumbers />}
+              {placeholder}
+            </div>
+          */}
 
           {tradeInfo.length > 0 ? <TradeComponents /> : <p className="no-trades-text">No trades were found with the given filters</p>}
 
-          {/* placeholder */}
+          {tradeInfo.length > 0 && <PageNumbers />}
 
         </main>
   )} else return null
@@ -101,7 +103,7 @@ function RLTrading() {
     const tradeComponents =  tradeInfo.map(trade => <RLTradeComponent trade={trade} />)
  
     return(
-      <div style={tradeInfo.length > 3 ? {paddingRight: "15px"} : null} className="main-middle"> {/*this padding is for the scrollbar*/}
+      <div style={{paddingRight: "31px"}} className="main-middle"> {/*this padding is for the scrollbar*/}
         {tradeComponents}
       </div>
     )

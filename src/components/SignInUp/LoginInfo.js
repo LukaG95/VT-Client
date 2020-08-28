@@ -11,7 +11,6 @@ function LoginInfo({setForgotPassword}) {
 
   const [unPassErrorMsg, setUnPassErrorMsg] = useState("")
 
-
   return (
     <form onSubmit={handleSubmit} className="loginHolder">
 
@@ -88,7 +87,7 @@ function LoginInfo({setForgotPassword}) {
       email: username,
       password: password
     })
-    .then(res => { console.log(res)
+    .then(res => { 
       if (res.data.status === "blocked"){
         createNotification("error", "Too many requests, please try again later") 
       }

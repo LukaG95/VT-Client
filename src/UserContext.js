@@ -26,18 +26,19 @@ function UserContextProvider({children}) {
         }
         else 
         setIsLoggedIn(false)
-
+      
       })
       .catch(err => console.log(err))
 
 
       axios.get('/api/test/getUser')
       .then (res => { 
+        console.log(res)
         if (res.data.status === "success"){
           setDisplayWebsite(true)
           setRole(res.data.user.role)
         }
-        else if (res.data.status === "unauthorized")
+        else
         setDisplayWebsite(false)
 
       })

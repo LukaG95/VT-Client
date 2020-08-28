@@ -29,7 +29,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://justlearningfront.website/",
+  "proxy": "https://virtrade-backend.herokuapp.com/",
   "eslintConfig": {
     "extends": "react-app"
   },
