@@ -13,6 +13,7 @@
     "fs-extra": "^9.0.0",
     "http-proxy-middleware": "^1.0.3",
     "intersection-observer": "^0.10.0",
+    "path": "^0.12.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-notifications": "^1.6.0",
@@ -24,7 +25,7 @@
     "webpack": "^4.42.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
