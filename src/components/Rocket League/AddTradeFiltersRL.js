@@ -1,13 +1,12 @@
 import React, {useContext} from 'react'
 
-import {TradeContext} from './TradeContextRL'
+import {TradeContextRL} from './TradeContextRL'
 import infoRL from '../../info/infoRL.json' 
 import imageExists from '../../misc/func'
 
 function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
 
-  const {pushItem} = useContext(TradeContext)
-
+  const {pushItem} = useContext(TradeContextRL)
   
 	return (
     <>
@@ -18,12 +17,11 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
             thumbnails.push(
               <div className="RLicon noUserInteraction">
                 <img 
-                  width="95"
-                  height="95"
+                  style={{height: "95px", width: "95px", cursor: "pointer", borderRadius: "5px 5px 0px 0px"}} 
                   src={imageExists(`${item.ItemID}.0.webp`)}
                   onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
                 />
-                <span className="RLicon-name-hover"><p>{item.Name}</p></span>
+                <div className="RLicon-name"><p>{item.Name}</p></div>
               </div>
             )
         }))
@@ -60,12 +58,11 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
         item.Tradable && thumbnails.push(
           <div className="RLicon noUserInteraction">
             <img 
-              width="95"
-              height="95"
+              style={{height: "95px", width: "95px", cursor: "pointer", borderRadius: "5px 5px 0px 0px"}} 
               src={imageExists(`${item.ItemID}.0.webp`)}
               onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
             />
-            <span className="RLicon-name-hover"><p>{item.Name}</p></span>
+            <div className="RLicon-name"><p>{item.Name}</p></div>
           </div>
         )
       }))
@@ -78,12 +75,11 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
         item.Tradable && thumbnails.push(
           <div className="RLicon noUserInteraction">
             <img 
-              width="95"
-              height="95"
+              style={{height: "95px", width: "95px", cursor: "pointer", borderRadius: "5px 5px 0px 0px"}} 
               src={imageExists(`${item.ItemID}.0.webp`)}
               onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
             />
-            <span className="RLicon-name-hover"><p>{item.Name}</p></span>
+            <div className="RLicon-name"><p>{item.Name}</p></div>
           </div>
         )
       }))

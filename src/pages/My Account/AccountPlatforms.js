@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 
-import AccountSidebar from './AccountSidebar'
+import AccountTopbar from './AccountTopbar'
 import {UserContext} from '../../UserContext'
 
 function AccountPlatforms() {
@@ -10,7 +10,7 @@ function AccountPlatforms() {
 	return (
 		<div className="secondaryWrapper accountWrapper">
 		
-			<AccountSidebar />
+			<AccountTopbar />
 			
 			<div className="accountFieldsWrapper">
 			

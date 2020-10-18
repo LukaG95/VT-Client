@@ -1,28 +1,31 @@
 import React, {useState, useContext, useEffect} from 'react'
 
 import {rl_dd_names} from '../../info/DropdownNames'
-import {SbFiltersRLContext} from './SbFiltersRLContext'
+import {TbFiltersRLContext} from './TbFiltersRLContext'
 
-const {gameDD, searchTypeDD, namesDD, paintDD, certDD, itemTypeDD, platformDD} = rl_dd_names
+const {gameDD, searchTypeDD, namesDD, colorDD, certDD, itemTypeDD, platformDD} = rl_dd_names
 
 function FiltersRL() {
-  const {game, setGame, searchType, setSearchType, name, setName, paint, setPaint, cert, setCert, itemType, setItemType, platform, setPlatform} = useContext(SbFiltersRLContext)
+  const {game, setGame, searchType, setSearchType, name, setName, color, setColor, cert, setCert, itemType, setItemType, platform, setPlatform, resetFilters} = useContext(TbFiltersRLContext)
 
   return (
-    <div className="sbSection filtersRL">
+    <div className="filters-field">
 
       <FilterButton text={`Game`} value={game} dd={gameDD} setFunction={setGame}/>
       <FilterButton text={`Search`} value={searchType} dd={searchTypeDD} setFunction={setSearchType}/>
       <FilterButton text={`Name`} value={name} dd={namesDD} setFunction={setName}/>
-      <FilterButton text={`Paint`} value={paint} dd={paintDD} setFunction={setPaint}/>
+      <FilterButton text={`Color`} value={color} dd={colorDD} setFunction={setColor}/>
       <FilterButton text={`Certification`} value={cert} dd={certDD} setFunction={setCert}/> 
       <FilterButton text={`Item Type`} value={itemType} dd={itemTypeDD} setFunction={setItemType}/>
       <FilterButton text={`Platform`} value={platform} dd={platformDD} setFunction={setPlatform}/>
+      
+      <div onClick={resetFilters} className="rl-resetFilters-button noUserInteraction">
+        <img src={require(`../../images/other/trash.png`)} style={{height: "14px", width: "14px"}}/>
+      </div>
 
     </div>
   )
 }
-
 
 /*-----Functions                -------------*/
 
@@ -34,6 +37,23 @@ function FilterButton({text, value, dd, setFunction}){
     window.addEventListener("click", click)
     return () => {window.removeEventListener("click", click)}
   },[])
+
+  return(
+    <div className="filterButtonWrapper">
+      <label className="filter-label">{text}</label>
+      <div 
+        id={`${text}`}
+        onClick={() => setOpen(!open)}
+        className={`noUserInteraction filterButton ${open ? "blackBorder" : null}`}
+      >
+        <div className="filterButtonContent"><p id="fix">{value}</p></div>
+        
+        <div className={`${open ? "openArrow" : "dropdownArrow"}`} ></div>
+        
+      </div> 
+      {open && <DropdownMenu dd={dd} setFunction={setFunction}/>}
+    </div>
+  )
 
   function click(e){
     if (e.target.parentNode === null) return
@@ -53,21 +73,7 @@ function FilterButton({text, value, dd, setFunction}){
     !open && setTimeout(async()=> document.getElementById("dd") ? document.getElementById("dd").focus() : null)
   }
 
-  return(
-    <div className="filterButtonWrapper">
-      <div 
-        id={`${text}`}
-        onClick={() => setOpen(!open)}
-        className="noUserInteraction filterButton" 
-      >
-        <div className="filterButtonContent">{text}&nbsp;&nbsp; -<p id="fix">{value}</p></div>
-        
-        <div className={`${open ? "openArrow" : "dropdownArrow"}`} ></div>
-        
-      </div> 
-      {open && <DropdownMenu dd={dd} setFunction={setFunction}/>}
-    </div>
-  )
+  
 }
 
 function DropdownMenu({dd, setFunction}){

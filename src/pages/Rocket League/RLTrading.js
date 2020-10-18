@@ -3,9 +3,9 @@ import axios from 'axios'
 import Spinner from '../../components/Spinner'
 
 import infoRL from '../../info/infoRL.json'
-import Sidebar from '../../components/Sidebar'
-import {SbFiltersRLContext} from '../../components/Rocket League/SbFiltersRLContext'
+import {TbFiltersRLContext} from '../../components/Rocket League/TbFiltersRLContext'
 import RLTradeComponent from '../../components/Rocket League/RLTradeComponent'
+import { createNotification } from '../../App'
 
 
 function RLTrading() {
@@ -14,49 +14,33 @@ function RLTrading() {
   const [pageAmount, setPageAmount] = useState()
   const [currentPage, setCurrentPage] = useState(1)
 
-  const {game, searchType, name, paint, cert, itemType, platform} = useContext(SbFiltersRLContext)
+  const {game, searchType, name, color, cert, itemType, platform, resetFilters} = useContext(TbFiltersRLContext)
 
   useEffect(()=> {
-    // convert names to IDs
-    let id = 0
-    infoRL.Slots.forEach(type => { type.Items.forEach(item => {
-        if (item.Name === name)
-          id = item.ItemID
-      })
-    })
+    const route = tradeFilters()
 
-    if (name === "Any")
-      id = "any"
-
-    // server request with given filters
-    axios.get(`/api/trades/getTrades?itemID=${id}&itemName=${name.toLowerCase()}&cert=${cert.toLowerCase()}&paint=${paint.toLowerCase()}&page=${currentPage}&limit=10`)
+    axios.get(route)
     .then (res => {
-      // set state with response
-      setTradeInfo(res.data.trades)
-      setPageAmount(res.data.pages)
+      if (res.data.info === "success"){
+        setTradeInfo(res.data.trades)
+        setPageAmount(res.data.pages)
+      }
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      createNotification("error", "Oops, something went wrong", "something went wrong") 
+    })
 
-  }, [game, searchType, name, paint, cert, itemType, platform, currentPage])
-
+  }, [game, searchType, name, color, cert, itemType, platform, currentPage])
 
   if (tradeInfo){
     return (
-        <main className="main">
+      <>
 
-          {/*
-            <div className="main-top">
-              <p className="trading-title">Rocket League</p> 
-              {tradeInfo.length > 0 && <PageNumbers />}
-              {placeholder}
-            </div>
-          */}
+        {tradeInfo.length > 0 && <PageNumbers />}
+        {tradeInfo.length > 0 ? TradeComponents() : NoTradesFound()}
 
-          {tradeInfo.length > 0 ? <TradeComponents /> : <p className="no-trades-text">No trades were found with the given filters</p>}
-
-          {tradeInfo.length > 0 && <PageNumbers />}
-
-        </main>
+      </>
   )} else return null
 
   /*-----Functions                -------------*/
@@ -89,7 +73,7 @@ function RLTrading() {
         )
 
       return(
-        <section style={{marginTop: "20px"}} className="page-numbers">
+        <section className="page-numbers-field">
           <div onClick={()=> currentPage > 1 && setCurrentPage(prev => prev - 1)} className="page-left noUserInteraction"></div>
             {pageButtons}
           <div onClick={()=> currentPage < pageAmount && setCurrentPage(prev => prev + 1)} className="page-right noUserInteraction"></div>
@@ -98,15 +82,51 @@ function RLTrading() {
     }else return null
   }
 
-
   function TradeComponents(){
     const tradeComponents =  tradeInfo.map(trade => <RLTradeComponent trade={trade} />)
- 
+    
     return(
-      <div style={{paddingRight: "31px"}} className="main-middle"> {/*this padding is for the scrollbar*/}
+      <>
         {tradeComponents}
+      </>
+    )
+  }
+
+  function NoTradesFound(){
+    return(
+      <div className="no-trades-found">
+        <img height="306" width="650" style={{pointerEvents: "none"}} className="noUserInteraction" src={require("../../images/other/No trades found.png")}></img>
+        <h2>No <span style={{color: "#FE3B3B"}}>trades</span> were found for your filters</h2>
+        <p className="no-trades-text">Try a new search or reset the filters</p>
+        <button onClick={resetFilters}>Reset filters</button>
       </div>
     )
+  }
+
+  function tradeFilters(){
+    // converts names to IDs
+    let id
+    if (name === "Any")
+      id = "Any"
+    else
+      infoRL.Slots.map(Slot => Slot.Items.map(item => {
+          if (item.Name === name && item.Tradable)
+            id = item.ItemID
+        })
+      )
+
+    const route = 
+     `/api/trades/getTrades?` +
+     `search=${searchType}` +
+     `&itemID=${id}` +
+     `&itemType=${itemType}` +
+     `&cert=${cert}` +
+     `&color=${color}` +
+     `&page=${currentPage}` +
+     `&limit=10` 
+      
+    return route
+    
   }
 }
 

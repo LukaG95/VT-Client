@@ -2,14 +2,14 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 
-import AccountSidebar from './AccountSidebar'
+import AccountTopbar from './AccountTopbar'
 
 function AccountPlatforms() {
   
 	return (
 		<div className="secondaryWrapper accountWrapper">
 		
-			<AccountSidebar />
+			<AccountTopbar />
 			
 			<div className="accountFieldsWrapper">
     

@@ -63,15 +63,15 @@ function ResetPassword() {
     e.preventDefault()
 
     if (password.length < 6 || password.length > 30){
-      createNotification("warning", "Password must be between 6 and 30 characters long")
+      createNotification("warning", "Password must be between 6 and 30 characters long", "password between 6 and 30")
       return
     }
     else if (!password.match(/^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{4,30}$/gm)){
-      createNotification("warning", "Passwords contains inappropriate characters")
+      createNotification("warning", "Passwords contains inappropriate characters", "innapropriate characters")
       return
     }
     else if (password !== confirmPassword){
-      createNotification("warning", "Passwords don't match")
+      createNotification("warning", "Passwords don't match", "pass don't match")
       return
     }
 
@@ -82,14 +82,14 @@ function ResetPassword() {
     })
     .then(res => { console.log(res)
       if (res.data.status === "blocked"){
-        createNotification("error", "Too many requests, please try again later") 
+        createNotification("error", "Too many requests, please try again later", "too many requests") 
       }
       else if (res.data.status === "success"){
-        createNotification("success", "Your password has been changed") 
-        setTimeout(()=> createNotification("info", "Redirecting in a few moments"), 1500)
+        createNotification("success", "Your password has been changed", "pass has been changed") 
+        setTimeout(()=> createNotification("info", "Redirecting in a few moments", "redirecting in a few"), 1500)
         setTimeout(()=> window.location.href = "/", 4000)
       }
-      else createNotification("error", "Oops, something went wrong...") 
+      else createNotification("error", "Oops, something went wrong...", "something went wrong") 
     })
     .catch(err => console.log(err))
 

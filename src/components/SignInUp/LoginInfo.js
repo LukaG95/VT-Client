@@ -7,7 +7,7 @@ function LoginInfo({setForgotPassword}) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  const [rememberMe, setRememberMe] = useState(false)
+  const [keepMe, setKeepMe] = useState(false)
 
   const [unPassErrorMsg, setUnPassErrorMsg] = useState("")
 
@@ -42,10 +42,10 @@ function LoginInfo({setForgotPassword}) {
       </div>
 
 
-      <div className="formItem rememberMeSection">
-        <div onClick={() => setRememberMe(!rememberMe)} style={{display: "flex", flexDirection: "row", cursor: "pointer"}}>
-          <div className="rememberMeButton">{rememberMe && <p> &#10004; </p>}</div>
-          <div className="rememberMeText">Remember me</div>
+      <div className="formItem keepMeSection">
+        <div onClick={() => setKeepMe(!keepMe)} style={{display: "flex", flexDirection: "row", cursor: "pointer"}}>
+          <div className="keepMeButton">{keepMe && <p> &#10004; </p>}</div>
+          <div className="keepMeText">Keep me logged in</div>
         </div>
         <p onClick={() => setForgotPassword(true)} className="forgotPassword">Forgot password?</p>
       </div>
@@ -78,31 +78,27 @@ function LoginInfo({setForgotPassword}) {
 
   /*-----Functions                -------------*/
   
-  function handleSubmit(event){
-    event.preventDefault()
-
-    /*setUnPassErrorMsg("Wrong username or password")*/
+  function handleSubmit(e){
+    e.preventDefault()
 
     axios.post('/api/auth/login', {
       email: username,
       password: password
-    })
-    .then(res => { 
-      if (res.data.status === "blocked"){
-        createNotification("error", "Too many requests, please try again later") 
-      }
-      else if (res.data.status === "logorpass"){
-        setUnPassErrorMsg("Wrong username or password")
-      }
-      else if (res.data.status === "success"){
-        window.location.reload(true)
-      }
-      else createNotification("error", "Oops, something went wrong...") 
+
+    }).then(res => { console.log('POST /api/auth/login', res)
+        
+        window.location.reload()
       
-    })
-    .catch(err => console.log(err))  
-    
+    }).catch(err => {
+      if (err.response.status === 429)
+        createNotification("error", "Too many requests, please try again later", "too many requests") 
+      else if (err.response.data.info === "logorpass")
+        setUnPassErrorMsg("Wrong username or password")
+      else 
+        createNotification("error", "Oops, something went wrong...", "something went wrong") 
+    })  
   }
+
 }
 
 export default LoginInfo

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import axios from 'axios'
 
-import AccountSidebar from './AccountSidebar'
+import AccountTopbar from './AccountTopbar'
 import {createNotification} from '../../App'
 
 function AccountPrivacy() {
@@ -17,7 +17,7 @@ function AccountPrivacy() {
 	return (
 		<div className="secondaryWrapper accountWrapper">
 		
-			<AccountSidebar />
+			<AccountTopbar />
 			
 			<div className="accountFieldsWrapper">
 			
@@ -100,12 +100,12 @@ function AccountPrivacy() {
     })
     .then(res => { 
       if (res.data.status === "success"){
-        createNotification("success", "Password was updated")
+        createNotification("success", "Password was updated", "password updated")
         setPassword("")
         setNewpass("")
         setNewpass2("")
       }
-      else createNotification("error", "Oops something went wrong...")
+      else createNotification("error", "Oops something went wrong...", "something went wrong")
     })
     .catch(err => console.log(err))
 

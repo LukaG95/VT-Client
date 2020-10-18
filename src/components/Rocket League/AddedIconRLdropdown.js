@@ -1,21 +1,22 @@
 import React, {useState, useContext, useEffect} from 'react'
 
-import {TradeContext} from './TradeContextRL'
+import {TradeContextRL} from './TradeContextRL'
 import {rl_dd_names} from '../../info/DropdownNames'
+import infoRL from '../../info/infoRL.json' 
 
-const {paintDD, certDD} = rl_dd_names
+const {colorDD, certDD} = rl_dd_names
 
-function RLitem_icon_dropdown({id}) { 
-  const [paint, setPaint] = useState("None")
+function RLitem_icon_dropdown({id, itemID}) { 
+  const [color, setColor] = useState("None")
   const [certification, setCertification] = useState("None")
   const [amount, setAmount] = useState(1)
 
-  const {setHave, setWant, have, want, deleteRLitem} = useContext(TradeContext)
+  const {setHave, setWant, have, want, deleteRLitem} = useContext(TradeContextRL)
 
   useEffect(()=> {
     [...have, ...want].map(item=> {
       if (item.id == id){
-        setPaint(item.color)
+        setColor(item.color)
         setCertification(item.cert)
         setAmount(item.amount)
       }
@@ -26,53 +27,66 @@ function RLitem_icon_dropdown({id}) {
 	return (
     <div 
     name="enableDropdown"
-    className="rl-icon-dropdown"
-    >
-      <FilterButton label="Paint"         value={paint}           setFunction={setPaint}         dd={paintDD}/>
+    className="rl-icon-dropdown">
+
+      <FilterButton label="Color"         value={color}           setFunction={setColor}         dd={colorDD}/>
       <FilterButton label="Certification" value={certification}   setFunction={setCertification} dd={certDD}/>
-      <FilterButton label="Amount"        value={amount}          setFunction={setAmount}/>
+      <FilterButton label="Amount"        value={amount}          setFunction={setAmount}        itemID={itemID}/>
 
-      <button id="submit-rl-filters-button" onClick={()=> {
-        let temp = []
-        have.map(item => {
-          if (item.id === id){
-            item.color = paint
-            item.cert = certification
-            item.amount = amount
-            temp.push(item)
-          }
-          else temp.push(item)
-        })
-        setHave(temp)
-
-        temp = []
-        want.map(item => {
-          if (item.id === id){
-            item.color = paint
-            item.cert = certification
-            item.amount = amount
-            temp.push(item)
-          }
-          else temp.push(item)
-        })
-        setWant(temp)
-
-      }}>Done</button>
+      <button id="submit-rl-filters-button" onClick={submitFilters}>Done</button>
 
       <button
         id="delete-rl-filters-button" 
-        onClick={()=> deleteRLitem(id)}
-      >
+        onClick={()=> deleteRLitem(id)}>
+          
       Delete </button>
       
     </div> 	
-	)
+  )
+
+
+  function submitFilters(){
+    let colorID = 0
+    let temp = []
+
+    infoRL.Colors.map(color => {
+      if (color.Name === color)
+        colorID = color.ID
+    })
+
+    have.map(item => {
+      if (item.id === id){
+        item.color = color
+        item.colorID = colorID
+        item.cert = certification
+        item.amount = amount
+        temp.push(item)
+      }
+      else temp.push(item)
+    })
+    setHave(temp)
+
+    temp = []
+
+    want.map(item => {
+      if (item.id === id){
+        item.color = color
+        item.colorID = colorID
+        item.cert = certification
+        item.amount = amount
+        temp.push(item)
+      }
+      else temp.push(item)
+    })
+    setWant(temp)
+  }
+  
 }
 
 
  /*-----Functions                -------------*/
 
-function FilterButton({dd, label, value, setFunction}){
+function FilterButton({dd, label, value, setFunction, itemID}){
   const [open, setOpen] = useState(false)
 
   if (label !== "Amount"){
@@ -103,13 +117,17 @@ function FilterButton({dd, label, value, setFunction}){
       <div 
       className="rl-icon-dropdown-button-section"
       >
-        <label className="enableDropdown"> {label} </label>
+        <label className="enableDropdown"> {label} - max {itemID === 4743 ? 100000 : 100}</label>
   
         <input
           name="enableDropdown"
           style={{justifyContent: "space-between"}}
           value={value}
-          onChange={e => setFunction(e.target.value)}
+          onChange={e => {
+            if (isNaN(e.target.value) || e.target.value > (itemID === 4743 ? 100000 : 100) || e.target.value <= 0)
+              return
+            setFunction(e.target.value)
+          }}
         />
   
       </div>

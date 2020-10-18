@@ -9,7 +9,7 @@ import {PopupContextProvider} from './components/PopupContext'
 import './css/styles.css'
 import './css/animations.css'
 import './css/template.css'
-import 'react-notifications/lib/notifications.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <UserContextProvider>

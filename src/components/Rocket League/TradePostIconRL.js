@@ -5,10 +5,10 @@ import infoRL from '../../info/infoRL.json'
 
 function TradepostIconRL({item}) { 
 
-  var paintID = 0
+  var colorID = 0
   infoRL.Colors.map(Color => { 
-    if (Color.Name === item.paint)
-    paintID = Color.ID
+    if (Color.Name === item.color)
+    colorID = Color.ID
   }) 
 
 
@@ -17,8 +17,8 @@ function TradepostIconRL({item}) {
 
       <img 
         name="enableDropdown"
-        style={{height: "95px", width: "95px", cursor: "pointer"}} 
-        src={imageExists(`${item.itemID}.${paintID}.webp`, item.itemID)}  // pass in 2 params, if the painted image doesn't exist check if regular exists, 
+        style={{height: "95px", width: "95px", cursor: "pointer", borderRadius: "5px 5px 0px 0px"}} 
+        src={imageExists(`${item.itemID}.${colorID}.webp`, item.itemID)}  // pass in 2 params, if the painted image doesn't exist check if regular exists, 
         alt=""                                                                                         // and then if both don't exist return questionmark
       />
       
@@ -26,7 +26,7 @@ function TradepostIconRL({item}) {
       <ColorIcon />
       <CertIcon />
       
-      <span className="RLicon-name-hover"><p>{item.itemName}</p></span>
+      <div className="RLicon-name"><p>{item.itemName}</p></div>
 
     </div>		
   )
@@ -41,14 +41,16 @@ function TradepostIconRL({item}) {
   }
 
   function AmountIcon(){
-    return <div className="AmountIcon">{`${item.amount}x`}</div>
+    if (item.amount > 1)
+    return <div className="AmountIcon">{item.amount}</div>
+    else return null
   }
 
   function ColorIcon(){
-    if (item.paint !== "None")
+    if (item.color !== "None")
       return (
-        <div className={`colorIcon ${item.paint.replace(/\s+/g, '')}`}>
-          <span className="paint-tooltip">{item.paint}</span>
+        <div className={`colorIcon ${item.color.replace(/\s+/g, '')}`}>
+          <span className="paint-tooltip">{item.color}</span>
         </div>
       )
     else return null

@@ -3,6 +3,7 @@ import {Link, useLocation} from 'react-router-dom'
 import axios from 'axios'
 
 import {UserContext} from '../UserContext'
+import { createNotification } from '../App'
 
 function Reputation() {
   const [repInfo, setRepInfo] = useState() 
@@ -13,7 +14,7 @@ function Reputation() {
   const {myID, isLoggedIn} = useContext(UserContext)
 
   const pathID = useLocation().pathname.substring(12) // reads url after /reputation/ till the end 
-  
+
   useEffect(()=> {
     if (myID === undefined && pathID === "") {
       setRepInfo(undefined)
@@ -29,7 +30,7 @@ function Reputation() {
 
     axios.get(`/api/reputation/${searchUserID}`)
     .then (res => { 
-      if (res.data.status === "success")
+      if (res.data.info === "success")
         setRepInfo(res.data.rep)
       else /*if (res.data.status === "invalid")*/
         setRepInfo("invalid")
@@ -46,13 +47,13 @@ function Reputation() {
       <div className="flex" style={{marginBottom: "20px"}}>
         <input 
           onChange = {e => setSearchValue(e.target.value)}
-          placeholder="Search by VT id..." 
+          placeholder="Search by username..." 
           className="rep-search-input">
         </input>
-        <a className="searchRep-button" href={`/reputation/${searchValue}`}>
+        <button className="searchRep-button" onClick={searchForUserRep}>
           <img style={{width: "11px", height: "11px", marginRight: "6px"}} src={require("../images/other/MagnGlass.png")} /> 
           SEARCH
-        </a>
+        </button>
       </div>
 
       <div className="repHeader">
@@ -120,19 +121,33 @@ function Reputation() {
       <div className="repSearch_wrapper">
           <input 
             onChange = {e => setSearchValue(e.target.value)}
-            placeholder="Search by VT id..." 
+            placeholder="Search by username..." 
             className="rep-search-input">
           </input>
-          <a className="searchRep-button" href={`/reputation/${searchValue}`}>
+
+          <button className="searchRep-button" onClick={searchForUserRep}>
             <img style={{width: "11px", height: "11px", marginRight: "6px"}} src={require("../images/other/MagnGlass.png")} /> 
             SEARCH
-          </a>
+          </button>
       </div>
     )  
     else return null // <Spinner className="newPosition">
 
 
   /*-----Functions                -------------*/
+
+  function searchForUserRep(){
+    
+    axios.get(`/api/auth/getUserByUsername/${searchValue}`)
+    .then (res => { 
+      if (res.data.info === "success")
+        window.location.href = `/reputation/${res.data.user._id}`
+    })
+    .catch(err => {
+      if (err.response.data.info === "no user")
+        createNotification("error", "That user doesn't exist", "user doesn't exist") 
+    })
+  }
 
   function Reps(){
     const reps = repInfo.repsByGame[repType].map((rep, i) => {

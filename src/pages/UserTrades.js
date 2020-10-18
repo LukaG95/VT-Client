@@ -9,6 +9,7 @@ import {PopupContext} from '../components/PopupContext'
 
 function UserTrades() {
   const [userTrades, setUserTrades] = useState()
+  const [username, setUsername] = useState()
   const [game, setGame] = useState("rl")
   
   const pathID = useLocation().pathname.substring(8)   // reads url after /trades/ till the end
@@ -17,25 +18,29 @@ function UserTrades() {
   const {setOpenDeleteAllTrades} = useContext(PopupContext)
 
   useEffect(() => {
-    axios.get(`/api/trades/getTrades?userId=${pathID}`)
-    .then (res => { 
+    axios.get(`/api/trades/getUserTrades?searchId=${pathID}`)
+    .then (res => { console.log(res)
       setUserTrades(res.data.trades)
+      setUsername(res.data.username)
     })
-    .catch(err => console.log("Error: " + err))
+    .catch(err => {
+      console.log(err)
+      createNotification("error", "Oops, something went wrong", `oops something went wrong`)
+    })
   }, [])
 
-  if (userTrades)
+  if (userTrades && username)
   return (
-    <div className="userTrades-page-wrapper">
+    <>
       
-      <div className="userTrades-top-section">
-        <section>
+      <div className="user-trades-topbar-field">
+        <div className="user-trades-topbar-left">
+          <p>{username}'s <span style={{color: "#FE3B3B"}}>trades</span></p>
+          <div id="separator"></div>
           <button onClick={()=> setGame("rl")} style={game==="rl" ? {backgroundColor: "#47384D"} : null}>Rocket League</button>
-          {/*<button onClick={()=> setGame("csgo")} style={game==="csgo" ? {backgroundColor: "#47384D"} : null}>CSGO</button>*/}
-        </section>
-
-        {myID === pathID ? userTrades.length > 0 && <button onClick={()=> setOpenDeleteAllTrades(true)} id="del-all-trades-button" > Delete all trades</button> : null}
+        </div>
         
+        {myID === pathID ? userTrades.length > 0 && <button onClick={()=> setOpenDeleteAllTrades(true)} id="del-all-trades-button" > Delete all trades</button> : null}
       </div>
       
       {userTrades.length <= 0 && 
@@ -47,7 +52,7 @@ function UserTrades() {
       
       <TradeComponents />
 
-    </div>
+    </>
   )
   else return null
 
@@ -55,9 +60,10 @@ function UserTrades() {
 /*-----Functions                -------------*/
 
   function deleteTrade(trade){
-    axios.delete(`/api/trades/deleteTrade?id=${trade._id}`)
+    axios.delete(`/api/trades/deleteTrade?tradeId=${trade._id}`)
     .then (res => { 
-      window.location.reload(true)
+      if (res.data.info === "success")
+        window.location.reload()
     })
     .catch(err => console.log("Error: " + err))
   }
@@ -67,16 +73,40 @@ function UserTrades() {
   }
 
   function bumpTrade(trade){
-    axios.put(`/api/trades/bumpTrade/${trade._id}`)
+    axios.put(`/api/trades/bumpTrade/?tradeId=${trade._id}`)
     .then (res => { 
-      if (res.data.status === "success"){
-        createNotification("success", "Trade was bumped")
-      }
+      if (res.data.info === "success")
+        createNotification("success", "Your trade was bumped!", `bumping trade ${trade._id}`)
     })
     .catch(err => console.log("Error: " + err))
   }
 
   function TradeComponents(){
+    let manageTrade = {deleteTrade, editTrade, bumpTrade}
+
+    return userTrades.map(trade => {
+      if (myID === pathID)
+        return (
+          <>
+            <RLTradeComponent trade={trade} manageTrade={manageTrade}/>
+            
+          </>
+        )
+      else 
+        return <RLTradeComponent trade={trade}/>
+    })
+
+  }
+
+  
+
+}
+export default UserTrades
+
+
+
+/*
+function TradeComponents(){
     var tradeComponents = userTrades.map(trade => 
       <>
         <RLTradeComponent trade={trade} userTradesPage={true}/>
@@ -97,7 +127,4 @@ function UserTrades() {
       </>
     )
   }
-
-}
-
-export default UserTrades
+*/

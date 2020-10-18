@@ -1,6 +1,4 @@
 import React, {useState} from 'react'
-import axios from 'axios'
-import {createNotification} from '../App'
 
 const PopupContext = React.createContext()
 

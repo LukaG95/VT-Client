@@ -61,9 +61,10 @@ function Popups() {
   /*-----Functions                -------------*/
 
   function handleDeleteAll(){
-    axios.delete(`/api/trades/deleteTrade?all=true`)
+    axios.delete(`/api/trades/deleteTrades`)
     .then (res => { 
-      window.location.reload(true)
+      if (res.data.info === "success")
+        window.location.reload()
     })
     .catch(err => console.log("Error: " + err))
   }

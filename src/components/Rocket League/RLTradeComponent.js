@@ -1,19 +1,33 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 
 import TradePostIconRL from './TradePostIconRL'
 
-function RLTradeComponent({trade, userTradesPage}) {
+function RLTradeComponent({trade, manageTrade}) {
+  const [rep, setRep] = useState()
   const [notesHeight, setNotesHeight] = useState(()=> {
     if (trade.have.length >= 9 || trade.want.length >= 9)
-      return "277px"
+      return "310px"
     else if (trade.have.length >= 5 || trade.want.length >= 5)
       return "179px"
     else 
-      return "82px"
+      return "68px"
   })
 
-  const refPlatform = trade.platform === "PC" ? "Steam" : trade.platform
-
+  useEffect(() => {
+    
+    axios.get(`/api/reputation/compact/${trade.user._id}`)
+    .then (res => { 
+      if (res.status === 200)
+        setRep(res.data.rep)
+    
+    })
+    .catch(err => {
+      console.log(err)
+      /*if (err.response)
+      if (err.response.status === 400 || 401){}*/
+    })
+  }, [])
   
   return (
       <div className="rltrade-container">
@@ -22,36 +36,38 @@ function RLTradeComponent({trade, userTradesPage}) {
 
           <div className="flex">
             {userName()}
-            <div className="top-triangle"></div>
             <div className="trade-reputation">
-              <div style={{fontSize: "12px", color: "#CEC6E0"}}>Reputation</div>
+              <p style={{fontSize: "12px", color: "#CEC6E0", marginBottom: "3px"}}>Reputation</p>
               <div className="flex">
-                <span style={{fontSize: "12px", color: "#5FD86B"}}>+{trade.reputation.ups}</span> 
-                <span style={{fontSize: "12px", color: "#766495", marginLeft: "3px"}}>   </span> 
-                <span style={{fontSize: "12px", color: "#C03030", marginLeft: "3px"}}>-{trade.reputation.downs} </span> 
-                <span style={{fontSize: "12px", color: "#766495", marginLeft: "5px"}}>Trading Expert</span>
+                <p style={{fontSize: "18px", color: "#5FD86B"}}>+{rep ? rep.ups : null} </p> 
+                <p style={{fontSize: "18px", color: "#766495", marginLeft: "3px"}}> </p> 
+                <p style={{fontSize: "18px", color: "#C03030", marginLeft: "3px"}}>-{rep ? rep.downs : null} </p> 
               </div>
             </div>
-          </div>
-
-          <div className="flex">
-            <div className="flex-col" style={{marginRight: "10px", justifyContent: "space-evenly"}}>
-              <div className="active-text">Active</div>
-              <div className="trade-post-time">{trade.createdAt}</div>
-            </div>
-
-            <div className="right-gamePlatform" style={{height: "100%"}}>
-              <img style={{height: "17px", width: "17px", marginRight: "10px"}} src={require(`../../images/other/${refPlatform} icon.png`)} alt="" />{refPlatform}
+            <div className="trade-component-tagsAndTitle">
+              <div className="trade-component-tags">{tags()}</div>
+              <p className="trade-component-title">{rep ? rep.title : null}</p>
             </div>
           </div>
 
+          <div className="rl-trade-component-top-right">
+            <div className="right-gamePlatform">
+              {/*<img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/SWITCH icon.png`)} alt="" />*/}
+              {/*<img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/SWITCH icon.png`)} alt="" />*/}
+              <img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/${trade.platform} icon.png`)} alt="" />{trade.platform}
+            </div>
+
+            <div className="flex">
+              <div className="trade-post-time">Active {trade.bumpedAt}</div>
+            </div>
+          </div>
         </div>
 
         <div className="flex rltrade_cMidPlace">
 
           <div className="flex-col rl-has-container">
             <p className="haswant-text">Has</p>
-            <div className="has-items">{tradeItems()}</div>
+            <div className="has-items">{haveItems()}</div>
           </div>
 
           <div className="flex-col rl-wants-container">
@@ -67,8 +83,20 @@ function RLTradeComponent({trade, userTradesPage}) {
             </div>
 
             <div className="buttons-box">
-              <button onClick={() => window.open(trade.steamAccount)}>Contact on Steam</button>
-              {userTradesPage ? null : <button onClick={() => window.open(`/trades/${trade.userId}`)}>All {trade.username}'s trades</button> }
+              {manageTrade ? 
+                  <>
+                    <button onClick={() => manageTrade.editTrade(trade)} id="editTrade-button">Edit trade</button>
+                    <button onClick={() => manageTrade.deleteTrade(trade)} id="deleteTrade-button">Delete trade</button>
+                    <button onClick={() => manageTrade.bumpTrade(trade)} id="bumpTrade-button">Bump trade</button> 
+                    <p className="trade-expire-text">Expires {trade.expiresIn.days < 1 ? 'today' : `in ${trade.expiresIn.days} days`} at {trade.expiresIn.at}</p>
+                  </>
+                : 
+                  <>
+                    <button onClick={() => window.open("#")}>Message</button>
+                    <button onClick={() => window.open(`/reputation/${trade.user._id}`)}>View reputation</button> 
+                    <button onClick={() => window.open(`/trades/${trade.user._id}`)}>View all trades</button> 
+                  </>
+              }
             </div>
             
           </div>
@@ -78,23 +106,38 @@ function RLTradeComponent({trade, userTradesPage}) {
       </div>
   )
 
-
   /*-----Functions                -------------*/
 
   function userName(){
-    if (trade.premium){
+    if (trade.user.isPremium)
       return (
         <div className="username premium">
           <img style={{marginTop: "4px", marginRight: "6px", width: "17px", height: "17px"}} src={require("../../images/other/crown.svg")} />
-          <p>{trade.username}</p>
+          <p>{trade.user.username}</p>
         </div>
       )
-    }
-    else return <p className="username">{trade.username}</p>
+    else return (
+      <div className="username">
+        <p style={{fontSize: "12px", color: "#CEC6E0"}}>User</p>
+        <p style={{fontWeight: "600", fontSize: "21px"}}>{trade.user.username}</p>
+      </div>
+    )
   }
 
+  function tags(){
 
-  function tradeItems(){
+    if (trade.user.tags)
+      return trade.user.tags.map(tag =>
+        <div style={{color: tag.color, border: `1px solid ${tag.color}`}} className="displayed-user-tag">
+          {tag.name.toUpperCase()}
+        </div>
+      )
+  
+    else return null
+
+  } 
+  
+  function haveItems(){
     return trade.have.map(item => <TradePostIconRL item={item} />)
   }
 

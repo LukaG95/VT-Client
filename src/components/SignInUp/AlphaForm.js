@@ -4,7 +4,7 @@ import axios from 'axios'
 function AlphaForm() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  
+
   return (
     <div className="alphaFormWrapper">
       <p>VT Alpha</p>

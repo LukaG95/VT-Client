@@ -84,10 +84,10 @@ function SignUpInfo() {
       </div>
 
 
-      <div className="formItem rememberMeSection">
+      <div className="formItem keepMeSection">
           <div onClick={e => e.target.nodeName !== "A" && setReadAndAgreed(!readAndAgreed)} style={{display: "flex", flexDirection: "row", cursor: "pointer"}}>
-            <div className="rememberMeButton">{readAndAgreed && <p> &#10004; </p>}</div>
-            <div className="rememberMeText">I have read and agreed to <a style={{textDecoration: "none", color: "#e7aa0f"}} href="/terms">Terms of service</ a></div>
+            <div className="keepMeButton">{readAndAgreed && <p> &#10004; </p>}</div>
+            <div className="keepMeText">I have read and agreed to <a style={{color: "#2297D9"}} href="/terms">Terms of service</ a></div>
           </div>
       </div>
 
@@ -100,8 +100,8 @@ function SignUpInfo() {
 
   /*-----Functions                -------------*/
 
-  function handleSubmit(event){
-    event.preventDefault()
+  function handleSubmit(e){
+    e.preventDefault()
     
     if (username.replace(/\s/g, '').length < 2 || username.length > 15){
       setUsernameErrorMsg("Username must be between 2 and 15 characters long")
@@ -128,7 +128,7 @@ function SignUpInfo() {
       return
     }
     else if (!readAndAgreed){
-      createNotification("warning", "Agree to Terms of service")
+      createNotification("warning", "Agree to Terms of service", "terms of service")
       return
     }
 
@@ -138,24 +138,22 @@ function SignUpInfo() {
       password: password,
       passwordConfirm: confirmPassword
     })
-    .then(res => {
-      console.log(res.data)
-      if (res.data.status === "blocked"){
-        createNotification("error", "Too many requests, please try again later") 
-      }
-      else if (res.data.status === "username"){
-        setUsernameErrorMsg("Username is taken")
-      }
-      else if (res.data.status === "email"){
-        setEmailErrorMsg("Email is already in use")
-      }
-      else if (res.data.status === "success"){
-        createNotification("success", "You have signed up")
-        setTimeout(()=> {createNotification("info", "Check your email for a confirmation link")}, 2000)
-      }
-      else createNotification("error", "Oops, something went wrong...") 
+    .then(res => { console.log('POST /api/auth/signup', res)
+
+      createNotification("success", "You have signed up", "you have signed up")
+      setTimeout(()=> {createNotification("info", "Check your email for a confirmation link", "confirmation link")}, 2000)
+      
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      if (err.response.status === 429)
+        createNotification("error", "Too many requests, please try again later", "too many requests") 
+      else if (err.response.data.info === "username")
+        setUsernameErrorMsg("Username is taken")
+      else if (err.response.data.info === "email")
+        setEmailErrorMsg("Email is already in use")
+      else 
+        createNotification("error", "Oops, something went wrong...", "something went wrong") 
+    })
     
   }
 

@@ -12,10 +12,10 @@ function AdminPage() {
   const {role} = useContext(UserContext)
 
   useEffect(()=> {
-    axios.get('/api/test/aggregateUsers')
-      .then (res => { 
-      const temp = res.data.map(item => <><div className="testUserComponent"><p>{item.role}</p><p>{item.username}</p><p>{item.password}</p></div><hr /></>) 
-        setTestUsers(temp)
+    axios.get('/api/auth/getTestUsers')
+      .then (res => { console.log('/api/auth/getTestUsers', res)
+        const test_users = res.data.testers.map(item => <><div className="testUserComponent"><p>{item.role}</p><p>{item.username}</p><p>{item.password}</p></div><hr /></>) 
+        setTestUsers(test_users)
       })
       .catch(err => console.log(err))
   }, [])
@@ -43,22 +43,24 @@ function AdminPage() {
   /*-----Functions                -------------*/
 
   function createUser(){
-    axios.post('/api/test/createUser', {
+    axios.post('/api/auth/createTestUser', {
       username: newUsername
     })
     .then (res => { 
-      //console.log(res)
+      // console.log(res)
       window.location.reload()
     })
     .catch(err => console.log(err))
   }
 
   function deleteUser(){
-    axios.delete('/api/test/deleteUser', {
-      username: deleteUsername
+    axios.delete('/api/auth/deleteTestUser', { 
+      data: {
+        username: deleteUsername
+      }
     })
     .then (res => { 
-      //console.log(res)
+      // console.log(res)
       window.location.reload()
     })
     .catch(err => console.log(err))

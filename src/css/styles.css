@@ -10,14 +10,29 @@
   outline: none;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 body{
-  background-color: #312635;
+  background-color: #141115;
   width: 100%;
   min-width: fit-content;
 }
 
-.secondaryWrapper{
+.underNav-content-wrapper{
   display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.underNav-fields{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
 }
 
 .noUserInteraction{
@@ -27,6 +42,7 @@ body{
      -moz-user-select: none;   /* Old versions of Firefox */
       -ms-user-select: none;   /* Internet Explorer/Edge */
           user-select: none;   /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+          
 }
 
 .flex{
@@ -47,7 +63,7 @@ body{
 /*-----Navbar             ----*/
 .navWrapper{
   display: flex;
-  background-color: #47384D;
+  background-color: #1D191F;
   justify-content: space-between;
   height: 60px;
 }
@@ -55,82 +71,60 @@ body{
 .navLeft, .navRight{
   display: flex;
   align-items: center;
-  
-  /*border: 2px solid blue;*/
 }
-
 
 .navLeftItem, .navRightItem{
   display: flex;
   padding: 3px 15px 3px 15px;
   align-items: center;
-  
-  border-radius: 10px;
+  height: 60px;
+
 }
 
-/*
-.navLeftItem:hover{
-  border-radius: 10px;
-  background-color: #5c4964;
-
-  border-bottom: 2px solid #e7aa0f;
-}
-.navLeftItem:active{
-  border-radius: 10px;
-  filter: brightness(1.3);
-  border-bottom: 2px solid #e7aa0f;
-}
-
-*/
-
-.currentPage{
-  background-color: #5c4964;
-  border-bottom: 2px solid #e7aa0f;
+#separator{
+  width: 1px;
+  height: 30px;
+  padding: 0px;
+  background-color: #5e5266;
 }
 
 .navLeftContent, .navRightContent{
-  font-size: 19px;
-  font-weight: 500;
+  display: flex;
+  font-size: 18px;
+  font-weight: 600;
   color: #F6F6F6;
   text-decoration: none;
-
+  /*border: 1px solid yellow;*/
   margin-left: 5px;
   margin-right: 5px;
 }
 
-.addTrade{
-  cursor: pointer;
+.currentPage{
+  border-bottom: 2px solid #FE3B3B;
+  padding-top: 2px;
+  color: #FE3B3B;
 }
 
-.navRightItem .addTrade{
+.navLeftContent{
+  height: 60px;
+  align-items: center;
+}
+
+.addTrade{
   display: flex;
-  background: linear-gradient(180deg, #2C8E54 83.32%, #267947 83.33%);
+  background: linear-gradient(180deg, #2C8E54 51.04%, #23854B 53.66%);
   width: 135px;
   height: 30px;
+  border-radius: 5px;
   font-weight: 600;
   font-size: 17px;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .addTrade:hover{
   background: linear-gradient(180deg, rgb(46, 148, 87) 83.32%, #28804b 83.33%);
-}
-
-#logo{
-  height: 60px;
-  background-color: #564B68;
-  padding-left: 45px;
-  margin-right: 20px;
-  border-radius: 0px;
-
-  width: 130px;
-  clip-path: polygon(100% 0, 76% 100%, 0 100%, 0 0);
-}
-
-#logo:hover{
-  filter: brightness(1);
-  border-bottom: none;
 }
 
 .tradeBellSection{
@@ -147,29 +141,32 @@ body{
 .profile{
   display: flex;
   border-radius: 0px;
-  background-color: #564B68;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 24% 100%);
-  height: 60px;
-  width: 140px;
-  justify-content: center;
+  font-weight: 500;
+  color: #f6f6f6;
+
+  padding: 0px 30px 0px 30px;
+
+  transition: background 0.15s;
 }
 
 .profile:hover{
   cursor: pointer;
-  filter: brightness(1.2);
+  background-color: #423847;
 }
 
-.profile .navRightContent{
-  margin-left: 35px;
+.profile:active{
+  cursor: pointer;
+  background-color: #786681;
 }
+
 
 .loginButton{
   color: #f6f6f6;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
+  padding: 0px 35px 0px 35px;
 
-  padding-left: 40px;
 }
 
 #center{
@@ -177,91 +174,85 @@ body{
   align-items: center;
 }
 
-/*-----Sidebar              ----*/
+/*-----Filters              ----*/
 
-.sbWrapper{
+.filters-field{
+  margin-top: 15px;
+  margin-right: 0px;
+  margin-left: 0px;
+
   display: flex;
-  background-color: #392C3E;
-  flex-direction: column;
-  align-items: center;
+  background-color: #1D191F;
 
-  min-width: 280px;
-  height: 100%;
+  border-radius: 5px;
+  align-items: center;
+  padding-top: 3px;
+  padding-bottom: 12px;
+  padding-left: 12px;
+  flex-wrap: wrap;
+
+}
+
+.rl-resetFilters-button{
+  display: flex;
+  background-color: #D10A0A;
+  color: #f6f6f6;
+  font-weight: 600;
+  font-size: 13px;
+  min-width: 35px;
+  min-height: 29px;
+  border-radius: 5px;
   
-}
-
-.sbSection{
-  display: flex;
-  height: 100%;
-  
-  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
-
-  width: 100%;
-}
-
-.premiumSection{
-  height: 115px;
-  justify-content: center;
-}
-
-.premiumButton{
-  display: flex;
-  width: 230px;
-  height: 53px;
-  background-color: #2C8E54;
-  color: #F6F6F6;
-  text-decoration: none;
-  align-items: center;
-  justify-content: center;
-  font-size: 19px;
-  font-weight: 500;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  transition: filter 300ms;
-}
-
-.premiumButton:hover{
-  filter: brightness(1.2);
+  margin-top: 22px;
+  margin-right: 12px;
   cursor: pointer;
 }
 
-.premiumButton svg{
-  margin-right: 18px;
-  margin-bottom: 5px;
-  width: 35px;
-  height: 35px;
+.rl-resetFilters-button:hover{
+  background-color: #d42222;
 }
 
-.filtersRL{
-  display: flex;
-  flex-direction: column;
-  height: 447px;
-  max-height: 447px;
-  justify-content: space-between;
+.rl-resetFilters-button:active{
+  background-color: #d45656;
 }
 
 .filterButtonWrapper{
   position: relative;
 }
 
+.filter-label{
+  font-size: 11px;
+  color: #F6F6F6;
+}
+
 .filterButton {
   display: flex;
-  height: 44px;
-  width: 220px;
+  width: 209px;
+  height: 29px;
   font-size: 12px;
-  color: #101010;
-  background: linear-gradient(180deg, #392C3E 50%, #332838 50%);
-  
-  border: 1px solid rgb(167, 167, 167);
-
+  background: #131313;
+  border-radius: 5px;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  
   transition: filter 200ms;
+  margin-right: 12px;
+  padding-left: 10px;
+}
+
+.blackBorder{
+  border-radius: 5px 5px 0px 0px;
+  padding-left: 9px;
+  padding-bottom: 1px;
+  border: 1px solid black;
+  border-bottom: none;
 }
 
 .filterButton:hover {
-  filter: brightness(1.075)
+  filter: brightness(1.075);
 }
 
 .filterButton:active {
@@ -269,7 +260,6 @@ body{
 }
 
 .filterButtonContent {
-  padding-left: 10px;
   color: #f6f6f6;
   font-size: 13px;
   font-weight: 600;
@@ -279,8 +269,8 @@ body{
   background-color: #f6f6f6;
   margin-right: 12px;
   margin-bottom: 2px;
-  height: 13px;
-  width: 13px;
+  height: 9px;
+  width: 9px;
   clip-path: polygon(50% 100%, 0 30%, 100% 30%);
 }
 
@@ -289,37 +279,34 @@ body{
   visibility: hidden;
   margin-right: 12px;
   margin-bottom: 2px;
-  height: 13px;
-  width: 13px;
+  height: 9px;
+  width: 9px;
   clip-path: polygon(50% 100%, 0 30%, 100% 30%);
   animation: fallDown 0.2s;
 }
 
 #fix{
-  display: inline;
-  font-size: 11px;
-  color: #CECECE;
-
-  margin-left: 8px;
+  font-size: 13px;
+  color: #F6F6F6;
+  font-weight: 600;
+  margin-left: 5px;
 }
 
 .dropdown{
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 41px;
-  width: 220px;
-  
+  width: 209px;
   max-height: 300px;
 
-  background-color: #392C3E;
-  border-right: 1px solid rgb(167, 167, 167);
-  border-left: 1px solid rgb(167, 167, 167);
-  border-bottom: 1px solid rgb(167, 167, 167);
+  background: #131313;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.54);
 
   padding: 10px;
-  z-index: 1;
+  z-index: 2;
   cursor: pointer;
   animation: transitionDown 0.2s;
 }
@@ -331,29 +318,30 @@ body{
 }
 
 .filterInput{
-  background: #1E1E1E;
+  background: #1e1e1e;
+  border: 1px solid #676767;
+  border-radius: 5px;
   font-size: 10px;
   color: #CDCDCD;
-  border: 1px solid #676767;
   padding: 10px;
   width: 100%;
   box-shadow: 0px 0px 4px #5D4E76;
+  margin-bottom: 10px;
 }
 
 .itemNames{
   width: 100%;
   font-size: 12px;
   overflow: auto;
-  scrollbar-color: #f6f6f6 #312635;
+  scrollbar-color: #f6f6f6 #332638;
   scrollbar-width: thin;
 }
 
 .menu-item{
   display: flex;
-  color: #CCCCCC;
-  font-weight: 500;
-  font-size: 12px;
-  min-height: 44px;
+  color: #F6F6F6;
+  font-size: 13px;
+  min-height: 35px;
   align-items: center;
   transition: background 0.2s;
 
@@ -363,10 +351,9 @@ body{
 
 .menu-item:hover{
   color: #f6f6f6;
-  font-weight: 500;
-  background-color: #564b68;
-  padding-left: 20px;
-  
+  background: #332638;
+  border-radius: 5px;
+  padding-left: 15px;
 }
 
 .leaderboards-wrapper{
@@ -514,153 +501,194 @@ body{
 }
 
 
-/*-----RL Trading (main)         ----*/
-.main{
+/*-----RL trading and page numbers        ----*/
+
+.page-numbers-field{
   display: flex;
-  position: relative;
-  flex-direction: column;
+  background-color: #1D191F;
   width: 100%;
-  height: 100%;
-  margin: 31px 0px 0px 31px;
-  animation: transitionIn 0.25s;
-}
 
-.main-middle{
-  display: flex;
-  flex-direction: column;
-  height: 80vh;
-  min-height: 590px;
-  overflow: auto;
-  scrollbar-color: #E7AA0F #47384D;
-  scrollbar-width: 15px;
-}
+  border-radius: 5px;
+  align-items: center;
+  
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
 
-.main-middle::-webkit-scrollbar {
-  width: 15px;
-}
-
-.main-middle::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.6); 
-}
-
-.main-middle::-webkit-scrollbar-thumb, .main-middle::-webkit-scrollbar-thumb:window-inactive {
-  background: #E7AA0F; 
-}
-
-.main-top{
-  display: flex;
-  justify-content: space-between;
-}
-
-.trading-title{
-  color: #F6F6F6;
-  font-weight: 500;
-  font-size: 36px;
-
-  line-height: 100%;
-}
-
-.page-numbers{
-  display: flex;
-
-  align-items: flex-end;
-  justify-content: center;
+  margin-top: 3px;
+  margin-right: 40px;
+  margin-left: 40px;
 }
 
 .pageButton{
   background: none;
-  color: #938F8F;
-  font-weight: 400;
-  font-size: 18px;
+  color: #f6f6f6;
+  font-size: 13px;
   border: none;
   cursor: pointer;
 
-  width: 30px;
+  height: 26px;
+  width: 26px;
+  border-radius: 50px;
 }
 
 .pageButton:hover{
-  color: #F6F6F6;
-  background-color: #564b68;
+  background-color: #28222b;
 }
 
 .pageButton:active{
-  background-color: #595264;
+  background-color: #39303d;
 }
 
 .highlighted-page{
-  color: #F6F6F6;
-  background-color: #564b68;
+  background-color: #2C8E54;
+}
+
+.highlighted-page:hover{
+  background-color: #2C8E54;
 }
 
 .page-left{
-  height: 10px;
-  width: 10px;
+  height: 7px;
+  width: 7px;
   margin-right: 7px;
-  margin-bottom: 8px;
   background-color: #f6f6f6;
   clip-path: polygon(0 50%, 100% 0, 100% 100%);
   cursor: pointer;
 }
 
 .page-right{
-  height: 10px;
-  width: 10px;
+  height: 7px;
+  width: 7px;
   margin-left: 7px;
-  margin-bottom: 8px;
   background-color: #f6f6f6;
   clip-path: polygon(100% 50%, 0 0, 0 100%);
   cursor: pointer;
 }
 
+.no-trades-found{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.no-trades-found p{
+  color: #f6f6f6;
+  font-weight: 500;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.no-trades-found h2{
+  color: #f6f6f6;
+  font-weight: 600;
+  font-size: 24px;
+  margin-top: 20px;
+  line-height: 0px;
+}
+
+.no-trades-found button{
+  border: 1px solid #D10A0A;
+  background: none;
+  color: #f6f6f6;
+  margin-top: 25px;
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.no-trades-found button:hover{
+  background-color: #ce1e1e;
+}
 
 .rltrade-container{
   display: flex;
   flex-direction: column;
+  width: 100%;
   min-width: 1350px;
 
-  background-color: none;
-  border-bottom: 3px solid #47384D;
-  border-left: 3px solid #47384D;
-  border-right: 3px solid #47384D;
-  margin-bottom: 31px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 15px;
+
+  min-height: 100%;
 }
 
 .rltrade-cTopPlace{
   display: flex;
-  background-color: #392C3E;
-  height: 40px;
+  background-color: #1D191F;
+  height: 55px;
+  border-radius: 5px;
 
+  margin-bottom: 3px;
   justify-content: space-between;
 }
 
 .username{
   display: flex;
-  background-color: #47384D;
+  flex-direction: column;
   font-weight: 500;
   font-size: 21px;
   color: #f6f6f6;
-  padding: 3px 18px 0px 23px;
+  justify-content: space-evenly;
+
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+.username p{
+  line-height: 100%;
 }
 
 .premium{
   color: #E7AA0F;
 }
 
-.top-triangle{
-  display: flex;
-  width: 25px;
-  height: 100%;
-  background-color: #47384D;
-  clip-path: polygon(100% 0, 0 0, 0 100%);
-}
-
 .trade-reputation{
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
+  font-weight: 500;
+  margin-left: 15px;
 
   justify-content: space-evenly;
+}
+
+.trade-reputation p{
+  line-height: 100%;
+}
+
+.trade-component-tagsAndTitle{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 10px;
+  position: relative;
+}
+
+.trade-component-tags{
+  display: flex;
+  width: 100%;
+  margin-top: 7px; 
+}
+
+.trade-component-title{
+  color: #766495;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.displayed-user-tag{
+  display: flex;
+  align-items: center;
+  padding: 0px 5px 0px 5px;
+  height: 15px;
+  line-height: 0px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 9px;
+
+  border-radius: 5px;
 }
 
 .active-text{
@@ -671,48 +699,62 @@ body{
   line-height: 100%;
 }
 
+.rl-trade-component-top-right{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  margin-right: 20px;
+}
+
+.right-gamePlatform{
+  display: flex;
+  color: #f6f6f6;
+  font-size: 19px;
+  line-height: 0px;
+  font-weight: 500;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
 .trade-post-time{
   display: flex;
-  font-size: 11px; 
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 12px; 
   color: #CEC6E0;
   line-height: 100%;
+  margin-bottom: 8px;
 }
 
 .rltrade_cMidPlace{
   width: 100%;
-  height: 100%;
-  
+  border-radius: 5px;
+  background-color: #1D191F;
   justify-content: space-between;
+  min-height: 100%;
+
 }
 
-.rl-has-container{
+.rl-has-container, .rl-wants-container{
   min-width: 411px;
+  height: 100%;
   align-items: flex-start;
-  padding: 10px 0px 20px 20px;
-}
-
-.rl-wants-container{
-  min-width: 411px;
-  align-items: flex-start;
+  
   padding: 10px 0px 20px 20px;
 
 }
 
 .haswant-text{
-  font-size: 18px;
-  color: #F6F6F6;
+  font-size: 14px;
+  color: #CEC6E0;
+ 
   padding-bottom: 10px;
 }
 
-.has-items{
-  display: grid;
-  position: relative;
-  grid-template-columns:  auto auto auto auto;
-  column-gap: 3px;
-  row-gap: 3px;
-}
-
-.want-items{
+.has-items, .want-items{
   display: grid;
   position: relative;
   grid-template-columns:  auto auto auto auto;
@@ -730,41 +772,36 @@ body{
 }
 
 .notes-box{
-  background: #251D28;
-  border: 1px solid #47384D;
+  background: #332638;
   border-radius: 5px;
-}
-
-.notes-top{
-  display: flex;
-  height: 31px;
-  background-color: #392C3E;
-  font-weight: 500;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.68);
-  align-items: center;
-  padding-left: 10px;
 }
 
 .notes{
   font-weight: 300;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.95);
-  padding: 5px 10px 5px 10px;
-  overflow: auto;
+  margin: 10px 15px 10px 15px;
+  overflow: hidden;
   scrollbar-color: #392C3E #47384D;
   scrollbar-width: thin;
   text-align: justify;
 }
 
+.buttons-box{
+  display: flex;
+  position: relative;
+}
+
 .buttons-box button{
-  background: #251D28;
+  background: none;
+  font-style: normal;
   font-weight: 500;
-  font-size: 11px;
+  font-size: 12px;
+  line-height: 14px;
   color: #F6F6F6;
-  border: 1px solid #47384D;
+  border: 1px solid #61496A;
   border-radius: 5px;
-  padding: 3px 10px 3px 10px;
+  padding: 8px 24px 8px 24px;
   cursor: pointer;
   margin-right: 10px;
   transition: background-color 100ms;
@@ -776,6 +813,14 @@ body{
 
 .buttons-box button:active{
   background: #251D28;
+}
+
+.trade-expire-text{
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  color: #f6f6f6;
+  font-size: 10px;
 }
 
 .no-trades-text{
@@ -795,104 +840,128 @@ body{
   animation: transitionIn 0.4s;
 }
 
-.userTrades-top-section{
+.user-trades-topbar-field{
   display: flex;
   height: 100px;
-  min-width: 1350px;
+  background-color: #1d191f;
+  border-radius: 5px;
+  width: 1600px;
   align-items: center;
+  margin-top: 15px;
   justify-content: space-between;
-
 }
 
-.userTrades-top-section button{
+.user-trades-topbar-field p{
+  color: #f6f6f6;
+  font-weight: 600;
+  font-size: 26px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.user-trades-topbar-field button{
   background: none;
   color: #f6f6f6;
   border: 1px solid #47384D;
   width: 133px;
   height: 30px;
   margin-right: 10px;
+  margin-left: 30px;
+  border-radius: 5px;
 
   cursor: pointer;
 }
 
-.userTrades-top-section button:hover{
+.user-trades-topbar-field button:hover{
   background-color: #47384D;
 }
 
-.userTrades-top-section button:active{
+.user-trades-topbar-field button:active{
   background-color: rgb(83, 66, 90);
 }
 
+.user-trades-topbar-left{
+  display: flex;
+  align-items: center;
+}
+
 #del-all-trades-button{
-  background-color: #D10A0A;
-  width: 191px;
-  height: 37px;
-  font-weight: 600;
-  font-size: 18px;
+  border: 1px solid #D10A0A;
   color: #f6f6f6;
-  margin-right: 0px;
+  margin-right: 30px;
+}
+
+#del-all-trades-button:hover{
+  background-color: #d10a0a1a;
 }
 
 .editDel-tradeButtons-section{
+  display: flex;
   position: relative;
   bottom: 20px;
   margin-bottom: 15px;
+
+  justify-content: space-between;
 }
 
-.editTrade-button{
-  background: none;
-  width: 153px;
-  height: 37px;
-  border: 2px solid #2C8E54;
-  border-radius: 5px;
-  font-weight: 600;
-  font-size: 18px;
+.editDel-tradeButtons-section p{
   color: #f6f6f6;
+  font-size: 12px;
+}
+
+#editTrade-button{
+  background: none;
+  border: 1px solid #2C8E54;
+  border-radius: 5px;
+  color: #f6f6f6;
+  font-weight: 500;
+  font-size: 12px;
   cursor: pointer;
+  padding: 5px 15px 5px 15px;
   transition: background 200ms;
 
   margin-right: 15px;
 }
 
-.deleteTrade-button{
+#deleteTrade-button{
   background: none;
-  width: 153px;
-  height: 37px;
-  border: 2px solid #D10A0A;
+  border: 1px solid #D10A0A;
   border-radius: 5px;
-  font-weight: 600;
-  font-size: 18px;
   color: #f6f6f6;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 0px;
   cursor: pointer;
+  padding: 5px 15px 5px 15px;
   transition: background 200ms;
 
-  margin-right: 15px;
+  margin-right: 15x;
 }
 
-.bumpTrade-button{
+#bumpTrade-button{
   background: none;
-  width: 153px;
-  height: 37px;
-  border: 2px solid #E7AA0F;
+  border: 1px solid #E7AA0F;
   border-radius: 5px;
-  font-weight: 600;
-  font-size: 18px;
   color: #f6f6f6;
+  font-weight: 500;
+  line-height: 0px;
+  font-size: 12px;
   cursor: pointer;
+  padding: 5px 15px 5px 15px;
   transition: background 200ms;
 }
 
 
-.bumpTrade-button:hover{
-  background: #E7AA0F;
+#bumpTrade-button:hover{
+  background: #e7aa0f25;
 }
 
-.editTrade-button:hover{
-  background: #2C8E54;
+#editTrade-button:hover{
+  background: #2c8e5327;
 }
 
-.deleteTrade-button:hover{
-  background: #D10A0A;
+#deleteTrade-button:hover{
+  background: #d10a0a23;
 }
 
 
@@ -946,7 +1015,9 @@ body{
   background-color: #47384d;
   height: 33px; 
   border-radius: 0px 40px 40px 0px;
+  border: none;
   padding: 0px 15px 0px 15px;
+  cursor: pointer;
   text-decoration: none;
 }
 
@@ -1247,12 +1318,12 @@ body{
 }
 
 .addRepButton2{
-  color: #E7AA0F;
+  color: #fe3b3b;
   cursor: pointer;
 }
 
 .addRepButton2:hover{
-  color: rgb(243, 181, 24);
+  color: #ff6464;
 }
 
 .rep-noUserFound-container{
@@ -1354,87 +1425,37 @@ body{
   background: linear-gradient(180deg, rgb(82, 64, 88) 49.01%, #4e3e55 49.03%);
 }
 
-
 .addRLWrapper{
   display: flex;
   flex-direction: column;
-  height: 1200px;
 
   align-items: center;
   justify-content: space-evenly;
 
+  margin-top: 20px;
   animation: transitionIn 0.4s;
-}
-
-.newTradeTitle{
-  color: #f6f6f6;
-  font-size: 40px;
-  font-weight: 500;
-  
-  padding: 0px;
-  margin: 0px;
 }
 
 .rlHaveWantSection{
   display: flex;
-  width: 938px;
-  height: 395px;
+  background-color: #1D191F;
+
+  border-radius: 5px;
   flex-direction: column;
 
-  border: 2px solid #47384D;
 }
 
-
-.h-wTopPlace{
-  display: flex;
-  background-color: #392C3E;
-  height: 40px;
-
-  justify-content: space-between;
-  transform: translateY(-3px);
-}
-
-.left-gameName, .right-gamePlatform{
-  display: flex;
-  color: #f6f6f6;
-  background-color: #47384D;
-
-  align-items: center;
-  justify-content: center;
-} 
-
-.left-gameName{
-  font-size: 21px;
-  font-weight: 500;
-
-  padding: 0px 40px 0px 20px;
-  clip-path: polygon(100% 0, 92% 100%, 0 100%, 0 0);
-}
-
-.right-gamePlatform{
-  font-size: 19px;
-  font-weight: 500;
-
-  border-radius: 5px 0px 0px 5px;
-  padding: 0px 18px 0px 18px;
-}
-
-
-.allAddedItems{
-  display: flex;
-  height: 100%;
-
-  margin-top: 10px;
-  justify-content: space-between;
-}
-
-.hwLeftSection, .hwRightSection{
+.hwTopSection, .hwBottomSection{
   display: flex;
   flex-direction: column;
   height: auto;
   width: 400px;
 
-  margin: 0px 14px 0px 14px;
+  margin: 14px 14px 0px 14px;
+}
+
+.hwRightSection{
+  margin-top: 20px;
 }
 
 .hTitle, .wTitle{
@@ -1473,7 +1494,8 @@ body{
 }
 
 .haveItems button, .wantItems button{
-  background-color: #392C3E;
+  background-color: #2B202F;
+  border-radius: 5px;
   height: 95px;
   width: 95px;
   justify-self: center;
@@ -1494,8 +1516,10 @@ body{
 }
 
 .RLicon{
+  display: flex;
   position: relative;
-  height: 95px;
+  flex-direction: column;
+  
   width: 95px;
 }
 
@@ -1523,13 +1547,13 @@ body{
 
 .certIcon{
   position: absolute; 
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: rgba(0, 0, 0, 0.50);
   color: #f6f6f6;
   font-size: 12px;
   height: 20px;
   width: 100%;
 
-  bottom: 10px;
+  bottom: 30px;
   text-align: center;
   cursor: pointer;
 }
@@ -1538,12 +1562,14 @@ body{
   position: absolute; 
   color: #f6f6f6;
   background-color: #251d28;
-  font-size: 9px;
+  font-size: 11px;
   border-radius: 50px;
-  font-weight: 600;
+  font-weight: 500;
+  line-height: 0px;
   border: 1px solid #6e6e6e;
 
-  padding: 1px 3px 1px 4px;
+  /*padding: 1px 3px 1px 4px;*/
+  padding: 8px 7px 8px 7px;
   top: 6px; 
   left: 5px;
   cursor: pointer;
@@ -1623,27 +1649,27 @@ body{
   visibility: visible;
 }
 
-.RLicon-name-hover{
-  visibility: hidden;
+.RLicon-name{
   display: flex;
   flex-direction: column;
   position: relative;
-  background-color: #221c24;
+  background-color: #161616;
   color: #f6f6f6;
   font-size: 12px;
   font-weight: 700;
   width: 100%;
-  max-height: 100%;
-
+  height: 20px;
   text-align: center;
-  bottom: 6px;
-  white-space: wrap;
-  z-index: 1;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+
+  border-radius: 0px 0px 5px 5px;
+
+  overflow: hidden;
 }
 
-.RLicon:hover .RLicon-name-hover{
-  visibility: visible;
-}
 
 
 .rl-icon-dropdown{
@@ -1732,7 +1758,6 @@ body{
   margin-bottom: 10px;
   background-color: #9F2727; 
   border: none;
-
 }
 
 #delete-rl-filters-button:hover{
@@ -1776,11 +1801,11 @@ body{
 
 .rlChooseItemsSection{
   position: relative;
-  width: 938px;
-  height: 380px;
-  background-color: #221C24;
+  width: 920px;
 
-  border: 2px solid #47384D;
+  background-color: #1D191F;
+  border-radius: 5px;
+  margin-right: 20px;
 }
 
 
@@ -1851,8 +1876,6 @@ body{
   filter: brightness(0.75);
 }
 
-
-
 .RLfilter_icons_section button {
   display: flex;
   align-items: center;
@@ -1865,14 +1888,15 @@ body{
 .item-imagesRL{
   display: grid;
   position: relative;
-  height: 300px;
+  height: auto;
+  max-height: 630px;
   grid-template-columns:  auto auto auto auto auto auto auto auto auto;
   grid-template-rows: max-content;
   column-gap: 3px;
   row-gap: 3px;
 
   padding-left: 13px;
-  overflow-y: scroll;
+  overflow: auto;
 
   align-items: flex-start;
   justify-content: flex-start;
@@ -1887,29 +1911,34 @@ body{
   display: flex;
   position: relative;
   flex-direction: column;
-  width: 938px;
+  width: 100%;
   height: 230px;
-  background-color: #221C24;
+  background-color: #1d191f;
 
-  border: 2px solid #47384D;
+  margin-top: 20px;
+  border-radius: 5px;
 }
 
 .notesArea{
   color: #f6f6f6;
   font-size: 12px;
   width: 100%;
+  border: none;
   height: 100%;
   resize: none;
-  background-color: #221C24;
-  border: none;
+  background-color: #1d191f;
+ 
   padding: 9px 15px 0px 15px;
+
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
 }
 
 .platformSection{
   display: flex;
   align-items: center;
   height: 50px;
-
 }
 
 .platformSection h4{
@@ -1962,9 +1991,11 @@ body{
 
 .rlSubmit{
   display: flex;
-  align-items: flex-start;
+  width: 100%;
 
-  width: 938px;
+  align-items: flex-start;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .rlSubmitButton{
@@ -1976,7 +2007,7 @@ body{
   border: 2px solid #2C8E54;
   border-radius: 4px;
   background: none;
-
+  
   align-items: center;
   justify-content: center;
   transition: background-color 200ms;
@@ -2083,7 +2114,7 @@ body{
   display: flex;
   flex-direction: column;
   position: fixed;
-  background-color: #47384D;
+  background-color: #1D191F;
 
   width: 440px;
 
@@ -2121,7 +2152,7 @@ body{
 }
 
 .colorBG{
-  background-color: #564B68;
+  background-color: #332638;
 }
 
 .loginHeader-left:hover, .loginHeader-right:hover{
@@ -2129,7 +2160,7 @@ body{
 }
 
 .loginHeader-left:active, .loginHeader-right:active{
-  border-bottom: 2px solid #e7aa0f;
+  border-bottom: 2px solid #9A2929;
 }
 
 
@@ -2185,7 +2216,7 @@ body{
   color: #f6f6f6;
   width: 100%;
   height: 33px;
-  background: #47384D;
+  background: #1D191F;
   font-size: 12px;
 
   margin-bottom: 5px;
@@ -2201,14 +2232,14 @@ body{
   font-size: 12px;
 }
 
-.rememberMeSection{
+.keepMeSection{
   height: 21px;
   flex-direction: row;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.rememberMeButton{
+.keepMeButton{
   display: flex;
   width: 24px;
   height: 21px;
@@ -2220,17 +2251,18 @@ body{
   justify-content: center;
   margin-right: 8px;
   border-radius: 5px;
-  border: 2px solid #E7AA0F;
+  border: 2px solid #9A2929;
 }
 
-.rememberMeText{
+.keepMeText{
   color: #F6F6F6;
   font-weight: 500;
   font-size: 13px;
 }
 
 .forgotPassword{
-  color: #E7AA0F;
+  color: #2297D9;
+  text-decoration: underline;
   font-weight: 500;
   font-size: 13px;
   cursor: pointer;
@@ -2240,7 +2272,7 @@ body{
 .loginNowButton{
   display: flex;
   color: #f6f6f6;
-  background-color: #E7AA0F;
+  background-color: #9A2929;
 
   font-weight: 500;
   font-size: 21px;
@@ -2290,7 +2322,7 @@ body{
 
   font-weight: 600;
   font-size: 18px;
-  border: 2px solid #E7AA0F;
+  border: 2px solid #9A2929;
   border-radius: 50px;
 
   align-items: center;
@@ -2313,7 +2345,7 @@ body{
 .resetPassButton{
   display: flex;
   color: #f6f6f6;
-  background-color: #E7AA0F;
+  background-color: #9A2929;
   width: 372px;
   justify-content: center;
   align-items: center;
@@ -2333,196 +2365,294 @@ body{
   filter: brightness(1.05);
 }
 
+
 /*-----My Account              ----*/
 
-.accountWrapper {
-	color: #F6F6F6;
-  margin-top: 130px;
-}
-
-.accountFieldsWrapper {
-	margin: 13px 0 0 56px;
+.account-settings-wrapper {
+  display: flex;
   font-size: 18px;
   
   animation: transitionIn 0.4s;
 }
 
-.accountFieldsWrapper form{
-  position: relative;
+.account-settings-sidebar{
+  display: flex;
+  flex-direction: column;
+  background-color: #1d191f;
+  min-width: 335px;
+  height: 800px;
 }
 
-.accountFieldsWrapper label {
-	display: inline-flex;
-  margin-right: 5px;
-  margin-left: 5px;
+.account-settings-sidebar div{
+  font-weight: 500;
+  font-size: 16px;  
+  color: rgba(246, 246, 246, 0.5);
+
+  border-bottom: 1px solid #27212B;
+  padding: 18px;
+  cursor: pointer;
+  transition: padding 0.3s;
 }
 
-.accountFieldsWrapper label>p {
-	margin-bottom: 7px;
+.account-settings-sidebar div:nth-child(1){
+  border-top: 1px solid #27212B;
+  margin-top: 50px;
 }
 
-.accountFieldsWrapper input {
+.account-settings-main{
+  display: flex;
+  background-color: #1d191f;
+  width: 100%;
+  height: 800px;
+
+  margin-left: 10px;
+}
+
+.account-username-container{
+  margin: 50px 0px 0px 70px;
+}
+
+.account-username-container p{
+  color: #f6f6f6;
+  font-size: 14px;
+}
+
+.acSettings-username-text{
+  color: #f6f6f6;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.acSettings-currentUsername{
+  color: #F6F6F6;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 34px;
+
+  margin-bottom: 30px;
+}
+
+.account-username-container input {
   display:block;
 	background: none;
-  border: 1px solid #564B68;
+  border: 1px solid rgba(246, 246, 246, 0.5);
   border-radius: 5px;
   font-weight: 300;
 	color: #F6F6F6;
 	width: 358px;
-	padding: 10px 0 10px 15px;
-	margin-bottom: 21px;
-	font-size: 14px;
+  padding: 7px 0 7px 15px;
+  margin-top: 10px;
+	font-size: 12px;
 }
 
-.accountFieldsWrapper input:hover{
+.account-username-container input:hover{
   border: 1px solid rgb(88, 105, 117);
 }
 
-.accountFieldsWrapper input:focus{
+.account-username-container input:focus{
   border: 1px solid #18A0FA;
 }
 
-.accountUnError{
-  position: absolute;
-  top: 77px;
-  left: 2px;
-  color: rgb(255, 61, 61);
-  font-size: 12px;
-}
-
-.accountEmailError{
-  position: absolute;
-  top: 77px;
-  left: 2px;
-  color: rgb(255, 61, 61);
-  font-size: 12px;
-}
-
-.currentPassError{
-  position: absolute;
-  top: 77px;
-  left: 2px;
-  color: rgb(255, 61, 61);
-  font-size: 12px;
-}
-
-.newPassError{
-  position: absolute;
-  top: 175px;
-  left: 2px;
-  color: rgb(255, 61, 61);
-  font-size: 12px;
-}
-
-.NewPassError2{
-  position: absolute;
-  top: 275px;
-  left: 2px;
-  color: rgb(255, 61, 61);
-  font-size: 12px;
-}
-
-.accountFieldsWrapper button {
+.account-username-container button {
 	display: block;
-	margin-bottom: 51px;
-	font-size: 12px;
-	background: unset;
-	border: 1px solid #2C8E54;
+	font-weight: 500;
+  font-size: 16px;
+  background: #141115;
+  border: none;
 	border-radius: 5px;
 	color: #F6F6F6;
-  padding: 6px 12px;
+  padding: 12px 18px;
+  margin-top: 25px;
   cursor: pointer;
 	transition: background-color 200ms;
 }
 
-.accountFieldsWrapper button:active {
-	background-color: #2C8E54;
+.account-username-container button:hover {
+	background-color: #0f0c0f;
 }
 
-.tooltip {
-	position: relative;
-	display: inline-flex;
-	border: 2px solid #564B68;
-	border-radius: 100px;
-	width: 22px;
-	height: 22px;
+.account-username-container button:active {
+	background-color: #120f13;
+}
+
+.account-email-container{
+  margin: 50px 0px 0px 70px;
+}
+
+.account-email-container p{
+  color: #f6f6f6;
+  font-size: 14px;
+}
+
+.account-email-container input{
+  display:block;
+	background: none;
+  border: 1px solid rgba(246, 246, 246, 0.5);
+  border-radius: 5px;
+  font-weight: 300;
+	color: #F6F6F6;
+	width: 358px;
+  padding: 7px 0 7px 15px;
+  margin-top: 10px;
 	font-size: 12px;
-	text-align: center;
-	bottom: 2px;
 }
 
-.tooltip:before {
-	content: "i";
+.account-email-container input:hover{
+  border: 1px solid rgb(88, 105, 117);
+}
+
+.account-email-container input:focus{
+  border: 1px solid #18A0FA;
+}
+
+.account-email-container button{
+  display: block;
+	font-weight: 500;
+  font-size: 16px;
+  background: #141115;
+  border: none;
+	border-radius: 5px;
+	color: #F6F6F6;
+  padding: 12px 18px;
+  margin-top: 15px;
+  cursor: pointer;
+	transition: background-color 200ms;
+}
+
+.account-email-container button:hover {
+	background-color: #0f0c0f;
+}
+
+.account-email-container button:active {
+	background-color: #120f13;
+}
+
+.acSettings-currentUEmail{
+  color: #F6F6F6;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 34px;
+
+  margin-bottom: 15px;
+}
+
+.acSettings-email-text{
+  color: #F6F6F6;
+  font-weight: normal;
+  font-size: 16px;
+
+  margin-bottom: 50px;
+}
+
+#accountUnError{
+  position: absolute;
+  color: rgb(255, 61, 61);
+  font-size: 10px;
+}
+
+#accountEmailError{
+  position: absolute;
+  color: rgb(255, 61, 61);
+  font-size: 10px;
+}
+
+.account-password-container{
+  margin: 50px 0px 0px 70px;
+}
+
+.account-password-container p{
+  color: #f6f6f6;
+  font-size: 14px;
+}
+
+.account-password-container input{
+  display:block;
+	background: none;
+  border: 1px solid rgba(246, 246, 246, 0.5);
+  border-radius: 5px;
+  font-weight: 300;
+	color: #F6F6F6;
+	width: 358px;
+  padding: 7px 0 7px 15px;
+  margin-top: 10px;
+	font-size: 12px;
+}
+
+.account-password-container input:hover{
+  border: 1px solid rgb(88, 105, 117);
+}
+
+.account-password-container input:focus{
+  border: 1px solid #18A0FA;
+}
+
+.account-password-container button{
+  display: block;
+	font-weight: 500;
+  font-size: 16px;
+  background: #141115;
+  border: none;
+	border-radius: 5px;
+	color: #F6F6F6;
+  padding: 12px 18px;
+  margin-top: 25px;
+  cursor: pointer;
+	transition: background-color 200ms;
+}
+
+.account-password-container button:hover {
+	background-color: #0f0c0f;
+}
+
+.account-password-container button:active {
+	background-color: #120f13;
+}
+
+#currentPassError{
+  position: absolute;
+  color: rgb(255, 61, 61);
+  font-size: 12px;
+}
+
+#newPassError{
+  position: absolute;
+
+  color: rgb(255, 61, 61);
+  font-size: 12px;
+}
+
+#NewPassError2{
+  position: absolute;
+
+  color: rgb(255, 61, 61);
+  font-size: 12px;
+}
+
+
+/*-----Account Topbar              ----*/
+
+.accountTb {
+  display: flex;
 	width: 100%;
 }
 
-.tooltip>div {
-	position: absolute;
-	pointer-events: none;
-	filter: opacity(0);
-	transition: filter .5s;
-	bottom: 1em;
-	margin-left: 50%;
-	transform: translateX(-50%);
-	width: 200px;
+.accountTb-nav{
+  color: rgba(246, 246, 246, 0.5);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 15px 20px 15px 20px;
+
+  transition: background-color 400ms;
 }
 
-.tooltip:hover>div {
-	pointer-events: unset;
-	filter: opacity(1);
+
+.accountTb-nav:hover {
+	background: #1d191f;
 }
 
-.tooltip>div>.tooltip-tip>p {
-	background: black;
-	border-radius: 10px;
-	padding: 5px;
-	margin: 0 auto;
-	width: fit-content;
-}
-
-.tooltip .tooltip-bottom {
-	border: 10px solid black;
-	border-bottom-color: transparent;
-	border-left-color: transparent;
-	border-right-color: transparent;
-	width: 0;
-	height: 0;
-	margin: 0 auto;
-}
-
-/*-----Account Sidebar              ----*/
-
-.accountSb {
-	color: white;
-	text-align: right;
-	width: 625px;
-	height: 540px;
-	padding-right: 31px;
-	border-right: 1px solid #564B68;
-	font-size: 24px;
-}
-
-.accountSb-nav {
-	padding-top: 25px;
-}
-
-.accountSb-nav>a {
-	color: white;
-	padding: 12px;
-	text-decoration: none;
-	transition: background-color 400ms;
-}
-
-.accountSb-nav:hover>a {
-	background: #47384D;
-}
-
-.accountSb-nav:active>a {
-  filter: brightness(1.3);
-}
-
-.accountSb-nav>a.currentPage {
-	background: #47384D;
+.account-currentPage{
+  color: #f6f6f6;
+	background: #1d191f;
 }
 
 /*-----Logout               ----*/
@@ -2645,10 +2775,6 @@ body{
 
 
 /*-----ToS              ----*/
-.ToS {
-	
-}
-
 
 .ToS h1 {
 	color: white;
@@ -2755,4 +2881,55 @@ body{
 
 .testUserComponent p{
   margin-left: 0px;
+}
+
+/*-----Toast and back to top button          ----*/
+
+.Toastify__toast--success, .Toastify__toast--info, .Toastify__toast--warning, .Toastify__toast--error {
+  border-radius: 5px !important;
+  border: 1px solid rgb(31, 31, 31) !important;
+  box-shadow: 0px 10px 45px -17px rgba(0,0,0,0.75) !important;
+  padding-left: 20px !important;
+  user-select: none !important;
+}
+
+.Toastify__toast--success {
+  background: #2c8e54 !important;
+}
+
+.Toastify__toast--info {
+  background: #298dcf !important;
+}
+
+.Toastify__toast--warning {
+  background: #db1c1c !important;
+}
+
+.Toastify__toast--error {
+  background: #dd2b2b !important;
+}
+
+.to-top {
+  background: white;
+  position: fixed;
+  bottom: 16px;
+  right:32px;
+  width:50px;
+  height:50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size:32px;
+  color:#1f1f1f;
+  text-decoration: none;
+  opacity:0;
+  pointer-events: none;
+  transition: all .4s;
+}
+
+.to-top.active {
+  bottom:32px;
+  pointer-events: auto;
+  opacity:1;
 }

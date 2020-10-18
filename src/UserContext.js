@@ -16,37 +16,39 @@ function UserContextProvider({children}) {
 
   useEffect(() => {
     axios.get('/api/auth/getUser')
-      .then (res => {
-        if (res.data.status === "success"){
+      .then (res => { // console.log('/api/auth/getUser', res)
+        if (res.data.info === "success"){
           setUser(res.data.user)
           setIsLoggedIn(true)
           setMyID(res.data.user._id)
           setUsername(res.data.user.username)
           setEmail(res.data.user.email)
-        }
-        else 
-        setIsLoggedIn(false)
-      
-      })
-      .catch(err => console.log(err))
-
-
-      axios.get('/api/test/getUser')
-      .then (res => { 
-        console.log(res)
-        if (res.data.status === "success"){
-          setDisplayWebsite(true)
           setRole(res.data.user.role)
         }
-        else
-        setDisplayWebsite(false)
-
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        setIsLoggedIn(false)
+        console.log(err.response)
+        /*if (err.response)
+        if (err.response.status === 400 || 401){}*/
+      })
+
+      axios.get('/api/test/getUser')
+      .then (res => { // console.log('/api/test/getUser', res)
+        if (res.status === 200){
+          setDisplayWebsite(true)
+        }
+        
+      })
+      .catch(err => {
+        setDisplayWebsite(false)
+        console.log(err)
+        /*if (err.response)
+        if (err.response.status === 400 || 401){}*/
+      })
 
   }, [])
 
-  
   return (
       <UserContext.Provider value={{user, username, email, isLoggedIn, setIsLoggedIn, myID, role, displayWebsite}}>
           {children}
