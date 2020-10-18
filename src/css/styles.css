@@ -797,11 +797,10 @@ body{
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  line-height: 14px;
   color: #F6F6F6;
   border: 1px solid #61496A;
   border-radius: 5px;
-  padding: 8px 24px 8px 24px;
+  padding: 5px 24px 5px 24px;
   cursor: pointer;
   margin-right: 10px;
   transition: background-color 100ms;

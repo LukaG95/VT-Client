@@ -7,7 +7,7 @@ function RLTradeComponent({trade, manageTrade}) {
   const [rep, setRep] = useState()
   const [notesHeight, setNotesHeight] = useState(()=> {
     if (trade.have.length >= 9 || trade.want.length >= 9)
-      return "310px"
+      return "300px"
     else if (trade.have.length >= 5 || trade.want.length >= 5)
       return "179px"
     else 
