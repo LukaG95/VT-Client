@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import Img from "react-cool-img";
 import LazyLoad from "react-lazyload";
 
 import { createNotification } from "../../../App";

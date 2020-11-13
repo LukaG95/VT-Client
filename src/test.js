@@ -4,7 +4,6 @@ import infoRL from "./info/infoRL.json";
 import imageExists from "./misc/func";
 import LazyLoad from "react-lazyload";
 import Placeholder from "./pages/Rocket League/AddTrade/Placeholder";
-import Img from "react-cool-img";
 
 function AddTradeRL() {
   return (
