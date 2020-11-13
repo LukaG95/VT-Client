@@ -5,7 +5,7 @@ import { TradeContextRL } from "../../../context/TradeContextRL";
 import infoRL from "../../../info/infoRL.json";
 import ItemContainer from "./ItemContainer";
 import Item from "./Item";
-import ItemConfirmIcon from "./Item";
+import ItemConfirmIcon from "./ItemConfirmIcon";
 
 function SmallChooseItems({ setShowPage, displayPage }) {
   const [itemImages, setItemImages] = useState();

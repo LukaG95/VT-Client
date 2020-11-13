@@ -1,0 +1,21 @@
+.have,
+.want {
+  display: flex;
+  position: absolute;
+
+  align-items: center;
+  justify-content: center;
+
+  top: 4px;
+
+  width: 20px;
+  height: 20px;
+}
+
+.have {
+  left: 4px;
+}
+
+.want {
+  right: 4px;
+}

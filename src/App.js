@@ -39,7 +39,7 @@ import {
 } from './components/index'
 
 
-export default () => {
+export default function App () {
   const { isLoggedIn, displayWebsite } = useContext(UserContext);
   const { setIsOpen_LeftSidebar } = useContext(
     LeftSidebarContext

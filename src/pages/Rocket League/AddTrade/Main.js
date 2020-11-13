@@ -8,7 +8,8 @@ import AddedIconRL from "../../../components/Rocket League/AddedIconRL";
 import AddTradeFiltersRL from "../../../components/Rocket League/AddTradeFiltersRL";
 import { TradeContextRL } from "../../../context/TradeContextRL";
 import infoRL from "../../../info/infoRL.json";
-import imageExists from "../../../misc/imageExists";
+import Item from "./Item";
+import ItemContainer from "./ItemContainer";
 import SmallHome from "./SmallHome";
 import useWindowDimensions from "../../../misc/windowHW";
 
@@ -65,51 +66,30 @@ function AddTradeRL() {
     } else return <AddedIconRL item={item} />;
   });
 
-  // initial images for selection
+  //Initial Items
   useEffect(() => {
-    let thumbnails = [];
-    infoRL.Slots.map((Slot) =>
-      Slot.Items.forEach((item) => {
-        item.Tradable &&
-          thumbnails.push(
-            <div className="RLicon noUserInteraction">
-              <img
-                loading="lazy"
-                style={{
-                  height: "auto",
-                  minHeight: "95px",
-                  width: "100%",
-                  maxWidth: "105px",
-                  cursor: "pointer",
-                  borderRadius: "5px 5px 0px 0px",
-                }}
-                src={imageExists(`${item.ItemID}.0.webp`)}
-                onClick={() => {
-                  setTradeErrorMsg("");
-                  pushItem(item);
-                }}
-                alt=""
-              />
-              <div
-                onClick={() => {
-                  setTradeErrorMsg("");
-                  pushItem(item);
-                }}
-                className="RLicon-name"
-              >
-                {item.Name}
-              </div>
-            </div>
-          );
-      })
-    );
-    setItemImages(thumbnails);
+    setItemImages(
+      infoRL.Slots.map((Slot) =>
+        Slot.Items.map((item) => {
+          if (item.Tradable) return <Item
+            item={item}
+            onClick={() => ItemClick(item)}
+            key={item.ItemID} />
+          else return null;
+        })
+      )
+    )
   }, [gotInfo]);
 
-  return <>{width > 1213 ? AddTrade() : <SmallHome />}</>;
+  //Return Desktop or Mobile
+  return width > 1213 ? AddTrade() : <SmallHome />
 
-  /*-----Functions                -------------*/
-
+  // --- FUNCTIONS ---
+  function ItemClick(item) {
+    setTradeErrorMsg("")
+    pushItem(item)
+  }
+  
   function AddTrade() {
     return (
       <div className="add-trade-wrapper">
@@ -119,7 +99,6 @@ function AddTradeRL() {
         <div style={{ position: "absolute", top: "25px", color: "white" }}>
           {height}
         </div>
-
         <div
           className="rlChooseItemsSection"
           style={tradeErrorMsg !== "" ? { border: "1px solid #ff4645" } : null}
@@ -129,18 +108,11 @@ function AddTradeRL() {
             setItemImages={setItemImages}
             setTradeErrorMsg={setTradeErrorMsg}
           />
-
-          <div className="item-imagesRL">
-            {!itemImages ? (
-              <div style={{ color: "#f6f6f6" }}>Loading...</div>
-            ) : (
-              itemImages
-            )}
-          </div>
-
+          <ItemContainer>
+            {itemImages}
+          </ItemContainer>
           <p className="addRLTradeErrorMsg">{tradeErrorMsg}</p>
         </div>
-
         <div className="rlHaveWantSection">
           <div className="hwTopSection">
             <div className="hTitle">
@@ -380,34 +352,18 @@ function AddTradeRL() {
     }
   }
 
-  // returns true if there are items added in have and in want
+  // Returns true if there are items added in have and in want
   function checkAddedItems() {
-    let x = false,
-      y = false;
-    have.forEach((item) => {
-      if (item.isAdded === true) {
-        x = true;
-        return;
-      }
-    });
-    want.forEach((item) => {
-      if (item.isAdded === true) {
-        y = true;
-        return;
-      }
-    });
-    return x && y;
+    return want.find(item => item.isAdded) && have.find(item => item.isAdded);
   }
 
-  // check notes for limits / errors
+  // Check trade notes for links & length
   function checkNotes() {
-    if (
-      notes.match(
-        /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm
-      )
-    )
+    const notesRegex = /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm
+    if (notes.match(notesRegex))
       return "No links allowed in notes";
-    else if (notes.length > 300) return "Max 300 characters allowed";
+    if (notes.length > 300)
+      return "Max 300 characters allowed";
   }
 }
 

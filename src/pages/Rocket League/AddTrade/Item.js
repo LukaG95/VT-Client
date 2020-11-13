@@ -30,6 +30,7 @@ export default function Item(props) {
           </div>
           <span className={styles.name}>{item.Name}</span>
         </div>
+        {props.children}
       </div>
     </LazyLoadComponent>
   );
