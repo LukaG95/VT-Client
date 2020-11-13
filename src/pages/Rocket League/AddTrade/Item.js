@@ -9,7 +9,7 @@ export default function Item(props) {
   const { item } = props;
   return (
     <LazyLoadComponent
-      threshold={500}
+      threshold={100}
       placeholder={<div className={styles.placeholder} />}
       key={item.ItemID}
     >
@@ -24,8 +24,10 @@ export default function Item(props) {
             <LazyLoadImage
               className={styles.image}
               src={`/images/items/${item.ItemID}.0.webp`}
-              threshold={500}
+              threshold={100}
+              delayTime={0}
               alt=""
+              lazy
             />
           </div>
           <span className={styles.name}>{item.Name}</span>
