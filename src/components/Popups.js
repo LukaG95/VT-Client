@@ -1,11 +1,11 @@
 import React, {useContext} from 'react'
 import axios from 'axios'
 
-import {PopupContext} from './PopupContext'
+import {PopupContext} from '../context/PopupContext'
 
 function Popups() {
 
-  const {openTradeNotice, setOpenTradeNotice, openDeleteAllTrades, setOpenDeleteAllTrades} = useContext(PopupContext)
+  const {openTradeNotice, setOpenTradeNotice, openDeleteAllTrades, setOpenDeleteAllTrades, openLogoutPopup, setOpenLogoutPopup} = useContext(PopupContext)
 
   // create a function, pass in setOpenTradeNotice as a parameter
   if (openTradeNotice)
@@ -55,6 +55,30 @@ function Popups() {
         </div>
       )
     }
+    else if (openLogoutPopup){
+      return (
+        <div 
+        className="shading" 
+        onMouseDown={e => {
+          if(e.target.className === "shading")
+          setOpenLogoutPopup(false)
+        }}
+        >
+          <div style={{width: "500px"}} className="tradeNotice">
+                     
+            <p className="tradeNoticeTop">Are you sure you want to logout?</p>
+
+            <div className="tradeNoticeBottom" style={{justifyContent: "space-evenly"}}>
+              <button onClick={()=> handleLogout()} className="tradeNoticeLeftButton">Yes</button>
+              <button onClick={()=> setOpenLogoutPopup(false)} className="tradeNoticeRightButton">No</button>
+            </div>
+  
+          </div>
+  
+        </div>
+      )
+    }
+ 
     else return null
 
 
@@ -65,6 +89,14 @@ function Popups() {
     .then (res => { 
       if (res.data.info === "success")
         window.location.reload()
+    })
+    .catch(err => console.log("Error: " + err))
+  }
+
+  function handleLogout(){
+    axios.delete(`/api/auth/logout`)
+    .then (res => { 
+      window.location.reload()
     })
     .catch(err => console.log("Error: " + err))
   }

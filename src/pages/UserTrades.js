@@ -1,11 +1,11 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {useLocation} from 'react-router-dom'
+import {useLocation, Link} from 'react-router-dom'
 import axios from 'axios'
 
 import {createNotification} from '../App'
 import RLTradeComponent from '../components/Rocket League/RLTradeComponent'
-import {UserContext} from '../UserContext'
-import {PopupContext} from '../components/PopupContext'
+import {UserContext} from '../context/UserContext'
+import {PopupContext} from '../context/PopupContext'
 
 function UserTrades() {
   const [userTrades, setUserTrades] = useState()
@@ -19,9 +19,11 @@ function UserTrades() {
 
   useEffect(() => {
     axios.get(`/api/trades/getUserTrades?searchId=${pathID}`)
-    .then (res => { console.log(res)
-      setUserTrades(res.data.trades)
-      setUsername(res.data.username)
+    .then (res => { 
+      if (res.data.info === "success" || res.data.info === "no trades"){
+        setUserTrades(res.data.trades)
+        setUsername(res.data.username)
+      }
     })
     .catch(err => {
       console.log(err)
@@ -43,12 +45,7 @@ function UserTrades() {
         {myID === pathID ? userTrades.length > 0 && <button onClick={()=> setOpenDeleteAllTrades(true)} id="del-all-trades-button" > Delete all trades</button> : null}
       </div>
       
-      {userTrades.length <= 0 && 
-        <div style={{color: "#f6f6f6", marginTop: "30px"}}>
-          No active Rocket League trades. Create your 
-          <a href={`/trading/rl/new`} className="addRepButton2" id="removeDecoration"> first trade</a>
-        </div>
-      }
+      {userTrades.length <= 0 && NoTrades()}
       
       <TradeComponents />
 
@@ -81,17 +78,29 @@ function UserTrades() {
     .catch(err => console.log("Error: " + err))
   }
 
+  function NoTrades(){
+    if (myID === pathID)
+      return(
+        <div style={{color: "#f6f6f6", marginTop: "30px"}}>
+          No active Rocket League trades. Create your<span> </span>
+          <Link to="/trading/rl/new" className="first-trade-text-button" id="">first trade</Link>
+        </div>
+      )
+
+    else 
+      return (
+        <div style={{color: "#f6f6f6", marginTop: "30px"}}>
+          No active Rocket League trades.
+        </div>
+      )
+  }
+
   function TradeComponents(){
     let manageTrade = {deleteTrade, editTrade, bumpTrade}
 
     return userTrades.map(trade => {
       if (myID === pathID)
-        return (
-          <>
-            <RLTradeComponent trade={trade} manageTrade={manageTrade}/>
-            
-          </>
-        )
+        return <RLTradeComponent trade={trade} manageTrade={manageTrade}/>
       else 
         return <RLTradeComponent trade={trade}/>
     })

@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import {Redirect} from 'react-router-dom'
 import axios from 'axios'
 
-import {UserContext} from '../UserContext'
+import {UserContext} from '../context/UserContext'
 
 function AdminPage() {
   const [testUsers, setTestUsers] = useState()

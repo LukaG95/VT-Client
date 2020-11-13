@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 
 import AccountTopbar from './AccountTopbar'
-import {UserContext} from '../../UserContext'
+import {UserContext} from '../../context/UserContext'
 
 function AccountPlatforms() {
 

@@ -6,7 +6,7 @@ import {createNotification} from '../../App'
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 
-function SignUpInfo() {
+function SignUpInfo({closeForm}) {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -20,81 +20,86 @@ function SignUpInfo() {
 
   
   return (
-    <form onSubmit={handleSubmit} className="loginHolder">
+    <div className="logForm-body">
 
-      <div className="formItem">
-        <p className="logFormText">Username</p>
-        <input 
-          onClick={()=> setUsernameErrorMsg("")}
-          onChange={e => setUsername(e.target.value)}
-          className="logFormInput"
-          style={usernameErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
-          value={username}
-          required
-        >
-        </input>
-        <p className="formErrorMessage">{usernameErrorMsg}</p>
-      </div>
+      <form onSubmit={handleSubmit} className="loginHolder">
 
-
-      <div className="formItem">
-      <p className="logFormText">Email</p>
-        <input 
-          type="email"
-          onClick={()=> setEmailErrorMsg("")}
-          onChange={e => setEmail(e.target.value)}
-          className="logFormInput"
-          style={emailErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
-          value={email}
-          required
-        >
-        </input>
-        <p className="formErrorMessage">{emailErrorMsg}</p>
-      </div>
+        <div className="formItem">
+          <p className="logFormText">Username</p>
+          <input 
+            onClick={()=> setUsernameErrorMsg("")}
+            onChange={e => setUsername(e.target.value)}
+            className="logFormInput"
+            style={usernameErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
+            value={username}
+            required
+          >
+          </input>
+          <p className="formErrorMessage">{usernameErrorMsg}</p>
+        </div>
 
 
-      <div className="formItem">
-        <p className="logFormText">Password</p>
-        <input 
-          type="password"
-          onClick={()=> {setPasswordErrorMsg("")}}
-          onChange={e => setPassword(e.target.value)}
-          className="logFormInput"
-          style={passwordErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
-          value={password}
-          required
-        >
-        </input>
-        <p className="formErrorMessage">{passwordErrorMsg}</p>
-      </div>
-      
-
-      <div className="formItem">
-      <p className="logFormText">Confirm password</p>
-        <input 
-          type="password"
-          onClick={()=> {setPasswordErrorMsg("")}}
-          onChange={e => setConfirmPassword(e.target.value)}
-          className="logFormInput"
-          style={passwordErrorMsg === "Passwords don't match" ? {border: "1px solid rgb(255, 61, 61)"} : null}
-          value={confirmPassword}
-          required
-        >
-        </input>
-      </div>
+        <div className="formItem">
+        <p className="logFormText">Email</p>
+          <input 
+            type="email"
+            onClick={()=> setEmailErrorMsg("")}
+            onChange={e => setEmail(e.target.value)}
+            className="logFormInput"
+            style={emailErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
+            value={email}
+            required
+          >
+          </input>
+          <p className="formErrorMessage">{emailErrorMsg}</p>
+        </div>
 
 
-      <div className="formItem keepMeSection">
-          <div onClick={e => e.target.nodeName !== "A" && setReadAndAgreed(!readAndAgreed)} style={{display: "flex", flexDirection: "row", cursor: "pointer"}}>
-            <div className="keepMeButton">{readAndAgreed && <p> &#10004; </p>}</div>
-            <div className="keepMeText">I have read and agreed to <a style={{color: "#2297D9"}} href="/terms">Terms of service</ a></div>
-          </div>
-      </div>
+        <div className="formItem">
+          <p className="logFormText">Password</p>
+          <input 
+            type="password"
+            onClick={()=> {setPasswordErrorMsg("")}}
+            onChange={e => setPassword(e.target.value)}
+            className="logFormInput"
+            style={passwordErrorMsg !== "" ? {border: "1px solid rgb(255, 61, 61)"} : null}
+            value={password}
+            required
+          >
+          </input>
+          <p className="formErrorMessage">{passwordErrorMsg}</p>
+        </div>
+        
+
+        <div className="formItem">
+        <p className="logFormText">Confirm password</p>
+          <input 
+            type="password"
+            onClick={()=> {setPasswordErrorMsg("")}}
+            onChange={e => setConfirmPassword(e.target.value)}
+            className="logFormInput"
+            style={passwordErrorMsg === "Passwords don't match" ? {border: "1px solid rgb(255, 61, 61)"} : null}
+            value={confirmPassword}
+            required
+          >
+          </input>
+        </div>
 
 
-      <button type="submit" className="formItem loginNowButton">Sign Up</button>
+        <div className="formItem keepMeSection">
+            <div onClick={e => e.target.nodeName !== "A" && setReadAndAgreed(!readAndAgreed)} style={{display: "flex", flexDirection: "row", cursor: "pointer"}}>
+              <div className="keepMeButton">{readAndAgreed && <p> &#10004; </p>}</div>
+              <div className="keepMeText">I have read and agreed to <a style={{color: "#2297D9"}} href="/terms">Terms of service</ a></div>
+            </div>
+        </div>
 
-    </form>
+
+        <button type="submit" className="formItem loginNowButton">Sign Up</button>
+
+        <div onClick={closeForm} className="formItem closeFormButton">Close</div>
+
+      </form>
+    </div>
   )
 
 

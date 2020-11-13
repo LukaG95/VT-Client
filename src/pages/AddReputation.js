@@ -4,7 +4,7 @@ import axios from 'axios'
 import Filter from 'bad-words'
 
 import {createNotification} from '../App'
-import {UserContext} from '../UserContext'
+import {UserContext} from '../context/UserContext'
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 
@@ -37,40 +37,38 @@ function AddReputation() {
 
   if (repInfo !== undefined && repInfo !== "invalid")
   return (
-    
-    <main className="repWrapper">
       
-      <div className="repHeader">
-        <div className="flex">
-          <div className="flex-col rep-header-left">
-            <p className="rep-username">{repInfo.username}'s Reputation</p>
-            <p className="rep-title">{repInfo.title}</p>
+    <>
+
+      <div className="reputation-topbar-field">
+
+        <div className="rep-username">{repInfo.username}'s Reputation</div>
+
+        <div className="rep-header-right">
+
+          <div className="flex">
+            <div className="rep-grade">{repInfo.grade}</div>
+            <div className="rep-title-addrep-wrapper">
+              <p className="rep-title">{repInfo.title}</p>
+              <Link style={{textDecoration: "none"}} to={`/reputation/${repInfo.userId}`}><button className="rep-addrep-button">Full reputation</button> </Link>
+            </div>
           </div>
-          <p className="rep-grade">{repInfo.grade}</p>
-        </div>
-
-        <div className="flex rep-header-right">
-        <Link style={{textDecoration: "none"}} to={`/reputation/${repInfo.userId}`}>
-            <button className="rep-addrep-button">
-              <img src={require('../images/other/Reputation orange.png')} className="rep-icon-inButton"/>Full reputation
-            </button>
-          </Link>
-
-          <section className="rep-cutout"></section>
+       
           <div className="rep-ups-downs">
             <span className="rep-ups">+{repInfo.ups}</span>
             <span className="rep-middle"> </span>
             <span className="rep-downs">-{repInfo.downs}</span>
           </div>
+          
         </div>
       </div>
       
       <div className="rep-category-buttons">
         <button style={repCategory === "rl" ? {background: "#47384D"} : null} onClick={() => {setRepCategory("rl"); if (repErrorMessage === "You have to pick a rep category 1st") setRepErrorMessage("")}}>Rocket League</button>
         <button style={repCategory === "csgo" ? {background: "#47384D"} : null} onClick={() => {setRepCategory("csgo"); if (repErrorMessage === "You have to pick a rep category 1st") setRepErrorMessage("")}}>CSGO</button>
-        <button style={repCategory === "other" ? {background: "#47384D"} : null} onClick={() => {setRepCategory("other"); if (repErrorMessage === "You have to pick a rep category 1st") setRepErrorMessage("")}}>Other</button>
+        <button style={repCategory === "other" ? {background: "#47384D", marginRight: "0px"} : {marginRight: "0px"}} onClick={() => {setRepCategory("other"); if (repErrorMessage === "You have to pick a rep category 1st") setRepErrorMessage("")}}>Other</button>
       </div>
-
+     
       <textarea 
         onChange={e => {
           setFeedback(e.target.value)
@@ -84,11 +82,13 @@ function AddReputation() {
 
       <p className="repErrorText">{repErrorMessage}</p>
 
-      <button onClick={()=> handleRepSubmit(true)} className="rep-button">Complete as positive</button>
-      <button onClick={()=> handleRepSubmit(false)} className="rep-button negative">Complete as negative</button>
-      {/*<button className="rep-button-back">Back to reputation</button>*/}
+      <div className="complete-rep-buttons-section">
+        <button onClick={()=> handleRepSubmit(true)} className="rep-button">Complete as positive</button>
+        <button onClick={()=> handleRepSubmit(false)} className="rep-button negative" style={{marginRight: "0px"}}>Complete as negative</button>
+        {/*<button className="rep-button-back">Back to reputation</button>*/}
+      </div>
 
-    </main>
+    </>
       
   )
   else if (repInfo === "invalid")
@@ -123,8 +123,8 @@ function AddReputation() {
       return
     }
 
-    if (feedback.length > 100) {
-      setRepErrorMessage("Your message is too long, max 100 characters")
+    if (feedback.length > 300) {
+      setRepErrorMessage("Your message is too long, max 300 characters")
       createNotification("error", "Your message is too long", "message too long")
       return
     }

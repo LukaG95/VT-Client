@@ -3,18 +3,14 @@ import axios from 'axios'
 import Spinner from '../../components/Spinner'
 
 import infoRL from '../../info/infoRL.json'
-import {TbFiltersRLContext} from '../../components/Rocket League/TbFiltersRLContext'
+import {TbFiltersRLContext} from '../../context/TbFiltersRLContext'
 import RLTradeComponent from '../../components/Rocket League/RLTradeComponent'
 import { createNotification } from '../../App'
 
 
 function RLTrading() {
-  const [tradeInfo, setTradeInfo] = useState()
 
-  const [pageAmount, setPageAmount] = useState()
-  const [currentPage, setCurrentPage] = useState(1)
-
-  const {game, searchType, name, color, cert, itemType, platform, resetFilters} = useContext(TbFiltersRLContext)
+  const {game, searchType, name, color, cert, itemType, platform, resetFilters, tradeInfo, setTradeInfo, pageAmount, setPageAmount, currentPage, setCurrentPage} = useContext(TbFiltersRLContext)
 
   useEffect(()=> {
     const route = tradeFilters()
@@ -32,6 +28,8 @@ function RLTrading() {
     })
 
   }, [game, searchType, name, color, cert, itemType, platform, currentPage])
+
+  useEffect(()=> {return resetFilters}, []) // reset filters when we leave trading page
 
   if (tradeInfo){
     return (
@@ -94,8 +92,8 @@ function RLTrading() {
 
   function NoTradesFound(){
     return(
-      <div className="no-trades-found">
-        <img height="306" width="650" style={{pointerEvents: "none"}} className="noUserInteraction" src={require("../../images/other/No trades found.png")}></img>
+      <div className="no-trades-found-wrapper">
+        <img className="noUserInteraction" src={require("../../images/other/No trades found.png")}></img>
         <h2>No <span style={{color: "#FE3B3B"}}>trades</span> were found for your filters</h2>
         <p className="no-trades-text">Try a new search or reset the filters</p>
         <button onClick={resetFilters}>Reset filters</button>

@@ -20,7 +20,7 @@ function FiltersREP() {
       .catch(err => console.log(err))
   }, [])
 
-  return (
+  return (  
     <div className="sbSection leaderboards-wrapper">
 
       <div className="leaderboards-header">

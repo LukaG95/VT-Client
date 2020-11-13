@@ -1,56 +1,53 @@
 import React, {useState, useContext, useEffect} from 'react'
 
-import {TradeContextRL} from './TradeContextRL'
+import {TradeContextRL} from '../../context/TradeContextRL'
 import AddedIconRLdropdown from './AddedIconRLdropdown'
 import infoRL from '../../info/infoRL.json' 
 import imageExists from '../../misc/func'
 
-function AddedIconRL({item}) { 
+function AddedIconRL({item, setShowPage, setClickedItem}) {  // if we pass setShowPage it means we're on small (mobile) - also for setClickedItem
   const {id, itemID, itemName, color, colorID, cert, amount, isDropdown} = item
   const {setIsDropdown} = useContext(TradeContextRL)
 
 	return (
-    <div className="RLicon noUserInteraction" style={{height: "95px"}}>
-      
-      <div onClick={() => setIsDropdown(id)} style={{height: "95px", width: "95px"}}>
+    <>
+      <div className="RLicon noUserInteraction" 
+        style={{height: "95px", width: "95px", marginBottom: "0px", position: "relative"}} 
+        onClick={()=> {
+          
+          if (setShowPage) setShowPage("3")
+          if (setClickedItem) setClickedItem(item)
+        }}
+      >
         
-        <img 
-        name="enableDropdown"
-        id={id}
-        style={{height: "95px", width: "95px", cursor: "pointer"}} 
-        src={imageExists(`${itemID}.${colorID}.webp`)}
-        alt="" 
-        />
+        <div onClick={() => setIsDropdown(id)} style={{height: "95px", width: "95px"}}>
+          
+          <img 
+            name="enableDropdown"
+            id={id}
+            style={{height: "95px", width: "95px", cursor: "pointer", borderRadius: "5px"}} 
+            src={imageExists(`${itemID}.${colorID}.webp`)}
+            alt="" 
+          />
 
-        <EditIcon />
-        <AmountIcon />
-        <ColorIcon />
-        <CertIcon />
+          <EditIcon />
+          <AmountIcon />
+          <ColorIcon />
+          <CertIcon />
 
-      </div>
+        </div>
 
-      <Dropdown />
+        {!setShowPage && <Dropdown />}
 
-    </div>		
+      </div>		
+
+    </>
   )
-  
 
    /*-----Functions                -------------*/
-/*
-   function Dropdown(){
-    const Dropdown = [...have, ...want].map(item => {
-      if (item.id == id){
-        if (item.isDropdown === true) 
-          return <AddedIconRLdropdown id={id}/>
-        else 
-          return null
-      }
-    })
-    return Dropdown
-  }*/
 
   function Dropdown(){
-    if (isDropdown === true) return <AddedIconRLdropdown id={id} itemID={itemID}/>
+    if (isDropdown === true) return <AddedIconRLdropdown item={item}/>
     else return null
   }
 
@@ -61,7 +58,9 @@ function AddedIconRL({item}) {
   }
 
   function AmountIcon(){
-    return <div className="AmountIcon">{`${amount}x`}</div>
+    if (amount > 1)
+    return <div className="AmountIcon">{amount}</div>
+    else return null
   }
 
   function ColorIcon(){
@@ -75,7 +74,7 @@ function AddedIconRL({item}) {
   }
 
   function EditIcon(){
-    return <img className="editIcon" src={require(`../../images/other/Edit-icon.png`)} alt="" />
+    return <img style={amount <= 1 ? {top: "6px"} : null} className="editIcon" src={require(`../../images/other/Edit-icon.png`)} alt="" />
   }
 }
 

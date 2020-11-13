@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom'
 import {BrowserRouter as Router} from 'react-router-dom'
 
 import {App} from './App'
-import {UserContextProvider} from './UserContext'
-import {PopupContextProvider} from './components/PopupContext'
+import {UserContextProvider} from './context/UserContext'
+import {PopupContextProvider} from './context/PopupContext'
+import {TbFiltersRLContextProvider} from './context/TbFiltersRLContext'
 
 import './css/styles.css'
 import './css/animations.css'
@@ -14,9 +15,11 @@ import 'react-toastify/dist/ReactToastify.css';
 ReactDOM.render(
   <UserContextProvider>
     <PopupContextProvider>
-      <Router>
-        <App />
-      </Router>
+      <TbFiltersRLContextProvider>
+        <Router>
+          <App />
+        </Router>
+      </TbFiltersRLContextProvider>
     </PopupContextProvider>
   </UserContextProvider>,
   document.getElementById('root')

@@ -3,7 +3,7 @@ import {useLocation, Redirect} from 'react-router-dom'
 import axios from 'axios'
 
 import {createNotification} from '../../App'
-import {UserContext} from '../../UserContext'
+import {UserContext} from '../../context/UserContext'
 
 function ResetPassword() {
   const [password, setPassword] = useState("")

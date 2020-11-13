@@ -2,15 +2,16 @@ import React, {useState, useEffect, useContext} from 'react'
 import {useLocation} from 'react-router-dom'
 import axios from 'axios'
 import Filter from 'bad-words'
-import Spinner from '../../components/Spinner'
 
-import {createNotification} from '../../App'
-import AddedIconRL from '../../components/Rocket League/AddedIconRL'
-import AddTradeFiltersRL from '../../components/Rocket League/AddTradeFiltersRL'
-import {TradeContextRL} from '../../components/Rocket League/TradeContextRL'
-import {UserContext} from '../../UserContext'
-import infoRL from '../../info/infoRL.json' 
-import imageExists from '../../misc/func'
+import {createNotification} from '../../../App'
+import AddedIconRL from '../../../components/Rocket League/AddedIconRL'
+import AddTradeFiltersRL from '../../../components/Rocket League/AddTradeFiltersRL'
+import {TradeContextRL} from '../../../context/TradeContextRL'
+import {UserContext} from '../../../context/UserContext'
+import infoRL from '../../../info/infoRL.json' 
+import imageExists from '../../../misc/func'
+import SmallHome from './SmallHome'
+import useWindowDimensions from '../../../misc/windowHW'
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
 
@@ -23,6 +24,8 @@ function AddTradeRL() {
   const {have, want, platform, setPlatform, notes, setNotes, manageFocus, pushItem, clearWantItems, clearHaveItems, gotInfo, displayPage, tradesAmount, setTradesAmount} = useContext(TradeContextRL)
 
   const pathID = useLocation().pathname.substring(17)   // reads url after /trades/ till the end
+
+  const { height, width } = useWindowDimensions()
   
   const displayed_have_items = have.map(item => {
     if (item.isAdded === false){
@@ -43,108 +46,130 @@ function AddTradeRL() {
   // initial images for selection
   useEffect(() => {
     
-    setTimeout(()=> {
       let thumbnails = []
       infoRL.Slots.map(Slot => Slot.Items.map(item => {
-        item.Tradable && thumbnails.push(
+        item.Tradable && thumbnails.push( 
           <div className="RLicon noUserInteraction">
-            <img 
-              style={{height: "95px", width: "95px", cursor: "pointer", borderRadius: "5px 5px 0px 0px"}} 
+            <img
+              loading="lazy"
+              style={{height: "auto", minHeight: "95px", width: "100%", maxWidth: "105px", cursor: "pointer", borderRadius: "5px 5px 0px 0px"}} 
               src={imageExists(`${item.ItemID}.0.webp`)}
               onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
             />
-            <div className="RLicon-name"><p>{item.Name}</p></div>
+            <div onClick={() => {setTradeErrorMsg(""); pushItem(item)}} className="RLicon-name">{item.Name}</div>
           </div>
         )
       }))
       setItemImages(thumbnails)
-    }, 750)
-
+    
   }, [gotInfo])
+
   
-  if (displayPage)
-    return (
-      <div className="addRLWrapper">
-        <div className="flex">
-
-          <div className="rlChooseItemsSection" style={tradeErrorMsg !== "" ? {border: "2px solid #ff4645"} : null}>
-            <div className="choose-itemsSearchFiltersRL">
-              <div><img style={{width: "11px", height: "11px", marginLeft: "2px"}} src={require("../../images/other/MagnGlass.png")} /></div>
-              <AddTradeFiltersRL itemImages={itemImages} setItemImages={setItemImages} setTradeErrorMsg={setTradeErrorMsg}/>
-            </div>
-            <div className="item-imagesRL">
-              {itemImages === undefined ? <Spinner /> : itemImages}
-            </div>
-            <p className="addRLTradeErrorMsg">{tradeErrorMsg}</p>
-          </div>
-
-          <div className="rlHaveWantSection">
-
-            <div className="hwTopSection">
-              <div className="hTitle">
-                <p>You <b>have</b></p>
-                <div onClick={clearHaveItems} className="rl-resetFilters-button noUserInteraction" style={{margin: '0px'}}>
-                  <img src={require(`../../images/other/trash.png`)} style={{height: "14px", width: "14px"}}/>
-                </div>
-              </div>
-
-              <div className="haveItems">
-                {displayed_have_items}
-              </div>
-            </div>
-  
-            <div className="hwBottomSection" style={{marginBottom: "20px"}}>
-
-              <div className="wTitle">
-                <p>You <b>want</b></p>
-                <div onClick={clearHaveItems} className="rl-resetFilters-button noUserInteraction" style={{margin: '0px'}}>
-                    <img src={require(`../../images/other/trash.png`)} style={{height: "14px", width: "14px"}}/>
-                  </div>
-              </div> 
-
-              <div className="wantItems">
-                {displayed_want_items}
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-
-        <div className="notesSection" style={notesErrorMsg !== "" ? {border: "2px solid #ff4645"} : null} onClick={()=> setNotesErrorMsg("")}>
-          <textarea placeholder="Add notes..." className="notesArea" value={notes} onChange={e => setNotes(e.target.value)}></textarea>
-          <div className="platformSection">
-            <h4>PLATFORM:</h4>
-            <label className="noUserInteraction platf-button-container">
-              <input type="radio" checked={platform==="Steam"} onChange={()=> setPlatform("Steam")} />
-              <p style={platform === "Steam" ? {color: "#2C8E54"} : null}>STEAM</p>
-            </label>
-            <label className="noUserInteraction platf-button-container">
-              <input type="radio" checked={platform==="PS4"} onChange={()=> setPlatform("PS4")}/>
-              <p style={platform === "PS4" ? {color: "#2C8E54"} : null}>PS4</p>
-            </label>
-            <label className="noUserInteraction platf-button-container">
-              <input type="radio" checked={platform==="XBOX"} onChange={()=> setPlatform("XBOX")}/>
-              <p style={platform === "XBOX" ? {color: "#2C8E54"} : null}>XBOX</p>
-            </label>
-            <label className="noUserInteraction platf-button-container">
-              <input type="radio" checked={platform==="SWITCH"} onChange={()=> setPlatform("SWITCH")}/>
-              <p style={platform === "SWITCH" ? {color: "#2C8E54"} : null}>SWITCH</p>
-            </label>
-          </div>
-          <p className="addNotesErrorMsg">{notesErrorMsg}</p>
-        </div>
-
-        <div className="rlSubmit">
-          <button onClick={()=> handleTradeSubmit()} className="rlSubmitButton">SUBMIT TRADE</button>   
-        </div>
-
-      </div>
-    )
-  else return null
+  return (  
+    <>
+      {
+        width > 1213 ? 
+          AddTrade()
+        :
+          <SmallHome />
+      } 
+    </>
+  )
 
 
   /*-----Functions                -------------*/
+
+
+  function AddTrade(){
+    return(
+      <div className="add-trade-wrapper">
+
+        <div style={{position: "absolute", top: "5px", color: "white"}}>{width}</div>
+        <div style={{position: "absolute", top: "25px", color: "white"}}>{height}</div>
+
+        <div className="rlChooseItemsSection" style={tradeErrorMsg !== "" ? {border: "1px solid #ff4645"} : null}>
+
+          <AddTradeFiltersRL itemImages={itemImages} setItemImages={setItemImages} setTradeErrorMsg={setTradeErrorMsg}/>
+
+          <div className="item-imagesRL">
+            {!itemImages ? <div style={{color: "#f6f6f6"}}>Loading...</div> : itemImages}
+          </div>
+
+          <p className="addRLTradeErrorMsg">{tradeErrorMsg}</p>
+
+        </div>
+
+        <div className="rlHaveWantSection">
+
+          <div className="hwTopSection">
+            
+            <div className="hTitle">
+              <p>You <b>have</b></p>
+              <div onClick={clearHaveItems} className="rl-resetFilters-button noUserInteraction" style={{margin: '0px'}}>
+                <img src={require(`../../../images/other/trash.png`)} style={{height: "14px", width: "14px"}}/>
+              </div>
+            </div>
+
+            <div className="haveItems">
+              {displayed_have_items}
+            </div>
+
+        </div>
+
+          <div className="hwBottomSection" style={{marginBottom: "20px"}}>
+
+            <div className="wTitle">
+              <p>You <b>want</b></p>
+              <div onClick={clearWantItems} className="rl-resetFilters-button noUserInteraction" style={{margin: '0px'}}>
+                  <img src={require(`../../../images/other/trash.png`)} style={{height: "14px", width: "14px"}}/>
+                </div>
+            </div> 
+
+            <div className="wantItems">
+              {displayed_want_items}
+            </div>
+
+          </div>
+
+        </div>
+
+        <div className="notes-and-submit-button">
+
+          <div className="notesSection" style={notesErrorMsg !== "" ? {border: "1px solid #ff4645"} : null} onClick={()=> setNotesErrorMsg("")}>
+            <textarea placeholder="Add notes..." className="notesArea" value={notes} onChange={e => setNotes(e.target.value)}></textarea>
+            <div className="platformSection">
+              <h4>PLATFORM:</h4>
+              <label className="noUserInteraction platf-button-container">
+                <input type="radio" checked={platform==="Steam"} onChange={()=> setPlatform("Steam")} />
+                <p style={platform === "Steam" ? {color: "#2C8E54"} : null}>STEAM</p>
+              </label>
+              <label className="noUserInteraction platf-button-container">
+                <input type="radio" checked={platform==="PS4"} onChange={()=> setPlatform("PS4")}/>
+                <p style={platform === "PS4" ? {color: "#2C8E54"} : null}>PS4</p>
+              </label>
+              <label className="noUserInteraction platf-button-container">
+                <input type="radio" checked={platform==="XBOX"} onChange={()=> setPlatform("XBOX")}/>
+                <p style={platform === "XBOX" ? {color: "#2C8E54"} : null}>XBOX</p>
+              </label>
+              <label className="noUserInteraction platf-button-container">
+                <input type="radio" checked={platform==="SWITCH"} onChange={()=> setPlatform("SWITCH")}/>
+                <p style={platform === "SWITCH" ? {color: "#2C8E54"} : null}>SWITCH</p>
+              </label>
+            </div>
+            <p className="addNotesErrorMsg">{notesErrorMsg}</p>
+
+          </div>
+
+          <div className="rlSubmit">
+            <button onClick={()=> handleTradeSubmit()} className="rlSubmitButton">SUBMIT TRADE</button>   
+          </div>
+
+        </div>
+
+      </div>
+      
+    )
+  }
 
   function handleTradeSubmit(){
     if (have && want){
@@ -164,7 +189,6 @@ function AddTradeRL() {
         let wantRefactor = []
         
         have.map(item => {
-          console.log(item.colorID, typeof item.colorID)
           if (item.isAdded){
             let readyItem = {
               itemID: item.itemID,
@@ -218,6 +242,8 @@ function AddTradeRL() {
           .catch(err => {
             if (err.response)
               createNotification("error", "Oops, something went wrong", "something went wrong") 
+            console.log(err.response)
+            console.log(have)
           }) 
         }
         else {

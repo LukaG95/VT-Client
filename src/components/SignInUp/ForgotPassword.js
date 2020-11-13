@@ -3,30 +3,35 @@ import axios from 'axios'
 
 import {createNotification} from '../../App'
 
-function ForgotPassword() {
+function ForgotPassword({closeForm}) {
   const [unOrEmail, setUnOrEmail] = useState("")
 
-
   return (
-    <form onSubmit={handleSubmit} className="loginHolder">
+    <div className="logForm-body">
 
-      <p className="forgotPasswordText" style={{marginBottom: "10px"}}>Enter your email address that you used to register and we will send you a password reset link</p>
+      <form onSubmit={handleSubmit} className="loginHolder">
 
-      <div style={{marginBottom: "0px"}} className="formItem">
-        <input 
-          required
-          placeholder="Enter your email address"
-          type="email"
-          onChange={e => setUnOrEmail(e.target.value)}
-          className="logFormInput"
-          value={unOrEmail}
-        >
-        </input>
-      </div>
+        <p className="forgotPasswordText" style={{marginBottom: "10px"}}>Enter your email address that you used to register and we will send you a password reset link</p>
 
-      <button type="submit" className="resetPassButton">Send password reset email</button>
+        <div style={{marginBottom: "0px"}} className="formItem">
+          <input 
+            required
+            placeholder="Enter your email address"
+            type="email"
+            onChange={e => setUnOrEmail(e.target.value)}
+            className="logFormInput"
+            style={{marginBottom: "25px"}}
+            value={unOrEmail}
+          >
+          </input>
+        </div>
 
-    </form>
+        <button type="submit" className="resetPassButton">Send password reset email</button>
+
+        <div onClick={closeForm} className="formItem closeFormButton">Close</div>
+
+      </form>
+    </div>
   )
 
 

@@ -17,7 +17,7 @@ function TradepostIconRL({item}) {
 
       <img 
         name="enableDropdown"
-        style={{height: "95px", width: "95px", cursor: "pointer", borderRadius: "5px 5px 0px 0px"}} 
+        className="RLicon-item-img"
         src={imageExists(`${item.itemID}.${colorID}.webp`, item.itemID)}  // pass in 2 params, if the painted image doesn't exist check if regular exists, 
         alt=""                                                                                         // and then if both don't exist return questionmark
       />
@@ -26,7 +26,7 @@ function TradepostIconRL({item}) {
       <ColorIcon />
       <CertIcon />
       
-      <div className="RLicon-name"><p>{item.itemName}</p></div>
+      <div className="RLicon-name">{item.itemName}</div>
 
     </div>		
   )

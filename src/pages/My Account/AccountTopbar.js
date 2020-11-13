@@ -1,11 +1,13 @@
 import React, {useContext} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 
-import {UserContext} from '../../UserContext'
+import {UserContext} from '../../context/UserContext'
+import {PopupContext} from '../../context/PopupContext'
 
 function AccountSidebar() {
 
   const {myID} = useContext(UserContext)
+  const {setOpenLogoutPopup} = useContext(PopupContext)
 
 	let location = useLocation();
 	let account = "", messages = "", trades = "", premium = "";
@@ -45,7 +47,7 @@ function AccountSidebar() {
         <p className={`accountTb-nav ${premium}`} style={{color: premium === "" ? "rgba(52, 206, 255, 0.5)" : "#34CEFF"}}>Premium</p>
       </Link>
 
-      <a href="#" className="accountTb-nav" style={{color: "#C33030"}}>Logout</a>
+      <div onClick={() => setOpenLogoutPopup(true)} className="accountTb-nav" style={{color: "#C33030", cursor: "pointer"}}>Logout</div>
 
 		</div>
 	)

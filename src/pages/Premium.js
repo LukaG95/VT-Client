@@ -1,13 +1,14 @@
 import React from 'react'
 
+import AccountTopbar from './My Account/AccountTopbar'
+
 function Premium() {
   
   return (
-    <div className="secondaryWrapper">
-
-      <h1 style={{color: "white", margin: "10px 0px 0px 20px"}}>Coming Soon</h1>
-      
-    </div>
+    <>
+      <AccountTopbar />
+      <h1 style={{color: "white", margin: "150px 0px 0px 20px", textAlign: "center"}}>Coming Soon</h1>
+    </>
   )
 }
 

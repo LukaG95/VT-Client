@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 
 import TradePostIconRL from './TradePostIconRL'
+import useWindowDimensions from '../../misc/windowHW'
+import {UserContext} from '../../context/UserContext'
 
 function RLTradeComponent({trade, manageTrade}) {
   const [rep, setRep] = useState()
@@ -13,6 +15,10 @@ function RLTradeComponent({trade, manageTrade}) {
     else 
       return "68px"
   })
+
+const {isLoggedIn} = useContext(UserContext)
+
+ const { width } = useWindowDimensions()
 
   useEffect(() => {
     
@@ -29,41 +35,17 @@ function RLTradeComponent({trade, manageTrade}) {
     })
   }, [])
   
+  
   return (
       <div className="rltrade-container">
 
-        <div className="rltrade-cTopPlace">
+        { width >= 957 ? 
+          PCTabledTradeHeader()
+            :
+          PhoneTradeHeader()
+        }
 
-          <div className="flex">
-            {userName()}
-            <div className="trade-reputation">
-              <p style={{fontSize: "12px", color: "#CEC6E0", marginBottom: "3px"}}>Reputation</p>
-              <div className="flex">
-                <p style={{fontSize: "18px", color: "#5FD86B"}}>+{rep ? rep.ups : null} </p> 
-                <p style={{fontSize: "18px", color: "#766495", marginLeft: "3px"}}> </p> 
-                <p style={{fontSize: "18px", color: "#C03030", marginLeft: "3px"}}>-{rep ? rep.downs : null} </p> 
-              </div>
-            </div>
-            <div className="trade-component-tagsAndTitle">
-              <div className="trade-component-tags">{tags()}</div>
-              <p className="trade-component-title">{rep ? rep.title : null}</p>
-            </div>
-          </div>
-
-          <div className="rl-trade-component-top-right">
-            <div className="right-gamePlatform">
-              {/*<img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/SWITCH icon.png`)} alt="" />*/}
-              {/*<img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/SWITCH icon.png`)} alt="" />*/}
-              <img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/${trade.platform} icon.png`)} alt="" />{trade.platform}
-            </div>
-
-            <div className="flex">
-              <div className="trade-post-time">Active {trade.bumpedAt}</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex rltrade_cMidPlace">
+        <div className="rltrade_cMidPlace">
 
           <div className="flex-col rl-has-container">
             <p className="haswant-text">Has</p>
@@ -78,8 +60,7 @@ function RLTradeComponent({trade, manageTrade}) {
           <div className="flex-col rl_notes_buttons_container">
 
             <div className="notes-box">
-              {/*<div className="notes-top">Notes</div>*/}
-              <div style={{height: `${notesHeight}`}} className="notes">{trade.notes}</div>
+              <div style={{maxHeight: `${notesHeight}`}} className="notes">{trade.notes}</div>
             </div>
 
             <div className="buttons-box">
@@ -90,12 +71,14 @@ function RLTradeComponent({trade, manageTrade}) {
                     <button onClick={() => manageTrade.bumpTrade(trade)} id="bumpTrade-button">Bump trade</button> 
                     <p className="trade-expire-text">Expires {trade.expiresIn.days < 1 ? 'today' : `in ${trade.expiresIn.days} days`} at {trade.expiresIn.at}</p>
                   </>
-                : 
+                : isLoggedIn ?
                   <>
-                    <button onClick={() => window.open("#")}>Message</button>
-                    <button onClick={() => window.open(`/reputation/${trade.user._id}`)}>View reputation</button> 
+                    <button onClick={() => window.open("#")} style={{marginRight: "10px"}}>Message</button>
+                    <button onClick={() => window.open(`/reputation/${trade.user._id}`)} style={{marginRight: "10px"}}>View reputation</button> 
                     <button onClick={() => window.open(`/trades/${trade.user._id}`)}>View all trades</button> 
                   </>
+                :
+                  <p className="buttons-box-sign-to-interact" >Sign in to interact</p>
               }
             </div>
             
@@ -108,6 +91,79 @@ function RLTradeComponent({trade, manageTrade}) {
 
   /*-----Functions                -------------*/
 
+  function PCTabledTradeHeader(){
+    return(
+      <div className="rltrade-cTopPlace">
+
+        <div className="flex">
+          {userName()}
+          <div className="trade-reputation">
+            <p style={{fontSize: "12px", color: "#CEC6E0", marginBottom: "3px"}}>Reputation</p>
+            <div className="flex">
+              <p className="trade-component-pozitiveRep">+{rep ? rep.ups : null} </p> 
+              <p style={{marginLeft: "6px"}}> </p> 
+              <p className="trade-component-negativeRep">-{rep ? rep.downs : null} </p> 
+            </div>
+          </div>
+          <div className="trade-component-tagsAndTitle">
+            <div className="trade-component-tags">{tags()}</div>
+            <p className="trade-component-title">{rep ? rep.title : null}</p>
+          </div>
+        </div>
+
+        <div className="rl-trade-component-top-right">
+          <div className="right-gamePlatform">
+            {/*<img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/SWITCH icon.png`)} alt="" />*/}
+            {/*<img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/SWITCH icon.png`)} alt="" />*/}
+            <img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/${trade.platform} icon.png`)} alt="" />{trade.platform}
+          </div>
+
+          <div className="flex">
+            <div className="trade-post-time">Active {trade.bumpedAt}</div>
+          </div>
+        </div>
+
+      </div>
+    )
+  }
+
+  function PhoneTradeHeader(){
+    return (
+      <div className="rltrade-cTopPlace">
+
+        <div className="trade-component-header-left">
+          {userName()}
+          <div className="trade-component-header-repTitleTags-PHONEVIEW">
+            <div className="trade-reputation">
+              <div className="flex">
+                <p className="trade-component-pozitiveRep" style={{fontSize: "15px"}}>+{rep ? rep.ups : null} </p> 
+                <p style={{marginLeft: "6px"}}> </p> 
+                <p className="trade-component-negativeRep" style={{fontSize: "15px"}}>-{rep ? rep.downs : null} </p> 
+              </div>
+            </div>
+            <div className="trade-component-tagsAndTitle-PHONEVIEW">
+              <p className="trade-component-title-PHONEVIEW">{rep ? rep.title : null}</p>
+              <div className="trade-component-tags-PHONEVIEW">{tags()}</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="rl-trade-component-top-right">
+          <div className="right-gamePlatform-PHONEVIEW">
+            {/*<img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/SWITCH icon.png`)} alt="" />*/}
+            {/*<img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/SWITCH icon.png`)} alt="" />*/}
+            <img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/${trade.platform} icon.png`)} alt="" />{trade.platform}
+          </div>
+
+          <div className="flex">
+            <div className="trade-post-time-PHONEVIEW">Active {trade.bumpedAt}</div>
+          </div>
+        </div>
+
+      </div>
+    )
+  }
+
   function userName(){
     if (trade.user.isPremium)
       return (
@@ -118,8 +174,8 @@ function RLTradeComponent({trade, manageTrade}) {
       )
     else return (
       <div className="username">
-        <p style={{fontSize: "12px", color: "#CEC6E0"}}>User</p>
-        <p style={{fontWeight: "600", fontSize: "21px"}}>{trade.user.username}</p>
+        {width >= 957 ? <p style={{fontSize: "12px", color: "#CEC6E0"}}>User</p> : null}
+        <p style={{fontWeight: "600", fontSize: "21px"}, width < 957 ? {fontSize: "17px", marginBottom: "5px"} : null}>{trade.user.username}</p>
       </div>
     )
   }

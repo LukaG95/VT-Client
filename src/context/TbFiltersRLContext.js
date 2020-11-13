@@ -11,10 +11,30 @@ function TbFiltersRLContextProvider({children}) {
   const [itemType, setItemType] = useState("Any")
   const [platform, setPlatform] = useState("Any")
 
+  const [tradeInfo, setTradeInfo] = useState()
+  const [pageAmount, setPageAmount] = useState()
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const [isOpen_LeftSidebar, setIsOpen_LeftSidebar] = useState(false)
 
   return (
-      <TbFiltersRLContext.Provider value={{game, setGame, searchType, setSearchType, name, setName, color, setColor, cert, setCert, itemType, setItemType, platform, setPlatform, resetFilters}}>
-          {children}
+      <TbFiltersRLContext.Provider 
+        value={{
+          game, setGame, 
+          searchType, setSearchType, 
+          name, setName, 
+          color, setColor,
+          cert, setCert, 
+          itemType, setItemType, 
+          platform, setPlatform, 
+          resetFilters, 
+          tradeInfo, setTradeInfo, 
+          pageAmount, setPageAmount, 
+          currentPage, setCurrentPage,
+          isOpen_LeftSidebar, setIsOpen_LeftSidebar
+        }}
+      >
+        {children}
       </TbFiltersRLContext.Provider>
   )
 

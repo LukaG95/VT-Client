@@ -4,8 +4,7 @@ import Filter from 'bad-words'
 
 import AccountTopbar from './AccountTopbar'
 import Tooltip from '../../components/Tooltip'
-import {UserContext} from '../../UserContext'
-import {PopupContext} from '../../components/PopupContext'
+import {UserContext} from '../../context/UserContext'
 import {createNotification} from '../../App'
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
@@ -34,7 +33,9 @@ function MyAccount() {
 
   let chosenSidebarStyle = {
     border: "1px solid rgba(0, 0, 0, 0.8)", 
-    paddingLeft: "50px", 
+
+    paddingTop: "17px",
+    paddingLeft: "35px",
     backgroundColor: "#141115", 
     color: "#f6f6f6"
   }

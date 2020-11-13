@@ -2,8 +2,10 @@ import React, {useState, useEffect, useContext} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 import axios from 'axios'
 
-import {UserContext} from '../UserContext'
+import {UserContext} from '../context/UserContext'
+import {PopupContext} from '../context/PopupContext'
 import { createNotification } from '../App'
+import useWindowDimensions from '../misc/windowHW'
 
 function Reputation() {
   const [repInfo, setRepInfo] = useState() 
@@ -12,8 +14,11 @@ function Reputation() {
   const [searchValue, setSearchValue] = useState("")
 
   const {myID, isLoggedIn} = useContext(UserContext)
+  const {setOpenForm} = useContext(PopupContext)
 
   const pathID = useLocation().pathname.substring(12) // reads url after /reputation/ till the end 
+
+  const { width } = useWindowDimensions()
 
   useEffect(()=> {
     if (myID === undefined && pathID === "") {
@@ -39,76 +44,97 @@ function Reputation() {
 
   }, [myID, pathID])
 
-
   if (repInfo !== undefined && repInfo !== "invalid")
   return (
-    <main className="repWrapper">
+    <>
 
-      <div className="flex" style={{marginBottom: "20px"}}>
+      <form onSubmit={searchForUserRep}>
         <input 
           onChange = {e => setSearchValue(e.target.value)}
-          placeholder="Search by username..." 
+          placeholder="Search users ..." 
           className="rep-search-input">
         </input>
-        <button className="searchRep-button" onClick={searchForUserRep}>
-          <img style={{width: "11px", height: "11px", marginRight: "6px"}} src={require("../images/other/MagnGlass.png")} /> 
-          SEARCH
-        </button>
-      </div>
+      </form>
 
-      <div className="repHeader">
-        <div className="flex">
-          <div className="flex-col rep-header-left">
-            <p className="rep-username">{repInfo.username}'s Reputation</p>
-            <p className="rep-title">{repInfo.title}</p>
+      <div className="reputation-topbar-field">
+
+        <div className="rep-username">{repInfo.username}'s Reputation</div>
+
+        <div className="rep-header-right">
+
+          <div className="flex">
+            <div className="rep-grade">{repInfo.grade}</div>
+            <div className="rep-title-addrep-wrapper">
+              <p className="rep-title">{repInfo.title}</p>
+              {isLoggedIn ? 
+                  <Link style={{textDecoration: "none"}} to={`/reputation/add/${repInfo.userId}`}><button className="rep-addrep-button">+ Add reputation</button> </Link>
+                : 
+                  <button onClick={()=> setOpenForm(true)} className="rep-addrep-button">+ Add reputation</button>
+              }
+              
+            </div>
           </div>
-          <p className="rep-grade">{repInfo.grade}</p>
-        </div>
-
-        <div className="flex rep-header-right">
-          <Link style={{textDecoration: "none"}} to={`/reputation/add/${repInfo.userId}`}>
-            {isLoggedIn && 
-            <button className="rep-addrep-button">
-              <img src={require('../images/other/Reputation orange.png')} className="rep-icon-inButton"/>Add reputation
-            </button>}
-          </Link>
-
-          <section className="rep-cutout"></section>
+       
           <div className="rep-ups-downs">
             <span className="rep-ups">+{repInfo.ups}</span>
             <span className="rep-middle"> </span>
             <span className="rep-downs">-{repInfo.downs}</span>
           </div>
+          
         </div>
       </div>
 
+      {repInfo.amount.all > 1 && <PageNumbers />}
+
       {repInfo.amount.all > 0 ? 
-      <>
-        <section className="rep-inbetween-section">
-          <div className="rep-inbetween-section-left">
-            <p style={{marginLeft: "80px"}}>Created By</p>
-            <p style={{marginLeft: "145px"}}>Date &#38; Time (UTC)</p>
-            <p style={{marginLeft: "60px"}}>Feedback</p>
-          </div>
+    
+        <>
 
-          <div className="rep-inbetween-section-right">
-            <button onClick={()=> {setCurrentPage(1); setRepType("all")}} style={repType==="all" ? {color: "#E7AA0F"} : null}> All ({repInfo.amount.all}) /&nbsp;</button>
-            <button onClick={()=> {setCurrentPage(1); setRepType("csgo")}} style={repType==="csgo" ? {color: "#E7AA0F"} : null}> CSGO ({repInfo.amount.csgo}) /&nbsp;</button>
-            <button onClick={()=> {setCurrentPage(1); setRepType("rl")}} style={repType==="rl" ? {color: "#E7AA0F"} : null}> RL ({repInfo.amount.rl}) /&nbsp;</button>
-            <button onClick={()=> {setCurrentPage(1); setRepType("other")}} style={repType==="other" ? {color: "#E7AA0F"} : null}> Other ({repInfo.amount.other})</button>
-          </div>
-        </section>
+          { width > 800 ?
+              <section className="rep-inbetween-section">
+                <div className="rep-inbetween-section-left">
+                  <p style={{marginLeft: "80px"}}>Created By</p>
+                  <p style={{marginLeft: "85px"}}>Date &#38; Time (UTC)</p>
+                  <p style={{marginLeft: "35px"}}>Feedback</p>
+                </div>
 
-        <Reps />
-      
-        {repInfo.amount[repType] > 17 && <PageNumbers />}
-      </>
-      : <div className="noReputationMsg">User has no reputation in the database. Be the 1st one to 
-      <Link to={`/reputation/add/${repInfo.userId}`} className="addRepButton2" id="removeDecoration"> add reputation</Link>
+                <div className="rep-inbetween-section-right">
+                  {repInfo.amount.all > 0 && <button onClick={()=> {setCurrentPage(1); setRepType("all")}} style={repType==="all" ? {color: "#E7AA0F"} : null}> All ({repInfo.amount.all}) /&nbsp;</button>}
+                  {repInfo.amount.csgo > 0 && <button onClick={()=> {setCurrentPage(1); setRepType("csgo")}} style={repType==="csgo" ? {color: "#E7AA0F"} : null}> CSGO ({repInfo.amount.csgo}) /&nbsp;</button>}
+                  {repInfo.amount.rl > 0 && <button onClick={()=> {setCurrentPage(1); setRepType("rl")}} style={repType==="rl" ? {color: "#E7AA0F"} : null}> RL ({repInfo.amount.rl}) /&nbsp;</button>}
+                  {repInfo.amount.other > 0 && <button onClick={()=> {setCurrentPage(1); setRepType("other")}} style={repType==="other" ? {color: "#E7AA0F"} : null}> Other ({repInfo.amount.other})</button>}
+                </div>
+              </section>
+            :
+              <section className="rep-inbetween-section">
+                <div className="rep-inbetween-section-left">
+                  <p style={{marginLeft: "59px"}}>Feedback</p>
+                </div>
+
+                <div className="rep-inbetween-section-category-wrapper">
+                  <p>{repType}</p>
+                  <div className="dropdownArrow"></div>
+                </div>
+              </section>
+            
+          }
+
+          <div className="all-reps-wrapper">
+            <Reps />
+          </div>
+         
+        </>
+
+      : 
+        <div className="noReputationMsg">
+          <h2>User has no rep in the database.</h2>
+          Be the 1st one to <span> </span>
+          <Link to={`/reputation/add/${repInfo.userId}`} className="first-trade-text-button" id="">add reputation</Link>
         </div>
+        
       }
 
-    </main> 
+    </> 
   )
   else if (repInfo === "invalid")
     return (
@@ -117,18 +143,19 @@ function Reputation() {
         <a id="removeDecoration" href="/reputation">&#8617; Back to my reputation</a>
       </div>
     )
-    else if (isLoggedIn === false && pathID === "") return (
-      <div className="repSearch_wrapper">
+  else if (isLoggedIn === false && pathID === "") 
+    return (
+      <div className="rep-notLogged-in">
+        <form onSubmit={searchForUserRep}>
           <input 
             onChange = {e => setSearchValue(e.target.value)}
-            placeholder="Search by username..." 
+            placeholder="Search users ..." 
             className="rep-search-input">
           </input>
-
-          <button className="searchRep-button" onClick={searchForUserRep}>
-            <img style={{width: "11px", height: "11px", marginRight: "6px"}} src={require("../images/other/MagnGlass.png")} /> 
-            SEARCH
-          </button>
+        </form>
+        <p className="sign-in-to-receive-rep-text">You need an account to receive reputation</p>
+        <p className="sign-in-to-begin-text"><span>Sign in</span> to begin</p>
+        <p className="what-is-reputation-text">What is reputation?</p>
       </div>
     )  
     else return null // <Spinner className="newPosition">
@@ -136,11 +163,12 @@ function Reputation() {
 
   /*-----Functions                -------------*/
 
-  function searchForUserRep(){
-    
+  function searchForUserRep(e){
+    e.preventDefault()
+
     axios.get(`/api/auth/getUserByUsername/${searchValue}`)
     .then (res => { 
-      if (res.data.info === "success")
+      if (res.data.info === "success") 
         window.location.href = `/reputation/${res.data.user._id}`
     })
     .catch(err => {
@@ -151,15 +179,23 @@ function Reputation() {
 
   function Reps(){
     const reps = repInfo.repsByGame[repType].map((rep, i) => {
-      if (i >= currentPage * 17 - 17 && i <= currentPage * 17 - 1)
-        return(
-          <div className={"rep-container noUserInteraction" }>
-            <div className="rep-vote" style={rep.good ? {backgroundColor: "#2C8E54"} : {backgroundColor: "#CE4646"}} >{rep.good ? "+ " : "- "}1</div>
-            <p style={{marginLeft: "19px", width: "200px"}}>{rep.createdBy}</p>
-            <p style={{width: "150px"}}>{rep.createdAt}</p>
-            <p>{rep.feedback}</p>
+      if (i >= currentPage * 17 - 17 && i <= currentPage * 17 - 1){
+        if (width > 800)
+          return(
+            <div className="rep-container noUserInteraction">
+              <div className="rep-vote" style={rep.good ? {backgroundColor: "#2C8E54"} : {backgroundColor: "#CE4646"}} >{rep.good ? "+ " : "- "}1</div>
+              <p style={{marginLeft: "19px", minWidth: "140px"}}>{rep.username}</p>
+              <p style={{minWidth: "130px"}}>{rep.createdAt}</p>
+              <div style={{width: width-460}} className="feedback-text">{rep.feedback}</div>
+            </div>
+          )
+        else return (
+          <div className="rep-container noUserInteraction">
+            <div className="rep-vote-PHONEVIEW" style={rep.good ? {backgroundColor: "#2C8E54"} : {backgroundColor: "#CE4646"}} >{rep.good ? "+ " : "- "}1</div>
+            <div style={width <= 650 ? {width: width-110, marginLeft: "20px"} : {width: width-170, marginLeft: "20px"}} className="feedback-text">{rep.feedback}</div>
           </div>
         )
+      }
     })
     return reps
   }
@@ -184,7 +220,7 @@ function Reputation() {
       else
         return starting_number() + 10
     }
-
+    
     for (let i = starting_number(); i < ending_number(); i++)
       pageButtons.push(
         i === currentPage ? 
@@ -193,7 +229,7 @@ function Reputation() {
       )
 
     return(
-      <section style={{marginTop: "20px"}} className="page-numbers">
+      <section className="page-numbers-field">
         <div onClick={()=> currentPage > 1 && setCurrentPage(prev => prev - 1)} className="page-left noUserInteraction"></div>
           {pageButtons}
         <div onClick={()=> currentPage < pageAmount && setCurrentPage(prev => prev + 1)} className="page-right noUserInteraction"></div>

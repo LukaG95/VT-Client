@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {useLocation} from 'react-router-dom'
-import {UserContext} from '../../UserContext'
+import {UserContext} from './UserContext'
 import axios from 'axios'
 
-import infoRL from '../../info/infoRL.json' 
+import infoRL from '../info/infoRL.json' 
 
 const TradeContextRL = React.createContext()
 
@@ -106,7 +106,7 @@ function TradeContextProviderRL({children}) {
   function click(e){
     if (e.target.parentNode === null) return
     if(e.target.name !== "enableDropdown" && e.target.className !== "rl-icon-dropdown" && e.target.className !== "rl-attribute-dd-item" && e.target.parentNode.name !== "enableDropdown"
-    && e.target.className !== "enableDropdown"){
+    && e.target.className !== "enableDropdown" && e.target.className !== "item_name"){
       let temp=[] 
       have.map(item => {
         item.isDropdown = false
@@ -153,13 +153,18 @@ function TradeContextProviderRL({children}) {
     clearFocusedFields()
 
     let temp = []
+
     have.map(item => {
       if (item.id === id){
-        // item.url = ""
-        item.isAdded = false
         item.color = "None"
+        item.colorID = 0
+        item.itemID = "None"
+        item.itemName = ""
         item.cert = "None"
+        item.amount = 1
         item.isFocused = true
+        item.isDropdown = false
+        item.isAdded = false
         temp.push(item)
       } else
       temp.push(item)
@@ -170,11 +175,15 @@ function TradeContextProviderRL({children}) {
 
     want.map(item => {
       if (item.id === id){
-        // item.url = ""
-        item.isAdded = false
         item.color = "None"
+        item.colorID = 0
+        item.itemID = "None"
+        item.itemName = ""
         item.cert = "None"
+        item.amount = 1
         item.isFocused = true
+        item.isDropdown = false
+        item.isAdded = false
         temp.push(item)
       } else
       temp.push(item)
@@ -333,12 +342,14 @@ function TradeContextProviderRL({children}) {
 
       let temp = []
       have.map(item => {
-        // item.url = ""
         item.color = "None"
         item.colorID = 0
-        item.name = ""
+        item.itemID = "None"
+        item.itemName = ""
         item.cert = "None"
         item.amount = 1
+        item.isFocused = false
+        item.isDropdown = false
         item.isAdded = false
         temp.push(item)
       })
@@ -359,12 +370,14 @@ function TradeContextProviderRL({children}) {
 
     let temp = []
       want.map(item => {
-        // item.url = ""
         item.color = "None"
         item.colorID = 0
-        item.name = ""
+        item.itemID = "None"
+        item.itemName = ""
         item.cert = "None"
         item.amount = 1
+        item.isFocused = false
+        item.isDropdown = false
         item.isAdded = false
         temp.push(item)
       })
