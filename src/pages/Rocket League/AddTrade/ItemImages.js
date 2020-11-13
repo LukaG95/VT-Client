@@ -13,7 +13,7 @@ import infoRL from "../../../info/infoRL.json";
 import imageExists from "../../../misc/func";
 import Placeholder from "./Placeholder";
 
-import RLicon from "./RLicon";
+import RLicon from "./ItemImage";
 import useWindowDimensions from "../../../misc/windowHW";
 
 function ItemImages() {

@@ -51,40 +51,40 @@ function Sidebar({ setIsOpen_LeftSidebar }) {
 
         <Switch>
           <Route exact path="/">
-            {" "}
-            <RLBody />{" "}
+            
+            <RLBody />
           </Route>
           <Route exact path="/trading/rl">
-            {" "}
-            <RLBody />{" "}
+            
+            <RLBody />
           </Route>
           <Route path="/reputation/add">
-            {" "}
-            <SidebarBodyREP />{" "}
+            
+            <SidebarBodyREP />
           </Route>
           <Route path="/reputation">
-            {" "}
-            <SidebarBodyREP />{" "}
+            
+            <SidebarBodyREP />
           </Route>
           <Route exact path="/trading/rl/new">
-            {" "}
+            
           </Route>
           <Route path="/trading/rl/edit"> </Route>
           <Route path="/trades"> </Route>
           <Route exact path="/terms">
-            {" "}
+            
           </Route>
           <Route exact path="/privacy">
-            {" "}
+            
           </Route>
           <Route exact path="/account/settings">
-            {" "}
+            
           </Route>
           <Route exact path="/account/messages">
-            {" "}
+            
           </Route>
           <Route exact path="/account/premium">
-            {" "}
+            
           </Route>
           <Route path="/password/reset"> </Route>
           <Route path="/email/confirm"> </Route>

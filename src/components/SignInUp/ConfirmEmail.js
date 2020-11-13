@@ -27,10 +27,10 @@ function ConfirmEmail() {
         <div className="displayTextWrapper">
           <h2>Success! You have confirmed your email</h2>
           <p>
-            Make sure you are familiar with our <a href="/">trading rules</a>{" "}
+            Make sure you are familiar with our <a href="/">trading rules</a>
             and <a href="/">reputation rules</a>. <br />
             Be careful when clicking on links when trading with others. <br />
-            List of <a href="/">scamming methods</a> and how to prevent them{" "}
+            List of <a href="/">scamming methods</a> and how to prevent them
             <br />
             <br />
             Happy trading and stay safe!

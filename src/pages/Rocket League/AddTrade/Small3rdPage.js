@@ -196,7 +196,7 @@ function FilterButton({ dd, label, value, setFunction, itemID, translate }) {
     return (
       <div className="rl-icon-amount-filter-field">
         <label>
-          {" "}
+          
           {label} - max {itemID === 4743 ? 100000 : 100}
         </label>
 

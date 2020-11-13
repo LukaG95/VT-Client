@@ -10,8 +10,8 @@ import RLTrading from "./pages/Rocket League/RLTrading";
 import AddTradeRL from "./pages/Rocket League/AddTrade/Main";
 import Reputation from "./pages/Reputation";
 import AccountSettings from "./pages/My Account/Account Settings";
-import AccountPlatforms from "./pages/My Account/AccountPlatforms";
-import AccountLogout from "./pages/My Account/AccountLogout";
+//import AccountPlatforms from "./pages/My Account/AccountPlatforms";
+//import AccountLogout from "./pages/My Account/AccountLogout";
 import Terms from "./pages/Terms";
 import FilterBar from "./components/FilterBar";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -32,8 +32,8 @@ import Test from "./test";
 
 import AlphaForm from "./components/SignInUp/AlphaForm";
 
-import io from "socket.io-client";
-const socket = io();
+//import io from "socket.io-client";
+//const socket = io();
 
 function App() {
   const { isLoggedIn, displayWebsite } = useContext(UserContext);
@@ -90,100 +90,78 @@ function App() {
             <div style={{ position: "absolute", top: "25px", color: "white" }}>
               {height}
             </div>
-
             <Navbar />
-
             <Switch>
               <Route exact path="/testing">
-                {" "}
-                <Test />{" "}
+                <Test />
               </Route>
               <Route exact path="/">
-                {" "}
                 <>
-                  {" "}
                   <FilterBar />
                   <RLTrading />
-                </>{" "}
+                </>
               </Route>
               <Route exact path="/trading/rl">
-                {" "}
                 <>
-                  {" "}
                   <FilterBar />
-                  <RLTrading />{" "}
-                </>{" "}
+                  <RLTrading />
+                </>
               </Route>
               <Route path="/reputation/add">
-                {" "}
-                {handleRedirectOnRefresh(<AddReputation />)}{" "}
+                {handleRedirectOnRefresh(<AddReputation />)}
               </Route>
               <Route path="/reputation">
-                {" "}
-                <Reputation />{" "}
+                <Reputation />
               </Route>
               <Route exact path="/trading/rl/new">
-                {" "}
                 {handleRedirectOnRefresh(
                   <TradeContextProviderRL>
-                    {" "}
-                    <AddTradeRL />{" "}
+
+                    <AddTradeRL />
                   </TradeContextProviderRL>
-                )}{" "}
+                )}
               </Route>
               <Route path="/trading/rl/edit">
-                {" "}
                 {handleRedirectOnRefresh(
                   <TradeContextProviderRL>
-                    {" "}
-                    <AddTradeRL />{" "}
+                    <AddTradeRL />
                   </TradeContextProviderRL>
-                )}{" "}
+                )}
               </Route>
               <Route path="/trades">
-                {" "}
                 {handleRedirectOnRefresh(
                   <>
                     <FilterBar />
                     <UserTrades />
                   </>
-                )}{" "}
+                )}
               </Route>
               <Route exact path="/terms">
-                {" "}
-                <Terms />{" "}
+                <Terms />
               </Route>
               <Route exact path="/privacy">
-                {" "}
-                <PrivacyPolicy />{" "}
+                <PrivacyPolicy />
               </Route>
               <Route exact path="/account/settings">
-                {" "}
-                {handleRedirectOnRefresh(<AccountSettings />)}{" "}
+                {handleRedirectOnRefresh(<AccountSettings />)}
               </Route>
               <Route exact path="/account/messages">
-                {" "}
-                {handleRedirectOnRefresh(<></>)}{" "}
+                {handleRedirectOnRefresh(<></>)}
               </Route>
               <Route exact path="/account/premium">
-                {" "}
-                {handleRedirectOnRefresh(<Premium />)}{" "}
+                {handleRedirectOnRefresh(<Premium />)}
               </Route>
               <Route path="/password/reset">
-                {" "}
-                <ResetPassword />{" "}
+                <ResetPassword />
               </Route>
               <Route path="/email/confirm">
-                {" "}
-                <ConfirmEmail />{" "}
+                <ConfirmEmail />
               </Route>
               <Route path="/email/update">
-                {" "}
-                <UpdateEmail />{" "}
+                <UpdateEmail />
               </Route>
               <Route path="/admin">
-                {" "}
-                <AdminPage />{" "}
+                <AdminPage />
               </Route>
             </Switch>
           </div>
@@ -199,6 +177,7 @@ function App() {
             height={30}
             width={30}
             src={require("./images/other/arrow_nav_up.png")}
+            alt=""
           />
           {/*<i className="fas fa-chevron-up"></i>*/}
         </div>
@@ -249,7 +228,7 @@ function App() {
         form.style.height = "100%";
         form.style.width = "100%";
         body.style.overflowY = "hidden";
-      } catch {}
+      } catch { }
     } else if (width >= 700 && openForm === true) {
       try {
         const form = document.getElementById("logForm");
@@ -258,7 +237,7 @@ function App() {
         form.style.height = "auto";
         form.style.width = "440px";
         body.style.overflowY = "scroll";
-      } catch {}
+      } catch { }
     }
   }
 }
