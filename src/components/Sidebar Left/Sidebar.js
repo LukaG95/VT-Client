@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, Redirect, Route, Switch } from "react-router-dom";
-import axios from "axios";
+import React, { useContext, useState } from "react";
+import { Route, Switch } from "react-router-dom";
 
 import SidebarHeader from "./SidebarHeader";
 import SidebarFooter from "./SidebarFooter";
@@ -39,8 +38,6 @@ function Sidebar({ setIsOpen_LeftSidebar }) {
     setItemType,
     platform,
     setPlatform,
-    setTradeInfo,
-    setPageAmount,
     resetFilters,
   } = useContext(TbFiltersRLContext);
 
@@ -89,7 +86,7 @@ function Sidebar({ setIsOpen_LeftSidebar }) {
           onChange={(e) => {
             let names = [];
 
-            selectedDropdown.map((itemName) => {
+            selectedDropdown.forEach((itemName) => {
               if (itemName.toLowerCase().includes(e.target.value.toLowerCase()))
                 names.push(itemName);
             });

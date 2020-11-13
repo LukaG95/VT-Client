@@ -1,15 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 import { TradeContextRL } from "../../context/TradeContextRL";
 import AddedIconRLdropdown from "./AddedIconRLdropdown";
-import infoRL from "../../info/infoRL.json";
 import imageExists from "../../misc/func";
 
 function AddedIconRL({ item }) {
   const {
     id,
     itemID,
-    itemName,
     color,
     colorID,
     cert,

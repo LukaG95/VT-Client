@@ -2,8 +2,8 @@ import infoRL from "./infoRL.json";
 
 let rl_names = ["Any"];
 
-infoRL.Slots.map((Slot) =>
-  Slot.Items.map((item) => {
+infoRL.Slots.forEach((Slot) =>
+  Slot.Items.forEach((item) => {
     if (item.Tradable) rl_names.push(item.Name);
   })
 );

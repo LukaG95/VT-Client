@@ -12,6 +12,7 @@ export default function Placeholder({ item }) {
           borderRadius: "5px 5px 0px 0px",
         }}
         src="images/icons/question.png"
+        alt=""
       />
 
       <div className="RLicon-name">{item.Name}</div>

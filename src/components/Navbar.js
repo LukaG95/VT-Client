@@ -12,13 +12,10 @@ import { ReactComponent as ProfileIcon } from "../images/other/profile.svg";
 
 function Navbar() {
   let location = useLocation();
-  let trading = "",
-    prices = "",
-    reputation = "",
-    premium = "";
+  let trading = "", reputation = "";
 
   const { isLoggedIn, username } = useContext(UserContext);
-  const { openForm, setOpenForm } = useContext(PopupContext);
+  const { setOpenForm } = useContext(PopupContext);
 
   switch (location.pathname) {
     case "/trading/rl":
@@ -27,14 +24,8 @@ function Navbar() {
     case "/":
       trading = "currentPage";
       break;
-    case "/prices":
-      prices = "currentPage";
-      break;
     case "/reputation":
       reputation = "currentPage";
-      break;
-    case "/premium":
-      premium = "currentPage";
       break;
     default:
   }
@@ -92,6 +83,7 @@ function Navbar() {
               <img
                 height={25}
                 src={require("../images/other/addtrade_icon_small.png")}
+                alt=""
               />
             </div>
           </Link>
@@ -145,6 +137,7 @@ function Navbar() {
               height={25}
               width={25}
               src={require("../images/other/profile_icon_small.png")}
+              alt=""
             />
           </div>
         );
@@ -165,32 +158,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-// ??
-/*
-notifications = [
-  {
-    type: "message",
-    sender: "Ryu",
-    message: "hi",
-    timeSince: "3m",
-    seen: false
-  },
-  {
-    type: "website update",
-    version: "1.0.1",
-    sender: "virtrade",
-    message: "view update notes",
-    timeSince: "yesterday",
-    seen: true
-  },
-  {
-    type: "reputation",
-    positive: true,
-    sender: "Drogings",
-    message: "Good trade, thank you",
-    timeSince: "10 Oct",
-    seen: true
-  }
-]
-*/

@@ -3,8 +3,6 @@ import { useLocation } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import axios from "axios";
 
-import infoRL from "../info/infoRL.json";
-
 const TradeContextRL = React.createContext();
 
 function TradeContextProviderRL({ children }) {
@@ -395,7 +393,7 @@ function TradeContextProviderRL({ children }) {
       e.target.className !== "item_name"
     ) {
       let temp = [];
-      have.map((item) => {
+      have.forEach((item) => {
         item.isDropdown = false;
         temp.push(item);
       });
@@ -404,7 +402,7 @@ function TradeContextProviderRL({ children }) {
       // console.log(e.target)
 
       temp = [];
-      want.map((item) => {
+      want.forEach((item) => {
         item.isDropdown = false;
         temp.push(item);
       });
@@ -416,7 +414,7 @@ function TradeContextProviderRL({ children }) {
   function clearFocusedFields() {
     let temp = [];
 
-    have.map((item) => {
+    have.forEach((item) => {
       if (item.isFocused) item.isFocused = false;
       temp.push(item);
     });
@@ -425,7 +423,7 @@ function TradeContextProviderRL({ children }) {
 
     temp = [];
 
-    want.map((item) => {
+    want.forEach((item) => {
       if (item.isFocused) item.isFocused = false;
       temp.push(item);
     });
@@ -439,7 +437,7 @@ function TradeContextProviderRL({ children }) {
 
     let temp = [];
 
-    have.map((item) => {
+    have.forEach((item) => {
       if (item.id === id) {
         item.color = "None";
         item.colorID = 0;
@@ -457,7 +455,7 @@ function TradeContextProviderRL({ children }) {
 
     temp = [];
 
-    want.map((item) => {
+    want.forEach((item) => {
       if (item.id === id) {
         item.color = "None";
         item.colorID = 0;
@@ -477,8 +475,9 @@ function TradeContextProviderRL({ children }) {
   // sets dropdown state to true on clicked item
   function setIsDropdown(id) {
     let temp = [];
-    have.map((item) => {
-      if (item.id == id) {
+    have.forEach((item) => {
+      console.log(typeof item.id)
+      if (item.id === id) {
         item.isDropdown = !item.isDropdown;
         temp.push(item);
       } else {
@@ -489,8 +488,8 @@ function TradeContextProviderRL({ children }) {
     setHave(temp);
 
     temp = [];
-    want.map((item) => {
-      if (item.id == id) {
+    want.forEach((item) => {
+      if (item.id === id) {
         item.isDropdown = !item.isDropdown;
         temp.push(item);
       } else {
@@ -505,11 +504,11 @@ function TradeContextProviderRL({ children }) {
   function manageFocus(e) {
     if (e.target.id !== "focusedButton") {
       let temp = [];
-      have.map((item) => {
+      have.forEach((item) => {
         if (item.isFocused === true) {
           item.isFocused = false;
           temp.push(item);
-        } else if (e.target.name == item.id) {
+        } else if (parseInt(e.target.name) === item.id) {
           item.isFocused = true;
           temp.push(item);
         } else temp.push(item);
@@ -518,11 +517,11 @@ function TradeContextProviderRL({ children }) {
 
       temp = [];
 
-      want.map((item) => {
+      want.forEach((item) => {
         if (item.isFocused === true) {
           item.isFocused = false;
           temp.push(item);
-        } else if (e.target.name == item.id) {
+        } else if (parseInt(e.target.name) === item.id) {
           item.isFocused = true;
           temp.push(item);
         } else temp.push(item);
@@ -535,7 +534,7 @@ function TradeContextProviderRL({ children }) {
   function pushItem({ ItemID, Name }) {
     let current = undefined;
     let temp = [];
-    have.map((item) => {
+    have.forEach((item) => {
       if (item.isFocused === true) {
         item.isFocused = false;
         item.itemID = ItemID;
@@ -562,7 +561,7 @@ function TradeContextProviderRL({ children }) {
 
     temp = [];
 
-    want.map((item) => {
+    want.forEach((item) => {
       if (item.isFocused === true) {
         item.isFocused = false;
         item.itemID = ItemID;
@@ -604,14 +603,14 @@ function TradeContextProviderRL({ children }) {
   // clears all have items
   function clearHaveItems() {
     let empty = true;
-    have.map((item) => {
+    have.forEach((item) => {
       if (item.isAdded) empty = false;
     });
 
     if (empty) return null;
 
     let temp = [];
-    have.map((item) => {
+    have.forEach((item) => {
       item.color = "None";
       item.colorID = 0;
       item.itemID = "None";
@@ -631,14 +630,14 @@ function TradeContextProviderRL({ children }) {
   // clears all want items
   function clearWantItems() {
     let empty = true;
-    want.map((item) => {
+    want.forEach((item) => {
       if (item.isAdded) empty = false;
     });
 
     if (empty) return null;
 
     let temp = [];
-    want.map((item) => {
+    want.forEach((item) => {
       item.color = "None";
       item.colorID = 0;
       item.itemID = "None";
@@ -660,7 +659,7 @@ function TradeContextProviderRL({ children }) {
       let want_focused = [];
       let stop = false;
 
-      h.map((item) => {
+      h.forEach((item) => {
         if (item.isAdded || stop) item.isFocused = false;
         else {
           item.isFocused = true;
@@ -670,7 +669,7 @@ function TradeContextProviderRL({ children }) {
         have_focused.push(item);
       });
 
-      w.map((item) => {
+      w.forEach((item) => {
         if (item.isAdded || stop) item.isFocused = false;
         else {
           item.isFocused = true;
@@ -686,13 +685,13 @@ function TradeContextProviderRL({ children }) {
       let temp = [];
       let stop = false;
 
-      want.map((item) => {
+      want.forEach((item) => {
         if (item.isFocused) item.isFocused = false;
         temp.push(item);
       });
       setWant(temp);
 
-      h.map((item) => {
+      h.forEach((item) => {
         if (item.isAdded || stop) item.isFocused = false;
         else {
           item.isFocused = true;
@@ -708,13 +707,13 @@ function TradeContextProviderRL({ children }) {
       let temp = [];
       let stop = false;
 
-      have.map((item) => {
+      have.forEach((item) => {
         if (item.isFocused) item.isFocused = false;
         temp.push(item);
       });
       setHave(temp);
 
-      w.map((item) => {
+      w.forEach((item) => {
         if (item.isAdded || stop) item.isFocused = false;
         else {
           item.isFocused = true;
@@ -733,14 +732,14 @@ function TradeContextProviderRL({ children }) {
     let have_reform = [];
     let want_reform = [];
 
-    have.map((item, i) => {
+    have.forEach((item, i) => {
       if (res.data.trade.have[i]) {
         have_reform[i] = { ...item, ...res.data.trade.have[i] };
         have_reform[i].isAdded = true;
       } else have_reform[i] = item;
     });
 
-    want.map((item, i) => {
+    want.forEach((item, i) => {
       if (res.data.trade.want[i]) {
         want_reform[i] = { ...item, ...res.data.trade.want[i] };
         want_reform[i].isAdded = true;

@@ -1,17 +1,9 @@
-import React, { useState, useContext } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
-import Filter from "bad-words";
-import Spinner from "../../../components/Spinner";
+import React, { useContext } from "react";
 
 import AddedIconRL from "../../../components/Rocket League/AddedIconRL";
 import { TradeContextRL } from "../../../context/TradeContextRL";
-import useWindowDimensions from "../../../misc/windowHW";
-
-const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
 function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
-  const [itemImages, setItemImages] = useState();
 
   const {
     have,
@@ -21,17 +13,9 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
     notes,
     setNotes,
     manageFocus,
-    pushItem,
     clearWantItems,
-    clearHaveItems,
-    gotInfo,
-    tradesAmount,
-    setTradesAmount,
+    clearHaveItems
   } = useContext(TradeContextRL);
-
-  const pathID = useLocation().pathname.substring(17); // reads url after /trades/ till the end
-
-  const { height, width } = useWindowDimensions();
 
   const displayed_have_items = have.map((item) => {
     if (item.isAdded === false) {
@@ -118,6 +102,7 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
             <img
               src={require(`../../../images/other/trash.png`)}
               style={{ height: "14px", width: "14px" }}
+              alt=""
             />
           </div>
         </div>
@@ -138,6 +123,7 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
             <img
               src={require(`../../../images/other/trash.png`)}
               style={{ height: "14px", width: "14px" }}
+              alt=""
             />
           </div>
         </div>

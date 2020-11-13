@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, Redirect } from "react-router-dom";
 import axios from "axios";
 
@@ -19,7 +19,7 @@ function ConfirmEmail() {
         // else if (res.data.status === "OldOrInvalid")
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [pathID]);
 
   if (emailConfirmed)
     return (
@@ -42,6 +42,7 @@ function ConfirmEmail() {
                 height="22"
                 width="24"
                 src={require("../../images/other/DiscordLogo.png")}
+                alt=""
               />
             </div>
             <div>
@@ -50,6 +51,7 @@ function ConfirmEmail() {
                 height="14"
                 width="19"
                 src={require("../../images/other/TwitterLogo.png")}
+                alt=""
               />
             </div>
             <div>
@@ -58,6 +60,7 @@ function ConfirmEmail() {
                 height="17"
                 width="17"
                 src={require("../../images/other/InstagramLogo.png")}
+                alt=""
               />
             </div>
           </div>

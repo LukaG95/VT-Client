@@ -1,8 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 import { TradeContextRL } from "../../context/TradeContextRL";
 import AddedIconRLdropdown from "./AddedIconRLdropdown";
-import infoRL from "../../info/infoRL.json";
 import imageExists from "../../misc/func";
 
 function AddedIconRL({ item, setShowPage, setClickedItem }) {
@@ -10,7 +9,6 @@ function AddedIconRL({ item, setShowPage, setClickedItem }) {
   const {
     id,
     itemID,
-    itemName,
     color,
     colorID,
     cert,
@@ -35,7 +33,7 @@ function AddedIconRL({ item, setShowPage, setClickedItem }) {
         }}
       >
         <div
-          onClick={() => setIsDropdown(id)}
+          onClick={() => {console.log(typeof id); setIsDropdown(id)}}
           style={{ height: "95px", width: "95px" }}
         >
           <img

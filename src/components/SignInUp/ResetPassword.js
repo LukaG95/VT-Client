@@ -67,7 +67,7 @@ function ResetPassword() {
       return;
     } else if (
       !password.match(
-        /^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{4,30}$/gm
+        /^[!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{4,30}$/gm
       )
     ) {
       createNotification(

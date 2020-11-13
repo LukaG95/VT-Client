@@ -3,7 +3,6 @@ import axios from "axios";
 import Filter from "bad-words";
 
 import AccountTopbar from "./AccountTopbar";
-import Tooltip from "../../components/Tooltip";
 import { UserContext } from "../../context/UserContext";
 import { createNotification } from "../../App";
 
@@ -145,7 +144,7 @@ function MyAccount() {
       return;
     } else if (
       !newPass.match(
-        /^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{6,30}$/gm
+        /^[!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{6,30}$/gm
       )
     ) {
       setNewPassErrorMsg("Password contains inappropriate characters");

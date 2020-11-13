@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, Suspense } from "react";
+import React, { useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Filter from "bad-words";
@@ -59,7 +59,7 @@ function SmallHome() {
         let haveRefactor = [];
         let wantRefactor = [];
 
-        have.map((item) => {
+        have.forEach((item) => {
           if (item.isAdded) {
             let readyItem = {
               itemID: item.itemID,
@@ -74,7 +74,7 @@ function SmallHome() {
           }
         });
 
-        want.map((item) => {
+        want.forEach((item) => {
           if (item.isAdded) {
             let readyItem = {
               itemID: item.itemID,
@@ -190,7 +190,7 @@ function SmallHome() {
   function checkNotes() {
     if (
       notes.match(
-        /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm
+        /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm
       )
     )
       return "No links allowed in notes";
@@ -199,192 +199,3 @@ function SmallHome() {
 }
 
 export default SmallHome;
-
-/*
-import React, {useState, useContext, useEffect, Suspense} from 'react'
-import {useLocation} from 'react-router-dom'
-import axios from 'axios'
-import Filter from 'bad-words'
-
-import {createNotification} from '../../../App'
-import {TradeContextRL} from '../../../context/TradeContextRL'
-import Small1stPage from './Small1stPage'
-import SmallChooseItems from './SmallChooseItems'
-
-import infoRL from '../../../info/infoRL.json' 
-import imageExists from '../../../misc/func'
-import Placeholder from './Placeholder'
-import Img from "react-cool-img"
-import LazyLoad from 'react-lazyload'
-
-const profanityFilter = new Filter({ regex: /^\*|\.|$/gi })
-
-function SmallHome() {
-  const [itemImages, setItemImages] = useState()
-  const [showPage, setShowPage] = useState("1")
-  const [itemsHaveLoaded, setItemsHaveLoaded] = useState(false)
-
-  const {have, want, platform, notes, setNotes, clearWantItems, clearHaveItems, tradesAmount, setTradesAmount} = useContext(TradeContextRL)
-
-  const pathID = useLocation().pathname.substring(17)   // reads url after /trades/ till the end
-
-    return(
-      <div className="add-trade-wrapper-SMALL">
-     {
-       itemsHaveLoaded ?
-        <Small1stPage setShowPage={setShowPage} handleTradeSubmit={handleTradeSubmit} displayPage={showPage==="1" ? true : false}/>
-      :
-        <p style={{color: "#f6f6f6", marginLeft: "10px", marginTop: "10px", fontWeight: "600", fontSize: "14px"}}>Loading...</p>
-     }
-        
-        <SmallChooseItems setShowPage={setShowPage} displayPage={showPage==="2" ? true : false} setItemsHaveLoaded={setItemsHaveLoaded}/>
-    
-      </div>
-    )
-    
-
-  
-    return (
-      <div className="add-trade-wrapper-SMALL">
-        {
-          showPage === "1" ?
-            <Small1stPage setShowPage={setShowPage} handleTradeSubmit={handleTradeSubmit}/>
-          :
-          showPage === "2" ?
-            <SmallChooseItems setShowPage={setShowPage} itemImages={itemImages} setItemImages={setItemImages}/>
-          :
-            null
-        }
-        
-      </div>
-    )
-
-
- 
-
-  function handleTradeSubmit(){
-    if (have && want){
- 
-      if (!checkAddedItems()){
-        createNotification("error", "Choose items", "choose the items")
-        return
-      }
-      else if (checkNotes()){
-        createNotification("error", checkNotes(), checkNotes())
-        return
-      } 
-      else {
-        let haveRefactor = []
-        let wantRefactor = []
-        
-        have.map(item => {
-          if (item.isAdded){
-            let readyItem = {
-              itemID: item.itemID,
-              itemName: item.itemName,
-              color: item.color,
-              colorID: item.colorID,
-              cert: item.cert,
-              itemType: "item",  // needs work
-              amount: item.amount
-            }
-            haveRefactor.push(readyItem)
-          } 
-        })
-        
-        want.map(item => {
-          if (item.isAdded){
-            let readyItem = {
-              itemID: item.itemID,
-              itemName: item.itemName,
-              color: item.color,
-              colorID: item.colorID,
-              cert: item.cert,
-              itemType: "item",  // needs work
-              amount: item.amount
-            }
-            wantRefactor.push(readyItem)
-          }
-        })
-
-        if (pathID === ""){
-          if (tradesAmount >= 15){
-            createNotification("error", "You reached the limit of 15 trades", "limit 15 trades")
-            return
-          }
-          axios.post('/api/trades/createTrade', {
-            have: haveRefactor,
-            want: wantRefactor, 
-            platform: platform,
-            notes: profanityFilter.clean(notes)
-          })
-          .then(res => {
-            if (res.data.info === "success"){
-              clearWantItems()
-              clearHaveItems()
-              setNotes("")
-              createNotification("success", "Created a new trade", "created a new trade")
-              setTimeout(()=>createNotification("info", `${tradesAmount + 1} / 15 RL trades created`, "info on trades created"), 1000)
-              setTradesAmount(prev => prev + 1)  
-            }          
-          })
-          .catch(err => {
-            if (err.response)
-              createNotification("error", "Oops, something went wrong", "something went wrong") 
-            console.log(err.response)
-            console.log(have)
-          }) 
-        }
-        else {
-          axios.post(`/api/trades/editTrade?tradeId=${pathID}`, {
-            have: haveRefactor,
-            want: wantRefactor, 
-            platform: platform,
-            notes: profanityFilter.clean(notes)
-          })
-          .then(res => {
-            if (res.data.info === "success"){
-              createNotification("success", "You have edited your trade", "you have edited the trade")
-            }
-          })
-          .catch(err => {
-            if (err.response)
-              createNotification("error", "Oops, something went wrong", "something went wrong") 
-          })  
-        }
-      }
-    }
-  }
-
-  // returns true if there are items added in have and in want
-  function checkAddedItems(){
-    let x = false, y = false;
-    have.forEach(item=> {
-      if (item.isAdded === true){
-        x = true
-        return
-      }
-    })
-    want.forEach(item=> {
-      if (item.isAdded === true){
-        y = true
-        return
-      }
-    })
-    return (x && y)
-  }
-
-  // check notes for limits / errors
-  function checkNotes(){
-    if (notes.match(/\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm))
-      return ("No links allowed in notes")
-    else if (notes.length > 300)
-      return ("Max 300 characters allowed")
-  }
-
-  
-}
-
-export default SmallHome
-
-*/

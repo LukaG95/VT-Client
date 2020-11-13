@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, Redirect } from "react-router-dom";
 import axios from "axios";
 
@@ -21,7 +21,7 @@ function UpdateEmail() {
         else setEmailConfirmed(false);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [pathID]);
 
   if (emailConfirmed)
     return (

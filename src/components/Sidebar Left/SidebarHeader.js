@@ -39,6 +39,7 @@ function SidebarHeader({ setIsOpen_LeftSidebar }) {
               height={20}
               width={20}
               src={require("../../images/other/arrow_up_sidebar.png")}
+              alt=""
             />
           </span>
         ) : (
@@ -82,7 +83,7 @@ function SidebarHeader({ setIsOpen_LeftSidebar }) {
   function headerDropdown() {
     const dropdown = allOptions.map((option) => {
       if (option.name === "My Account" && !isLoggedIn) return null;
-      if (option.name != headerSelection)
+      if (option.name !== headerSelection)
         return (
           <div
             onClick={() => {
@@ -98,6 +99,7 @@ function SidebarHeader({ setIsOpen_LeftSidebar }) {
             </Link>
           </div>
         );
+        else return null
     });
 
     return dropdown;

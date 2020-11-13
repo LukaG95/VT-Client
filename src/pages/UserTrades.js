@@ -34,7 +34,7 @@ function UserTrades() {
           `oops something went wrong`
         );
       });
-  }, []);
+  }, [pathID]);
 
   if (userTrades && username)
     return (
