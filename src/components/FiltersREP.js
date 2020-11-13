@@ -93,7 +93,6 @@ function FiltersREP() {
 
         <div className="leaderboards-component">
           <div>
-            
             4 <span className="paddingBetween2" />
             {leadInfo
               ? leadInfo[timeType][3] && leadInfo[timeType][3].username
@@ -108,7 +107,6 @@ function FiltersREP() {
 
         <div className="leaderboards-component">
           <div>
-            
             5 <span className="paddingBetween2" />
             {leadInfo
               ? leadInfo[timeType][4] && leadInfo[timeType][4].username
@@ -123,7 +121,6 @@ function FiltersREP() {
 
         <div className="leaderboards-component">
           <div>
-            
             6 <span className="paddingBetween2" />
             {leadInfo
               ? leadInfo[timeType][5] && leadInfo[timeType][5].username
@@ -138,7 +135,6 @@ function FiltersREP() {
 
         <div className="leaderboards-component">
           <div>
-            
             7 <span className="paddingBetween2" />
             {leadInfo
               ? leadInfo[timeType][6] && leadInfo[timeType][6].username
@@ -153,7 +149,6 @@ function FiltersREP() {
 
         <div className="leaderboards-component">
           <div>
-            
             8 <span className="paddingBetween2" />
             {leadInfo
               ? leadInfo[timeType][7] && leadInfo[timeType][7].username
@@ -168,7 +163,6 @@ function FiltersREP() {
 
         <div className="leaderboards-component">
           <div>
-            
             9 <span className="paddingBetween2" />
             {leadInfo
               ? leadInfo[timeType][8] && leadInfo[timeType][8].username
@@ -183,7 +177,6 @@ function FiltersREP() {
 
         <div className="leaderboards-component">
           <div>
-            
             10 <span className="paddingBetween2" />
             {leadInfo
               ? leadInfo[timeType][9] && leadInfo[timeType][9].username
@@ -200,21 +193,18 @@ function FiltersREP() {
           onClick={() => setTimeType("All")}
           style={timeType === "All" ? { color: "#E7AA0F" } : null}
         >
-          
           All time &nbsp;&nbsp;
         </button>
         <button
           onClick={() => setTimeType("Month")}
           style={timeType === "Month" ? { color: "#E7AA0F" } : null}
         >
-          
           Month &nbsp;&nbsp;
         </button>
         <button
           onClick={() => setTimeType("Week")}
           style={timeType === "Week" ? { color: "#E7AA0F" } : null}
         >
-          
           Week
         </button>
       </div>

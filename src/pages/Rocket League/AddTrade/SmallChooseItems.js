@@ -3,45 +3,42 @@ import styles from "./SmallChooseItems.module.css";
 import AddTradeFiltersRL from "../../../components/Rocket League/AddTradeFiltersRL";
 import { TradeContextRL } from "../../../context/TradeContextRL";
 import infoRL from "../../../info/infoRL.json";
-import ItemImage from "./ItemImage";
-import { LazyLoadComponent } from 'react-lazy-load-image-component';
+import ItemContainer from "./ItemContainer";
+import Item from "./Item";
+import ItemConfirmIcon from "./Item";
 
 function SmallChooseItems({ setShowPage, displayPage }) {
   const [itemImages, setItemImages] = useState();
   const [selectedItems, setSelectedItems] = useState([]);
 
-  const { have, want, clearHaveItems, clearWantItems } = useContext(
+  const { have, want, clearHaveItems, clearWantItems, pushItem } = useContext(
     TradeContextRL
   );
-
+  //On Item Click
+  const ItemClick = (item) => {
+    console.log(item);
+    pushItem(item);
+    setSelectedItems([...selectedItems, item.ItemID]);
+  };
+  //Map All Items
   useEffect(() => {
-      setItemImages(
-        infoRL.Slots.map((Slot) =>
-          Slot.Items.map((item) => {
-            if (item.Tradable)
-              return (
-                <LazyLoadComponent
-                  scrollContainer={".item-imagesRL-SMALL"}
-                  threshold={500}
-                  placeholder={<div className={styles.placeholder} />}
-                  key={item.ItemID}
-                >
-                  <div className={`${styles.item} noUserInteraction`}>
-                    <div className={styles.content}>
-                      <ItemImage
-                        item={item}
-                        selectedItems={selectedItems}
-                        setSelectedItems={setSelectedItems}
-                      />
-                      <span className={styles.name}>{item.Name}</span>
-                    </div>
-                  </div>
-                </LazyLoadComponent>
-              )
-            else return null;
-          })
-        )
-      );
+    setItemImages(
+      infoRL.Slots.map((Slot) =>
+        Slot.Items.map((item) => {
+          if (item.Tradable)
+            return (
+              <Item
+                item={item}
+                onClick={() => ItemClick(item)}
+                key={item.ItemID}
+              >
+                <ItemConfirmIcon item={item} />
+              </Item>
+            );
+          else return null;
+        })
+      )
+    );
   }, []);
 
   return (
@@ -51,9 +48,7 @@ function SmallChooseItems({ setShowPage, displayPage }) {
           itemImages={itemImages}
           setItemImages={setItemImages}
         />
-        <div className={styles.itemContainer}>
-          {itemImages}
-        </div>
+        <ItemContainer>{itemImages}</ItemContainer>
       </div>
       {showSelectedAmount()}
       <button

@@ -108,7 +108,6 @@ function Reputation() {
                       }}
                       style={repType === "all" ? { color: "#E7AA0F" } : null}
                     >
-                      
                       All ({repInfo.amount.all}) /&nbsp;
                     </button>
                   )}
@@ -120,7 +119,6 @@ function Reputation() {
                       }}
                       style={repType === "csgo" ? { color: "#E7AA0F" } : null}
                     >
-                      
                       CSGO ({repInfo.amount.csgo}) /&nbsp;
                     </button>
                   )}
@@ -132,7 +130,6 @@ function Reputation() {
                       }}
                       style={repType === "rl" ? { color: "#E7AA0F" } : null}
                     >
-                      
                       RL ({repInfo.amount.rl}) /&nbsp;
                     </button>
                   )}
@@ -144,7 +141,6 @@ function Reputation() {
                       }}
                       style={repType === "other" ? { color: "#E7AA0F" } : null}
                     >
-                      
                       Other ({repInfo.amount.other})
                     </button>
                   )}
