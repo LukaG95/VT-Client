@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import AccountTopbar from "./AccountTopbar";
+import Topbar from "./Topbar";
 
 function AccountPlatforms() {
   return (
     <div className="secondaryWrapper accountWrapper">
-      <AccountTopbar />
+      <Topbar />
 
       <div className="accountFieldsWrapper">
         <div style={{ marginTop: "50px" }}>

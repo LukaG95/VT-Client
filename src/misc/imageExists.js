@@ -1,6 +1,6 @@
 import React from "react";
 
-function imageExists(url, itemID) {
+export default (url, itemID) => {
   let x = null;
   try {
     try {
@@ -14,5 +14,3 @@ function imageExists(url, itemID) {
     return "/images/icons/question.png";
   }
 }
-
-export default imageExists;

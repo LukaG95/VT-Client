@@ -5,7 +5,7 @@ import { closeSidebar } from "../../misc/manageSidebar";
 
 import { UserContext } from "../../context/UserContext";
 
-function SidebarHeader({ setIsOpen_LeftSidebar }) {
+function Header({ setIsOpen_LeftSidebar }) {
   const [openHeader, setOpenHeader] = useState(false);
   const [headerSelection, setHeaderSelection] = useState("Trading");
   const [allOptions] = useState([
@@ -106,4 +106,4 @@ function SidebarHeader({ setIsOpen_LeftSidebar }) {
   }
 }
 
-export default SidebarHeader;
+export default Header;

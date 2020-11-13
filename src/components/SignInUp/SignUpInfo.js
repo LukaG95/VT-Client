@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Filter from "bad-words";
 
-import { createNotification } from "../../App";
+import { createNotification } from "../../misc/ToastNotification";
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 

@@ -15,8 +15,6 @@ function TbFiltersRLContextProvider({ children }) {
   const [pageAmount, setPageAmount] = useState();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [isOpen_LeftSidebar, setIsOpen_LeftSidebar] = useState(false);
-
   return (
     <TbFiltersRLContext.Provider
       value={{
@@ -40,9 +38,7 @@ function TbFiltersRLContextProvider({ children }) {
         pageAmount,
         setPageAmount,
         currentPage,
-        setCurrentPage,
-        isOpen_LeftSidebar,
-        setIsOpen_LeftSidebar,
+        setCurrentPage
       }}
     >
       {children}

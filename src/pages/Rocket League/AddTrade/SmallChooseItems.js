@@ -26,7 +26,7 @@ function SmallChooseItems({ setShowPage, displayPage }) {
       infoRL.Slots.map((Slot) =>
         Slot.Items.map((item) => {
           if (item.Tradable)
-            return (
+            return ( 
               <Item
                 item={item}
                 onClick={() => ItemClick(item)}
@@ -45,7 +45,6 @@ function SmallChooseItems({ setShowPage, displayPage }) {
     <div id="add-trade-2nd-page">
       <div className="rlChooseItemsSection-SMALL">
         <AddTradeFiltersRL
-          itemImages={itemImages}
           setItemImages={setItemImages}
         />
         <ItemContainer>{itemImages}</ItemContainer>

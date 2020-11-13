@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
-import { UserContext } from "../context/UserContext";
-import { PopupContext } from "../context/PopupContext";
-import { createNotification } from "../App";
-import useWindowDimensions from "../misc/windowHW";
+import { UserContext } from "../../context/UserContext";
+import { PopupContext } from "../../context/PopupContext";
+import { createNotification } from "../../misc/ToastNotification";
+import useWindowDimensions from "../../misc/windowHW";
 
 function Reputation() {
   const [repInfo, setRepInfo] = useState();

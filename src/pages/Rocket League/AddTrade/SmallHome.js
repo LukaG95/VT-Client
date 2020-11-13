@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Filter from "bad-words";
 
-import { createNotification } from "../../../App";
+import { createNotification } from "../../../misc/ToastNotification";
 import { TradeContextRL } from "../../../context/TradeContextRL";
 import Small1stPage from "./Small1stPage";
 import SmallChooseItems from "./SmallChooseItems";

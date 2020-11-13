@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import SidebarFooter from "./SidebarFooter";
+import SidebarFooter from "./Footer";
 
-function SidebarBodyREP() {
+function ReputationBody() {
   const [leadInfo, setLeadInfo] = useState();
   const [timeType, setTimeType] = useState("Week");
 
@@ -217,4 +217,4 @@ function SidebarBodyREP() {
   /*-----Functions                -------------*/
 }
 
-export default SidebarBodyREP;
+export default ReputationBody;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function SidebarFooter() {
+function Footer() {
   return (
     <>
       <div className="sidebar-socials-wrapper">
@@ -85,4 +85,4 @@ function SidebarFooter() {
   );
 }
 
-export default SidebarFooter;
+export default Footer;

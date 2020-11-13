@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import { TradeContextRL } from "../../context/TradeContextRL";
 import AddedIconRLdropdown from "./AddedIconRLdropdown";
-import imageExists from "../../misc/func";
+import imageExists from "../../misc/imageExists";
 
 function AddedIconRL({ item, setShowPage, setClickedItem }) {
   // if we pass setShowPage it means we're on small (mobile) - also for setClickedItem

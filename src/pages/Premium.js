@@ -1,11 +1,11 @@
 import React from "react";
 
-import AccountTopbar from "./My Account/AccountTopbar";
+import Topbar from "./My Account/Topbar";
 
 function Premium() {
   return (
     <>
-      <AccountTopbar />
+      <Topbar />
       <h1
         style={{
           color: "white",

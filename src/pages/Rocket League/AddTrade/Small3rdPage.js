@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 
 import { TradeContextRL } from "../../../context/TradeContextRL";
 import infoRL from "../../../info/infoRL.json";
-import imageExists from "../../../misc/func";
+import imageExists from "../../../misc/imageExists";
 
 import { rl_dd_names } from "../../../info/DropdownNames";
 

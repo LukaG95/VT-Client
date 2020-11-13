@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
 
-import { createNotification } from "../App";
+import { createNotification } from "../misc/ToastNotification";
 import RLTradeComponent from "../components/Rocket League/RLTradeComponent";
 import { UserContext } from "../context/UserContext";
 import { PopupContext } from "../context/PopupContext";

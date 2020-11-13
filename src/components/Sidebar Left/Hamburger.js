@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 
 import { viewSidebar } from "../../misc/manageSidebar";
-import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
+import { LeftSidebarContext } from "../../context/LeftSidebar";
 
-function SidebarHamburger() {
-  const { setIsOpen_LeftSidebar } = useContext(TbFiltersRLContext);
+function Hamburber() {
+  const { setIsOpen_LeftSidebar } = useContext(LeftSidebarContext);
 
   return (
     <div
@@ -23,4 +23,4 @@ function SidebarHamburger() {
   );
 }
 
-export default SidebarHamburger;
+export default Hamburber;

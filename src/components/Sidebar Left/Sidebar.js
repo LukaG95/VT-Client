@@ -1,15 +1,17 @@
 import React, { useContext, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
-import SidebarHeader from "./SidebarHeader";
-import SidebarFooter from "./SidebarFooter";
-import SidebarBodyREP from "./SidebarBodyREP";
+import Header from "./Header";
+import Footer from "./Footer";
+import ReputationBody from "./ReputationBody";
 
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
 import { rl_dd_names } from "../../info/DropdownNames";
-import { closeSidebar } from "../../misc/manageSidebar";
+import { closeSidebar, manageSidebarResize } from "../../misc/manageSidebar";
+import { LeftSidebarContext } from "../../context/LeftSidebar";
+import useWindowDimensions from "../../misc/windowHW";
 
-function Sidebar({ setIsOpen_LeftSidebar }) {
+function Sidebar() {
   const [selectedFilter, setSelectedFilter] = useState("");
   const [selectedDropdown, setSelectedDropdown] = useState([]);
   const [displayedDropdown, setDisplayedDropdown] = useState([]);
@@ -41,10 +43,18 @@ function Sidebar({ setIsOpen_LeftSidebar }) {
     resetFilters,
   } = useContext(TbFiltersRLContext);
 
+  const { isOpen_LeftSidebar, setIsOpen_LeftSidebar } = useContext(
+    LeftSidebarContext
+  );
+
+  const { width } = useWindowDimensions();
+
+  manageSidebarResize(width, isOpen_LeftSidebar, setIsOpen_LeftSidebar)
+
   return (
     <div id="sidebar">
       <div id="sidebar-1st-page">
-        <SidebarHeader setIsOpen_LeftSidebar={setIsOpen_LeftSidebar} />
+        <Header setIsOpen_LeftSidebar={setIsOpen_LeftSidebar} />
 
         <Switch>
           <Route exact path="/">
@@ -54,10 +64,10 @@ function Sidebar({ setIsOpen_LeftSidebar }) {
             <RLBody />
           </Route>
           <Route path="/reputation/add">
-            <SidebarBodyREP />
+            <ReputationBody />
           </Route>
           <Route path="/reputation">
-            <SidebarBodyREP />
+            <ReputationBody />
           </Route>
           <Route exact path="/trading/rl/new"></Route>
           <Route path="/trading/rl/edit"> </Route>
@@ -178,7 +188,7 @@ function Sidebar({ setIsOpen_LeftSidebar }) {
 
         <div className="separator-horizontal"></div>
 
-        <SidebarFooter />
+        <Footer />
       </div>
     );
   }

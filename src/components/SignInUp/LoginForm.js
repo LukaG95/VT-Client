@@ -4,12 +4,17 @@ import { PopupContext } from "../../context/PopupContext";
 import LoginInfo from "./LoginInfo";
 import SignUpInfo from "./SignUpInfo";
 import ForgotPassword from "./ForgotPassword";
+import manageFormResize from "../../misc/manageFormResize";
+import useWindowDimensions from "../../misc/windowHW";
 
 function LoginForm() {
   const [showLogin, setShowLogin] = useState(true);
   const [forgotPassword, setForgotPassword] = useState(false);
 
   const { openForm, setOpenForm } = useContext(PopupContext);
+  const { width } = useWindowDimensions();
+
+  manageFormResize(width, openForm)
 
   let x,
     y = "";

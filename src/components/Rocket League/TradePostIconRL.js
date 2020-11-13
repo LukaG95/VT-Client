@@ -1,6 +1,6 @@
 import React from "react";
 
-import imageExists from "../../misc/func";
+import imageExists from "../../misc/imageExists";
 import infoRL from "../../info/infoRL.json";
 
 function TradepostIconRL({ item }) {

@@ -3,12 +3,12 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Filter from "bad-words";
 
-import { createNotification } from "../../../App";
+import { createNotification } from "../../../misc/ToastNotification";
 import AddedIconRL from "../../../components/Rocket League/AddedIconRL";
 import AddTradeFiltersRL from "../../../components/Rocket League/AddTradeFiltersRL";
 import { TradeContextRL } from "../../../context/TradeContextRL";
 import infoRL from "../../../info/infoRL.json";
-import imageExists from "../../../misc/func";
+import imageExists from "../../../misc/imageExists";
 import SmallHome from "./SmallHome";
 import useWindowDimensions from "../../../misc/windowHW";
 

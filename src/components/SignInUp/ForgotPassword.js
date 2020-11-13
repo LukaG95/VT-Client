@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-import { createNotification } from "../../App";
+import { createNotification } from "../../misc/ToastNotification";
 
 function ForgotPassword({ closeForm }) {
   const [unOrEmail, setUnOrEmail] = useState("");

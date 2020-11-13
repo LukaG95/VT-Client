@@ -3,8 +3,8 @@ import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import Filter from "bad-words";
 
-import { createNotification } from "../App";
-import { UserContext } from "../context/UserContext";
+import { createNotification } from "../../misc/ToastNotification";
+import { UserContext } from "../../context/UserContext";
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 

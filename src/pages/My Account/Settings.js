@@ -2,9 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import Filter from "bad-words";
 
-import AccountTopbar from "./AccountTopbar";
+import Topbar from "./Topbar";
 import { UserContext } from "../../context/UserContext";
-import { createNotification } from "../../App";
+import { createNotification } from "../../misc/ToastNotification";
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
@@ -46,7 +46,7 @@ function MyAccount() {
 
   return (
     <>
-      <AccountTopbar />
+      <Topbar />
 
       <div className="account-settings-wrapper">
         <div className="account-settings-sidebar">

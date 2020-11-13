@@ -4,7 +4,7 @@ import axios from "axios";
 import infoRL from "../../info/infoRL.json";
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
 import RLTradeComponent from "../../components/Rocket League/RLTradeComponent";
-import { createNotification } from "../../App";
+import { createNotification } from "../../misc/ToastNotification";
 
 function RLTrading() {
   const {

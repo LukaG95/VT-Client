@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react'
 
 import {TradeContextRL} from '../../context/TradeContextRL'
 import infoRL from '../../info/infoRL.json' 
-import imageExists from '../../misc/func'
+import imageExists from '../../misc/imageExists'
 import useWindowDimensions from '../../misc/windowHW'
 
 function RLfilter_icon({setItemImages, setTradeErrorMsg}) {

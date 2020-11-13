@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import useWindowDimensions from "../misc/windowHW";
-import SidebarHamburger from "./Sidebar Left/SidebarHamburger";
+import Hamburber from "./Sidebar Left/Hamburger";
 import { UserContext } from "../context/UserContext";
 import { PopupContext } from "../context/PopupContext";
 import { ReactComponent as LogoIcon } from "../images/logo/vt-red.svg";
@@ -35,7 +35,7 @@ function Navbar() {
   return (
     <nav className="navWrapper">
       <div className="navLeft">
-        {width <= 1213 && <SidebarHamburger />}
+        {width <= 1213 && <Hamburber />}
 
         <div className="navLeftItem">
           <Link
