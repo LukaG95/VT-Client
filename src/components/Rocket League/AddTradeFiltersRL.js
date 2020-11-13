@@ -15,7 +15,6 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
 
   if (width >= 1778 && openFilters === true)
     setOpenFilters(false)
-
   
 	return (
     <div className="choose-itemsSearchFiltersRL">
@@ -54,7 +53,7 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
           : 
             <div className="rl-filters-small-width">	
               <div className="sigh" style={currentFilter === "Filter" ? {filter: "brightness(1)"} : null} onClick={()=> setOpenFilters(!openFilters)}>
-                <img className="filter-filter-icon" src={require(`../../images/other/filter.png`)} />
+                <img className="filter-filter-icon" src={require(`../../images/other/filter.png`)} alt="" />
                 <div style={{alignSelf: "flex-end"}} className="dropdownArrow"></div>
               </div>
             </div>
@@ -86,6 +85,7 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
               style={{height: "auto", minHeight: "95px", width: "100%", maxWidth: "105px", cursor: "pointer", borderRadius: "5px 5px 0px 0px"}} 
               src={imageExists(`${item.ItemID}.0.webp`)}
               onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
+              alt=""
             />
             <div onClick={() => {setTradeErrorMsg(""); pushItem(item)}} className="RLicon-name">{item.Name}</div>
           </div>
@@ -104,6 +104,7 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
               style={{height: "auto", minHeight: "95px", width: "100%", maxWidth: "105px", cursor: "pointer", borderRadius: "5px 5px 0px 0px"}} 
               src={imageExists(`${item.ItemID}.0.webp`)}
               onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
+              alt=""
             />
             <div onClick={() => {setTradeErrorMsg(""); pushItem(item)}} className="RLicon-name">{item.Name}</div>
           </div>

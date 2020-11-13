@@ -1,43 +1,52 @@
-import React, {useContext} from 'react'
+import React, { useContext } from "react";
 
-import AccountTopbar from './AccountTopbar'
-import {UserContext} from '../../context/UserContext'
+import AccountTopbar from "./AccountTopbar";
+import { UserContext } from "../../context/UserContext";
 
 function AccountPlatforms() {
+  const { user } = useContext(UserContext);
 
-  const {user} = useContext(UserContext)
+  return (
+    <div className="secondaryWrapper accountWrapper">
+      <AccountTopbar />
 
-	return (
-		<div className="secondaryWrapper accountWrapper">
-		
-			<AccountTopbar />
-			
-			<div className="accountFieldsWrapper">
-			
-				<form onSubmit={(e)=>{e.preventDefault();handleUpdateDiscord()}}>
-        <label><p>Discord {user.discord && <>&#x2714;</>}</p></label>
-					{!user.discord && <button>Log in with Discord</button>}
-				</form>
-				
-				<form onSubmit={(e)=>{e.preventDefault();handleUpdateSteam()}}>
-          <label><p>Steam {user.steam && <>&#x2714;</>}</p></label>
-					{!user.steam && <button>Log in with Steam</button>}
-				</form>
-				
-			</div>
-		
-		</div>
-  )
-  
+      <div className="accountFieldsWrapper">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleUpdateDiscord();
+          }}
+        >
+          <label>
+            <p>Discord {user.discord && <>&#x2714;</>}</p>
+          </label>
+          {!user.discord && <button>Log in with Discord</button>}
+        </form>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleUpdateSteam();
+          }}
+        >
+          <label>
+            <p>Steam {user.steam && <>&#x2714;</>}</p>
+          </label>
+          {!user.steam && <button>Log in with Steam</button>}
+        </form>
+      </div>
+    </div>
+  );
+
   /*-----Functions                -------------*/
 
   function handleUpdateDiscord() {
-    console.log('Discord button was clicked')
+    console.log("Discord button was clicked");
   }
-  
+
   function handleUpdateSteam() {
-    console.log('Steam button was clicked')
+    console.log("Steam button was clicked");
   }
 }
 
-export default AccountPlatforms
+export default AccountPlatforms;

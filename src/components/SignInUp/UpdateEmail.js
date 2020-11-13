@@ -1,49 +1,43 @@
-import React, {useState, useEffect, useContext} from 'react'
-import {useLocation, Redirect} from 'react-router-dom'
-import axios from 'axios'
+import React, { useState, useEffect, useContext } from "react";
+import { useLocation, Redirect } from "react-router-dom";
+import axios from "axios";
 
 function UpdateEmail() {
-  const [emailConfirmed, setEmailConfirmed] = useState()
-  
-  const pathID = useLocation().pathname.substring(14)  // reads url after /email/update/ till the end
-  
+  const [emailConfirmed, setEmailConfirmed] = useState();
+
+  const pathID = useLocation().pathname.substring(14); // reads url after /email/update/ till the end
+
   useEffect(() => {
-    axios.put(`/api/auth/updateEmail`, {
-      code: pathID
-    })
-    .then(res => {console.log(res)
-      if (res.data.status === "success"){
-        setEmailConfirmed(true)
-      }
-      // else if (res.data.status === "OldOrInvalid")
-      else setEmailConfirmed(false)
-    })
-    .catch(err => console.log(err))
-  }, [])
+    axios
+      .put(`/api/auth/updateEmail`, {
+        code: pathID,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.data.status === "success") {
+          setEmailConfirmed(true);
+        }
+        // else if (res.data.status === "OldOrInvalid")
+        else setEmailConfirmed(false);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-  
   if (emailConfirmed)
-  return (
-    <div className="confirmEmailWrapper">
-
-      <div style={{textAlign: "center"}} className="displayTextWrapper">
-        <h2>Success! You have updated your email</h2>
-        <a href="/" style={{textDecoration: "none"}}>Back to trading</a>
+    return (
+      <div className="confirmEmailWrapper">
+        <div style={{ textAlign: "center" }} className="displayTextWrapper">
+          <h2>Success! You have updated your email</h2>
+          <a href="/" style={{ textDecoration: "none" }}>
+            Back to trading
+          </a>
+        </div>
       </div>
-
-    </div>
-  )
-
-  else if (emailConfirmed === undefined) return null
-  else return <Redirect to="/" />
-
-  
-
+    );
+  else if (emailConfirmed === undefined) return null;
+  else return <Redirect to="/" />;
 
   /*-----Functions                -------------*/
-
-
-
 }
 
-export default UpdateEmail
+export default UpdateEmail;
