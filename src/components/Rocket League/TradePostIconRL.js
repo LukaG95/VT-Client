@@ -5,7 +5,7 @@ import infoRL from "../../info/infoRL.json";
 
 function TradepostIconRL({ item }) {
   var colorID = 0;
-  infoRL.Colors.map((Color) => {
+  infoRL.Colors.forEach((Color) => {
     if (Color.Name === item.color) colorID = Color.ID;
   });
 

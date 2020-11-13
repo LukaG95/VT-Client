@@ -1,14 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
 
-import { createNotification } from "../../../App";
 import { TradeContextRL } from "../../../context/TradeContextRL";
-import { UserContext } from "../../../context/UserContext";
 import infoRL from "../../../info/infoRL.json";
 import imageExists from "../../../misc/func";
 
-import useWindowDimensions from "../../../misc/windowHW";
 import { rl_dd_names } from "../../../info/DropdownNames";
 
 const { colorDD, certDD } = rl_dd_names;
@@ -28,12 +23,12 @@ function Small3rdPage({ setShowPage, clickedItem }) {
     setColor(clickedItem.color);
     setCertification(clickedItem.cert);
     setAmount(clickedItem.amount);
-  }, []);
+  }, [clickedItem.amount, clickedItem.cert, clickedItem.color]);
 
   return (
     <div id="add-trade-3rd-page">
       <div className="add-trade-3rd-page-header-field">
-        <img src={imageExists(`${itemID}.0.webp`)} />
+        <img src={imageExists(`${itemID}.0.webp`)} alt="" />
         <div>
           <p>{itemName}</p>
           <button
@@ -91,15 +86,15 @@ function Small3rdPage({ setShowPage, clickedItem }) {
     let colorID = 0;
     let temp = [];
 
-    infoRL.Colors.map((info_color) => {
+    infoRL.Colors.forEach((info_color) => {
       if (info_color.Name === color) colorID = info_color.ID;
     });
 
-    if (amount === "" || amount == 0)
+    if (amount === "" || amount === 0 || amount === "0")
       // this is so that if users set amount to zero or an empty string it will set it back to 1 when accepting filters
       var refactorAmount = 1; // without this users won't be able to delete the initial value "1" and put for example "9"
 
-    have.map((item) => {
+    have.forEach((item) => {
       if (item.id === id) {
         item.color = color;
         item.colorID = colorID;
@@ -112,7 +107,7 @@ function Small3rdPage({ setShowPage, clickedItem }) {
 
     temp = [];
 
-    want.map((item) => {
+    want.forEach((item) => {
       if (item.id === id) {
         item.color = color;
         item.colorID = colorID;
@@ -208,7 +203,7 @@ function FilterButton({ dd, label, value, setFunction, itemID, translate }) {
 }
 
 function DropdownMenu({ dd, setFunction, setOpen, label }) {
-  const [dropNames, setDropNames] = useState(() =>
+  const [dropNames] = useState(() =>
     dd.map((item) => <MenuItem>{item}</MenuItem>)
   );
 

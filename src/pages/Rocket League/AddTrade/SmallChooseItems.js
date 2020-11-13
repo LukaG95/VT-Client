@@ -42,7 +42,7 @@ function SmallChooseItems({ setShowPage, displayPage }) {
           })
         )
       );
-  }, []);
+  }, [selectedItems]);
 
   return (
     <div id="add-trade-2nd-page">

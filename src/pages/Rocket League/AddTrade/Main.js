@@ -7,7 +7,6 @@ import { createNotification } from "../../../App";
 import AddedIconRL from "../../../components/Rocket League/AddedIconRL";
 import AddTradeFiltersRL from "../../../components/Rocket League/AddTradeFiltersRL";
 import { TradeContextRL } from "../../../context/TradeContextRL";
-import { UserContext } from "../../../context/UserContext";
 import infoRL from "../../../info/infoRL.json";
 import imageExists from "../../../misc/func";
 import SmallHome from "./SmallHome";
@@ -20,7 +19,6 @@ function AddTradeRL() {
   const [tradeErrorMsg, setTradeErrorMsg] = useState("");
   const [notesErrorMsg, setNotesErrorMsg] = useState("");
 
-  const { myID } = useContext(UserContext);
   const {
     have,
     want,
@@ -33,7 +31,6 @@ function AddTradeRL() {
     clearWantItems,
     clearHaveItems,
     gotInfo,
-    displayPage,
     tradesAmount,
     setTradesAmount,
   } = useContext(TradeContextRL);
@@ -72,7 +69,7 @@ function AddTradeRL() {
   useEffect(() => {
     let thumbnails = [];
     infoRL.Slots.map((Slot) =>
-      Slot.Items.map((item) => {
+      Slot.Items.forEach((item) => {
         item.Tradable &&
           thumbnails.push(
             <div className="RLicon noUserInteraction">
@@ -91,6 +88,7 @@ function AddTradeRL() {
                   setTradeErrorMsg("");
                   pushItem(item);
                 }}
+                alt=""
               />
               <div
                 onClick={() => {
@@ -157,6 +155,7 @@ function AddTradeRL() {
                 <img
                   src={require(`../../../images/other/trash.png`)}
                   style={{ height: "14px", width: "14px" }}
+                  alt=""
                 />
               </div>
             </div>
@@ -177,6 +176,7 @@ function AddTradeRL() {
                 <img
                   src={require(`../../../images/other/trash.png`)}
                   style={{ height: "14px", width: "14px" }}
+                  alt=""
                 />
               </div>
             </div>
@@ -272,7 +272,7 @@ function AddTradeRL() {
         let haveRefactor = [];
         let wantRefactor = [];
 
-        have.map((item) => {
+        have.forEach((item) => {
           if (item.isAdded) {
             let readyItem = {
               itemID: item.itemID,
@@ -287,7 +287,7 @@ function AddTradeRL() {
           }
         });
 
-        want.map((item) => {
+        want.forEach((item) => {
           if (item.isAdded) {
             let readyItem = {
               itemID: item.itemID,
@@ -403,7 +403,7 @@ function AddTradeRL() {
   function checkNotes() {
     if (
       notes.match(
-        /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm
+        /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm
       )
     )
       return "No links allowed in notes";

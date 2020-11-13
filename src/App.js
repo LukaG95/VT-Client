@@ -28,7 +28,6 @@ import { TbFiltersRLContext } from "./context/TbFiltersRLContext";
 import { PopupContext } from "./context/PopupContext";
 import { closeSidebar } from "./misc/manageSidebar";
 import useWindowDimensions from "./misc/windowHW";
-import Test from "./test";
 
 import AlphaForm from "./components/SignInUp/AlphaForm";
 
@@ -92,9 +91,6 @@ function App() {
             </div>
             <Navbar />
             <Switch>
-              <Route exact path="/testing">
-                <Test />
-              </Route>
               <Route exact path="/">
                 <>
                   <FilterBar />

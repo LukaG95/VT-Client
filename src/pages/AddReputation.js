@@ -10,7 +10,7 @@ const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
 function AddReputation() {
   const [repInfo, setRepInfo] = useState();
-  const [userID, setUserID] = useState(useLocation().pathname.substring(16)); // reads url after /reputation/add/ till the end
+  const [userID] = useState(useLocation().pathname.substring(16)); // reads url after /reputation/add/ till the end
 
   const [repCategory, setRepCategory] = useState();
   const [feedback, setFeedback] = useState();
@@ -31,7 +31,7 @@ function AddReputation() {
         console.log(err);
         setRepInfo("invalid");
       });
-  }, [myID]);
+  }, [myID, userID]);
 
   if (repInfo !== undefined && repInfo !== "invalid")
     return (
@@ -181,7 +181,7 @@ function AddReputation() {
 
     if (
       !feedback.match(
-        /^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9 ]{5,100}$/gm
+        /^[!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9 ]{5,100}$/gm
       )
     ) {
       setRepErrorMessage("Your message includes inappropriate characters");
@@ -194,7 +194,7 @@ function AddReputation() {
     }
     if (
       feedback.match(
-        /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm
+        /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm
       )
     ) {
       setRepErrorMessage("Your message must not inlcude links");

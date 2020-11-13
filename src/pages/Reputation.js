@@ -234,7 +234,7 @@ function Reputation() {
   }
 
   function Reps() {
-    const reps = repInfo.repsByGame[repType].map((rep, i) => {
+    const reps = repInfo.repsByGame[repType].forEach((rep, i) => {
       if (i >= currentPage * 17 - 17 && i <= currentPage * 17 - 1) {
         if (width > 800)
           return (

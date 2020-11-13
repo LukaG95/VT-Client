@@ -84,6 +84,7 @@ function FiltersRL() {
         <img
           src={require(`../../images/other/trash.png`)}
           style={{ height: "14px", width: "14px" }}
+          alt=""
         />
       </div>
     </div>
@@ -100,7 +101,7 @@ function FilterButton({ text, value, dd, setFunction }) {
     return () => {
       window.removeEventListener("click", click);
     };
-  }, []);
+  });
 
   return (
     <div className="filterButtonWrapper">
@@ -170,9 +171,9 @@ function DropdownMenu({ dd, setFunction }) {
         id="dd"
         onChange={(event) => {
           const searchName = dd.map((name) => {
-            if (name.toLowerCase().includes(event.target.value.toLowerCase())) {
+            if (name.toLowerCase().includes(event.target.value.toLowerCase())) 
               return <DropdownItem>{name}</DropdownItem>;
-            }
+            else return null
           });
           setDropNames(searchName);
         }}

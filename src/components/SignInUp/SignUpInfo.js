@@ -147,7 +147,7 @@ function SignUpInfo({ closeForm }) {
       return;
     } else if (
       !password.match(
-        /^[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{6,30}$/gm
+        /^[!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{6,30}$/gm
       )
     ) {
       setPasswordErrorMsg("Passwords contains inappropriate characters");

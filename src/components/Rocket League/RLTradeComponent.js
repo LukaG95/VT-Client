@@ -7,7 +7,7 @@ import { UserContext } from "../../context/UserContext";
 
 function RLTradeComponent({ trade, manageTrade }) {
   const [rep, setRep] = useState();
-  const [notesHeight, setNotesHeight] = useState(() => {
+  const [notesHeight] = useState(() => {
     if (trade.have.length >= 9 || trade.want.length >= 9) return "300px";
     else if (trade.have.length >= 5 || trade.want.length >= 5) return "179px";
     else return "68px";
@@ -231,6 +231,7 @@ function RLTradeComponent({ trade, manageTrade }) {
               height: "17px",
             }}
             src={require("../../images/other/crown.svg")}
+            alt=""
           />
           <p>{trade.user.username}</p>
         </div>

@@ -1,25 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from "react";
 import LazyLoad from "react-lazyload";
 
-import { createNotification } from "../../../App";
-import AddedIconRL from "../../../components/Rocket League/AddedIconRL";
-import AddTradeFiltersRL from "../../../components/Rocket League/AddTradeFiltersRL";
-import { TradeContextRL } from "../../../context/TradeContextRL";
-import { UserContext } from "../../../context/UserContext";
 import infoRL from "../../../info/infoRL.json";
-import imageExists from "../../../misc/func";
 import Placeholder from "./Placeholder";
-
 import RLicon from "./ItemImage";
-import useWindowDimensions from "../../../misc/windowHW";
 
 function ItemImages() {
   const [selectedItems, setSelectedItems] = useState([]);
 
   return infoRL.Slots.map((Slot) =>
-    Slot.Items.map((item) => {
+    Slot.Items.forEach((item) => {
       if (item.Tradable)
         return (
           <LazyLoad

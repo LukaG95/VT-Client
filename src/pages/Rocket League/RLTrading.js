@@ -1,6 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
-import Spinner from "../../components/Spinner";
 
 import infoRL from "../../info/infoRL.json";
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
@@ -121,6 +120,7 @@ function RLTrading() {
         <img
           className="noUserInteraction"
           src={require("../../images/other/No trades found.png")}
+          alt=""
         ></img>
         <h2>
           No <span style={{ color: "#FE3B3B" }}>trades</span> were found for
@@ -137,8 +137,8 @@ function RLTrading() {
     let id;
     if (name === "Any") id = "Any";
     else
-      infoRL.Slots.map((Slot) =>
-        Slot.Items.map((item) => {
+      infoRL.Slots.forEach((Slot) =>
+        Slot.Items.forEach((item) => {
           if (item.Name === name && item.Tradable) id = item.ItemID;
         })
       );

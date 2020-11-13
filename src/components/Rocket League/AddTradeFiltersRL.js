@@ -26,7 +26,7 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
         <input 
           onChange={e=> {
             let thumbnails = []
-            infoRL.Slots.map(Slot => Slot.Items.map(item => {
+            infoRL.Slots.map(Slot => Slot.Items.forEach(item => {
               if (item.Tradable && item.Name.toLowerCase().includes(e.target.value.toLowerCase())) 
                 thumbnails.push(
                   <div className="RLicon noUserInteraction">
@@ -77,7 +77,7 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
   function setNames(type){
     if (type === "All"){
       let thumbnails = []
-      infoRL.Slots.map(Slot => Slot.Items.map(item => {
+      infoRL.Slots.map(Slot => Slot.Items.forEach(item => {
         item.Tradable && thumbnails.push(
           <div className="RLicon noUserInteraction">
             <img 
@@ -96,7 +96,7 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
     }
     else{
       let thumbnails = []
-      infoRL.Slots.map(Slot => Slot.Name === type && Slot.Items.map(item => {
+      infoRL.Slots.map(Slot => Slot.Name === type && Slot.Items.forEach(item => {
         item.Tradable && thumbnails.push(
           <div className="RLicon noUserInteraction">
             <img 
@@ -117,20 +117,20 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
   function filterButtons(){
     return(
       <section className="RLfilter_icons_section">		
-        <button onClick={()=> {setCurrentFilter("All"); setNames("All")}}><img className="RLfilter_icon" src={require(`../../images/rl_filter_icons/Transparent/All.png`)} style={currentFilter === "All" ? {filter: "brightness(1)"} : null} /></button>
-        <button onClick={()=> {setCurrentFilter("Blueprint"); setNames("Blueprint")}}><img className="RLfilter_icon" src={require(`../../images/rl_filter_icons/Transparent/Blueprints.png`)} style={currentFilter === "Blueprint" ? {filter: "brightness(1)"} : null} /></button>
-        <button onClick={()=> {setCurrentFilter("Crate"); setNames("Crate")}}><img className="RLfilter_icon" src={require(`../../images/rl_filter_icons/Transparent/Gift_Packs.png`)} style={currentFilter === "Crate" ? {filter: "brightness(1)"} : null} /></button>
-        <button onClick={()=> {setCurrentFilter("Body"); setNames("Body")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Bodies.png")} style={currentFilter === "Body" ? {filter: "brightness(1)"} : null} /></button>
-        <button onClick={()=> {setCurrentFilter("Decal"); setNames("Decal")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Decals.png")} style={currentFilter === "Decal" ? {filter: "brightness(1)"} : null} /></button>
-        <button onClick={()=> {setCurrentFilter("Paint Finish"); setNames("Paint Finish")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Paint_Finishes.png")} style={currentFilter === "Paint Finish" ? {filter: "brightness(1)"} : null} /></button>
-        <button onClick={()=> {setCurrentFilter("Wheels"); setNames("Wheels")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Wheels.png")} style={currentFilter === "Wheels" ? {filter: "brightness(1)"} : null} /></button>
-        <button onClick={()=> {setCurrentFilter("Rocket Boost"); setNames("Rocket Boost")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Boosts.png")} style={currentFilter === "Rocket Boost" ? {filter: "brightness(1)"} : null} /></button>
-        <button onClick={()=> {setCurrentFilter("Topper"); setNames("Topper")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Toppers.png")} style={currentFilter === "Topper" ? {filter: "brightness(1)"} : null} /></button>
-        <button onClick={()=> {setCurrentFilter("Antenna"); setNames("Antenna")}}><img className="RLfilter_icon" src={require(`../../images/rl_filter_icons/Transparent/Antennas.png`)} style={currentFilter === "Antenna" ? {filter: "brightness(1)"} : null} /></button>
-        <button onClick={()=> {setCurrentFilter("Goal Explosion"); setNames("Goal Explosion")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Goal_Explosions.png")} style={currentFilter === "Goal Explosion" ? {filter: "brightness(1)"} : null} /></button>
-        <button onClick={()=> {setCurrentFilter("Trail"); setNames("Trail")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Trails.png")} style={currentFilter === "Trail" ? {filter: "brightness(1)"} : null} /></button>
-        <button onClick={()=> {setCurrentFilter("Player Banner"); setNames("Player Banner")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Banners.png")} style={currentFilter === "Player Banner" ? {filter: "brightness(1)"} : null} /></button>
-        <button onClick={()=> {setCurrentFilter("Avatar Border"); setNames("Avatar Border")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Avatar_Borders.png")} style={currentFilter === "Avatar Border" ? {filter: "brightness(1)"} : null} /></button>
+        <button onClick={()=> {setCurrentFilter("All"); setNames("All")}}><img className="RLfilter_icon" src={require(`../../images/rl_filter_icons/Transparent/All.png`)} alt="" style={currentFilter === "All" ? {filter: "brightness(1)"} : null} /></button>
+        <button onClick={()=> {setCurrentFilter("Blueprint"); setNames("Blueprint")}}><img className="RLfilter_icon" src={require(`../../images/rl_filter_icons/Transparent/Blueprints.png`)} alt="" style={currentFilter === "Blueprint" ? {filter: "brightness(1)"} : null} /></button>
+        <button onClick={()=> {setCurrentFilter("Crate"); setNames("Crate")}}><img className="RLfilter_icon" src={require(`../../images/rl_filter_icons/Transparent/Gift_Packs.png`)} alt="" style={currentFilter === "Crate" ? {filter: "brightness(1)"} : null} /></button>
+        <button onClick={()=> {setCurrentFilter("Body"); setNames("Body")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Bodies.png")} alt="" style={currentFilter === "Body" ? {filter: "brightness(1)"} : null} /></button>
+        <button onClick={()=> {setCurrentFilter("Decal"); setNames("Decal")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Decals.png")} alt="" style={currentFilter === "Decal" ? {filter: "brightness(1)"} : null} /></button>
+        <button onClick={()=> {setCurrentFilter("Paint Finish"); setNames("Paint Finish")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Paint_Finishes.png")} alt="" style={currentFilter === "Paint Finish" ? {filter: "brightness(1)"} : null} /></button>
+        <button onClick={()=> {setCurrentFilter("Wheels"); setNames("Wheels")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Wheels.png")} alt="" style={currentFilter === "Wheels" ? {filter: "brightness(1)"} : null} /></button>
+        <button onClick={()=> {setCurrentFilter("Rocket Boost"); setNames("Rocket Boost")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Boosts.png")} alt="" style={currentFilter === "Rocket Boost" ? {filter: "brightness(1)"} : null} /></button>
+        <button onClick={()=> {setCurrentFilter("Topper"); setNames("Topper")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Toppers.png")} alt="" style={currentFilter === "Topper" ? {filter: "brightness(1)"} : null} /></button>
+        <button onClick={()=> {setCurrentFilter("Antenna"); setNames("Antenna")}}><img className="RLfilter_icon" src={require(`../../images/rl_filter_icons/Transparent/Antennas.png`)} alt="" style={currentFilter === "Antenna" ? {filter: "brightness(1)"} : null} /></button>
+        <button onClick={()=> {setCurrentFilter("Goal Explosion"); setNames("Goal Explosion")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Goal_Explosions.png")} alt="" style={currentFilter === "Goal Explosion" ? {filter: "brightness(1)"} : null} /></button>
+        <button onClick={()=> {setCurrentFilter("Trail"); setNames("Trail")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Trails.png")} alt="" style={currentFilter === "Trail" ? {filter: "brightness(1)"} : null} /></button>
+        <button onClick={()=> {setCurrentFilter("Player Banner"); setNames("Player Banner")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Banners.png")} alt="" style={currentFilter === "Player Banner" ? {filter: "brightness(1)"} : null} /></button>
+        <button onClick={()=> {setCurrentFilter("Avatar Border"); setNames("Avatar Border")}}><img className="RLfilter_icon" src={require("../../images/rl_filter_icons/Transparent/Avatar_Borders.png")} alt="" style={currentFilter === "Avatar Border" ? {filter: "brightness(1)"} : null} /></button>
       </section>
     )
   }

@@ -1,6 +1,4 @@
-import useWindowDimensions from "./windowHW";
-
-const { innerWidth: width, innerHeight: height } = window;
+const { innerWidth: width } = window;
 
 function viewSidebar() {
   const sidebar = document.getElementById("sidebar");
