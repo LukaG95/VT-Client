@@ -130,7 +130,6 @@ function App() {
 /*-----Functions                -------------*/
 
 
-
   function handleRedirectOnRefresh(component){
     if (isLoggedIn === true) return component
     else if (isLoggedIn === false) return <Redirect to="/" />

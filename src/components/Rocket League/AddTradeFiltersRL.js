@@ -22,7 +22,7 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
 
       <div className="initial-filter-header-addTrade">
 
-        <div className="magnGlass-container"><img style={{width: "11px", height: "11px", marginLeft: "2px"}} src={require("../../images/other/MagnGlass.png")} /></div>
+        <div className="magnGlass-container"><img style={{width: "11px", height: "11px", marginLeft: "2px"}} src={require("../../images/other/MagnGlass.png")} alt=""/></div>
 
         <input 
           onChange={e=> {
@@ -36,6 +36,7 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
                       style={{height: "auto", minHeight: "95px", width: "100%", maxWidth: "105px", cursor: "pointer", borderRadius: "5px 5px 0px 0px"}} 
                       src={imageExists(`${item.ItemID}.0.webp`)}
                       onClick={() => {setTradeErrorMsg(""); pushItem(item)}} 
+                      alt=""
                     />
                     <div onClick={() => {setTradeErrorMsg(""); pushItem(item)}} className="RLicon-name">{item.Name}</div>
                   </div>
