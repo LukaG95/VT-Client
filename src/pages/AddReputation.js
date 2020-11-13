@@ -48,7 +48,7 @@ function AddReputation() {
                   style={{ textDecoration: "none" }}
                   to={`/reputation/${repInfo.userId}`}
                 >
-                  <button className="rep-addrep-button">Full reputation</button>{" "}
+                  <button className="rep-addrep-button">Full reputation</button>
                 </Link>
               </div>
             </div>

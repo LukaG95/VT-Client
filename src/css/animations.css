@@ -1,107 +1,104 @@
 @keyframes transitionLeft {
-  from{
+  from {
     opacity: 0;
     transform: translateX(-50px);
-
   }
-  to{
+  to {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
 @keyframes transitionRight {
-  from{
+  from {
     opacity: 0;
     transform: translateX(50px);
-
   }
-  to{
+  to {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
 @keyframes transitionFade {
-  from{
+  from {
     opacity: 0;
   }
 
-  to{
+  to {
     opacity: 1;
   }
 }
 
 @keyframes transitionDown {
-  from{
+  from {
     opacity: 0;
     transform: translateY(-20px);
   }
 
-  to{
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
 @keyframes transitionUp {
-  from{
+  from {
     opacity: 0;
     transform: translateY(20px);
   }
 
-  to{
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-
 @keyframes fallDown {
-  from{
+  from {
     visibility: visible;
     opacity: 1;
     transform: translateY(0px);
   }
 
-  to{
+  to {
     opacity: 0;
     transform: translateY(20px);
   }
 }
 
 @keyframes leaveRight {
-  from{
+  from {
     visibility: visible;
     opacity: 1;
     transform: translateX(0px);
   }
 
-  to{
+  to {
     opacity: 0;
     transform: translateX(50px);
   }
 }
 
 @keyframes leaveLeft {
-  from{
+  from {
     visibility: visible;
     opacity: 1;
     transform: translateX(0px);
   }
 
-  to{
+  to {
     opacity: 0;
     transform: translateX(-50px);
   }
 }
 
 @keyframes border-bottom {
-  from{
+  from {
     opacity: 0;
   }
 
-  to{
+  to {
     opacity: 1;
   }
 }

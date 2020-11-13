@@ -11,7 +11,7 @@ export default function Placeholder({ item }) {
           maxWidth: "130px",
           borderRadius: "5px 5px 0px 0px",
         }}
-        src={require("../../../images/RLimages/question.png")}
+        src="images/icons/question.png"
       />
 
       <div className="RLicon-name">{item.Name}</div>

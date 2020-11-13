@@ -1,29 +1,30 @@
 import React, { useContext } from "react";
-
-import imageExists from "../../../misc/func";
 import { TradeContextRL } from "../../../context/TradeContextRL";
+import CheckImage from "../../../images/other/check.png"
+import CheckRedImage from "../../../images/other/check-red.png"
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import styles from "./ItemImage.module.css";
 
 function RLicon({ item, selectedItems, setSelectedItems }) {
   const { pushItem, have, want } = useContext(TradeContextRL);
-
   return (
     <>
-      <img
-        style={{
-          height: "auto",
-          width: "100%",
-          maxWidth: "140px",
-          cursor: "pointer",
-          borderRadius: "5px 5px 0px 0px",
-        }}
-        src={imageExists(`${item.ItemID}.0.webp`)}
-        onClick={() => {
-          pushItem(item);
-          setSelectedItems([...selectedItems, item.ItemID]);
-        }}
-        alt=""
-      />
-
+      <div className={styles.container}>
+        <img
+          className={styles.image}
+          src="/images/icons/question.png"
+          alt={item.Name} />
+        <LazyLoadImage
+          className={styles.image}
+          src={`/images/items/${item.ItemID}.0.webp`}
+          threshold={500}
+          onClick={() => {
+            pushItem(item);
+            setSelectedItems([...selectedItems, item.ItemID]);
+          }}
+          alt=""
+        />
+      </div>
       {confirmIcon()}
     </>
   );
@@ -32,8 +33,8 @@ function RLicon({ item, selectedItems, setSelectedItems }) {
     let have_item = [];
     let want_item = [];
 
-    have.map((space) => {
-      if (space.itemID == item.ItemID) have_item.push("a");
+    have.forEach((space) => {
+      if (space.itemID === item.ItemID) have_item.push("a");
     });
 
     let result = have.filter((obj) => {
@@ -42,8 +43,8 @@ function RLicon({ item, selectedItems, setSelectedItems }) {
 
     if (result.length === 0) have_item = [];
 
-    want.map((space) => {
-      if (space.itemID == item.ItemID) want_item.push("a");
+    want.forEach((space) => {
+      if (space.itemID === item.ItemID) want_item.push("a");
     });
 
     result = want.filter((obj) => {
@@ -51,32 +52,35 @@ function RLicon({ item, selectedItems, setSelectedItems }) {
     });
 
     if (result.length === 0) want_item = [];
-
     if (have_item.length > 0 && want_item.length > 0)
       return (
         <>
           <img
-            src={require("../../../images/other/check.png")}
+            src={CheckImage}
             className="success-added-have-items"
+            alt=""
           />
           <img
-            src={require("../../../images/other/check-red.png")}
+            src={CheckRedImage}
             className="success-added-want-items"
+            alt=""
           />
         </>
       );
     else if (have_item.length > 0)
       return (
         <img
-          src={require("../../../images/other/check.png")}
+          src={CheckImage}
           className="success-added-have-items"
+          alt=""
         />
       );
     else if (want_item.length > 0)
       return (
         <img
-          src={require("../../../images/other/check-red.png")}
+          src={CheckRedImage}
           className="success-added-want-items"
+          alt=""
         />
       );
     else return null;

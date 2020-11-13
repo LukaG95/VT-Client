@@ -51,7 +51,7 @@ function FiltersREP() {
       <div className="leaderboards-body">
         <div className="leaderboards-component" id="firstPlace">
           <div>
-            {goldTrophy} <span className="paddingBetween" />{" "}
+            {goldTrophy} <span className="paddingBetween" />
             {leadInfo
               ? leadInfo[timeType][0] && leadInfo[timeType][0].username
               : null}
@@ -65,7 +65,7 @@ function FiltersREP() {
 
         <div className="leaderboards-component" id="secondPlace">
           <div>
-            {silverTrophy} <span className="paddingBetween" />{" "}
+            {silverTrophy} <span className="paddingBetween" />
             {leadInfo
               ? leadInfo[timeType][1] && leadInfo[timeType][1].username
               : null}
@@ -79,7 +79,7 @@ function FiltersREP() {
 
         <div className="leaderboards-component" id="thirdPlace">
           <div>
-            {bronzeTrophy} <span className="paddingBetween" />{" "}
+            {bronzeTrophy} <span className="paddingBetween" />
             {leadInfo
               ? leadInfo[timeType][2] && leadInfo[timeType][2].username
               : null}
@@ -93,11 +93,11 @@ function FiltersREP() {
 
         <div className="leaderboards-component">
           <div>
-            {" "}
-            4 <span className="paddingBetween2" />{" "}
+            
+            4 <span className="paddingBetween2" />
             {leadInfo
               ? leadInfo[timeType][3] && leadInfo[timeType][3].username
-              : null}{" "}
+              : null}
           </div>
           {leadInfo
             ? leadInfo[timeType][3] && <p>{leadInfo[timeType][3].repRating}</p>
@@ -108,11 +108,11 @@ function FiltersREP() {
 
         <div className="leaderboards-component">
           <div>
-            {" "}
-            5 <span className="paddingBetween2" />{" "}
+            
+            5 <span className="paddingBetween2" />
             {leadInfo
               ? leadInfo[timeType][4] && leadInfo[timeType][4].username
-              : null}{" "}
+              : null}
           </div>
           {leadInfo
             ? leadInfo[timeType][4] && <p>{leadInfo[timeType][4].repRating}</p>
@@ -123,11 +123,11 @@ function FiltersREP() {
 
         <div className="leaderboards-component">
           <div>
-            {" "}
-            6 <span className="paddingBetween2" />{" "}
+            
+            6 <span className="paddingBetween2" />
             {leadInfo
               ? leadInfo[timeType][5] && leadInfo[timeType][5].username
-              : null}{" "}
+              : null}
           </div>
           {leadInfo
             ? leadInfo[timeType][5] && <p>{leadInfo[timeType][5].repRating}</p>
@@ -138,11 +138,11 @@ function FiltersREP() {
 
         <div className="leaderboards-component">
           <div>
-            {" "}
-            7 <span className="paddingBetween2" />{" "}
+            
+            7 <span className="paddingBetween2" />
             {leadInfo
               ? leadInfo[timeType][6] && leadInfo[timeType][6].username
-              : null}{" "}
+              : null}
           </div>
           {leadInfo
             ? leadInfo[timeType][6] && <p>{leadInfo[timeType][6].repRating}</p>
@@ -153,11 +153,11 @@ function FiltersREP() {
 
         <div className="leaderboards-component">
           <div>
-            {" "}
-            8 <span className="paddingBetween2" />{" "}
+            
+            8 <span className="paddingBetween2" />
             {leadInfo
               ? leadInfo[timeType][7] && leadInfo[timeType][7].username
-              : null}{" "}
+              : null}
           </div>
           {leadInfo
             ? leadInfo[timeType][7] && <p>{leadInfo[timeType][7].repRating}</p>
@@ -168,11 +168,11 @@ function FiltersREP() {
 
         <div className="leaderboards-component">
           <div>
-            {" "}
-            9 <span className="paddingBetween2" />{" "}
+            
+            9 <span className="paddingBetween2" />
             {leadInfo
               ? leadInfo[timeType][8] && leadInfo[timeType][8].username
-              : null}{" "}
+              : null}
           </div>
           {leadInfo
             ? leadInfo[timeType][8] && <p>{leadInfo[timeType][8].repRating}</p>
@@ -183,11 +183,11 @@ function FiltersREP() {
 
         <div className="leaderboards-component">
           <div>
-            {" "}
-            10 <span className="paddingBetween2" />{" "}
+            
+            10 <span className="paddingBetween2" />
             {leadInfo
               ? leadInfo[timeType][9] && leadInfo[timeType][9].username
-              : null}{" "}
+              : null}
           </div>
           {leadInfo
             ? leadInfo[timeType][9] && <p>{leadInfo[timeType][9].repRating}</p>
@@ -200,22 +200,22 @@ function FiltersREP() {
           onClick={() => setTimeType("All")}
           style={timeType === "All" ? { color: "#E7AA0F" } : null}
         >
-          {" "}
+          
           All time &nbsp;&nbsp;
         </button>
         <button
           onClick={() => setTimeType("Month")}
           style={timeType === "Month" ? { color: "#E7AA0F" } : null}
         >
-          {" "}
+          
           Month &nbsp;&nbsp;
         </button>
         <button
           onClick={() => setTimeType("Week")}
           style={timeType === "Week" ? { color: "#E7AA0F" } : null}
         >
-          {" "}
-          Week{" "}
+          
+          Week
         </button>
       </div>
     </div>

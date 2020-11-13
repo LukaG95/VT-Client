@@ -74,10 +74,10 @@ function RLTradeComponent({ trade, manageTrade }) {
                   Bump trade
                 </button>
                 <p className="trade-expire-text">
-                  Expires{" "}
+                  Expires
                   {trade.expiresIn.days < 1
                     ? "today"
-                    : `in ${trade.expiresIn.days} days`}{" "}
+                    : `in ${trade.expiresIn.days} days`}
                   at {trade.expiresIn.at}
                 </p>
               </>
@@ -131,11 +131,11 @@ function RLTradeComponent({ trade, manageTrade }) {
             </p>
             <div className="flex">
               <p className="trade-component-pozitiveRep">
-                +{rep ? rep.ups : null}{" "}
+                +{rep ? rep.ups : null}
               </p>
               <p style={{ marginLeft: "6px" }}> </p>
               <p className="trade-component-negativeRep">
-                -{rep ? rep.downs : null}{" "}
+                -{rep ? rep.downs : null}
               </p>
             </div>
           </div>
@@ -177,14 +177,14 @@ function RLTradeComponent({ trade, manageTrade }) {
                   className="trade-component-pozitiveRep"
                   style={{ fontSize: "15px" }}
                 >
-                  +{rep ? rep.ups : null}{" "}
+                  +{rep ? rep.ups : null}
                 </p>
                 <p style={{ marginLeft: "6px" }}> </p>
                 <p
                   className="trade-component-negativeRep"
                   style={{ fontSize: "15px" }}
                 >
-                  -{rep ? rep.downs : null}{" "}
+                  -{rep ? rep.downs : null}
                 </p>
               </div>
             </div>

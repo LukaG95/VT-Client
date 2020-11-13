@@ -59,7 +59,7 @@ function UserTrades() {
                   onClick={() => setOpenDeleteAllTrades(true)}
                   id="del-all-trades-button"
                 >
-                  {" "}
+                  
                   Delete all trades
                 </button>
               )

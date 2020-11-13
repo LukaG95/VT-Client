@@ -9,12 +9,12 @@ function FilterBar() {
     <>
       <Switch>
         <Route exact path="/">
-          {" "}
-          <TbFiltersRL />{" "}
+          
+          <TbFiltersRL />
         </Route>
         <Route exact path="/trading/rl">
-          {" "}
-          <TbFiltersRL />{" "}
+          
+          <TbFiltersRL />
         </Route>
       </Switch>
     </>

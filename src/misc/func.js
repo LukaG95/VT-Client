@@ -11,7 +11,7 @@ function imageExists(url, itemID) {
       return require(`../images/RLimages/${itemID}.0.webp`);
     }
   } catch {
-    return require("../images/RLimages/question.png");
+    return "/images/icons/question.png";
   }
 }
 

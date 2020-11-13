@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import Img from "react-cool-img";
 import LazyLoad from "react-lazyload";
 
 import { createNotification } from "../../../App";
@@ -13,7 +12,7 @@ import infoRL from "../../../info/infoRL.json";
 import imageExists from "../../../misc/func";
 import Placeholder from "./Placeholder";
 
-import RLicon from "./RLicon";
+import RLicon from "./ItemImage";
 import useWindowDimensions from "../../../misc/windowHW";
 
 function ItemImages() {
