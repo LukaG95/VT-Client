@@ -36,19 +36,21 @@
   border-radius: 0px 0px 5px 5px;
 }
 
-.itemContainer {
+.imageContainer {
   position: relative;
-  overflow-y: scroll;
-  padding: 0 10px;
-  /* Item Grid Styles */
-  display: grid;
-  align-items: center;
-  /* Min size of 100px */
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  grid-template-rows: max-content;
-  gap: 3px;
+  width: 100%;
+  padding-top: 100%;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 5px 5px 0px 0px;
 }
 
 .placeholder {
-  padding-top: calc(100% + 20px);
-}
+    padding-top: calc(100% + 20px);
+  }

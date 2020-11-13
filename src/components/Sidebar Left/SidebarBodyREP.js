@@ -48,21 +48,18 @@ function SidebarBodyREP() {
               onClick={() => setTimeType("All")}
               style={timeType === "All" ? { color: "#E7AA0F" } : null}
             >
-              
               All time &nbsp;&nbsp;
             </button>
             <button
               onClick={() => setTimeType("Month")}
               style={timeType === "Month" ? { color: "#E7AA0F" } : null}
             >
-              
               Month &nbsp;&nbsp;
             </button>
             <button
               onClick={() => setTimeType("Week")}
               style={timeType === "Week" ? { color: "#E7AA0F" } : null}
             >
-              
               Week
             </button>
           </div>
@@ -113,7 +110,6 @@ function SidebarBodyREP() {
 
           <div className="leaderboards-component">
             <div style={{ paddingLeft: "8px" }}>
-              
               4 <span className="paddingBetween2" />
               {leadInfo
                 ? leadInfo[timeType][3] && leadInfo[timeType][3].username
@@ -128,7 +124,6 @@ function SidebarBodyREP() {
 
           <div className="leaderboards-component">
             <div style={{ paddingLeft: "8px" }}>
-              
               5 <span className="paddingBetween2" />
               {leadInfo
                 ? leadInfo[timeType][4] && leadInfo[timeType][4].username
@@ -143,7 +138,6 @@ function SidebarBodyREP() {
 
           <div className="leaderboards-component">
             <div style={{ paddingLeft: "8px" }}>
-              
               6 <span className="paddingBetween2" />
               {leadInfo
                 ? leadInfo[timeType][5] && leadInfo[timeType][5].username
@@ -158,7 +152,6 @@ function SidebarBodyREP() {
 
           <div className="leaderboards-component">
             <div style={{ paddingLeft: "8px" }}>
-              
               7 <span className="paddingBetween2" />
               {leadInfo
                 ? leadInfo[timeType][6] && leadInfo[timeType][6].username
@@ -173,7 +166,6 @@ function SidebarBodyREP() {
 
           <div className="leaderboards-component">
             <div style={{ paddingLeft: "8px" }}>
-              
               8 <span className="paddingBetween2" />
               {leadInfo
                 ? leadInfo[timeType][7] && leadInfo[timeType][7].username
@@ -188,7 +180,6 @@ function SidebarBodyREP() {
 
           <div className="leaderboards-component">
             <div style={{ paddingLeft: "8px" }}>
-              
               9 <span className="paddingBetween2" />
               {leadInfo
                 ? leadInfo[timeType][8] && leadInfo[timeType][8].username
@@ -203,7 +194,6 @@ function SidebarBodyREP() {
 
           <div className="leaderboards-component">
             <div style={{ paddingLeft: "8px" }}>
-              
               10 <span className="paddingBetween2" />
               {leadInfo
                 ? leadInfo[timeType][9] && leadInfo[timeType][9].username

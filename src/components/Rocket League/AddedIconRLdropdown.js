@@ -168,7 +168,6 @@ function FilterButton({ dd, label, value, setFunction, itemID }) {
     return (
       <div className="rl-icon-dropdown-button-section">
         <label className="enableDropdown">
-          
           {label} - max {itemID === 4743 ? 100000 : 100}
         </label>
 

@@ -112,7 +112,6 @@ function App() {
               <Route exact path="/trading/rl/new">
                 {handleRedirectOnRefresh(
                   <TradeContextProviderRL>
-
                     <AddTradeRL />
                   </TradeContextProviderRL>
                 )}
@@ -224,7 +223,7 @@ function App() {
         form.style.height = "100%";
         form.style.width = "100%";
         body.style.overflowY = "hidden";
-      } catch { }
+      } catch {}
     } else if (width >= 700 && openForm === true) {
       try {
         const form = document.getElementById("logForm");
@@ -233,7 +232,7 @@ function App() {
         form.style.height = "auto";
         form.style.width = "440px";
         body.style.overflowY = "scroll";
-      } catch { }
+      } catch {}
     }
   }
 }

@@ -8,11 +8,9 @@ function FilterBar() {
     <>
       <Switch>
         <Route exact path="/">
-          
           <TbFiltersRL />
         </Route>
         <Route exact path="/trading/rl">
-          
           <TbFiltersRL />
         </Route>
       </Switch>
