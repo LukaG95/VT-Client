@@ -5,10 +5,11 @@ import { FixedSizeList } from 'react-window';
 
 function ItemContainer({ items, ...props }) {
   const [rows, setRows] = useState([])
+  const [itemsPerRow, setItemsPerRow] = useState(3)
   const container = useRef()
   const size = useComponentSize(container)
   const { height, width } = size
-  const [itemsPerRow, setItemsPerRow] = useState(3)
+
   //Calculate Items per Row on Container Resize
   useEffect(() => {
     setItemsPerRow(Math.floor(width / 100) || 3)
