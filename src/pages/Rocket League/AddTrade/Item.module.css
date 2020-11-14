@@ -1,5 +1,7 @@
 .item {
   position: relative;
+  width: 100%;
+  padding-top: calc(100% + 20px);
 }
 
 .content {
@@ -35,7 +37,6 @@
 }
 
 .imageContainer {
-  display: block;
   position: relative;
   width: 100%;
   padding-top: 100%;

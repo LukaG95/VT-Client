@@ -1,24 +1,12 @@
 .container {
-  height: 100%;
-  width: 100%;
-}
-
-.scroller {
+  position: relative;
   overflow-y: scroll;
-  overflow-x: hidden;
-  height: 100%;
-  padding: 0 5px;
-}
-
-.row {
-  display: flex;
-  margin: 5px 0;
-  width: 100%;
+  padding: 0 10px;
+  /* Item Grid Styles */
+  display: grid;
   align-items: center;
-  justify-content: space-between;
-}
-
-.row > * {
-  width: calc(100% / var(--itemsPerRow) - 3px);
-  display: inline-block;
+  /* Min size of 100px */
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-rows: max-content;
+  gap: 3px;
 }

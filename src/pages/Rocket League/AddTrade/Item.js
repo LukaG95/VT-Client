@@ -1,20 +1,39 @@
 import React from "react";
-import LazyLoadImage from "react-cool-img";
+import {
+  LazyLoadImage,
+  LazyLoadComponent,
+} from "react-lazy-load-image-component";
 import styles from "./Item.module.css";
 
-export default function Item({ item, ...props }) {
+export default function Item(props) {
+  const { item } = props;
   return (
-    <div className={styles.item} {...props}>
-      <div className={styles.imageContainer}>
-        <LazyLoadImage
-          className={styles.image}
-          placeholder="/images/icons/question.png"
-          src={`/images/items/${item.ItemID}.0.webp`}
-          alt={item.Name}
-        />
+    <LazyLoadComponent
+      threshold={100}
+      placeholder={<div className={styles.placeholder} />}
+      key={item.ItemID}
+    >
+      <div className={styles.item} {...props}>
+        <div className={styles.content}>
+          <div className={styles.imageContainer}>
+            <img
+              className={styles.image}
+              src="/images/icons/question.png"
+              alt={item.Name}
+            />
+            <LazyLoadImage
+              className={styles.image}
+              src={`/images/items/${item.ItemID}.0.webp`}
+              threshold={100}
+              delayTime={0}
+              alt=""
+              lazy
+            />
+          </div>
+          <span className={styles.name}>{item.Name}</span>
+        </div>
+        {props.children}
       </div>
-      <span className={styles.name}>{item.Name}</span>
-      {props.children}
-    </div>
+    </LazyLoadComponent>
   );
 }
