@@ -54,7 +54,7 @@ function Sidebar() {
   return (
     <div id="sidebar">
       <div id="sidebar-1st-page">
-        <Header setIsOpen_LeftSidebar={setIsOpen_LeftSidebar} />
+        <Header />
 
         <Switch>
           <Route exact path="/">
@@ -113,6 +113,14 @@ function Sidebar() {
       </div>
     </div>
   );
+
+
+
+
+
+
+
+
 
   function RLBody() {
     return (

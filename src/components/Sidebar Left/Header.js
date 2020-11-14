@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { closeSidebar } from "../../misc/manageSidebar";
-
+import { LeftSidebarContext } from "../../context/LeftSidebar";
 import { UserContext } from "../../context/UserContext";
 
-function Header({ setIsOpen_LeftSidebar }) {
+function Header() {
   const [openHeader, setOpenHeader] = useState(false);
   const [headerSelection, setHeaderSelection] = useState("Trading");
   const [allOptions] = useState([
@@ -15,6 +15,9 @@ function Header({ setIsOpen_LeftSidebar }) {
   ]);
 
   const { isLoggedIn } = useContext(UserContext);
+  const { setIsOpen_LeftSidebar } = useContext(
+    LeftSidebarContext
+  );
 
   const path = useLocation().pathname;
 

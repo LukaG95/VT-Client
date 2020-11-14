@@ -5,7 +5,7 @@ import infoRL from '../../info/infoRL.json'
 import imageExists from '../../misc/imageExists'
 import useWindowDimensions from '../../misc/windowHW'
 
-function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
+function AddTradeFiltersRL({setItemImages, setTradeErrorMsg}) {
   const [currentFilter, setCurrentFilter] = useState("All")
   const [openFilters, setOpenFilters] = useState(false)
 
@@ -136,4 +136,4 @@ function RLfilter_icon({setItemImages, setTradeErrorMsg}) {
   }
 }
 
-export default RLfilter_icon
+export default AddTradeFiltersRL
