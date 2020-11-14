@@ -8,7 +8,7 @@ import Item from "./Item";
 import ItemConfirmIcon from "./ItemConfirmIcon";
 
 function SmallChooseItems({ setShowPage, displayPage }) {
-  const [itemImages, setItemImages] = useState();
+  const [itemImages, setItemImages] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
 
   const { have, want, clearHaveItems, clearWantItems, pushItem } = useContext(
@@ -23,7 +23,7 @@ function SmallChooseItems({ setShowPage, displayPage }) {
   //Map All Items
   useEffect(() => {
     setItemImages(
-      infoRL.Slots.map((Slot) =>
+      infoRL.Slots.flatMap((Slot) =>
         Slot.Items.map((item) => {
           if (item.Tradable)
             return ( 
@@ -37,7 +37,7 @@ function SmallChooseItems({ setShowPage, displayPage }) {
             );
           else return null;
         })
-      )
+      ).filter(i => !!i)
     );
   }, []);
 
@@ -47,7 +47,7 @@ function SmallChooseItems({ setShowPage, displayPage }) {
         <AddTradeFiltersRL
           setItemImages={setItemImages}
         />
-        <ItemContainer>{itemImages}</ItemContainer>
+        <ItemContainer items={itemImages} />1
       </div>
       {showSelectedAmount()}
       <button

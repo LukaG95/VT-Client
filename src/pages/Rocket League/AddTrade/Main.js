@@ -16,7 +16,7 @@ import useWindowDimensions from "../../../misc/windowHW";
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
 function AddTradeRL() {
-  const [itemImages, setItemImages] = useState();
+  const [itemImages, setItemImages] = useState([]);
   const [tradeErrorMsg, setTradeErrorMsg] = useState("");
   const [notesErrorMsg, setNotesErrorMsg] = useState("");
 
@@ -69,7 +69,7 @@ function AddTradeRL() {
   //Initial Items
   useEffect(() => {
     setItemImages(
-      infoRL.Slots.map((Slot) =>
+      infoRL.Slots.flatMap((Slot) =>
         Slot.Items.map((item) => {
           if (item.Tradable) return <Item
             item={item}
@@ -77,7 +77,7 @@ function AddTradeRL() {
             key={item.ItemID} />
           else return null;
         })
-      )
+      ).filter(i => !!i)
     )
   }, [gotInfo]);
 
@@ -89,7 +89,7 @@ function AddTradeRL() {
     setTradeErrorMsg("")
     pushItem(item)
   }
-  
+
   function AddTrade() {
     return (
       <div className="add-trade-wrapper">
@@ -108,9 +108,7 @@ function AddTradeRL() {
             setItemImages={setItemImages}
             setTradeErrorMsg={setTradeErrorMsg}
           />
-          <ItemContainer>
-            {itemImages}
-          </ItemContainer>
+          <ItemContainer items={itemImages} />
           <p className="addRLTradeErrorMsg">{tradeErrorMsg}</p>
         </div>
         <div className="rlHaveWantSection">
