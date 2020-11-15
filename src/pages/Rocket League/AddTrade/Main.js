@@ -75,6 +75,7 @@ function AddTradeRL() {
                 key={item.ItemID}
               />
             ))}
+            {Array(items.length > 12 ? 0 : 12 - items.length).fill(null).map(() => <div />)}
           </ItemContainer>
           <p className={styles.error}>{error.trade}</p>
         </div>
@@ -99,6 +100,7 @@ function AddTradeRL() {
               ))}
               {Array(12 - have.length).fill(null).map((_, index) =>
                 <PlusItem
+                  key={index}
                   selected={!index && slot === "have"}
                   onClick={() => setSlot("have")}
                 />
@@ -125,6 +127,7 @@ function AddTradeRL() {
               ))}
               {Array(12 - want.length).fill(null).map((_, index) =>
                 <PlusItem
+                  key={index}
                   selected={!index && slot === "want"}
                   onClick={() => setSlot("want")}
                 />
