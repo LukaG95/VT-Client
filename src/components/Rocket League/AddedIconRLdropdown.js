@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 
 import { TradeContextRL } from "../../context/TradeContextRL";
 import { rl_dd_names } from "../../info/DropdownNames";
-import infoRL from "../../info/infoRL.json";
+import infoRL from "../../constants/RocketLeagueInfo.json";
 import useWindowDimensions from "../../misc/windowHW";
 
 const { colorDD, certDD } = rl_dd_names;

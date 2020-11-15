@@ -5,309 +5,29 @@ import axios from "axios";
 
 const TradeContextRL = React.createContext();
 
+const BlankItem = {
+  id: 0,
+  isFocused: true,
+  isDropdown: false,
+  itemName: "",
+  itemID: "None",
+  color: "None",
+  colorID: 0,
+  cert: "None",
+  amount: 1,
+  isAdded: false,
+}
+
 function TradeContextProviderRL({ children }) {
   const pathID = useLocation().pathname.substring(17);
   const { myID } = useContext(UserContext);
 
   const [gotInfo, setGotInfo] = useState(false);
-  const [have, setHave] = useState([
-    {
-      id: 0,
-      isFocused: true,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 1,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 2,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 3,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 4,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 5,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 6,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 7,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 8,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 9,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 10,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 11,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-  ]);
-
-  const [want, setWant] = useState([
-    {
-      id: 12,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 13,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 14,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 15,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 16,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 17,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 18,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 19,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 20,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 21,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 22,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-    {
-      id: 23,
-      isFocused: false,
-      isDropdown: false,
-      itemName: "",
-      itemID: "None",
-      color: "None",
-      colorID: 0,
-      cert: "None",
-      amount: 1,
-      isAdded: false,
-    },
-  ]);
-
+  const [have, setHave] = useState(Array(12).fill(BlankItem));
+  const [want, setWant] = useState(Array(12).fill(BlankItem));
   const [notes, setNotes] = useState("");
   const [platform, setPlatform] = useState("Steam");
   const [tradesAmount, setTradesAmount] = useState();
-
   const [displayPage, setDisplayPage] = useState(false);
 
   // adds event listener to trigger click() function that sets all DDs to false on click
@@ -606,24 +326,8 @@ function TradeContextProviderRL({ children }) {
     have.forEach((item) => {
       if (item.isAdded) empty = false;
     });
-
     if (empty) return null;
-
-    let temp = [];
-    have.forEach((item) => {
-      item.color = "None";
-      item.colorID = 0;
-      item.itemID = "None";
-      item.itemName = "";
-      item.cert = "None";
-      item.amount = 1;
-      item.isFocused = false;
-      item.isDropdown = false;
-      item.isAdded = false;
-      temp.push(item);
-    });
-
-    const have_focused = focuseOnCorrectField(temp, false);
+    const have_focused = focuseOnCorrectField(Array(12).fill(BlankItem), false);
     setHave(have_focused);
   }
 
@@ -633,23 +337,8 @@ function TradeContextProviderRL({ children }) {
     want.forEach((item) => {
       if (item.isAdded) empty = false;
     });
-
     if (empty) return null;
-
-    let temp = [];
-    want.forEach((item) => {
-      item.color = "None";
-      item.colorID = 0;
-      item.itemID = "None";
-      item.itemName = "";
-      item.cert = "None";
-      item.amount = 1;
-      item.isFocused = false;
-      item.isDropdown = false;
-      item.isAdded = false;
-      temp.push(item);
-    });
-    const want_focused = focuseOnCorrectField(false, temp);
+    const want_focused = focuseOnCorrectField(false, Array(12).fill(BlankItem));
     setWant(want_focused);
   }
 

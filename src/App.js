@@ -37,9 +37,11 @@ import {
   UpdateEmail,
   AlphaForm
 } from './components/index'
+import { TradeProvider } from "./context/TradeContext";
+import { TradeFiltersProvider } from "./context/TradeFiltersContext";
 
 
-export default function App () {
+export default function App() {
   const { isLoggedIn, displayWebsite } = useContext(UserContext);
   const { setIsOpen_LeftSidebar } = useContext(
     LeftSidebarContext
@@ -84,16 +86,24 @@ export default function App () {
               </Route>
               <Route exact path="/trading/rl/new">
                 {handleRedirectOnRefresh(
-                  <TradeContextProviderRL>
-                    <RLAddTrade />
-                  </TradeContextProviderRL>
+                  <TradeProvider>
+                    <TradeContextProviderRL>
+                      <TradeFiltersProvider>
+                        <RLAddTrade />
+                      </TradeFiltersProvider>
+                    </TradeContextProviderRL>
+                  </TradeProvider>
                 )}
               </Route>
               <Route path="/trading/rl/edit">
                 {handleRedirectOnRefresh(
-                  <TradeContextProviderRL>
-                    <RLAddTrade />
-                  </TradeContextProviderRL>
+                  <TradeProvider>
+                    <TradeFiltersProvider>
+                      <TradeContextProviderRL>
+                        <RLAddTrade />
+                      </TradeContextProviderRL>
+                    </TradeFiltersProvider>
+                  </TradeProvider>
                 )}
               </Route>
               <Route path="/trades">
@@ -149,5 +159,5 @@ export default function App () {
     if (isLoggedIn === true) return component;
     else if (isLoggedIn === false) return <Redirect to="/" />;
   }
-  
+
 }

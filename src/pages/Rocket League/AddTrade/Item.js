@@ -27,7 +27,7 @@ export default function Item(props) {
               threshold={100}
               delayTime={0}
               alt=""
-              lazy
+              lazy="true"
             />
           </div>
           <span className={styles.name}>{item.Name}</span>
