@@ -6,7 +6,7 @@
   display: grid;
   align-items: center;
   /* Min size of 100px */
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
   grid-template-rows: max-content;
-  gap: 3px;
+  gap: 4px;
 }

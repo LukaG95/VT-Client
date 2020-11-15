@@ -12,7 +12,8 @@ import { ReactComponent as ProfileIcon } from "../images/other/profile.svg";
 
 function Navbar() {
   let location = useLocation();
-  let trading = "", reputation = "";
+  let trading = "",
+    reputation = "";
 
   const { isLoggedIn, username } = useContext(UserContext);
   const { setOpenForm } = useContext(PopupContext);

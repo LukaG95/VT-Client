@@ -1,40 +1,36 @@
 .wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: 6fr 3fr 2fr;
+  gap: 16px;
 
   margin-top: 15px;
   animation: transitionUp 0.4s;
 
   width: 100%;
   height: calc(100vh - 105px);
-}
+  overflow: hidden;
 
-.chooseItems {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-
-  width: 100%;
-  max-width: 1010px;
-
-  background-color: #1d191f;
-  border-radius: 5px;
-  margin-right: 15px;
+  > * {
+    width: 100%;
+    max-height: 100%;
+    background-color: #1d191f;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
 }
 
 .haveWant {
-  display: flex;
-  flex-direction: column;
-  background-color: #1d191f;
-
-  border-radius: 5px;
-
   .section {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     height: auto;
-    width: 400px;
-
-    margin: 14px 14px 0px 14px;
+    width: 100%;
+    padding: 16px;
+    height: 50%;
   }
 
   .title {
@@ -48,24 +44,8 @@
   }
 
   .items {
-    display: grid;
-    position: relative;
-    grid-template-columns: auto auto auto auto;
-    column-gap: 3px;
-    row-gap: 3px;
-    align-items: center;
-    justify-content: center;
     padding-bottom: 10px;
   }
-}
-
-.notesSection {
-  display: flex;
-  flex-direction: column;
-
-  min-width: 360px;
-
-  margin-left: 15px;
 }
 
 .notes {
@@ -76,7 +56,6 @@
 
   width: 100%;
   height: 100%;
-
   border-radius: 5px;
 
   > .input {

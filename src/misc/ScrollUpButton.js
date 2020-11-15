@@ -1,7 +1,6 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from "react";
 
 export default () => {
-
   useEffect(() => {
     const toTop = document.querySelector(".to-top");
 
@@ -23,7 +22,7 @@ export default () => {
     });
   });
 
-  return(
+  return (
     <div
       onClick={() => {
         window.scrollTo(0, 0);
@@ -37,5 +36,5 @@ export default () => {
         alt=""
       />
     </div>
-  )
-}
+  );
+};

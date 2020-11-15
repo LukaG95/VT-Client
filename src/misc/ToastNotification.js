@@ -9,4 +9,4 @@ function createNotification(type, message, customId) {
   });
 }
 
-export {createNotification, ToastContainer, toast}
+export { createNotification, ToastContainer, toast };

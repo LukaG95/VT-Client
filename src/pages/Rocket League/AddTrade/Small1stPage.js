@@ -4,7 +4,6 @@ import AddedIconRL from "../../../components/Rocket League/AddedIconRL";
 import { TradeContextRL } from "../../../context/TradeContextRL";
 
 function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
-
   const {
     have,
     want,
@@ -14,7 +13,7 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
     setNotes,
     manageFocus,
     clearWantItems,
-    clearHaveItems
+    clearHaveItems,
   } = useContext(TradeContextRL);
 
   const displayed_have_items = have.map((item) => {

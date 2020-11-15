@@ -1,3 +1,3 @@
 export const Games = {
-    ROCKET_LEAGUE: "Rocket League"
-}
+  ROCKET_LEAGUE: "Rocket League",
+};

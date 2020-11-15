@@ -6,15 +6,7 @@ import imageExists from "../../misc/imageExists";
 
 function AddedIconRL({ item, setShowPage, setClickedItem }) {
   // if we pass setShowPage it means we're on small (mobile) - also for setClickedItem
-  const {
-    id,
-    itemID,
-    color,
-    colorID,
-    cert,
-    amount,
-    isDropdown,
-  } = item;
+  const { id, itemID, color, colorID, cert, amount, isDropdown } = item;
   const { setIsDropdown } = useContext(TradeContextRL);
 
   return (
@@ -33,7 +25,10 @@ function AddedIconRL({ item, setShowPage, setClickedItem }) {
         }}
       >
         <div
-          onClick={() => {console.log(typeof id); setIsDropdown(id)}}
+          onClick={() => {
+            console.log(typeof id);
+            setIsDropdown(id);
+          }}
           style={{ height: "95px", width: "95px" }}
         >
           <img

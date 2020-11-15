@@ -16,7 +16,7 @@ const BlankItem = {
   cert: "None",
   amount: 1,
   isAdded: false,
-}
+};
 
 function TradeContextProviderRL({ children }) {
   const pathID = useLocation().pathname.substring(17);
@@ -196,7 +196,7 @@ function TradeContextProviderRL({ children }) {
   function setIsDropdown(id) {
     let temp = [];
     have.forEach((item) => {
-      console.log(typeof item.id)
+      console.log(typeof item.id);
       if (item.id === id) {
         item.isDropdown = !item.isDropdown;
         temp.push(item);

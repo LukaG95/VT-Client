@@ -37,24 +37,23 @@ function closeSidebar() {
   } catch {
     return null;
   }
-  
 }
 
 function manageSidebarResize(width, isOpen_LeftSidebar, setIsOpen_LeftSidebar) {
   if (width > 1213 && isOpen_LeftSidebar) {
-    console.log("1")
+    console.log("1");
     // && sidebar is opened (for resizing performance)
     closeSidebar();
     setIsOpen_LeftSidebar(false);
   } else if (width > 650 && isOpen_LeftSidebar) {
-    console.log("2")
+    console.log("2");
     const main = document.getElementById("main");
     const sidebar = document.getElementById("sidebar");
 
     sidebar.style.width = `400px`;
     main.style.transform = `translateX(400px)`;
   } else if (width <= 650 && isOpen_LeftSidebar) {
-    console.log("3")
+    console.log("3");
     //  && document.getElementById("main").style.transform !== "translateX(100%)"
     const main = document.getElementById("main");
     const sidebar = document.getElementById("sidebar");

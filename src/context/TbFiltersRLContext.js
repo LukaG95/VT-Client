@@ -38,7 +38,7 @@ function TbFiltersRLContextProvider({ children }) {
         pageAmount,
         setPageAmount,
         currentPage,
-        setCurrentPage
+        setCurrentPage,
       }}
     >
       {children}

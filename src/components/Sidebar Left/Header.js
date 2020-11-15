@@ -99,7 +99,7 @@ function Header({ setIsOpen_LeftSidebar }) {
             </Link>
           </div>
         );
-        else return null
+      else return null;
     });
 
     return dropdown;

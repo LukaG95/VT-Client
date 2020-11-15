@@ -11,20 +11,16 @@ import {
   PrivacyPolicy,
   AddReputation,
   UserTrades,
-  AdminPage
-} from './pages/index'
+  AdminPage,
+} from "./pages/index";
 
 import {
   UserContext,
   TradeContextProviderRL,
   LeftSidebarContext,
-} from './context/index'
+} from "./context/index";
 
-import {
-  closeSidebar,
-  ToastContainer,
-  ScrollUpButton,
-} from './misc/index'
+import { closeSidebar, ToastContainer, ScrollUpButton } from "./misc/index";
 
 import {
   Sidebar,
@@ -35,17 +31,14 @@ import {
   ResetPassword,
   ConfirmEmail,
   UpdateEmail,
-  AlphaForm
-} from './components/index'
+  AlphaForm,
+} from "./components/index";
 import { TradeProvider } from "./context/TradeContext";
 import { TradeFiltersProvider } from "./context/TradeFiltersContext";
 
-
 export default function App() {
   const { isLoggedIn, displayWebsite } = useContext(UserContext);
-  const { setIsOpen_LeftSidebar } = useContext(
-    LeftSidebarContext
-  );
+  const { setIsOpen_LeftSidebar } = useContext(LeftSidebarContext);
 
   if (displayWebsite === true) {
     return (
@@ -159,5 +152,4 @@ export default function App() {
     if (isLoggedIn === true) return component;
     else if (isLoggedIn === false) return <Redirect to="/" />;
   }
-
 }

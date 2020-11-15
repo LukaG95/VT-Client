@@ -49,7 +49,7 @@ function Sidebar() {
 
   const { width } = useWindowDimensions();
 
-  manageSidebarResize(width, isOpen_LeftSidebar, setIsOpen_LeftSidebar)
+  manageSidebarResize(width, isOpen_LeftSidebar, setIsOpen_LeftSidebar);
 
   return (
     <div id="sidebar">

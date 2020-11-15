@@ -26,7 +26,7 @@ function SmallChooseItems({ setShowPage, displayPage }) {
       RLInfo.Slots.map((Slot) =>
         Slot.Items.map((item) => {
           if (item.Tradable)
-            return ( 
+            return (
               <Item
                 item={item}
                 onClick={() => ItemClick(item)}
@@ -44,9 +44,7 @@ function SmallChooseItems({ setShowPage, displayPage }) {
   return (
     <div id="add-trade-2nd-page">
       <div className="rlChooseItemsSection-SMALL">
-        <AddTradeFiltersRL
-          setItemImages={setItemImages}
-        />
+        <AddTradeFiltersRL setItemImages={setItemImages} />
         <ItemContainer>{itemImages}</ItemContainer>
       </div>
       {showSelectedAmount()}
@@ -60,9 +58,9 @@ function SmallChooseItems({ setShowPage, displayPage }) {
   );
 
   function showSelectedAmount() {
-    const have_count = have.filter(i => i.isAdded).length;
-    const want_count = want.filter(i => i.isAdded).length;
-    const focused_field = have.find(i => i.isFocused) ? "have" : "want";
+    const have_count = have.filter((i) => i.isAdded).length;
+    const want_count = want.filter((i) => i.isAdded).length;
+    const focused_field = have.find((i) => i.isFocused) ? "have" : "want";
 
     if (have_count > 0 || want_count > 0)
       return (

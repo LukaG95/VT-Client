@@ -14,91 +14,121 @@ import { PlatformColours, Platforms } from "../../../constants/Platforms";
 import ClearItems from "../../../components/AddTrade/ClearItems";
 import { getTradeableItems } from "../../../constants/Items";
 import { useTradeFilters } from "../../../context/TradeFiltersContext";
+import PlusItem from "./PlusItem";
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
 function AddTradeRL() {
   const pathID = useLocation().pathname.substring(17); // Reads url after `/trades/` till the end
-  const [{ have, want, platform, notes, count: tradeCount }, dispatch] = useTrade()
-  const [filters] = useTradeFilters()
+  const [
+    { have, want, platform, notes, count: tradeCount },
+    dispatch,
+  ] = useTrade();
+  const [filters] = useTradeFilters();
   const [error, setError] = useState({
     trade: "",
-    notes: ""
-  })
-  const [items, setItems] = useState(getTradeableItems())
+    notes: "",
+  });
+  const [items, setItems] = useState(getTradeableItems());
+  const [slot, setSlot] = useState("have")
   const { width } = useWindowDimensions();
-  console.log(filters)
   //Filtered Items
   useEffect(() => {
-    let items = getTradeableItems()
+    let items = getTradeableItems();
     if (filters.type !== "Any") {
-      items = items.filter(i => i.Slot === filters.type)
+      items = items.filter((i) => i.Slot === filters.type);
     }
     if (filters.name) {
-      items = items.filter(i => i.Name.toLowerCase().search(filters.name) > -1)
+      items = items.filter(
+        (i) => i.Name.toLowerCase().search(filters.name) > -1
+      );
     }
-    setItems(items)
+    setItems(items);
   }, [filters]);
 
   //Return Desktop or Mobile
-  return width > 1213 ? AddTrade() : <SmallHome />
+  return width > 1213 ? AddTrade() : <SmallHome />;
 
   function ItemClick(item) {
-    setError({ ...error, trade: "" })
+    setError({ ...error, trade: "" });
     dispatch({
       type: "addItem",
       payload: {
-        type: "have",
-        item
-      }
-    })
+        type: slot,
+        item,
+      },
+    });
+    if (slot === "have" && have.length === 11) return setSlot("want")
+    if (slot === "wave" && want.length === 11) return setSlot("have")
   }
 
   function AddTrade() {
     return (
       <div className={styles.wrapper}>
-        <div className={`${styles.chooseItems} ${error.trade ? styles.errored : ""}`}>
+        <div className={error.trade ? styles.errored : ""}>
           <FilterBar />
           <ItemContainer>
-            {items.map(item => <Item
-              item={item}
-              onClick={() => ItemClick(item)}
-              key={item.ItemID} />
-            )}
+            {items.map((item) => (
+              <Item
+                item={item}
+                onClick={() => ItemClick(item)}
+                key={item.ItemID}
+              />
+            ))}
           </ItemContainer>
           <p className={styles.error}>{error.trade}</p>
         </div>
         <div className={styles.haveWant}>
           <div className={styles.section}>
             <div className={styles.title}>
-              <p>You <b>have</b></p>
+              <p>
+                You <b>have</b>
+              </p>
               <ClearItems
-                onClick={() => dispatch({
-                  type: "clearItems",
-                  payload: "have"
-                })}
+                onClick={() =>
+                  dispatch({
+                    type: "clearItems",
+                    payload: "have",
+                  })
+                }
               />
             </div>
             <ItemContainer className={styles.items}>
               {have.map((item) => (
                 <Item item={item} />
               ))}
+              {Array(12 - have.length).fill(null).map((_, index) =>
+                <PlusItem
+                  selected={!index && slot === "have"}
+                  onClick={() => setSlot("have")}
+                />
+              )}
             </ItemContainer>
           </div>
           <div className={styles.section} style={{ marginBottom: "20px" }}>
             <div className={styles.title}>
-              <p>You <b>want</b></p>
+              <p>
+                You <b>want</b>
+              </p>
               <ClearItems
-                onClick={() => dispatch({
-                  type: "clearItems",
-                  payload: "want"
-                })}
+                onClick={() =>
+                  dispatch({
+                    type: "clearItems",
+                    payload: "want",
+                  })
+                }
               />
             </div>
             <ItemContainer className="wantItems">
               {want.map((item) => (
                 <Item item={item} />
               ))}
+              {Array(12 - want.length).fill(null).map((_, index) =>
+                <PlusItem
+                  selected={!index && slot === "want"}
+                  onClick={() => setSlot("want")}
+                />
+              )}
             </ItemContainer>
           </div>
         </div>
@@ -112,32 +142,41 @@ function AddTradeRL() {
               placeholder="Add notes..."
               className={styles.input}
               value={notes}
-              onChange={(e) => dispatch({
-                type: "setNotes",
-                payload: e.target.value
-              })}
+              onChange={(e) =>
+                dispatch({
+                  type: "setNotes",
+                  payload: e.target.value,
+                })
+              }
             />
             <div className={styles.platforms}>
               <h4>PLATFORM:</h4>
               {/* Map Platforms */}
-              {Object.keys(Platforms).map(p => (
+              {Object.keys(Platforms).map((p) => (
                 <label className={styles.platform} key={p}>
                   <input
                     type="radio"
                     checked={platform === Platforms[p]}
-                    onChange={() => dispatch({
-                      type: "setPlatform",
-                      payload: Platforms[p]
-                    })}
+                    onChange={() =>
+                      dispatch({
+                        type: "setPlatform",
+                        payload: Platforms[p],
+                      })
+                    }
                   />
-                  <span style={{ color: PlatformColours[p] }}>{Platforms[p]}</span>
+                  <span style={{ color: PlatformColours[p] }}>
+                    {Platforms[p]}
+                  </span>
                 </label>
               ))}
             </div>
             <p className={styles.error}>{error.notes}</p>
           </div>
           <div>
-            <button onClick={() => handleTradeSubmit()} className={styles.submit}>
+            <button
+              onClick={() => handleTradeSubmit()}
+              className={styles.submit}
+            >
               SUBMIT TRADE
             </button>
           </div>
@@ -148,13 +187,16 @@ function AddTradeRL() {
 
   function handleTradeSubmit() {
     //Check Items
-    if (!checkAddedItems()) {
-      setError({ ...error, trade: "You have to select at least 1 item in have and want" });
+    if (!have.length || !want.length) {
+      setError({
+        ...error,
+        trade: "You have to select at least 1 item in have and want",
+      });
       createNotification("error", "Choose items", "choose the items");
       return;
     }
     //Check Notes
-    const notesError = checkNotes()
+    const notesError = checkNotes();
     if (notesError) {
       setError({ ...error, notes: notesError });
       return createNotification("error", notesError, notesError);
@@ -163,25 +205,37 @@ function AddTradeRL() {
     if (pathID === "") {
       //Create Trade
       if (tradeCount >= 15)
-        return createNotification("error", "You reached the limit of 15 trades", "limit 15 trades");
-      axios.post("/api/trades/createTrade", {
-        have: have.map(preparePostItem),
-        want: want.map(preparePostItem),
-        platform: platform,
-        notes: profanityFilter.clean(notes),
-      })
+        return createNotification(
+          "error",
+          "You reached the limit of 15 trades",
+          "limit 15 trades"
+        );
+      axios
+        .post("/api/trades/createTrade", {
+          have: have.map(preparePostItem),
+          want: want.map(preparePostItem),
+          platform: platform,
+          notes: profanityFilter.clean(notes),
+        })
         .then((res) => {
           if (res.data.info === "success") {
             //Trade Successfully Created
-            dispatch({ type: "reset" })
+            dispatch({ type: "reset" });
             dispatch({ type: "addTrade" });
-            createNotification("success", "Created a new trade", "created a new trade");
-            setTimeout(() =>
-              createNotification(
-                "info",
-                `${tradeCount + 1} / 15 RL trades created`,
-                "info on trades created"
-              ), 1000);
+            createNotification(
+              "success",
+              "Created a new trade",
+              "created a new trade"
+            );
+            setTimeout(
+              () =>
+                createNotification(
+                  "info",
+                  `${tradeCount + 1} / 15 RL trades created`,
+                  "info on trades created"
+                ),
+              1000
+            );
           }
         })
         .catch((err) => {
@@ -196,12 +250,13 @@ function AddTradeRL() {
         });
     } else {
       //Edit Trade
-      axios.post(`/api/trades/editTrade?tradeId=${pathID}`, {
-        have: have.map(preparePostItem),
-        want: want.map(preparePostItem),
-        platform: platform,
-        notes: profanityFilter.clean(notes),
-      })
+      axios
+        .post(`/api/trades/editTrade?tradeId=${pathID}`, {
+          have: have.map(preparePostItem),
+          want: want.map(preparePostItem),
+          platform: platform,
+          notes: profanityFilter.clean(notes),
+        })
         .then((res) => {
           if (res.data.info === "success") {
             //Successfully Edit Trade
@@ -223,19 +278,11 @@ function AddTradeRL() {
         });
     }
   }
-
-  // Returns true if there are items added in have and in want
-  function checkAddedItems() {
-    return want.find(item => item.isAdded) && have.find(item => item.isAdded);
-  }
-
   // Check trade notes for links & length
   function checkNotes() {
-    const notesRegex = /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm
-    if (notes.match(notesRegex))
-      return "No links allowed in notes";
-    if (notes.length > 300)
-      return "Max 300 characters allowed";
+    const notesRegex = /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm;
+    if (notes.match(notesRegex)) return "No links allowed in notes";
+    if (notes.length > 300) return "Max 300 characters allowed";
   }
 
   function preparePostItem(item) {
@@ -247,7 +294,7 @@ function AddTradeRL() {
       cert: item.cert,
       itemType: "item",
       amount: item.amount,
-    }
+    };
   }
 }
 

@@ -171,9 +171,9 @@ function DropdownMenu({ dd, setFunction }) {
         id="dd"
         onChange={(event) => {
           const searchName = dd.map((name) => {
-            if (name.toLowerCase().includes(event.target.value.toLowerCase())) 
+            if (name.toLowerCase().includes(event.target.value.toLowerCase()))
               return <DropdownItem>{name}</DropdownItem>;
-            else return null
+            else return null;
           });
           setDropNames(searchName);
         }}
