@@ -30,7 +30,7 @@ function AddTradeRL() {
     notes: "",
   });
   const [items, setItems] = useState(getTradeableItems());
-  const [slot, setSlot] = useState("have")
+  const [slot, setSlot] = useState("have");
   const { width } = useWindowDimensions();
   //Filtered Items
   useEffect(() => {
@@ -58,8 +58,8 @@ function AddTradeRL() {
         item,
       },
     });
-    if (slot === "have" && have.length === 11) return setSlot("want")
-    if (slot === "wave" && want.length === 11) return setSlot("have")
+    if (slot === "have" && have.length === 11) return setSlot("want");
+    if (slot === "wave" && want.length === 11) return setSlot("have");
   }
 
   function AddTrade() {
@@ -75,7 +75,11 @@ function AddTradeRL() {
                 key={item.ItemID}
               />
             ))}
-            {Array(items.length > 12 ? 0 : 12 - items.length).fill(null).map(() => <div />)}
+            {Array(items.length > 12 ? 0 : 12 - items.length)
+              .fill(null)
+              .map(() => (
+                <div />
+              ))}
           </ItemContainer>
           <p className={styles.error}>{error.trade}</p>
         </div>
@@ -98,13 +102,15 @@ function AddTradeRL() {
               {have.map((item) => (
                 <Item item={item} />
               ))}
-              {Array(12 - have.length).fill(null).map((_, index) =>
-                <PlusItem
-                  key={index}
-                  selected={!index && slot === "have"}
-                  onClick={() => setSlot("have")}
-                />
-              )}
+              {Array(12 - have.length)
+                .fill(null)
+                .map((_, index) => (
+                  <PlusItem
+                    key={index}
+                    selected={!index && slot === "have"}
+                    onClick={() => setSlot("have")}
+                  />
+                ))}
             </ItemContainer>
           </div>
           <div className={styles.section} style={{ marginBottom: "20px" }}>
@@ -125,13 +131,15 @@ function AddTradeRL() {
               {want.map((item) => (
                 <Item item={item} />
               ))}
-              {Array(12 - want.length).fill(null).map((_, index) =>
-                <PlusItem
-                  key={index}
-                  selected={!index && slot === "want"}
-                  onClick={() => setSlot("want")}
-                />
-              )}
+              {Array(12 - want.length)
+                .fill(null)
+                .map((_, index) => (
+                  <PlusItem
+                    key={index}
+                    selected={!index && slot === "want"}
+                    onClick={() => setSlot("want")}
+                  />
+                ))}
             </ItemContainer>
           </div>
         </div>
