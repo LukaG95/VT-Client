@@ -54,7 +54,6 @@ function manageSidebarResize(width, isOpen_LeftSidebar, setIsOpen_LeftSidebar) {
     sidebar.style.width = `400px`;
     main.style.transform = `translateX(400px)`;
   } else if (width <= 650 && isOpen_LeftSidebar) {
-    console.log("3")
     //  && document.getElementById("main").style.transform !== "translateX(100%)"
     const main = document.getElementById("main");
     const sidebar = document.getElementById("sidebar");

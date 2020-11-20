@@ -6,7 +6,7 @@ import Hamburber from "./Sidebar Left/Hamburger";
 import { UserContext } from "../context/UserContext";
 import { PopupContext } from "../context/PopupContext";
 import { ReactComponent as LogoIcon } from "../images/logo/vt-red.svg";
-import { ReactComponent as LogoIcon_phone } from "../images/logo/vt-red-v.svg";
+import { ReactComponent as LogoIconPhone } from "../images/logo/vt-red-v.svg";
 import { ReactComponent as BellIcon } from "../images/other/bellWhite.svg";
 import { ReactComponent as ProfileIcon } from "../images/other/profile.svg";
 
@@ -50,7 +50,7 @@ function Navbar() {
             {width > 800 ? (
               <LogoIcon style={{ width: "150px", height: "150px" }} />
             ) : (
-              <LogoIcon_phone
+              <LogoIconPhone
                 style={{ width: "65px", height: "65px", marginLeft: "-10px" }}
               />
             )}

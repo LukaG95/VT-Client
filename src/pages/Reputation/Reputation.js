@@ -25,7 +25,7 @@ function Reputation() {
       setRepInfo(undefined);
       return;
     }
-    console.log("heh")
+
     let searchUserID = 0;
     if (pathID === "") {
       searchUserID = myID;
