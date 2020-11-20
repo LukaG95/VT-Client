@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 
 import { rl_dd_names } from "../../info/DropdownNames";
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
+import Dropdown from "../Dropdown";
+
 
 const {
   gameDD,
@@ -52,11 +54,11 @@ function FiltersRL() {
         dd={namesDD}
         setFunction={setName}
       />
-      <FilterButton
-        text={`Color`}
-        value={color}
-        dd={colorDD}
-        setFunction={setColor}
+      <Dropdown
+        name="Color"
+        items={colorDD}
+        onChange={setColor}
+        defaultValue={colorDD.findIndex(c => c === color)}
       />
       <FilterButton
         text={`Certification`}
@@ -109,9 +111,8 @@ function FilterButton({ text, value, dd, setFunction }) {
       <div
         id={`${text}`}
         onClick={() => setOpen(!open)}
-        className={`noUserInteraction filterButton ${
-          open ? "blackBorder" : null
-        }`}
+        className={`noUserInteraction filterButton ${open ? "blackBorder" : null
+          }`}
       >
         <div className="filterButtonContent">
           <p id="fix">{value}</p>
@@ -137,9 +138,9 @@ function FilterButton({ text, value, dd, setFunction }) {
           e.target.parentNode.parentNode.parentNode.id !== text &&
           e.target.parentNode.parentNode.parentNode.parentNode.id !== text &&
           e.target.parentNode.parentNode.parentNode.parentNode.parentNode.id !==
-            text &&
+          text &&
           e.target.parentNode.parentNode.parentNode.parentNode.parentNode.id !==
-            text &&
+          text &&
           e.target.parentNode.parentNode.parentNode.parentNode.parentNode
             .parentNode.id !== text &&
           e.target.parentNode.parentNode.parentNode.parentNode.parentNode

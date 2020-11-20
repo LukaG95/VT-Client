@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Platforms } from "../constants/Platforms";
+import { DefaultItem } from "../constants/Items";
 
 const TradeStateContext = React.createContext();
 const TradeDispatchContext = React.createContext();
@@ -24,7 +25,7 @@ function tradeReducer(state, action) {
       const type = action.payload.type; // "have" or "want"
       return {
         ...state,
-        [type]: [...state[type], action.payload.item].slice(0, 12),
+        [type]: [...state[type], Object.assign(DefaultItem, action.payload.item)].slice(0, 12),
       };
     }
     case "setItems": {

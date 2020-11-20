@@ -5,6 +5,7 @@ import Filter from "bad-words";
 import styles from "./Main.module.scss";
 import { createNotification } from "../../../misc/ToastNotification";
 import FilterBar from "../../../components/Rocket League/FilterBar";
+import EditItemDropdown from "../../../components/Rocket League/EditItemDropdown";
 import Item from "./Item";
 import ItemContainer from "./ItemContainer";
 import SmallHome from "./SmallHome";
@@ -100,7 +101,7 @@ function AddTradeRL() {
             </div>
             <ItemContainer className={styles.items}>
               {have.map((item) => (
-                <Item item={item} />
+                <Item item={item}><EditItemDropdown item={item}/></Item>
               ))}
               {Array(12 - have.length)
                 .fill(null)

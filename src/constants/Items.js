@@ -86,3 +86,18 @@ export const ItemTypes = [
     image: AvatarBorder,
   },
 ];
+
+export const DefaultItem = {
+  HasSpecialEditions: false,
+  HasTeamEditions: false,
+  ItemID: 0,
+  Name: "Unknown",
+  Paintable: true,
+  Quality: "Common",
+  Slot: "Body",
+  Tradable: true,
+  color: "Unpainted",
+  colorID: "",
+  cert: "",
+  amount: 0
+}
