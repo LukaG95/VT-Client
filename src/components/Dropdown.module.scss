@@ -1,0 +1,131 @@
+.wrapper {
+  position: relative;
+}
+
+.label {
+  font-size: 11px;
+  color: #f6f6f6;
+
+  > span {
+    font-size: 13px;
+    color: #f6f6f6;
+    font-weight: 600;
+    margin-left: 5px;
+  }
+}
+
+.button {
+  display: flex;
+  width: 209px;
+  height: 29px;
+  font-size: 12px;
+  background: #131313;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+
+  transition: filter 200ms;
+  margin-right: 12px;
+  padding-left: 10px;
+
+  &.open {
+    border-radius: 5px 5px 0px 0px;
+    padding-left: 9px;
+    padding-bottom: 1px;
+    border: 1px solid black;
+    border-bottom: none;
+  }
+
+  &:hover {
+    filter: brightness(1.075);
+  }
+
+  &:active {
+    filter: brightness(0.8);
+  }
+}
+
+.content {
+  color: #f6f6f6;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.arrow {
+  background-color: #f6f6f6;
+  margin-right: 12px;
+  margin-bottom: 2px;
+  height: 9px;
+  width: 9px;
+  clip-path: polygon(50% 100%, 0 30%, 100% 30%);
+
+  &.open {
+    background-color: #f6f6f6;
+    visibility: hidden;
+    margin-right: 12px;
+    margin-bottom: 2px;
+    height: 9px;
+    width: 9px;
+    clip-path: polygon(50% 100%, 0 30%, 100% 30%);
+    animation: fallDown 0.2s;
+  }
+}
+
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 209px;
+  max-height: 300px;
+
+  background: #131313;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.54);
+
+  padding: 10px;
+  z-index: 2;
+  cursor: pointer;
+  animation: transitionDown 0.2s;
+}
+
+.search {
+  background: #1e1e1e;
+  border: 1px solid #676767;
+  border-radius: 5px;
+  font-size: 10px;
+  color: #cdcdcd;
+  padding: 10px;
+  width: 100%;
+  box-shadow: 0px 0px 4px #5d4e76;
+  margin-bottom: 10px;
+}
+
+.items {
+  width: 100%;
+  font-size: 12px;
+  overflow: auto;
+  scrollbar-color: #f6f6f6 #332638;
+  scrollbar-width: thin;
+}
+
+.item {
+  display: flex;
+  color: #f6f6f6;
+  font-size: 13px;
+  min-height: 35px;
+  align-items: center;
+  transition: background 0.2s;
+
+  padding-left: 8px;
+  transition: padding 0.3s;
+
+  &:hover {
+    color: #f6f6f6;
+    background: #332638;
+    border-radius: 5px;
+    padding-left: 15px;
+  }
+}

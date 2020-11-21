@@ -22,6 +22,10 @@
   }
 }
 
+.itemContainer {
+  overflow-y: scroll;
+}
+
 .haveWant {
   .section {
     box-sizing: border-box;

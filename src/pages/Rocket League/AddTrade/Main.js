@@ -6,8 +6,8 @@ import styles from "./Main.module.scss";
 import { createNotification } from "../../../misc/ToastNotification";
 import FilterBar from "../../../components/Rocket League/FilterBar";
 import EditItemDropdown from "../../../components/Rocket League/EditItemDropdown";
-import Item from "./Item";
-import ItemContainer from "./ItemContainer";
+import Item from "../../../components/Rocket League/Item";
+import ItemContainer from "../../../components/Rocket League/ItemContainer";
 import SmallHome from "./SmallHome";
 import useWindowDimensions from "../../../misc/windowHW";
 import { useTrade } from "../../../context/TradeContext";
@@ -68,7 +68,7 @@ function AddTradeRL() {
       <div className={styles.wrapper}>
         <div className={error.trade ? styles.errored : ""}>
           <FilterBar />
-          <ItemContainer>
+          <ItemContainer className={styles.itemContainer}>
             {items.map((item) => (
               <Item
                 item={item}
@@ -76,11 +76,6 @@ function AddTradeRL() {
                 key={item.ItemID}
               />
             ))}
-            {Array(items.length > 12 ? 0 : 12 - items.length)
-              .fill(null)
-              .map(() => (
-                <div />
-              ))}
           </ItemContainer>
           <p className={styles.error}>{error.trade}</p>
         </div>

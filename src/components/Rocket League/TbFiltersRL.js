@@ -1,9 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 import { rl_dd_names } from "../../info/DropdownNames";
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
 import Dropdown from "../Dropdown";
-
 
 const {
   gameDD,
@@ -36,47 +35,47 @@ function FiltersRL() {
 
   return (
     <div className="filters-field hide">
-      <FilterButton
-        text={`Game`}
+      <Dropdown
+        name={`Game`}
         value={game}
-        dd={gameDD}
-        setFunction={setGame}
+        items={gameDD}
+        onChange={setGame}
       />
-      <FilterButton
-        text={`Search`}
+      <Dropdown
+        name={`Search`}
         value={searchType}
-        dd={searchTypeDD}
-        setFunction={setSearchType}
+        items={searchTypeDD}
+        onChange={setSearchType}
       />
-      <FilterButton
-        text={`Name`}
+      <Dropdown
+        name={`Name`}
         value={name}
-        dd={namesDD}
-        setFunction={setName}
+        items={namesDD}
+        onChange={setName}
       />
       <Dropdown
         name="Color"
         items={colorDD}
         onChange={setColor}
-        defaultValue={colorDD.findIndex(c => c === color)}
+        value={color}
       />
-      <FilterButton
-        text={`Certification`}
+      <Dropdown
+        name={`Certification`}
         value={cert}
-        dd={certDD}
-        setFunction={setCert}
+        items={certDD}
+        onChange={setCert}
       />
-      <FilterButton
-        text={`Item Type`}
+      <Dropdown
+        name={`Item Type`}
         value={itemType}
-        dd={itemTypeDD}
-        setFunction={setItemType}
+        items={itemTypeDD}
+        onChange={setItemType}
       />
-      <FilterButton
-        text={`Platform`}
+      <Dropdown
+        name={`Platform`}
         value={platform}
-        dd={platformDD}
-        setFunction={setPlatform}
+        items={platformDD}
+        onChange={setPlatform}
       />
 
       <div
@@ -91,107 +90,6 @@ function FiltersRL() {
       </div>
     </div>
   );
-}
-
-/*-----Functions                -------------*/
-
-function FilterButton({ text, value, dd, setFunction }) {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    window.addEventListener("click", click);
-    return () => {
-      window.removeEventListener("click", click);
-    };
-  });
-
-  return (
-    <div className="filterButtonWrapper">
-      <label className="filter-label">{text}</label>
-      <div
-        id={`${text}`}
-        onClick={() => setOpen(!open)}
-        className={`noUserInteraction filterButton ${open ? "blackBorder" : null
-          }`}
-      >
-        <div className="filterButtonContent">
-          <p id="fix">{value}</p>
-        </div>
-
-        <div className={`${open ? "openArrow" : "dropdownArrow"}`}></div>
-      </div>
-      {open && <DropdownMenu dd={dd} setFunction={setFunction} />}
-    </div>
-  );
-
-  function click(e) {
-    if (e.target.parentNode === null) return;
-
-    if (e.target.id !== text && e.target.nodeName !== "INPUT") {
-      if (
-        (e.target.id !== "fix" &&
-          e.target.className !== "filterButtonContent" &&
-          e.target.parentNode.className !== "noUserInteraction filterButton" &&
-          e.target.parentNode.nodeName !== "g") ||
-        (e.target.parentNode.id !== text &&
-          e.target.parentNode.parentNode.id !== text &&
-          e.target.parentNode.parentNode.parentNode.id !== text &&
-          e.target.parentNode.parentNode.parentNode.parentNode.id !== text &&
-          e.target.parentNode.parentNode.parentNode.parentNode.parentNode.id !==
-          text &&
-          e.target.parentNode.parentNode.parentNode.parentNode.parentNode.id !==
-          text &&
-          e.target.parentNode.parentNode.parentNode.parentNode.parentNode
-            .parentNode.id !== text &&
-          e.target.parentNode.parentNode.parentNode.parentNode.parentNode
-            .parentNode.parentNode.id !== text &&
-          e.target.parentNode.parentNode.parentNode.parentNode.parentNode
-            .parentNode.parentNode.parentNode.id !== text)
-      ) {
-        setOpen(false);
-      }
-    }
-
-    !open &&
-      setTimeout(async () =>
-        document.getElementById("dd")
-          ? document.getElementById("dd").focus()
-          : null
-      );
-  }
-}
-
-function DropdownMenu({ dd, setFunction }) {
-  const [dropNames, setDropNames] = useState(() =>
-    dd.map((name) => name.length < 25 && <DropdownItem>{name}</DropdownItem>)
-  );
-
-  return (
-    <div className="dropdown">
-      <input
-        id="dd"
-        onChange={(event) => {
-          const searchName = dd.map((name) => {
-            if (name.toLowerCase().includes(event.target.value.toLowerCase()))
-              return <DropdownItem>{name}</DropdownItem>;
-            else return null;
-          });
-          setDropNames(searchName);
-        }}
-        placeholder="Search"
-        className="filterInput"
-      ></input>
-      <div className="itemNames">{dropNames}</div>
-    </div>
-  );
-
-  function DropdownItem({ children }) {
-    return (
-      <div className="menu-item" onClick={() => setFunction(children)}>
-        {children}
-      </div>
-    );
-  }
 }
 
 export default FiltersRL;

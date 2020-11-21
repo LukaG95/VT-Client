@@ -3,8 +3,8 @@ import styles from "./SmallChooseItems.module.css";
 import AddTradeFiltersRL from "../../../components/Rocket League/FilterBar";
 import { TradeContextRL } from "../../../context/TradeContextRL";
 import RLInfo from "../../../constants/RocketLeagueInfo.json";
-import ItemContainer from "./ItemContainer";
-import Item from "./Item";
+import ItemContainer from "../../../components/Rocket League/ItemContainer";
+import Item from "../../../components/Rocket League/Item";
 import ItemConfirmIcon from "./ItemConfirmIcon";
 
 function SmallChooseItems({ setShowPage, displayPage }) {

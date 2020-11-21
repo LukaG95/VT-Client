@@ -3,7 +3,7 @@ import {
   LazyLoadImage,
   LazyLoadComponent,
 } from "react-lazy-load-image-component";
-import styles from "./Item.module.css";
+import styles from "./Item.module.scss";
 
 export default function Item({ item, lazy = false, ...props }) {
   const content = (
@@ -18,22 +18,30 @@ export default function Item({ item, lazy = false, ...props }) {
           {lazy ? (
             <LazyLoadImage
               className={styles.image}
-              src={`/images/items/${item.ItemID}.0.webp`}
+              src={`/images/items/${item.itemID}.0.webp`}
               threshold={100}
               delayTime={0}
               alt=""
               lazy="true"
             />
           ) : (
-            <img
-              className={styles.image}
-              src={`/images/items/${item.ItemID}.0.webp`}
-              alt=""
-              lazy="true"
-            />
-          )}
+              <img
+                className={styles.image}
+                src={`/images/items/${item.itemID}.0.webp`}
+                alt=""
+                lazy="true"
+              />
+            )}
         </div>
-        <span className={styles.name}>{item.Name}</span>
+        <span className={styles.name}>{item.itemName}</span>
+        {/* Icons + Overlays */}
+        {item.cert && item.cert !== "None" && <div className={styles.cert}>{item.cert}</div>}
+        {item.amount > 1 && <div className={styles.amount}>{item.amount}</div>}
+        {item.color && item.color !== "None" &&
+          <div className={`${styles.color} ${item.color.replace(/\s+/g, "")}`}>
+            <span className={styles.tooltip}>{item.color}</span>
+          </div>
+        }
       </div>
       {props.children}
     </div>
@@ -43,7 +51,7 @@ export default function Item({ item, lazy = false, ...props }) {
       <LazyLoadComponent
         threshold={100}
         placeholder={<div className={styles.placeholder} />}
-        key={item.ItemID}
+        key={item.itemID}
       >
         {content}
       </LazyLoadComponent>

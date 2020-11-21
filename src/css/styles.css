@@ -254,7 +254,6 @@ html {
 }
 
 /*-----Filters              ----*/
-
 .filters-field {
   margin-top: 15px;
   margin-right: 0px;
@@ -269,145 +268,6 @@ html {
   padding-bottom: 12px;
   padding-left: 12px;
   flex-wrap: wrap;
-}
-
-
-.filterButtonWrapper {
-  position: relative;
-}
-
-.filter-label {
-  font-size: 11px;
-  color: #f6f6f6;
-}
-
-.filterButton {
-  display: flex;
-  width: 209px;
-  height: 29px;
-  font-size: 12px;
-  background: #131313;
-  border-radius: 5px;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-
-  transition: filter 200ms;
-  margin-right: 12px;
-  padding-left: 10px;
-}
-
-.blackBorder {
-  border-radius: 5px 5px 0px 0px;
-  padding-left: 9px;
-  padding-bottom: 1px;
-  border: 1px solid black;
-  border-bottom: none;
-}
-
-.filterButton:hover {
-  filter: brightness(1.075);
-}
-
-.filterButton:active {
-  filter: brightness(0.8);
-}
-
-.filterButtonContent {
-  color: #f6f6f6;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.dropdownArrow {
-  background-color: #f6f6f6;
-  margin-right: 12px;
-  margin-bottom: 2px;
-  height: 9px;
-  width: 9px;
-  clip-path: polygon(50% 100%, 0 30%, 100% 30%);
-}
-
-.openArrow {
-  background-color: #f6f6f6;
-  visibility: hidden;
-  margin-right: 12px;
-  margin-bottom: 2px;
-  height: 9px;
-  width: 9px;
-  clip-path: polygon(50% 100%, 0 30%, 100% 30%);
-  animation: fallDown 0.2s;
-}
-
-#fix {
-  font-size: 13px;
-  color: #f6f6f6;
-  font-weight: 600;
-  margin-left: 5px;
-}
-
-.dropdown {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  width: 209px;
-  max-height: 300px;
-
-  background: #131313;
-  border-right: 1px solid black;
-  border-left: 1px solid black;
-  border-bottom: 1px solid black;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.54);
-
-  padding: 10px;
-  z-index: 2;
-  cursor: pointer;
-  animation: transitionDown 0.2s;
-}
-
-.filterWrapper {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-}
-
-.filterInput {
-  background: #1e1e1e;
-  border: 1px solid #676767;
-  border-radius: 5px;
-  font-size: 10px;
-  color: #cdcdcd;
-  padding: 10px;
-  width: 100%;
-  box-shadow: 0px 0px 4px #5d4e76;
-  margin-bottom: 10px;
-}
-
-.itemNames {
-  width: 100%;
-  font-size: 12px;
-  overflow: auto;
-  scrollbar-color: #f6f6f6 #332638;
-  scrollbar-width: thin;
-}
-
-.menu-item {
-  display: flex;
-  color: #f6f6f6;
-  font-size: 13px;
-  min-height: 35px;
-  align-items: center;
-  transition: background 0.2s;
-
-  padding-left: 8px;
-  transition: padding 0.3s;
-}
-
-.menu-item:hover {
-  color: #f6f6f6;
-  background: #332638;
-  border-radius: 5px;
-  padding-left: 15px;
 }
 
 .leaderboards-wrapper {
@@ -882,7 +742,8 @@ html {
 
 .rl-has-container,
 .rl-wants-container {
-  width: 430px;
+  min-width: 430px;
+  width: 50%;
   height: 100%;
   align-items: flex-start;
   padding: 10px 0px 20px 20px;
@@ -893,15 +754,6 @@ html {
   color: #cec6e0;
 
   padding-bottom: 10px;
-}
-
-.has-items,
-.want-items {
-  display: grid;
-  position: relative;
-  grid-template-columns: auto auto auto auto;
-  column-gap: 3px;
-  row-gap: 3px;
 }
 
 .rl_notes_buttons_container {
@@ -1824,34 +1676,6 @@ html {
   background-color: #564b68;
 }
 
-@media screen and (max-height: 820px) {
-  .haveItems,
-  .wantItems {
-    grid-template-columns: auto auto auto auto auto auto;
-    overflow-x: scroll;
-    overflow-y: hidden;
-
-    scrollbar-width: thin;
-
-    align-items: initial;
-    justify-content: initial;
-  }
-}
-
-@media screen and (max-height: 635px) {
-  .haveItems,
-  .wantItems {
-    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
-    overflow-x: scroll;
-    overflow-y: hidden;
-
-    scrollbar-width: thin;
-
-    align-items: initial;
-    justify-content: initial;
-  }
-}
-
 .haveItems button,
 .wantItems button {
   background-color: #2b202f;
@@ -1918,48 +1742,6 @@ html {
 
   top: 30px;
   left: 7px;
-  cursor: pointer;
-}
-
-.colorIcon {
-  position: absolute;
-  height: 14px;
-  width: 14px;
-
-  background: none;
-  border-radius: 50px;
-  top: 7px;
-  right: 7px;
-  cursor: pointer;
-}
-
-.certIcon {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #f6f6f6;
-  font-size: 12px;
-  height: 20px;
-  width: 100%;
-
-  bottom: 15px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.AmountIcon {
-  position: absolute;
-  color: #f6f6f6;
-  background-color: #251d28;
-  font-size: 11px;
-  border-radius: 50px;
-  font-weight: 500;
-  line-height: 0px;
-  border: 1px solid #6e6e6e;
-
-  /*padding: 1px 3px 1px 4px;*/
-  padding: 8px 5px 8px 5px;
-  top: 6px;
-  left: 5px;
   cursor: pointer;
 }
 
@@ -2046,33 +1828,6 @@ html {
     #ffffff 43.66%,
     rgba(255, 255, 255, 0.73) 100%
   );
-}
-
-.paint-tooltip {
-  position: absolute;
-  color: #f6f6f6;
-  background-color: #48364e;
-  min-width: 100%;
-  font-size: 12px;
-  font-weight: 400;
-
-  visibility: hidden;
-  text-align: center;
-
-  border-radius: 5px;
-
-  padding: 8px 14px 8px 14px;
-
-  top: 15px;
-  left: 10px;
-
-  z-index: 1;
-  white-space: nowrap;
-}
-
-.colorIcon:hover .paint-tooltip {
-  visibility: visible;
-  animation: transitionUp 0.2s;
 }
 
 .RLicon-name {
@@ -2459,7 +2214,6 @@ html {
   font-size: 12px;
   margin-left: 15px;
 }
-
 
 /*-----Add RL Trade SMALL          ----*/
 

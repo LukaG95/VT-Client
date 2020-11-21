@@ -1,13 +1,13 @@
 .container {
   position: relative;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 0 10px;
-  height: 100%;
+  width: 100%;
   /* Item Grid Styles */
   display: grid;
   align-items: center;
-  /* Min size of 100px */
+  /* Min size of 90px */
   grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  grid-template-rows: max-content;
+  grid-template-rows: min-content;
   gap: 4px;
 }
