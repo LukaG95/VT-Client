@@ -71,7 +71,7 @@ function SmallChooseItems({ setShowPage, displayPage }) {
           >
             <pre>Have: {have_count}/12</pre>
             <img
-              src={require(`../../../images/other/trash.png`)}
+              src="/images/icons/trash.png"
               style={{ height: "20px", width: "20px", cursor: "pointer" }}
               onClick={() => clearHaveItems()}
               alt="trash"
@@ -85,7 +85,7 @@ function SmallChooseItems({ setShowPage, displayPage }) {
           >
             <pre>Want: {want_count}/12</pre>
             <img
-              src={require(`../../../images/other/trash.png`)}
+              src="/images/icons/trash.png"
               style={{ height: "20px", width: "20px", cursor: "pointer" }}
               onClick={() => clearWantItems()}
               alt="trash"

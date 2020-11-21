@@ -83,7 +83,7 @@ function FiltersRL() {
         className="rl-resetFilters-button noUserInteraction"
       >
         <img
-          src={require(`../../images/other/trash.png`)}
+          src="/images/icons/trash.png"
           style={{ height: "14px", width: "14px" }}
           alt=""
         />

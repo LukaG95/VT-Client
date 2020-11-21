@@ -81,9 +81,9 @@ function LoginInfo({ setForgotPassword, closeForm }) {
             className="loginSteam"
           >
             <img
-              src={require("../../images/other/SteamCircle.png")}
+              src="/images/icons/steam-small.png"
               alt=""
-              style={{ marginRight: "10px" }}
+              style={{ height: "28px", width: "35", marginRight: "8px" }}
             ></img>
             <p>STEAM</p>
           </div>
@@ -93,7 +93,7 @@ function LoginInfo({ setForgotPassword, closeForm }) {
             className="loginDiscord"
           >
             <img
-              src={require("../../images/other/DiscordLogo.png")}
+              src="/images/icons/discord.png"
               alt=""
               style={{ height: "28px", width: "35", marginRight: "8px" }}
             ></img>

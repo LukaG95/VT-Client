@@ -152,7 +152,7 @@ function RLTradeComponent({ trade, manageTrade }) {
             {/*<img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/SWITCH icon.png`)} alt="" />*/}
             <img
               style={{ height: "20px", width: "20px", marginRight: "5px" }}
-              src={require(`../../images/other/${trade.platform} icon.png`)}
+              src={`/images/icons/${trade.platform.toLowerCase()}.png`}
               alt=""
             />
             {trade.platform}
@@ -204,7 +204,7 @@ function RLTradeComponent({ trade, manageTrade }) {
             {/*<img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/SWITCH icon.png`)} alt="" />*/}
             <img
               style={{ height: "20px", width: "20px", marginRight: "5px" }}
-              src={require(`../../images/other/${trade.platform} icon.png`)}
+              src={`/images/icons/${trade.platform.toLowerCase()}.png`}
               alt=""
             />
             {trade.platform}
@@ -231,7 +231,7 @@ function RLTradeComponent({ trade, manageTrade }) {
               width: "17px",
               height: "17px",
             }}
-            src={require("../../images/other/crown.svg")}
+            src="images/icons/crown.svg"
             alt=""
           />
           <p>{trade.user.username}</p>

@@ -8,25 +8,25 @@ function Footer() {
         <img
           height={38}
           width={33}
-          src={require("../../images/other/Discord logo FULL.png")}
+          src="/images/icons/discord-full.png"
           alt=""
         />
         <img
           height={35}
           width={42}
-          src={require("../../images/other/TwitterLogo.png")}
+          src="/images/icons/twitter.png"
           alt=""
         />
         <img
           height={35}
           width={35}
-          src={require("../../images/other/InstagramLogo.png")}
+          src="/images/icons/instagram.png"
           alt=""
         />
         <img
           height={35}
           width={35}
-          src={require("../../images/other/Steam icon.png")}
+          src="/images/icons/steam.png"
           alt=""
         />
       </div>

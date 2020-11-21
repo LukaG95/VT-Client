@@ -92,14 +92,10 @@ export const ItemTypes = [
 ];
 
 export const DefaultItem = {
-  HasSpecialEditions: false,
-  HasTeamEditions: false,
-  ItemID: 0,
-  Name: "Unknown",
-  Paintable: true,
+  itemID: 0,
+  itemName: "Unknown",
   Quality: "Common",
-  Slot: "Body",
-  Tradable: true,
+  itemType: "Body",
   color: "Unpainted",
   colorID: "",
   cert: "",

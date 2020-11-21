@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 
 import { TradeContextRL } from "../../../context/TradeContextRL";
 import RLInfo from "../../../constants/RocketLeagueInfo.json";
-import imageExists from "../../../misc/imageExists";
 
 import { rl_dd_names } from "../../../info/DropdownNames";
 
@@ -28,7 +27,7 @@ function Small3rdPage({ setShowPage, clickedItem }) {
   return (
     <div id="add-trade-3rd-page">
       <div className="add-trade-3rd-page-header-field">
-        <img src={imageExists(`${itemID}.0.webp`)} alt="" />
+        <img src={`/images/items/${itemID}.0.webp`} alt="" />
         <div>
           <p>{itemName}</p>
           <button

@@ -6,9 +6,7 @@ import Hamburber from "./Sidebar Left/Hamburger";
 import { UserContext } from "../context/UserContext";
 import { PopupContext } from "../context/PopupContext";
 import { ReactComponent as LogoIcon } from "../images/logo/vt-red.svg";
-import { ReactComponent as LogoIcon_phone } from "../images/logo/vt-red-v.svg";
-import { ReactComponent as BellIcon } from "../images/other/bellWhite.svg";
-import { ReactComponent as ProfileIcon } from "../images/other/profile.svg";
+import { ReactComponent as LogoIconPhone } from "../images/logo/vt-red-v.svg";
 
 function Navbar() {
   let location = useLocation();
@@ -51,10 +49,10 @@ function Navbar() {
             {width > 800 ? (
               <LogoIcon style={{ width: "150px", height: "150px" }} />
             ) : (
-              <LogoIcon_phone
-                style={{ width: "65px", height: "65px", marginLeft: "-10px" }}
-              />
-            )}
+                <LogoIconPhone
+                  style={{ width: "65px", height: "65px", marginLeft: "-10px" }}
+                />
+              )}
           </Link>
         </div>
 
@@ -83,7 +81,7 @@ function Navbar() {
             <div className="nav-button-wrapper">
               <img
                 height={25}
-                src={require("../images/other/addtrade_icon_small.png")}
+                src="/images/icons/plus-trade-small.png"
                 alt=""
               />
             </div>
@@ -101,7 +99,11 @@ function Navbar() {
         )}
         {isLoggedIn && (
           <div className={`nav-button-wrapper ${width > 1213 && "bell"}`}>
-            <BellIcon height={25} width={25} />
+            <img
+              src="/images/icons.bell-white.svg"
+              style={{ height: "25", width: "25" }}
+              alt=""
+            />
           </div>
         )}
 
@@ -123,9 +125,11 @@ function Navbar() {
         return (
           <Link to="/account/settings" id="removeDecoration">
             <div className="navRightItem profile">
-              <ProfileIcon
+              <img
+                src="/images/icons/profile.svg"
                 style={{ height: "40px", width: "40px" }}
                 className="navRightContent"
+                alt=""
               />
               <p style={{ marginLeft: "10px" }}>{username}</p>
             </div>
@@ -137,7 +141,7 @@ function Navbar() {
             <img
               height={25}
               width={25}
-              src={require("../images/other/profile_icon_small.png")}
+              src="/images/icons/"
               alt=""
             />
           </div>

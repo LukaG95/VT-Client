@@ -99,7 +99,7 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
             style={{ margin: "0px" }}
           >
             <img
-              src={require(`../../../images/other/trash.png`)}
+              src="/images/icons/trash.png"
               style={{ height: "14px", width: "14px" }}
               alt=""
             />
@@ -120,7 +120,7 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
             style={{ margin: "0px" }}
           >
             <img
-              src={require(`../../../images/other/trash.png`)}
+              src="/images/icons/trash.png"
               style={{ height: "14px", width: "14px" }}
               alt=""
             />

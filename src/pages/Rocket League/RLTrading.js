@@ -119,7 +119,7 @@ function RLTrading() {
       <div className="no-trades-found-wrapper">
         <img
           className="noUserInteraction"
-          src={require("../../images/other/No trades found.png")}
+          src="/images/icons/not-found.png"
           alt=""
         ></img>
         <h2>

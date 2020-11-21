@@ -8,28 +8,28 @@ function FiltersREP() {
   const trophy = (
     <img
       style={{ height: "25px", width: "25px", marginLeft: "50px" }}
-      src={require("../images/other/icon-trophy.png")}
+      src="/images/icons/trophy.png"
       alt=""
     />
   );
   const goldTrophy = (
     <img
       style={{ height: "25px", width: "25px" }}
-      src={require("../images/other/icon-1st.png")}
+      src="/images/icons/icon-1st.png"
       alt=""
     />
   );
   const silverTrophy = (
     <img
       style={{ height: "25px", width: "25px" }}
-      src={require("../images/other/icon-2nd.png")}
+      src="/images/icons/icon-2nd.png"
       alt=""
     />
   );
   const bronzeTrophy = (
     <img
       style={{ height: "25px", width: "25px" }}
-      src={require("../images/other/icon-3rd.png")}
+      src="/images/icons/icon-3rd.png"
       alt=""
     />
   );

@@ -87,7 +87,7 @@ function AddedIconRL({ item, setShowPage, setClickedItem }) {
       <img
         style={amount <= 1 ? { top: "6px" } : null}
         className="editIcon"
-        src={require(`../../images/other/Edit-icon.png`)}
+        src="/images/icons/edit.png"
         alt=""
       />
     );

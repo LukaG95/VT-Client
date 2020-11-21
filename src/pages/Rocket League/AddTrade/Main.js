@@ -33,15 +33,16 @@ function AddTradeRL() {
   const [items, setItems] = useState(getTradeableItems());
   const [slot, setSlot] = useState("have");
   const { width } = useWindowDimensions();
+  console.log(have, want)
   //Filtered Items
   useEffect(() => {
     let items = getTradeableItems();
     if (filters.type !== "Any") {
-      items = items.filter((i) => i.Slot === filters.type);
+      items = items.filter((i) => i.itemType === filters.type);
     }
     if (filters.name) {
       items = items.filter(
-        (i) => i.Name.toLowerCase().search(filters.name) > -1
+        (i) => i.itemName.toLowerCase().search(filters.name) > -1
       );
     }
     setItems(items);
@@ -73,7 +74,7 @@ function AddTradeRL() {
               <Item
                 item={item}
                 onClick={() => ItemClick(item)}
-                key={item.ItemID}
+                key={item.itemID}
               />
             ))}
           </ItemContainer>

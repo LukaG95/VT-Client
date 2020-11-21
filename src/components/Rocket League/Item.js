@@ -5,7 +5,7 @@ import {
 } from "react-lazy-load-image-component";
 import styles from "./Item.module.scss";
 
-export default function Item({ item, lazy = false, ...props }) {
+export default function Item({ item, lazy, ...props }) {
   const content = (
     <div className={styles.item} {...props}>
       <div className={styles.content}>

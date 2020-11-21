@@ -742,8 +742,7 @@ html {
 
 .rl-has-container,
 .rl-wants-container {
-  min-width: 430px;
-  width: 50%;
+  width: 35%;
   height: 100%;
   align-items: flex-start;
   padding: 10px 0px 20px 20px;
@@ -757,7 +756,7 @@ html {
 }
 
 .rl_notes_buttons_container {
-  width: 500px;
+  width: 30%;
   padding: 20px 20px 17px 20px;
 
   justify-content: space-between;
@@ -785,8 +784,9 @@ html {
     padding-top: 0px;
     width: 100%;
   }
+  .rl-has-container,
   .rl-wants-container {
-    padding-right: 20px;
+    width: 50%;
   }
   .notes {
     max-height: 100px !important;
@@ -1721,8 +1721,7 @@ html {
 @media screen and (max-width: 650px) {
   .rl-has-container,
   .rl-wants-container {
-    width: 320px;
-    padding-left: 0px;
+    width: 100%;
   }
 
   .RLicon {

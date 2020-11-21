@@ -38,7 +38,7 @@ function Header({ setIsOpen_LeftSidebar }) {
             <img
               height={20}
               width={20}
-              src={require("../../images/other/arrow_up_sidebar.png")}
+              src="/images/icons/arrow-up.png"
               alt=""
             />
           </span>

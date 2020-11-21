@@ -41,7 +41,7 @@ function ConfirmEmail() {
               <img
                 height="22"
                 width="24"
-                src={require("../../images/other/DiscordLogo.png")}
+                src="/images/icons/discord.png"
                 alt=""
               />
             </div>
@@ -50,7 +50,7 @@ function ConfirmEmail() {
               <img
                 height="14"
                 width="19"
-                src={require("../../images/other/TwitterLogo.png")}
+                src="/images/icons/twitter.png"
                 alt=""
               />
             </div>
@@ -59,7 +59,7 @@ function ConfirmEmail() {
               <img
                 height="17"
                 width="17"
-                src={require("../../images/other/InstagramLogo.png")}
+                src="/images/icons/instagram.png"
                 alt=""
               />
             </div>

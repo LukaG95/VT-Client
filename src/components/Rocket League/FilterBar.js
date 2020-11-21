@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ItemTypes } from "../../constants/Items";
 import { useTradeFilters } from "../../context/TradeFiltersContext";
 import useWindowDimensions from "../../misc/windowHW";
-import MagnifyingGlass from "../../images/other/MagnGlass.png";
 
 function FilterBar() {
   const [filters, dispatch] = useTradeFilters();
@@ -18,7 +17,7 @@ function FilterBar() {
         <div className="magnGlass-container">
           <img
             style={{ width: "11px", height: "11px", marginLeft: "2px" }}
-            src={MagnifyingGlass}
+            src="/images/icons/search.png"
             alt=""
           />
         </div>
@@ -48,7 +47,7 @@ function FilterBar() {
             >
               <img
                 className="filter-filter-icon"
-                src={require(`../../images/other/filter.png`)}
+                src="/images/icons/filter.png"
                 alt=""
               />
               <div
