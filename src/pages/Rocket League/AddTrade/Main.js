@@ -1,226 +1,193 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Filter from "bad-words";
-
+import styles from "./Main.module.scss";
 import { createNotification } from "../../../misc/ToastNotification";
-import AddedIconRL from "../../../components/Rocket League/AddedIconRL";
-import AddTradeFiltersRL from "../../../components/Rocket League/AddTradeFiltersRL";
-import { TradeContextRL } from "../../../context/TradeContextRL";
-import infoRL from "../../../info/infoRL.json";
+import FilterBar from "../../../components/Rocket League/FilterBar";
+import EditItemDropdown from "../../../components/Rocket League/EditItemDropdown";
 import Item from "./Item";
 import ItemContainer from "./ItemContainer";
 import SmallHome from "./SmallHome";
 import useWindowDimensions from "../../../misc/windowHW";
+import { useTrade } from "../../../context/TradeContext";
+import { PlatformColours, Platforms } from "../../../constants/Platforms";
+import ClearItems from "../../../components/AddTrade/ClearItems";
+import { getTradeableItems } from "../../../constants/Items";
+import { useTradeFilters } from "../../../context/TradeFiltersContext";
+import PlusItem from "./PlusItem";
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
 function AddTradeRL() {
-  const [itemImages, setItemImages] = useState();
-  const [tradeErrorMsg, setTradeErrorMsg] = useState("");
-  const [notesErrorMsg, setNotesErrorMsg] = useState("");
-
-  const {
-    have,
-    want,
-    platform,
-    setPlatform,
-    notes,
-    setNotes,
-    manageFocus,
-    pushItem,
-    clearWantItems,
-    clearHaveItems,
-    gotInfo,
-    tradesAmount,
-    setTradesAmount,
-  } = useContext(TradeContextRL);
-
-  const pathID = useLocation().pathname.substring(17); // reads url after /trades/ till the end
-
-  const { height, width } = useWindowDimensions();
-
-  const displayed_have_items = have.map((item) => {
-    if (item.isAdded === false) {
-      if (item.isFocused === false)
-        return <button name={item.id} onClick={manageFocus}></button>;
-      else
-        return (
-          <button name={item.id} onClick={manageFocus} id="focusedButton">
-            +
-          </button>
-        );
-    } else return <AddedIconRL item={item} />;
+  const pathID = useLocation().pathname.substring(17); // Reads url after `/trades/` till the end
+  const [
+    { have, want, platform, notes, count: tradeCount },
+    dispatch,
+  ] = useTrade();
+  const [filters] = useTradeFilters();
+  const [error, setError] = useState({
+    trade: "",
+    notes: "",
   });
-
-  const displayed_want_items = want.map((item) => {
-    if (item.isAdded === false) {
-      if (item.isFocused === false)
-        return <button name={item.id} onClick={manageFocus}></button>;
-      else
-        return (
-          <button name={item.id} onClick={manageFocus} id="focusedButton">
-            +
-          </button>
-        );
-    } else return <AddedIconRL item={item} />;
-  });
-
-  //Initial Items
+  const [items, setItems] = useState(getTradeableItems());
+  const [slot, setSlot] = useState("have");
+  const { width } = useWindowDimensions();
+  //Filtered Items
   useEffect(() => {
-    setItemImages(
-      infoRL.Slots.map((Slot) =>
-        Slot.Items.map((item) => {
-          if (item.Tradable) return <Item
-            item={item}
-            onClick={() => ItemClick(item)}
-            key={item.ItemID} />
-          else return null;
-        })
-      )
-    )
-  }, [gotInfo]);
+    let items = getTradeableItems();
+    if (filters.type !== "Any") {
+      items = items.filter((i) => i.Slot === filters.type);
+    }
+    if (filters.name) {
+      items = items.filter(
+        (i) => i.Name.toLowerCase().search(filters.name) > -1
+      );
+    }
+    setItems(items);
+  }, [filters]);
 
   //Return Desktop or Mobile
-  return width > 1213 ? AddTrade() : <SmallHome />
+  return width > 1213 ? AddTrade() : <SmallHome />;
 
-  // --- FUNCTIONS ---
   function ItemClick(item) {
-    setTradeErrorMsg("")
-    pushItem(item)
+    setError({ ...error, trade: "" });
+    dispatch({
+      type: "addItem",
+      payload: {
+        type: slot,
+        item,
+      },
+    });
+    if (slot === "have" && have.length === 11) return setSlot("want");
+    if (slot === "wave" && want.length === 11) return setSlot("have");
   }
-  
+
   function AddTrade() {
     return (
-      <div className="add-trade-wrapper">
-        <div style={{ position: "absolute", top: "5px", color: "white" }}>
-          {width}
-        </div>
-        <div style={{ position: "absolute", top: "25px", color: "white" }}>
-          {height}
-        </div>
-        <div
-          className="rlChooseItemsSection"
-          style={tradeErrorMsg !== "" ? { border: "1px solid #ff4645" } : null}
-        >
-          <AddTradeFiltersRL
-            itemImages={itemImages}
-            setItemImages={setItemImages}
-            setTradeErrorMsg={setTradeErrorMsg}
-          />
+      <div className={styles.wrapper}>
+        <div className={error.trade ? styles.errored : ""}>
+          <FilterBar />
           <ItemContainer>
-            {itemImages}
+            {items.map((item) => (
+              <Item
+                item={item}
+                onClick={() => ItemClick(item)}
+                key={item.ItemID}
+              />
+            ))}
+            {Array(items.length > 12 ? 0 : 12 - items.length)
+              .fill(null)
+              .map(() => (
+                <div />
+              ))}
           </ItemContainer>
-          <p className="addRLTradeErrorMsg">{tradeErrorMsg}</p>
+          <p className={styles.error}>{error.trade}</p>
         </div>
-        <div className="rlHaveWantSection">
-          <div className="hwTopSection">
-            <div className="hTitle">
+        <div className={styles.haveWant}>
+          <div className={styles.section}>
+            <div className={styles.title}>
               <p>
                 You <b>have</b>
               </p>
-              <div
-                onClick={clearHaveItems}
-                className="rl-resetFilters-button noUserInteraction"
-                style={{ margin: "0px" }}
-              >
-                <img
-                  src={require(`../../../images/other/trash.png`)}
-                  style={{ height: "14px", width: "14px" }}
-                  alt=""
-                />
-              </div>
+              <ClearItems
+                onClick={() =>
+                  dispatch({
+                    type: "clearItems",
+                    payload: "have",
+                  })
+                }
+              />
             </div>
-
-            <div className="haveItems">{displayed_have_items}</div>
+            <ItemContainer className={styles.items}>
+              {have.map((item) => (
+                <Item item={item}><EditItemDropdown item={item}/></Item>
+              ))}
+              {Array(12 - have.length)
+                .fill(null)
+                .map((_, index) => (
+                  <PlusItem
+                    key={index}
+                    selected={!index && slot === "have"}
+                    onClick={() => setSlot("have")}
+                  />
+                ))}
+            </ItemContainer>
           </div>
-
-          <div className="hwBottomSection" style={{ marginBottom: "20px" }}>
-            <div className="wTitle">
+          <div className={styles.section} style={{ marginBottom: "20px" }}>
+            <div className={styles.title}>
               <p>
                 You <b>want</b>
               </p>
-              <div
-                onClick={clearWantItems}
-                className="rl-resetFilters-button noUserInteraction"
-                style={{ margin: "0px" }}
-              >
-                <img
-                  src={require(`../../../images/other/trash.png`)}
-                  style={{ height: "14px", width: "14px" }}
-                  alt=""
-                />
-              </div>
+              <ClearItems
+                onClick={() =>
+                  dispatch({
+                    type: "clearItems",
+                    payload: "want",
+                  })
+                }
+              />
             </div>
-
-            <div className="wantItems">{displayed_want_items}</div>
+            <ItemContainer className="wantItems">
+              {want.map((item) => (
+                <Item item={item} />
+              ))}
+              {Array(12 - want.length)
+                .fill(null)
+                .map((_, index) => (
+                  <PlusItem
+                    key={index}
+                    selected={!index && slot === "want"}
+                    onClick={() => setSlot("want")}
+                  />
+                ))}
+            </ItemContainer>
           </div>
         </div>
-
-        <div className="notes-and-submit-button">
+        <div className={styles.notesSection}>
           <div
-            className="notesSection"
-            style={
-              notesErrorMsg !== "" ? { border: "1px solid #ff4645" } : null
-            }
-            onClick={() => setNotesErrorMsg("")}
+            className={`${styles.notes} ${error.notes ? styles.errored : ""}`}
+            onClick={() => setError({ ...error, notes: "" })}
           >
+            {/* Add Notes */}
             <textarea
               placeholder="Add notes..."
-              className="notesArea"
+              className={styles.input}
               value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-            ></textarea>
-            <div className="platformSection">
+              onChange={(e) =>
+                dispatch({
+                  type: "setNotes",
+                  payload: e.target.value,
+                })
+              }
+            />
+            <div className={styles.platforms}>
               <h4>PLATFORM:</h4>
-              <label className="noUserInteraction platf-button-container">
-                <input
-                  type="radio"
-                  checked={platform === "Steam"}
-                  onChange={() => setPlatform("Steam")}
-                />
-                <p style={platform === "Steam" ? { color: "#2C8E54" } : null}>
-                  STEAM
-                </p>
-              </label>
-              <label className="noUserInteraction platf-button-container">
-                <input
-                  type="radio"
-                  checked={platform === "PS4"}
-                  onChange={() => setPlatform("PS4")}
-                />
-                <p style={platform === "PS4" ? { color: "#2C8E54" } : null}>
-                  PS4
-                </p>
-              </label>
-              <label className="noUserInteraction platf-button-container">
-                <input
-                  type="radio"
-                  checked={platform === "XBOX"}
-                  onChange={() => setPlatform("XBOX")}
-                />
-                <p style={platform === "XBOX" ? { color: "#2C8E54" } : null}>
-                  XBOX
-                </p>
-              </label>
-              <label className="noUserInteraction platf-button-container">
-                <input
-                  type="radio"
-                  checked={platform === "SWITCH"}
-                  onChange={() => setPlatform("SWITCH")}
-                />
-                <p style={platform === "SWITCH" ? { color: "#2C8E54" } : null}>
-                  SWITCH
-                </p>
-              </label>
+              {/* Map Platforms */}
+              {Object.keys(Platforms).map((p) => (
+                <label className={styles.platform} key={p}>
+                  <input
+                    type="radio"
+                    checked={platform === Platforms[p]}
+                    onChange={() =>
+                      dispatch({
+                        type: "setPlatform",
+                        payload: Platforms[p],
+                      })
+                    }
+                  />
+                  <span style={{ color: PlatformColours[p] }}>
+                    {Platforms[p]}
+                  </span>
+                </label>
+              ))}
             </div>
-            <p className="addNotesErrorMsg">{notesErrorMsg}</p>
+            <p className={styles.error}>{error.notes}</p>
           </div>
-
-          <div className="rlSubmit">
+          <div>
             <button
               onClick={() => handleTradeSubmit()}
-              className="rlSubmitButton"
+              className={styles.submit}
             >
               SUBMIT TRADE
             </button>
@@ -231,139 +198,115 @@ function AddTradeRL() {
   }
 
   function handleTradeSubmit() {
-    if (have && want) {
-      if (!checkAddedItems()) {
-        setTradeErrorMsg("You have to select at least 1 item in have and want");
-        createNotification("error", "Choose items", "choose the items");
-        return;
-      } else if (checkNotes()) {
-        setNotesErrorMsg(checkNotes());
-        createNotification("error", checkNotes(), checkNotes());
-        return;
-      } else {
-        let haveRefactor = [];
-        let wantRefactor = [];
-
-        have.forEach((item) => {
-          if (item.isAdded) {
-            let readyItem = {
-              itemID: item.itemID,
-              itemName: item.itemName,
-              color: item.color,
-              colorID: item.colorID,
-              cert: item.cert,
-              itemType: "item", // needs work
-              amount: item.amount,
-            };
-            haveRefactor.push(readyItem);
+    //Check Items
+    if (!have.length || !want.length) {
+      setError({
+        ...error,
+        trade: "You have to select at least 1 item in have and want",
+      });
+      createNotification("error", "Choose items", "choose the items");
+      return;
+    }
+    //Check Notes
+    const notesError = checkNotes();
+    if (notesError) {
+      setError({ ...error, notes: notesError });
+      return createNotification("error", notesError, notesError);
+    }
+    //Create or Edit Trade
+    if (pathID === "") {
+      //Create Trade
+      if (tradeCount >= 15)
+        return createNotification(
+          "error",
+          "You reached the limit of 15 trades",
+          "limit 15 trades"
+        );
+      axios
+        .post("/api/trades/createTrade", {
+          have: have.map(preparePostItem),
+          want: want.map(preparePostItem),
+          platform: platform,
+          notes: profanityFilter.clean(notes),
+        })
+        .then((res) => {
+          if (res.data.info === "success") {
+            //Trade Successfully Created
+            dispatch({ type: "reset" });
+            dispatch({ type: "addTrade" });
+            createNotification(
+              "success",
+              "Created a new trade",
+              "created a new trade"
+            );
+            setTimeout(
+              () =>
+                createNotification(
+                  "info",
+                  `${tradeCount + 1} / 15 RL trades created`,
+                  "info on trades created"
+                ),
+              1000
+            );
           }
-        });
-
-        want.forEach((item) => {
-          if (item.isAdded) {
-            let readyItem = {
-              itemID: item.itemID,
-              itemName: item.itemName,
-              color: item.color,
-              colorID: item.colorID,
-              cert: item.cert,
-              itemType: "item", // needs work
-              amount: item.amount,
-            };
-            wantRefactor.push(readyItem);
-          }
-        });
-
-        if (pathID === "") {
-          if (tradesAmount >= 15) {
+        })
+        .catch((err) => {
+          //Error While Creating Trade
+          if (err.response)
             createNotification(
               "error",
-              "You reached the limit of 15 trades",
-              "limit 15 trades"
+              "Oops, something went wrong",
+              "something went wrong"
             );
-            return;
+          console.log(err.response);
+        });
+    } else {
+      //Edit Trade
+      axios
+        .post(`/api/trades/editTrade?tradeId=${pathID}`, {
+          have: have.map(preparePostItem),
+          want: want.map(preparePostItem),
+          platform: platform,
+          notes: profanityFilter.clean(notes),
+        })
+        .then((res) => {
+          if (res.data.info === "success") {
+            //Successfully Edit Trade
+            createNotification(
+              "success",
+              "You have edited your trade",
+              "you have edited the trade"
+            );
           }
-          axios
-            .post("/api/trades/createTrade", {
-              have: haveRefactor,
-              want: wantRefactor,
-              platform: platform,
-              notes: profanityFilter.clean(notes),
-            })
-            .then((res) => {
-              if (res.data.info === "success") {
-                clearWantItems();
-                clearHaveItems();
-                setNotes("");
-                createNotification(
-                  "success",
-                  "Created a new trade",
-                  "created a new trade"
-                );
-                setTimeout(
-                  () =>
-                    createNotification(
-                      "info",
-                      `${tradesAmount + 1} / 15 RL trades created`,
-                      "info on trades created"
-                    ),
-                  1000
-                );
-                setTradesAmount((prev) => prev + 1);
-              }
-            })
-            .catch((err) => {
-              if (err.response)
-                createNotification(
-                  "error",
-                  "Oops, something went wrong",
-                  "something went wrong"
-                );
-              console.log(err.response);
-              console.log(have);
-            });
-        } else {
-          axios
-            .post(`/api/trades/editTrade?tradeId=${pathID}`, {
-              have: haveRefactor,
-              want: wantRefactor,
-              platform: platform,
-              notes: profanityFilter.clean(notes),
-            })
-            .then((res) => {
-              if (res.data.info === "success") {
-                createNotification(
-                  "success",
-                  "You have edited your trade",
-                  "you have edited the trade"
-                );
-              }
-            })
-            .catch((err) => {
-              if (err.response)
-                createNotification(
-                  "error",
-                  "Oops, something went wrong",
-                  "something went wrong"
-                );
-            });
-        }
-      }
+        })
+        .catch((err) => {
+          //Error While Editing Trade
+          if (err.response)
+            createNotification(
+              "error",
+              "Oops, something went wrong",
+              "something went wrong"
+            );
+        });
     }
   }
-
-  // Returns true if there are items added in have and in want
-  function checkAddedItems() {
-    return want.find(item => item.isAdded) && have.find(item => item.isAdded);
-  }
-
   // Check trade notes for links & length
   function checkNotes() {
-    const notesRegex = /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm
-    if (notes.match(notesRegex))
-      return "No links allowed in notes";
-    if (notes.length > 300)
-      return "Max 300 characters allowed";
+    const notesRegex = /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm;
+    if (notes.match(notesRegex)) return "No links allowed in notes";
+    if (notes.length > 300) return "Max 300 characters allowed";
+  }
+
+  function preparePostItem(item) {
+    return {
+      itemID: item.itemID,
+      itemName: item.itemName,
+      color: item.color,
+      colorID: item.colorID,
+      cert: item.cert,
+      itemType: "item",
+      amount: item.amount,
+    };
   }
 }
 

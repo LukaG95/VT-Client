@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import styles from "./SmallChooseItems.module.css";
-import AddTradeFiltersRL from "../../../components/Rocket League/AddTradeFiltersRL";
+import AddTradeFiltersRL from "../../../components/Rocket League/FilterBar";
 import { TradeContextRL } from "../../../context/TradeContextRL";
-import infoRL from "../../../info/infoRL.json";
+import RLInfo from "../../../constants/RocketLeagueInfo.json";
 import ItemContainer from "./ItemContainer";
 import Item from "./Item";
 import ItemConfirmIcon from "./ItemConfirmIcon";
@@ -23,10 +23,10 @@ function SmallChooseItems({ setShowPage, displayPage }) {
   //Map All Items
   useEffect(() => {
     setItemImages(
-      infoRL.Slots.map((Slot) =>
+      RLInfo.Slots.map((Slot) =>
         Slot.Items.map((item) => {
           if (item.Tradable)
-            return ( 
+            return (
               <Item
                 item={item}
                 onClick={() => ItemClick(item)}
@@ -44,9 +44,7 @@ function SmallChooseItems({ setShowPage, displayPage }) {
   return (
     <div id="add-trade-2nd-page">
       <div className="rlChooseItemsSection-SMALL">
-        <AddTradeFiltersRL
-          setItemImages={setItemImages}
-        />
+        <AddTradeFiltersRL setItemImages={setItemImages} />
         <ItemContainer>{itemImages}</ItemContainer>
       </div>
       {showSelectedAmount()}
@@ -60,19 +58,9 @@ function SmallChooseItems({ setShowPage, displayPage }) {
   );
 
   function showSelectedAmount() {
-    let have_count = 0;
-    let want_count = 0;
-    let focused_field = "";
-
-    have.forEach((item) => {
-      if (item.isAdded) have_count++;
-      if (item.isFocused) focused_field = "have";
-    });
-
-    want.forEach((item) => {
-      if (item.isAdded) want_count++;
-      if (item.isFocused) focused_field = "want";
-    });
+    const have_count = have.filter((i) => i.isAdded).length;
+    const want_count = want.filter((i) => i.isAdded).length;
+    const focused_field = have.find((i) => i.isFocused) ? "have" : "want";
 
     if (have_count > 0 || want_count > 0)
       return (

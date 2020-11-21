@@ -1,7 +1,7 @@
 import React from "react";
 
 import imageExists from "../../misc/imageExists";
-import infoRL from "../../info/infoRL.json";
+import infoRL from "../../constants/RocketLeagueInfo.json";
 
 function TradepostIconRL({ item }) {
   var colorID = 0;

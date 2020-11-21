@@ -5,15 +5,7 @@ import AddedIconRLdropdown from "./AddedIconRLdropdown";
 import imageExists from "../../misc/func";
 
 function AddedIconRL({ item }) {
-  const {
-    id,
-    itemID,
-    color,
-    colorID,
-    cert,
-    amount,
-    isDropdown,
-  } = item;
+  const { id, itemID, color, colorID, cert, amount, isDropdown } = item;
   const { setIsDropdown } = useContext(TradeContextRL);
 
   return (

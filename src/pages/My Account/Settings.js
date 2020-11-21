@@ -143,9 +143,7 @@ function MyAccount() {
       setNewPassErrorMsg("Password must be between 6 and 30 characters long");
       return;
     } else if (
-      !newPass.match(
-        /^[!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{6,30}$/gm
-      )
+      !newPass.match(/^[!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9]{6,30}$/gm)
     ) {
       setNewPassErrorMsg("Password contains inappropriate characters");
       return;

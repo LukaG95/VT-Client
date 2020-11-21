@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import axios from "axios";
 
-import infoRL from "../../info/infoRL.json";
+import infoRL from "../../constants/RocketLeagueInfo.json";
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
 import RLTradeComponent from "../../components/Rocket League/RLTradeComponent";
 import { createNotification } from "../../misc/ToastNotification";

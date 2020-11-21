@@ -17,5 +17,5 @@ export {
   ResetPassword,
   ConfirmEmail,
   UpdateEmail,
-  AlphaForm
-}
+  AlphaForm,
+};

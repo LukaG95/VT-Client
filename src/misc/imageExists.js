@@ -13,4 +13,4 @@ export default (url, itemID) => {
   } catch {
     return "/images/icons/question.png";
   }
-}
+};

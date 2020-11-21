@@ -17,11 +17,11 @@ ReactDOM.render(
   <UserContextProvider>
     <PopupContextProvider>
       <TbFiltersRLContextProvider>
-      <LeftSidebarContextProvider>
-        <Router>
-          <App />
-        </Router>
-       </LeftSidebarContextProvider>
+        <LeftSidebarContextProvider>
+          <Router>
+            <App />
+          </Router>
+        </LeftSidebarContextProvider>
       </TbFiltersRLContextProvider>
     </PopupContextProvider>
   </UserContextProvider>,

@@ -9,6 +9,7 @@
     "axios": "^0.21.0",
     "bad-words": "^3.0.3",
     "http-proxy-middleware": "^1.0.3",
+    "node-sass": "4.14.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-lazy-load-image-component": "^1.5.0",
@@ -21,6 +22,10 @@
     "smooth-scrollbar": "^8.5.2",
     "socket.io-client": "^3.0.1",
     "validator": "^13.1.1"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.12.5",
+    "prettier": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -43,10 +48,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@babel/preset-react": "^7.12.5",
-    "prettier": "^2.1.2"
   },
   "proxy": "https://virtrade-backend.herokuapp.com/"
 }

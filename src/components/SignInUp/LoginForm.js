@@ -14,7 +14,7 @@ function LoginForm() {
   const { openForm, setOpenForm } = useContext(PopupContext);
   const { width } = useWindowDimensions();
 
-  manageFormResize(width, openForm)
+  manageFormResize(width, openForm);
 
   let x,
     y = "";

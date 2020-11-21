@@ -102,7 +102,7 @@ function Header() {
             </Link>
           </div>
         );
-        else return null
+      else return null;
     });
 
     return dropdown;

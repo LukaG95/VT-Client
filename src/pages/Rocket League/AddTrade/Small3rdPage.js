@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import { TradeContextRL } from "../../../context/TradeContextRL";
-import infoRL from "../../../info/infoRL.json";
+import RLInfo from "../../../constants/RocketLeagueInfo.json";
 import imageExists from "../../../misc/imageExists";
 
 import { rl_dd_names } from "../../../info/DropdownNames";
@@ -86,7 +86,7 @@ function Small3rdPage({ setShowPage, clickedItem }) {
     let colorID = 0;
     let temp = [];
 
-    infoRL.Colors.forEach((info_color) => {
+    RLInfo.Colors.forEach((info_color) => {
       if (info_color.Name === color) colorID = info_color.ID;
     });
 

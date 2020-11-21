@@ -1,57 +1,37 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useTrade } from "../../context/TradeContext";
+import styles from "./EditItemDropdown.module.scss";
 
-import { TradeContextRL } from "../../context/TradeContextRL";
-import { rl_dd_names } from "../../info/DropdownNames";
-import infoRL from "../../constants/RocketLeagueInfo.json";
-import useWindowDimensions from "../../misc/windowHW";
-
-const { colorDD, certDD } = rl_dd_names;
-
-function RLitem_icon_dropdown({ item }) {
-  const [color, setColor] = useState("None");
-  const [certification, setCertification] = useState("None");
-  const [amount, setAmount] = useState(1);
-
-  const { setHave, setWant, have, want, deleteRLitem } = useContext(
-    TradeContextRL
-  );
-
-  const { id, itemID, itemName } = item;
-
-  const { height } = useWindowDimensions();
-
+function EditItemDropdown({ item }) {
+  const [visible, setVisible] = useState(false)
   useEffect(() => {
-    [...have, ...want].forEach((item) => {
-      if (item.id === id) {
-        setColor(item.color);
-        setCertification(item.cert);
-        setAmount(item.amount);
-      }
-    });
+
   }, []);
 
   return (
-    <div
+    <>
+    { visible
+    /*<div
       name="enableDropdown"
       className="rl-icon-dropdown" // style is small height positioning
       style={
         height <= 650
           ? {
-              position: "fixed",
-              top: "280px",
-              right: "510px",
-              marginTop: "-200px",
-              marginLeft: "200px",
-            }
+            position: "fixed",
+            top: "280px",
+            right: "510px",
+            marginTop: "-200px",
+            marginLeft: "200px",
+          }
           : height <= 820
-          ? {
+            ? {
               position: "fixed",
               top: "400px",
               right: "510px",
               marginTop: "-200px",
               marginLeft: "200px",
             }
-          : null
+            : null
       }
     >
       <div className="item_name">{itemName}</div>
@@ -81,45 +61,47 @@ function RLitem_icon_dropdown({ item }) {
       <button id="delete-rl-filters-button" onClick={() => deleteRLitem(id)}>
         Delete
       </button>
-    </div>
+    </div>*/
+    } 
+    </>
   );
+/*
+function submitFilters() {
+  let colorID = 0;
+  let temp = [];
 
-  function submitFilters() {
-    let colorID = 0;
-    let temp = [];
+  infoRL.Colors.forEach((info_color) => {
+    if (info_color.Name === color) colorID = info_color.ID;
+  });
 
-    infoRL.Colors.forEach((info_color) => {
-      if (info_color.Name === color) colorID = info_color.ID;
-    });
+  if (amount === "" || amount === 0 || amount === "0")
+    // this is so that if users set amount to zero or an empty string it will set it back to 1 when accepting filters
+    var refactorAmount = 1; // without this users won't be able to delete the initial value "1" and put for example "9"
 
-    if (amount === "" || amount === 0 || amount === "0")
-      // this is so that if users set amount to zero or an empty string it will set it back to 1 when accepting filters
-      var refactorAmount = 1; // without this users won't be able to delete the initial value "1" and put for example "9"
+  have.forEach((item) => {
+    if (item.id === id) {
+      item.color = color;
+      item.colorID = colorID;
+      item.cert = certification;
+      item.amount = refactorAmount || +amount; // plus removes leading zeros
+      temp.push(item);
+    } else temp.push(item);
+  });
+  setHave(temp);
 
-    have.forEach((item) => {
-      if (item.id === id) {
-        item.color = color;
-        item.colorID = colorID;
-        item.cert = certification;
-        item.amount = refactorAmount || +amount; // plus removes leading zeros
-        temp.push(item);
-      } else temp.push(item);
-    });
-    setHave(temp);
+  temp = [];
 
-    temp = [];
-
-    want.forEach((item) => {
-      if (item.id === id) {
-        item.color = color;
-        item.colorID = colorID;
-        item.cert = certification;
-        item.amount = refactorAmount || +amount;
-        temp.push(item);
-      } else temp.push(item);
-    });
-    setWant(temp);
-  }
+  want.forEach((item) => {
+    if (item.id === id) {
+      item.color = color;
+      item.colorID = colorID;
+      item.cert = certification;
+      item.amount = refactorAmount || +amount;
+      temp.push(item);
+    } else temp.push(item);
+  });
+  setWant(temp);
+}*/
 }
 
 /*-----Functions                -------------*/
@@ -203,4 +185,4 @@ function DropdownMenu({ dd, setFunction, setOpen }) {
   return <div className="rl-dd-dd">{dropNames}</div>;
 }
 
-export default RLitem_icon_dropdown;
+export default EditItemDropdown;

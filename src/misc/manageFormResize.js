@@ -19,4 +19,4 @@ export default (width, openForm) => {
       body.style.overflowY = "scroll";
     } catch {}
   }
-}
+};

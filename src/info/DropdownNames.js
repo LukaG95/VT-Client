@@ -1,4 +1,4 @@
-import infoRL from "./infoRL.json";
+import infoRL from "../constants/RocketLeagueInfo.json";
 
 let rl_names = ["Any"];
 

@@ -279,7 +279,7 @@ function Reputation() {
               </div>
             </div>
           );
-      } else return null
+      } else return null;
     });
     return reps;
   }

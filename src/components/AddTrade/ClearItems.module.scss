@@ -1,0 +1,32 @@
+.button {
+  display: flex;
+  background: none;
+  color: #f6f6f6;
+  font-weight: 600;
+  font-size: 13px;
+  min-width: 35px;
+  min-height: 29px;
+  border: 2px solid #9a2929;
+  border-radius: 5px;
+
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 22px;
+  margin-right: 12px;
+  cursor: pointer;
+
+  transition: background 200ms;
+
+  &:hover {
+    background-color: #9a2929;
+  }
+
+  &:active {
+    background-color: #a35353;
+  }
+}
+
+.icon {
+  height: 14px;
+  width: 14px;
+}
