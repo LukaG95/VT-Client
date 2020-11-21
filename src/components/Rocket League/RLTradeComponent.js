@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
-import TradePostIconRL from "./TradePostIconRL";
+import Item from "./Item";
 import useWindowDimensions from "../../misc/windowHW";
 import { UserContext } from "../../context/UserContext";
+import ItemContainer from "./ItemContainer";
 
 function RLTradeComponent({ trade, manageTrade }) {
   const [rep, setRep] = useState();
@@ -37,12 +38,12 @@ function RLTradeComponent({ trade, manageTrade }) {
       <div className="rltrade_cMidPlace">
         <div className="flex-col rl-has-container">
           <p className="haswant-text">Has</p>
-          <div className="has-items">{haveItems()}</div>
+          <ItemContainer className="has-items">{haveItems()}</ItemContainer>
         </div>
 
         <div className="flex-col rl-wants-container">
           <p className="haswant-text">Wants</p>
-          <div className="want-items">{wantItems()}</div>
+          <ItemContainer className="want-items">{wantItems()}</ItemContainer>
         </div>
 
         <div className="flex-col rl_notes_buttons_container">
@@ -268,11 +269,11 @@ function RLTradeComponent({ trade, manageTrade }) {
   }
 
   function haveItems() {
-    return trade.have.map((item) => <TradePostIconRL item={item} />);
+    return trade.have.map((item) => <Item item={item} />);
   }
 
   function wantItems() {
-    return trade.want.map((item) => <TradePostIconRL item={item} />);
+    return trade.want.map((item) => <Item item={item} />);
   }
 }
 

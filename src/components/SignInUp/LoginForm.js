@@ -16,8 +16,7 @@ function LoginForm() {
 
   manageFormResize(width, openForm);
 
-  let x,
-    y = "";
+  let x, y = "";
   showLogin ? (x = "colorBG") : (y = "colorBG");
 
   return (
@@ -58,8 +57,8 @@ function LoginForm() {
             closeForm={closeForm}
           />
         ) : (
-          <SignUpInfo closeForm={closeForm} />
-        )}
+              <SignUpInfo closeForm={closeForm} />
+            )}
       </div>
     </div>
   );

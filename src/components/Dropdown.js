@@ -1,33 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react'
+import styles from "./Dropdown.module.scss";
 
-export default function Dropdown({ name, items, onChange, defaultValue, ...props }) {
+export default function Dropdown({ name, items, onChange, value, ...props }) {
     const [state, setState] = useState({
         open: false,
-        selected: defaultValue || 0,
         search: "",
-        visibleItems: []
+        visibleItems: items
     })
-    const { open, selected, search, visibleItems } = state;
+    const { open, search, visibleItems } = state;
     const ref = useRef();
     useEffect(() => {
         const term = state.search.toLowerCase().trim();
         setState({
             ...state,
-            visibleItems: items
-                .map((value, index) => ({ value, index }))
-                .filter(i => i.value.toLowerCase().search(term) > -1)
+            visibleItems: term ? items.filter(i => i.toLowerCase().search(term) > -1) : items
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search, items])
-
-    //When Selected Value Changes
-    useEffect(() => {
-        onChange(items[selected]/*{ index: selected, value: items[selected] }*/)
-    }, [selected, items, onChange])
-
     //Detect Clicks
     function onClick(e) {
-        if (!ref.current.contains(e.target)) setState({ ...state, open: false })
+        if (!ref.current || !ref.current.contains(e.target)) setState({ ...state, open: false })
     }
     useEffect(() => {
         window.addEventListener("click", onClick)
@@ -36,35 +28,36 @@ export default function Dropdown({ name, items, onChange, defaultValue, ...props
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    console.log(state)
     return (
-        <div className="filterButtonWrapper" {...props} ref={ref}>
-            <label className="filter-label">{name || "Dropdown"}</label>
+        <div className={styles.wrapper} {...props} ref={ref}>
+            <label className={styles.label}>{name || "Dropdown"}</label>
             <div
                 onClick={() => setState({ ...state, open: !open })}
-                className={`noUserInteraction filterButton ${open ? "blackBorder" : null}`}
+                className={`${styles.button} ${open ? styles.open : ""}`}
             >
-                <div className="filterButtonContent">
-                    <p id="fix">{items[selected]}</p>
+                <div className={styles.content}>
+                    <span>{value}</span>
                 </div>
-                <div className={`${open ? "openArrow" : "dropdownArrow"}`}></div>
+                <div className={`${styles.arrow} ${open ? styles.open : ""}`}></div>
             </div>
             {/* Dropdown Content */}
-            {open && <div className="dropdown">
+            {open && <div className={styles.dropdown}>
                 <input
-                    id="dd"
                     onChange={e => setState({ ...state, search: e.target.value })}
                     placeholder="Search"
-                    className="filterInput"
+                    className={styles.search}
                 ></input>
-                <div className="itemNames">
-                    {visibleItems.map(item => (
+                <div className={styles.items}>
+                    {visibleItems.map((item, index) => (
                         <div
-                            className="menu-item"
-                            onClick={() => setState({ ...state, selected: item.index })}
-                            key={item.index}
+                            className={styles.item}
+                            onClick={() => {
+                                if (item !== value && onChange) onChange(item)
+                                setState({ ...state, open: false})
+                            }}
+                            key={index}
                         >
-                            {item.value}
+                            {item}
                         </div>
                     ))}
                 </div>

@@ -1,0 +1,126 @@
+.item {
+  position: relative;
+  width: 100%;
+  padding-top: calc(100% + 20px);
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  display: block;
+  height: 20px;
+  width: 100%;
+  color: #f6f6f6;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  background-color: #1d191f;
+
+  padding-left: 0px;
+  padding-right: 0px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 0;
+  border-radius: 0px 0px 5px 5px;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.placeholder {
+  padding-top: calc(100% + 20px);
+}
+
+.cert {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #f6f6f6;
+  font-size: 12px;
+  height: 20px;
+  width: 100%;
+
+  bottom: 24px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.amount {
+  position: absolute;
+  color: #f6f6f6;
+  background-color: #251d28;
+  font-size: 11px;
+  border-radius: 50px;
+  font-weight: 500;
+  line-height: 0px;
+  border: 1px solid #6e6e6e;
+
+  /*padding: 1px 3px 1px 4px;*/
+  padding: 8px 5px 8px 5px;
+  top: 6px;
+  left: 5px;
+  cursor: pointer;
+}
+
+.color {
+  position: absolute;
+  height: 14px;
+  width: 14px;
+
+  background: none;
+  border-radius: 50px;
+  top: 7px;
+  right: 7px;
+  cursor: pointer;
+
+  &:hover .tooltip {
+    visibility: visible;
+    animation: transitionUp 0.2s;
+  }
+  
+
+  .tooltip {
+    position: absolute;
+    color: #f6f6f6;
+    background-color: #48364e;
+    min-width: 100%;
+    font-size: 12px;
+    font-weight: 400;
+  
+    visibility: hidden;
+    text-align: center;
+  
+    border-radius: 5px;
+  
+    padding: 8px 14px 8px 14px;
+  
+    top: 15px;
+    left: 10px;
+  
+    z-index: 1;
+    white-space: nowrap;
+  }
+}
