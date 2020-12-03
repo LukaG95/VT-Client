@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { ItemTypes } from "../../constants/Items";
 import { useTradeFilters } from "../../context/TradeFiltersContext";
 import useWindowDimensions from "../../misc/windowHW";
+import SearchIcon from "../../images/icons/search.png"
+import FilterIcon from "../../images/icons/filter.png"
 
 function FilterBar() {
   const [filters, dispatch] = useTradeFilters();
@@ -17,7 +19,7 @@ function FilterBar() {
         <div className="magnGlass-container">
           <img
             style={{ width: "11px", height: "11px", marginLeft: "2px" }}
-            src="/images/icons/search.png"
+            src={SearchIcon}
             alt=""
           />
         </div>
@@ -47,7 +49,7 @@ function FilterBar() {
             >
               <img
                 className="filter-filter-icon"
-                src="/images/icons/filter.png"
+                src={FilterIcon}
                 alt=""
               />
               <div

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
+import ArrowUpIcon from "../images/icons/arrow-up.png"
 
-export default () => {
+const ScrollUpButton =  () => {
   useEffect(() => {
     const toTop = document.querySelector(".to-top");
 
@@ -32,9 +33,11 @@ export default () => {
       <img
         height={30}
         width={30}
-        src="/images/icons/arrow-up.png"
+        src={ArrowUpIcon}
         alt=""
       />
     </div>
   );
 };
+
+export default ScrollUpButton;

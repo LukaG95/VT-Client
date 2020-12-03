@@ -4,6 +4,7 @@ import styles from "./EditItemDropdown.module.scss";
 import useWindowDimensions from "../../misc/windowHW";
 import Dropdown from "../Dropdown";
 import { rl_dd_names } from "../../info/DropdownNames";
+import EditIcon from "../../images/icons/edit.png"
 
 const {
   colorDD,
@@ -34,7 +35,7 @@ function EditItemDropdown({ item, index, type }) {
       <img
         style={item.amount <= 1 ? { top: "6px" } : null}
         className="editIcon"
-        src="/images/icons/edit.png"
+        src={EditIcon}
         alt=""
         onClick={() => setVisible(true)}
       />

@@ -1,5 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import DiscordIcon from "../../images/icons/discord-full.png"
+import TwitterIcon from "../../images/icons/twitter.png"
+import InstagramIcon from "../../images/icons/instagram.png"
+import SteamIcon from "../../images/icons/steam.png"
 
 function Footer() {
   return (
@@ -8,25 +12,25 @@ function Footer() {
         <img
           height={38}
           width={33}
-          src="/images/icons/discord-full.png"
+          src={DiscordIcon}
           alt=""
         />
         <img
           height={35}
           width={42}
-          src="/images/icons/twitter.png"
+          src={TwitterIcon}
           alt=""
         />
         <img
           height={35}
           width={35}
-          src="/images/icons/instagram.png"
+          src={InstagramIcon}
           alt=""
         />
         <img
           height={35}
           width={35}
-          src="/images/icons/steam.png"
+          src={SteamIcon}
           alt=""
         />
       </div>

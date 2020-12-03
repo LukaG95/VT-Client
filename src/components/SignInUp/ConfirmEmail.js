@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Redirect } from "react-router-dom";
 import axios from "axios";
+import DiscordIcon from "../../images/icons/discord.png"
+import TwitterIcon from "../../images/icons/twitter.png"
+import InstagramIcon from "../../images/icons/instagram.png"
 
 function ConfirmEmail() {
   const [emailConfirmed, setEmailConfirmed] = useState();
@@ -41,7 +44,7 @@ function ConfirmEmail() {
               <img
                 height="22"
                 width="24"
-                src="/images/icons/discord.png"
+                src={DiscordIcon}
                 alt=""
               />
             </div>
@@ -50,7 +53,7 @@ function ConfirmEmail() {
               <img
                 height="14"
                 width="19"
-                src="/images/icons/twitter.png"
+                src={TwitterIcon}
                 alt=""
               />
             </div>
@@ -59,7 +62,7 @@ function ConfirmEmail() {
               <img
                 height="17"
                 width="17"
-                src="/images/icons/instagram.png"
+                src={InstagramIcon}
                 alt=""
               />
             </div>

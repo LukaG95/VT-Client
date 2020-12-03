@@ -4,6 +4,7 @@ import {
   LazyLoadComponent,
 } from "react-lazy-load-image-component";
 import styles from "./Item.module.scss";
+import MissingImageIcon from "../../images/icons/question.png"
 
 export default function Item({ item, lazy, ...props }) {
   const content = (
@@ -12,7 +13,7 @@ export default function Item({ item, lazy, ...props }) {
         <div className={styles.imageContainer}>
           <img
             className={styles.image}
-            src="/images/icons/question.png"
+            src={MissingImageIcon}
             alt={item.Name}
           />
           {lazy ? (
@@ -22,7 +23,7 @@ export default function Item({ item, lazy, ...props }) {
               threshold={100}
               delayTime={0}
               alt=""
-              lazy="true"
+              lazy
             />
           ) : (
               <img

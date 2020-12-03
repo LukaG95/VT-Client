@@ -5,6 +5,7 @@ import Item from "./Item";
 import useWindowDimensions from "../../misc/windowHW";
 import { UserContext } from "../../context/UserContext";
 import ItemContainer from "./ItemContainer";
+import CrownImage from "../../images/icons/crown.svg"
 
 function RLTradeComponent({ trade, manageTrade }) {
   const [rep, setRep] = useState();
@@ -231,7 +232,7 @@ function RLTradeComponent({ trade, manageTrade }) {
               width: "17px",
               height: "17px",
             }}
-            src="images/icons/crown.svg"
+            src={CrownImage}
             alt=""
           />
           <p>{trade.user.username}</p>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import SteamIcon from "../../images/icons/steam-small.png"
+import DiscordIcon from "../../images/icons/discord.png"
 
 import { createNotification } from "../../misc/ToastNotification";
 
@@ -81,7 +83,7 @@ function LoginInfo({ setForgotPassword, closeForm }) {
             className="loginSteam"
           >
             <img
-              src="/images/icons/steam-small.png"
+              src={SteamIcon}
               alt=""
               style={{ height: "28px", width: "35", marginRight: "8px" }}
             ></img>
@@ -93,7 +95,7 @@ function LoginInfo({ setForgotPassword, closeForm }) {
             className="loginDiscord"
           >
             <img
-              src="/images/icons/discord.png"
+              src={DiscordIcon}
               alt=""
               style={{ height: "28px", width: "35", marginRight: "8px" }}
             ></img>

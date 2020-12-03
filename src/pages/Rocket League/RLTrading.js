@@ -5,6 +5,7 @@ import infoRL from "../../constants/RocketLeagueInfo.json";
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
 import RLTradeComponent from "../../components/Rocket League/RLTradeComponent";
 import { createNotification } from "../../misc/ToastNotification";
+import NotFoundImage from "../../images/icons/not-found.png"
 
 function RLTrading() {
   const {
@@ -119,7 +120,7 @@ function RLTrading() {
       <div className="no-trades-found-wrapper">
         <img
           className="noUserInteraction"
-          src="/images/icons/not-found.png"
+          src={NotFoundImage}
           alt=""
         ></img>
         <h2>

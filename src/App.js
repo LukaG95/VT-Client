@@ -16,7 +16,6 @@ import {
 
 import {
   UserContext,
-  TradeContextProviderRL,
   LeftSidebarContext,
 } from "./context/index";
 
@@ -80,11 +79,9 @@ export default function App() {
               <Route exact path="/trading/rl/new">
                 {handleRedirectOnRefresh(
                   <TradeProvider>
-                    <TradeContextProviderRL>
                       <TradeFiltersProvider>
                         <RLAddTrade />
                       </TradeFiltersProvider>
-                    </TradeContextProviderRL>
                   </TradeProvider>
                 )}
               </Route>
@@ -92,9 +89,7 @@ export default function App() {
                 {handleRedirectOnRefresh(
                   <TradeProvider>
                     <TradeFiltersProvider>
-                      <TradeContextProviderRL>
                         <RLAddTrade />
-                      </TradeContextProviderRL>
                     </TradeFiltersProvider>
                   </TradeProvider>
                 )}

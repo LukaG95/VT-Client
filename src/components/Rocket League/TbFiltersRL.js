@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { rl_dd_names } from "../../info/DropdownNames";
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
 import Dropdown from "../Dropdown";
+import TrashIcon from "../../images/icons/trash.png"
 
 const {
   gameDD,
@@ -83,7 +84,7 @@ function FiltersRL() {
         className="rl-resetFilters-button noUserInteraction"
       >
         <img
-          src="/images/icons/trash.png"
+          src={TrashIcon}
           style={{ height: "14px", width: "14px" }}
           alt=""
         />

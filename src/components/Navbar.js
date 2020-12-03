@@ -7,6 +7,9 @@ import { UserContext } from "../context/UserContext";
 import { PopupContext } from "../context/PopupContext";
 import { ReactComponent as LogoIcon } from "../images/logo/vt-red.svg";
 import { ReactComponent as LogoIconPhone } from "../images/logo/vt-red-v.svg";
+import PlusTradeImage from "../images/icons/plus-trade-small.png"
+import BellWhiteImage from "../images/icons/bell-white.svg"
+import ProfileImage from "../images/icons/profile.svg"
 
 function Navbar() {
   let location = useLocation();
@@ -81,7 +84,7 @@ function Navbar() {
             <div className="nav-button-wrapper">
               <img
                 height={25}
-                src="/images/icons/plus-trade-small.png"
+                src={PlusTradeImage}
                 alt=""
               />
             </div>
@@ -100,7 +103,7 @@ function Navbar() {
         {isLoggedIn && (
           <div className={`nav-button-wrapper ${width > 1213 && "bell"}`}>
             <img
-              src="/images/icons.bell-white.svg"
+              src={BellWhiteImage}
               style={{ height: "25", width: "25" }}
               alt=""
             />
@@ -126,7 +129,7 @@ function Navbar() {
           <Link to="/account/settings" id="removeDecoration">
             <div className="navRightItem profile">
               <img
-                src="/images/icons/profile.svg"
+                src={ProfileImage}
                 style={{ height: "40px", width: "40px" }}
                 className="navRightContent"
                 alt=""
@@ -141,7 +144,7 @@ function Navbar() {
             <img
               height={25}
               width={25}
-              src="/images/icons/profile.svg"
+              src={ProfileImage}
               alt=""
             />
           </div>
