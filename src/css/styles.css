@@ -268,8 +268,13 @@ html {
   padding-bottom: 12px;
   padding-left: 12px;
   flex-wrap: wrap;
+
+  
 }
 
+.filters-field > * {
+  width: 192px;
+}
 .leaderboards-wrapper {
   display: flex;
   flex-direction: column;
@@ -1866,7 +1871,7 @@ html {
 .rl-icon-dropdown {
   display: flex;
   flex-direction: column;
-  position: relative;
+  position: fixed;
   width: 214px;
 
   justify-content: space-between;
@@ -2220,13 +2225,14 @@ html {
   display: flex;
   flex-direction: column;
   position: relative;
+  flex-grow: 2;
 
   margin-top: 15px;
   animation: transitionLeft 0.4s;
 
   width: 100%;
-  height: calc(100vh - 150px); /* -150px because on phone there's navbar*/
-  max-height: calc(100vh - 150px); /* -150px because on phone there's navbar*/
+  height: calc(100vh - 60px); /* -60px because on phone there's navbar*/
+  max-height: calc(100vh - 60px); /* -60px because on phone there's navbar*/
   /*calc(100vh - 105px);*/
 }
 
@@ -2247,19 +2253,6 @@ html {
   margin-bottom: 15px;
 
   border-radius: 5px;
-}
-
-.you-have-wrapper,
-.you-want-wrapper {
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-
-  overflow-x: scroll;
-  overflow-y: hidden;
-
-  scrollbar-width: thin;
 }
 
 .hTitle-SMALL,

@@ -141,7 +141,7 @@ function Navbar() {
             <img
               height={25}
               width={25}
-              src="/images/icons/"
+              src="/images/icons/profile.svg"
               alt=""
             />
           </div>

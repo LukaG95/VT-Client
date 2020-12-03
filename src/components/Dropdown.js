@@ -29,7 +29,7 @@ export default function Dropdown({ name, items, onChange, value, ...props }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
-        <div className={styles.wrapper} {...props} ref={ref}>
+        <div {...props} className={[styles.wrapper, props.className || ""].join(" ")}  ref={ref}>
             <label className={styles.label}>{name || "Dropdown"}</label>
             <div
                 onClick={() => setState({ ...state, open: !open })}

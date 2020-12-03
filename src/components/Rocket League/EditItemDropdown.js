@@ -1,107 +1,131 @@
 import React, { useState, useEffect } from "react";
 import { useTrade } from "../../context/TradeContext";
 import styles from "./EditItemDropdown.module.scss";
+import useWindowDimensions from "../../misc/windowHW";
+import Dropdown from "../Dropdown";
+import { rl_dd_names } from "../../info/DropdownNames";
 
-function EditItemDropdown({ item }) {
+const {
+  colorDD,
+  certDD,
+} = rl_dd_names;
+
+function EditItemDropdown({ item, index, type }) {
   const [visible, setVisible] = useState(false)
+  const { height } = useWindowDimensions();
+  const [_context, dispatch] = useTrade();
+  const [amountInput, setAmountInput] = useState(item.amount)
+  //Amount Changes
   useEffect(() => {
-
-  }, []);
-
+    dispatch({
+      type: "updateItem",
+      payload: {
+        type,
+        index,
+        item: {
+          amount: Number(amountInput) || 1,
+        }
+      }
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [amountInput])
   return (
     <>
-    { visible
-    /*<div
-      name="enableDropdown"
-      className="rl-icon-dropdown" // style is small height positioning
-      style={
-        height <= 650
-          ? {
-            position: "fixed",
-            top: "280px",
-            right: "510px",
-            marginTop: "-200px",
-            marginLeft: "200px",
+      <img
+        style={item.amount <= 1 ? { top: "6px" } : null}
+        className="editIcon"
+        src="/images/icons/edit.png"
+        alt=""
+        onClick={() => setVisible(true)}
+      />
+      { visible &&
+        <div
+          className="rl-icon-dropdown" // style is small height positioning
+          style={
+            height <= 650
+              ? {
+                position: "fixed",
+                top: "280px",
+                right: "510px",
+                marginTop: "-200px",
+                marginLeft: "200px",
+              }
+              : height <= 820
+                ? {
+                  position: "fixed",
+                  top: "400px",
+                  right: "510px",
+                  marginTop: "-200px",
+                  marginLeft: "200px",
+                }
+                : null
           }
-          : height <= 820
-            ? {
-              position: "fixed",
-              top: "400px",
-              right: "510px",
-              marginTop: "-200px",
-              marginLeft: "200px",
+        >
+          <div className="item_name">{item.itemName}</div>
+          <Dropdown
+            name="Color"
+            items={colorDD}
+            className={styles.dropdowns}
+            onChange={(color) => dispatch({
+              type: "updateItem",
+              payload: {
+                type,
+                index,
+                item: {
+                  color,
+                  colorID: colorDD.findIndex(c => c === color)
+                }
+              }
+            })}
+            value={item.color}
+          />
+          <Dropdown
+            name={`Certification`}
+            value={item.cert}
+            items={certDD}
+            className={styles.dropdowns}
+            onChange={(cert) => dispatch({
+              type: "updateItem",
+              payload: {
+                type,
+                index,
+                item: {
+                  cert
+                }
+              }
+            })} />
+          <div className="rl-icon-dropdown-button-section">
+            <label className="enableDropdown">
+              Amount - max {item.itemID === 4743 ? 100000 : 100}
+            </label>
+            <input
+              name="enableDropdown"
+              style={{ justifyContent: "space-between" }}
+              value={amountInput}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^\d]/g, "")
+                const max = item.itemID === 4743 ? 100000 : 100
+                if (Number(value) > max) setAmountInput("" + max)
+                else setAmountInput(value)
+              }}
+            />
+          </div>
+          <button id="submit-rl-filters-button" onClick={() => setVisible(false)}>
+            Done
+      </button>
+          <button id="delete-rl-filters-button" onClick={() => dispatch({
+            type: "removeItem",
+            payload: {
+              type,
+              index
             }
-            : null
+          })}>
+            Delete
+      </button>
+        </div>
       }
-    >
-      <div className="item_name">{itemName}</div>
-
-      <FilterButton
-        label="Color"
-        value={color}
-        setFunction={setColor}
-        dd={colorDD}
-      />
-      <FilterButton
-        label="Certification"
-        value={certification}
-        setFunction={setCertification}
-        dd={certDD}
-      />
-      <FilterButton
-        label="Amount"
-        value={amount}
-        setFunction={setAmount}
-        itemID={itemID}
-      />
-
-      <button id="submit-rl-filters-button" onClick={submitFilters}>
-        Done
-      </button>
-      <button id="delete-rl-filters-button" onClick={() => deleteRLitem(id)}>
-        Delete
-      </button>
-    </div>*/
-    } 
     </>
   );
-/*
-function submitFilters() {
-  let colorID = 0;
-  let temp = [];
-
-  infoRL.Colors.forEach((info_color) => {
-    if (info_color.Name === color) colorID = info_color.ID;
-  });
-
-  if (amount === "" || amount === 0 || amount === "0")
-    // this is so that if users set amount to zero or an empty string it will set it back to 1 when accepting filters
-    var refactorAmount = 1; // without this users won't be able to delete the initial value "1" and put for example "9"
-
-  have.forEach((item) => {
-    if (item.id === id) {
-      item.color = color;
-      item.colorID = colorID;
-      item.cert = certification;
-      item.amount = refactorAmount || +amount; // plus removes leading zeros
-      temp.push(item);
-    } else temp.push(item);
-  });
-  setHave(temp);
-
-  temp = [];
-
-  want.forEach((item) => {
-    if (item.id === id) {
-      item.color = color;
-      item.colorID = colorID;
-      item.cert = certification;
-      item.amount = refactorAmount || +amount;
-      temp.push(item);
-    } else temp.push(item);
-  });
-  setWant(temp);
-}*/
 }
 
 /*-----Functions                -------------*/

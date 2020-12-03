@@ -96,8 +96,8 @@ export const DefaultItem = {
   itemName: "Unknown",
   Quality: "Common",
   itemType: "Body",
-  color: "Unpainted",
-  colorID: "",
-  cert: "",
-  amount: 0
+  color: "None",
+  colorID: 0,
+  cert: "None",
+  amount: 1
 }
