@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { rl_dd_names } from "../../info/DropdownNames";
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
 import Dropdown from "../Dropdown";
-import TrashIcon from "../../images/icons/trash.png"
+import TrashIcon from "../../images/icons/trash.png";
 
 const {
   gameDD,
@@ -36,24 +36,14 @@ function FiltersRL() {
 
   return (
     <div className="filters-field hide">
-      <Dropdown
-        name={`Game`}
-        value={game}
-        items={gameDD}
-        onChange={setGame}
-      />
+      <Dropdown name={`Game`} value={game} items={gameDD} onChange={setGame} />
       <Dropdown
         name={`Search`}
         value={searchType}
         items={searchTypeDD}
         onChange={setSearchType}
       />
-      <Dropdown
-        name={`Name`}
-        value={name}
-        items={namesDD}
-        onChange={setName}
-      />
+      <Dropdown name={`Name`} value={name} items={namesDD} onChange={setName} />
       <Dropdown
         name="Color"
         items={colorDD}
@@ -83,11 +73,7 @@ function FiltersRL() {
         onClick={resetFilters}
         className="rl-resetFilters-button noUserInteraction"
       >
-        <img
-          src={TrashIcon}
-          style={{ height: "14px", width: "14px" }}
-          alt=""
-        />
+        <img src={TrashIcon} style={{ height: "14px", width: "14px" }} alt="" />
       </div>
     </div>
   );

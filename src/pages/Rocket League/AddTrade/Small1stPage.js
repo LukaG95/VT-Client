@@ -7,16 +7,14 @@ import ItemContainer from "../../../components/Rocket League/ItemContainer";
 import PlusItem from "./PlusItem";
 import ClearItems from "../../../components/AddTrade/ClearItems";
 
-function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem, slot, setSlot }) {
-  const [
-    {
-      have,
-      want,
-      platform,
-      notes
-    },
-    dispatch,
-  ] = useTrade();
+function Small1stPage({
+  handleTradeSubmit,
+  setShowPage,
+  setClickedItem,
+  slot,
+  setSlot,
+}) {
+  const [{ have, want, platform, notes }, dispatch] = useTrade();
 
   return (
     <div className={styles.wrapperSmall}>
@@ -37,10 +35,13 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem, slot, se
         <div className={styles.sectionSmall} style={{ marginBottom: "10px" }}>
           <ItemContainer className={styles.items}>
             {have.map((item, index) => (
-              <Item {...{ item, index }} onClick={() => {
-                setClickedItem({ type: "have", index })
-                setShowPage("3")
-              }} />
+              <Item
+                {...{ item, index }}
+                onClick={() => {
+                  setClickedItem({ type: "have", index });
+                  setShowPage("3");
+                }}
+              />
             ))}
             {Array(12 - have.length)
               .fill(null)
@@ -49,8 +50,8 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem, slot, se
                   key={index}
                   selected={!index && slot === "have"}
                   onClick={() => {
-                    setShowPage("2")
-                    setSlot("have")
+                    setShowPage("2");
+                    setSlot("have");
                   }}
                 />
               ))}
@@ -72,10 +73,14 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem, slot, se
         <div className={styles.sectionSmall}>
           <ItemContainer className={styles.items}>
             {want.map((item, index) => (
-              <Item {...{ item, index }} onClick={() => {
-                setClickedItem({ type: "want", index })
-                setShowPage("3")
-              }} />            ))}
+              <Item
+                {...{ item, index }}
+                onClick={() => {
+                  setClickedItem({ type: "want", index });
+                  setShowPage("3");
+                }}
+              />
+            ))}
             {Array(12 - want.length)
               .fill(null)
               .map((_, index) => (
@@ -83,9 +88,10 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem, slot, se
                   key={index}
                   selected={!index && slot === "want"}
                   onClick={() => {
-                    setShowPage("2")
-                    setSlot("want")
-                  }} />
+                    setShowPage("2");
+                    setSlot("want");
+                  }}
+                />
               ))}
           </ItemContainer>
         </div>
@@ -125,12 +131,9 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem, slot, se
             ))}
           </div>
         </div>
-        <button
-          onClick={() => handleTradeSubmit()}
-          className={styles.submit}
-        >
+        <button onClick={() => handleTradeSubmit()} className={styles.submit}>
           SUBMIT TRADE
-            </button>
+        </button>
       </div>
     </div>
   );

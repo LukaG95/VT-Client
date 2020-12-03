@@ -48,7 +48,11 @@ function AddTradeRL() {
   }, [filters]);
 
   //Return Desktop or Mobile
-  return width > 1213 ? AddTrade() : <SmallHome {...{ handleTradeSubmit, ItemClick }} />;
+  return width > 1213 ? (
+    AddTrade()
+  ) : (
+    <SmallHome {...{ handleTradeSubmit, ItemClick }} />
+  );
 
   function ItemClick(item) {
     setError({ ...error, trade: "" });
@@ -96,7 +100,9 @@ function AddTradeRL() {
             </div>
             <ItemContainer className={styles.items}>
               {have.map((item, index) => (
-                <Item item={item}><EditItemDropdown {...{ item, index, type: "have" }} /></Item>
+                <Item item={item}>
+                  <EditItemDropdown {...{ item, index, type: "have" }} />
+                </Item>
               ))}
               {Array(12 - have.length)
                 .fill(null)
@@ -125,7 +131,9 @@ function AddTradeRL() {
             </div>
             <ItemContainer className="wantItems">
               {want.map((item, index) => (
-                <Item item={item}><EditItemDropdown {...{ item, index, type: "want" }} /></Item>
+                <Item item={item}>
+                  <EditItemDropdown {...{ item, index, type: "want" }} />
+                </Item>
               ))}
               {Array(12 - want.length)
                 .fill(null)

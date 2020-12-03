@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import FirstImage from "../images/icons/icon-1st.png";
-import SecondImage from "../images/icons/icon-2nd.png";
-import ThirdImage from "../images/icons/icon-3rd.png";
+import FirstImage from "../../images/icons/icon-1st.png";
+import SecondImage from "../../images/icons/icon-2nd.png";
+import ThirdImage from "../../images/icons/icon-3rd.png";
 import SidebarFooter from "./Footer";
 
 function ReputationBody() {
@@ -10,25 +10,13 @@ function ReputationBody() {
   const [timeType, setTimeType] = useState("Week");
 
   const goldTrophy = (
-    <img
-      style={{ height: "25px", width: "25px" }}
-      src={FirstImage}
-      alt=""
-    />
+    <img style={{ height: "25px", width: "25px" }} src={FirstImage} alt="" />
   );
   const silverTrophy = (
-    <img
-      style={{ height: "25px", width: "25px" }}
-      src={SecondImage}
-      alt=""
-    />
+    <img style={{ height: "25px", width: "25px" }} src={SecondImage} alt="" />
   );
   const bronzeTrophy = (
-    <img
-      style={{ height: "25px", width: "25px" }}
-      src={ThirdImage}
-      alt=""
-    />
+    <img style={{ height: "25px", width: "25px" }} src={ThirdImage} alt="" />
   );
 
   useEffect(() => {

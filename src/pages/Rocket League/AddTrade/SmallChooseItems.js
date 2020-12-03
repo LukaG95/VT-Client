@@ -11,10 +11,7 @@ import ClearItems from "../../../components/AddTrade/ClearItems";
 function SmallChooseItems({ setShowPage, slot, setSlot }) {
   const [items, setItems] = useState(getTradeableItems());
   const [filters] = useTradeFilters();
-  const [
-    { have, want },
-    dispatch,
-  ] = useTrade();
+  const [{ have, want }, dispatch] = useTrade();
   //On Item Click
   function ItemClick(item) {
     dispatch({
@@ -54,7 +51,8 @@ function SmallChooseItems({ setShowPage, slot, setSlot }) {
               lazy
             />
           ))}
-        </ItemContainer></div>
+        </ItemContainer>
+      </div>
       {/* Selected Amounts */}
       <div className="added-items-notice-phone">
         <div

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import SteamIcon from "../../images/icons/steam-small.png"
-import DiscordIcon from "../../images/icons/discord.png"
+import SteamIcon from "../../images/icons/steam-small.png";
+import DiscordIcon from "../../images/icons/discord.png";
 
 import { createNotification } from "../../misc/ToastNotification";
 

@@ -14,10 +14,7 @@ import {
   AdminPage,
 } from "./pages/index";
 
-import {
-  UserContext,
-  LeftSidebarContext,
-} from "./context/index";
+import { UserContext, LeftSidebarContext } from "./context/index";
 
 import { closeSidebar, ToastContainer, ScrollUpButton } from "./misc/index";
 
@@ -79,9 +76,9 @@ export default function App() {
               <Route exact path="/trading/rl/new">
                 {handleRedirectOnRefresh(
                   <TradeProvider>
-                      <TradeFiltersProvider>
-                        <RLAddTrade />
-                      </TradeFiltersProvider>
+                    <TradeFiltersProvider>
+                      <RLAddTrade />
+                    </TradeFiltersProvider>
                   </TradeProvider>
                 )}
               </Route>
@@ -89,7 +86,7 @@ export default function App() {
                 {handleRedirectOnRefresh(
                   <TradeProvider>
                     <TradeFiltersProvider>
-                        <RLAddTrade />
+                      <RLAddTrade />
                     </TradeFiltersProvider>
                   </TradeProvider>
                 )}

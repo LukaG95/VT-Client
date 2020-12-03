@@ -7,9 +7,9 @@ import { UserContext } from "../context/UserContext";
 import { PopupContext } from "../context/PopupContext";
 import { ReactComponent as LogoIcon } from "../images/logo/vt-red.svg";
 import { ReactComponent as LogoIconPhone } from "../images/logo/vt-red-v.svg";
-import PlusTradeImage from "../images/icons/plus-trade-small.png"
-import BellWhiteImage from "../images/icons/bell-white.svg"
-import ProfileImage from "../images/icons/profile.svg"
+import PlusTradeImage from "../images/icons/plus-trade-small.png";
+import BellWhiteImage from "../images/icons/bell-white.svg";
+import ProfileImage from "../images/icons/profile.svg";
 
 function Navbar() {
   let location = useLocation();
@@ -52,10 +52,10 @@ function Navbar() {
             {width > 800 ? (
               <LogoIcon style={{ width: "150px", height: "150px" }} />
             ) : (
-                <LogoIconPhone
-                  style={{ width: "65px", height: "65px", marginLeft: "-10px" }}
-                />
-              )}
+              <LogoIconPhone
+                style={{ width: "65px", height: "65px", marginLeft: "-10px" }}
+              />
+            )}
           </Link>
         </div>
 
@@ -82,11 +82,7 @@ function Navbar() {
         {width <= 1213 && isLoggedIn ? (
           <Link to="/trading/rl/new" id="removeDecoration">
             <div className="nav-button-wrapper">
-              <img
-                height={25}
-                src={PlusTradeImage}
-                alt=""
-              />
+              <img height={25} src={PlusTradeImage} alt="" />
             </div>
           </Link>
         ) : null}
@@ -141,12 +137,7 @@ function Navbar() {
       else
         return (
           <div className="nav-button-wrapper" style={{ marginRight: "15px" }}>
-            <img
-              height={25}
-              width={25}
-              src={ProfileImage}
-              alt=""
-            />
+            <img height={25} width={25} src={ProfileImage} alt="" />
           </div>
         );
     else if (isLoggedIn === undefined)

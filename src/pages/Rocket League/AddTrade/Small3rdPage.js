@@ -6,8 +6,8 @@ const { colorDD, certDD } = rl_dd_names;
 
 function Small3rdPage({ setShowPage, clickedItem }) {
   const [context, dispatch] = useTrade();
-  const item = context[clickedItem.type][clickedItem.index]
-  const [amountInput, setAmountInput] = useState(item.amount)
+  const item = context[clickedItem.type][clickedItem.index];
+  const [amountInput, setAmountInput] = useState(item.amount);
 
   //Amount Changes
   useEffect(() => {
@@ -17,11 +17,11 @@ function Small3rdPage({ setShowPage, clickedItem }) {
         ...clickedItem,
         item: {
           amount: Number(amountInput) || 1,
-        }
-      }
-    })
+        },
+      },
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [amountInput])
+  }, [amountInput]);
 
   return (
     <div id="add-trade-3rd-page">
@@ -34,8 +34,8 @@ function Small3rdPage({ setShowPage, clickedItem }) {
               dispatch({
                 type: "removeItem",
                 payload: {
-                  ...clickedItem
-                }
+                  ...clickedItem,
+                },
               });
               setShowPage("1");
             }}
@@ -49,16 +49,18 @@ function Small3rdPage({ setShowPage, clickedItem }) {
           name="Color"
           items={colorDD}
           className="dropdown"
-          onChange={(color) => dispatch({
-            type: "updateItem",
-            payload: {
-              ...clickedItem,
-              item: {
-                color,
-                colorID: colorDD.findIndex(c => c === color)
-              }
-            }
-          })}
+          onChange={(color) =>
+            dispatch({
+              type: "updateItem",
+              payload: {
+                ...clickedItem,
+                item: {
+                  color,
+                  colorID: colorDD.findIndex((c) => c === color),
+                },
+              },
+            })
+          }
           value={item.color}
         />
         <Dropdown
@@ -66,15 +68,18 @@ function Small3rdPage({ setShowPage, clickedItem }) {
           value={item.cert}
           items={certDD}
           className="dropdown"
-          onChange={(cert) => dispatch({
-            type: "updateItem",
-            payload: {
-              ...clickedItem,
-              item: {
-                cert
-              }
-            }
-          })} />
+          onChange={(cert) =>
+            dispatch({
+              type: "updateItem",
+              payload: {
+                ...clickedItem,
+                item: {
+                  cert,
+                },
+              },
+            })
+          }
+        />
         <div className="rl-icon-amount-filter-field">
           <label className="enableDropdown">
             Amount - max {item.itemID === 4743 ? 100000 : 100}
@@ -85,10 +90,10 @@ function Small3rdPage({ setShowPage, clickedItem }) {
             style={{ justifyContent: "space-between" }}
             value={amountInput}
             onChange={(e) => {
-              const value = e.target.value.replace(/[^\d]/g, "")
-              const max = item.itemID === 4743 ? 100000 : 100
-              if (Number(value) > max) setAmountInput("" + max)
-              else setAmountInput(value)
+              const value = e.target.value.replace(/[^\d]/g, "");
+              const max = item.itemID === 4743 ? 100000 : 100;
+              if (Number(value) > max) setAmountInput("" + max);
+              else setAmountInput(value);
             }}
           />
         </div>

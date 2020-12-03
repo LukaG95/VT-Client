@@ -23,10 +23,13 @@ function tradeReducer(state, action) {
     }
     case "addItem": {
       const type = action.payload.type; // "have" or "want"
-      console.log(state, type)
+      console.log(state, type);
       return {
         ...state,
-        [type]: [...state[type], { ...Object.assign(DefaultItem, action.payload.item) }].slice(0, 12),
+        [type]: [
+          ...state[type],
+          { ...Object.assign(DefaultItem, action.payload.item) },
+        ].slice(0, 12),
       };
     }
     case "removeItem": {
@@ -34,7 +37,10 @@ function tradeReducer(state, action) {
       const index = action.payload.index;
       return {
         ...state,
-        [type]: [...state[type].slice(0, index), ...state[type].slice(index + 1, 12)]
+        [type]: [
+          ...state[type].slice(0, index),
+          ...state[type].slice(index + 1, 12),
+        ],
       };
     }
     case "updateItem": {
@@ -45,7 +51,8 @@ function tradeReducer(state, action) {
         [type]: [
           ...state[type].slice(0, index),
           Object.assign(state[type][index], action.payload.item),
-          ...state[type].slice(index + 1, 12)]
+          ...state[type].slice(index + 1, 12),
+        ],
       };
     }
     case "setItems": {

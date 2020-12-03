@@ -17,25 +17,13 @@ function FiltersREP() {
     />
   );
   const goldTrophy = (
-    <img
-      style={{ height: "25px", width: "25px" }}
-      src={FirstImage}
-      alt=""
-    />
+    <img style={{ height: "25px", width: "25px" }} src={FirstImage} alt="" />
   );
   const silverTrophy = (
-    <img
-      style={{ height: "25px", width: "25px" }}
-      src={SecondImage}
-      alt=""
-    />
+    <img style={{ height: "25px", width: "25px" }} src={SecondImage} alt="" />
   );
   const bronzeTrophy = (
-    <img
-      style={{ height: "25px", width: "25px" }}
-      src={ThirdImage}
-      alt=""
-    />
+    <img style={{ height: "25px", width: "25px" }} src={ThirdImage} alt="" />
   );
 
   const hr = <div id="hr-line"></div>;

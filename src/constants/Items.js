@@ -21,11 +21,12 @@ export function getTradeableItems() {
     tradeableItems = [];
     RocketLeagueInfo.Slots.forEach((slot) => {
       slot.Items.forEach((item) => {
-        if (item.Tradable) tradeableItems.push({
-          itemID: item.ItemID,
-          itemName: item.Name,
-          itemType: slot.Name
-        });
+        if (item.Tradable)
+          tradeableItems.push({
+            itemID: item.ItemID,
+            itemName: item.Name,
+            itemType: slot.Name,
+          });
       });
     });
   }
@@ -99,5 +100,5 @@ export const DefaultItem = {
   color: "None",
   colorID: 0,
   cert: "None",
-  amount: 1
-}
+  amount: 1,
+};

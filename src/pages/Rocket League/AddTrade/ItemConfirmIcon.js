@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { TradeContextRL } from "../../../context/TradeContextRL";
 import styles from "./ItemConfirmIcon.module.scss";
-import CheckIcon from "../../../images/icons/check.png"
-import RedCheckIcon from "../../../images/icons/check-red.png"
+import CheckIcon from "../../../images/icons/check.png";
+import RedCheckIcon from "../../../images/icons/check-red.png";
 
 export default function ItemConfirmIcon(props) {
   const { have, want } = useContext(TradeContextRL);

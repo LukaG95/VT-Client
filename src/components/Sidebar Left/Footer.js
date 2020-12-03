@@ -1,38 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DiscordIcon from "../../images/icons/discord-full.png"
-import TwitterIcon from "../../images/icons/twitter.png"
-import InstagramIcon from "../../images/icons/instagram.png"
-import SteamIcon from "../../images/icons/steam.png"
+import DiscordIcon from "../../images/icons/discord-full.png";
+import TwitterIcon from "../../images/icons/twitter.png";
+import InstagramIcon from "../../images/icons/instagram.png";
+import SteamIcon from "../../images/icons/steam.png";
 
 function Footer() {
   return (
     <>
       <div className="sidebar-socials-wrapper">
-        <img
-          height={38}
-          width={33}
-          src={DiscordIcon}
-          alt=""
-        />
-        <img
-          height={35}
-          width={42}
-          src={TwitterIcon}
-          alt=""
-        />
-        <img
-          height={35}
-          width={35}
-          src={InstagramIcon}
-          alt=""
-        />
-        <img
-          height={35}
-          width={35}
-          src={SteamIcon}
-          alt=""
-        />
+        <img height={38} width={33} src={DiscordIcon} alt="" />
+        <img height={35} width={42} src={TwitterIcon} alt="" />
+        <img height={35} width={35} src={InstagramIcon} alt="" />
+        <img height={35} width={35} src={SteamIcon} alt="" />
       </div>
 
       <div className="sidebar-info-links">

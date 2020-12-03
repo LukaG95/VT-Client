@@ -4,18 +4,15 @@ import styles from "./EditItemDropdown.module.scss";
 import useWindowDimensions from "../../misc/windowHW";
 import Dropdown from "../Dropdown";
 import { rl_dd_names } from "../../info/DropdownNames";
-import EditIcon from "../../images/icons/edit.png"
+import EditIcon from "../../images/icons/edit.png";
 
-const {
-  colorDD,
-  certDD,
-} = rl_dd_names;
+const { colorDD, certDD } = rl_dd_names;
 
 function EditItemDropdown({ item, index, type }) {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
   const { height } = useWindowDimensions();
   const [_context, dispatch] = useTrade();
-  const [amountInput, setAmountInput] = useState(item.amount)
+  const [amountInput, setAmountInput] = useState(item.amount);
   //Amount Changes
   useEffect(() => {
     dispatch({
@@ -25,11 +22,11 @@ function EditItemDropdown({ item, index, type }) {
         index,
         item: {
           amount: Number(amountInput) || 1,
-        }
-      }
-    })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [amountInput])
+        },
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [amountInput]);
   return (
     <>
       <img
@@ -39,27 +36,27 @@ function EditItemDropdown({ item, index, type }) {
         alt=""
         onClick={() => setVisible(true)}
       />
-      { visible &&
+      {visible && (
         <div
           className="rl-icon-dropdown" // style is small height positioning
           style={
             height <= 650
               ? {
-                position: "fixed",
-                top: "280px",
-                right: "510px",
-                marginTop: "-200px",
-                marginLeft: "200px",
-              }
+                  position: "fixed",
+                  top: "280px",
+                  right: "510px",
+                  marginTop: "-200px",
+                  marginLeft: "200px",
+                }
               : height <= 820
-                ? {
+              ? {
                   position: "fixed",
                   top: "400px",
                   right: "510px",
                   marginTop: "-200px",
                   marginLeft: "200px",
                 }
-                : null
+              : null
           }
         >
           <div className="item_name">{item.itemName}</div>
@@ -67,17 +64,19 @@ function EditItemDropdown({ item, index, type }) {
             name="Color"
             items={colorDD}
             className={styles.dropdowns}
-            onChange={(color) => dispatch({
-              type: "updateItem",
-              payload: {
-                type,
-                index,
-                item: {
-                  color,
-                  colorID: colorDD.findIndex(c => c === color)
-                }
-              }
-            })}
+            onChange={(color) =>
+              dispatch({
+                type: "updateItem",
+                payload: {
+                  type,
+                  index,
+                  item: {
+                    color,
+                    colorID: colorDD.findIndex((c) => c === color),
+                  },
+                },
+              })
+            }
             value={item.color}
           />
           <Dropdown
@@ -85,16 +84,19 @@ function EditItemDropdown({ item, index, type }) {
             value={item.cert}
             items={certDD}
             className={styles.dropdowns}
-            onChange={(cert) => dispatch({
-              type: "updateItem",
-              payload: {
-                type,
-                index,
-                item: {
-                  cert
-                }
-              }
-            })} />
+            onChange={(cert) =>
+              dispatch({
+                type: "updateItem",
+                payload: {
+                  type,
+                  index,
+                  item: {
+                    cert,
+                  },
+                },
+              })
+            }
+          />
           <div className="rl-icon-dropdown-button-section">
             <label className="enableDropdown">
               Amount - max {item.itemID === 4743 ? 100000 : 100}
@@ -104,27 +106,35 @@ function EditItemDropdown({ item, index, type }) {
               style={{ justifyContent: "space-between" }}
               value={amountInput}
               onChange={(e) => {
-                const value = e.target.value.replace(/[^\d]/g, "")
-                const max = item.itemID === 4743 ? 100000 : 100
-                if (Number(value) > max) setAmountInput("" + max)
-                else setAmountInput(value)
+                const value = e.target.value.replace(/[^\d]/g, "");
+                const max = item.itemID === 4743 ? 100000 : 100;
+                if (Number(value) > max) setAmountInput("" + max);
+                else setAmountInput(value);
               }}
             />
           </div>
-          <button id="submit-rl-filters-button" onClick={() => setVisible(false)}>
+          <button
+            id="submit-rl-filters-button"
+            onClick={() => setVisible(false)}
+          >
             Done
-      </button>
-          <button id="delete-rl-filters-button" onClick={() => dispatch({
-            type: "removeItem",
-            payload: {
-              type,
-              index
+          </button>
+          <button
+            id="delete-rl-filters-button"
+            onClick={() =>
+              dispatch({
+                type: "removeItem",
+                payload: {
+                  type,
+                  index,
+                },
+              })
             }
-          })}>
+          >
             Delete
-      </button>
+          </button>
         </div>
-      }
+      )}
     </>
   );
 }

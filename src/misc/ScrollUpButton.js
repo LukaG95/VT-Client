@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import ArrowUpIcon from "../images/icons/arrow-up.png"
+import ArrowUpIcon from "../images/icons/arrow-up.png";
 
-const ScrollUpButton =  () => {
+const ScrollUpButton = () => {
   useEffect(() => {
     const toTop = document.querySelector(".to-top");
 
@@ -30,12 +30,7 @@ const ScrollUpButton =  () => {
       }}
       className="to-top"
     >
-      <img
-        height={30}
-        width={30}
-        src={ArrowUpIcon}
-        alt=""
-      />
+      <img height={30} width={30} src={ArrowUpIcon} alt="" />
     </div>
   );
 };

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { ItemTypes } from "../../constants/Items";
 import { useTradeFilters } from "../../context/TradeFiltersContext";
 import useWindowDimensions from "../../misc/windowHW";
-import SearchIcon from "../../images/icons/search.png"
-import FilterIcon from "../../images/icons/filter.png"
+import SearchIcon from "../../images/icons/search.png";
+import FilterIcon from "../../images/icons/filter.png";
 
 function FilterBar() {
   const [filters, dispatch] = useTradeFilters();
@@ -47,11 +47,7 @@ function FilterBar() {
               }
               onClick={() => setOpenFilters(!openFilters)}
             >
-              <img
-                className="filter-filter-icon"
-                src={FilterIcon}
-                alt=""
-              />
+              <img className="filter-filter-icon" src={FilterIcon} alt="" />
               <div
                 style={{ alignSelf: "flex-end" }}
                 className="dropdownArrow"
