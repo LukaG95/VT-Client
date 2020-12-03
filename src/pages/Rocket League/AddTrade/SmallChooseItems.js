@@ -89,10 +89,10 @@ function SmallChooseItems({ setShowPage, slot, setSlot }) {
         </div>
       </div>
       <button
-        className="add-trade-back-button"
+        className="add-trade-done-button"
         onClick={() => setShowPage("1")}
       >
-        BACK
+        DONE
       </button>
     </div>
   );

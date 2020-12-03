@@ -2231,8 +2231,8 @@ html {
   animation: transitionLeft 0.4s;
 
   width: 100%;
-  height: calc(100vh - 60px); /* -60px because on phone there's navbar*/
-  max-height: calc(100vh - 60px); /* -60px because on phone there's navbar*/
+  height: calc(100vh - 80px); /* -80px because on phone there's navbar*/
+  max-height: calc(100vh - 80px); /* -80px because on phone there's navbar*/
   /*calc(100vh - 105px);*/
 }
 
@@ -2444,8 +2444,7 @@ html {
   }
 }
 
-.add-trade-back-button,
-.add-trade-confirm-button {
+.add-trade-done-button {
   display: flex;
   color: #f6f6f6;
   background: #3a3a3a;
@@ -2465,9 +2464,6 @@ html {
   margin-top: 15px;
 
   cursor: pointer;
-}
-
-.add-trade-confirm-button {
   background: #2c8e54;
 }
 
@@ -2550,6 +2546,15 @@ html {
   cursor: pointer;
 }
 
+.add-trade-3rd-page-input-fields {
+  padding: 0 20px;
+  flex: 2 2;
+}
+
+.add-trade-3rd-page-input-fields .dropdown {
+  min-width: 200px;
+}
+
 .filter-button-small {
   display: flex;
   background: #1d191f;
@@ -2591,11 +2596,9 @@ html {
 .rl-icon-amount-filter-field {
   display: flex;
   flex-direction: column;
-  background: #1d191f;
 
   align-items: flex-start;
   justify-content: space-evenly;
-  padding-left: 10px;
 
   width: 100%;
   height: 75px;
@@ -2604,7 +2607,7 @@ html {
 }
 
 .rl-icon-amount-filter-field label {
-  color: grey;
+  color: #f6f6f6;
   font-size: 11px;
 }
 
