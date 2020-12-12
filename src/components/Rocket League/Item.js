@@ -29,7 +29,7 @@ export default function Item({ item, lazy = false, ...props }) {
                 className={styles.image}
                 src={`/images/items/${item.itemID}.0.webp`}
                 alt=""
-                lazy="true"
+                loading="lazy"
               />
             )}
         </div>
