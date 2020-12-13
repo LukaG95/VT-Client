@@ -6,6 +6,17 @@ import useWindowDimensions from "../../misc/windowHW";
 import { UserContext } from "../../context/UserContext";
 import ItemContainer from "./ItemContainer";
 import CrownImage from "../../images/icons/crown.svg";
+import SteamIcon from "../../images/icons/steam.png";
+import PS4Icon from "../../images/icons/ps4.png";
+import XBOXIcon from "../../images/icons/xbox.png";
+import SwitchIcon from "../../images/icons/switch.png";
+
+const platformIcons = {
+  steam: SteamIcon,
+  ps4: PS4Icon,
+  xbox: XBOXIcon,
+  switch: SwitchIcon
+}
 
 function RLTradeComponent({ trade, manageTrade }) {
   const [rep, setRep] = useState();
@@ -104,10 +115,10 @@ function RLTradeComponent({ trade, manageTrade }) {
                 </button>
               </>
             ) : (
-              <p className="buttons-box-sign-to-interact">
-                Sign in to interact
-              </p>
-            )}
+                  <p className="buttons-box-sign-to-interact">
+                    Sign in to interact
+                  </p>
+                )}
           </div>
         </div>
       </div>
@@ -149,11 +160,9 @@ function RLTradeComponent({ trade, manageTrade }) {
 
         <div className="rl-trade-component-top-right">
           <div className="right-gamePlatform">
-            {/*<img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/SWITCH icon.png`)} alt="" />*/}
-            {/*<img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/SWITCH icon.png`)} alt="" />*/}
             <img
               style={{ height: "20px", width: "20px", marginRight: "5px" }}
-              src={`/images/icons/${trade.platform.toLowerCase()}.png`}
+              src={platformIcons[trade.platform.toLowerCase()]}
               alt=""
             />
             {trade.platform}
@@ -247,7 +256,7 @@ function RLTradeComponent({ trade, manageTrade }) {
           <p
             style={
               ({ fontWeight: "600", fontSize: "21px" },
-              width < 957 ? { fontSize: "17px", marginBottom: "5px" } : null)
+                width < 957 ? { fontSize: "17px", marginBottom: "5px" } : null)
             }
           >
             {trade.user.username}
