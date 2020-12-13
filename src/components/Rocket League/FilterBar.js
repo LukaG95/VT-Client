@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { ItemTypes } from "../../constants/Items";
 import { useTradeFilters } from "../../context/TradeFiltersContext";
 import useWindowDimensions from "../../misc/windowHW";
-import MagnifyingGlass from "../../images/other/MagnGlass.png";
+import SearchIcon from "../../images/icons/search.png";
+import FilterIcon from "../../images/icons/filter.png";
 
 function FilterBar() {
   const [filters, dispatch] = useTradeFilters();
@@ -18,7 +19,7 @@ function FilterBar() {
         <div className="magnGlass-container">
           <img
             style={{ width: "11px", height: "11px", marginLeft: "2px" }}
-            src={MagnifyingGlass}
+            src={SearchIcon}
             alt=""
           />
         </div>
@@ -46,11 +47,7 @@ function FilterBar() {
               }
               onClick={() => setOpenFilters(!openFilters)}
             >
-              <img
-                className="filter-filter-icon"
-                src={require(`../../images/other/filter.png`)}
-                alt=""
-              />
+              <img className="filter-filter-icon" src={FilterIcon} alt="" />
               <div
                 style={{ alignSelf: "flex-end" }}
                 className="dropdownArrow"

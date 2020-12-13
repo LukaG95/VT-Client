@@ -1,191 +1,137 @@
-import React, { useContext } from "react";
+import React from "react";
+import styles from "./Main.module.scss";
+import { PlatformColours, Platforms } from "../../../constants/Platforms";
+import { useTrade } from "../../../context/TradeContext";
+import Item from "../../../components/Rocket League/Item";
+import ItemContainer from "../../../components/Rocket League/ItemContainer";
+import PlusItem from "./PlusItem";
+import ClearItems from "../../../components/AddTrade/ClearItems";
 
-import AddedIconRL from "../../../components/Rocket League/AddedIconRL";
-import { TradeContextRL } from "../../../context/TradeContextRL";
-
-function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
-  const {
-    have,
-    want,
-    platform,
-    setPlatform,
-    notes,
-    setNotes,
-    manageFocus,
-    clearWantItems,
-    clearHaveItems,
-  } = useContext(TradeContextRL);
-
-  const displayed_have_items = have.map((item) => {
-    if (item.isAdded === false) {
-      if (item.isFocused === false)
-        return (
-          <button
-            name={item.id}
-            onClick={(e) => {
-              manageFocus(e);
-              setShowPage("2");
-            }}
-          ></button>
-        );
-      else
-        return (
-          <button
-            name={item.id}
-            onClick={(e) => {
-              manageFocus(e);
-              setShowPage("2");
-            }}
-            id="focusedButton"
-          >
-            +
-          </button>
-        );
-    } else
-      return (
-        <AddedIconRL
-          item={item}
-          setShowPage={setShowPage}
-          setClickedItem={setClickedItem}
-        />
-      );
-  });
-
-  const displayed_want_items = want.map((item) => {
-    if (item.isAdded === false) {
-      if (item.isFocused === false)
-        return (
-          <button
-            name={item.id}
-            onClick={(e) => {
-              manageFocus(e);
-              setShowPage("2");
-            }}
-          ></button>
-        );
-      else
-        return (
-          <button
-            name={item.id}
-            onClick={(e) => {
-              manageFocus(e);
-              setShowPage("2");
-            }}
-            id="focusedButton"
-          >
-            +
-          </button>
-        );
-    } else
-      return (
-        <AddedIconRL
-          item={item}
-          setShowPage={setShowPage}
-          setClickedItem={setClickedItem}
-        />
-      );
-  });
+function Small1stPage({
+  handleTradeSubmit,
+  setShowPage,
+  setClickedItem,
+  slot,
+  setSlot,
+}) {
+  const [{ have, want, platform, notes }, dispatch] = useTrade();
 
   return (
-    <div id="add-trade-1st-page">
-      <div className="rlHaveWantSection-SMALL">
-        <div className="hTitle-SMALL">
+    <div className={styles.wrapperSmall}>
+      <div className={styles.haveWant}>
+        <div className={styles.title}>
           <p>
             You <b>have</b>
           </p>
-          <div
-            onClick={clearHaveItems}
-            className="rl-resetFilters-button noUserInteraction"
-            style={{ margin: "0px" }}
-          >
-            <img
-              src={require(`../../../images/other/trash.png`)}
-              style={{ height: "14px", width: "14px" }}
-              alt=""
-            />
-          </div>
+          <ClearItems
+            onClick={() =>
+              dispatch({
+                type: "clearItems",
+                payload: "have",
+              })
+            }
+          />
         </div>
-
-        <div className="you-have-wrapper" style={{ marginBottom: "10px" }}>
-          <div className="haveItems-SMALL">{displayed_have_items}</div>
+        <div className={styles.sectionSmall} style={{ marginBottom: "10px" }}>
+          <ItemContainer className={styles.items}>
+            {have.map((item, index) => (
+              <Item
+                {...{ item, index }}
+                onClick={() => {
+                  setClickedItem({ type: "have", index });
+                  setShowPage("3");
+                }}
+              />
+            ))}
+            {Array(12 - have.length)
+              .fill(null)
+              .map((_, index) => (
+                <PlusItem
+                  key={index}
+                  selected={!index && slot === "have"}
+                  onClick={() => {
+                    setShowPage("2");
+                    setSlot("have");
+                  }}
+                />
+              ))}
+          </ItemContainer>
         </div>
-
-        <div className="wTitle-SMALL">
+        <div className={styles.title}>
           <p>
             You <b>want</b>
           </p>
-          <div
-            onClick={clearWantItems}
-            className="rl-resetFilters-button noUserInteraction"
-            style={{ margin: "0px" }}
-          >
-            <img
-              src={require(`../../../images/other/trash.png`)}
-              style={{ height: "14px", width: "14px" }}
-              alt=""
-            />
-          </div>
+          <ClearItems
+            onClick={() =>
+              dispatch({
+                type: "clearItems",
+                payload: "want",
+              })
+            }
+          />
         </div>
-
-        <div className="you-want-wrapper">
-          <div className="wantItems-SMALL">{displayed_want_items}</div>
+        <div className={styles.sectionSmall}>
+          <ItemContainer className={styles.items}>
+            {want.map((item, index) => (
+              <Item
+                {...{ item, index }}
+                onClick={() => {
+                  setClickedItem({ type: "want", index });
+                  setShowPage("3");
+                }}
+              />
+            ))}
+            {Array(12 - want.length)
+              .fill(null)
+              .map((_, index) => (
+                <PlusItem
+                  key={index}
+                  selected={!index && slot === "want"}
+                  onClick={() => {
+                    setShowPage("2");
+                    setSlot("want");
+                  }}
+                />
+              ))}
+          </ItemContainer>
         </div>
       </div>
-
-      <div className="notes-and-submit-button-SMALL">
-        <div className="notesSection">
+      <div className={styles.notesSection}>
+        <div className={styles.notes}>
           <textarea
             placeholder="Add notes..."
-            className="notesArea"
+            className={styles.input}
             value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-          ></textarea>
-          <div className="platformSection">
+            onChange={(e) =>
+              dispatch({
+                type: "setNotes",
+                payload: e.target.value,
+              })
+            }
+          />
+          <div className={styles.platforms}>
             <h4>PLATFORM:</h4>
-            <label className="noUserInteraction platf-button-container">
-              <input
-                type="radio"
-                checked={platform === "Steam"}
-                onChange={() => setPlatform("Steam")}
-              />
-              <p style={platform === "Steam" ? { color: "#2C8E54" } : null}>
-                STEAM
-              </p>
-            </label>
-            <label className="noUserInteraction platf-button-container">
-              <input
-                type="radio"
-                checked={platform === "PS4"}
-                onChange={() => setPlatform("PS4")}
-              />
-              <p style={platform === "PS4" ? { color: "#2C8E54" } : null}>
-                PS4
-              </p>
-            </label>
-            <label className="noUserInteraction platf-button-container">
-              <input
-                type="radio"
-                checked={platform === "XBOX"}
-                onChange={() => setPlatform("XBOX")}
-              />
-              <p style={platform === "XBOX" ? { color: "#2C8E54" } : null}>
-                XBOX
-              </p>
-            </label>
-            <label className="noUserInteraction platf-button-container">
-              <input
-                type="radio"
-                checked={platform === "SWITCH"}
-                onChange={() => setPlatform("SWITCH")}
-              />
-              <p style={platform === "SWITCH" ? { color: "#2C8E54" } : null}>
-                SWITCH
-              </p>
-            </label>
+            {/* Map Platforms */}
+            {Object.keys(Platforms).map((p) => (
+              <label className={styles.platform} key={p}>
+                <input
+                  type="radio"
+                  checked={platform === Platforms[p]}
+                  onChange={() =>
+                    dispatch({
+                      type: "setPlatform",
+                      payload: Platforms[p],
+                    })
+                  }
+                />
+                <span style={{ color: PlatformColours[p] }}>
+                  {Platforms[p]}
+                </span>
+              </label>
+            ))}
           </div>
         </div>
-
-        <button onClick={() => handleTradeSubmit()} className="rlSubmitButton">
+        <button onClick={() => handleTradeSubmit()} className={styles.submit}>
           SUBMIT TRADE
         </button>
       </div>

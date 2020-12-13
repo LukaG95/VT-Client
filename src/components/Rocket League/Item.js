@@ -4,15 +4,16 @@ import {
   LazyLoadComponent,
 } from "react-lazy-load-image-component";
 import styles from "./Item.module.scss";
+import MissingImageIcon from "../../images/icons/question.png";
 
-export default function Item({ item, lazy = false, ...props }) {
+export default function Item({ item, lazy, ...props }) {
   const content = (
     <div className={styles.item} {...props}>
       <div className={styles.content}>
         <div className={styles.imageContainer}>
           <img
             className={styles.image}
-            src="/images/icons/question.png"
+            src={MissingImageIcon}
             alt={item.Name}
           />
           {lazy ? (
@@ -22,26 +23,28 @@ export default function Item({ item, lazy = false, ...props }) {
               threshold={100}
               delayTime={0}
               alt=""
-              lazy="true"
+              lazy
             />
           ) : (
-              <img
-                className={styles.image}
-                src={`/images/items/${item.itemID}.0.webp`}
-                alt=""
-                loading="lazy"
-              />
-            )}
+            <img
+              className={styles.image}
+              src={`/images/items/${item.itemID}.0.webp`}
+              alt=""
+              lazy="true"
+            />
+          )}
         </div>
         <span className={styles.name}>{item.itemName}</span>
         {/* Icons + Overlays */}
-        {item.cert && item.cert !== "None" && <div className={styles.cert}>{item.cert}</div>}
+        {item.cert && item.cert !== "None" && (
+          <div className={styles.cert}>{item.cert}</div>
+        )}
         {item.amount > 1 && <div className={styles.amount}>{item.amount}</div>}
-        {item.color && item.color !== "None" &&
+        {item.color && item.color !== "None" && (
           <div className={`${styles.color} ${item.color.replace(/\s+/g, "")}`}>
             <span className={styles.tooltip}>{item.color}</span>
           </div>
-        }
+        )}
       </div>
       {props.children}
     </div>

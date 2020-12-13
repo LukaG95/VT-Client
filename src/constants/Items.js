@@ -21,11 +21,12 @@ export function getTradeableItems() {
     tradeableItems = [];
     RocketLeagueInfo.Slots.forEach((slot) => {
       slot.Items.forEach((item) => {
-        if (item.Tradable) tradeableItems.push({
-          itemID: item.ItemID,
-          itemName: item.Name,
-          itemType: slot.Name
-        });
+        if (item.Tradable)
+          tradeableItems.push({
+            itemID: item.ItemID,
+            itemName: item.Name,
+            itemType: slot.Name,
+          });
       });
     });
   }
@@ -92,16 +93,12 @@ export const ItemTypes = [
 ];
 
 export const DefaultItem = {
-  HasSpecialEditions: false,
-  HasTeamEditions: false,
-  ItemID: 0,
-  Name: "Unknown",
-  Paintable: true,
+  itemID: 0,
+  itemName: "Unknown",
   Quality: "Common",
-  Slot: "Body",
-  Tradable: true,
-  color: "Unpainted",
-  colorID: "",
-  cert: "",
-  amount: 0
-}
+  itemType: "Body",
+  color: "None",
+  colorID: 0,
+  cert: "None",
+  amount: 1,
+};

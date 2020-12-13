@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import TrophyImage from "../images/icons/trophy.png";
+import FirstImage from "../images/icons/icon-1st.png";
+import SecondImage from "../images/icons/icon-2nd.png";
+import ThirdImage from "../images/icons/icon-3rd.png";
 
 function FiltersREP() {
   const [leadInfo, setLeadInfo] = useState();
@@ -8,30 +12,18 @@ function FiltersREP() {
   const trophy = (
     <img
       style={{ height: "25px", width: "25px", marginLeft: "50px" }}
-      src={require("../images/other/icon-trophy.png")}
+      src={TrophyImage}
       alt=""
     />
   );
   const goldTrophy = (
-    <img
-      style={{ height: "25px", width: "25px" }}
-      src={require("../images/other/icon-1st.png")}
-      alt=""
-    />
+    <img style={{ height: "25px", width: "25px" }} src={FirstImage} alt="" />
   );
   const silverTrophy = (
-    <img
-      style={{ height: "25px", width: "25px" }}
-      src={require("../images/other/icon-2nd.png")}
-      alt=""
-    />
+    <img style={{ height: "25px", width: "25px" }} src={SecondImage} alt="" />
   );
   const bronzeTrophy = (
-    <img
-      style={{ height: "25px", width: "25px" }}
-      src={require("../images/other/icon-3rd.png")}
-      alt=""
-    />
+    <img style={{ height: "25px", width: "25px" }} src={ThirdImage} alt="" />
   );
 
   const hr = <div id="hr-line"></div>;

@@ -1,230 +1,109 @@
-import React, { useState, useEffect, useContext } from "react";
-
-import { TradeContextRL } from "../../../context/TradeContextRL";
-import RLInfo from "../../../constants/RocketLeagueInfo.json";
-import imageExists from "../../../misc/imageExists";
-
+import React, { useState, useEffect } from "react";
+import { useTrade } from "../../../context/TradeContext";
+import Dropdown from "../../../components/Dropdown";
 import { rl_dd_names } from "../../../info/DropdownNames";
-
 const { colorDD, certDD } = rl_dd_names;
 
 function Small3rdPage({ setShowPage, clickedItem }) {
-  const [color, setColor] = useState("None");
-  const [certification, setCertification] = useState("None");
-  const [amount, setAmount] = useState(1);
+  const [context, dispatch] = useTrade();
+  const item = context[clickedItem.type][clickedItem.index];
+  const [amountInput, setAmountInput] = useState(item.amount);
 
-  const { have, want, setHave, setWant, deleteRLitem } = useContext(
-    TradeContextRL
-  );
-
-  const { id, itemID, itemName } = clickedItem;
-
+  //Amount Changes
   useEffect(() => {
-    setColor(clickedItem.color);
-    setCertification(clickedItem.cert);
-    setAmount(clickedItem.amount);
-  }, [clickedItem.amount, clickedItem.cert, clickedItem.color]);
+    dispatch({
+      type: "updateItem",
+      payload: {
+        ...clickedItem,
+        item: {
+          amount: Number(amountInput) || 1,
+        },
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [amountInput]);
 
   return (
     <div id="add-trade-3rd-page">
       <div className="add-trade-3rd-page-header-field">
-        <img src={imageExists(`${itemID}.0.webp`)} alt="" />
+        <img src={`/images/items/${item.itemID}.0.webp`} alt="" />
         <div>
-          <p>{itemName}</p>
+          <p>{item.itemName}</p>
           <button
             onClick={() => {
-              deleteRLitem(id);
+              dispatch({
+                type: "removeItem",
+                payload: {
+                  ...clickedItem,
+                },
+              });
               setShowPage("1");
             }}
           >
-            Delete item
+            Delete Item
           </button>
         </div>
       </div>
-
-      <FilterButton
-        label="Color"
-        value={color}
-        setFunction={setColor}
-        dd={colorDD}
-        translate="translateY(-150px)"
-      />
-      <FilterButton
-        label="Certification"
-        value={certification}
-        setFunction={setCertification}
-        dd={certDD}
-        translate="translateY(-215px)"
-      />
-      <FilterButton
-        label="Amount"
-        value={amount}
-        setFunction={setAmount}
-        itemID={itemID}
-      />
-
+      <div className="add-trade-3rd-page-input-fields">
+        <Dropdown
+          name="Color"
+          items={colorDD}
+          className="dropdown"
+          onChange={(color) =>
+            dispatch({
+              type: "updateItem",
+              payload: {
+                ...clickedItem,
+                item: {
+                  color,
+                  colorID: colorDD.findIndex((c) => c === color),
+                },
+              },
+            })
+          }
+          value={item.color}
+        />
+        <Dropdown
+          name={`Certification`}
+          value={item.cert}
+          items={certDD}
+          className="dropdown"
+          onChange={(cert) =>
+            dispatch({
+              type: "updateItem",
+              payload: {
+                ...clickedItem,
+                item: {
+                  cert,
+                },
+              },
+            })
+          }
+        />
+        <div className="rl-icon-amount-filter-field">
+          <label className="enableDropdown">
+            Amount - max {item.itemID === 4743 ? 100000 : 100}
+          </label>
+          <input
+            name="amount-dropdown"
+            className="rl-icon-dropdown-button-section"
+            style={{ justifyContent: "space-between" }}
+            value={amountInput}
+            onChange={(e) => {
+              const value = e.target.value.replace(/[^\d]/g, "");
+              const max = item.itemID === 4743 ? 100000 : 100;
+              if (Number(value) > max) setAmountInput("" + max);
+              else setAmountInput(value);
+            }}
+          />
+        </div>
+      </div>
       <button
-        className="add-trade-confirm-button"
-        onClick={() => {
-          submitFilters();
-          setShowPage("1");
-        }}
-      >
-        CONFIRM
-      </button>
-
-      <button
-        className="add-trade-back-button"
+        className="add-trade-done-button"
         onClick={() => setShowPage("1")}
       >
-        BACK
+        DONE
       </button>
-    </div>
-  );
-
-  function submitFilters() {
-    let colorID = 0;
-    let temp = [];
-
-    RLInfo.Colors.forEach((info_color) => {
-      if (info_color.Name === color) colorID = info_color.ID;
-    });
-
-    if (amount === "" || amount === 0 || amount === "0")
-      // this is so that if users set amount to zero or an empty string it will set it back to 1 when accepting filters
-      var refactorAmount = 1; // without this users won't be able to delete the initial value "1" and put for example "9"
-
-    have.forEach((item) => {
-      if (item.id === id) {
-        item.color = color;
-        item.colorID = colorID;
-        item.cert = certification;
-        item.amount = refactorAmount || +amount; // plus removes leading zeros
-        temp.push(item);
-      } else temp.push(item);
-    });
-    setHave(temp);
-
-    temp = [];
-
-    want.forEach((item) => {
-      if (item.id === id) {
-        item.color = color;
-        item.colorID = colorID;
-        item.cert = certification;
-        item.amount = refactorAmount || +amount;
-        temp.push(item);
-      } else temp.push(item);
-    });
-    setWant(temp);
-  }
-}
-
-function FilterButton({ dd, label, value, setFunction, itemID, translate }) {
-  const [open, setOpen] = useState(false);
-
-  function handleAmountSubmit(e) {
-    const { value } = e.target;
-
-    if (
-      (isNaN(value) && value !== "") ||
-      value > (itemID === 4743 ? 100000 : 100) ||
-      value < 0 ||
-      value.length > 8
-    )
-      return;
-
-    setFunction(value);
-  }
-
-  if (label !== "Amount") {
-    return (
-      <div
-        id={`${label}`}
-        className="rl-icon-dropdown-button-section"
-        style={
-          open
-            ? { zIndex: "2", marginBottom: "15px" }
-            : { marginBottom: "15px" }
-        }
-      >
-        <button
-          name="enableDropdown"
-          onClick={() => {
-            if (!open) {
-              document.getElementById(`${label}`).style.transform = translate;
-              setTimeout(() => {
-                setOpen(!open);
-              }, 500);
-            } else {
-              document.getElementById(`${label}`).style.transform =
-                "translateY(0px)";
-              setOpen(!open);
-            }
-          }}
-          style={
-            open ? { border: "1px solid black", borderBottom: "none" } : null
-          }
-          className="filter-button-small"
-        >
-          <div className="filter-button-left-small">
-            <label className="enableDropdown"> {label} </label>
-            <p>{value}</p>
-          </div>
-
-          <i className="dd-arrow"></i>
-        </button>
-
-        {open && (
-          <DropdownMenu
-            setFunction={setFunction}
-            dd={dd}
-            setOpen={setOpen}
-            label={label}
-          />
-        )}
-      </div>
-    );
-  } else
-    return (
-      <div className="rl-icon-amount-filter-field">
-        <label>
-          {label} - max {itemID === 4743 ? 100000 : 100}
-        </label>
-
-        <input
-          name="enableDropdown"
-          value={value}
-          onChange={(e) => handleAmountSubmit(e)}
-        />
-      </div>
-    );
-}
-
-function DropdownMenu({ dd, setFunction, setOpen, label }) {
-  const [dropNames] = useState(() =>
-    dd.map((item) => <MenuItem>{item}</MenuItem>)
-  );
-
-  function MenuItem({ children }) {
-    return (
-      <div
-        className="rl-attribute-dd-item"
-        onClick={() => {
-          document.getElementById(`${label}`).style.transform =
-            "translateY(0px)";
-          setOpen((prev) => !prev);
-          setFunction(children);
-        }}
-      >
-        {children}
-      </div>
-    );
-  }
-
-  return (
-    <div className="rl-dd-dd" id="rl-dd-dd-mobile">
-      {dropNames}
     </div>
   );
 }

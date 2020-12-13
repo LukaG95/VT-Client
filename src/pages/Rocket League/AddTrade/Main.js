@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import Filter from "bad-words";
+//import Filter from "bad-words";
 import styles from "./Main.module.scss";
 import { createNotification } from "../../../misc/ToastNotification";
 import FilterBar from "../../../components/Rocket League/FilterBar";
@@ -17,7 +17,7 @@ import { getTradeableItems } from "../../../constants/Items";
 import { useTradeFilters } from "../../../context/TradeFiltersContext";
 import PlusItem from "./PlusItem";
 
-const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
+//const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
 function AddTradeRL() {
   const pathID = useLocation().pathname.substring(17); // Reads url after `/trades/` till the end
@@ -37,18 +37,22 @@ function AddTradeRL() {
   useEffect(() => {
     let items = getTradeableItems();
     if (filters.type !== "Any") {
-      items = items.filter((i) => i.Slot === filters.type);
+      items = items.filter((i) => i.itemType === filters.type);
     }
     if (filters.name) {
       items = items.filter(
-        (i) => i.Name.toLowerCase().search(filters.name) > -1
+        (i) => i.itemName.toLowerCase().search(filters.name) > -1
       );
     }
     setItems(items);
   }, [filters]);
 
   //Return Desktop or Mobile
-  return width > 1213 ? AddTrade() : <SmallHome />;
+  return width > 1213 ? (
+    AddTrade()
+  ) : (
+    <SmallHome {...{ handleTradeSubmit, ItemClick }} />
+  );
 
   function ItemClick(item) {
     setError({ ...error, trade: "" });
@@ -73,7 +77,7 @@ function AddTradeRL() {
               <Item
                 item={item}
                 onClick={() => ItemClick(item)}
-                key={item.ItemID}
+                key={item.itemID}
               />
             ))}
           </ItemContainer>
@@ -95,8 +99,10 @@ function AddTradeRL() {
               />
             </div>
             <ItemContainer className={styles.items}>
-              {have.map((item) => (
-                <Item item={item}><EditItemDropdown item={item}/></Item>
+              {have.map((item, index) => (
+                <Item item={item}>
+                  <EditItemDropdown {...{ item, index, type: "have" }} />
+                </Item>
               ))}
               {Array(12 - have.length)
                 .fill(null)
@@ -124,8 +130,10 @@ function AddTradeRL() {
               />
             </div>
             <ItemContainer className="wantItems">
-              {want.map((item) => (
-                <Item item={item} />
+              {want.map((item, index) => (
+                <Item item={item}>
+                  <EditItemDropdown {...{ item, index, type: "want" }} />
+                </Item>
               ))}
               {Array(12 - want.length)
                 .fill(null)
@@ -222,7 +230,7 @@ function AddTradeRL() {
           have: have.map(preparePostItem),
           want: want.map(preparePostItem),
           platform: platform,
-          notes: profanityFilter.clean(notes),
+          notes: notes,
         })
         .then((res) => {
           if (res.data.info === "success") {
@@ -262,7 +270,7 @@ function AddTradeRL() {
           have: have.map(preparePostItem),
           want: want.map(preparePostItem),
           platform: platform,
-          notes: profanityFilter.clean(notes),
+          notes: notes,
         })
         .then((res) => {
           if (res.data.info === "success") {

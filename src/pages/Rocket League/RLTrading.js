@@ -5,6 +5,7 @@ import infoRL from "../../constants/RocketLeagueInfo.json";
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
 import RLTradeComponent from "../../components/Rocket League/RLTradeComponent";
 import { createNotification } from "../../misc/ToastNotification";
+import NotFoundImage from "../../images/icons/not-found.png";
 
 function RLTrading() {
   const {
@@ -117,11 +118,7 @@ function RLTrading() {
   function NoTradesFound() {
     return (
       <div className="no-trades-found-wrapper">
-        <img
-          className="noUserInteraction"
-          src={require("../../images/other/No trades found.png")}
-          alt=""
-        ></img>
+        <img className="noUserInteraction" src={NotFoundImage} alt=""></img>
         <h2>
           No <span style={{ color: "#FE3B3B" }}>trades</span> were found for
           your filters
