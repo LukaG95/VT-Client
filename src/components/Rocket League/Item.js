@@ -8,7 +8,7 @@ import MissingImageIcon from "../../images/icons/question.png";
 
 export default function Item({ item, lazy, ...props }) {
   const content = (
-    <div className={styles.item} {...props}>
+    <div className={`${styles.item} ${props.hideName ? styles.hideName :""}`} {...props}>
       <div className={styles.content}>
         <div className={styles.imageContainer}>
           <img
@@ -30,11 +30,11 @@ export default function Item({ item, lazy, ...props }) {
               className={styles.image}
               src={`/images/items/${item.itemID}.0.webp`}
               alt=""
-              lazy="true"
+              lazy
             />
           )}
         </div>
-        <span className={styles.name}>{item.itemName}</span>
+        {!props.hideName && <span className={styles.name}>{item.itemName}</span>}
         {/* Icons + Overlays */}
         {item.cert && item.cert !== "None" && (
           <div className={styles.cert}>{item.cert}</div>

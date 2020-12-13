@@ -100,7 +100,7 @@ function Navbar() {
           <div className={`nav-button-wrapper ${width > 1213 && "bell"}`}>
             <img
               src={BellWhiteImage}
-              style={{ height: "25", width: "25" }}
+              style={{ height: "25px", width: "25px" }}
               alt=""
             />
           </div>

@@ -30,21 +30,23 @@ function AddTradeRL() {
     trade: "",
     notes: "",
   });
-  const [items, setItems] = useState(getTradeableItems());
+  const [items, setItems] = useState([]);
   const [slot, setSlot] = useState("have");
   const { width } = useWindowDimensions();
   //Filtered Items
   useEffect(() => {
-    let items = getTradeableItems();
-    if (filters.type !== "Any") {
-      items = items.filter((i) => i.itemType === filters.type);
-    }
-    if (filters.name) {
-      items = items.filter(
-        (i) => i.itemName.toLowerCase().search(filters.name) > -1
-      );
-    }
-    setItems(items);
+    process.nextTick(() => {
+      let items = getTradeableItems();
+      if (filters.type !== "Any") {
+        items = items.filter((i) => i.itemType === filters.type);
+      }
+      if (filters.name) {
+        items = items.filter(
+          (i) => i.itemName.toLowerCase().search(filters.name) > -1
+        );
+      }
+      setItems(items);
+    })
   }, [filters]);
 
   //Return Desktop or Mobile
@@ -100,7 +102,7 @@ function AddTradeRL() {
             </div>
             <ItemContainer className={styles.items}>
               {have.map((item, index) => (
-                <Item item={item}>
+                <Item item={item} hideName>
                   <EditItemDropdown {...{ item, index, type: "have" }} />
                 </Item>
               ))}
@@ -131,7 +133,7 @@ function AddTradeRL() {
             </div>
             <ItemContainer className="wantItems">
               {want.map((item, index) => (
-                <Item item={item}>
+                <Item item={item} hideName>
                   <EditItemDropdown {...{ item, index, type: "want" }} />
                 </Item>
               ))}

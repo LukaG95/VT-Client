@@ -74,7 +74,7 @@ function FiltersRL() {
         onChange={setPlatform}
         className={styles.dropdown}
       />
-      <ClearItems onClick={resetFilters} className={styles.clear}/>
+      <ClearItems onClick={resetFilters}/>
     </div>
   );
 }

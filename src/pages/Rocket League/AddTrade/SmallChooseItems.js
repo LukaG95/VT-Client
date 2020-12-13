@@ -9,7 +9,7 @@ import FilterBar from "../../../components/Rocket League/FilterBar";
 import ClearItems from "../../../components/AddTrade/ClearItems";
 
 function SmallChooseItems({ setShowPage, slot, setSlot }) {
-  const [items, setItems] = useState(getTradeableItems());
+  const [items, setItems] = useState([]);
   const [filters] = useTradeFilters();
   const [{ have, want }, dispatch] = useTrade();
   //On Item Click
@@ -26,16 +26,18 @@ function SmallChooseItems({ setShowPage, slot, setSlot }) {
   }
   //Filtered Items
   useEffect(() => {
-    let items = getTradeableItems();
-    if (filters.type !== "Any") {
-      items = items.filter((i) => i.itemType === filters.type);
-    }
-    if (filters.name) {
-      items = items.filter(
-        (i) => i.itemName.toLowerCase().search(filters.name) > -1
-      );
-    }
-    setItems(items);
+    process.nextTick(() => {
+      let items = getTradeableItems();
+      if (filters.type !== "Any") {
+        items = items.filter((i) => i.itemType === filters.type);
+      }
+      if (filters.name) {
+        items = items.filter(
+          (i) => i.itemName.toLowerCase().search(filters.name) > -1
+        );
+      }
+      setItems(items);
+    })
   }, [filters]);
 
   return (
