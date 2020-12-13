@@ -1,10 +1,12 @@
 .wrapper {
   display: grid;
-  grid-template-columns: 6fr 3fr 2fr;
+  grid-template-columns: 1fr 420px 360px;
   gap: 16px;
 
   margin-top: 15px;
-  animation: transitionUp 0.4s;
+  &:global {
+    animation: transitionLeft 0.4s;
+  }
 
   width: 100%;
   height: calc(100vh - 105px);

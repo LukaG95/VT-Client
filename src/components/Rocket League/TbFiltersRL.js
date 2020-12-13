@@ -3,7 +3,8 @@ import React, { useContext } from "react";
 import { rl_dd_names } from "../../info/DropdownNames";
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
 import Dropdown from "../Dropdown";
-import TrashIcon from "../../images/icons/trash.png";
+import styles from "./TbFiltersRL.module.scss";
+import ClearItems from "../AddTrade/ClearItems";
 
 const {
   gameDD,
@@ -36,12 +37,13 @@ function FiltersRL() {
 
   return (
     <div className="filters-field hide">
-      <Dropdown name={`Game`} value={game} items={gameDD} onChange={setGame} />
+      <Dropdown name={`Game`} value={game} items={gameDD} onChange={setGame} className={styles.dropdown} />
       <Dropdown
         name={`Search`}
         value={searchType}
         items={searchTypeDD}
         onChange={setSearchType}
+        className={styles.dropdown}
       />
       <Dropdown name={`Name`} value={name} items={namesDD} onChange={setName} />
       <Dropdown
@@ -49,32 +51,30 @@ function FiltersRL() {
         items={colorDD}
         onChange={setColor}
         value={color}
+        className={styles.dropdown}
       />
       <Dropdown
         name={`Certification`}
         value={cert}
         items={certDD}
         onChange={setCert}
+        className={styles.dropdown}
       />
       <Dropdown
         name={`Item Type`}
         value={itemType}
         items={itemTypeDD}
         onChange={setItemType}
+        className={styles.dropdown}
       />
       <Dropdown
         name={`Platform`}
         value={platform}
         items={platformDD}
         onChange={setPlatform}
+        className={styles.dropdown}
       />
-
-      <div
-        onClick={resetFilters}
-        className="rl-resetFilters-button noUserInteraction"
-      >
-        <img src={TrashIcon} style={{ height: "14px", width: "14px" }} alt="" />
-      </div>
+      <ClearItems onClick={resetFilters}/>
     </div>
   );
 }

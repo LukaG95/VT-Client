@@ -4,7 +4,7 @@ import TrashImage from "../../images/icons/trash.png";
 
 export default function ClearItems(props) {
   return (
-    <div className={styles.button} style={{ margin: "0px" }} {...props}>
+    <div {...props} className={[styles.button, props.className || ""].join(" ")}>
       <img src={TrashImage} className={styles.icon} alt="" />
     </div>
   );

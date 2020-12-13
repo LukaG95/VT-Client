@@ -37,6 +37,7 @@ function Small1stPage({
             {have.map((item, index) => (
               <Item
                 {...{ item, index }}
+                hideName
                 onClick={() => {
                   setClickedItem({ type: "have", index });
                   setShowPage("3");
@@ -75,6 +76,7 @@ function Small1stPage({
             {want.map((item, index) => (
               <Item
                 {...{ item, index }}
+                hideName
                 onClick={() => {
                   setClickedItem({ type: "want", index });
                   setShowPage("3");
