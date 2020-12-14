@@ -8,7 +8,7 @@ const { colorDD, certDD } = rl_dd_names;
 
 function Small3rdPage({ setShowPage, clickedItem }) {
   const [context, dispatch] = useTrade();
-  console.log(clickedItem)
+  console.log(clickedItem);
   const item = context[clickedItem.type][clickedItem.index];
   const [amountInput, setAmountInput] = useState(item.amount);
 

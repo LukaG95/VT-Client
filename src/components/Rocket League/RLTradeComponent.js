@@ -15,8 +15,8 @@ const platformIcons = {
   steam: SteamIcon,
   ps4: PS4Icon,
   xbox: XBOXIcon,
-  switch: SwitchIcon
-}
+  switch: SwitchIcon,
+};
 
 function RLTradeComponent({ trade, manageTrade }) {
   const [rep, setRep] = useState();
@@ -115,10 +115,10 @@ function RLTradeComponent({ trade, manageTrade }) {
                 </button>
               </>
             ) : (
-                  <p className="buttons-box-sign-to-interact">
-                    Sign in to interact
-                  </p>
-                )}
+              <p className="buttons-box-sign-to-interact">
+                Sign in to interact
+              </p>
+            )}
           </div>
         </div>
       </div>
@@ -256,7 +256,7 @@ function RLTradeComponent({ trade, manageTrade }) {
           <p
             style={
               ({ fontWeight: "600", fontSize: "21px" },
-                width < 957 ? { fontSize: "17px", marginBottom: "5px" } : null)
+              width < 957 ? { fontSize: "17px", marginBottom: "5px" } : null)
             }
           >
             {trade.user.username}

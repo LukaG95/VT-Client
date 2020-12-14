@@ -30,8 +30,7 @@ function EditItemDropdown({ item, index, type }) {
   const ref = useRef();
   //Detect Clicks
   function onClick(e) {
-    if (!ref.current || !ref.current.contains(e.target))
-      setVisible(false);
+    if (!ref.current || !ref.current.contains(e.target)) setVisible(false);
   }
   useEffect(() => {
     window.addEventListener("click", onClick);
@@ -56,21 +55,21 @@ function EditItemDropdown({ item, index, type }) {
           style={
             height <= 650
               ? {
-                position: "fixed",
-                top: "280px",
-                right: "510px",
-                marginTop: "-200px",
-                marginLeft: "200px",
-              }
+                  position: "fixed",
+                  top: "280px",
+                  right: "510px",
+                  marginTop: "-200px",
+                  marginLeft: "200px",
+                }
               : height <= 820
-                ? {
+              ? {
                   position: "fixed",
                   top: "400px",
                   right: "510px",
                   marginTop: "-200px",
                   marginLeft: "200px",
                 }
-                : null
+              : null
           }
         >
           <div className="item_name">{item.itemName}</div>

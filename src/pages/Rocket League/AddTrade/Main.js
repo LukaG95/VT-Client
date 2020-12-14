@@ -45,24 +45,24 @@ function AddTradeRL() {
         );
       }
       setItems(items);
-    })
+    });
   }, [filters]);
 
-  const inventoryItems = useMemo(() => items.map((item) => (
-    <Item
-      item={item}
-      onClick={() => ItemClick(item)}
-      key={item.itemID}
-    />
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  )), [items])
+  const inventoryItems = useMemo(
+    () =>
+      items.map((item) => (
+        <Item item={item} onClick={() => ItemClick(item)} key={item.itemID} />
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      )),
+    [items]
+  );
 
   //Return Desktop or Mobile
   return width > 1213 ? (
     AddTrade()
   ) : (
-      <SmallHome {...{ handleTradeSubmit, ItemClick }} />
-    );
+    <SmallHome {...{ handleTradeSubmit, ItemClick }} />
+  );
 
   function ItemClick(item) {
     setError({ ...error, trade: "" });
@@ -98,24 +98,29 @@ function AddTradeRL() {
               />
             </div>
             <ItemContainer className={styles.items}>
-              {have.map((item, index) => (
-                item ?
+              {have.map((item, index) =>
+                item ? (
                   <Item item={item} key={index} hideName>
                     <EditItemDropdown {...{ item, index, type: "have" }} />
                   </Item>
-                  :
+                ) : (
                   <PlusItem
                     key={index}
-                    selected={index === selected.index && selected.type === "have"}
-                    onClick={() => dispatch({
-                      type: actions.SET_SELECTED,
-                      payload: {
-                        index,
-                        type: "have"
-                      }
-                    })}
+                    selected={
+                      index === selected.index && selected.type === "have"
+                    }
+                    onClick={() =>
+                      dispatch({
+                        type: actions.SET_SELECTED,
+                        payload: {
+                          index,
+                          type: "have",
+                        },
+                      })
+                    }
                   />
-              ))}
+                )
+              )}
             </ItemContainer>
           </div>
           <div className={styles.section} style={{ marginBottom: "20px" }}>
@@ -133,24 +138,29 @@ function AddTradeRL() {
               />
             </div>
             <ItemContainer className={styles.items}>
-              {want.map((item, index) => (
-                item ?
+              {want.map((item, index) =>
+                item ? (
                   <Item item={item} key={index} hideName>
                     <EditItemDropdown {...{ item, index, type: "want" }} />
                   </Item>
-                  :
+                ) : (
                   <PlusItem
                     key={index}
-                    selected={index === selected.index && selected.type === "want"}
-                    onClick={() => dispatch({
-                      type: actions.SET_SELECTED,
-                      payload: {
-                        index,
-                        type: "want"
-                      }
-                    })}
+                    selected={
+                      index === selected.index && selected.type === "want"
+                    }
+                    onClick={() =>
+                      dispatch({
+                        type: actions.SET_SELECTED,
+                        payload: {
+                          index,
+                          type: "want",
+                        },
+                      })
+                    }
                   />
-              ))}
+                )
+              )}
             </ItemContainer>
           </div>
         </div>
@@ -210,9 +220,9 @@ function AddTradeRL() {
   function handleTradeSubmit() {
     //Check Items
     const filtered = {
-      have: have.filter(i => i),
-      want: want.filter(i => i)
-    }
+      have: have.filter((i) => i),
+      want: want.filter((i) => i),
+    };
     if (!filtered.have.length || !filtered.want.length) {
       setError({
         ...error,

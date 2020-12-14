@@ -17,7 +17,7 @@ function SmallChooseItems({ setShowPage }) {
   function ItemClick(item) {
     dispatch({
       type: actions.ADD_ITEM,
-      payload: item
+      payload: item,
     });
   }
   //Filtered Items
@@ -33,20 +33,24 @@ function SmallChooseItems({ setShowPage }) {
         );
       }
       setItems(items);
-    })
+    });
   }, [filters]);
 
-  const inventoryItems = useMemo(() => items.map((item) => (
-    <Item
-      item={item}
-      onClick={() => ItemClick(item)}
-      key={item.itemID}
-      lazy
-    >
-      <ItemConfirmIcon item={item} />
-    </Item>
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  )), [items])
+  const inventoryItems = useMemo(
+    () =>
+      items.map((item) => (
+        <Item
+          item={item}
+          onClick={() => ItemClick(item)}
+          key={item.itemID}
+          lazy
+        >
+          <ItemConfirmIcon item={item} />
+        </Item>
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      )),
+    [items]
+  );
 
   return (
     <div id="add-trade-2nd-page">
@@ -61,12 +65,14 @@ function SmallChooseItems({ setShowPage }) {
         <div
           className="have-count-notice"
           style={selected.type !== "have" ? { opacity: "0.65" } : null}
-          onClick={() => dispatch({
-            type: actions.SET_TYPE,
-            payload: "have",
-          })}
+          onClick={() =>
+            dispatch({
+              type: actions.SET_TYPE,
+              payload: "have",
+            })
+          }
         >
-          <pre>Have: {have.filter(i => i).length}/12</pre>
+          <pre>Have: {have.filter((i) => i).length}/12</pre>
           <ClearItems
             onClick={() =>
               dispatch({
@@ -79,11 +85,14 @@ function SmallChooseItems({ setShowPage }) {
         <div
           className="want-count-notice"
           style={selected.type !== "want" ? { opacity: "0.65" } : null}
-          onClick={() => dispatch({
-            type: actions.SET_TYPE,
-            payload: "want",
-          })}        >
-          <pre>Want: {want.filter(i => i).length}/12</pre>
+          onClick={() =>
+            dispatch({
+              type: actions.SET_TYPE,
+              payload: "want",
+            })
+          }
+        >
+          <pre>Want: {want.filter((i) => i).length}/12</pre>
           <ClearItems
             onClick={() =>
               dispatch({

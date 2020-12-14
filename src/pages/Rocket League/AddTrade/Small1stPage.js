@@ -7,11 +7,7 @@ import ItemContainer from "../../../components/Rocket League/ItemContainer";
 import PlusItem from "./PlusItem";
 import ClearItems from "../../../components/AddTrade/ClearItems";
 
-function Small1stPage({
-  handleTradeSubmit,
-  setShowPage,
-  setClickedItem
-}) {
+function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
   const [{ have, want, platform, notes, selected }, dispatch] = useTrade();
 
   return (
@@ -32,29 +28,36 @@ function Small1stPage({
         </div>
         <div className={styles.sectionSmall} style={{ marginBottom: "10px" }}>
           <ItemContainer className={styles.items}>
-            {have.map((item, index) => (
-              item ?
-                <Item item={item} key={index} hideName onClick={() => {
-                  setClickedItem({ type: "have", index })
-                  setShowPage("3")
-                }}>
-                </Item>
-                :
+            {have.map((item, index) =>
+              item ? (
+                <Item
+                  item={item}
+                  key={index}
+                  hideName
+                  onClick={() => {
+                    setClickedItem({ type: "have", index });
+                    setShowPage("3");
+                  }}
+                ></Item>
+              ) : (
                 <PlusItem
                   key={index}
-                  selected={index === selected.index && selected.type === "have"}
+                  selected={
+                    index === selected.index && selected.type === "have"
+                  }
                   onClick={() => {
                     dispatch({
                       type: actions.SET_SELECTED,
                       payload: {
                         type: "have",
-                        index
+                        index,
                       },
-                    })
-                    setShowPage("2")
+                    });
+                    setShowPage("2");
                   }}
                 />
-            ))}
+              )
+            )}
           </ItemContainer>
         </div>
         <div className={styles.title}>
@@ -72,29 +75,36 @@ function Small1stPage({
         </div>
         <div className={styles.sectionSmall}>
           <ItemContainer className={styles.items}>
-            {want.map((item, index) => (
-              item ?
-                <Item item={item} key={index} hideName onClick={() => {
-                  setClickedItem({ type: "have", index })
-                  setShowPage("3")
-                }}>
-                </Item>
-                :
+            {want.map((item, index) =>
+              item ? (
+                <Item
+                  item={item}
+                  key={index}
+                  hideName
+                  onClick={() => {
+                    setClickedItem({ type: "have", index });
+                    setShowPage("3");
+                  }}
+                ></Item>
+              ) : (
                 <PlusItem
                   key={index}
-                  selected={index === selected.index && selected.type === "want"}
+                  selected={
+                    index === selected.index && selected.type === "want"
+                  }
                   onClick={() => {
                     dispatch({
                       type: actions.SET_SELECTED,
                       payload: {
                         type: "want",
-                        index
+                        index,
                       },
-                    })
-                    setShowPage("2")
+                    });
+                    setShowPage("2");
                   }}
                 />
-            ))}
+              )
+            )}
           </ItemContainer>
         </div>
       </div>
@@ -137,7 +147,7 @@ function Small1stPage({
           SUBMIT TRADE
         </button>
       </div>
-    </div >
+    </div>
   );
 }
 

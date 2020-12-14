@@ -5,7 +5,7 @@ import RedCheckIcon from "../../../images/icons/check-red.png";
 import { useTrade } from "../../../context/TradeContext";
 
 export default function ItemConfirmIcon({ item }) {
-  const [{ have, want }] = useTrade()
+  const [{ have, want }] = useTrade();
   let icons = [];
   //If item is in have, display have check
   if (have.find((h) => h && h.itemID === item.itemID))
