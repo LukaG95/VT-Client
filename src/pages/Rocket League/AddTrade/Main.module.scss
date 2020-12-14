@@ -33,11 +33,12 @@
   animation: transitionLeft 0.4s;
 
   width: 100%;
-  height: 100%
+  height: 100%;
 }
 
 .itemContainer {
   overflow-y: scroll;
+  padding: 0 10px;
 }
 
 .haveWant {
@@ -111,6 +112,11 @@
   }
 }
 
+.notesSmall {
+  @extend .notes;
+  margin-top: 10px;
+}
+
 .error {
   position: absolute;
   bottom: -18px;
@@ -126,7 +132,7 @@
 .platforms {
   display: flex;
   align-items: center;
-  height: 50px;
+  height: 20px;
 
   > h4 {
     color: #f6f6f6;

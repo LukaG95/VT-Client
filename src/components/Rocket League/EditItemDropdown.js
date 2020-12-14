@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useTrade } from "../../context/TradeContext";
+import React, { useState, useEffect, useRef } from "react";
+import { actions, useTrade } from "../../context/TradeContext";
 import styles from "./EditItemDropdown.module.scss";
 import useWindowDimensions from "../../misc/windowHW";
 import Dropdown from "../Dropdown";
@@ -16,7 +16,7 @@ function EditItemDropdown({ item, index, type }) {
   //Amount Changes
   useEffect(() => {
     dispatch({
-      type: "updateItem",
+      type: actions.UPDATE_ITEM,
       payload: {
         type,
         index,
@@ -27,36 +27,50 @@ function EditItemDropdown({ item, index, type }) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [amountInput]);
+  const ref = useRef();
+  //Detect Clicks
+  function onClick(e) {
+    if (!ref.current || !ref.current.contains(e.target))
+      setVisible(false);
+  }
+  useEffect(() => {
+    window.addEventListener("click", onClick);
+    return () => {
+      window.removeEventListener("click", onClick);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
-    <>
-      <img
-        style={item.amount <= 1 ? { top: "6px" } : null}
-        className="editIcon"
-        src={EditIcon}
-        alt=""
-        onClick={() => setVisible(true)}
-      />
+    <div onClick={() => setVisible(true)} ref={ref}>
+      <div className={styles.clickBind}>
+        <img
+          style={item.amount <= 1 ? { top: "6px" } : null}
+          className="editIcon"
+          src={EditIcon}
+          alt=""
+        />
+      </div>
       {visible && (
         <div
           className="rl-icon-dropdown" // style is small height positioning
           style={
             height <= 650
               ? {
-                  position: "fixed",
-                  top: "280px",
-                  right: "510px",
-                  marginTop: "-200px",
-                  marginLeft: "200px",
-                }
+                position: "fixed",
+                top: "280px",
+                right: "510px",
+                marginTop: "-200px",
+                marginLeft: "200px",
+              }
               : height <= 820
-              ? {
+                ? {
                   position: "fixed",
                   top: "400px",
                   right: "510px",
                   marginTop: "-200px",
                   marginLeft: "200px",
                 }
-              : null
+                : null
           }
         >
           <div className="item_name">{item.itemName}</div>
@@ -66,7 +80,7 @@ function EditItemDropdown({ item, index, type }) {
             className={styles.dropdowns}
             onChange={(color) =>
               dispatch({
-                type: "updateItem",
+                type: actions.UPDATE_ITEM,
                 payload: {
                   type,
                   index,
@@ -86,7 +100,7 @@ function EditItemDropdown({ item, index, type }) {
             className={styles.dropdowns}
             onChange={(cert) =>
               dispatch({
-                type: "updateItem",
+                type: actions.UPDATE_ITEM,
                 payload: {
                   type,
                   index,
@@ -123,7 +137,7 @@ function EditItemDropdown({ item, index, type }) {
             id="delete-rl-filters-button"
             onClick={() =>
               dispatch({
-                type: "removeItem",
+                type: actions.REMOVE_ITEM,
                 payload: {
                   type,
                   index,
@@ -135,7 +149,7 @@ function EditItemDropdown({ item, index, type }) {
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

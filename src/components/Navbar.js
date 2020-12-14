@@ -10,6 +10,7 @@ import { ReactComponent as LogoIconPhone } from "../images/logo/vt-red-v.svg";
 import PlusTradeImage from "../images/icons/plus-trade-small.png";
 import BellWhiteImage from "../images/icons/bell-white.svg";
 import ProfileImage from "../images/icons/profile.svg";
+import ProfileSmallImage from "../images/icons/profile-small.png";
 
 function Navbar() {
   let location = useLocation();
@@ -137,7 +138,7 @@ function Navbar() {
       else
         return (
           <div className="nav-button-wrapper" style={{ marginRight: "15px" }}>
-            <img height={25} width={25} src={ProfileImage} alt="" />
+            <img height={25} width={25} src={ProfileSmallImage} alt="" />
           </div>
         );
     else if (isLoggedIn === undefined)

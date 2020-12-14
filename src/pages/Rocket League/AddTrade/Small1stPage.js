@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Main.module.scss";
 import { PlatformColours, Platforms } from "../../../constants/Platforms";
-import { useTrade } from "../../../context/TradeContext";
+import { actions, useTrade } from "../../../context/TradeContext";
 import Item from "../../../components/Rocket League/Item";
 import ItemContainer from "../../../components/Rocket League/ItemContainer";
 import PlusItem from "./PlusItem";
@@ -10,11 +10,9 @@ import ClearItems from "../../../components/AddTrade/ClearItems";
 function Small1stPage({
   handleTradeSubmit,
   setShowPage,
-  setClickedItem,
-  slot,
-  setSlot,
+  setClickedItem
 }) {
-  const [{ have, want, platform, notes }, dispatch] = useTrade();
+  const [{ have, want, platform, notes, selected }, dispatch] = useTrade();
 
   return (
     <div className={styles.wrapperSmall}>
@@ -26,7 +24,7 @@ function Small1stPage({
           <ClearItems
             onClick={() =>
               dispatch({
-                type: "clearItems",
+                type: actions.CLEAR_ITEMS,
                 payload: "have",
               })
             }
@@ -35,27 +33,28 @@ function Small1stPage({
         <div className={styles.sectionSmall} style={{ marginBottom: "10px" }}>
           <ItemContainer className={styles.items}>
             {have.map((item, index) => (
-              <Item
-                {...{ item, index }}
-                hideName
-                onClick={() => {
-                  setClickedItem({ type: "have", index });
-                  setShowPage("3");
-                }}
-              />
-            ))}
-            {Array(12 - have.length)
-              .fill(null)
-              .map((_, index) => (
+              item ?
+                <Item item={item} key={index} hideName onClick={() => {
+                  setClickedItem({ type: "have", index })
+                  setShowPage("3")
+                }}>
+                </Item>
+                :
                 <PlusItem
                   key={index}
-                  selected={!index && slot === "have"}
+                  selected={index === selected.index && selected.type === "have"}
                   onClick={() => {
-                    setShowPage("2");
-                    setSlot("have");
+                    dispatch({
+                      type: actions.SET_SELECTED,
+                      payload: {
+                        type: "have",
+                        index
+                      },
+                    })
+                    setShowPage("2")
                   }}
                 />
-              ))}
+            ))}
           </ItemContainer>
         </div>
         <div className={styles.title}>
@@ -65,7 +64,7 @@ function Small1stPage({
           <ClearItems
             onClick={() =>
               dispatch({
-                type: "clearItems",
+                type: actions.CLEAR_ITEMS,
                 payload: "want",
               })
             }
@@ -74,39 +73,40 @@ function Small1stPage({
         <div className={styles.sectionSmall}>
           <ItemContainer className={styles.items}>
             {want.map((item, index) => (
-              <Item
-                {...{ item, index }}
-                hideName
-                onClick={() => {
-                  setClickedItem({ type: "want", index });
-                  setShowPage("3");
-                }}
-              />
-            ))}
-            {Array(12 - want.length)
-              .fill(null)
-              .map((_, index) => (
+              item ?
+                <Item item={item} key={index} hideName onClick={() => {
+                  setClickedItem({ type: "have", index })
+                  setShowPage("3")
+                }}>
+                </Item>
+                :
                 <PlusItem
                   key={index}
-                  selected={!index && slot === "want"}
+                  selected={index === selected.index && selected.type === "want"}
                   onClick={() => {
-                    setShowPage("2");
-                    setSlot("want");
+                    dispatch({
+                      type: actions.SET_SELECTED,
+                      payload: {
+                        type: "want",
+                        index
+                      },
+                    })
+                    setShowPage("2")
                   }}
                 />
-              ))}
+            ))}
           </ItemContainer>
         </div>
       </div>
       <div className={styles.notesSection}>
-        <div className={styles.notes}>
+        <div className={styles.notesSmall}>
           <textarea
             placeholder="Add notes..."
             className={styles.input}
             value={notes}
             onChange={(e) =>
               dispatch({
-                type: "setNotes",
+                type: actions.SET_NOTES,
                 payload: e.target.value,
               })
             }
@@ -121,7 +121,7 @@ function Small1stPage({
                   checked={platform === Platforms[p]}
                   onChange={() =>
                     dispatch({
-                      type: "setPlatform",
+                      type: actions.SET_PLATFORM,
                       payload: Platforms[p],
                     })
                   }
@@ -137,7 +137,7 @@ function Small1stPage({
           SUBMIT TRADE
         </button>
       </div>
-    </div>
+    </div >
   );
 }
 

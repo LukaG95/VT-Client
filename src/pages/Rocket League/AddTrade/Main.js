@@ -10,19 +10,19 @@ import Item from "../../../components/Rocket League/Item";
 import ItemContainer from "../../../components/Rocket League/ItemContainer";
 import SmallHome from "./SmallHome";
 import useWindowDimensions from "../../../misc/windowHW";
-import { useTrade } from "../../../context/TradeContext";
+import { actions, useTrade } from "../../../context/TradeContext";
 import { PlatformColours, Platforms } from "../../../constants/Platforms";
 import ClearItems from "../../../components/AddTrade/ClearItems";
 import { getTradeableItems } from "../../../constants/Items";
 import { useTradeFilters } from "../../../context/TradeFiltersContext";
 import PlusItem from "./PlusItem";
 
-//const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
+// const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
 function AddTradeRL() {
   const pathID = useLocation().pathname.substring(17); // Reads url after `/trades/` till the end
   const [
-    { have, want, platform, notes, count: tradeCount },
+    { have, want, platform, notes, count: tradeCount, selected },
     dispatch,
   ] = useTrade();
   const [filters] = useTradeFilters();
@@ -31,7 +31,6 @@ function AddTradeRL() {
     notes: "",
   });
   const [items, setItems] = useState([]);
-  const [slot, setSlot] = useState("have");
   const { width } = useWindowDimensions();
   //Filtered Items
   useEffect(() => {
@@ -53,20 +52,15 @@ function AddTradeRL() {
   return width > 1213 ? (
     AddTrade()
   ) : (
-    <SmallHome {...{ handleTradeSubmit, ItemClick }} />
-  );
+      <SmallHome {...{ handleTradeSubmit, ItemClick }} />
+    );
 
   function ItemClick(item) {
     setError({ ...error, trade: "" });
     dispatch({
-      type: "addItem",
-      payload: {
-        type: slot,
-        item,
-      },
+      type: actions.ADD_ITEM,
+      payload: item,
     });
-    if (slot === "have" && have.length === 11) return setSlot("want");
-    if (slot === "wave" && want.length === 11) return setSlot("have");
   }
 
   function AddTrade() {
@@ -94,7 +88,7 @@ function AddTradeRL() {
               <ClearItems
                 onClick={() =>
                   dispatch({
-                    type: "clearItems",
+                    type: actions.CLEAR_ITEMS,
                     payload: "have",
                   })
                 }
@@ -102,19 +96,23 @@ function AddTradeRL() {
             </div>
             <ItemContainer className={styles.items}>
               {have.map((item, index) => (
-                <Item item={item} hideName>
-                  <EditItemDropdown {...{ item, index, type: "have" }} />
-                </Item>
-              ))}
-              {Array(12 - have.length)
-                .fill(null)
-                .map((_, index) => (
+                item ?
+                  <Item item={item} key={index} hideName>
+                    <EditItemDropdown {...{ item, index, type: "have" }} />
+                  </Item>
+                  :
                   <PlusItem
                     key={index}
-                    selected={!index && slot === "have"}
-                    onClick={() => setSlot("have")}
+                    selected={index === selected.index && selected.type === "have"}
+                    onClick={() => dispatch({
+                      type: actions.SET_SELECTED,
+                      payload: {
+                        index,
+                        type: "have"
+                      }
+                    })}
                   />
-                ))}
+              ))}
             </ItemContainer>
           </div>
           <div className={styles.section} style={{ marginBottom: "20px" }}>
@@ -125,27 +123,31 @@ function AddTradeRL() {
               <ClearItems
                 onClick={() =>
                   dispatch({
-                    type: "clearItems",
+                    type: actions.CLEAR_ITEMS,
                     payload: "want",
                   })
                 }
               />
             </div>
-            <ItemContainer className="wantItems">
+            <ItemContainer className={styles.items}>
               {want.map((item, index) => (
-                <Item item={item} hideName>
-                  <EditItemDropdown {...{ item, index, type: "want" }} />
-                </Item>
-              ))}
-              {Array(12 - want.length)
-                .fill(null)
-                .map((_, index) => (
+                item ?
+                  <Item item={item} key={index} hideName>
+                    <EditItemDropdown {...{ item, index, type: "want" }} />
+                  </Item>
+                  :
                   <PlusItem
                     key={index}
-                    selected={!index && slot === "want"}
-                    onClick={() => setSlot("want")}
+                    selected={index === selected.index && selected.type === "want"}
+                    onClick={() => dispatch({
+                      type: actions.SET_SELECTED,
+                      payload: {
+                        index,
+                        type: "want"
+                      }
+                    })}
                   />
-                ))}
+              ))}
             </ItemContainer>
           </div>
         </div>
@@ -161,7 +163,7 @@ function AddTradeRL() {
               value={notes}
               onChange={(e) =>
                 dispatch({
-                  type: "setNotes",
+                  type: actions.SET_NOTES,
                   payload: e.target.value,
                 })
               }
@@ -176,7 +178,7 @@ function AddTradeRL() {
                     checked={platform === Platforms[p]}
                     onChange={() =>
                       dispatch({
-                        type: "setPlatform",
+                        type: actions.SET_PLATFORM,
                         payload: Platforms[p],
                       })
                     }
@@ -204,7 +206,11 @@ function AddTradeRL() {
 
   function handleTradeSubmit() {
     //Check Items
-    if (!have.length || !want.length) {
+    const filtered = {
+      have: have.filter(i => i),
+      want: want.filter(i => i)
+    }
+    if (!filtered.have.length || !filtered.want.length) {
       setError({
         ...error,
         trade: "You have to select at least 1 item in have and want",
@@ -229,16 +235,16 @@ function AddTradeRL() {
         );
       axios
         .post("/api/trades/createTrade", {
-          have: have.map(preparePostItem),
-          want: want.map(preparePostItem),
+          have: filtered.have.map(preparePostItem),
+          want: filtered.want.map(preparePostItem),
           platform: platform,
           notes: notes,
         })
         .then((res) => {
           if (res.data.info === "success") {
             //Trade Successfully Created
-            dispatch({ type: "reset" });
-            dispatch({ type: "addTrade" });
+            dispatch({ type: actions.RESET });
+            dispatch({ type: actions.ADD_TRADE });
             createNotification(
               "success",
               "Created a new trade",
@@ -269,8 +275,8 @@ function AddTradeRL() {
       //Edit Trade
       axios
         .post(`/api/trades/editTrade?tradeId=${pathID}`, {
-          have: have.map(preparePostItem),
-          want: want.map(preparePostItem),
+          have: filtered.have.map(preparePostItem),
+          want: filtered.want.map(preparePostItem),
           platform: platform,
           notes: notes,
         })

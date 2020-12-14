@@ -2,27 +2,22 @@ import React, { useState, useEffect } from "react";
 import styles from "./SmallChooseItems.module.scss";
 import ItemContainer from "../../../components/Rocket League/ItemContainer";
 import Item from "../../../components/Rocket League/Item";
-import { useTrade } from "../../../context/TradeContext";
+import { actions, useTrade } from "../../../context/TradeContext";
 import { useTradeFilters } from "../../../context/TradeFiltersContext";
 import { getTradeableItems } from "../../../constants/Items";
 import FilterBar from "../../../components/Rocket League/FilterBar";
 import ClearItems from "../../../components/AddTrade/ClearItems";
 
-function SmallChooseItems({ setShowPage, slot, setSlot }) {
+function SmallChooseItems({ setShowPage }) {
   const [items, setItems] = useState([]);
   const [filters] = useTradeFilters();
-  const [{ have, want }, dispatch] = useTrade();
+  const [{ have, want, selected }, dispatch] = useTrade();
   //On Item Click
   function ItemClick(item) {
     dispatch({
-      type: "addItem",
-      payload: {
-        type: slot,
-        item,
-      },
+      type: actions.ADD_ITEM,
+      payload: item
     });
-    if (slot === "have" && have.length === 11) return setSlot("want");
-    if (slot === "wave" && want.length === 11) return setSlot("have");
   }
   //Filtered Items
   useEffect(() => {
@@ -59,14 +54,17 @@ function SmallChooseItems({ setShowPage, slot, setSlot }) {
       <div className="added-items-notice-phone">
         <div
           className="have-count-notice"
-          style={slot !== "have" ? { opacity: "0.65" } : null}
-          onClick={() => setSlot("have")}
+          style={selected.type !== "have" ? { opacity: "0.65" } : null}
+          onClick={() => dispatch({
+            type: actions.SET_TYPE,
+            payload: "have",
+          })}
         >
-          <pre>Have: {have.length}/12</pre>
+          <pre>Have: {have.filter(i => i).length}/12</pre>
           <ClearItems
             onClick={() =>
               dispatch({
-                type: "clearItems",
+                type: actions.CLEAR_ITEMS,
                 payload: "have",
               })
             }
@@ -74,14 +72,16 @@ function SmallChooseItems({ setShowPage, slot, setSlot }) {
         </div>
         <div
           className="want-count-notice"
-          style={slot !== "want" ? { opacity: "0.65" } : null}
-          onClick={() => setSlot("want")}
-        >
-          <pre>Want: {want.length}/12</pre>
+          style={selected.type !== "want" ? { opacity: "0.65" } : null}
+          onClick={() => dispatch({
+            type: actions.SET_TYPE,
+            payload: "want",
+          })}        >
+          <pre>Want: {want.filter(i => i).length}/12</pre>
           <ClearItems
             onClick={() =>
               dispatch({
-                type: "clearItems",
+                type: actions.CLEAR_ITEMS,
                 payload: "want",
               })
             }

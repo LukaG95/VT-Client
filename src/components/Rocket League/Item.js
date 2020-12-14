@@ -6,9 +6,9 @@ import {
 import styles from "./Item.module.scss";
 import MissingImageIcon from "../../images/icons/question.png";
 
-export default function Item({ item, lazy, ...props }) {
+export default function Item({ item, lazy, hideName, ...props }) {
   const content = (
-    <div className={`${styles.item} ${props.hideName ? styles.hideName :""}`} {...props}>
+    <div className={`${styles.item} ${hideName ? styles.hideName :""}`} {...props}>
       <div className={styles.content}>
         <div className={styles.imageContainer}>
           <img
@@ -34,7 +34,7 @@ export default function Item({ item, lazy, ...props }) {
             />
           )}
         </div>
-        {!props.hideName && <span className={styles.name}>{item.itemName}</span>}
+        {!hideName && <span className={styles.name}>{item.itemName}</span>}
         {/* Icons + Overlays */}
         {item.cert && item.cert !== "None" && (
           <div className={styles.cert}>{item.cert}</div>
