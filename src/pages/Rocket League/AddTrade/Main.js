@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 //import Filter from "bad-words";
@@ -48,6 +48,15 @@ function AddTradeRL() {
     })
   }, [filters]);
 
+  const inventoryItems = useMemo(() => items.map((item) => (
+    <Item
+      item={item}
+      onClick={() => ItemClick(item)}
+      key={item.itemID}
+    />
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  )), [items])
+
   //Return Desktop or Mobile
   return width > 1213 ? (
     AddTrade()
@@ -69,13 +78,7 @@ function AddTradeRL() {
         <div className={error.trade ? styles.errored : ""}>
           <FilterBar />
           <ItemContainer className={styles.itemContainer}>
-            {items.map((item) => (
-              <Item
-                item={item}
-                onClick={() => ItemClick(item)}
-                key={item.itemID}
-              />
-            ))}
+            {inventoryItems}
           </ItemContainer>
           <p className={styles.error}>{error.trade}</p>
         </div>

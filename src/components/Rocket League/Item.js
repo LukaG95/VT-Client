@@ -30,7 +30,6 @@ export default function Item({ item, lazy, hideName, ...props }) {
               className={styles.image}
               src={`/images/items/${item.itemID}.0.webp`}
               alt=""
-              lazy
             />
           )}
         </div>

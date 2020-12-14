@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import styles from "./SmallChooseItems.module.scss";
 import ItemContainer from "../../../components/Rocket League/ItemContainer";
 import Item from "../../../components/Rocket League/Item";
@@ -35,19 +35,22 @@ function SmallChooseItems({ setShowPage }) {
     })
   }, [filters]);
 
+  const inventoryItems = useMemo(() => items.map((item) => (
+    <Item
+      item={item}
+      onClick={() => ItemClick(item)}
+      key={item.itemID}
+      lazy
+    />
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  )), [items])
+
   return (
     <div id="add-trade-2nd-page">
       <div className="rlChooseItemsSection-SMALL">
         <FilterBar />
         <ItemContainer className={styles.itemContainer}>
-          {items.map((item) => (
-            <Item
-              item={item}
-              onClick={() => ItemClick(item)}
-              key={item.itemID}
-              lazy
-            />
-          ))}
+          {inventoryItems}
         </ItemContainer>
       </div>
       {/* Selected Amounts */}
