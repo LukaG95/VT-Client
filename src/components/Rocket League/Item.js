@@ -23,7 +23,6 @@ export default function Item({ item, lazy, hideName, ...props }) {
               threshold={100}
               delayTime={0}
               alt=""
-              lazy
             />
           ) : (
             <img

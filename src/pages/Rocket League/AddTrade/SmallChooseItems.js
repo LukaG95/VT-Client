@@ -7,6 +7,7 @@ import { useTradeFilters } from "../../../context/TradeFiltersContext";
 import { getTradeableItems } from "../../../constants/Items";
 import FilterBar from "../../../components/Rocket League/FilterBar";
 import ClearItems from "../../../components/AddTrade/ClearItems";
+import ItemConfirmIcon from "./ItemConfirmIcon";
 
 function SmallChooseItems({ setShowPage }) {
   const [items, setItems] = useState([]);
@@ -41,7 +42,9 @@ function SmallChooseItems({ setShowPage }) {
       onClick={() => ItemClick(item)}
       key={item.itemID}
       lazy
-    />
+    >
+      <ItemConfirmIcon item={item} />
+    </Item>
     // eslint-disable-next-line react-hooks/exhaustive-deps
   )), [items])
 
