@@ -45,7 +45,7 @@ function FiltersRL() {
         onChange={setSearchType}
         className={styles.dropdown}
       />
-      <Dropdown name={`Name`} value={name} items={namesDD} onChange={setName} />
+      <Dropdown name={`Name`} value={name} items={namesDD} onChange={setName} className={styles.dropdown} />
       <Dropdown
         name="Color"
         items={colorDD}
@@ -74,7 +74,7 @@ function FiltersRL() {
         onChange={setPlatform}
         className={styles.dropdown}
       />
-      <ClearItems onClick={resetFilters}/>
+      <ClearItems onClick={resetFilters} className={styles.clear} />
     </div>
   );
 }

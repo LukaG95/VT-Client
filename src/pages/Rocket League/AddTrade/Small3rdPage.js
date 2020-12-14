@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useTrade } from "../../../context/TradeContext";
+import { actions, useTrade } from "../../../context/TradeContext";
 import Dropdown from "../../../components/Dropdown";
 import { rl_dd_names } from "../../../info/DropdownNames";
+import styles from "./Small3rdPage.module.scss";
+
 const { colorDD, certDD } = rl_dd_names;
 
 function Small3rdPage({ setShowPage, clickedItem }) {
   const [context, dispatch] = useTrade();
+  console.log(clickedItem)
   const item = context[clickedItem.type][clickedItem.index];
   const [amountInput, setAmountInput] = useState(item.amount);
 
   //Amount Changes
   useEffect(() => {
     dispatch({
-      type: "updateItem",
+      type: actions.UPDATE_ITEM,
       payload: {
         ...clickedItem,
         item: {
@@ -32,7 +35,7 @@ function Small3rdPage({ setShowPage, clickedItem }) {
           <button
             onClick={() => {
               dispatch({
-                type: "removeItem",
+                type: actions.REMOVE_ITEM,
                 payload: {
                   ...clickedItem,
                 },
@@ -48,10 +51,10 @@ function Small3rdPage({ setShowPage, clickedItem }) {
         <Dropdown
           name="Color"
           items={colorDD}
-          className="dropdown"
+          className={styles.dropdown}
           onChange={(color) =>
             dispatch({
-              type: "updateItem",
+              type: actions.UPDATE_ITEM,
               payload: {
                 ...clickedItem,
                 item: {
@@ -67,10 +70,10 @@ function Small3rdPage({ setShowPage, clickedItem }) {
           name={`Certification`}
           value={item.cert}
           items={certDD}
-          className="dropdown"
+          className={styles.dropdown}
           onChange={(cert) =>
             dispatch({
-              type: "updateItem",
+              type: actions.UPDATE_ITEM,
               payload: {
                 ...clickedItem,
                 item: {
