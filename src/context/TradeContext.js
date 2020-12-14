@@ -13,8 +13,8 @@ const defaultState = {
   count: 0,
   selected: {
     type: "have",
-    index: 0
-  }
+    index: 0,
+  },
 };
 
 export const actions = {
@@ -29,8 +29,8 @@ export const actions = {
   CLEAR_ITEMS: "CLEAR_ITEMS",
   ADD_TRADE: "ADD_TRADE",
   REMOVE_TRADE: "REMOVE_TRADE",
-  RESET: "RESET"
-}
+  RESET: "RESET",
+};
 
 function tradeReducer(state, action) {
   switch (action.type) {
@@ -45,22 +45,22 @@ function tradeReducer(state, action) {
       const index = state.selected.index;
       //If item in slot already, return
       if (state[type][index]) return state;
-      let selected = { ...state.selected }
+      let selected = { ...state.selected };
       //Find first empty after index
-      const after = state[type].slice(index + 1, 12).findIndex(item => !item)
+      const after = state[type].slice(index + 1, 12).findIndex((item) => !item);
       if (after > -1) {
-        selected.index = after + index + 1
+        selected.index = after + index + 1;
       } else {
         //If none empty after, check other section
-        const altType = type === "have" ? "want" : "have"
-        const otherSection = state[altType].findIndex(item => !item)
+        const altType = type === "have" ? "want" : "have";
+        const otherSection = state[altType].findIndex((item) => !item);
         if (otherSection > -1) {
-          selected.type = altType
-          selected.index = otherSection
+          selected.type = altType;
+          selected.index = otherSection;
         } else {
           //If none in other section, find empty before
-          const before = state[type].slice(0, index).findIndex(item => !item)
-          selected.index = before
+          const before = state[type].slice(0, index).findIndex((item) => !item);
+          selected.index = before;
         }
       }
       return {
@@ -68,22 +68,22 @@ function tradeReducer(state, action) {
         [type]: [
           ...state[type].slice(0, index),
           { ...Object.assign(DefaultItem, action.payload) },
-          ...state[type].slice(index + 1, 12)
+          ...state[type].slice(index + 1, 12),
         ].slice(0, 12),
-        selected
+        selected,
       };
     }
     case actions.SET_TYPE: {
-      const type = action.payload
+      const type = action.payload;
       if (state.selected.type === type) return state;
-      const index = state[type].findIndex(item => !item)
+      const index = state[type].findIndex((item) => !item);
       return {
         ...state,
         selected: {
           type,
-          index: index > -1 ? index : 0
-        }
-      }
+          index: index > -1 ? index : 0,
+        },
+      };
     }
     case actions.REMOVE_ITEM: {
       const type = action.payload.type; // "have" or "want"
@@ -97,8 +97,8 @@ function tradeReducer(state, action) {
         ],
         selected: {
           type,
-          index
-        }
+          index,
+        },
       };
     }
     case actions.UPDATE_ITEM: {
@@ -126,8 +126,8 @@ function tradeReducer(state, action) {
         [type]: Array(12).fill(null),
         selected: {
           type,
-          index: 0
-        }
+          index: 0,
+        },
       };
     }
     case actions.ADD_TRADE: {

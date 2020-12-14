@@ -37,7 +37,13 @@ function FiltersRL() {
 
   return (
     <div className="filters-field hide">
-      <Dropdown name={`Game`} value={game} items={gameDD} onChange={setGame} className={styles.dropdown} />
+      <Dropdown
+        name={`Game`}
+        value={game}
+        items={gameDD}
+        onChange={setGame}
+        className={styles.dropdown}
+      />
       <Dropdown
         name={`Search`}
         value={searchType}
@@ -45,7 +51,13 @@ function FiltersRL() {
         onChange={setSearchType}
         className={styles.dropdown}
       />
-      <Dropdown name={`Name`} value={name} items={namesDD} onChange={setName} className={styles.dropdown} />
+      <Dropdown
+        name={`Name`}
+        value={name}
+        items={namesDD}
+        onChange={setName}
+        className={styles.dropdown}
+      />
       <Dropdown
         name="Color"
         items={colorDD}

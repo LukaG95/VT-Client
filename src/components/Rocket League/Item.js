@@ -8,7 +8,10 @@ import MissingImageIcon from "../../images/icons/question.png";
 
 export default function Item({ item, lazy, hideName, ...props }) {
   const content = (
-    <div className={`${styles.item} ${hideName ? styles.hideName :""}`} {...props}>
+    <div
+      className={`${styles.item} ${hideName ? styles.hideName : ""}`}
+      {...props}
+    >
       <div className={styles.content}>
         <div className={styles.imageContainer}>
           <img
@@ -23,14 +26,12 @@ export default function Item({ item, lazy, hideName, ...props }) {
               threshold={100}
               delayTime={0}
               alt=""
-              lazy
             />
           ) : (
             <img
               className={styles.image}
               src={`/images/items/${item.itemID}.0.webp`}
               alt=""
-              lazy
             />
           )}
         </div>
