@@ -32,6 +32,26 @@ function AddTradeRL() {
   });
   const [items, setItems] = useState([]);
   const { width } = useWindowDimensions();
+  //Edit Trade
+  useEffect(() => {
+    if (pathID) {
+      axios.get(`/api/trades/getTrade/${pathID}`)
+        .then(({ data }) => {
+          if (data.idMatch) {
+            dispatch({
+              type: actions.SET_ITEMS,
+              payload: {
+                notes: data.trade.notes,
+                platform: data.trade.platform,
+                have: [...data.trade.have, ...Array(12 - data.trade.have.length).fill(null)],
+                want: [...data.trade.want, ...Array(12 - data.trade.want.length).fill(null)]
+              }
+            })
+          }
+        })
+        .catch(err => console.log("Error: " + err))
+    }
+  }, [pathID])
   //Filtered Items
   useEffect(() => {
     process.nextTick(() => {
@@ -61,8 +81,8 @@ function AddTradeRL() {
   return width > 1213 ? (
     AddTrade()
   ) : (
-    <SmallHome {...{ handleTradeSubmit, ItemClick }} />
-  );
+      <SmallHome {...{ handleTradeSubmit, ItemClick }} />
+    );
 
   function ItemClick(item) {
     setError({ ...error, trade: "" });
@@ -104,22 +124,22 @@ function AddTradeRL() {
                     <EditItemDropdown {...{ item, index, type: "have" }} />
                   </Item>
                 ) : (
-                  <PlusItem
-                    key={index}
-                    selected={
-                      index === selected.index && selected.type === "have"
-                    }
-                    onClick={() =>
-                      dispatch({
-                        type: actions.SET_SELECTED,
-                        payload: {
-                          index,
-                          type: "have",
-                        },
-                      })
-                    }
-                  />
-                )
+                    <PlusItem
+                      key={index}
+                      selected={
+                        index === selected.index && selected.type === "have"
+                      }
+                      onClick={() =>
+                        dispatch({
+                          type: actions.SET_SELECTED,
+                          payload: {
+                            index,
+                            type: "have",
+                          },
+                        })
+                      }
+                    />
+                  )
               )}
             </ItemContainer>
           </div>
@@ -144,22 +164,22 @@ function AddTradeRL() {
                     <EditItemDropdown {...{ item, index, type: "want" }} />
                   </Item>
                 ) : (
-                  <PlusItem
-                    key={index}
-                    selected={
-                      index === selected.index && selected.type === "want"
-                    }
-                    onClick={() =>
-                      dispatch({
-                        type: actions.SET_SELECTED,
-                        payload: {
-                          index,
-                          type: "want",
-                        },
-                      })
-                    }
-                  />
-                )
+                    <PlusItem
+                      key={index}
+                      selected={
+                        index === selected.index && selected.type === "want"
+                      }
+                      onClick={() =>
+                        dispatch({
+                          type: actions.SET_SELECTED,
+                          payload: {
+                            index,
+                            type: "want",
+                          },
+                        })
+                      }
+                    />
+                  )
               )}
             </ItemContainer>
           </div>
@@ -196,7 +216,7 @@ function AddTradeRL() {
                       })
                     }
                   />
-                  <span style={{ color: PlatformColours[p] }}>
+                  <span style={platform === Platforms[p] ? { color: PlatformColours[p] } : {}}>
                     {Platforms[p]}
                   </span>
                 </label>
@@ -282,7 +302,7 @@ function AddTradeRL() {
               "Oops, something went wrong",
               "something went wrong"
             );
-          console.log(err.response);
+          console.error(err.response);
         });
     } else {
       //Edit Trade

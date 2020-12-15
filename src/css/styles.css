@@ -268,8 +268,6 @@ html {
   padding-bottom: 12px;
   padding-left: 12px;
   flex-wrap: wrap;
-
-  
 }
 
 .filters-field > * {
@@ -2547,8 +2545,8 @@ html {
 }
 
 .add-trade-3rd-page-input-fields {
-  padding: 0 20px;
-  flex: 2 2;
+  background-color: #1d191f;
+  margin-bottom: 15px;
 }
 
 .add-trade-3rd-page-input-fields .dropdown {

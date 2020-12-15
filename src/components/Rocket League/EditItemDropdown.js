@@ -30,7 +30,8 @@ function EditItemDropdown({ item, index, type }) {
   const ref = useRef();
   //Detect Clicks
   function onClick(e) {
-    if (!ref.current || !ref.current.contains(e.target)) setVisible(false);
+    if (!ref.current || (!ref.current.contains(e.target) && e.target.dataset.type !== "dropdown-item")) setVisible(false);
+    if (ref.current && ref.current.parentElement.contains(e.target)) setVisible(true)
   }
   useEffect(() => {
     window.addEventListener("click", onClick);
@@ -40,36 +41,34 @@ function EditItemDropdown({ item, index, type }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div onClick={() => setVisible(true)} ref={ref}>
-      <div className={styles.clickBind}>
-        <img
-          style={item.amount <= 1 ? { top: "6px" } : null}
-          className="editIcon"
-          src={EditIcon}
-          alt=""
-        />
-      </div>
+    <div ref={ref}>
+      <img
+        style={item.amount <= 1 ? { top: "6px" } : null}
+        className="editIcon"
+        src={EditIcon}
+        alt=""
+      />
       {visible && (
         <div
           className="rl-icon-dropdown" // style is small height positioning
           style={
             height <= 650
               ? {
-                  position: "fixed",
-                  top: "280px",
-                  right: "510px",
-                  marginTop: "-200px",
-                  marginLeft: "200px",
-                }
+                position: "fixed",
+                top: "280px",
+                right: "510px",
+                marginTop: "-200px",
+                marginLeft: "200px",
+              }
               : height <= 820
-              ? {
+                ? {
                   position: "fixed",
                   top: "400px",
                   right: "510px",
                   marginTop: "-200px",
                   marginLeft: "200px",
                 }
-              : null
+                : null
           }
         >
           <div className="item_name">{item.itemName}</div>
@@ -91,6 +90,7 @@ function EditItemDropdown({ item, index, type }) {
               })
             }
             value={item.color}
+            light
           />
           <Dropdown
             name={`Certification`}
@@ -109,6 +109,7 @@ function EditItemDropdown({ item, index, type }) {
                 },
               })
             }
+            light
           />
           <div className="rl-icon-dropdown-button-section">
             <label className="enableDropdown">

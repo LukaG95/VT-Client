@@ -132,7 +132,7 @@
 .platforms {
   display: flex;
   align-items: center;
-  height: 20px;
+  height: 50px;
 
   > h4 {
     color: #f6f6f6;
@@ -147,6 +147,7 @@
     align-items: center;
     font-size: 12px;
     height: 100%;
+    text-transform: uppercase;
 
     cursor: pointer;
     margin-left: 12px;
@@ -200,4 +201,5 @@
   flex: 2 2;
   display: flex;
   flex-direction: column;
+  background-color: transparent;
 }
