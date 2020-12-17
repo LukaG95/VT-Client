@@ -64,7 +64,7 @@ function Small3rdPage({ setShowPage, clickedItem }) {
             })
           }
           value={item.color}
-          light
+          floating={"-150px"}
         />
       </div>
       <div className="add-trade-3rd-page-input-fields">
@@ -85,7 +85,7 @@ function Small3rdPage({ setShowPage, clickedItem }) {
               },
             })
           }
-          light
+          floating
         />
       </div>
       <div className="add-trade-3rd-page-input-fields rl-icon-amount-filter-field">

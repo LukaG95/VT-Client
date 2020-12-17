@@ -34,7 +34,8 @@ export default function Dropdown({ name, items, onChange, value, light, floating
   return (
     <div
       {...props}
-      className={[styles.wrapper, light ? styles.light : "", props.className || ""].join(" ")}
+      className={[styles.wrapper, light ? styles.light : "", floating ? styles.floating : "", props.className || ""].join(" ")}
+      style={floating && open ? {transform: `translateY(${floating})`} : {}}
       ref={ref}
     >
       <label className={styles.label}>{name || "Dropdown"}</label>

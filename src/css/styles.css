@@ -3794,6 +3794,16 @@ html {
   transition: height 250ms, color 250ms;
 }
 
+.dropdownArrow {
+  background-color: #f6f6f6;
+  margin-right: 12px;
+  margin-bottom: 2px;
+  height: 9px;
+  width: 9px;
+  -webkit-clip-path: polygon(50% 100%,0 30%,100% 30%);
+  clip-path: polygon(50% 100%,0 30%,100% 30%);
+}
+
 .header-selection-dropdown a:hover {
   color: #fe3b3b;
 }
