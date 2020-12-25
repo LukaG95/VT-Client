@@ -8,7 +8,6 @@ const { colorDD, certDD } = rl_dd_names;
 
 function Small3rdPage({ setShowPage, clickedItem }) {
   const [context, dispatch] = useTrade();
-  console.log(clickedItem);
   const item = context[clickedItem.type][clickedItem.index];
   const [amountInput, setAmountInput] = useState(item.amount);
 
@@ -65,7 +64,11 @@ function Small3rdPage({ setShowPage, clickedItem }) {
             })
           }
           value={item.color}
+          floating={"-150px"}
         />
+      </div>
+      <div className="add-trade-3rd-page-input-fields">
+
         <Dropdown
           name={`Certification`}
           value={item.cert}
@@ -82,24 +85,25 @@ function Small3rdPage({ setShowPage, clickedItem }) {
               },
             })
           }
+          floating
         />
-        <div className="rl-icon-amount-filter-field">
-          <label className="enableDropdown">
-            Amount - max {item.itemID === 4743 ? 100000 : 100}
-          </label>
-          <input
-            name="amount-dropdown"
-            className="rl-icon-dropdown-button-section"
-            style={{ justifyContent: "space-between" }}
-            value={amountInput}
-            onChange={(e) => {
-              const value = e.target.value.replace(/[^\d]/g, "");
-              const max = item.itemID === 4743 ? 100000 : 100;
-              if (Number(value) > max) setAmountInput("" + max);
-              else setAmountInput(value);
-            }}
-          />
-        </div>
+      </div>
+      <div className="add-trade-3rd-page-input-fields rl-icon-amount-filter-field">
+        <label className="enableDropdown">
+          Amount - max {item.itemID === 4743 ? 100000 : 100}
+        </label>
+        <input
+          name="amount-dropdown"
+          className="rl-icon-dropdown-button-section"
+          style={{ justifyContent: "space-between" }}
+          value={amountInput}
+          onChange={(e) => {
+            const value = e.target.value.replace(/[^\d]/g, "");
+            const max = item.itemID === 4743 ? 100000 : 100;
+            if (Number(value) > max) setAmountInput("" + max);
+            else setAmountInput(value);
+          }}
+        />
       </div>
       <button
         className="add-trade-done-button"

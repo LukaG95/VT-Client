@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./Dropdown.module.scss";
 
-export default function Dropdown({ name, items, onChange, value, ...props }) {
+export default function Dropdown({ name, items, onChange, value, light, floating, ...props }) {
   const [state, setState] = useState({
     open: false,
     search: "",
@@ -34,7 +34,8 @@ export default function Dropdown({ name, items, onChange, value, ...props }) {
   return (
     <div
       {...props}
-      className={[styles.wrapper, props.className || ""].join(" ")}
+      className={[styles.wrapper, light ? styles.light : "", floating ? styles.floating : "", props.className || ""].join(" ")}
+      style={floating && open ? {transform: `translateY(${floating})`} : {}}
       ref={ref}
     >
       <label className={styles.label}>{name || "Dropdown"}</label>
@@ -58,6 +59,7 @@ export default function Dropdown({ name, items, onChange, value, ...props }) {
           <div className={styles.items}>
             {visibleItems.map((item, index) => (
               <div
+                data-type="dropdown-item"
                 className={styles.item}
                 onClick={() => {
                   if (item !== value && onChange) onChange(item);
