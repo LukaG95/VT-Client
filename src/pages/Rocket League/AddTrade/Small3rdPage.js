@@ -85,7 +85,7 @@ function Small3rdPage({ setShowPage, clickedItem }) {
               },
             })
           }
-          floating
+          floating={"-220px"}
         />
       </div>
       <div className="add-trade-3rd-page-input-fields rl-icon-amount-filter-field">
