@@ -31,7 +31,7 @@ function AddTradeRL() {
     notes: "",
   });
   const [items, setItems] = useState([]);
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   //Edit Trade
   useEffect(() => {
     if (pathID) {
