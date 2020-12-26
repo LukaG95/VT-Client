@@ -115,10 +115,10 @@ function RLTradeComponent({ trade, manageTrade }) {
                 </button>
               </>
             ) : (
-              <p className="buttons-box-sign-to-interact">
-                Sign in to interact
-              </p>
-            )}
+                  <p className="buttons-box-sign-to-interact">
+                    Sign in to interact
+                  </p>
+                )}
           </div>
         </div>
       </div>
@@ -210,11 +210,9 @@ function RLTradeComponent({ trade, manageTrade }) {
 
         <div className="rl-trade-component-top-right">
           <div className="right-gamePlatform-PHONEVIEW">
-            {/*<img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/SWITCH icon.png`)} alt="" />*/}
-            {/*<img style={{height: "20px", width: "20px", marginRight: "5px"}} src={require(`../../images/other/SWITCH icon.png`)} alt="" />*/}
             <img
               style={{ height: "20px", width: "20px", marginRight: "5px" }}
-              src={`/images/icons/${trade.platform.toLowerCase()}.png`}
+              src={platformIcons[trade.platform.toLowerCase()]}
               alt=""
             />
             {trade.platform}
@@ -256,7 +254,7 @@ function RLTradeComponent({ trade, manageTrade }) {
           <p
             style={
               ({ fontWeight: "600", fontSize: "21px" },
-              width < 957 ? { fontSize: "17px", marginBottom: "5px" } : null)
+                width < 957 ? { fontSize: "17px", marginBottom: "5px" } : null)
             }
           >
             {trade.user.username}
