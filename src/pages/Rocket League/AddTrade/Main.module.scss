@@ -52,7 +52,25 @@
     height: 50%;
 
     .items {
+      overflow-y: hidden;
       padding-bottom: 10px;
+    }
+
+    @media only screen and (max-height: 800px) {
+      .items {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        grid-template-rows: 90px 90px;
+        grid-template-columns: repeat(6, 90px);
+        height: 100%;
+      }
+    }
+
+    @media only screen and (max-height: 660px) {
+      .items {
+        grid-template-rows: 90px;
+        grid-template-columns: repeat(12, 90px);
+      }
     }
   }
 
