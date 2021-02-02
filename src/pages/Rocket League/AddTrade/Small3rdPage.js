@@ -46,48 +46,46 @@ function Small3rdPage({ setShowPage, clickedItem }) {
           </button>
         </div>
       </div>
-      <div className="add-trade-3rd-page-input-fields">
-        <Dropdown
-          name="Color"
-          items={colorDD}
-          className={styles.dropdown}
-          onChange={(color) =>
-            dispatch({
-              type: actions.UPDATE_ITEM,
-              payload: {
-                ...clickedItem,
-                item: {
-                  color,
-                  colorID: colorDD.findIndex((c) => c === color),
-                },
+      
+      <Dropdown
+        name="Color"
+        items={colorDD}
+        className={styles.dropdown}
+        onChange={(color) =>
+          dispatch({
+            type: actions.UPDATE_ITEM,
+            payload: {
+              ...clickedItem,
+              item: {
+                color,
+                colorID: colorDD.findIndex((c) => c === color),
               },
-            })
-          }
-          value={item.color}
-          floating={"-150px"}
-        />
-      </div>
-      <div className="add-trade-3rd-page-input-fields">
-
-        <Dropdown
-          name={`Certification`}
-          value={item.cert}
-          items={certDD}
-          className={styles.dropdown}
-          onChange={(cert) =>
-            dispatch({
-              type: actions.UPDATE_ITEM,
-              payload: {
-                ...clickedItem,
-                item: {
-                  cert,
-                },
+            },
+          })
+        }
+        value={item.color}
+        floating={"-150px"}
+      />
+  
+      <Dropdown
+        name={`Certification`}
+        value={item.cert}
+        items={certDD}
+        className={styles.dropdown}
+        onChange={(cert) =>
+          dispatch({
+            type: actions.UPDATE_ITEM,
+            payload: {
+              ...clickedItem,
+              item: {
+                cert,
               },
-            })
-          }
-          floating={"-220px"}
-        />
-      </div>
+            },
+          })
+        }
+        floating={"-220px"}
+      />
+     
       <div className="add-trade-3rd-page-input-fields rl-icon-amount-filter-field">
         <label className="enableDropdown">
           Amount - max {item.itemID === 4743 ? 100000 : 100}

@@ -29,7 +29,6 @@
   flex-direction: column;
   position: relative;
 
-  margin-top: 15px;
   animation: transitionLeft 0.4s;
 
   width: 100%;
@@ -42,6 +41,12 @@
 }
 
 .haveWant {
+  @media only screen and (max-width: 1213px) {
+    background: #1d191f;
+    padding: 15px 10px 15px 10px;
+    border-radius: 5px;
+  }
+
   .section {
     display: flex;
     box-sizing: border-box;
@@ -102,8 +107,9 @@
     color: #f6f6f6;
     font-size: 18px;
 
-    padding: 0px 6px 0px 6px;
+    padding-left: 6px;
     margin-bottom: 10px;
+
   }
 }
 
@@ -132,7 +138,7 @@
 
 .notesSmall {
   @extend .notes;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .error {
@@ -212,6 +218,10 @@
 
   &:active {
     background: rgb(113, 168, 135);
+  }
+
+  @media only screen and (max-width: 1213px) {
+    margin-bottom: 10px;
   }
 }
 

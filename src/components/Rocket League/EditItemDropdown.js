@@ -13,6 +13,7 @@ function EditItemDropdown({ item, index, type }) {
   const { height } = useWindowDimensions();
   const [_context, dispatch] = useTrade();
   const [amountInput, setAmountInput] = useState(item.amount);
+  console.log(type)
   //Amount Changes
   useEffect(() => {
     dispatch({
@@ -33,6 +34,31 @@ function EditItemDropdown({ item, index, type }) {
     if (!ref.current || (!ref.current.contains(e.target) && e.target.dataset.type !== "dropdown-item")) setVisible(false);
     if (ref.current && ref.current.parentElement.contains(e.target)) setVisible(true)
   }
+  function editDropdownStyle(){
+    let style = {}
+    if (height <= 820)
+      style = {
+        position: "fixed",
+        top: "400px",
+        right: "510px",
+        marginTop: "-200px",
+        marginLeft: "200px"
+        
+      }
+    else if (height <= 650)
+      style = {
+        position: "fixed",
+        top: "280px",
+        right: "510px",
+        marginTop: "-200px",
+        marginLeft: "200px"
+      }
+
+   else if (type === "want")
+      style.marginTop = "-395px"
+
+    return style
+  }
   useEffect(() => {
     window.addEventListener("click", onClick);
     return () => {
@@ -51,25 +77,7 @@ function EditItemDropdown({ item, index, type }) {
       {visible && (
         <div
           className="rl-icon-dropdown" // style is small height positioning
-          style={
-            height <= 650
-              ? {
-                position: "fixed",
-                top: "280px",
-                right: "510px",
-                marginTop: "-200px",
-                marginLeft: "200px",
-              }
-              : height <= 820
-                ? {
-                  position: "fixed",
-                  top: "400px",
-                  right: "510px",
-                  marginTop: "-200px",
-                  marginLeft: "200px",
-                }
-                : null
-          }
+          style={editDropdownStyle()}
         >
           <div className="item_name">{item.itemName}</div>
           <Dropdown

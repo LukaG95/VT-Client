@@ -59,9 +59,7 @@ function SmallChooseItems({ setShowPage }) {
         <ItemContainer className={styles.itemContainer}>
           {inventoryItems}
         </ItemContainer>
-      </div>
-      {/* Selected Amounts */}
-      <div className="added-items-notice-phone">
+        <div className="added-items-notice-phone">
         <div
           className="have-count-notice"
           style={selected.type !== "have" ? { opacity: "0.65" } : null}
@@ -81,6 +79,7 @@ function SmallChooseItems({ setShowPage }) {
               })
             }
           />
+          <span></span>
         </div>
         <div
           className="want-count-notice"
@@ -101,8 +100,12 @@ function SmallChooseItems({ setShowPage }) {
               })
             }
           />
+          <span></span>
         </div>
       </div>
+      </div>
+      {/* Selected Amounts */}
+      
       <button
         className="add-trade-done-button"
         onClick={() => setShowPage("1")}

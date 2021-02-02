@@ -7,8 +7,10 @@ export default function Dropdown({ name, items, onChange, value, light, floating
     search: "",
     visibleItems: items,
   });
+  
   const { open, search, visibleItems } = state;
   const ref = useRef();
+
   useEffect(() => {
     const term = state.search.toLowerCase().trim();
     setState({
@@ -19,11 +21,13 @@ export default function Dropdown({ name, items, onChange, value, light, floating
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, items]);
+
   //Detect Clicks
   function onClick(e) {
     if (!ref.current || !ref.current.contains(e.target))
       setState({ ...state, open: false });
   }
+
   useEffect(() => {
     window.addEventListener("click", onClick);
     return () => {
@@ -31,31 +35,36 @@ export default function Dropdown({ name, items, onChange, value, light, floating
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <div
       {...props}
       className={[styles.wrapper, light ? styles.light : "", floating ? styles.floating : "", props.className || ""].join(" ")}
-      style={floating && open ? { transform: `translateY(${floating})`, zIndex: 5 } : {}}
+      style={floating && open ? { transform: `translateY(${floating})`, zIndex: 5} : {}}
       ref={ref}
     >
-      <label className={styles.label}>{name || "Dropdown"}</label>
+      <label onClick={() => {floating && setState({ ...state, open: !open })}} className={styles.label}>{name || "Dropdown"}</label>
       <div
         onClick={() => setState({ ...state, open: !open })}
         className={`${styles.button} ${open ? styles.open : ""}`}
       >
+          
         <div className={styles.content}>
           <span>{value}</span>
         </div>
+
         <div className={`${styles.arrow} ${open ? styles.open : ""}`}></div>
       </div>
+
       {/* Dropdown Content */}
       {open && (
-        <div className={styles.dropdown}>
+        <div className={styles.dropdown} style={floating ? {animation: "transitionFade 0.5s"} : {}}> 
           <input
             onChange={(e) => setState({ ...state, search: e.target.value })}
             placeholder="Search"
             className={styles.search}
-          ></input>
+            autoFocus
+          />
           <div className={styles.items}>
             {visibleItems.map((item, index) => (
               <div

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
-import ArrowUpIcon from "../../images/icons/arrow-up.png";
+import ArrowUpIcon from "../../images/icons/arrow-up-white.png";
 
 import { closeSidebar } from "../../misc/manageSidebar";
 import { LeftSidebarContext } from "../../context/LeftSidebar";

@@ -82,7 +82,7 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
                   key={index}
                   hideName
                   onClick={() => {
-                    setClickedItem({ type: "have", index });
+                    setClickedItem({ type: "want", index });
                     setShowPage("3");
                   }}
                 ></Item>
@@ -136,7 +136,7 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
                     })
                   }
                 />
-                <span style={{ color: PlatformColours[p] }}>
+                <span style={platform === Platforms[p] ? { color: PlatformColours[p] } : {}}>
                   {Platforms[p]}
                 </span>
               </label>

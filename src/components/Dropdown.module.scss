@@ -1,3 +1,5 @@
+@import '../css/animations';
+
 .wrapper {
   position: relative;
 }
@@ -28,7 +30,7 @@
   transition: filter 200ms;
   margin-right: 12px;
   padding-left: 10px;
-
+  
   &.open {
     border-radius: 5px 5px 0px 0px;
     padding-left: 9px;
@@ -50,6 +52,7 @@
   color: #f6f6f6;
   font-size: 13px;
   font-weight: 600;
+  
 }
 
 .arrow {
@@ -76,8 +79,8 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  width: 209px;
   max-height: 300px;
+  width: 100%;
 
   background: #131313;
   border-right: 1px solid black;
@@ -88,7 +91,6 @@
   padding: 10px;
   z-index: 2;
   cursor: pointer;
-  animation: transitionDown 0.2s;
 }
 
 .search {
@@ -149,10 +151,15 @@
   }
 
   .search {
-    border: 1px solid black;
+    background: #141115;
+
     box-shadow: none !important;
-    margin: 5px;
+    margin: 8px 5px 7px 5px;
     width: calc(100% - 10px);
+  }
+
+  .search:hover{
+    background: #141115;
   }
 
   .items {
@@ -169,25 +176,30 @@
   background-color: #1d191f;
 
   .label {
-    display: flex;
-    flex-direction: column;
     align-items: flex-start;
-    margin-left: 20px;
-    margin-top: 10px;
+    padding-left: 15px;
+    padding-top: 10px;
+
+    cursor: pointer;
   }
 
   .button {
     background-color: #1d191f;
     border: none;
-    padding-left: 20px;
+    padding-left: 15px;
+
+    &:hover {
+      filter: brightness(1);
+    }
   }
 
   .dropdown {
-    top: 56px;
+    top: 54px;
     width: 100%;
     background-color: #1d191f;
     border: none;
-    max-height: none;
+    max-height: 300px;
+
   }
 
   .items {
