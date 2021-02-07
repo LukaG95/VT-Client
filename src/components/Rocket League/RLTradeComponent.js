@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 
 import Item from "./Item";
@@ -20,17 +20,15 @@ const platformIcons = {
 
 function RLTradeComponent({ trade, manageTrade }) {
   const [rep, setRep] = useState();
-  const [notesHeight] = useState(() => {
-    if (trade.have.length >= 9 || trade.want.length >= 9) return "300px";
-    else if (trade.have.length >= 5 || trade.want.length >= 5) return "179px";
-    else return "68px";
-  });
 
   const { isLoggedIn } = useContext(UserContext);
 
   const { width } = useWindowDimensions();
 
+  const noteBox = useRef(null)
+
   useEffect(() => {
+    
     axios
       .get(`/api/reputation/compact/${trade.user._id}`)
       .then((res) => {
@@ -47,7 +45,7 @@ function RLTradeComponent({ trade, manageTrade }) {
     <div className="rltrade-container">
       {width >= 957 ? PCTabledTradeHeader() : PhoneTradeHeader()}
 
-      <div className="rltrade_cMidPlace">
+      <div className="rltrade_cMidPlace" ref={noteBox}>
         <div className="flex-col rl-has-container">
           <p className="haswant-text">Has</p>
           <ItemContainer className="has-items">{haveItems()}</ItemContainer>
@@ -60,9 +58,10 @@ function RLTradeComponent({ trade, manageTrade }) {
 
         <div className="flex-col rl_notes_buttons_container">
           <div className="notes-box">
-            <div style={{ maxHeight: `${notesHeight}` }} className="notes">
+          {noteBox.current ? 
+            (<div style={{ maxHeight: `${noteBox.current.offsetHeight-105}px` }} className="notes">
               {trade.notes}
-            </div>
+            </div>) : null}
           </div>
 
           <div className="buttons-box">
@@ -86,25 +85,17 @@ function RLTradeComponent({ trade, manageTrade }) {
                 >
                   Bump trade
                 </button>
-                <p className="trade-expire-text">
-                  Expires
-                  {trade.expiresIn.days < 1
-                    ? "today"
-                    : `in ${trade.expiresIn.days} days`}
-                  at {trade.expiresIn.at}
-                </p>
+               
               </>
             ) : isLoggedIn ? (
               <>
                 <button
                   onClick={() => window.open("#")}
-                  style={{ marginRight: "10px" }}
                 >
                   Message
                 </button>
                 <button
                   onClick={() => window.open(`/reputation/${trade.user._id}`)}
-                  style={{ marginRight: "10px" }}
                 >
                   View reputation
                 </button>
@@ -122,6 +113,17 @@ function RLTradeComponent({ trade, manageTrade }) {
           </div>
         </div>
       </div>
+      
+      {manageTrade &&
+          <p className="trade-expire-text">
+          Expires 
+          {trade.expiresIn.days < 1
+            ? "today"
+            : ` in ${trade.expiresIn.days} days `}
+          at {trade.expiresIn.at}
+        </p>
+      }
+      
     </div>
   );
 

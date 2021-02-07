@@ -5,11 +5,14 @@ import Filter from "bad-words";
 import Topbar from "./Topbar";
 import { UserContext } from "../../context/UserContext";
 import { createNotification } from "../../misc/ToastNotification";
+import useWindowDimensions from '../../misc/windowHW'
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
 function MyAccount() {
   const [sidebarChoice, setSidebarChoice] = useState("Username");
+
+  const [view, setView] = useState()
 
   const [currentUsername, setCurrentUsername] = useState();
   const [newUsername, setNewUsername] = useState("");
@@ -30,9 +33,10 @@ function MyAccount() {
 
   const { username, email } = useContext(UserContext);
 
+  const { width } = useWindowDimensions()
+
   let chosenSidebarStyle = {
     border: "1px solid rgba(0, 0, 0, 0.8)",
-
     paddingTop: "17px",
     paddingLeft: "35px",
     backgroundColor: "#141115",
@@ -40,8 +44,18 @@ function MyAccount() {
   };
 
   useEffect(() => {
+    if (width > 1065){
+      resetStyles()
+      setView("big")
+    } else
+      setView("small")
+
+  }, [width]);
+
+  useEffect(() => {
     setCurrentUsername(username);
     setCurrentEmail(email);
+
   }, [username, email]);
 
   return (
@@ -49,34 +63,44 @@ function MyAccount() {
       <Topbar />
 
       <div className="account-settings-wrapper">
-        <div className="account-settings-sidebar">
+        <div className="account-settings-sidebar" id="account-sidebar">
           <div
-            onClick={() => setSidebarChoice("Username")}
-            style={sidebarChoice === "Username" ? chosenSidebarStyle : null}
+            onClick={() => {
+              setSidebarChoice("Username")
+              if (view === "small") show2ndPage()
+            }}
+            style={sidebarChoice === "Username" && view === "big" ? chosenSidebarStyle : null}
           >
             Username
           </div>
           <div
-            onClick={() => setSidebarChoice("Password")}
-            style={sidebarChoice === "Password" ? chosenSidebarStyle : null}
+            onClick={() => {
+              setSidebarChoice("Password")
+              if (view === "small")  show2ndPage()
+            }}
+            style={sidebarChoice === "Password" && view === "big" ? chosenSidebarStyle : null}
           >
             Password
           </div>
           <div
-            onClick={() => setSidebarChoice("Email")}
-            style={sidebarChoice === "Email" ? chosenSidebarStyle : null}
+            onClick={() => {
+              setSidebarChoice("Email")
+              if (view === "small")  show2ndPage()
+            }}
+            style={sidebarChoice === "Email" && view === "big" ? chosenSidebarStyle : null}
           >
             Email
           </div>
         </div>
 
-        <div className="account-settings-main">
+        <div className="account-settings-main" id="account-main">
           {sidebarChoice === "Username" && Username()}
           {sidebarChoice === "Password" && Password()}
           {sidebarChoice === "Email" && Email()}
           {/*sidebarChoice === "Platforms" && Platforms() */}
         </div>
       </div>
+      
     </>
   );
 
@@ -225,6 +249,7 @@ function MyAccount() {
   function Username() {
     return (
       <div className="account-username-container">
+        {view === "small" && <div className="backArrow" onClick={()=> show1stPage()}>&#10140;</div>}
         <h3 className="acSettings-username-text">Username</h3>
         <h1 className="acSettings-currentUsername">{currentUsername}</h1>
 
@@ -260,7 +285,10 @@ function MyAccount() {
   function Password() {
     return (
       <div className="account-password-container">
-        <h1 className="acSettings-currentUEmail">Current Password</h1>
+        <div className="center-align">
+          {view === "small" && <div className="backArrow" onClick={()=> show1stPage()}>&#10140;</div>}
+          <h1 className="acSettings-currentUEmail">Current password</h1>
+        </div>
         <form onSubmit={(e) => handleUpdatePassword(e)}>
           <input
             style={
@@ -327,7 +355,10 @@ function MyAccount() {
   function Email() {
     return (
       <div className="account-email-container">
+        <div className="center-align">
+        {view === "small" && <div className="backArrow" onClick={()=> show1stPage()}>&#10140;</div>}
         <h1 className="acSettings-currentUEmail">Current Email</h1>
+        </div>
         <h3 className="acSettings-email-text">{currentEmail}</h3>
 
         <form onSubmit={(e) => handleUpdateEmail(e)}>
@@ -379,6 +410,28 @@ function MyAccount() {
         </form>
       </div>
     );
+  }
+
+  // phone view
+  function show1stPage(){
+    document.getElementById("account-sidebar").style.minWidth = "100%"
+    document.getElementById("account-sidebar").style.maxWidth = "100%"
+    document.getElementById("account-main").style.width = "0px"
+    document.getElementById("account-main").style.marginLeft = "0px"
+  }
+
+  function show2ndPage(){
+    document.getElementById("account-sidebar").style.minWidth = "0px"
+    document.getElementById("account-sidebar").style.maxWidth = "0px"
+    document.getElementById("account-main").style.width = "100%"
+    document.getElementById("account-main").style.marginLeft = "0px"
+  }
+
+  function resetStyles(){
+    document.getElementById("account-sidebar").style.minWidth = ""
+    document.getElementById("account-sidebar").style.maxWidth = ""
+    document.getElementById("account-main").style.width = ""
+    document.getElementById("account-main").style.marginLeft = ""
   }
 }
 

@@ -6,6 +6,8 @@ import { createNotification } from "../misc/ToastNotification";
 import RLTradeComponent from "../components/Rocket League/RLTradeComponent";
 import { UserContext } from "../context/UserContext";
 import { PopupContext } from "../context/PopupContext";
+import Topbar from "./My Account/Topbar";
+import useWindowDimensions from "../misc/windowHW";
 
 function UserTrades() {
   const [userTrades, setUserTrades] = useState();
@@ -16,6 +18,8 @@ function UserTrades() {
 
   const { myID } = useContext(UserContext);
   const { setOpenDeleteAllTrades } = useContext(PopupContext);
+
+  const { width } = useWindowDimensions();
 
   useEffect(() => {
     axios
@@ -34,43 +38,24 @@ function UserTrades() {
           `oops something went wrong`
         );
       });
+      console.log("heh")
   }, [pathID]);
 
-  if (userTrades && username)
     return (
       <>
-        <div className="user-trades-topbar-field">
-          <div className="user-trades-topbar-left">
-            <p>
-              {username}'s <span style={{ color: "#FE3B3B" }}>trades</span>
-            </p>
-            <div id="separator"></div>
-            <button
-              onClick={() => setGame("rl")}
-              style={game === "rl" ? { backgroundColor: "#47384D" } : null}
-            >
-              Rocket League
-            </button>
-          </div>
+        {myID === pathID ? <Topbar /> : usernameField()}
 
-          {myID === pathID
-            ? userTrades.length > 0 && (
-                <button
-                  onClick={() => setOpenDeleteAllTrades(true)}
-                  id="del-all-trades-button"
-                >
-                  Delete all trades
-                </button>
-              )
-            : null}
-        </div>
+        {!userTrades ? null : userTrades.length <= 0 ? 
+          NoTrades() 
+        : 
+          <>
+            {width < 700 && myID === pathID ? <div style={{height: "15px"}}></div> : null  /* Topbar is hidden to hamburger on smaller width so we need spacing*/} 
+            {TradeComponents()}
+          </>
+        }
 
-        {userTrades.length <= 0 && NoTrades()}
-
-        <TradeComponents />
       </>
     );
-  else return null;
 
   /*-----Functions                -------------*/
 
@@ -128,7 +113,42 @@ function UserTrades() {
       else return <RLTradeComponent trade={trade} />;
     });
   }
+
+  function usernameField(){
+    return(
+      <div className="user-trades-topbar-field">
+        <div className="user-trades-topbar-left">
+          <p>
+            {username}'s <span style={{ color: "#FE3B3B" }}>trades</span>
+          </p>
+          {/*
+            <div id="separator" ></div>
+          <button
+            onClick={() => setGame("rl")}
+            style={game === "rl" ? { backgroundColor: "#47384D" } : null}
+          >
+            Rocket League
+          </button>
+          */}
+          
+        </div>
+  
+        {myID === pathID
+          ? userTrades.length > 0 && (
+            <button
+              onClick={() => setOpenDeleteAllTrades(true)}
+              id="del-all-trades-button"
+            >
+              Delete all trades
+            </button>
+          )
+        : null}
+      </div>
+    )
+  }
+  
 }
+
 export default UserTrades;
 
 /*

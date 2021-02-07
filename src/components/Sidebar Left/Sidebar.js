@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import ReputationBody from "./ReputationBody";
+import AccountBody from "./AccountBody";
 
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
 import { rl_dd_names } from "../../info/DropdownNames";
@@ -69,14 +70,14 @@ function Sidebar() {
           <Route path="/reputation">
             <ReputationBody />
           </Route>
+          <Route path="/account"> 
+            <AccountBody />
+          </Route>
           <Route exact path="/trading/rl/new"></Route>
           <Route path="/trading/rl/edit"> </Route>
           <Route path="/trades"> </Route>
           <Route exact path="/terms"></Route>
           <Route exact path="/privacy"></Route>
-          <Route exact path="/account/settings"></Route>
-          <Route exact path="/account/messages"></Route>
-          <Route exact path="/account/premium"></Route>
           <Route path="/password/reset"> </Route>
           <Route path="/email/confirm"> </Route>
           <Route path="/email/update"> </Route>
@@ -113,13 +114,6 @@ function Sidebar() {
       </div>
     </div>
   );
-
-
-
-
-
-
-
 
 
   function RLBody() {

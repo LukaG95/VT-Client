@@ -4,10 +4,12 @@
   box-sizing: border-box;
 
   font-family: "Poppins", sans-serif;
+  -webkit-tap-highlight-color: transparent; /*To remove the blue background when tapping on links & icons on phone*/
 }
 
 *:focus,
 *:active {
+  -webkit-tap-highlight-color: transparent;
   outline: none;
 }
 
@@ -38,6 +40,12 @@ input:-webkit-autofill:active {
   justify-content: center;
   display: flex;
 }
+
+.center-align {
+  align-items: center;
+  display: flex;
+}
+
 
 .flex-col {
   display: flex;
@@ -84,7 +92,7 @@ html {
 
   width: 100%;
 
-  height: fit-content;
+  height: max-content;
 
   margin-left: 40px;
   margin-right: 40px;
@@ -552,6 +560,7 @@ html {
   display: flex;
   flex-direction: column;
   width: 100%;
+
   margin-bottom: 15px;
 }
 
@@ -741,6 +750,7 @@ html {
 
   min-height: 100%;
   justify-content: space-between;
+
 }
 
 .rl-has-container,
@@ -769,6 +779,8 @@ html {
   background: #332638;
   border-radius: 5px;
   min-height: 40px;
+  height: fit-content;
+  word-break: break-all;
 }
 
 .notes {
@@ -780,9 +792,11 @@ html {
   overflow-y: auto;
   scrollbar-color: #392c3e #47384d;
   text-align: justify;
+
+  width: fit-content;
 }
 
-@media screen and (max-width: 1496px) {
+@media screen and (max-width: 1596px) {
   .rl_notes_buttons_container {
     padding-top: 0px;
     width: 100%;
@@ -827,6 +841,10 @@ html {
   padding: 5px 24px 5px 24px;
   cursor: pointer;
 
+  margin-right: 10px;
+
+  height: fit-content;
+  white-space: nowrap;
   transition: background-color 100ms;
 }
 
@@ -852,6 +870,10 @@ html {
   background: #251d28;
 }
 
+.test{
+
+}
+
 #editTrade-button {
   background: none;
   border: 1px solid #2c8e54;
@@ -871,7 +893,6 @@ html {
 #bumpTrade-button {
   background: none;
   border: 1px solid #e7aa0f;
-  font-size: 12px;
   padding: 5px 15px 5px 15px;
   transition: background 200ms;
   margin-bottom: 2px;
@@ -890,11 +911,12 @@ html {
 }
 
 .trade-expire-text {
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
+  display: flex;
+  justify-content: flex-end;
   color: #f6f6f6;
   font-size: 10px;
+  margin: 5px 0px 0px 5px;
+
 }
 
 .no-trades-text {
@@ -918,11 +940,12 @@ html {
   height: 100px;
   background-color: #1d191f;
   border-radius: 5px;
-  width: 1600px;
+  width: 100%;
   align-items: center;
   margin-top: 15px;
   margin-bottom: 15px;
   justify-content: space-between;
+
 }
 
 .user-trades-topbar-field p {
@@ -957,6 +980,18 @@ html {
 .user-trades-topbar-left {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+
+@media screen and (max-width: 490px) {
+  .user-trades-topbar-left p{
+    font-size: 18px;
+  }
+  .user-trades-topbar-field{
+    height: 70px;
+  }
+  
 }
 
 #del-all-trades-button {
@@ -2317,7 +2352,7 @@ html {
   position: relative;
 
   height: 100%;
-  max-height: calc(100% - 120px);
+  max-height: calc(100% - 135px);
   min-height: 300px;
   width: 100%;
 
@@ -2396,7 +2431,7 @@ html {
   justify-content: space-between;
 
   width: 100%;
-  bottom: 65px;
+  bottom: 55px;
 
   border-radius: 5px 5px 5px 5px;
 
@@ -3074,8 +3109,22 @@ html {
 .account-settings-wrapper {
   display: flex;
   font-size: 18px;
+  height: calc(100vh - 160px);
 
   animation: transitionLeft 0.4s;
+}
+
+@media screen and (max-width: 700px) {
+  .account-settings-wrapper {
+    margin-top: 10px;
+    height: calc(100vh - 115px);
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .account-settings-wrapper {
+    height: calc(100vh - 80px);
+  }
 }
 
 .account-settings-sidebar {
@@ -3083,7 +3132,9 @@ html {
   flex-direction: column;
   background-color: #1d191f;
   min-width: 335px;
-  height: 800px;
+
+  border-radius: 5px;
+  transition: min-width 250ms;
 }
 
 .account-settings-sidebar div {
@@ -3106,21 +3157,58 @@ html {
   display: flex;
   background-color: #1d191f;
   width: 100%;
-  height: 800px;
 
   margin-left: 10px;
+  border-radius: 5px;
+
+  transition: width 250ms;
+}
+
+
+@media screen and (max-width: 1065px) {
+  .account-settings-sidebar {
+    min-width: 100%;
+  }
+
+  .account-settings-main {
+    width: 0px;
+  }
+
+  .account-settings-sidebar div {
+    display: flex;
+    justify-content: center;
+  }
+
+  .account-settings-sidebar div:nth-child(1) {
+    margin-top: 0px;
+  }
 }
 
 .account-username-container {
   margin: 50px 0px 0px 70px;
 }
 
+@media screen and (max-width: 700px) {
+  .account-username-container {
+    margin: 40px 0px 0px 40px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .account-username-container {
+    margin: 20px 0px 0px 20px;
+  }
+}
+
 .account-username-container p {
   color: #f6f6f6;
   font-size: 14px;
+  padding-right: 15px;
+
 }
 
 .acSettings-username-text {
+  display: inline;
   color: #f6f6f6;
   font-weight: 500;
   font-size: 16px;
@@ -3136,7 +3224,7 @@ html {
 }
 
 .account-username-container input {
-  display: block;
+  display: flex;
   background: none;
   border: 1px solid rgba(246, 246, 246, 0.5);
   border-radius: 5px;
@@ -3146,6 +3234,15 @@ html {
   padding: 7px 0 7px 15px;
   margin-top: 10px;
   font-size: 12px;
+}
+
+@media screen and (max-width: 425px) {
+  .acSettings-currentUsername  {
+    font-size: 28px;
+  }
+  .account-username-container input {
+    width: 300px;
+  }
 }
 
 .account-username-container input:hover {
@@ -3178,6 +3275,21 @@ html {
   background-color: #120f13;
 }
 
+.backArrow{
+  display: inline-block;
+  color: #f6f6f6;
+  border: 2px solid #1a8ad4;
+  width: fit-content;
+  padding: 3px 9px 3px 9px;
+
+  border-radius: 5px;
+  transform: rotate(180deg);
+
+  margin-right: 10px;
+
+  cursor: pointer;
+}
+
 .account-email-container {
   margin: 50px 0px 0px 70px;
 }
@@ -3185,6 +3297,8 @@ html {
 .account-email-container p {
   color: #f6f6f6;
   font-size: 14px;
+
+  padding-right: 15px;
 }
 
 .account-email-container input {
@@ -3198,6 +3312,24 @@ html {
   padding: 7px 0 7px 15px;
   margin-top: 10px;
   font-size: 12px;
+}
+
+@media screen and (max-width: 700px) {
+  .account-email-container {
+    margin: 40px 0px 0px 40px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .account-email-container {
+    margin: 20px 0px 0px 20px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .account-email-container input {
+    width: 300px;
+  }
 }
 
 .account-email-container input:hover {
@@ -3234,9 +3366,9 @@ html {
   color: #f6f6f6;
   font-style: normal;
   font-weight: normal;
-  font-size: 34px;
-
-  margin-bottom: 15px;
+  font-size: 34px;  
+  
+  white-space: nowrap;
 }
 
 .acSettings-email-text {
@@ -3246,6 +3378,7 @@ html {
 
   margin-bottom: 50px;
 }
+
 
 #accountUnError {
   position: absolute;
@@ -3268,6 +3401,7 @@ html {
   font-size: 14px;
 }
 
+
 .account-password-container input {
   display: block;
   background: none;
@@ -3279,6 +3413,29 @@ html {
   padding: 7px 0 7px 15px;
   margin-top: 10px;
   font-size: 12px;
+}
+
+
+@media screen and (max-width: 700px) {
+  .account-password-container {
+    margin: 40px 0px 0px 40px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .account-password-container {
+    margin: 20px 0px 0px 20px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .acSettings-currentUEmail {
+    font-size: 28px;
+  }
+  
+  .account-password-container input {
+    width: 300px;
+  }
 }
 
 .account-password-container input:hover {
@@ -3336,6 +3493,14 @@ html {
 .accountTb {
   display: flex;
   width: 100%;
+  
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px) {
+  .accountTb {
+    display: none;
+  }
 }
 
 .accountTb-nav {
@@ -3343,6 +3508,8 @@ html {
   font-size: 15px;
   font-weight: 500;
   padding: 15px 20px 15px 20px;
+
+  white-space: nowrap;
 }
 
 .accountTb-nav:hover {
@@ -3356,6 +3523,7 @@ html {
   background: #0f0c0f;
   border-bottom: 2px solid #fe3b3b;
 }
+
 
 /*-----Logout               ----*/
 
@@ -3911,6 +4079,44 @@ html {
 
   height: 100%;
   width: 100%;
+}
+
+.sidebar-body-account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow-y: scroll;
+
+  scrollbar-color: #929292 #131014;
+
+  height: 100%;
+  width: 100%;
+}
+
+.sidebar-filter-button-account {
+  display: flex;
+  width: 100%;
+  
+  color: rgba(246, 246, 246, 0.5);
+  font-weight: 600;
+  padding-left: 60px;
+
+  align-items: center;
+  min-height: 70px;
+  
+  cursor: pointer;
+}
+
+
+.sidebar-filter-button-account:hover span {
+  transform: translateX(10px);
+}
+
+.account-currentPage-sidebar {
+  color: #f6f6f6;
+  padding-left: 90px;
+  background: rgb(7, 7, 7);
 }
 
 #sidebar-1st-page {

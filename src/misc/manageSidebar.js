@@ -41,7 +41,6 @@ function closeSidebar() {
 
 function manageSidebarResize(width, isOpen_LeftSidebar, setIsOpen_LeftSidebar) {
   if (width > 1213 && isOpen_LeftSidebar) {
-    console.log("1");
     // && sidebar is opened (for resizing performance)
     closeSidebar();
     setIsOpen_LeftSidebar(false);

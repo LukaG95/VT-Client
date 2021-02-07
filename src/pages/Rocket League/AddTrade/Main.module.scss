@@ -119,7 +119,6 @@
   flex-direction: column;
   background-color: #1d191f;
   flex: 2 2;
-
   width: 100%;
   border-radius: 5px;
 
@@ -137,6 +136,8 @@
 }
 
 .notesSmall {
+  max-height: calc(100% - 150px);
+  min-height: 139px;
   @extend .notes;
   margin-top: 15px;
 }

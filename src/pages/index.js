@@ -15,6 +15,7 @@ import Settings from "./My Account/Settings";
 import Logout from "./My Account/Logout";
 import Platforms from "./My Account/Platforms";
 import Topbar from "./My Account/Topbar";
+import Messages from "./My Account/Messages";
 
 export {
   UserTrades,
@@ -31,4 +32,5 @@ export {
   Logout,
   Platforms,
   Topbar,
+  Messages
 };

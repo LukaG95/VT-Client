@@ -21,14 +21,14 @@ function AccountSidebar() {
     case "/account/messages":
       messages = "account-currentPage";
       break;
-    case "/trades":
-      trades = "account-currentPage";
-      break;
     case "/account/premium":
       premium = "account-currentPage";
       break;
     default:
   }
+
+  if (location.pathname.includes("/trades/"))
+    trades = "account-currentPage"
 
   return (
     <div className="accountTb">

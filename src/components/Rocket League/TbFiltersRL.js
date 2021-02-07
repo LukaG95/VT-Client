@@ -19,7 +19,7 @@ const {
 function FiltersRL() {
   const {
     game,
-    setGame,
+    setGame, 
     searchType,
     setSearchType,
     name,

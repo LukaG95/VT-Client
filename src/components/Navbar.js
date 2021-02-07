@@ -137,9 +137,11 @@ function Navbar() {
         );
       else
         return (
-          <div className="nav-button-wrapper" style={{ marginRight: "15px" }}>
-            <img height={25} width={25} src={ProfileSmallImage} alt="" />
-          </div>
+           <Link to="/account/settings" id="removeDecoration">
+            <div className="nav-button-wrapper" style={{ marginRight: "15px" }}>
+              <img height={25} width={25} src={ProfileSmallImage} alt="" />
+            </div>
+          </Link>
         );
     else if (isLoggedIn === undefined)
       return <div className="navRightItem profile"></div>;

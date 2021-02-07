@@ -38,7 +38,7 @@ export default function Item({ item, lazy, hideName, ...props }) {
         {!hideName && <span className={styles.name}>{item.itemName}</span>}
         {/* Icons + Overlays */}
         {item.cert && item.cert !== "None" && (
-          <div className={styles.cert}>{item.cert}</div>
+          <div className={[styles.cert, hideName ? styles.certAdjustment : ""].join(" ")}>{item.cert}</div>
         )}
         {item.amount > 1 && <div className={styles.amount}>{item.amount}</div>}
         {item.color && item.color !== "None" && (

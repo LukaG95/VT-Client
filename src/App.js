@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
+import useWindowDimensions from './misc/windowHW'
 import {
   Premium,
   RLTrading,
@@ -12,6 +13,7 @@ import {
   AddReputation,
   UserTrades,
   AdminPage,
+  Messages
 } from "./pages/index";
 
 import { UserContext, LeftSidebarContext } from "./context/index";
@@ -36,6 +38,8 @@ export default function App() {
   const { isLoggedIn, displayWebsite } = useContext(UserContext);
   const { setIsOpen_LeftSidebar } = useContext(LeftSidebarContext);
 
+  const { height, width } = useWindowDimensions()
+
   if (displayWebsite === true) {
     return (
       <>
@@ -53,6 +57,10 @@ export default function App() {
           ></div>
 
           <div className="mainWrapper">
+
+            <div style={{position: "absolute", top: "5px", color: "white"}}>{width}</div>
+            <div style={{position: "absolute", top: "25px", color: "white"}}>{height}</div>
+
             <Navbar />
             <Switch>
               <Route exact path="/">
@@ -109,7 +117,7 @@ export default function App() {
                 {handleRedirectOnRefresh(<Settings />)}
               </Route>
               <Route exact path="/account/messages">
-                {handleRedirectOnRefresh(<></>)}
+                {handleRedirectOnRefresh(<><Messages /></>)}
               </Route>
               <Route exact path="/account/premium">
                 {handleRedirectOnRefresh(<Premium />)}
