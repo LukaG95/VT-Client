@@ -132,12 +132,12 @@ function EditItemDropdown({ item, index, type }) {
                 const max = item.itemID === 4743 ? 100000 : 100;
                 if (Number(value) > max) setAmountInput("" + max);
                 else setAmountInput(value);
-              }}
+              }} 
             />
           </div>
           <button
             id="submit-rl-filters-button"
-            onClick={() => setVisible(false)}
+            onClick={() => {if (Number(amountInput) <= 0) setAmountInput(1); setVisible(false)}}
           >
             Done
           </button>

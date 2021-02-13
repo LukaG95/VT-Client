@@ -1,6 +1,9 @@
 import * as React from "react";
+import axios from 'axios'
+
 import { Platforms } from "../constants/Platforms";
 import { DefaultItem } from "../constants/Items";
+import {UserContext} from './UserContext'
 
 const TradeStateContext = React.createContext();
 const TradeDispatchContext = React.createContext();
@@ -147,6 +150,8 @@ function tradeReducer(state, action) {
 
 function TradeProvider({ children }) {
   const [state, dispatch] = React.useReducer(tradeReducer, defaultState);
+  const [tradesAmount, setTradesAmount] = React.useState("");
+
   return (
     <TradeStateContext.Provider value={state}>
       <TradeDispatchContext.Provider value={dispatch}>

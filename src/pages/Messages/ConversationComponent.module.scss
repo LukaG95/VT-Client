@@ -1,0 +1,50 @@
+
+.convComponent {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  font-size: 16px;
+  color: rgba(246, 246, 246, 0.5);
+
+  border-bottom: 1px solid #27212b;
+  padding: 7px 12px 7px 12px;
+  cursor: pointer;
+}
+
+.convComponent .flex{
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 16px;
+  color: #f6f6f6;
+}
+
+.convComponent .flex p{
+  font-size: 11px;
+  color: #f6f6f6;
+  padding-top: 5px;
+}
+
+.lastMessage{
+  display: block;
+  font-weight: normal;
+  font-size: 13px;
+  color: #f6f6f6;
+
+  text-overflow: ellipsis;
+  overflow: hidden !important;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 1065px) {
+  .convComponent {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.selected{
+  background: #141115;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 6px 11px 7px 11px;
+}

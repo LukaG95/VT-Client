@@ -14,7 +14,7 @@ function UserTrades() {
   const [username, setUsername] = useState();
   const [game, setGame] = useState("rl");
 
-  const pathID = useLocation().pathname.substring(8); // reads url after /trades/ till the end
+  const pathID = useLocation().pathname.substring(8); // reads url after /trades/ till the end (import queryString from 'query-string')
 
   const { myID } = useContext(UserContext);
   const { setOpenDeleteAllTrades } = useContext(PopupContext);
@@ -38,7 +38,7 @@ function UserTrades() {
           `oops something went wrong`
         );
       });
-      console.log("heh")
+
   }, [pathID]);
 
     return (

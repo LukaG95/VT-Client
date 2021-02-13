@@ -12,10 +12,9 @@ import AddReputation from "./Reputation/AddReputation";
 import Reputation from "./Reputation/Reputation";
 
 import Settings from "./My Account/Settings";
-import Logout from "./My Account/Logout";
 import Platforms from "./My Account/Platforms";
 import Topbar from "./My Account/Topbar";
-import Messages from "./My Account/Messages";
+import Messages from "./Messages/Main";
 
 export {
   UserTrades,
@@ -29,7 +28,6 @@ export {
   AddReputation,
   Reputation,
   Settings,
-  Logout,
   Platforms,
   Topbar,
   Messages

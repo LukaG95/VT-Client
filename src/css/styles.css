@@ -870,10 +870,6 @@ html {
   background: #251d28;
 }
 
-.test{
-
-}
-
 #editTrade-button {
   background: none;
   border: 1px solid #2c8e54;
@@ -1038,11 +1034,13 @@ html {
 }
 
 .rep-search-input:hover {
-  box-shadow: 0 0 2px #f6f6f6;
+  border: 1px solid #494949;
+  padding-left: 9px;
 }
 
 .rep-search-input:focus {
-  box-shadow: 0 0 4px #f6f6f6;
+  border: 1px solid #808080;
+  padding-left: 9px;
 }
 
 .sign-in-to-receive-rep-text {
