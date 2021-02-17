@@ -246,7 +246,7 @@ function Reputation() {
                 {rep.good ? "+ " : "- "}1
               </div>
               <p style={{ marginLeft: "19px", minWidth: "140px" }}>
-                {rep.username}
+                {rep.username || <p style={{color: "#e25d5d"}}>user deleted</p>}
               </p>
               <p style={{ minWidth: "130px" }}>{rep.createdAt}</p>
               <div style={{ width: width - 460 }} className="feedback-text">
