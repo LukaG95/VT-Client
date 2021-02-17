@@ -1,12 +1,11 @@
-import * as React from "react";
-import axios from 'axios'
-
 import { Platforms } from "../constants/Platforms";
 import { DefaultItem } from "../constants/Items";
-import {UserContext} from './UserContext'
+import { useEffect, useReducer, createContext, useContext } from "react";
+import axios from "axios";
+import { UserContext } from "./UserContext";
 
-const TradeStateContext = React.createContext();
-const TradeDispatchContext = React.createContext();
+const TradeStateContext = createContext();
+const TradeDispatchContext = createContext();
 
 const defaultState = {
   have: Array(12).fill(null),
@@ -139,6 +138,9 @@ function tradeReducer(state, action) {
     case actions.REMOVE_TRADE: {
       return { ...state, count: state.count - 1 };
     }
+    case actions.SET_TRADE_COUNT: {
+      return { ...state, count: action.payload };
+    }
     case actions.RESET: {
       return { ...defaultState, platform: state.platform, count: state.count };
     }
@@ -149,9 +151,17 @@ function tradeReducer(state, action) {
 }
 
 function TradeProvider({ children }) {
-  const [state, dispatch] = React.useReducer(tradeReducer, defaultState);
-  const [tradesAmount, setTradesAmount] = React.useState("");
-
+  const [state, dispatch] = useReducer(tradeReducer, defaultState);
+  const { myID } = useContext(UserContext)
+  //Fetch Trade Count
+  useEffect(() => {
+    async function getUserTrades() {
+      const res = await axios.get(`/api/trades/getUserTrades?searchId=${myID}`)
+      dispatch({ type: actions.SET_TRADE_COUNT, payload: res.data.trades.length })
+    }
+    if (myID)
+      getUserTrades()
+  }, [myID])
   return (
     <TradeStateContext.Provider value={state}>
       <TradeDispatchContext.Provider value={dispatch}>
@@ -162,7 +172,7 @@ function TradeProvider({ children }) {
 }
 
 function useTradeState() {
-  const context = React.useContext(TradeStateContext);
+  const context = useContext(TradeStateContext);
   if (context === undefined) {
     throw new Error("useTradeState must be used within a TradeProvider");
   }
@@ -170,7 +180,7 @@ function useTradeState() {
 }
 
 function useTradeDispatch() {
-  const context = React.useContext(TradeDispatchContext);
+  const context = useContext(TradeDispatchContext);
   if (context === undefined) {
     throw new Error("useTradeDispatch must be used within a TradeProvider");
   }

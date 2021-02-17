@@ -6,6 +6,16 @@ import useWindowDimensions from '../../misc/windowHW'
 
 function ConversationComponent({conversation, conversations, setConversations}) {
   const [view, setView] = useState()
+  const [lastMessage, setLastMessage] = useState()
+  const [lastDate, setLastDate] = useState()
+
+  useEffect(()=> {
+
+    setLastMessage(conversation.lastMessage)
+    setLastDate(conversation.createdAt)
+
+    
+  }, [conversations])
 
   const { width } = useWindowDimensions()
 
@@ -36,10 +46,10 @@ function ConversationComponent({conversation, conversations, setConversations}) 
       > 
         <div className={styles.flex}>
           {conversation.conversationWith.username} 
-          <p>{conversation.createdAt}</p>
+          <p>{lastDate}</p>
         </div>
 
-        <p className={styles.lastMessage}>{conversation.lastMessage}</p>
+        <p className={styles.lastMessage}>{lastMessage}</p>
         
       </div>
     );
@@ -50,6 +60,7 @@ function ConversationComponent({conversation, conversations, setConversations}) 
       document.getElementById("account-main").style.width = "100%"
       document.getElementById("account-main").style.marginLeft = "0px"
     }
+
 }
 
 export default ConversationComponent;

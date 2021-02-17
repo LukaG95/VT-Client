@@ -6,9 +6,7 @@ import Topbar from "../My Account/Topbar";
 import Conversations from "./Conversations"
 import Chat from "./Chat"
 import useWindowDimensions from '../../misc/windowHW'
-import { UserContext } from "../../context/UserContext";
 import styles from "./Main.module.scss";
-import testMessages from "./testMessages"
 
 function Main({newMessage}) {
   const [conversations, setConversations] = useState([])
@@ -22,80 +20,97 @@ function Main({newMessage}) {
 
   }, [width]);
 
-  useEffect(() => {
-    conversations.map(convo => {
-      if (convo.isSelected)
-        axios
-        .get(`/api/messages/${convo.conversationWith._id}`)
-        .then((res) => {
-          //console.log(res.data.messages)
-          setMessages(res.data.messages)
-          //setMessages(testMessages)
-        })
-        .catch((err) => {
-          console.log(err);
-          createNotification(
-            "error",
-            "Oops, something went wrong",
-            `oops something went wrong`
-          );
-        });
-      })
-    
-  }, [conversations]);
-
+  // 1. Get conversations on first visit and set isSelected to the 1st one
   useEffect(() => { 
     axios
       .get(`/api/messages`)
       .then((res) => {
         let dialogues = res.data.dialogues
-
-        for (let i = 0; i<dialogues.length; i++)
-          if (i === 0)
-            dialogues[i].isSelected = true
-          else
-            dialogues[i].isSelected = false
-
+        if (dialogues.length > 0)
+          dialogues[0].isSelected = true
         setConversations(dialogues)
       })
       .catch((err) => {
         console.log(err);
-        createNotification(
-          "error",
-          "Oops, something went wrong",
-          `oops something went wrong`
-        );
       });
   }, []);
 
-  useEffect(() => { 
+  // 2. On newMessage 
+  useEffect(() => {                                            
     if (newMessage){
-      setMessages([...messages, newMessage])
+      const found = conversations.findIndex(convo => convo.conversationWith._id === newMessage.sender._id) // find the conversation newMessage belongs to
+
+      if (found !== -1){ // if it's found move it to the top of the list, then update it's lastMessage and createdAt
+        let updatedConvos = []
+        conversations.forEach((convo, i)=> {
+          if (i === found){
+            convo.lastMessage = newMessage.message
+            convo.createdAt = newMessage.createdAt
+
+            if(convo.isSelected)
+              setMessages([...messages, newMessage])
+          }
+            updatedConvos.push(convo)
+        })
+        arraymove(updatedConvos, found, 0) // move to top 
+        setConversations(updatedConvos) 
+      }
+      else { // if it's not found create a new conversation
+        let newConversation = {
+          createdAt:  newMessage.createdAt,
+          lastMessage: newMessage.message,
+          conversationWith: {
+            _id: newMessage.sender._id,
+            username: newMessage.sender.username
+          },
+          isSelected: conversations.length === 0
+        }
+        setConversations([newConversation, ...conversations])
+      }  
     }
-      
+    
   }, [newMessage]);
 
 
   return (
     <>
       <Topbar />
-
+      
       <div className={styles.accountWrapper}>
 
-        <Conversations conversations={conversations} setConversations={setConversations}/>
+        <Conversations 
+          conversations={conversations} 
+          setConversations={setConversations}
+        />
 
-        <Chat messages={messages} setMessages={setMessages} conversation={conversations.find(conv => conv.isSelected === true)}/>
+        <Chat 
+          messages={messages} 
+          setMessages={setMessages} 
+          setConversations={setConversations}
+          conversation={conversations.find(conv => conv.isSelected === true)}
+          conversations={conversations}
+        />
 
-      </div>
+      </div> 
     </>
     );
+    
 
   function resetStyles(){
+    try{
     document.getElementById("account-sidebar").style.minWidth = ""
     document.getElementById("account-sidebar").style.maxWidth = "335px"
     document.getElementById("account-main").style.width = ""
     document.getElementById("account-main").style.marginLeft = ""
+    } catch {}
   }
+
+  function arraymove(arr, fromIndex, toIndex) {
+    var element = arr[fromIndex];
+    arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, element);  
+  }
+
 }
 
 export default Main;

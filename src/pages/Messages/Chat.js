@@ -1,15 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 
 import styles from './Chat.module.scss'
 import ChatComponent from './ChatComponent'
 import useWindowDimensions from '../../misc/windowHW'
+import { UserContext } from "../../context/UserContext";
+import { createNotification } from "../../misc/ToastNotification";
 
-function Chat({conversation, messages, setMessages}) {
+function Chat({conversation, conversations, messages, setMessages, setConversations}) {
   const [chat, setChat] = useState("")
   const [view, setView] = useState()
 
   const { width } = useWindowDimensions()
+  const { myID, username } = useContext(UserContext)
+
+  const [confirmed, setConfirmed] = useState([])
 
   useEffect(() => {
     if (width > 1065){
@@ -21,16 +26,38 @@ function Chat({conversation, messages, setMessages}) {
 
   useEffect(() => {
     updateScroll()
+
   }, [messages])
 
-  const allMessages = messages.map(message => <ChatComponent message={message}/>)
- 
+  useEffect(() => {
+   
+    if (conversation)
+      axios
+      .get(`/api/messages/${conversation.conversationWith._id}`)
+      .then((res) => {
+        setConfirmed([])
+        setMessages(res.data.messages)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    if (inputEl.current)
+      inputEl.current.focus()
+
+  }, [conversation]);
+
+  const inputEl = useRef(null);
+
+  // const allMessages = messages.length === 0 ? <Loader /> : messages.map(message => <ChatComponent message={message}/>)
+  const allMessages = messages.map((message, i) => <ChatComponent message={message} confirmed={confirmed.includes(i) ? true : false}/>)
+
   return (
     <div className={styles.chatWrapper} id="account-main">
 
       <div className={styles.header}>
         {view === "small" && <div className={styles.backArrow} onClick={()=> show1stPage()}>&#10140;</div>}
-        <div className={styles.status}></div>
+        {conversations.length > 0 && <div className={styles.status}></div>}
         <p>{conversation && conversation.conversationWith.username}</p>
       </div>
 
@@ -38,26 +65,65 @@ function Chat({conversation, messages, setMessages}) {
         {allMessages}
       </div>
       
-      <form className={styles.form} onSubmit={e => {e.preventDefault(); submitChat(); /*setChat("")*/}}>
-        <input 
-          className={styles.chatInput}
-          placeholder="Message"
-          value={chat}
-          onChange={e => {setChat(e.target.value)}}
-        />
-      </form>
+      {
+        conversations.length > 0 &&
+
+        <form className={styles.form} onSubmit={e => {e.preventDefault(); submitChat(); /*setChat("")*/}}>
+          <input 
+            className={styles.chatInput}
+            placeholder="Message"
+            value={chat}
+            onChange={e => {setChat(e.target.value)}}
+            ref = {inputEl}
+          />
+        </form>
+      
+      }
 
     </div>
   );
 
   function submitChat(){
-    setMessages([...messages, {recipientId: "4u8545", message: chat}])
+    // there's a confirmed: false here, which is only applied to new messages so we know not to check for that on those
+    setMessages([...messages, {confirmed: false, sender: {_id: myID, username}, message: chat, createdAt: cleanTime()}]) 
+
     let tempChat = chat
     setChat("")
+
     axios
       .post('/api/messages/message', {recipientId: conversation.conversationWith._id, message: tempChat})
-      .then(res => {setChat("")})
-      .catch(err => console.log(err.response))
+      .then(res => { 
+        if(res.data.info === "success"){
+          // since we don't have access to the updated messages (the last message), we save the index (length) of the current array, so we can later check. 
+          // If the index is found in the array, the message has been confirmed
+          setConfirmed(prev=> [...prev, messages.length]) 
+
+          // move it to the top of the list, then update it's lastMessage and createdAt
+          let updatedConvos = []
+          let index = null
+          conversations.forEach((convo, i)=> {
+          if (convo === conversation){
+            convo.lastMessage = tempChat
+            convo.createdAt = cleanTime()
+            index = i
+          }
+            updatedConvos.push(convo)
+          })
+          arraymove(updatedConvos, index, 0) // move to top 
+          setConversations(updatedConvos)
+
+        }                                                 
+        
+      })
+      .catch(err => {
+        if (err.response)
+          if (err.response.status === 429)
+            createNotification(
+              "error",
+              "You are sending too many messages, slow down",
+              "1"
+            )
+      })
   }
 
   function updateScroll(){
@@ -72,6 +138,21 @@ function Chat({conversation, messages, setMessages}) {
     document.getElementById("account-main").style.marginLeft = "0px"
   }
 
+  function cleanTime(){
+
+    var d = new Date(),
+      h = (d.getHours()<10?'0':'') + d.getHours(),
+      m = (d.getMinutes()<10?'0':'') + d.getMinutes()
+
+    return (h + ':' + m)
+    
+  }
+
+  function arraymove(arr, fromIndex, toIndex) {
+    var element = arr[fromIndex];
+    arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, element);  
+  }
 
 }
 

@@ -79,8 +79,8 @@ export default function App() {
 
           <div className="mainWrapper">
 
-            <div style={{position: "absolute", top: "5px", color: "white"}}>{width}</div>
-            <div style={{position: "absolute", top: "25px", color: "white"}}>{height}</div>
+            {/*<div style={{position: "absolute", top: "5px", color: "white"}}>{width}</div>
+            <div style={{position: "absolute", top: "25px", color: "white"}}>{height}</div>*/}
 
             <Navbar />
             <Switch>

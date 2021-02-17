@@ -7,13 +7,14 @@ import styles from "./Conversations.module.scss";
 function Conversations({conversations, setConversations}) {
 
   const allConversations = useMemo(
-    () =>
+    () => 
       conversations.map(conversation => (
-        <ConversationComponent conversation={conversation} conversations={conversations} setConversations={setConversations}/>
+        <ConversationComponent conversation={conversation} conversations={conversations} setConversations={setConversations} />
       )),
     [conversations]
   );
- 
+  
+
   return (
 
       <div className={styles.conversationsWrapper} id="account-sidebar">
@@ -24,6 +25,7 @@ function Conversations({conversations, setConversations}) {
       
 
     );
+
 }
 
 export default Conversations;

@@ -106,7 +106,7 @@ function SignUpInfo({ closeForm }) {
               {readAndAgreed && <p> &#10004; </p>}
             </div>
             <div className="keepMeText">
-              I have read and agreed to
+              I have read and agreed to&nbsp;
               <a style={{ color: "#2297D9" }} href="/terms">
                 Terms of service
               </a>
