@@ -3,6 +3,7 @@ import axios from "axios";
 
 import styles from './ConversationComponent.module.scss'
 import useWindowDimensions from '../../misc/windowHW'
+import {formatedMessagesTime} from "../../misc/time"
 
 function ConversationComponent({conversation, conversations, setConversations}) {
   const [view, setView] = useState()
@@ -10,10 +11,8 @@ function ConversationComponent({conversation, conversations, setConversations}) 
   const [lastDate, setLastDate] = useState()
 
   useEffect(()=> {
-
     setLastMessage(conversation.lastMessage)
-    setLastDate(conversation.createdAt)
-
+    setLastDate(formatedMessagesTime(conversation.createdAt.timestamp))
     
   }, [conversations])
 
