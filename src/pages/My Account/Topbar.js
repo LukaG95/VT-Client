@@ -44,6 +44,7 @@ function AccountSidebar() {
         <p className={`accountTb-nav ${trades}`}>My Trades</p>
       </Link>
 
+{/*
       <Link to="/account/premium" id="removeDecoration">
         <p
           className={`accountTb-nav ${premium}`}
@@ -54,7 +55,7 @@ function AccountSidebar() {
           Premium
         </p>
       </Link>
-
+        */}
       <div
         onClick={() => setOpenLogoutPopup(true)}
         className="accountTb-nav"

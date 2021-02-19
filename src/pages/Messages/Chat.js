@@ -10,6 +10,7 @@ import { createNotification } from "../../misc/ToastNotification";
 function Chat({conversation, conversations, messages, setMessages, setConversations}) {
   const [chat, setChat] = useState("")
   const [view, setView] = useState()
+  const [userStatus, setUserStatus] = useState()
 
   const { width } = useWindowDimensions()
   const { myID, username } = useContext(UserContext)
@@ -24,6 +25,7 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
 
   useEffect(() => {
     chatbox.current.scrollTop = chatbox.current.scrollHeight
+    console.log(chatbox.current.scrollHeight)
 
   }, [messages])
 
@@ -39,6 +41,13 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
         console.log(err);
       });
 
+      getUserStatus()
+
+      let checkingUserStatus = setInterval(()=> {
+        getUserStatus()
+      }, 15000)
+
+      return () => clearTimeout(checkingUserStatus)
     }
       
     if (inputEl.current)
@@ -57,7 +66,13 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
 
       <div className={styles.header}>
         {view === "small" && <div className={styles.backArrow} onClick={()=> show1stPage()}>&#10140;</div>}
-        {conversations.length > 0 && <div className={styles.status}></div>}
+        {conversations.length > 0 && 
+
+            <div className={[styles.status, userStatus === "online" ? styles.online : styles.offline].join(" ")}>
+              <span className={styles.statusTooltip}>{userStatus && userStatus}</span>
+            </div>
+            
+        }
         <p>{conversation && conversation.conversationWith.username}</p>
       </div>
 
@@ -151,6 +166,18 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
     var element = arr[fromIndex];
     arr.splice(fromIndex, 1);
     arr.splice(toIndex, 0, element);  
+  }
+
+  function getUserStatus(){
+    axios
+      .get(`/api/messages/status/${conversation.conversationWith._id}`)
+      .then((res) => {
+        if (res.data.info === "success")
+          setUserStatus(res.data.status)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
 }

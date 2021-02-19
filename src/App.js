@@ -40,7 +40,7 @@ export default function App() {
 
   const path = useLocation().pathname
 
-  useEffect(()=> {console.log("heh")
+  useEffect(()=> { 
     const socket = io(); // const socket = io("https://virtrade-backend.herokuapp.com");
     socket.on('auth', status => { 
       if (status === 'success')
@@ -51,7 +51,7 @@ export default function App() {
   }, [])
 
 
-  useEffect(()=> {console.log("hah")
+  useEffect(()=> {
     if (newMessage && !path.includes('/account/messages'))
     createNotification(
       "info",
