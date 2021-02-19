@@ -35,26 +35,26 @@ export const actions = {
 };
 
 function tradeReducer(state, action) {
-  function setSelected() {
-    const type = state.selected.type; // "have" or "want"
-    const index = state.selected.index;
+  function setSelected(current = state) {
+    const type = current.selected.type; // "have" or "want"
+    const index = current.selected.index;
     //If item in slot already, return
-    if (state[type][index]) return state;
-    let selected = { ...state.selected };
+    if (!current[type][index]) return current.selected;
+    let selected = { ...current.selected };
     //Find first empty after index
-    const after = state[type].slice(index + 1, 12).findIndex((item) => !item);
+    const after = current[type].slice(index + 1, 12).findIndex((item) => !item);
     if (after > -1) {
       selected.index = after + index + 1;
     } else {
       //If none empty after, check other section
       const altType = type === "have" ? "want" : "have";
-      const otherSection = state[altType].findIndex((item) => !item);
+      const otherSection = current[altType].findIndex((item) => !item);
       if (otherSection > -1) {
         selected.type = altType;
         selected.index = otherSection;
       } else {
         //If none in other section, find empty before
-        const before = state[type].slice(0, index).findIndex((item) => !item);
+        const before = current[type].slice(0, index).findIndex((item) => !item);
         selected.index = before;
       }
     }
@@ -125,8 +125,8 @@ function tradeReducer(state, action) {
       return { ...state, selected: action.payload };
     }
     case actions.SET_ITEMS: {
-      const selected = setSelected();
-      return { ...state, selected, ...action.payload };
+      state = { ...state, ...action.payload }
+      return { ...state, selected: setSelected(state) };
     }
     case actions.CLEAR_ITEMS: {
       const type = action.payload; // "have" or "want"
