@@ -7,6 +7,7 @@ import Conversations from "./Conversations"
 import Chat from "./Chat"
 import useWindowDimensions from '../../misc/windowHW'
 import styles from "./Main.module.scss";
+import {formatedMessagesTime} from "../../misc/time"
 
 function Main({newMessage}) {
   const [conversations, setConversations] = useState([])
@@ -36,7 +37,7 @@ function Main({newMessage}) {
   }, []);
 
   // 2. On newMessage 
-  useEffect(() => {                                            
+  useEffect(() => {                                        
     if (newMessage){
       const found = conversations.findIndex(convo => convo.conversationWith._id === newMessage.sender._id) // find the conversation newMessage belongs to
 
@@ -55,9 +56,9 @@ function Main({newMessage}) {
         arraymove(updatedConvos, found, 0) // move to top 
         setConversations(updatedConvos) 
       }
-      else { // if it's not found create a new conversation
+      else { // if it's not found create a new conversation 
         let newConversation = {
-          createdAt:  newMessage.createdAt,
+          createdAt: newMessage.createdAt,
           lastMessage: newMessage.message,
           conversationWith: {
             _id: newMessage.sender._id,
