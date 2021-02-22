@@ -70,16 +70,15 @@ function tradeReducer(state, action) {
     case actions.ADD_ITEM: {
       const type = state.selected.type; // "have" or "want"
       const index = state.selected.index;
-      const selected = setSelected();
-      return {
+      state = {
         ...state,
         [type]: [
           ...state[type].slice(0, index),
           { ...Object.assign(DefaultItem, action.payload) },
           ...state[type].slice(index + 1, 12),
-        ].slice(0, 12),
-        selected,
-      };
+        ].slice(0, 12)
+      }
+      return { ...state, selected: setSelected(state) }
     }
     case actions.SET_TYPE: {
       const type = action.payload;
