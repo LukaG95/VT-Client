@@ -1,9 +1,11 @@
+@import '../../css/animations';
+
 .item {
   position: relative;
   width: 100%;
   padding-top: calc(100% + 20px);
   border-radius: 5px;
-
+ 
   &.hideName {
     padding-top: 100%;
   }
@@ -17,6 +19,7 @@
   left: 0;
   display: flex;
   flex-direction: column;
+  
 }
 
 .name {
@@ -24,15 +27,18 @@
   position: absolute;
   bottom: 0px;
   height: 20px;
+  line-height: 18px;
   width: 100%;
   color: #f6f6f6;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  font-weight: bold;
   text-align: center;
+  
   background-color: #1d191f;
-
-  padding-left: 0px;
-  padding-right: 0px;
+  
+  padding-left: 7px;
+  padding-right: 7px;
 
   white-space: nowrap;
   overflow: hidden;
@@ -45,12 +51,16 @@
   cursor: pointer;
 }
 
-
 .name:hover{
   height: fit-content;
   overflow: visible;
   white-space: normal;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-left: 7px;
+  padding-right: 7px;
+
+  min-height: 20px;     // to ensure text doesn't move down on hover
+  padding-bottom: 1px;  // to ensure text doesn't move down on hover
 }
 
 .imageContainer {
@@ -119,7 +129,7 @@
 
   &:hover .tooltip {
     visibility: visible;
-    animation: transitionUp 0.2s;
+    animation: transitionDown 0.2s ease;
   }
   
 
@@ -144,4 +154,26 @@
     z-index: 1;
     white-space: nowrap;
   }
+}
+
+.skeleton{
+  background: #332638;
+  position: relative;
+
+  overflow: hidden;
+
+  /* animation (appears a little laggy) 
+
+  &::before{
+    content: '';
+    display: block;
+    position: absolute;
+    left: -26px;
+    top: 0;
+    height: 100%;
+    width: 26px;
+    background: linear-gradient(to right, transparent 0%, #5b4464 50%, transparent 100%);
+    animation: load 1s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+  }
+  */
 }

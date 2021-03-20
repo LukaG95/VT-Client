@@ -1,55 +1,98 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 import { UserContext } from "../../context/UserContext";
 import { PopupContext } from "../../context/PopupContext";
 import { createNotification } from "../../misc/ToastNotification";
 import useWindowDimensions from "../../misc/windowHW";
+import { RepCategories } from "../../constants/RepCategories"
+import useUserSearch from "./useUserSearch"
+import pageNumbers from "../../misc/pageNumbers"
+import repTitle from "../../constants/repTitle"
+import {Helmet} from "react-helmet";
 
 function Reputation() {
   const [repInfo, setRepInfo] = useState();
   const [repType, setRepType] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchValue, setSearchValue] = useState("");
+  const [view, setView] = useState("big")
+  const [openCategories, setOpenCategories] = useState(false)
+
+  const [search, setSearch] = useState({
+    open: false,
+    text: ""
+  })
 
   const { myID, isLoggedIn } = useContext(UserContext);
   const { setOpenForm } = useContext(PopupContext);
 
-  const pathID = useLocation().pathname.substring(12); // reads url after /reputation/ till the end
-
+  const { pathID } = useParams()
   const { width } = useWindowDimensions();
+  const { users } = useUserSearch(search.text)
+
+  const ref = useRef();
+
+  function onClick(e) {
+
+    if (!ref.current || !ref.current.contains(e.target))
+      setSearch(prev=>  ({ ...prev, open: false }));
+    else if (e.target.tagName === "INPUT")
+      setSearch(prev=>  ({ ...prev, open: true }));
+  }
 
   useEffect(() => {
-    if (myID === undefined && pathID === "") {
+    window.addEventListener("click", onClick);
+    const checkingFocus = setInterval(()=> {if (!document.hasFocus()) setSearch(prev=>  ({ ...prev, open: false }));}, 300);
+
+    return () => {
+      window.removeEventListener("click", onClick);
+      clearInterval(checkingFocus)
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+
+  useEffect(() => {
+    if (width > 800){
+      setView("big")
+    } else{
+      setView("small")
+      setOpenCategories(false)
+    }
+
+  }, [width]);
+
+  useEffect(() => {
+    if (myID === undefined && !pathID) {
       setRepInfo(undefined);
       return;
     }
 
     let searchUserID = 0;
-    if (pathID === "") {
+    if (!pathID) {
       searchUserID = myID;
     } else searchUserID = pathID;
 
     axios
       .get(`/api/reputation/${searchUserID}`)
       .then((res) => {
-        if (res.data.info === "success") setRepInfo(res.data.rep);
-        /*if (res.data.status === "invalid")*/ else setRepInfo("invalid");
+        if (res.data.info === "success") 
+          setRepInfo(res.data.rep);
+  
       })
-      .catch((err) => console.log(err));
+      .catch(res => {
+          setRepInfo("invalid")
+      });
   }, [myID, pathID]);
+
 
   if (repInfo !== undefined && repInfo !== "invalid")
     return (
       <>
-        <form onSubmit={searchForUserRep}>
-          <input
-            onChange={(e) => setSearchValue(e.target.value)}
-            placeholder="Search users ..."
-            className="rep-search-input"
-          ></input>
-        </form>
+        {helmet()}
+
+        {searchInput()}
 
         <div className="reputation-topbar-field">
           <div className="rep-username">{repInfo.username}'s Reputation</div>
@@ -58,7 +101,7 @@ function Reputation() {
             <div className="flex">
               <div className="rep-grade">{repInfo.grade}</div>
               <div className="rep-title-addrep-wrapper">
-                <p className="rep-title">{repInfo.title}</p>
+                <p className="rep-title">{repTitle(repInfo.ups)}</p>
                 {isLoggedIn ? (
                   <Link
                     style={{ textDecoration: "none" }}
@@ -87,7 +130,7 @@ function Reputation() {
           </div>
         </div>
 
-        {repInfo.amount.all > 1 && <PageNumbers />}
+        {repInfo.amount.all > 0 && pageNumbers(currentPage, pageAmount(), setCurrentPage)}
 
         {repInfo.amount.all > 0 ? (
           <>
@@ -100,63 +143,32 @@ function Reputation() {
                 </div>
 
                 <div className="rep-inbetween-section-right">
-                  {repInfo.amount.all > 0 && (
-                    <button
-                      onClick={() => {
-                        setCurrentPage(1);
-                        setRepType("all");
-                      }}
-                      style={repType === "all" ? { color: "#E7AA0F" } : null}
-                    >
-                      All ({repInfo.amount.all}) /&nbsp;
-                    </button>
-                  )}
-                  {repInfo.amount.csgo > 0 && (
-                    <button
-                      onClick={() => {
-                        setCurrentPage(1);
-                        setRepType("csgo");
-                      }}
-                      style={repType === "csgo" ? { color: "#E7AA0F" } : null}
-                    >
-                      CSGO ({repInfo.amount.csgo}) /&nbsp;
-                    </button>
-                  )}
-                  {repInfo.amount.rl > 0 && (
-                    <button
-                      onClick={() => {
-                        setCurrentPage(1);
-                        setRepType("rl");
-                      }}
-                      style={repType === "rl" ? { color: "#E7AA0F" } : null}
-                    >
-                      RL ({repInfo.amount.rl}) /&nbsp;
-                    </button>
-                  )}
-                  {repInfo.amount.other > 0 && (
-                    <button
-                      onClick={() => {
-                        setCurrentPage(1);
-                        setRepType("other");
-                      }}
-                      style={repType === "other" ? { color: "#E7AA0F" } : null}
-                    >
-                      Other ({repInfo.amount.other})
-                    </button>
-                  )}
+                  {Categories()}
                 </div>
               </section>
             ) : (
-              <section className="rep-inbetween-section">
-                <div className="rep-inbetween-section-left">
-                  <p style={{ marginLeft: "59px" }}>Feedback</p>
-                </div>
+              <>
+                <section 
+                  style={ openCategories ? 
+                    {visibility: "visible", height: "25px", marginBottom: "10px"} 
+                      : 
+                    {visibility: "hidden", height: "0px"}} 
+                  className="rep-inbetween-section-right"
+                >
+                  {Categories()}
+                </section>
 
-                <div className="rep-inbetween-section-category-wrapper">
-                  <p>{repType}</p>
-                  <div className="dropdownArrow"></div>
-                </div>
-              </section>
+                <section className="rep-inbetween-section">
+                  <div className="rep-inbetween-section-left">
+                    <p style={{ marginLeft: "59px" }}>Feedback</p>
+                  </div>
+
+                  <div onClick={()=> setOpenCategories(prev => !prev)} className="rep-inbetween-section-category-wrapper">
+                    <p>Categories</p>
+                    <div className="dropdownArrow"></div>
+                  </div>
+                </section>
+              </>
             )}
 
             <div className="all-reps-wrapper">
@@ -180,33 +192,35 @@ function Reputation() {
     );
   else if (repInfo === "invalid")
     return (
-      <div className="rep-noUserFound-container">
-        <p>Whoops no user matches that ID :'(</p>
-        <a id="removeDecoration" href="/reputation">
-          &#8617; Back to my reputation
-        </a>
-      </div>
+      <>
+        {helmet()}
+
+        <div className="rep-noUserFound-container">
+          <p>Whoops no user matches that ID :'(</p>
+          <a id="removeDecoration" href="/reputation">
+            &#8617; Back to my reputation
+          </a>
+        </div>
+      </>
     );
-  else if (isLoggedIn === false && pathID === "")
+  else if (isLoggedIn === false && !pathID)
     return (
-      <div className="rep-notLogged-in">
-        <form onSubmit={searchForUserRep}>
-          <input
-            onChange={(e) => setSearchValue(e.target.value)}
-            placeholder="Search users ..."
-            className="rep-search-input"
-          ></input>
-        </form>
-        <p className="sign-in-to-receive-rep-text">
-          You need an account to receive reputation
-        </p>
-        <p className="sign-in-to-begin-text">
-          <span>Sign in</span> to begin
-        </p>
-        <p className="what-is-reputation-text">What is reputation?</p>
-      </div>
+      <>
+        {helmet()}
+
+        <div className="rep-notLogged-in">
+          {searchInput()}
+          <p className="sign-in-to-receive-rep-text">
+            You need an account to receive reputation
+          </p>
+          <p className="sign-in-to-begin-text">
+            <span onClick={() => setOpenForm(true)}>Sign in</span> to begin
+          </p>
+          <Link to="/rules/reputation" className="what-is-reputation-text">What is reputation?</Link>
+        </div>
+      </>
     );
-  else return null; // <Spinner className="newPosition">
+  else return <>{helmet()}</>; // <Spinner className="newPosition">
 
   /*-----Functions                -------------*/
 
@@ -214,7 +228,7 @@ function Reputation() {
     e.preventDefault();
 
     axios
-      .get(`/api/auth/getUserByUsername/${searchValue}`)
+      .get(`/api/auth/getUserByUsername/${search.text}`)
       .then((res) => {
         if (res.data.info === "success")
           window.location.href = `/reputation/${res.data.user._id}`;
@@ -229,10 +243,39 @@ function Reputation() {
       });
   }
 
+  function Categories(){
+    let count = 0
+
+    RepCategories.forEach(cat => {
+      let category = cat.toLowerCase()
+      if (repInfo.amount[category] > 0)
+        count ++
+    })
+
+    return RepCategories.map((cat, i) => {
+      let category = cat.toLowerCase()
+      if (repInfo.amount[category] > 0){
+        count --
+        return (
+          <button
+            onClick={() => {
+              setCurrentPage(1);
+              setRepType(category);
+            }}
+            style={repType === category ? { color: "#E7AA0F" } : null}
+          >
+            {cat} ({repInfo.amount[category]}) {count === 0 ? <span>&nbsp;</span> : <span>/&nbsp;</span>}
+         </button>
+        )
+      }
+    })
+
+  }
+
   function Reps() {
     const reps = repInfo.repsByGame[repType].map((rep, i) => {
       if (i >= currentPage * 17 - 17 && i <= currentPage * 17 - 1) {
-        if (width > 800)
+        if (view === "big")
           return (
             <div className="rep-container noUserInteraction">
               <div
@@ -246,7 +289,7 @@ function Reputation() {
                 {rep.good ? "+ " : "- "}1
               </div>
               <p style={{ marginLeft: "19px", minWidth: "140px" }}>
-                {rep.username || <p style={{color: "#e25d5d"}}>user deleted</p>}
+                {rep.createdBy.username}
               </p>
               <p style={{ minWidth: "130px" }}>{rep.createdAt}</p>
               <div style={{ width: width - 460 }} className="feedback-text">
@@ -284,48 +327,51 @@ function Reputation() {
     return reps;
   }
 
-  function PageNumbers() {
-    const pageButtons = [];
+  function pageAmount() {
     const x = repInfo.amount[repType] / 17;
-    const pageAmount = Number.isInteger(x) ? x : Math.floor(x + 1);
+    return Number.isInteger(x) ? x : Math.floor(x + 1);
+  }
 
-    const starting_number = () => {
-      if (currentPage <= 5 || pageAmount <= 10) return 1;
-      else if (currentPage + 5 >= pageAmount) return pageAmount - 9;
-      else return currentPage - 5;
-    };
+  function inputStyle(){
 
-    const ending_number = () => {
-      if (pageAmount < 10) return pageAmount + 1;
-      else return starting_number() + 10;
-    };
+    if (search.open && search.text !== "")
+      return {borderRadius: "5px 5px 0px 0px", border: "1px solid #4f4453", borderBottom: "none", paddingBottom: "1px", paddingLeft: "8px"} 
+    else if (search.open)
+      return {border: "1px solid #4f4453", borderBottom: "1px solid #4f4453", paddingLeft: "8px"} 
+    else 
+      return {borderRadius: "5px"} 
+  }
 
-    for (let i = starting_number(); i < ending_number(); i++)
-      pageButtons.push(
-        i === currentPage ? (
-          <button className="pageButton highlighted-page">{i}</button>
-        ) : (
-          <button className="pageButton" onClick={() => setCurrentPage(i)}>
-            {i}
-          </button>
-        )
-      );
-
+  function searchInput(){
     return (
-      <section className="page-numbers-field">
-        <div
-          onClick={() => currentPage > 1 && setCurrentPage((prev) => prev - 1)}
-          className="page-left noUserInteraction"
-        ></div>
-        {pageButtons}
-        <div
-          onClick={() =>
-            currentPage < pageAmount && setCurrentPage((prev) => prev + 1)
-          }
-          className="page-right noUserInteraction"
-        ></div>
-      </section>
-    );
+      <form onSubmit={searchForUserRep} ref={ref} className="rep-form">
+        <input
+          onChange={(e) => setSearch({...search, text: e.target.value})}
+          placeholder="Search users ..."
+          className="rep-search-input"
+          value={search.text}
+          style={inputStyle()}
+        ></input>
+        {
+          search.open && search.text !== "" && 
+            <div className="rep-search-dropdown">
+              <p>Results: {users.length}</p>
+              {users.map(user => <Link to={`/reputation/${user._id}`} onClick={()=> setSearch(prev=>  ({ ...prev, text: user.username, open: false }))} className="">{user.username}</Link>)}
+              {users.length > 0 && <div name="spacer" style={{minHeight: "5px"}}></div>}
+            </div>
+        }
+      </form>
+    )
+  }
+
+  function helmet(){
+    return(
+      <Helmet>
+        <title>Reputation | VirTrade</title>
+        <description>Reputation page contains user's reputation. You can add and review reputation here</description>
+        <link rel="canonical" href="http://virtrade.gg/reputation" />
+      </Helmet>
+    )
   }
 }
 

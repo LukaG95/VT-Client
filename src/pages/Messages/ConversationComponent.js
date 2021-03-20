@@ -5,7 +5,7 @@ import styles from './ConversationComponent.module.scss'
 import useWindowDimensions from '../../misc/windowHW'
 import {formatedMessagesTime} from "../../misc/time"
 
-function ConversationComponent({conversation, conversations, setConversations}) {
+function ConversationComponent({conversation, conversations, setConversations, setPageNumber}) {
   const [view, setView] = useState()
   const [lastMessage, setLastMessage] = useState()
   const [lastDate, setLastDate] = useState()
@@ -32,8 +32,12 @@ function ConversationComponent({conversation, conversations, setConversations}) 
         onClick={()=> {
           let x = []
           conversations.forEach(conv => {
-            if (conv === conversation)
+            if (conv === conversation){ 
+              if (conv.isSelected === false)
+                setPageNumber(1)
+              
               conv.isSelected = true
+            }
             else 
               conv.isSelected = false
             

@@ -7,6 +7,6 @@
   display: grid;
   align-items: center;
   /* Min size of 90px */
-  grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
   gap: 4px;
 }

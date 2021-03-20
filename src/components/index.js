@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import FilterBar from "./FilterBar";
 import LoginForm from "./SignInUp/LoginForm";
 import Popups from "./Popups";
+import Footer from "./Footer";
 import ResetPassword from "./SignInUp/ResetPassword";
 import ConfirmEmail from "./SignInUp/ConfirmEmail";
 import UpdateEmail from "./SignInUp/UpdateEmail";
@@ -18,4 +19,5 @@ export {
   ConfirmEmail,
   UpdateEmail,
   AlphaForm,
+  Footer
 };

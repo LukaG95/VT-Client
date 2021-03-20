@@ -1,56 +1,46 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DiscordIcon from "../../images/icons/discord-full.png";
-import TwitterIcon from "../../images/icons/twitter.png";
-import InstagramIcon from "../../images/icons/instagram.png";
-import SteamIcon from "../../images/icons/steam.png";
+import { ReactComponent as DiscordIcon } from "../../images/icons/discord.svg";
+import { ReactComponent as TwitterIcon } from "../../images/icons/twitter.svg";
+import { ReactComponent as FacebookIcon } from "../../images/icons/facebook.svg";
+import { ReactComponent as SteamIcon } from "../../images/icons/steam.svg";
 
 function Footer() {
   return (
     <>
       <div className="sidebar-socials-wrapper">
-        <img height={38} width={33} src={DiscordIcon} alt="" />
-        <img height={35} width={42} src={TwitterIcon} alt="" />
-        <img height={35} width={35} src={InstagramIcon} alt="" />
-        <img height={35} width={35} src={SteamIcon} alt="" />
+        <DiscordIcon style={{ height: "35px", width: "35px", marginRight: "5px" }} /> {/*38h 33w */}
+        <TwitterIcon style={{ height: "35px", width: "35px", marginRight: "5px" }} />
+        <FacebookIcon style={{ height: "35px", width: "35px", marginRight: "5px" }} />
+        <SteamIcon style={{ height: "35px", width: "35px", marginRight: "5px" }} />
       </div>
 
       <div className="sidebar-info-links">
         <div>
           <div>
-            <Link to="/a" id="removeDecoration" className="sb-button">
-              About us
-            </Link>
+            <a href="https://discord.gg/nqSgyCr" target="popup" id="removeDecoration" className="sb-button">
+              Support
+            </a>
           </div>
           <div>
-            <Link to="/b" id="removeDecoration" className="sb-button">
-              Privacy policy
-            </Link>
-          </div>
-          <div>
-            <Link to="/c" id="removeDecoration" className="sb-button">
-              Terms of service
+            <Link to="/terms" id="removeDecoration" className="sb-button">
+              Terms and conditions
             </Link>
           </div>
         </div>
         <div>
           <div>
-            <Link to="/d" id="removeDecoration" className="sb-button">
-              FAQ
-            </Link>
-          </div>
-          <div>
-            <Link to="/e" id="removeDecoration" className="sb-button">
+            <Link to="/rules/trading" id="removeDecoration" className="sb-button">
               Trading rules
             </Link>
           </div>
           <div>
-            <Link to="/f" id="removeDecoration" className="sb-button">
+            <Link to="/rules/reputation" id="removeDecoration" className="sb-button">
               Reputation rules
             </Link>
           </div>
           <div>
-            <Link to="/g" id="removeDecoration" className="sb-button">
+            <Link to="/security" id="removeDecoration" className="sb-button">
               Prevent scam
             </Link>
           </div>
@@ -59,11 +49,11 @@ function Footer() {
 
       <div className="sidebar-copyright-wrapper">
         <p>
-          Copyright &#169; 2020 Virtrade,
-          <br />
-          Inc. All rights reserved
+          Copyright © 2020 Virtrade,<br /> Inc. All rights reserved 
+          <br /><br />
+          <span><a href="mailto:info@virtrade.com">info@virtrade.com</a></span>
+          <br /><br /><br />
         </p>
-        <p className="sidebar-email">info@virtrade.com</p>
       </div>
     </>
   );

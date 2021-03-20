@@ -1,10 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import {Link, useLocation} from "react-router-dom"
-import axios from "axios";
 
-import FirstImage from "../../images/icons/icon-1st.png";
-import SecondImage from "../../images/icons/icon-2nd.png";
-import ThirdImage from "../../images/icons/icon-3rd.png";
 import SidebarFooter from "./Footer";
 import { closeSidebar, manageSidebarResize } from "../../misc/manageSidebar";
 import { PopupContext } from "../../context/PopupContext";

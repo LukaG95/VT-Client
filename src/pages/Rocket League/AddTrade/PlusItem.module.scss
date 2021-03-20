@@ -9,6 +9,14 @@
   position: relative;
 }
 
+.plus:hover{
+  background-color: #382a3d;
+}
+
+.plus:active{
+  background-color: #423247;
+}
+
 .selected {
   font-style: normal;
   font-size: 60px;

@@ -1,23 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import FirstImage from "../../images/icons/icon-1st.png";
-import SecondImage from "../../images/icons/icon-2nd.png";
-import ThirdImage from "../../images/icons/icon-3rd.png";
+
 import SidebarFooter from "./Footer";
+import { ReactComponent as Badge1stIcon } from "../../images/icons/icon1st.svg";
+import { ReactComponent as Badge2ndIcon } from "../../images/icons/icon2nd.svg";
+import { ReactComponent as Badge3rdIcon } from "../../images/icons/icon3rd.svg";
 
 function ReputationBody() {
   const [leadInfo, setLeadInfo] = useState();
   const [timeType, setTimeType] = useState("Week");
 
-  const goldTrophy = (
-    <img style={{ height: "25px", width: "25px" }} src={FirstImage} alt="" />
-  );
-  const silverTrophy = (
-    <img style={{ height: "25px", width: "25px" }} src={SecondImage} alt="" />
-  );
-  const bronzeTrophy = (
-    <img style={{ height: "25px", width: "25px" }} src={ThirdImage} alt="" />
-  );
+  const goldTrophy = <Badge1stIcon style={{ height: "25px", width: "25px" }} />
+  const silverTrophy = <Badge2ndIcon style={{ height: "25px", width: "25px" }} />
+  const bronzeTrophy = <Badge3rdIcon style={{ height: "25px", width: "25px" }} />
 
   useEffect(() => {
     axios

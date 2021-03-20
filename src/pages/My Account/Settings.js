@@ -6,6 +6,8 @@ import Topbar from "./Topbar";
 import { UserContext } from "../../context/UserContext";
 import { createNotification } from "../../misc/ToastNotification";
 import useWindowDimensions from '../../misc/windowHW'
+import Platforms from "./Platforms"
+import {Helmet} from "react-helmet";
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
@@ -60,6 +62,12 @@ function MyAccount() {
 
   return (
     <>
+      <Helmet>
+        <title>{username} | VirTrade</title>
+        <description>Profile page contains all user settings. Link your platforms, change your credentials and more</description>
+        <link rel="canonical" href="http://virtrade.gg/account/settings" />
+      </Helmet>
+
       <Topbar />
 
       <div className="account-settings-wrapper">
@@ -91,13 +99,22 @@ function MyAccount() {
           >
             Email
           </div>
+          <div
+            onClick={() => {
+              setSidebarChoice("Platforms")
+              if (view === "small")  show2ndPage()
+            }}
+            style={sidebarChoice === "Platforms" && view === "big" ? chosenSidebarStyle : null}
+          >
+            Platforms
+          </div>
         </div>
 
         <div className="account-settings-main" id="account-main">
           {sidebarChoice === "Username" && Username()}
           {sidebarChoice === "Password" && Password()}
           {sidebarChoice === "Email" && Email()}
-          {/*sidebarChoice === "Platforms" && Platforms() */}
+          {sidebarChoice === "Platforms" && Platforms(view)}
         </div>
       </div>
       
@@ -355,6 +372,7 @@ function MyAccount() {
   function Email() {
     return (
       <div className="account-email-container">
+        {console.log("I've ran 2")}
         <div className="center-align">
         {view === "small" && <div className="backArrow" onClick={()=> show1stPage()}>&#10140;</div>}
         <h1 className="acSettings-currentUEmail">Current Email</h1>

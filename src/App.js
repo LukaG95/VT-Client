@@ -1,16 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { useLocation, Redirect, Route, Switch } from "react-router-dom";
 
 import useWindowDimensions from './misc/windowHW'
+import checkPath from './constants/FooterPath'
 import {
-  Premium,
   RLTrading,
+  TradingRules,
   RLAddTrade,
   Reputation,
+  AddReputation,
+  ReputationRules,
+  PreventScam,
   Settings,
   Terms,
-  PrivacyPolicy,
-  AddReputation,
   UserTrades,
   AdminPage,
   Messages
@@ -27,6 +29,7 @@ import {
   ConfirmEmail,
   UpdateEmail,
   AlphaForm,
+  Footer
 } from "./components/index";
 import { TradeProvider } from "./context/TradeContext";
 import { TradeFiltersProvider } from "./context/TradeFiltersContext";
@@ -37,8 +40,10 @@ export default function App() {
   const { isLoggedIn, displayWebsite } = useContext(UserContext);
   const { setIsOpen_LeftSidebar } = useContext(LeftSidebarContext);
   const [newMessage, setNewMessage] = useState(null)
+  const [displayFooter, setDisplayFooter] = useState(false)
 
   const path = useLocation().pathname
+  const { width, height } = useWindowDimensions()
 
   useEffect(()=> { 
     const socket = io(); // const socket = io("https://virtrade-backend.herokuapp.com");
@@ -50,17 +55,23 @@ export default function App() {
     
   }, [])
 
-
   useEffect(()=> {
     if (newMessage && !path.includes('/account/messages'))
     createNotification(
       "info",
       `You received a new message from ${newMessage.sender.username}`,
-      `${newMessage.sender.username}`
+      `${newMessage.sender.username}`,
+      `/account/messages/${newMessage.sender._id}`
     ); 
         
   }, [newMessage])
 
+  useEffect(() => {
+    if (checkPath(path))
+      setDisplayFooter(true)
+    else
+      setDisplayFooter(false)
+  }, [path])
 
   if (displayWebsite === true) {
     return (
@@ -78,7 +89,7 @@ export default function App() {
             }}
           ></div>
 
-          <div className="mainWrapper">
+          <div className="mainWrapper" style={width > 1213 && displayFooter ? {paddingBottom: "350px"} : {paddingBottom: "0px"}}>
 
             {/*<div style={{position: "absolute", top: "5px", color: "white"}}>{width}</div>
             <div style={{position: "absolute", top: "25px", color: "white"}}>{height}</div>*/}
@@ -88,7 +99,7 @@ export default function App() {
               <Route exact path="/">
                 <>
                   <FilterBar />
-                  <RLTrading />
+                  <RLTrading home={true} />
                 </>
               </Route>
               <Route exact path="/trading/rl">
@@ -97,10 +108,13 @@ export default function App() {
                   <RLTrading />
                 </>
               </Route>
-              <Route path="/reputation/add">
+              <Route path="/reputation/add/:pathID">
                 {handleRedirectOnRefresh(<AddReputation />)}
               </Route>
-              <Route path="/reputation">
+              <Route exact path="/reputation">
+                <Reputation />
+              </Route>
+              <Route path="/reputation/:pathID">
                 <Reputation />
               </Route>
               <Route exact path="/trading/rl/new">
@@ -112,7 +126,7 @@ export default function App() {
                   </TradeProvider>
                 )}
               </Route>
-              <Route path="/trading/rl/edit">
+              <Route path="/trading/rl/edit/:pathID">
                 {handleRedirectOnRefresh(
                   <TradeProvider>
                     <TradeFiltersProvider>
@@ -121,7 +135,7 @@ export default function App() {
                   </TradeProvider>
                 )}
               </Route>
-              <Route path="/trades">
+              <Route path="/trades/:pathID">
                 {handleRedirectOnRefresh(
                   <>
                     <FilterBar />
@@ -132,31 +146,40 @@ export default function App() {
               <Route exact path="/terms">
                 <Terms />
               </Route>
-              <Route exact path="/privacy">
-                <PrivacyPolicy />
+              <Route exact path="/rules/trading">
+                <TradingRules />
+              </Route>
+              <Route exact path="/rules/reputation">
+                <ReputationRules />
+              </Route>
+              <Route exact path="/security">
+                <PreventScam />
               </Route>
               <Route exact path="/account/settings">
                 {handleRedirectOnRefresh(<Settings />)}
               </Route>
               <Route exact path="/account/messages">
-                {handleRedirectOnRefresh(<><Messages newMessage={newMessage}/></>)}
+                {handleRedirectOnRefresh(<Messages newMessage={newMessage}/>)}
               </Route>
-              <Route exact path="/account/premium">
-                {handleRedirectOnRefresh(<Premium />)}
+              <Route path="/account/messages/:pathID">
+                {handleRedirectOnRefresh(<Messages newMessage={newMessage}/>)}
               </Route>
-              <Route path="/password/reset">
+              <Route path="/password/reset/:pathID">
                 <ResetPassword />
               </Route>
-              <Route path="/email/confirm">
-                <ConfirmEmail />
+              <Route path="/email/confirm/:pathID">
+                <ConfirmEmail /> 
               </Route>
-              <Route path="/email/update">
+              <Route path="/email/update/:pathID">
                 <UpdateEmail />
               </Route>
               <Route path="/admin">
-                <AdminPage />
+                {handleRedirectOnRefresh(<AdminPage />)}
               </Route>
             </Switch>
+            
+            {(displayFooter && width > 1213) ? <Footer /> : null}
+
           </div>
         </div>
 
@@ -174,4 +197,5 @@ export default function App() {
     if (isLoggedIn === true) return component;
     else if (isLoggedIn === false) return <Redirect to="/" />;
   }
+
 }

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useLocation, Redirect } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import axios from "axios";
 
 import { createNotification } from "../../misc/ToastNotification";
@@ -11,7 +11,7 @@ function ResetPassword() {
 
   const { isLoggedIn } = useContext(UserContext);
 
-  const pathID = useLocation().pathname.substring(16); // reads url after /password/reset/ till the end
+  const { pathID } = useParams()
 
   if (isLoggedIn === false)
     return (

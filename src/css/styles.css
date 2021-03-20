@@ -91,13 +91,14 @@ html {
   flex-direction: column;
 
   width: 100%;
-
   height: max-content;
+  min-height: 100%;
 
   margin-left: 40px;
   margin-right: 40px;
 
   overflow: hidden;
+  padding-bottom: 350px;
 }
 
 @media screen and (max-width: 650px) {
@@ -133,6 +134,7 @@ html {
 .navRight {
   display: flex;
   align-items: center;
+
 }
 
 .navLeftItem,
@@ -140,12 +142,12 @@ html {
   display: flex;
   padding: 3px 15px 3px 15px;
   align-items: center;
+
   height: 60px;
 }
 
 .logo {
-  margin-left: 10px;
-  margin-right: 15px;
+  display: flex;
 }
 
 #separator {
@@ -233,9 +235,10 @@ html {
   font-weight: 500;
   color: #f6f6f6;
 
-  padding: 0px 30px 0px 30px;
+  padding: 0px 30px 0px 27px;
 
   transition: background 0.15s;
+  border-radius: 0px 0px 5px 0px;
 }
 
 .profile:hover {
@@ -423,6 +426,33 @@ html {
 
 /*-----RL trading and page numbers        ----*/
 
+.bigNextPageButtons{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 35px;
+  margin-bottom: 50px;
+}
+
+.bigNextPageButtons button{
+  color: #F6F6F6;
+  font-size: 20px;
+  border: 2px solid #333333;
+  background: none;
+  height: 50px;
+  width: 200px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+  .bigNextPageButtons button{
+    font-size: 15px;
+  }
+
+}
+
 .page-numbers-field {
   display: flex;
   background-color: #1d191f;
@@ -449,6 +479,8 @@ html {
   height: 26px;
   width: 26px;
   border-radius: 50px;
+
+  margin-right: 5px;
 }
 
 .pageButton:hover {
@@ -457,6 +489,28 @@ html {
 
 .pageButton:active {
   background-color: #39303d;
+}
+
+.page-numbers-field .pageButton:first-of-type{
+  margin-left: 5px;
+}
+
+@media screen and (max-width: 450px) {
+  .pageButton{
+    margin-right: 0px;
+  }
+
+  .page-numbers-field .pageButton:first-of-type{
+    margin-left: 0px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .pageButton{
+    height: 24px;
+    width: 24px;
+  }
+
 }
 
 .highlighted-page {
@@ -494,7 +548,7 @@ html {
 
 .no-trades-found-wrapper img {
   width: 100%;
-  max-width: 650px;
+  max-width: 550px;
   height: auto;
 
   pointer-events: none;
@@ -768,6 +822,10 @@ html {
   padding-bottom: 10px;
 }
 
+.smallerIcon{
+  grid-template-columns: repeat(auto-fit, minmax(94px, 1fr));
+}
+
 .rl_notes_buttons_container {
   width: 30%;
   padding: 20px 20px 17px 20px;
@@ -838,9 +896,9 @@ html {
   color: #f6f6f6;
   border: 1px solid #61496a;
   border-radius: 5px;
-  padding: 5px 24px 5px 24px;
+  padding: 5px 0px 5px 0px;
   cursor: pointer;
-
+  width: 100%;
   margin-right: 10px;
 
   height: fit-content;
@@ -848,18 +906,16 @@ html {
   transition: background-color 100ms;
 }
 
+.buttons-box button:last-child{
+  margin-right: 0px;
+}
+
+
 .buttons-box-sign-to-interact {
   color: #818181;
 
   font-size: 12px;
   padding-left: 5px;
-}
-
-@media screen and (max-width: 650px) {
-  .buttons-box button {
-    font-size: 10px;
-    padding: 4px 15px 4px 15px;
-  }
 }
 
 .buttons-box button:hover {
@@ -873,9 +929,9 @@ html {
 #editTrade-button {
   background: none;
   border: 1px solid #2c8e54;
-  padding: 5px 15px 5px 15px;
+  padding: 5px 0px 5px 0px;
   transition: background 200ms;
-  margin-bottom: 2px;
+ 
 }
 
 #deleteTrade-button {
@@ -883,7 +939,7 @@ html {
   border: 1px solid #d10a0a;
   padding: 5px 15px 5px 15px;
   transition: background 200ms;
-  margin-bottom: 2px;
+  
 }
 
 #bumpTrade-button {
@@ -891,8 +947,23 @@ html {
   border: 1px solid #e7aa0f;
   padding: 5px 15px 5px 15px;
   transition: background 200ms;
-  margin-bottom: 2px;
+  
 }
+
+@media screen and (max-width: 1596px) {
+  .buttons-box button, #bumpTrade-button, #deleteTrade-button, #editTrade-button{
+    padding: 10px 0px 10px 0px;
+  }
+}
+
+
+@media screen and (max-width: 650px) {
+  .buttons-box button, #bumpTrade-button, #deleteTrade-button, #editTrade-button {
+    font-size: 10px;
+    padding: 5px 0px 5px 0px;
+  }
+}
+
 
 #bumpTrade-button:hover {
   background: #e7aa0f25;
@@ -1001,7 +1072,7 @@ html {
 }
 
 .first-trade-text-button {
-  color: #e7aa0f;
+  color: #fe3b3b;
   cursor: pointer;
   text-decoration: none;
 }
@@ -1017,30 +1088,87 @@ html {
   align-items: center;
 
   width: 100%;
+  padding-bottom: 200px; /*for search dropdown, to not vanish on longer dropdown searches*/
+}
+
+.rep-form{
+  width: fit-content;
+  margin-top: 15px;
 }
 
 .rep-search-input {
   width: 400px;
   height: 33px;
   font-size: 12px;
-  background-color: #221c24;
+  background-color: #1d191f;
   color: #f6f6f6;
   border-radius: 5px;
   padding-left: 10px;
 
-  margin-top: 15px;
-
   border: none;
+  padding-left: 9px;
 }
 
 .rep-search-input:hover {
-  border: 1px solid #494949;
-  padding-left: 9px;
+  border: 1px solid #332c36;
+  padding-left: 8px;
 }
 
-.rep-search-input:focus {
-  border: 1px solid #808080;
-  padding-left: 9px;
+.rep-search-dropdown{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+
+  background-color: #1d191f;
+
+  width: 400px;
+  max-height: 200px;
+  border: 1px solid #4f4453;
+  border-top: none;
+  
+  padding-left: 10px;
+  padding-right: 10px;
+
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+
+  overflow-y: auto;
+  z-index: 2;
+  border-radius: 0px 0px 5px 5px;
+
+  animation: transitionDown 0.2s;
+}
+
+.rep-search-dropdown a{
+  color: #f6f6f6;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  font-size: 14px;
+
+  transition: padding 0.25s;
+  cursor: pointer;
+
+  text-decoration: none;
+}
+
+.rep-search-dropdown a:hover{
+  background-color: #322b35;
+  padding-left: 15px;
+
+  border-radius: 5px;
+}
+
+.rep-search-dropdown p{
+  display: flex;
+  color: #808080;
+  align-items: center;
+
+  padding: none;
+  
+  font-size: 10px;
+  min-height: 30px;
+  cursor: default;
 }
 
 .sign-in-to-receive-rep-text {
@@ -1077,12 +1205,14 @@ html {
   padding: 5px 10px 5px 10px;
   border-radius: 5px;
   font-size: 14px;
+  text-decoration: none;
 
   margin-top: 30px;
 
   cursor: pointer;
 
   transition: background 200ms;
+  background: none;
 }
 
 .what-is-reputation-text:hover {
@@ -1320,6 +1450,7 @@ html {
   align-items: center;
   width: 100%;
   margin-bottom: 8px;
+
 }
 
 .rep-inbetween-section-left {
@@ -1334,6 +1465,8 @@ html {
 
 .rep-inbetween-section-right {
   display: flex;
+  justify-content: flex-end;
+  transition: height 0.15s;
 }
 
 .rep-inbetween-section-right button {
@@ -1356,9 +1489,10 @@ html {
   justify-content: flex-end;
   align-items: flex-end;
 
-  font-size: 14px;
+  font-size: 12px;
 
   line-height: 100%;
+  cursor: pointer;
 }
 
 .rep-inbetween-section-category-wrapper p {
@@ -1385,7 +1519,6 @@ html {
 
 .rep-container:hover {
   background-color: #2e2831;
-  height: 40px;
 }
 
 .rep-container:active {
@@ -1599,8 +1732,10 @@ html {
   justify-content: center;
   align-items: center;
   width: 100%;
+
+  padding-top: 50px;
   padding-bottom: 200px;
-  padding-right: 280px;
+
 }
 
 .rep-noUserFound-container p {
@@ -2125,6 +2260,53 @@ html {
   background-color: none;
 }
 
+.RLfilter_iconWrapper{
+  position: relative;
+  margin-left: 12px;
+}
+
+.RLfilter_iconWrapper span{
+  position: absolute;
+  color: #f6f6f6;
+  background: #332638;
+  
+  font-weight: 500;
+  font-size: 12px;
+
+  padding: 5px 10px 5px 10px;
+  
+  border-radius: 5px;
+
+  left: 100%;
+  margin-top: 13px;
+
+  opacity: 0;
+  transform: translateX(-50%);
+
+  white-space: nowrap;
+  transition: all 0.25s ease;
+
+  visibility: hidden;
+  z-index: 2;
+}
+
+.RLfilter_iconWrapper span:before{
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -7px;
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent transparent #332638 transparent;
+}
+
+.RLfilter_iconWrapper:hover span{
+  visibility: visible;
+  opacity: 1;
+  left: 50%;
+}
+
 .RLfilter_icons_section button {
   display: flex;
   align-items: center;
@@ -2174,7 +2356,7 @@ html {
 .RLfilter_icon {
   height: 30px;
   width: 30px;
-  margin-left: 12px;
+  
   filter: brightness(0.5);
 
   cursor: pointer;
@@ -2747,7 +2929,7 @@ html {
 
   background-color: rgba(0, 0, 0, 0.8);
 
-  animation: transitionFade 0.2s;
+  animation: transitionFade 0.25s;
 }
 
 .loginWrapper {
@@ -2762,6 +2944,7 @@ html {
   border-radius: 5px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
   align-items: center;
+
 }
 
 .loginHeader {
@@ -3160,6 +3343,8 @@ html {
   border-radius: 5px;
 
   transition: width 250ms;
+
+  overflow: auto;
 }
 
 
@@ -3642,38 +3827,58 @@ html {
 
 /*-----ToS              ----*/
 
-.ToS h1 {
+.tos-header{
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  background: #1d191f;
+  border-radius: 5px;
+  padding: 20px 38px;
+}
+
+.tos-header h1 {
   color: #f6f6f6;
-  margin: 21px 0 0;
-  width: 100%;
-  text-align: center;
-  font-size: 44px;
+  font-size: 32px;
+}
+
+.tos-header p{
+  color: rgba(246, 246, 246, 0.5);
+  font-size: 14px;
 }
 
 .ToS-body {
-  max-width: 1278px;
-  background: #47384d;
-  border-radius: 4px;
+  width: 100%;
+  background: #1d191f;
+  border-radius: 5px;
   padding: 30px 38px;
   color: #f6f6f6;
-  margin: 21px 0;
+  margin-top: 3px;
+  margin-bottom: 50px;
 }
 
 .ToS-body h2:first-child {
   margin-top: 0;
 }
 
+.ToS-body ul, .ToS-body ol{
+  margin-left: 30px;
+}
+
 .ToS-body h2 {
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 600;
-  display: list-item;
   list-style: decimal inside;
   margin: 51px 0 11px;
 }
 
+.ToS-body h4 {
+  list-style: decimal inside;
+  margin: 51px 0 5px;
+}
+
 .ToS-body p {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 15px;
+
 }
 
 /*-----Alpha              ----*/
@@ -3747,6 +3952,7 @@ html {
 .testUserComponent p {
   margin-left: 0px;
 }
+
 
 /*-----Toast and back to top button          ----*/
 
@@ -4202,12 +4408,11 @@ html {
   margin-top: 50px;
 }
 
-.sidebar-email {
+.sidebar-copyright-wrapper span a {
   color: #f6f6f6;
   font-size: 13px;
 
-  margin-top: 10px;
-  margin-bottom: 20px;
+  text-decoration: none;
 }
 
 .sidebar-header-2nd-page {
@@ -4345,3 +4550,70 @@ html {
     transform: rotate(360deg);
   }
 }
+
+.trade-reputation .skeleton{
+  height: 15px;
+  width: 100px;
+
+  border-radius: 5px;
+}
+
+.trade-component-tagsAndTitle .skeleton{
+  height: 15px;
+  width: 100px;
+
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.rl-trade-component-top-right .skeleton{
+  height: 15px;
+  width: 100px;
+
+  border-radius: 5px;
+  align-self: flex-end;
+}
+
+.rl-trade-component-top-right .skeleton2{
+  height: 15px;
+  width: 200px;
+
+  border-radius: 5px;
+}
+
+.rl-has-container .skeleton, .rl-wants-container .skeleton{
+  height: 5px;
+  width: 25px;
+
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.buttons-box .skeleton{
+  height: 25px;
+  width: 100%;
+
+  border-radius: 5px;
+}
+
+.skeleton{
+  background: #332638;
+  position: relative;
+
+  overflow: hidden;
+}
+
+/* animation (appears a little laggy)
+
+.skeleton::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -26px;
+  top: 0;
+  height: 100%;
+  width: 26px;
+  background: linear-gradient(to right, transparent 0%, #5b4464 50%, transparent 100%);
+  animation: load 1s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+}
+*/

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 import { createNotification } from "../misc/ToastNotification";
@@ -8,13 +8,14 @@ import { UserContext } from "../context/UserContext";
 import { PopupContext } from "../context/PopupContext";
 import Topbar from "./My Account/Topbar";
 import useWindowDimensions from "../misc/windowHW";
+import TradeComponentsSkeleton from "../skeleton/TradeComponentsSkeleton"
+import {Helmet} from "react-helmet";
 
 function UserTrades() {
   const [userTrades, setUserTrades] = useState();
   const [username, setUsername] = useState();
-  const [game, setGame] = useState("rl");
 
-  const pathID = useLocation().pathname.substring(8); // reads url after /trades/ till the end (import queryString from 'query-string')
+  const { pathID } = useParams()
 
   const { myID } = useContext(UserContext);
   const { setOpenDeleteAllTrades } = useContext(PopupContext);
@@ -24,14 +25,14 @@ function UserTrades() {
   useEffect(() => {
     axios
       .get(`/api/trades/getUserTrades?searchId=${pathID}`)
-      .then((res) => {
+      .then((res) => { console.log(res.data.trades)
         if (res.data.info === "success" || res.data.info === "no trades") {
           setUserTrades(res.data.trades);
           setUsername(res.data.username);
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((res) => {
+        if (res.response.data.info === "no user"){}
         createNotification(
           "error",
           "Oops, something went wrong",
@@ -43,9 +44,15 @@ function UserTrades() {
 
     return (
       <>
+        <Helmet>
+          {username && <title>{username}'s Trades | VirTrade</title>}
+          <description>UserTrades page contains all trades from a user. Delete, edit or bump trades if they are yours</description>
+          <link rel="canonical" href="http://virtrade.gg/trades" />
+        </Helmet>
+
         {myID === pathID ? <Topbar /> : usernameField()}
 
-        {!userTrades ? null : userTrades.length <= 0 ? 
+        {!userTrades ? <TradeComponentsSkeleton /> : userTrades.length <= 0 ? 
           NoTrades() 
         : 
           <>
@@ -75,7 +82,7 @@ function UserTrades() {
   function bumpTrade(trade) {
     axios
       .put(`/api/trades/bumpTrade/?tradeId=${trade._id}`)
-      .then((res) => {
+      .then((res) => { console.log(res.data)
         if (res.data.info === "success")
           createNotification(
             "success",
@@ -83,7 +90,15 @@ function UserTrades() {
             `bumping trade ${trade._id}`
           );
       })
-      .catch((err) => console.log("Error: " + err));
+      .catch((err) => {
+        if (err.response.data.info === "already bumped"){
+          createNotification(
+            "info",
+            "You have already bumped this trade",
+            `already bumped ${trade._id}`
+          );
+        }
+      });
   }
 
   function NoTrades() {
@@ -115,12 +130,12 @@ function UserTrades() {
   }
 
   function usernameField(){
+    if(username)
     return(
       <div className="user-trades-topbar-field">
         <div className="user-trades-topbar-left">
-          <p>
-            {username}'s <span style={{ color: "#FE3B3B" }}>trades</span>
-          </p>
+          <p>{username}'s <span style={{ color: "#FE3B3B" }}>trades</span></p>
+          
           {/*
             <div id="separator" ></div>
           <button

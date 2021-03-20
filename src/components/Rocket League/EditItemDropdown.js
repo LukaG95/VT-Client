@@ -4,16 +4,17 @@ import styles from "./EditItemDropdown.module.scss";
 import useWindowDimensions from "../../misc/windowHW";
 import Dropdown from "../Dropdown";
 import { rl_dd_names } from "../../info/DropdownNames";
-import EditIcon from "../../images/icons/edit.png";
+import rl_info from "../../constants/RocketLeagueInfo.json"
 
-const { colorDD, certDD } = rl_dd_names;
+import { ReactComponent as EditIcon } from "../../images/icons/edit.svg";
+
+const { colorEditDD, certEditDD } = rl_dd_names;
 
 function EditItemDropdown({ item, index, type }) {
   const [visible, setVisible] = useState(false);
   const { height } = useWindowDimensions();
   const [_context, dispatch] = useTrade();
   const [amountInput, setAmountInput] = useState(item.amount);
-  console.log(type)
   //Amount Changes
   useEffect(() => {
     dispatch({
@@ -68,12 +69,7 @@ function EditItemDropdown({ item, index, type }) {
   }, []);
   return (
     <div ref={ref}>
-      <img
-        style={item.amount <= 1 ? { top: "6px" } : null}
-        className="editIcon"
-        src={EditIcon}
-        alt=""
-      />
+      <EditIcon className="editIcon" style={item.amount <= 1 ? { top: "6px" } : null}/>
       {visible && (
         <div
           className="rl-icon-dropdown" // style is small height positioning
@@ -82,7 +78,7 @@ function EditItemDropdown({ item, index, type }) {
           <div className="item_name">{item.itemName}</div>
           <Dropdown
             name="Color"
-            items={colorDD}
+            items={colorEditDD}
             className={styles.dropdowns}
             onChange={(color) =>
               dispatch({
@@ -92,7 +88,7 @@ function EditItemDropdown({ item, index, type }) {
                   index,
                   item: {
                     color,
-                    colorID: colorDD.findIndex((c) => c === color),
+                    colorID: rl_info.Colors.find((c) => c.Name === color).ID,
                   },
                 },
               })
@@ -103,7 +99,7 @@ function EditItemDropdown({ item, index, type }) {
           <Dropdown
             name={`Certification`}
             value={item.cert}
-            items={certDD}
+            items={certEditDD}
             className={styles.dropdowns}
             onChange={(cert) =>
               dispatch({

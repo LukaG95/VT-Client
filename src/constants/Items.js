@@ -1,18 +1,18 @@
 import RocketLeagueInfo from "./RocketLeagueInfo.json";
-import All from "../images/types/Transparent/All.png";
-import Blueprint from "../images/types/Transparent/Blueprints.png";
-import Crate from "../images/types/Transparent/Gift_Packs.png";
-import Body from "../images/types/Transparent/Bodies.png";
-import Decal from "../images/types/Transparent/Decals.png";
-import PaintFinish from "../images/types/Transparent/Paint_Finishes.png";
-import Wheels from "../images/types/Transparent/Wheels.png";
-import RocketBoost from "../images/types/Transparent/Boosts.png";
-import Topper from "../images/types/Transparent/Toppers.png";
-import Antenna from "../images/types/Transparent/Antennas.png";
-import GoalExplosion from "../images/types/Transparent/Goal_Explosions.png";
-import Trail from "../images/types/Transparent/Trails.png";
-import PlayerBanner from "../images/types/Transparent/Banners.png";
-import AvatarBorder from "../images/types/Transparent/Avatar_Borders.png";
+import All from "../images/icons/RL add trade filter icons/All.png";
+import Blueprint from "../images/icons/RL add trade filter icons/Blueprints.png";
+import Crate from "../images/icons/RL add trade filter icons/Gift_Packs.png";
+import Body from "../images/icons/RL add trade filter icons/Bodies.png";
+import Decal from "../images/icons/RL add trade filter icons/Decals.png";
+import PaintFinish from "../images/icons/RL add trade filter icons/Paint_Finishes.png";
+import Wheels from "../images/icons/RL add trade filter icons/Wheels.png";
+import RocketBoost from "../images/icons/RL add trade filter icons/Boosts.png";
+import Topper from "../images/icons/RL add trade filter icons/Toppers.png";
+import Antenna from "../images/icons/RL add trade filter icons/Antennas.png";
+import GoalExplosion from "../images/icons/RL add trade filter icons/Goal_Explosions.png";
+import Trail from "../images/icons/RL add trade filter icons/Trails.png";
+import PlayerBanner from "../images/icons/RL add trade filter icons/Banners.png";
+import AvatarBorder from "../images/icons/RL add trade filter icons/Avatar_Borders.png";
 
 //Memoize All Tradeable Items
 let tradeableItems = null;

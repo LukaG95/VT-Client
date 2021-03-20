@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ItemConfirmIcon.module.scss";
-import CheckIcon from "../../../images/icons/check.png";
-import RedCheckIcon from "../../../images/icons/check-red.png";
+import { ReactComponent as BlueCheckIcon } from "../../../images/icons/check blue.svg";
+import { ReactComponent as RedCheckIcon } from "../../../images/icons/check red.svg";
 import { useTrade } from "../../../context/TradeContext";
 
 export default function ItemConfirmIcon({ item }) {
@@ -9,9 +9,9 @@ export default function ItemConfirmIcon({ item }) {
   let icons = [];
   //If item is in have, display have check
   if (have.find((h) => h && h.itemID === item.itemID))
-    icons.push(<img src={CheckIcon} className={styles.have} alt="" />);
+  icons.push(<BlueCheckIcon className={styles.have}/>);
   //If item is in want, display want check
   if (want.find((w) => w && w.itemID === item.itemID))
-    icons.push(<img src={RedCheckIcon} className={styles.want} alt="" />);
+    icons.push(<RedCheckIcon className={styles.want}/>);
   return icons;
 }

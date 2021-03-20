@@ -1,24 +1,34 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom"
 import axios from "axios";
 
-import { createNotification } from "../../misc/ToastNotification";
 import Topbar from "../My Account/Topbar";
 import Conversations from "./Conversations"
 import Chat from "./Chat"
 import useWindowDimensions from '../../misc/windowHW'
 import styles from "./Main.module.scss";
-import {formatedMessagesTime} from "../../misc/time"
+import { UserContext } from "../../context/UserContext";
+import {Helmet} from "react-helmet";
 
 function Main({newMessage}) {
   const [conversations, setConversations] = useState([])
   const [messages, setMessages] = useState([])
+  const [pageNumber, setPageNumber] = useState(1)
+  const [conversationsSet, setConversationsSet] = useState(false)
+  const [view, setView] = useState()
 
   const { width } = useWindowDimensions()
-
+  const { myID, username } = useContext(UserContext);
+  const { pathID } = useParams()
+ 
   useEffect(() => {
-    if (width > 1065)
-      resetStyles()
-
+    if (width > 1065){
+      setView("big")
+      if (view === "small")
+        resetStyles()
+    } else
+      setView("small")
+        
   }, [width]);
 
   // 1. Get conversations on first visit and set isSelected to the 1st one
@@ -26,10 +36,11 @@ function Main({newMessage}) {
     axios
       .get(`/api/messages`)
       .then((res) => {
-        let dialogues = res.data.dialogues
+        let dialogues = res.data.dialogues.map(convo => {convo.isSelected = false; return convo})
         if (dialogues.length > 0)
           dialogues[0].isSelected = true
         setConversations(dialogues)
+        setConversationsSet(true)
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +60,17 @@ function Main({newMessage}) {
             convo.createdAt = newMessage.createdAt
 
             if(convo.isSelected)
-              setMessages([...messages, newMessage])
+              setMessages(prev=> {
+                if (messages.length === 0) // if it's the very 1st message
+                  newMessage.displayAvatar = true
+                else if (Date.now() - prev[prev.length-1].createdAt.timestamp > 300000) // if last message is 5 minutes or older
+                  newMessage.displayAvatar = true
+                else if (myID !== prev[prev.length-1].sender._id) // if the last message was not sent my me
+                  newMessage.displayAvatar = true
+                          
+                return [...messages, newMessage]
+              })
+
           }
             updatedConvos.push(convo)
         })
@@ -72,9 +93,64 @@ function Main({newMessage}) {
     
   }, [newMessage]);
 
+  // open a conversation through URL
+  useEffect(() => {
+    if(conversationsSet && pathID && (pathID !== myID)){
+      const found = conversations.findIndex(convo => convo.conversationWith._id === pathID) // check if the conversation already exists
+      
+      if (found !== -1){ // if it's found move it to the top of the list and select it
+        if (view === "small") show2ndPage()
+        let updatedConvos = []
+        conversations.forEach((convo, i)=> {
+          if (i === found)
+            convo.isSelected = true
+          else
+            convo.isSelected = false
+
+          updatedConvos.push(convo)
+        })
+        arraymove(updatedConvos, found, 0) // move to top 
+        setConversations(updatedConvos) 
+      }
+      else { // fetch if the user exists and open a new conversation 
+        axios
+          .get(`/api/auth/getUserById/${pathID}`)
+          .then((res) => { 
+            if (res.status !==200 ) return null
+            else {
+              let newConversation = {
+                createdAt: {timestamp: null},
+                lastMessage: null,
+                conversationWith: {
+                  _id: pathID,
+                  username: res.data.username
+                },
+                isSelected: true
+              }
+              setConversations(prev=> {
+                let updatedConvos = prev.map(convo => {convo.isSelected = false; return convo})
+                return [newConversation, ...updatedConvos]
+              })
+              if (view === "small") show2ndPage()
+
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }  
+    }
+  }, [conversationsSet, pathID])
+
 
   return (
     <>
+      <Helmet>
+        <title>Messages | VirTrade</title>
+        <description>Messages page contains you conversations and messages. Chat and talk to other players about their trades</description>
+        <link rel="canonical" href="http://virtrade.gg/account/messages" />
+      </Helmet>
+
       <Topbar />
       
       <div className={styles.accountWrapper}>
@@ -82,6 +158,7 @@ function Main({newMessage}) {
         <Conversations 
           conversations={conversations} 
           setConversations={setConversations}
+          setPageNumber={setPageNumber}
         />
 
         <Chat 
@@ -90,6 +167,9 @@ function Main({newMessage}) {
           setConversations={setConversations}
           conversation={conversations.find(conv => conv.isSelected === true)}
           conversations={conversations}
+          newMessage={newMessage}
+          setPageNumber={setPageNumber}
+          pageNumber={pageNumber}
         />
 
       </div> 
@@ -112,6 +192,12 @@ function Main({newMessage}) {
     arr.splice(toIndex, 0, element);  
   }
 
+  function show2ndPage(){
+    document.getElementById("account-sidebar").style.minWidth = "0px"
+    document.getElementById("account-sidebar").style.maxWidth = "0px"
+    document.getElementById("account-main").style.width = "100%"
+    document.getElementById("account-main").style.marginLeft = "0px"
+  }
 }
 
 export default Main;

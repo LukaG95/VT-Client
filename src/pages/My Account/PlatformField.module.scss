@@ -1,0 +1,171 @@
+.platformField{
+  width: 100%;
+
+  border-radius: 5px;
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 62px;
+
+  background: #100E11;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  border-radius: 5px 5px 0px 0px;
+
+  & > div{
+    display: flex;
+    align-items: center;
+  }
+
+  & div:nth-child(2){
+    display: flex;
+    align-items: flex-end;
+
+    flex-direction: column;
+
+    font-weight: normal;
+    font-size: 13px;
+
+    color: #f6f6f6;
+  }
+}
+
+.platformIcon{
+  height: 30px;
+  width: 30px;
+}
+
+.name{
+  color: #f6f6f6;
+  font-weight: 500;
+  font-size: 18px;
+
+  margin-left: 7px;
+}
+
+.body{
+  display: flex;
+  flex-direction: column;
+  background: #141115;
+
+  border: 2px solid #0A0A0A;
+  border-radius: 0px 0px 5px 5px;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  & .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 100%;
+  }
+
+  & > .buttons > button{
+    color: #f6f6f6;
+    background: none;
+  
+    font-weight: 600;
+    font-size: 14px;
+
+    width: 133px;
+    height: 43px;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+  
+    border-radius: 5px;
+  }
+
+  & > .buttons > form{
+    width: 100%;
+    padding: 20px;
+  }
+
+  & > .buttons > form > input{
+    color: #f6f6f6;
+    background: #100E11;
+
+    height: 43px;
+    width: 100%;
+
+    padding-left: 10px;
+
+    border: 1px solid #000000;
+    border-radius: 5px;
+  }
+}
+
+.text{
+  
+  & p{
+    font-size: 12px;
+    color: #f6f6f6;
+  
+    padding: 20px;
+    padding-bottom: 0px;
+  }
+
+  & button {
+    color: #f6f6f6;
+    background: #C33030;
+    font-weight: 500;
+    font-size: 10px;
+
+    margin-left: 20px;
+    margin-top: 18px;
+    margin-bottom: 20px;
+    padding: 5px 10px 5px 10px;
+
+    cursor: pointer;
+
+    border: none;
+    border-radius: 5px;
+  }
+}
+
+.signOut{
+  border: 1px solid #C33030;
+  transition: background 0.25s;
+  cursor: pointer;
+
+  &:hover{
+    background-color: #C33030 !important;
+  }
+
+  &:active{
+    background-color: #d63636 !important;
+  }
+}
+
+.signIn{
+  border: 1px solid #2C8E54;
+  transition: background 0.25s;
+  cursor: pointer;
+
+  &:hover{
+    background-color: #2C8E54 !important;
+  }
+
+  &:active{
+    background-color: #32a15e !important;
+  }
+}
+
+.Connected{
+  color: #2C8E54;
+}
+
+.Disconnected{
+  color: #C33030;
+}
+
+.Unverified{
+  color: #707070;
+}
+

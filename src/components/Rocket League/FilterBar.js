@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+
 import { ItemTypes } from "../../constants/Items";
 import { useTradeFilters } from "../../context/TradeFiltersContext";
 import useWindowDimensions from "../../misc/windowHW";
-import SearchIcon from "../../images/icons/search.png";
-import FilterIcon from "../../images/icons/filter.png";
+import { ReactComponent as MagnifyingGlass } from "../../images/icons/magnifying glass.svg";
+import { ReactComponent as FilterIcon } from "../../images/icons/filter.svg";
 
 function FilterBar() {
   const [filters, dispatch] = useTradeFilters();
@@ -17,11 +18,7 @@ function FilterBar() {
     <div className="choose-itemsSearchFiltersRL">
       <div className="initial-filter-header-addTrade">
         <div className="magnGlass-container">
-          <img
-            style={{ width: "11px", height: "11px", marginLeft: "2px" }}
-            src={SearchIcon}
-            alt=""
-          />
+          <MagnifyingGlass style={{ width: "15px", height: "15px", marginLeft: "2px" }} />
         </div>
         <input
           placeholder="Search items..."
@@ -47,7 +44,7 @@ function FilterBar() {
               }
               onClick={() => setOpenFilters(!openFilters)}
             >
-              <img className="filter-filter-icon" src={FilterIcon} alt="" />
+              <FilterIcon className="filter-filter-icon"/>
               <div
                 style={{ alignSelf: "flex-end" }}
                 className="dropdownArrow"
@@ -72,27 +69,28 @@ function FilterBar() {
     return (
       <section className="RLfilter_icons_section">
         {ItemTypes.map((type) => (
-          <button
-            key={type.type}
-            onClick={() =>
-              dispatch({
-                type: "setFilter",
-                payload: {
-                  type: "type",
-                  value: type.type,
-                },
-              })
-            }
-          >
-            <img
-              className="RLfilter_icon"
-              src={type.image}
-              alt={type.type}
-              style={
-                filters.type === type.type ? { filter: "brightness(1)" } : null
+          <div className="RLfilter_iconWrapper">
+            <button
+              key={type.type}
+              onClick={() =>
+                dispatch({
+                  type: "setFilter",
+                  payload: {
+                    type: "type",
+                    value: type.type,
+                  },
+                })
               }
-            />
-          </button>
+            >
+              <img
+                className="RLfilter_icon"
+                src={type.image}
+                alt=""
+                style={filters.type === type.type ? { filter: "brightness(1)" } : null}
+              />
+            </button>
+            <span>{type.type}</span>
+          </div>
         ))}
       </section>
     );

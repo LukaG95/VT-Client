@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 //import Filter from "bad-words";
 import styles from "./Main.module.scss";
@@ -11,16 +11,18 @@ import ItemContainer from "../../../components/Rocket League/ItemContainer";
 import SmallHome from "./SmallHome";
 import useWindowDimensions from "../../../misc/windowHW";
 import { actions, useTrade } from "../../../context/TradeContext";
-import { PlatformColours, Platforms } from "../../../constants/Platforms";
+import { PlatformColours, platforms } from "../../../constants/platforms";
 import ClearItems from "../../../components/AddTrade/ClearItems";
 import { getTradeableItems } from "../../../constants/Items";
 import { useTradeFilters } from "../../../context/TradeFiltersContext";
 import PlusItem from "./PlusItem";
+import {Helmet} from "react-helmet";
 
 // const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
 function AddTradeRL() {
-  const pathID = useLocation().pathname.substring(17); // Reads url after `/trades/` till the end
+  const { pathID } = useParams() // Reads url after `/trades/` till the end
+
   const [
     { have, want, platform, notes, count: tradeCount, selected },
     dispatch,
@@ -31,7 +33,7 @@ function AddTradeRL() {
     notes: "",
   });
   const [items, setItems] = useState([]);
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   //Edit Trade
   useEffect(() => {
     if (pathID) {
@@ -69,20 +71,36 @@ function AddTradeRL() {
   }, [filters]);
 
   const inventoryItems = useMemo(
-    () =>
-      items.map((item) => (
-        <Item item={item} onClick={() => ItemClick(item)} key={item.itemID} />
+    () => 
+      items.map((item, i) => ( 
+        <Item item={item} lazy={true} onClick={() => ItemClick(item)} key={item.itemID} />
         // eslint-disable-next-line react-hooks/exhaustive-deps
       )),
     [items]
   );
 
   //Return Desktop or Mobile
-  return width > 1213 ? (
+  return (
+    <>
+      <Helmet>
+        <title>New Trade | VirTrade</title>
+        <description>Create a new Rocket League trade post</description>
+        <link rel="canonical" href="http://virtrade.gg/trading/rl/new" />
+      </Helmet>
+      {
+        width > 1213 ? AddTrade()
+          :
+        <SmallHome {...{ handleTradeSubmit, ItemClick }} />
+      }
+    </>
+  )
+    
+    /*
+  return  (
     AddTrade()
   ) : (
       <SmallHome {...{ handleTradeSubmit, ItemClick }} />
-    );
+    );*/
 
   function ItemClick(item) {
     setError({ ...error, trade: "" });
@@ -120,7 +138,7 @@ function AddTradeRL() {
             <ItemContainer className={styles.items}>
               {have.map((item, index) =>
                 item ? (
-                  <Item item={item} key={index} hideName>
+                  <Item item={item} key={index} added={true} hideName>
                     <EditItemDropdown {...{ item, index, type: "have" }} />
                   </Item>
                 ) : (
@@ -160,7 +178,7 @@ function AddTradeRL() {
             <ItemContainer className={styles.items}>
               {want.map((item, index) =>
                 item ? (
-                  <Item item={item} key={index} hideName>
+                  <Item item={item} key={index} added={true} hideName>
                     <EditItemDropdown {...{ item, index, type: "want" }} />
                   </Item>
                 ) : (
@@ -201,26 +219,28 @@ function AddTradeRL() {
                 })
               }
             />
-            <div className={styles.platforms}>
+            <div className={styles.platformsWrapper}>
               <h4>PLATFORM:</h4>
-              {/* Map Platforms */}
-              {Object.keys(Platforms).map((p) => (
-                <label className={styles.platform} key={p}>
-                  <input
-                    type="radio"
-                    checked={platform === Platforms[p]}
-                    onChange={() =>
-                      dispatch({
-                        type: actions.SET_PLATFORM,
-                        payload: Platforms[p],
-                      })
-                    }
-                  />
-                  <span style={platform === Platforms[p] ? { color: PlatformColours[p] } : {}}>
-                    {Platforms[p]}
-                  </span>
-                </label>
-              ))}
+              <div className={styles.platforms}>
+                {/* Map platforms */}
+                {Object.keys(platforms).map((p) => (
+                  <label className={styles.platform} key={p}>
+                    <input
+                      type="radio"
+                      checked={platform === platforms[p]}
+                      onChange={() =>
+                        dispatch({
+                          type: actions.SET_PLATFORM,
+                          payload: platforms[p],
+                        })
+                      }
+                    />
+                    <span style={platform === platforms[p] ? { color: PlatformColours[p] } : {}}>
+                      {platforms[p]}
+                    </span>
+                  </label>
+                ))}
+              </div>
             </div>
             <p className={styles.error}>{error.notes}</p>
           </div>
@@ -258,7 +278,7 @@ function AddTradeRL() {
       return createNotification("error", notesError, notesError);
     }
     //Create or Edit Trade
-    if (pathID === "") {
+    if (!pathID) {
       //Create Trade
       if (tradeCount >= 15)
         return createNotification(
@@ -290,7 +310,7 @@ function AddTradeRL() {
                   `${tradeCount + 1} / 15 RL trades created`,
                   "info on trades created"
                 ),
-              1000
+              500
             );
           }
         })
@@ -331,6 +351,7 @@ function AddTradeRL() {
               "Oops, something went wrong",
               "something went wrong"
             );
+            console.error(err.response);
         });
     }
   }

@@ -1,4 +1,6 @@
 function formatedMessagesTime(timestamp){
+  if (!timestamp) return ""
+
   const dateNow = Date.now();
   const dateThen = new Date(timestamp)
   const timeAgo = Math.round((dateNow - timestamp) / 1000);

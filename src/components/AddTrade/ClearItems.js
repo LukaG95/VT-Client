@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ClearItems.module.scss";
-import TrashImage from "../../images/icons/trash.png";
+import { ReactComponent as Trash } from "../../images/icons/trash.svg";
 
 export default function ClearItems(props) {
   return (
@@ -8,7 +8,7 @@ export default function ClearItems(props) {
       {...props}
       className={[styles.button, props.className || ""].join(" ")}
     >
-      <img src={TrashImage} className={styles.icon} alt="" />
+      <Trash className={styles.icon} />
     </div>
   );
 }

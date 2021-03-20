@@ -1,0 +1,32 @@
+.platformsWrapper{
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.platforms{
+  display: grid;
+  height: fit-content;
+  width: 100%;
+  padding: 50px;
+
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: stretch;
+
+  column-gap: 50px;
+  row-gap: 50px;
+
+
+
+  @media only screen and (max-width: 1600px) {
+    grid-template-columns: 1fr 1fr;
+    padding: 20px;
+    row-gap: 20px;
+    column-gap: 20px;
+  }
+
+  @media only screen and (max-width: 825px) {
+    grid-template-columns: 1fr;
+  }
+}

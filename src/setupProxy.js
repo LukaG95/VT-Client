@@ -3,7 +3,7 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "https://virtrade-backend.herokuapp.com",
+      target: "https://virtrade-production.herokuapp.com",
       changeOrigin: true,
     })
   );

@@ -1,4 +1,4 @@
-import { Platforms } from "../constants/Platforms";
+import { platforms } from "../constants/platforms";
 import { DefaultItem } from "../constants/Items";
 import { useEffect, useReducer, createContext, useContext } from "react";
 import axios from "axios";
@@ -10,7 +10,7 @@ const TradeDispatchContext = createContext();
 const defaultState = {
   have: Array(12).fill(null),
   want: Array(12).fill(null),
-  platform: Platforms.STEAM,
+  platform: platforms.STEAM,
   notes: "",
   count: 0,
   selected: {

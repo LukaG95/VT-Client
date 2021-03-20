@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Redirect } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import axios from "axios";
-import DiscordIcon from "../../images/icons/discord.png";
-import TwitterIcon from "../../images/icons/twitter.png";
-import InstagramIcon from "../../images/icons/instagram.png";
+
+import { ReactComponent as DiscordIcon } from "../../images/icons/discord.svg";
+import { ReactComponent as TwitterIcon } from "../../images/icons/twitter.svg";
+import { ReactComponent as InstagramIcon } from "../../images/icons/instagram.svg";
 
 function ConfirmEmail() {
   const [emailConfirmed, setEmailConfirmed] = useState();
 
-  const pathID = useLocation().pathname.substring(15); // reads url after /email/confirm/ till the end
+  const { pathID } = useParams()
 
   useEffect(() => {
     axios
@@ -41,15 +42,16 @@ function ConfirmEmail() {
           <div>
             <div>
               <p style={{ fontWeight: "700" }}>Discord</p>
-              <img height="22" width="24" src={DiscordIcon} alt="" />
+              <DiscordIcon style={{ height: "17px", width: "17px" }} /> {/*h: 22, w: 24 */}
             </div>
             <div>
               <p style={{ fontWeight: "700" }}>Twitter</p>
               <img height="14" width="19" src={TwitterIcon} alt="" />
+              <TwitterIcon style={{ height: "17px", width: "17px" }} />
             </div>
             <div>
               <p style={{ fontWeight: "700" }}>Instagram</p>
-              <img height="17" width="17" src={InstagramIcon} alt="" />
+              <InstagramIcon style={{ height: "17px", width: "17px" }} />
             </div>
           </div>
         </div>

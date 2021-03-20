@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Main.module.scss";
-import { PlatformColours, Platforms } from "../../../constants/Platforms";
+import { PlatformColours, platforms } from "../../../constants/platforms";
 import { actions, useTrade } from "../../../context/TradeContext";
 import Item from "../../../components/Rocket League/Item";
 import ItemContainer from "../../../components/Rocket League/ItemContainer";
@@ -34,6 +34,7 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
                   item={item}
                   key={index}
                   hideName
+                  added={true}
                   onClick={() => {
                     setClickedItem({ type: "have", index });
                     setShowPage("3");
@@ -81,6 +82,7 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
                   item={item}
                   key={index}
                   hideName
+                  added={true}
                   onClick={() => {
                     setClickedItem({ type: "want", index });
                     setShowPage("3");
@@ -121,26 +123,28 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
               })
             }
           />
-          <div className={styles.platforms}>
+          <div className={styles.platformsWrapper}>
             <h4>PLATFORM:</h4>
-            {/* Map Platforms */}
-            {Object.keys(Platforms).map((p) => (
-              <label className={styles.platform} key={p}>
-                <input
-                  type="radio"
-                  checked={platform === Platforms[p]}
-                  onChange={() =>
-                    dispatch({
-                      type: actions.SET_PLATFORM,
-                      payload: Platforms[p],
-                    })
-                  }
-                />
-                <span style={platform === Platforms[p] ? { color: PlatformColours[p] } : {}}>
-                  {Platforms[p]}
-                </span>
-              </label>
-            ))}
+            <div className={styles.platforms}>
+              {/* Map platforms */}
+              {Object.keys(platforms).map((p) => (
+                <label className={styles.platform} key={p}>
+                  <input
+                    type="radio"
+                    checked={platform === platforms[p]}
+                    onChange={() =>
+                      dispatch({
+                        type: actions.SET_PLATFORM,
+                        payload: platforms[p],
+                      })
+                    }
+                  />
+                  <span style={platform === platforms[p] ? { color: PlatformColours[p] } : {}}>
+                    {platforms[p]}
+                  </span>
+                </label>
+              ))}
+            </div>
           </div>
         </div>
         <button onClick={() => handleTradeSubmit()} className={styles.submit}>

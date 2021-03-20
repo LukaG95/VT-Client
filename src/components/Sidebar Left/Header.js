@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
-import ArrowUpIcon from "../../images/icons/arrow-up-white.png";
+import { ReactComponent as ArrowUpIcon } from "../../images/icons/arrow-up-white.svg";
 
 import { closeSidebar } from "../../misc/manageSidebar";
 import { LeftSidebarContext } from "../../context/LeftSidebar";
@@ -39,7 +39,7 @@ function Header() {
       <div className="sidebar-header-initial">
         {openHeader ? (
           <span onClick={() => setOpenHeader(false)} id="arrow_up">
-            <img height={20} width={20} src={ArrowUpIcon} alt="" />
+            <ArrowUpIcon style={{width: "20px", height: "20px"}} />
           </span>
         ) : (
           <span

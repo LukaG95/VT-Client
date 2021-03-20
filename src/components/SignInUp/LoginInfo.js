@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import SteamIcon from "../../images/icons/steam-small.png";
-import DiscordIcon from "../../images/icons/discord.png";
+import { ReactComponent as SteamIcon} from "../../images/icons/steam.svg";
+import { ReactComponent as DiscordIcon} from "../../images/icons/discord.svg";
 
 import { createNotification } from "../../misc/ToastNotification";
 
@@ -82,11 +82,7 @@ function LoginInfo({ setForgotPassword, closeForm }) {
             onClick={() => (window.location.href = "/api/auth/steam")}
             className="loginSteam"
           >
-            <img
-              src={SteamIcon}
-              alt=""
-              style={{ height: "28px", width: "35", marginRight: "8px" }}
-            ></img>
+            <SteamIcon style={{ height: "28px", width: "35px", marginRight: "8px" }}/>
             <p>STEAM</p>
           </div>
 
@@ -94,11 +90,7 @@ function LoginInfo({ setForgotPassword, closeForm }) {
             onClick={() => (window.location.href = "/api/auth/discord")}
             className="loginDiscord"
           >
-            <img
-              src={DiscordIcon}
-              alt=""
-              style={{ height: "28px", width: "35", marginRight: "8px" }}
-            ></img>
+            <DiscordIcon style={{ height: "28px", width: "35px", marginRight: "8px" }}/>
             <p>DISCORD</p>
           </div>
         </div>
@@ -112,16 +104,16 @@ function LoginInfo({ setForgotPassword, closeForm }) {
     e.preventDefault();
 
     axios
-      .post("/api/auth/login", {
-        email: username,
-        password: password,
+      .post(`/api/auth/login?keepLogged=${keepMe}`, {}, {
+        auth: {
+          username: username,
+          password: password,
+        }
       })
       .then((res) => {
-        console.log("POST /api/auth/login", res);
-
         window.location.reload();
       })
-      .catch((err) => {
+      .catch((err) => { 
         if (err.response.status === 429)
           createNotification(
             "error",

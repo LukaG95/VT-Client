@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Redirect } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import axios from "axios";
 
 function UpdateEmail() {
   const [emailConfirmed, setEmailConfirmed] = useState();
 
-  const pathID = useLocation().pathname.substring(14); // reads url after /email/update/ till the end
+  const { pathID } = useParams()
 
   useEffect(() => {
     axios

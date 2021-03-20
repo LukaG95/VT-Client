@@ -4,12 +4,12 @@ import axios from "axios";
 import ConversationComponent from "./ConversationComponent"
 import styles from "./Conversations.module.scss";
 
-function Conversations({conversations, setConversations}) {
+function Conversations({conversations, setConversations, setPageNumber}) {
 
   const allConversations = useMemo(
     () => 
       conversations.map(conversation => (
-        <ConversationComponent conversation={conversation} conversations={conversations} setConversations={setConversations} />
+        <ConversationComponent conversation={conversation} conversations={conversations} setConversations={setConversations} setPageNumber={setPageNumber}/>
       )),
     [conversations]
   );

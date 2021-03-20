@@ -15,40 +15,7 @@ function UserContextProvider({ children }) {
   const [role, setRole] = useState();
 
   useEffect(() => {
-    axios
-      .get("/api/auth/getUser")
-      .then((res) => {
-        // console.log('/api/auth/getUser', res)
-        if (res.data.info === "success") {
-          setUser(res.data.user);
-          setIsLoggedIn(true);
-          setMyID(res.data.user._id);
-          setUsername(res.data.user.username);
-          setEmail(res.data.user.email);
-          setRole(res.data.user.role);
-        }
-      })
-      .catch((err) => {
-        setIsLoggedIn(false);
-        console.log(err.response);
-        /*if (err.response)
-        if (err.response.status === 400 || 401){}*/
-      });
-
-    axios
-      .get("/api/test/getUser")
-      .then((res) => {
-        // console.log('/api/test/getUser', res)
-        if (res.status === 200) {
-          setDisplayWebsite(true);
-        }
-      })
-      .catch((err) => {
-        setDisplayWebsite(false);
-        console.log(err);
-        /*if (err.response)
-        if (err.response.status === 400 || 401){}*/
-      });
+    getUserInfo()
   }, []);
 
   return (
@@ -62,11 +29,51 @@ function UserContextProvider({ children }) {
         myID,
         role,
         displayWebsite,
+        getUserInfo
       }}
     >
       {children}
     </UserContext.Provider>
   );
+
+  function getUserInfo(){
+    axios
+    .get("/api/auth/getUser")
+    .then((res) => { console.log(res.data)
+      // console.log('/api/auth/getUser', res)
+      if (res.data.info === "success") {
+        setUser(res.data.user);
+        setIsLoggedIn(true);
+        setMyID(res.data.user._id);
+        setUsername(res.data.user.username);
+        setEmail(res.data.user.email);
+        setRole(res.data.user.role);
+      }
+    })
+    .catch((err) => {
+      setIsLoggedIn(false);
+      console.log(err);
+      /*if (err.response)
+      if (err.response.status === 400 || 401){}*/
+    });
+
+  axios
+    .get("/api/test/getUser")
+    .then((res) => {
+      // console.log('/api/test/getUser', res)
+      if (res.status === 200) {
+        setDisplayWebsite(true);
+      }
+    })
+    .catch((err) => {
+      setDisplayWebsite(false);
+      console.log(err);
+      /*if (err.response)
+      if (err.response.status === 400 || 401){}*/
+    });
+  }
 }
+
+
 
 export { UserContextProvider, UserContext };

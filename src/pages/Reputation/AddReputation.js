@@ -1,28 +1,29 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Filter from "bad-words";
 
 import { createNotification } from "../../misc/ToastNotification";
 import { UserContext } from "../../context/UserContext";
+import {Helmet} from "react-helmet";
 
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
 function AddReputation() {
   const [repInfo, setRepInfo] = useState();
-  const [userID] = useState(useLocation().pathname.substring(16)); // reads url after /reputation/add/ till the end
 
   const [repCategory, setRepCategory] = useState();
   const [feedback, setFeedback] = useState();
   const [repErrorMessage, setRepErrorMessage] = useState("");
 
   const { myID } = useContext(UserContext);
+  const { pathID } = useParams()
 
   useEffect(() => {
     if (myID === undefined) return;
 
     axios
-      .get(`/api/reputation/${userID}`)
+      .get(`/api/reputation/${pathID}`)
       .then((res) => {
         if (res.data.info === "success") setRepInfo(res.data.rep);
         else setRepInfo("invalid");
@@ -31,11 +32,17 @@ function AddReputation() {
         console.log(err);
         setRepInfo("invalid");
       });
-  }, [myID, userID]);
+  }, [myID, pathID]);
 
   if (repInfo !== undefined && repInfo !== "invalid")
     return (
       <>
+        <Helmet>
+          <title>Add Reputation to {repInfo.username} | VirTrade</title>
+          <description>Add Reputation page contains user's reputation. You can add and review reputation here</description>
+          <link rel="canonical" href="http://virtrade.gg/reputation/add" />
+        </Helmet>
+
         <div className="reputation-topbar-field">
           <div className="rep-username">{repInfo.username}'s Reputation</div>
 
@@ -143,7 +150,7 @@ function AddReputation() {
   /*-----Functions                -------------*/
 
   function handleRepSubmit(good_bad) {
-    if (myID === userID) {
+    if (myID === pathID) {
       setRepErrorMessage("You can't rep yourself");
       createNotification("error", "You can't rep yourself", "rep yourself");
       return;
@@ -207,13 +214,12 @@ function AddReputation() {
     }
 
     axios
-      .post(`/api/reputation/addRep/${userID}`, {
+      .post(`/api/reputation/addRep/${pathID}`, {
         good: good_bad,
         category: repCategory,
         feedback: profanityFilter.clean(feedback),
       })
       .then((res) => {
-        console.log(res);
         if (res.data.info === "success") {
           setFeedback("");
           setRepCategory();
@@ -223,7 +229,10 @@ function AddReputation() {
             "Reputation was submitted",
             "rep submited"
           );
-        } else if (res.data.info === "hours24") {
+        } 
+      })
+      .catch((res) => {
+        if (res.response.data.info === "hours24") {
           setRepErrorMessage(
             "You can only leave a rep for the same person once in 24 hours"
           );
@@ -232,10 +241,8 @@ function AddReputation() {
             `You have already repped ${repInfo.username}`,
             "already repped"
           );
-          return;
         }
-      })
-      .catch((err) => console.log(err));
+      });
   }
 }
 

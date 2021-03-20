@@ -6,25 +6,26 @@ import useWindowDimensions from "../../misc/windowHW";
 import { UserContext } from "../../context/UserContext";
 import ItemContainer from "./ItemContainer";
 import CrownImage from "../../images/icons/crown.svg";
-import SteamIcon from "../../images/icons/steam.png";
-import PS4Icon from "../../images/icons/ps4.png";
-import XBOXIcon from "../../images/icons/xbox.png";
-import SwitchIcon from "../../images/icons/switch.png";
+import { ReactComponent as SteamIcon } from "../../images/icons/steam.svg";
+import { ReactComponent as PSNIcon } from "../../images/icons/playstation.svg";
+import { ReactComponent as XBOXIcon } from "../../images/icons/xbox.svg";
+import { ReactComponent as SwitchIcon } from "../../images/icons/switch.svg";
+import { ReactComponent as EPICIcon } from "../../images/icons/epic.svg";
+import repTitle from "../../constants/repTitle"
 
 const platformIcons = {
-  steam: SteamIcon,
-  ps4: PS4Icon,
-  xbox: XBOXIcon,
-  switch: SwitchIcon,
+  steam: <SteamIcon style={{ height: "20px", width: "20px", marginRight: "5px" }} />,
+  psn: <PSNIcon style={{ height: "20px", width: "20px", marginRight: "5px" }} />,
+  xbox: <XBOXIcon style={{ height: "20px", width: "20px", marginRight: "5px" }} />,
+  switch: <SwitchIcon style={{ height: "20px", width: "20px", marginRight: "5px" }} />,
+  epic: <EPICIcon style={{ height: "20px", width: "20px", marginRight: "5px" }} />
 };
 
 function RLTradeComponent({ trade, manageTrade }) {
   const [rep, setRep] = useState();
 
   const { isLoggedIn } = useContext(UserContext);
-
   const { width } = useWindowDimensions();
-
   const noteBox = useRef(null)
 
   useEffect(() => {
@@ -39,7 +40,7 @@ function RLTradeComponent({ trade, manageTrade }) {
         /*if (err.response)
       if (err.response.status === 400 || 401){}*/
       });
-  }, []);
+  }, [trade]);
 
   return (
     <div className="rltrade-container">
@@ -48,12 +49,12 @@ function RLTradeComponent({ trade, manageTrade }) {
       <div className="rltrade_cMidPlace" ref={noteBox}>
         <div className="flex-col rl-has-container">
           <p className="haswant-text">Has</p>
-          <ItemContainer className="has-items">{haveItems()}</ItemContainer>
+          <ItemContainer className="smallerIcon">{haveItems()}</ItemContainer>
         </div>
 
         <div className="flex-col rl-wants-container">
           <p className="haswant-text">Wants</p>
-          <ItemContainer className="want-items">{wantItems()}</ItemContainer>
+          <ItemContainer className="smallerIcon">{wantItems()}</ItemContainer>
         </div>
 
         <div className="flex-col rl_notes_buttons_container">
@@ -90,7 +91,7 @@ function RLTradeComponent({ trade, manageTrade }) {
             ) : isLoggedIn ? (
               <>
                 <button
-                  onClick={() => window.open("#")}
+                  onClick={() => window.open(`/account/messages/${trade.user._id}`)}
                 >
                   Message
                 </button>
@@ -156,17 +157,13 @@ function RLTradeComponent({ trade, manageTrade }) {
           </div>
           <div className="trade-component-tagsAndTitle">
             <div className="trade-component-tags">{tags()}</div>
-            <p className="trade-component-title">{rep ? rep.title : null}</p>
+            <p className="trade-component-title">{rep ? repTitle(rep.ups) : null}</p>
           </div>
         </div>
 
         <div className="rl-trade-component-top-right">
           <div className="right-gamePlatform">
-            <img
-              style={{ height: "20px", width: "20px", marginRight: "5px" }}
-              src={platformIcons[trade.platform.toLowerCase()]}
-              alt=""
-            />
+            {platformIcons[trade.platform.toLowerCase()]}
             {trade.platform}
           </div>
 
@@ -203,7 +200,7 @@ function RLTradeComponent({ trade, manageTrade }) {
             </div>
             <div className="trade-component-tagsAndTitle-PHONEVIEW">
               <p className="trade-component-title-PHONEVIEW">
-                {rep ? rep.title : null}
+                {rep ? repTitle(rep.ups) : null}
               </p>
               <div className="trade-component-tags-PHONEVIEW">{tags()}</div>
             </div>
@@ -212,11 +209,7 @@ function RLTradeComponent({ trade, manageTrade }) {
 
         <div className="rl-trade-component-top-right">
           <div className="right-gamePlatform-PHONEVIEW">
-            <img
-              style={{ height: "20px", width: "20px", marginRight: "5px" }}
-              src={platformIcons[trade.platform.toLowerCase()]}
-              alt=""
-            />
+            {platformIcons[trade.platform.toLowerCase()]}
             {trade.platform}
           </div>
 

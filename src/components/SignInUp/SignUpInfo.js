@@ -165,11 +165,11 @@ function SignUpInfo({ closeForm }) {
     }
 
     axios
-      .post("/api/auth/signup", {
-        username: username,
-        email: email,
-        password: password,
-        passwordConfirm: confirmPassword,
+      .post("/api/auth/signup", {}, {
+        auth: {
+          username: username + ":" + email,
+          password: password + ":" + confirmPassword
+        }
       })
       .then((res) => {
         console.log("POST /api/auth/signup", res);
