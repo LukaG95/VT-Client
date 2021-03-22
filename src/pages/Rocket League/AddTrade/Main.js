@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 //import Filter from "bad-words";
@@ -15,8 +15,10 @@ import { PlatformColours, platforms } from "../../../constants/platforms";
 import ClearItems from "../../../components/AddTrade/ClearItems";
 import { getTradeableItems } from "../../../constants/Items";
 import { useTradeFilters } from "../../../context/TradeFiltersContext";
+import { UserContext } from "../../../context/UserContext";
 import PlusItem from "./PlusItem";
 import {Helmet} from "react-helmet";
+import { io } from "socket.io-client";
 
 // const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
@@ -28,6 +30,7 @@ function AddTradeRL() {
     dispatch,
   ] = useTrade();
   const [filters] = useTradeFilters();
+  const { user } = useContext(UserContext);
   const [error, setError] = useState({
     trade: "",
     notes: "",
@@ -277,6 +280,13 @@ function AddTradeRL() {
       setError({ ...error, notes: notesError });
       return createNotification("error", notesError, notesError);
     }
+    //Check Platforms
+    const platformsError = checkPlatforms();
+    if (platformsError) {
+      setError({ ...error, notes: platformsError });
+      return createNotification("error", platformsError, platformsError);
+    }
+
     //Create or Edit Trade
     if (!pathID) {
       //Create Trade
@@ -360,6 +370,19 @@ function AddTradeRL() {
     const notesRegex = /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm;
     if (notes.match(notesRegex)) return "No links allowed in notes";
     if (notes.length > 300) return "Max 300 characters allowed";
+  }
+
+  // Check if user linked the platform he wants to create the trade in
+  function checkPlatforms(){
+    const userPlatform = platform.toLowerCase()
+
+    if (userPlatform === "switch"){
+      if (!user[userPlatform]) return `Link your ${platform} IGN in settings`}
+    else {
+      if (!user[userPlatform]) return `Verify your ${platform} IGN in settings`
+      else if (!user[userPlatform].verified) return `Verify your ${platform} IGN in settings` 
+    }
+
   }
 
   function preparePostItem(item) {

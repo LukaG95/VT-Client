@@ -17,7 +17,7 @@ function Footer() {
         
         <div className={styles.footerLogoWrapper}>
           <LogoIcon style={{ width: "150px", height: "50px"}} />
-          <p>Copyright © 2020 Virtrade,<br /> Inc. All rights reserved <br /><br /><span><a href="mailto:info@virtrade.com">info@virtrade.com</a></span></p>
+          <p>Copyright © 2020 Virtrade,<br /> Inc. All rights reserved <br /><br /><span><a href="mailto:info@virtrade.gg">info@virtrade.gg</a></span></p>
         </div>
 
         <div className={styles.footerInfoSection} style={{marginLeft: "200px"}}>

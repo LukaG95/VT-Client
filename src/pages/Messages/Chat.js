@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef, useCallback } from "react";
+import React, { useState, useEffect, useContext, useRef, useCallback, useMemo } from "react";
 import axios from "axios";
 
 import styles from './Chat.module.scss'
@@ -17,7 +17,7 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
   const [weReceivedMessage, setWeReceivedMessage] = useState(false)
   const [weFetchedMessages, setWeFetchedMessages] = useState(false)
 
-  const { width } = useWindowDimensions()
+  const { width, height } = useWindowDimensions()
   const { myID, username } = useContext(UserContext)
 
   const inputEl = useRef(null);
@@ -33,34 +33,18 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
 
   useEffect(() => {
     if(newMessage)
-      setWeReceivedMessage(true)
+      scrollChatContainer()
   }, [newMessage])
 
   // custom hook to tell us if we're currently loading and if more messages can be fetched
   let userId = null
   if (conversation) userId = conversation.conversationWith._id
-  const {loading, hasMore} = useChatSearch(userId, pageNumber, setMessages, setWeFetchedMessages)
-
+  const {loading, hasMore} = useChatSearch(userId, pageNumber, setMessages, scrollChatContainer)
 
   // scroll the container when messages state changes
   useEffect(() => {
-    
-    if (weSentMessage){
-      chatbox.current.scrollTop = chatbox.current.scrollHeight
-      setWeSentMessage(false)
-    }
-    else if (weReceivedMessage){
-      chatbox.current.scrollTop = chatbox.current.scrollHeight
-      setWeReceivedMessage(false)
-    }
-    else if (weFetchedMessages){
-      chatbox.current.scrollTop = chatbox.current.scrollHeight / 5
-      setWeFetchedMessages(false)
-    }
-    else 
-      chatbox.current.scrollTop = chatbox.current.scrollHeight
-
-  }, [messages])
+    chatbox.current.scrollTop = chatbox.current.scrollHeight
+  }, [height])
 
   // if hasMore has changed it means we made a request and we need to scroll appropriately
 
@@ -80,7 +64,6 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
     return () => clearTimeout(checkingUserStatus)
     
   }, [conversation]);
-
 
   const observer = useRef()
   const lastMessageElement = useCallback(node => { 
@@ -193,19 +176,17 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
   function submitChat(){
     if (!validateMessage()) return
 
-    setWeSentMessage(true)
-
-    // there's a confirmed: false here, which is only applied to new messages so we know to check for that only on those
+    // there's a confirmed: "pending" here, which is only applied to new messages so we know to check for that only on those
     setMessages(prev => {
       let avatar = false
-      if (messages.length === 0) // if it's the very 1st message
+      if (prev.length === 0) // if it's the very 1st message
         avatar = true
       else if (Date.now() - prev[prev.length-1].createdAt.timestamp > 300000) // if last message is 5 minutes or older
         avatar = true
       else if (myID !== prev[prev.length-1].sender._id) // if the last message was not sent my me
         avatar = true
-      return [...messages, {displayAvatar: avatar, confirmed: false, sender: {_id: myID, username}, message: chat, createdAt: {timestamp: Date.now()}}]
-    }) 
+      return [...prev, {displayAvatar: avatar, confirmed: "pending", sender: {_id: myID, username}, message: chat, createdAt: {timestamp: Date.now()}}]
+    }, setTimeout(()=> scrollChatContainer())) 
 
     let tempChat = chat
     setChat("")
@@ -215,10 +196,12 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
       .then(res => { 
         if(res.data.info === "success"){
           // confirm the message
+          
           setMessages(prev => {
-            prev[messages.length].confirmed = true;
-            return prev;
-          })
+            let state = [...prev]
+            state[messages.length].confirmed = "confirmed"
+            return state
+          }, setTimeout(()=> scrollChatContainer()))
         
           // move it to the top of the list, then update it's lastMessage and createdAt
           let updatedConvos = []
@@ -233,11 +216,17 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
           })
           arraymove(updatedConvos, index, 0) // move to top 
           setConversations(updatedConvos)
-
         }                                                 
         
       })
-      .catch(err => { console.log(err.response)
+      .catch(err => { 
+
+        setMessages(prev => {
+          let state = [...prev]
+          state[messages.length].confirmed = "denied"
+          return state
+        }, setTimeout(()=> scrollChatContainer()))
+
         if (err.response)
           if (err.response.status === 429)
             createNotification(
@@ -292,6 +281,11 @@ function validateMessage(){
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  function scrollChatContainer(x = 1){
+    console.log("scrolling")
+    chatbox.current.scrollTop = chatbox.current.scrollHeight / x
   }
 
 }

@@ -1,5 +1,6 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
-import { useLocation, Redirect, Route, Switch } from "react-router-dom";
+import React, { useContext, useEffect, useState, useRef } from "react"
+import { useLocation, Redirect, Route, Switch } from "react-router-dom"
+import ReactGA from 'react-ga'
 
 import useWindowDimensions from './misc/windowHW'
 import checkPath from './constants/FooterPath'
@@ -43,10 +44,10 @@ export default function App() {
   const [displayFooter, setDisplayFooter] = useState(false)
 
   const path = useLocation().pathname
-  const { width, height } = useWindowDimensions()
+  const { width } = useWindowDimensions()
 
   useEffect(()=> { 
-    const socket = io(); // const socket = io("https://virtrade-backend.herokuapp.com");
+    const socket = io(); // const socket = io("https://wwww.virtrade.gg");
     socket.on('auth', status => { 
       if (status === 'success')
         socket.on('message/new', message => setNewMessage(message))
@@ -54,6 +55,16 @@ export default function App() {
     return () => socket.off()
     
   }, [])
+
+  
+  
+  // google analytics
+  useEffect(()=> { 
+    console.log(window.location.pathname + window.location.search)
+    ReactGA.initialize('G-251GQ17ZLM');
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, [])
+  
 
   useEffect(()=> {
     if (newMessage && !path.includes('/account/messages'))

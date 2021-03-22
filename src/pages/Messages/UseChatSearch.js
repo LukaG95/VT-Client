@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import setAvatarLogic from '../../misc/setAvatarLogic'
 
-export default function useChatSearch(userId, pageNumber, setMessages, setWeFetchedMessages) {
+export default function useChatSearch(userId, pageNumber, setMessages, scrollChatContainer) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [hasMore, setHasMore] = useState(true)
@@ -14,11 +14,12 @@ export default function useChatSearch(userId, pageNumber, setMessages, setWeFetc
   }, [userId])
 
   useEffect(() => {
+    
     if (userId){
 
     setLoading(true)
     setError(false)
-
+    console.log("fetching", pageNumber)
     let cancel
     axios({
       method: 'GET',
@@ -29,7 +30,10 @@ export default function useChatSearch(userId, pageNumber, setMessages, setWeFetc
       setMessages(prev => setAvatarLogic([...res.data.messages, ...prev]))
       setHasMore(res.data.hasMore)
       setLoading(false)
-      setWeFetchedMessages(true)
+      if (pageNumber === 1)
+        scrollChatContainer()
+      else
+        scrollChatContainer(5)
       
     }).catch(e => {
       if (axios.isCancel(e)) return

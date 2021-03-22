@@ -39,7 +39,7 @@ function UserContextProvider({ children }) {
   function getUserInfo(){
     axios
     .get("/api/auth/getUser")
-    .then((res) => { console.log(res.data)
+    .then((res) => { 
       // console.log('/api/auth/getUser', res)
       if (res.data.info === "success") {
         setUser(res.data.user);

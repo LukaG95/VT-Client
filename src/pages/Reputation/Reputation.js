@@ -11,6 +11,7 @@ import useUserSearch from "./useUserSearch"
 import pageNumbers from "../../misc/pageNumbers"
 import repTitle from "../../constants/repTitle"
 import {Helmet} from "react-helmet";
+import {ReactComponent as NoReputationIcon} from "../../images/icons/no_reputation.svg"
 
 function Reputation() {
   const [repInfo, setRepInfo] = useState();
@@ -176,7 +177,10 @@ function Reputation() {
             </div>
           </>
         ) : (
+          <div className="noReputationWrapper">
+          <NoReputationIcon style={{ width: "150px", height: "150px"}} />
           <div className="noReputationMsg">
+            
             <h2>User has no rep in the database.</h2>
             Be the 1st one to <span> </span>
             <Link
@@ -186,6 +190,7 @@ function Reputation() {
             >
               add reputation
             </Link>
+          </div>
           </div>
         )}
       </>

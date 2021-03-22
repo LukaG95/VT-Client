@@ -51,7 +51,7 @@ function Footer() {
         <p>
           Copyright © 2020 Virtrade,<br /> Inc. All rights reserved 
           <br /><br />
-          <span><a href="mailto:info@virtrade.com">info@virtrade.com</a></span>
+          <span><a href="mailto:info@virtrade.gg">info@virtrade.gg</a></span>
           <br /><br /><br />
         </p>
       </div>
