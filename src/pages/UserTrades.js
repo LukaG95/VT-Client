@@ -16,10 +16,9 @@ function UserTrades() {
   const [username, setUsername] = useState();
 
   const { pathID } = useParams()
-
   const { myID } = useContext(UserContext);
+  
   const { setOpenDeleteAllTrades } = useContext(PopupContext);
-
   const { width } = useWindowDimensions();
 
   useEffect(() => {
@@ -45,20 +44,27 @@ function UserTrades() {
     return (
       <>
         <Helmet>
-          {username && <title>{username}'s Trades | VirTrade</title>}
+          {username ? <title>{username}'s Trades | VirTrade</title> : <title></title>}
           <description>UserTrades page contains all trades from a user. Delete, edit or bump trades if they are yours</description>
           <link rel="canonical" href="http://virtrade.gg/trades" />
         </Helmet>
 
         {myID === pathID ? <Topbar /> : usernameField()}
 
-        {!userTrades ? <TradeComponentsSkeleton /> : userTrades.length <= 0 ? 
-          NoTrades() 
-        : 
-          <>
-            {width < 700 && myID === pathID ? <div style={{height: "15px"}}></div> : null  /* Topbar is hidden to hamburger on smaller width so we need spacing*/} 
-            {TradeComponents()}
-          </>
+        {
+          !userTrades ? 
+            <>
+              {width < 700 && myID === pathID ? <div style={{height: "15px"}}></div> : null /* Topbar is hidden to hamburger on smaller width so we need spacing*/} 
+              <TradeComponentsSkeleton /> 
+            </>
+          : 
+            userTrades.length <= 0 ? 
+              NoTrades() 
+            : 
+              <>
+                {width < 700 && myID === pathID ? <div style={{height: "15px"}}></div> : null} 
+                {TradeComponents()}
+              </>
         }
 
       </>
@@ -158,6 +164,11 @@ function UserTrades() {
             </button>
           )
         : null}
+      </div>
+    )
+    else return(
+      <div className="user-trades-topbar-field">
+        <div className="nameSkeleton"></div>
       </div>
     )
   }

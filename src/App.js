@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState, useRef } from "react"
 import { useLocation, Redirect, Route, Switch } from "react-router-dom"
-import ReactGA from 'react-ga'
 
 import useWindowDimensions from './misc/windowHW'
 import checkPath from './constants/FooterPath'
@@ -56,15 +55,6 @@ export default function App() {
     
   }, [])
 
-  
-  
-  // google analytics
-  useEffect(()=> { 
-    console.log(window.location.pathname + window.location.search)
-    ReactGA.initialize('G-251GQ17ZLM');
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }, [])
-  
 
   useEffect(()=> {
     if (newMessage && !path.includes('/account/messages'))

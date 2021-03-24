@@ -15,7 +15,7 @@ function Header() {
     { path: "/account/settings", name: "My Account" },
   ]);
 
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, myID } = useContext(UserContext);
   const { setIsOpen_LeftSidebar } = useContext(
     LeftSidebarContext
   );
@@ -29,9 +29,12 @@ function Header() {
     else if (
       path === "/account/settings" ||
       path === "/account/messages" ||
-      path === "/account/premium"
+      path === "/account/premium" ||
+      path === `/trades/${myID}`
     )
       setHeaderSelection("My Account");
+    else
+      setHeaderSelection("Navigate to")
   }, [path]);
 
   return (

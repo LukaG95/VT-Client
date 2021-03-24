@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -11,6 +11,7 @@ import { rl_dd_names } from "../../info/DropdownNames";
 import { closeSidebar, manageSidebarResize } from "../../misc/manageSidebar";
 import { LeftSidebarContext } from "../../context/LeftSidebar";
 import useWindowDimensions from "../../misc/windowHW";
+import { UserContext } from "../../context/UserContext";
 
 function Sidebar() {
   const [selectedFilter, setSelectedFilter] = useState("");
@@ -25,6 +26,9 @@ function Sidebar() {
   const [certDD] = useState(rl_dd_names.certDD);
   const [itemTypeDD] = useState(rl_dd_names.itemTypeDD);
   const [platformDD] = useState(rl_dd_names.platformDD);
+
+  const pathID = useLocation().pathname.slice(8)
+  const { myID } = useContext(UserContext);
 
   const {
     game,
@@ -73,15 +77,17 @@ function Sidebar() {
           <Route path="/account"> 
             <AccountBody />
           </Route>
-          <Route exact path="/trading/rl/new"></Route>
-          <Route path="/trading/rl/edit"> </Route>
-          <Route path="/trades"> </Route>
-          <Route exact path="/terms"></Route>
-          <Route exact path="/privacy"></Route>
-          <Route path="/password/reset"> </Route>
-          <Route path="/email/confirm"> </Route>
-          <Route path="/email/update"> </Route>
-          <Route path="/admin"> </Route>
+          <Route exact path="/trading/rl/new"><div className="separator-horizontal"></div><Footer /></Route>
+          <Route path="/trading/rl/edit"> <div className="separator-horizontal"></div><Footer /></Route>
+          <Route path="/trades">{pathID === myID ? <AccountBody /> : <><div className="separator-horizontal"></div><Footer /></>}</Route>
+          <Route exact path="/terms"><div className="separator-horizontal"></div><Footer /></Route>
+          <Route exact path="/privacy"><div className="separator-horizontal"></div><Footer /></Route>
+          <Route path="/password/reset"> <div className="separator-horizontal"></div><Footer /> </Route>
+          <Route path="/email/confirm"> <div className="separator-horizontal"></div><Footer /> </Route>
+          <Route path="/email/update"> <div className="separator-horizontal"></div><Footer /> </Route>
+          <Route path="/admin"> <div className="separator-horizontal"></div><Footer /> </Route>
+          <Route path="/rules"> <div className="separator-horizontal"></div><Footer /> </Route>
+          <Route path="/security"> <div className="separator-horizontal"></div><Footer /> </Route>
         </Switch>
       </div>
 

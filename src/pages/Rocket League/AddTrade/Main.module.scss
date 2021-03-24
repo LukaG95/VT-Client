@@ -38,16 +38,22 @@
 .itemContainer {
   overflow-y: scroll;
   padding: 0 10px;
+  
+  &::-webkit-scrollbar{
+    background: #1a171d;
+  }
+  &::-webkit-scrollbar-thumb{
+    background: #737175;
+  }
+  
 }
 
 .haveWant {
   @media only screen and (max-width: 1213px) {
     background: #1d191f;
-    padding: 15px 10px 15px 10px;
+    padding: 15px 10px 5px 10px;
     border-radius: 5px;
   }
-  
-  min-height: 355px;
 
   .section {
     display: flex;
@@ -65,24 +71,28 @@
       grid-template-columns: repeat(4, 94px);
       scrollbar-width: thin;
       min-height: fit-content;
+
+      &::-webkit-scrollbar{
+        height: 5px;
+      }
     }
 
     @media only screen and (max-height: 830px) {
-      .items {
+      .items{
         overflow-x: scroll;
         overflow-y: hidden;
         grid-template-rows: 90px 90px;
         grid-template-columns: repeat(6, 90px);
-        
       }
     }
 
     @media only screen and (max-height: 660px) {
-      .items {
+      .items{
         grid-template-rows: 90px;
         grid-template-columns: repeat(12, 90px);
       }
     }
+    
   }
 
   .sectionSmall {
@@ -97,13 +107,9 @@
       width: auto;
       height: min-content;
       grid-auto-flow: column;
-      grid-template-columns: unset;
-      grid-template-rows: unset;
+      grid-template-rows: 94px;
+      grid-template-columns: repeat(12, 94px);
       scrollbar-width: thin;
-
-      > * {
-        width: 100px;
-      }
     }
   }
 
@@ -148,18 +154,46 @@
   margin-top: 15px;
 }
 
-.error {
-  position: absolute;
-  bottom: -15px;
-  right: 0px;
-  color: rgb(255, 61, 61);
-  font-size: 10px;
-}
 
 .errored {
-  border: 1px solid #ff4645;
+  box-shadow:inset 0px 0px 0px 1px #ff4645;
+  -webkit-box-shadow:inset 0px 0px 0px 1px #ff4645;
+  -moz-box-shadow:inset 0px 0px 0px 1px #ff4645;
 }
 
+
+.platformsBig{
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-around;
+
+  .platform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 46px;
+    margin-left: 5px;
+
+    cursor: pointer;
+    
+    border: 1px solid #443B52;
+    border-radius: 5px;
+    
+  }
+
+  .platform:first-child{
+    margin-left: 0px;
+  }
+  
+  .platformIcon{
+    height: 30px;
+    width: 30px;
+  }
+}
+
+// for small screen
 .platformsWrapper {
   display: flex;
   flex-direction: column;
@@ -207,7 +241,6 @@
   }
 }
 
-
 .submit {
   display: flex;
   color: #f6f6f6;
@@ -248,3 +281,58 @@
   flex-direction: column;
   background-color: transparent;
 }
+
+.STEAM{
+  background: #091831;
+}
+
+.EPIC{
+  background: #090909;
+}
+
+.PSN{
+  background: #004098;
+}
+
+.XBOX{
+  background: #107D10;
+}
+
+.SWITCH{
+  background: #e70012;
+}
+
+.STEAM, .EPIC, .PSN{
+  border: 1px solid #F6f6f6 !important;
+  box-shadow:inset 0px 0px 0px 1px #F6f6f6;
+  -webkit-box-shadow:inset 0px 0px 0px 1px #F6f6f6;
+  -moz-box-shadow:inset 0px 0px 0px 1px #F6f6f6;
+}
+
+.XBOX, .SWITCH{
+  border: 1px solid #F6f6f6 !important;
+  box-shadow:inset 0px 0px 0px 1px #F6f6f6;
+  -webkit-box-shadow:inset 0px 0px 0px 1px #F6f6f6;
+  -moz-box-shadow:inset 0px 0px 0px 1px #F6f6f6;
+}
+
+/*
+.STEAM:hover{
+  background: #091831;
+}
+
+.EPIC:hover{
+  background: #090909;
+}
+
+.PSN:hover{
+  background: #004098;
+}
+
+.XBOX:hover{
+  background: #107D10;
+}
+
+.SWITCH:hover{
+  background: #e70012;
+}ć*/

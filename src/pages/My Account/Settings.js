@@ -63,7 +63,7 @@ function MyAccount() {
   return (
     <>
       <Helmet>
-        <title>{username} | VirTrade</title>
+        {username ? <title>{username} | VirTrade</title> : <title></title>}
         <description>Profile page contains all user settings. Link your platforms, change your credentials and more</description>
         <link rel="canonical" href="http://virtrade.gg/account/settings" />
       </Helmet>

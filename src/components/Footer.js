@@ -36,13 +36,13 @@ function Footer() {
         <div className={styles.footerSocials}>
           <h4>Follow us</h4>
           <div>
-            <DiscordIcon className={styles.social}/>
-            <TwitterIcon className={styles.social} />
-            <FacebookIcon className={styles.social} />
-            <SteamIcon className={styles.social} />
+            <DiscordIcon onClick={()=> window.open("https://discord.gg/Qt6qKJx")} className={styles.social}/>
+            <TwitterIcon onClick={()=> window.open("https://twitter.com/VirtradeGG")} className={styles.social} />
+            <FacebookIcon onClick={()=> window.open("https://www.facebook.com/Virtrade/")} className={styles.social} />
+            <SteamIcon onClick={()=> window.open("https://steamcommunity.com/groups/virtrade")} className={styles.social} />
           </div>
         </div>
-
+        
       </div>
     </div>
   );

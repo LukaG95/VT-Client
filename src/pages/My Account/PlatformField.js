@@ -30,7 +30,15 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
       <div className={styles.header}>
         <div>
           {icon()}
-          <p className={styles.name}>{name}</p>
+         
+          {
+            name === "SWITCH" ? 
+            <div className={styles.switch}>
+              <p className={styles.name}>{name}</p>
+              <div>Currently down</div>
+            </div>
+            : <p className={styles.name}>{name}</p>
+          }
         </div>
         <div>
           <p>{username}</p>
@@ -105,11 +113,12 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
   function handleSubmit(e){
     e.preventDefault();
 
+console.log(name, unverifiedUsername)
     axios
       .post(`/api/auth/linkPlatform?platform=${name.toLowerCase()}`, { 
         username: unverifiedUsername
       })
-      .then((res) => { 
+      .then((res) => { console.log(res.data)
         if (res.data.info === "success"){
           getUserInfo()
         }

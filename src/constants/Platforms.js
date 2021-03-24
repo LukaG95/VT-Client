@@ -21,4 +21,5 @@ export const PlatformColours = {
   PSN: "#2C8E54",
   XBOX: "#2C8E54",
   SWITCH: "#2C8E54",
+  EPIC: "#2C8E54"
 };

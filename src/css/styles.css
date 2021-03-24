@@ -56,6 +56,14 @@ html {
   scroll-behavior: smooth;
 }
 
+*::-webkit-scrollbar{
+  background: #1a171d;
+}
+
+*::-webkit-scrollbar-thumb{
+  background: #737175;
+}
+
 body {
   background-color: #141115;
   min-width: fit-content;
@@ -243,12 +251,12 @@ html {
 
 .profile:hover {
   cursor: pointer;
-  background-color: #423847;
+  background-color: #29232c;
 }
 
 .profile:active {
   cursor: pointer;
-  background-color: #786681;
+  background-color: #372f3b;
 }
 
 .loginButton {
@@ -626,6 +634,7 @@ html {
 
   margin-bottom: 3px;
   justify-content: space-between;
+ 
 }
 
 .trade-component-header-left {
@@ -1042,6 +1051,16 @@ html {
 
 .user-trades-topbar-field button:active {
   background-color: rgb(83, 66, 90);
+}
+
+.user-trades-topbar-field .nameSkeleton{
+  background: #332638;
+
+  height: 25px;
+  width: 200px;
+
+  margin-left: 25px;
+  border-radius: 5px;
 }
 
 .user-trades-topbar-left {
@@ -4407,20 +4426,40 @@ html {
   width: 55%;
 }
 
+.sidebar-socials-wrapper .social{
+  height: 35px; 
+  width: 35px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.sidebar-socials-wrapper .social:hover{
+  filter: brightness(0.5);
+}
+
+
 .sidebar-info-links {
   display: flex;
   width: 70%;
 
   justify-content: space-between;
 
-  margin-top: 25px;
+  margin-top: 35px;
 }
 
-.sidebar-info-links .sb-button {
+.sidebar-info-links > div{
+  display: flex;
+  flex-direction: column;
+
+  height: 100px;
+}
+
+.sidebar-info-links > div > .sb-button{
   color: #f6f6f6;
   font-size: 12px;
+
   width: fit-content;
-  line-height: 300%;
+  margin-bottom: 17px;
 }
 
 .sidebar-copyright-wrapper {

@@ -97,7 +97,7 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
                   .delete("/api/messages/blockUser", {data: {
                     recipientId: conversation.conversationWith._id
                   }})
-                  .then((res) => { console.log(res.data)
+                  .then((res) => { 
                     if (res.data.info === "success"){
                       setBlocked(false)
                       createNotification(
@@ -284,7 +284,6 @@ function validateMessage(){
   }
 
   function scrollChatContainer(x = 1){
-    console.log("scrolling")
     chatbox.current.scrollTop = chatbox.current.scrollHeight / x
   }
 

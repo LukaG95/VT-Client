@@ -1,49 +1,54 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
+
 import { ReactComponent as DiscordIcon } from "../../images/icons/discord.svg";
 import { ReactComponent as TwitterIcon } from "../../images/icons/twitter.svg";
 import { ReactComponent as FacebookIcon } from "../../images/icons/facebook.svg";
 import { ReactComponent as SteamIcon } from "../../images/icons/steam.svg";
+import { closeSidebar } from "../../misc/manageSidebar";
+import { LeftSidebarContext } from "../../context/LeftSidebar";
 
 function Footer() {
+
+  const { setIsOpen_LeftSidebar } = useContext(
+    LeftSidebarContext
+  );
+
   return (
     <>
       <div className="sidebar-socials-wrapper">
-        <DiscordIcon style={{ height: "35px", width: "35px", marginRight: "5px" }} /> {/*38h 33w */}
-        <TwitterIcon style={{ height: "35px", width: "35px", marginRight: "5px" }} />
-        <FacebookIcon style={{ height: "35px", width: "35px", marginRight: "5px" }} />
-        <SteamIcon style={{ height: "35px", width: "35px", marginRight: "5px" }} />
+        <DiscordIcon onClick={()=> window.open("https://discord.gg/Qt6qKJx")} className="social" /> {/*38h 33w */}
+        <TwitterIcon onClick={()=> window.open("https://twitter.com/VirtradeGG")} className="social" />
+        <FacebookIcon onClick={()=> window.open("https://www.facebook.com/Virtrade/")} className="social" />
+        <SteamIcon onClick={()=> window.open("https://steamcommunity.com/groups/virtrade")} className="social" />
       </div>
 
       <div className="sidebar-info-links">
         <div>
-          <div>
-            <a href="https://discord.gg/nqSgyCr" target="popup" id="removeDecoration" className="sb-button">
-              Support
-            </a>
-          </div>
-          <div>
-            <Link to="/terms" id="removeDecoration" className="sb-button">
-              Terms and conditions
-            </Link>
-          </div>
+
+          <a href="https://discord.gg/nqSgyCr" target="popup" id="removeDecoration" className="sb-button">
+            Support
+          </a>
+
+          <Link to="/terms" id="removeDecoration" className="sb-button">
+            <div onClick={()=> {closeSidebar(); setIsOpen_LeftSidebar(false)}}>Terms and conditions</div>
+          </Link>
+         
         </div>
         <div>
-          <div>
-            <Link to="/rules/trading" id="removeDecoration" className="sb-button">
-              Trading rules
-            </Link>
-          </div>
-          <div>
-            <Link to="/rules/reputation" id="removeDecoration" className="sb-button">
-              Reputation rules
-            </Link>
-          </div>
-          <div>
-            <Link to="/security" id="removeDecoration" className="sb-button">
-              Prevent scam
-            </Link>
-          </div>
+          
+          <Link to="/rules/trading" id="removeDecoration" className="sb-button">
+            <div onClick={()=> {closeSidebar(); setIsOpen_LeftSidebar(false)}}>Trading rules</div>
+          </Link>
+        
+          <Link to="/rules/reputation" id="removeDecoration" className="sb-button">
+            <div onClick={()=> {closeSidebar(); setIsOpen_LeftSidebar(false)}}>Reputation rules</div>
+          </Link>
+        
+          <Link to="/security" id="removeDecoration" className="sb-button">
+            <div onClick={()=> {closeSidebar(); setIsOpen_LeftSidebar(false)}}>Prevent scam</div>
+          </Link>
+         
         </div>
       </div>
 

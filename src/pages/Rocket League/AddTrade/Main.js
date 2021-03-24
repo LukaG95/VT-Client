@@ -18,7 +18,11 @@ import { useTradeFilters } from "../../../context/TradeFiltersContext";
 import { UserContext } from "../../../context/UserContext";
 import PlusItem from "./PlusItem";
 import {Helmet} from "react-helmet";
-import { io } from "socket.io-client";
+import {ReactComponent as Steam} from "../../../images/icons/steam.svg"
+import {ReactComponent as PSN} from "../../../images/icons/playstation.svg"
+import {ReactComponent as Nintendo} from "../../../images/icons/switch.svg"
+import {ReactComponent as Xbox} from "../../../images/icons/xbox.svg"
+import {ReactComponent as Epic} from "../../../images/icons/epic.svg"
 
 // const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
@@ -116,12 +120,11 @@ function AddTradeRL() {
   function AddTrade() {
     return (
       <div className={styles.wrapper}>
-        <div className={error.trade ? styles.errored : ""}>
+        <div>
           <FilterBar />
           <ItemContainer className={styles.itemContainer}>
             {inventoryItems}
           </ItemContainer>
-          <p className={styles.error}>{error.trade}</p>
         </div>
         <div className={styles.haveWant}>
           <div className={styles.section}>
@@ -207,7 +210,7 @@ function AddTradeRL() {
         </div>
         <div className={styles.notesSection}>
           <div
-            className={`${styles.notes} ${error.notes ? styles.errored : ""}`}
+            className={styles.notes}
             onClick={() => setError({ ...error, notes: "" })}
           >
             {/* Add Notes */}
@@ -222,31 +225,23 @@ function AddTradeRL() {
                 })
               }
             />
-            <div className={styles.platformsWrapper}>
-              <h4>PLATFORM:</h4>
-              <div className={styles.platforms}>
-                {/* Map platforms */}
-                {Object.keys(platforms).map((p) => (
-                  <label className={styles.platform} key={p}>
-                    <input
-                      type="radio"
-                      checked={platform === platforms[p]}
-                      onChange={() =>
-                        dispatch({
-                          type: actions.SET_PLATFORM,
-                          payload: platforms[p],
-                        })
-                      }
-                    />
-                    <span style={platform === platforms[p] ? { color: PlatformColours[p] } : {}}>
-                      {platforms[p]}
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div>
-            <p className={styles.error}>{error.notes}</p>
           </div>
+            <div className={styles.platformsBig}>
+              {/* Map platforms */}
+              {Object.keys(platforms).map((p) => (
+                <div 
+                  className={[styles.platform, platform === platforms[p] && styles[p]].join(" ")}
+                  onClick={() =>
+                    dispatch({
+                      type: actions.SET_PLATFORM,
+                      payload: platforms[p],
+                    })
+                  }
+                >
+                  {icon(p)}
+                </div>
+              ))}
+            </div>
           <div>
             <button
               onClick={() => handleTradeSubmit()}
@@ -280,6 +275,7 @@ function AddTradeRL() {
       setError({ ...error, notes: notesError });
       return createNotification("error", notesError, notesError);
     }
+    
     //Check Platforms
     const platformsError = checkPlatforms();
     if (platformsError) {
@@ -396,6 +392,20 @@ function AddTradeRL() {
       amount: item.amount,
     };
   }
+
+  function icon(p){
+    const platforms={   
+      steam: Steam,
+      psn: PSN,
+      switch: Nintendo,
+      xbox: Xbox,
+      epic: Epic
+    }
+    const Platform = platforms[p.toLowerCase()]
+    return <Platform className={styles.platformIcon}/>
+  }
 }
+
+// className={[styles.avatar, message.sender._id === myID && styles.myChatColor].join(" ")}
 
 export default AddTradeRL;

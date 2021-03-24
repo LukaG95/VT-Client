@@ -45,7 +45,6 @@ function manageSidebarResize(width, isOpen_LeftSidebar, setIsOpen_LeftSidebar) {
     closeSidebar();
     setIsOpen_LeftSidebar(false);
   } else if (width > 650 && isOpen_LeftSidebar) {
-    console.log("2");
     const main = document.getElementById("main");
     const sidebar = document.getElementById("sidebar");
 

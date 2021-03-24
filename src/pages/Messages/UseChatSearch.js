@@ -19,7 +19,7 @@ export default function useChatSearch(userId, pageNumber, setMessages, scrollCha
 
     setLoading(true)
     setError(false)
-    console.log("fetching", pageNumber)
+
     let cancel
     axios({
       method: 'GET',

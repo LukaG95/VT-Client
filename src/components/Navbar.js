@@ -46,7 +46,7 @@ function Navbar() {
             className="logo"
           >
             {width > 800 ? (
-              <LogoIcon style={{ width: "140px", height: "auto", margin: `0px 20px 3px ${width > 1213 ? "15px" : "-10px"}`}} />
+              <LogoIcon style={logoStyle()} />
             ) : (
               <LogoIconPhone
                 style={{ width: "38px", height: "38px", marginLeft: "-10px", marginBottom: "3px"}}
@@ -142,6 +142,16 @@ function Navbar() {
           Login
         </div>
       );
+  }
+
+  function logoStyle(){
+    let margin
+    if (width > 1213)
+      margin = "0px 20px 3px 15px"
+    else
+      margin = "0px 20px 3px -10px"
+
+    return { width: "140px", height: "auto", margin}
   }
 }
 

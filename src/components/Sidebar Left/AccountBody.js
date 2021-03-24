@@ -25,7 +25,7 @@ function AccountBody() {
     case "/account/messages":
       messages = "account-currentPage-sidebar";
       break;
-    case "/trades":
+    case `/trades/${myID}`:
       trades = "account-currentPage-sidebar";
       break;
     case "/account/premium":
