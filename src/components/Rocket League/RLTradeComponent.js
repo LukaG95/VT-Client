@@ -23,10 +23,18 @@ const platformIcons = {
 
 function RLTradeComponent({ trade, manageTrade }) {
   const [rep, setRep] = useState();
+  const [showFriendCode, setShowFriendCode] = useState(false)
 
   const { isLoggedIn } = useContext(UserContext);
   const { width } = useWindowDimensions();
   const noteBox = useRef(null)
+
+  const [customHeight, setCustomHeight] = useState()
+
+  useEffect(() => {
+    setCustomHeight(`${noteBox.current.offsetHeight-60}px`)
+       
+  }, [noteBox.current])
 
   useEffect(() => {
     
@@ -47,6 +55,7 @@ function RLTradeComponent({ trade, manageTrade }) {
       {width >= 957 ? PCTabledTradeHeader() : PhoneTradeHeader()}
 
       <div className="rltrade_cMidPlace" ref={noteBox}>
+        
         <div className="flex-col rl-has-container">
           <p className="haswant-text">Has</p>
           <ItemContainer className="smallerIcon">{haveItems()}</ItemContainer>
@@ -58,9 +67,9 @@ function RLTradeComponent({ trade, manageTrade }) {
         </div>
 
         <div className="flex-col rl_notes_buttons_container">
-          <div className="notes-box">
+        <div className="notes-box">
           {noteBox.current ? 
-            (<div style={{ maxHeight: `${noteBox.current.offsetHeight-105}px` }} className="notes">
+            (<div style={{ maxHeight: customHeight }} className="notes">
               {trade.notes}
             </div>) : null}
           </div>
@@ -70,23 +79,19 @@ function RLTradeComponent({ trade, manageTrade }) {
               <>
                 <button
                   onClick={() => manageTrade.editTrade(trade)}
-                  id="editTrade-button"
                 >
                   Edit trade
                 </button>
                 <button
                   onClick={() => manageTrade.deleteTrade(trade)}
-                  id="deleteTrade-button"
                 >
                   Delete trade
                 </button>
                 <button
                   onClick={() => manageTrade.bumpTrade(trade)}
-                  id="bumpTrade-button"
                 >
                   Bump trade
                 </button>
-               
               </>
             ) : isLoggedIn ? (
               <>
@@ -133,7 +138,7 @@ function RLTradeComponent({ trade, manageTrade }) {
   function PCTabledTradeHeader() {
     return (
       <div className="rltrade-cTopPlace">
-        <div className="flex">
+        <div className="rl-trade-component-top-left">
           {userName()}
           <div className="trade-reputation">
             <p
@@ -162,13 +167,16 @@ function RLTradeComponent({ trade, manageTrade }) {
         </div>
 
         <div className="rl-trade-component-top-right">
-          <div className="right-gamePlatform">
-            {platformIcons[trade.platform.toLowerCase()]}
-            {trade.platform}
+          <div onClick={()=> redirectToPlatformWebsite()} className="right-gamePlatform">
+            {typeof trade.platform === "object" ? platformIcons[trade.platform.name.toLowerCase()] : platformIcons[trade.platform.toLowerCase()]}
+            {typeof trade.platform === "object" ? trade.platform.name : trade.platform}
+            {/*<p className="IGN">SW-1234-5267-5345</p>*/}
           </div>
 
           <div className="flex">
-            <div className="trade-post-time">Active {trade.bumpedAt}</div>
+            <div className="trade-post-time">
+              {showFriendCode ? "SW-1334-5346-3467" : `Active ${trade.bumpedAt}`}
+            </div>
           </div>
         </div>
       </div>
@@ -208,14 +216,14 @@ function RLTradeComponent({ trade, manageTrade }) {
         </div>
 
         <div className="rl-trade-component-top-right">
-          <div className="right-gamePlatform-PHONEVIEW">
-            {platformIcons[trade.platform.toLowerCase()]}
-            {trade.platform}
+          <div onClick={()=> redirectToPlatformWebsite()} className="right-gamePlatform" style={{fontSize: "15px"}}>
+            {typeof trade.platform === "object" ? platformIcons[trade.platform.name.toLowerCase()] : platformIcons[trade.platform.toLowerCase()]}
+            {typeof trade.platform === "object" ? trade.platform.name : trade.platform}
           </div>
 
           <div className="flex">
             <div className="trade-post-time-PHONEVIEW">
-              Active {trade.bumpedAt}
+              {showFriendCode ? "SW-1334-5346-3467" : `Active ${trade.bumpedAt}`}
             </div>
           </div>
         </div>
@@ -277,6 +285,20 @@ function RLTradeComponent({ trade, manageTrade }) {
 
   function wantItems() {
     return trade.want.map((item) => <Item item={item} />);
+  }
+
+  function redirectToPlatformWebsite(){
+    if(trade.platform.name === "Steam")
+      window.open(`https://steamcommunity.com/profiles/${trade.platform.ID}`)
+    else if(trade.platform.name === "XBOX")
+      window.open(`https://account.xbox.com/en-us/profile?gamertag=${trade.platform.ID}`)
+    else if(trade.platform.name === "PSN")
+      window.open(`https://my.playstation.com/profile/${trade.platform.ID}`)
+    else if(trade.platform.name === "EPIC")
+      return
+    else if(trade.platform === "SWITCH")
+      setShowFriendCode(prev => !prev)
+ 
   }
 }
 

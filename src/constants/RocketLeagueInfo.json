@@ -1,6 +1,10 @@
 {
     "Colors": [
         {
+            "ID": 0,
+            "Name": "None"
+        },
+        {
             "ID": 1,
             "Name": "Crimson"
         },
@@ -76,6 +80,15 @@
     "Slots": [
         {
             "Items": [
+                {
+                  "HasSpecialEditions": false,
+                  "HasTeamEditions": false,
+                  "ItemID": 9999,
+                  "Name": "Offer",
+                  "Paintable": false,
+                  "Quality": "Common",
+                  "Tradable": true
+                },
                 {
                     "HasSpecialEditions": false,
                     "HasTeamEditions": false,

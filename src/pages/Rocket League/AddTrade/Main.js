@@ -11,7 +11,7 @@ import ItemContainer from "../../../components/Rocket League/ItemContainer";
 import SmallHome from "./SmallHome";
 import useWindowDimensions from "../../../misc/windowHW";
 import { actions, useTrade } from "../../../context/TradeContext";
-import { PlatformColours, platforms } from "../../../constants/platforms";
+import { platforms } from "../../../constants/platforms";
 import ClearItems from "../../../components/AddTrade/ClearItems";
 import { getTradeableItems } from "../../../constants/Items";
 import { useTradeFilters } from "../../../context/TradeFiltersContext";
@@ -27,7 +27,7 @@ import {ReactComponent as Epic} from "../../../images/icons/epic.svg"
 // const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
 function AddTradeRL() {
-  const { pathID } = useParams() // Reads url after `/trades/` till the end
+  const { pathID } = useParams() 
 
   const [
     { have, want, platform, notes, count: tradeCount, selected },
@@ -64,22 +64,23 @@ function AddTradeRL() {
   //Filtered Items
   useEffect(() => {
     process.nextTick(() => {
-      let items = getTradeableItems();
+      let RLitems = getTradeableItems();
       if (filters.type !== "Any") {
-        items = items.filter((i) => i.itemType === filters.type);
+        RLitems = RLitems.filter((i) => i.itemType === filters.type);
       }
       if (filters.name) {
-        items = items.filter(
+        RLitems = RLitems.filter(
           (i) => i.itemName.toLowerCase().search(filters.name) > -1
         );
       }
-      setItems(items);
+
+      setItems(RLitems); // "Offer" is added in the .json
     });
   }, [filters]);
 
   const inventoryItems = useMemo(
     () => 
-      items.map((item, i) => ( 
+      items.map(item => ( 
         <Item item={item} lazy={true} onClick={() => ItemClick(item)} key={item.itemID} />
         // eslint-disable-next-line react-hooks/exhaustive-deps
       )),
@@ -90,8 +91,8 @@ function AddTradeRL() {
   return (
     <>
       <Helmet>
-        <title>New Trade | VirTrade</title>
-        <description>Create a new Rocket League trade post</description>
+        {!pathID ? <title>New Trade | VirTrade</title> : <title>Edit Trade | VirTrade</title>}
+        {!pathID ? <description>Create a new Rocket League trade post</description> : <description>Edit your Rocket League trade post</description>}
         <link rel="canonical" href="http://virtrade.gg/trading/rl/new" />
       </Helmet>
       {
@@ -101,13 +102,6 @@ function AddTradeRL() {
       }
     </>
   )
-    
-    /*
-  return  (
-    AddTrade()
-  ) : (
-      <SmallHome {...{ handleTradeSubmit, ItemClick }} />
-    );*/
 
   function ItemClick(item) {
     setError({ ...error, trade: "" });
@@ -266,7 +260,7 @@ function AddTradeRL() {
         ...error,
         trade: "You have to select at least 1 item in have and want",
       });
-      createNotification("error", "Choose items", "choose the items");
+      createNotification("error", `Choose at least 1 item you ${!filtered.have.length ? "have" : "want"}`, "choose the items");
       return;
     }
     //Check Notes
@@ -365,7 +359,7 @@ function AddTradeRL() {
   function checkNotes() {
     const notesRegex = /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm;
     if (notes.match(notesRegex)) return "No links allowed in notes";
-    if (notes.length > 300) return "Max 300 characters allowed";
+    if (notes.length > 1000) return "Max 1000 characters allowed";
   }
 
   // Check if user linked the platform he wants to create the trade in

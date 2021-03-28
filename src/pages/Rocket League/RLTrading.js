@@ -39,10 +39,9 @@ function RLTrading({ home }) {
       .get(route)
       .then((res) => { 
         if (res.data.info === "success") {
-   
           setTradeInfo(res.data.trades);
           setPageAmount(res.data.pages);
-          
+        
         }
       })
       .catch((err) => {

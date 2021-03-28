@@ -40,20 +40,17 @@ function Navbar() {
       <div className="navLeft">
         {width <= 1213 && <Hamburber />}
 
-        <div className="navLeftItem">
-          <Link
-            to="/"
-            className="logo"
-          >
-            {width > 800 ? (
-              <LogoIcon style={logoStyle()} />
-            ) : (
-              <LogoIconPhone
-                style={{ width: "38px", height: "38px", marginLeft: "-10px", marginBottom: "3px"}}
-              />
-            )}
-          </Link>
-        </div>
+        <Link
+          to="/"
+          className="logoWrapper"
+          style={width > 1213 ? {marginLeft: "30px", marginRight: "35px"} : {marginLeft: "5px"}}
+        >
+          {width > 800 ? 
+            <LogoIcon className="logo" />
+           : 
+            <LogoIconPhone className="logoSmall" />
+          }
+        </Link>
 
         <div className="hide" id="separator"></div>
 
@@ -144,15 +141,6 @@ function Navbar() {
       );
   }
 
-  function logoStyle(){
-    let margin
-    if (width > 1213)
-      margin = "0px 20px 3px 15px"
-    else
-      margin = "0px 20px 3px -10px"
-
-    return { width: "140px", height: "auto", margin}
-  }
 }
 
 export default Navbar;

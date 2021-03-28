@@ -8,21 +8,29 @@ import {ReactComponent as Nintendo} from "../../images/icons/switch.svg"
 import {ReactComponent as Discord} from "../../images/icons/discord.svg"
 import {ReactComponent as Xbox} from "../../images/icons/xbox.svg"
 import {ReactComponent as Epic} from "../../images/icons/epic.svg"
+import { createNotification } from '../../misc/ToastNotification'
 
 export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
   const [username, setUsername] = useState()
-  const [unverifiedUsername, setUnverifiedUsername] = useState()
+  const [unverifiedUsername, setUnverifiedUsername] = useState(()=> name==="SWITCH" ? "SW-" : null)
   const [state, setState] = useState()
 
   useEffect(() => {
+
     if (linkedPlatform){
       setUsername(linkedPlatform.username)
-      if (linkedPlatform.verified)
+      if ((name === "STEAM" || name === "DISCORD" || name === "XBOX") && linkedPlatform)
+        setState("Connected")
+      else if (linkedPlatform.verified)
         setState("Connected")
       else
         setState("Unverified")
     }
-    else setState("Disconnected")
+    else {
+      setState("Disconnected")
+      setUsername()
+    }
+
   }, [linkedPlatform])
 
   return (
@@ -72,9 +80,9 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
   }
 
   function text(){
-    if (state === "Disconnected" && (name !== "STEAM" && name !== "DISCORD"))
+    if (state === "Disconnected" && (name !== "STEAM" && name !== "DISCORD" && name !== "XBOX"))
       return (
-        <p>What is your IGN</p>
+        <p>What is your {name==="SWITCH" ? "Friend code" : "IGN"}</p>
       )
     else if (state === "Unverified")
       return (
@@ -91,14 +99,19 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
       return (
         <button onClick={()=> handleDisconnect()} className={styles.signOut}>Sign out</button>
       )
-    else if (state === "Disconnected" && (name === "STEAM" || name === "DISCORD"))
+    else if (state === "Disconnected" && (name === "STEAM" || name === "DISCORD" || name === "XBOX"))
       return (
-          <button className={styles.signIn}>Sign in</button>
+          <button onClick={()=> handleSubmit2()} className={styles.signIn}>Sign in</button>
       )
     else if (state === "Disconnected")
       return (
         <form onSubmit={handleSubmit}>
-          <input onChange={e => setUnverifiedUsername(e.target.value)} value={unverifiedUsername} placeholder="IGN..." />
+          <input 
+            onChange={e => setUnverifiedUsername(e.target.value)} 
+            minLength={name==="SWITCH" ? "17" : "1"} 
+            maxLength={name==="SWITCH" ? "17" : name==="PSN" ? "16" : "20"}
+            value={unverifiedUsername}  
+            placeholder={name==="SWITCH" ? "SW-XXXX-XXXX-XXXX" : "IGN..."} />
         </form>
       )
       /*
@@ -113,15 +126,29 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
   function handleSubmit(e){
     e.preventDefault();
 
-console.log(name, unverifiedUsername)
+    if (name === "SWITCH")
+      if (!verifyFriendCode(unverifiedUsername))
+        return createNotification(
+          "error",
+          `Incorrect friend code format. Must be: SW-XXXX-XXXX-XXXX`,
+          `Wrong friend code`
+        );
+
     axios
       .post(`/api/auth/linkPlatform?platform=${name.toLowerCase()}`, { 
         username: unverifiedUsername
       })
-      .then((res) => { console.log(res.data)
+      .then((res) => { 
         if (res.data.info === "success"){
           getUserInfo()
         }
+        
+        if (res.data.message === "username already linked to another account")
+        createNotification(
+          "error",
+          `IGN is already taken`,
+          `IGN is already taken`
+        );
         
       })
       .catch((err) => {
@@ -129,10 +156,25 @@ console.log(name, unverifiedUsername)
       });
   }
 
+  function handleSubmit2(){
+    axios
+      .get(`/api/auth/${name.toLowerCase()}`)
+      .then((res) => { 
+        if (res.data.info === "success"){
+          console.log(res.data)
+          getUserInfo()
+        }
+        
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   function handleDisconnect(){
     axios
     .delete(`/api/auth/linkPlatform?platform=${name.toLowerCase()}`)
-    .then((res) => { console.log(res.data)
+    .then((res) => { 
       if (res.data.info === "success"){
         getUserInfo()
       }
@@ -141,6 +183,22 @@ console.log(name, unverifiedUsername)
     .catch((err) => {
       console.log(err.response);
     });
+  }
+
+  function verifyFriendCode(nickname){
+    if (nickname.slice(0, 3) !== "SW-")
+      return false
+    
+    if (nickname[7] !== "-" || nickname[12] !== "-")
+      return false
+    
+    for (let i = 0; i<17; i++)
+      if (i === 3 || i=== 4 || i===5 || i===6 || i===8 || i===9 || i===10 || i===11 || i===13 || i===14 || i===15 || i===16)
+        if (!Number.isInteger(parseInt(nickname[i])))
+          return false
+
+    return true
+  
   }
 
 }

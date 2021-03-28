@@ -27,7 +27,8 @@ export default function PageNumbersSkeleton() {
         </div>
 
         <div className="flex-col rl_notes_buttons_container">
-          <div className="notes-box skeleton">
+          <div className="notes-box" style={{height: "50px"}}>
+            <div className="skeleton"></div>
           </div>
 
           <div className="buttons-box">
@@ -43,7 +44,7 @@ export default function PageNumbersSkeleton() {
 function Header() {
   return (
     <div className="rltrade-cTopPlace">
-      <div className="flex">
+      <div className="rl-trade-component-top-left">
         <div className="trade-reputation">
 
           <div className="skeleton"></div>

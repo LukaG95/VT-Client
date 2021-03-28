@@ -88,7 +88,7 @@ function EditItemDropdown({ item, index, type }) {
                   index,
                   item: {
                     color,
-                    colorID: rl_info.Colors.find((c) => c.Name === color).ID,
+                    colorID: rl_info.Colors.find(c => c.Name === color).ID || 0,
                   },
                 },
               })

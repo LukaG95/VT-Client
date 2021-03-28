@@ -43,14 +43,32 @@ export default function App() {
   const [displayFooter, setDisplayFooter] = useState(false)
 
   const path = useLocation().pathname
-  const { width } = useWindowDimensions()
+  const { width, height } = useWindowDimensions()
 
   useEffect(()=> { 
     const socket = io(); // const socket = io("https://wwww.virtrade.gg");
     socket.on('auth', status => { 
-      if (status === 'success')
-        socket.on('message/new', message => setNewMessage(message))
+      if (status === 'success'){
+        socket.on('message/new', message => {
+          setNewMessage(message)
+          if(!path.includes('/account/messages'))
+            createNotification(
+              "info",
+              `New message from ${newMessage.sender.username}`,
+              `${newMessage.sender.username}`,
+              `/account/messages/${newMessage.sender._id}`
+            ); 
+        })
+        socket.on('confirmPlatform', platform => {
+          createNotification(
+            "success",
+            `Successfully linked ${platform.platform}`,
+            `Successfully linked ${platform.platform}`,
+          ); 
+        })
+      }
     })
+    
     return () => socket.off()
     
   }, [])
@@ -92,8 +110,8 @@ export default function App() {
 
           <div className="mainWrapper" style={width > 1213 && displayFooter ? {paddingBottom: "350px"} : {paddingBottom: "0px"}}>
 
-            {/*<div style={{position: "absolute", top: "5px", color: "white"}}>{width}</div>
-            <div style={{position: "absolute", top: "25px", color: "white"}}>{height}</div>*/}
+            <div style={{position: "absolute", top: "5px", color: "white"}}>{width}</div>
+            <div style={{position: "absolute", top: "25px", color: "white"}}>{height}</div>
 
             <Navbar />
             <Switch>

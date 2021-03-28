@@ -10,17 +10,17 @@ function Platforms(view) {
 
   return (
     <div className={styles.platformsWrapper}>
-    {view === "small" && <div className="backArrow" style={{margin: "20px 0px 0px 20px"}} onClick={()=> show1stPage()}>&#10140;</div>}
-    <div className={styles.platforms}>
-      
-      {Object.keys(loginPlatforms).map(name =>
-        <PlatformField 
-          name={name}
-          linkedPlatform={user[name.toLowerCase()]}
-          getUserInfo={getUserInfo}
-        />
-      )}
-    </div>
+      {view === "small" && <div className="backArrow" style={{margin: "20px 0px 0px 20px"}} onClick={()=> show1stPage()}>&#10140;</div>}
+      <div className={styles.platforms}>
+        
+        {Object.keys(loginPlatforms).map(name =>
+          <PlatformField 
+            name={name}
+            linkedPlatform={user[name.toLowerCase()]}
+            getUserInfo={getUserInfo}
+          />
+        )}
+      </div>
     </div>
   );
 

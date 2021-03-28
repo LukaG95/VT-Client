@@ -154,9 +154,6 @@ html {
   height: 60px;
 }
 
-.logo {
-  display: flex;
-}
 
 #separator {
   width: 1px;
@@ -207,6 +204,21 @@ html {
   height: 60px;
   align-items: center;
 }
+
+.logoWrapper{
+  margin-top: 3px;
+}
+
+.logo{
+  width: 140px;
+  height: auto;
+}
+
+.logoSmall{
+  width: 38px;
+  height: 38px;
+}
+
 
 .addTrade {
   display: flex;
@@ -628,19 +640,21 @@ html {
 
 .rltrade-cTopPlace {
   display: flex;
-  background-color: #1d191f;
   min-height: 55px;
   border-radius: 5px;
 
   margin-bottom: 3px;
   justify-content: space-between;
- 
 }
 
 .trade-component-header-left {
   display: flex;
   flex-direction: column;
+  background: #1d191f;
+  width: calc(70% - 1.5px);
+
   justify-content: center;
+  border-radius: 5px;
 }
 
 .trade-component-header-repTitleTags-PHONEVIEW {
@@ -666,6 +680,14 @@ html {
 
 .premium {
   color: #e7aa0f;
+}
+
+.rl-trade-component-top-left{
+  display: flex;
+  background-color: #1d191f;
+  width: calc(70% - 1.5px);
+
+  border-radius: 5px;
 }
 
 .trade-reputation {
@@ -757,8 +779,26 @@ html {
   flex-direction: column;
   justify-content: space-between;
 
-  margin-right: 20px;
+  background-color: #1d191f;
+  width: calc(30% - 1.5px);
+
+  padding-right: 20px;
+
+  border-radius: 5px;
 }
+
+@media screen and (max-width: 530px) {
+  .rl-trade-component-top-right {
+    width: 50%;
+    border-radius: 0px 5px 5px 0px;
+  }
+  
+  .trade-component-header-left{
+    width: 50%;
+    border-radius: 5px 0px 0px 5px;
+  }
+}
+
 
 .right-gamePlatform {
   display: flex;
@@ -767,20 +807,29 @@ html {
   line-height: 0px;
   font-weight: 500;
   align-items: center;
-  justify-content: flex-end;
   margin-top: 8px;
+
+  width: fit-content;
+  align-self: flex-end;
+
+  cursor: pointer;
+  transition: 0.25s;
 }
 
-.right-gamePlatform-PHONEVIEW {
-  display: flex;
-  color: #f6f6f6;
-  font-size: 15px;
-  line-height: 0px;
-  font-weight: 500;
-  align-items: center;
-  justify-content: flex-end;
-  margin-top: 8px;
+.right-gamePlatform:hover {
+  filter: brightness(0.6);
+  transition: filter 250ms ease-in-out;
 }
+
+.right-gamePlatform > .IGN {
+  color: #a3a3a3;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 100%;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
 
 .trade-post-time {
   display: flex;
@@ -804,24 +853,30 @@ html {
   margin-bottom: 8px;
 }
 
+@media screen and (max-width: 400px) {
+  .trade-post-time-PHONEVIEW{
+    font-size: 9px;
+  }
+}
+
 .rltrade_cMidPlace {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   border-radius: 5px;
-  background-color: #1d191f;
 
   min-height: 100%;
   justify-content: space-between;
-
 }
 
 .rl-has-container,
 .rl-wants-container {
-  width: 35%;
-  height: 100%;
+  width: calc(35% - 2px);
+  min-height: 100%;
   align-items: flex-start;
   padding: 10px 20px 20px 20px;
+  background-color: #1d191f;
+  border-radius: 5px;
 }
 
 .haswant-text {
@@ -836,16 +891,17 @@ html {
 }
 
 .rl_notes_buttons_container {
-  width: 30%;
-  padding: 20px 20px 17px 20px;
+  width: calc(30% - 2px);
 
   justify-content: space-between;
+  border-radius: 5px;
+
 }
 
 .notes-box {
-  background: #332638;
+  background: #1d191f;
   border-radius: 5px;
-  min-height: 40px;
+  min-height: calc(100% - 36px);
   height: fit-content;
   word-break: break-all;
 }
@@ -857,26 +913,37 @@ html {
   margin: 10px 0px 10px 15px;
   padding-right: 15px;
   overflow-y: auto;
-  scrollbar-color: #392c3e #47384d;
   text-align: justify;
+  scrollbar-width: thin;
+  scrollbar-color: #737175 #1a171d;
 
   width: fit-content;
 }
 
+.notes::-webkit-scrollbar{
+  width: 7px;
+}
+
 @media screen and (max-width: 1596px) {
   .rl_notes_buttons_container {
-    padding-top: 0px;
     width: 100%;
   }
-  .rl-has-container,
+  .rl-has-container{
+    width: calc(50% - 1.5px);
+  }
   .rl-wants-container {
-    width: 50%;
+    width: calc(50% - 1.5px);
   }
-  .notes {
+
+  .notes{
     max-height: 100px !important;
+    margin-bottom: 10px;
   }
+
   .notes-box {
-    margin-bottom: 20px;
+    min-height: 0px;
+    margin-top: 3px;
+    margin-bottom: 3px;
   }
 }
 
@@ -888,27 +955,29 @@ html {
 
 @media screen and (max-width: 957px) {
   .rltrade_cMidPlace {
-    justify-content: center;
+    /*justify-content: center;*/
   }
 }
 
 .buttons-box {
   display: flex;
   position: relative;
+
+  border-radius: 5px;
 }
 
 .buttons-box button {
-  background: none;
+  background-color: #28222b;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   color: #f6f6f6;
-  border: 1px solid #61496a;
+  border: none;
   border-radius: 5px;
-  padding: 5px 0px 5px 0px;
+  padding: 7px 0px 7px 0px;
   cursor: pointer;
   width: 100%;
-  margin-right: 10px;
+  margin-right: 3px;
 
   height: fit-content;
   white-space: nowrap;
@@ -919,71 +988,43 @@ html {
   margin-right: 0px;
 }
 
-
-.buttons-box-sign-to-interact {
-  color: #818181;
-
-  font-size: 12px;
-  padding-left: 5px;
-}
-
 .buttons-box button:hover {
-  background-color: #47384d;
+  background-color: #312a35;
 }
 
 .buttons-box button:active {
   background: #251d28;
 }
 
-#editTrade-button {
-  background: none;
-  border: 1px solid #2c8e54;
-  padding: 5px 0px 5px 0px;
-  transition: background 200ms;
- 
+.buttons-box-sign-to-interact {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+  height: 33px;
+
+  color: #818181;
+  background-color: #1d191f;
+
+  font-size: 12px;
+  padding-left: 10px;
+
+  border-radius: 5px;
 }
 
-#deleteTrade-button {
-  background: none;
-  border: 1px solid #d10a0a;
-  padding: 5px 15px 5px 15px;
-  transition: background 200ms;
-  
-}
-
-#bumpTrade-button {
-  background: none;
-  border: 1px solid #e7aa0f;
-  padding: 5px 15px 5px 15px;
-  transition: background 200ms;
-  
-}
 
 @media screen and (max-width: 1596px) {
-  .buttons-box button, #bumpTrade-button, #deleteTrade-button, #editTrade-button{
+  .buttons-box button{
     padding: 10px 0px 10px 0px;
   }
 }
 
-
 @media screen and (max-width: 650px) {
-  .buttons-box button, #bumpTrade-button, #deleteTrade-button, #editTrade-button {
+  .buttons-box button{
     font-size: 10px;
     padding: 5px 0px 5px 0px;
   }
-}
-
-
-#bumpTrade-button:hover {
-  background: #e7aa0f25;
-}
-
-#editTrade-button:hover {
-  background: #2c8e5327;
-}
-
-#deleteTrade-button:hover {
-  background: #d10a0a23;
 }
 
 .trade-expire-text {
@@ -1935,6 +1976,10 @@ html {
   .rl-has-container,
   .rl-wants-container {
     width: 100%;
+  }
+
+  .rl-has-container{
+    margin-bottom: 3px;
   }
 
   .RLicon {
@@ -4630,7 +4675,7 @@ html {
 
 .rl-trade-component-top-right .skeleton{
   height: 15px;
-  width: 100px;
+  width: 50px;
 
   border-radius: 5px;
   align-self: flex-end;
@@ -4638,7 +4683,7 @@ html {
 
 .rl-trade-component-top-right .skeleton2{
   height: 15px;
-  width: 200px;
+  width: 100px;
 
   border-radius: 5px;
 }
@@ -4651,8 +4696,18 @@ html {
   margin-bottom: 10px;
 }
 
+.notes-box .skeleton{
+  height: 10px;
+  width: 100px;
+
+  margin-top: 10px;
+  margin-left: 10px;
+
+  border-radius: 5px;
+}
+
 .buttons-box .skeleton{
-  height: 25px;
+  height: 33px;
   width: 100%;
 
   border-radius: 5px;
@@ -4679,3 +4734,4 @@ html {
   animation: load 1s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
 }
 */
+

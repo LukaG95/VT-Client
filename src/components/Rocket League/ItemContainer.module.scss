@@ -6,7 +6,7 @@
   /* Item Grid Styles */
   display: grid;
   align-items: center;
-  /* Min size of 90px */
+  /* Min size of 95px */
   grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
   gap: 4px;
 }

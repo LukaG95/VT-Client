@@ -18,12 +18,12 @@ export default function Item({ item, lazy, hideName, added, ...props }) {
           <img
             className={styles.image}
             src={MissingImageIcon}
-            alt={item.Name}
+            alt={item.Name} // ?
           />
           {lazy ? (
             <LazyLoadImage
               className={`${styles.image}`}
-              src={`/images/items/${item.itemID}.${item.colorID || "0"}.webp`}
+              src={item.itemName !== "Offer" ? `/images/items/${item.itemID}.${item.colorID || "0"}.webp` : `/images/items/offer.png`}
               threshold={100}
               delayTime={0}
               alt=""
@@ -31,7 +31,7 @@ export default function Item({ item, lazy, hideName, added, ...props }) {
           ) : (
             <img
               className={styles.image}
-              src={`/images/items/${item.itemID}.${item.colorID || "0"}.webp`} 
+              src={item.itemName !== "Offer" ? `/images/items/${item.itemID}.${item.colorID || "0"}.webp` : `/images/items/offer.png`}
               alt=""
               style={added ? {borderRadius: "5px"} : null}
             />
