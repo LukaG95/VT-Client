@@ -1,5 +1,7 @@
-import React, { useContext, useEffect, useMemo } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import {Helmet} from "react-helmet";
+import useWindowDimensions from '../../misc/windowHW'
 
 import infoRL from "../../constants/RocketLeagueInfo.json";
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
@@ -9,9 +11,11 @@ import NotFoundImage from "../../images/icons/not-found.png";
 import pageNumbers from "../../misc/pageNumbers"
 import PageNumbersSkeleton from "../../skeleton/PageNumbersSkeleton"
 import TradeComponentsSkeleton from "../../skeleton/TradeComponentsSkeleton"
-import {Helmet} from "react-helmet";
+
 
 function RLTrading({ home }) {
+  const [view, setView] = useState()
+
   const {
     game,
     searchType,
@@ -28,33 +32,30 @@ function RLTrading({ home }) {
     currentPage,
     setCurrentPage,
   } = useContext(TbFiltersRLContext);
+  
+  const { width } = useWindowDimensions()
 
   const tradeComponents = useMemo(() => tradeInfo && 
   tradeInfo.map(trade => <RLTradeComponent trade={trade} />), [tradeInfo])
 
   useEffect(() => {
-    const route = tradeFilters();
+    requestTrades(false)
 
-    axios
-      .get(route)
-      .then((res) => { 
-        if (res.data.info === "success") {
-          setTradeInfo(res.data.trades);
-          setPageAmount(res.data.pages);
-        
-        }
-      })
-      .catch((err) => {
-        console.log(err.response);
-        createNotification(
-          "error",
-          "Oops, something went wrong",
-          "something went wrong"
-        );
-      });
-      
   }, [game, searchType, name, color, cert, itemType, platform, currentPage]);
+  
 
+  // this is so that notes height doesn't get messed up 
+  // when refreshing page on small width then putting window full screen - when low amount of items in trade and a lot of notes
+  useEffect(() => {
+    if (width > 1596 && view === "small"){
+      requestTrades()
+      setView("big")
+    } else if (width <= 1596)
+      setView("small")
+
+  }, [width]);
+
+  // clean up 
   useEffect(() => {
     return ()=> {
       resetFilters()
@@ -84,6 +85,11 @@ function RLTrading({ home }) {
   } else 
       return (
         <>
+          <Helmet>
+            {home ? <title>VirTrade</title> : <title>{game} Trading | VirTrade</title>}
+            <description>Trade your Rocket League items with others</description>
+            <link rel="canonical" href="http://virtrade.gg/trading/rl" />
+          </Helmet>
           {PageNumbersSkeleton()} 
           <TradeComponentsSkeleton />
         </>
@@ -114,8 +120,12 @@ function RLTrading({ home }) {
     );
   }
 
-  function tradeFilters() {
+  function requestTrades(resetInfo = true) {
     // converts names to IDs
+    if (resetInfo){
+      setTradeInfo()
+      setPageAmount()
+    }
     let id;
     if (name === "Any") id = "Any";
     else
@@ -136,7 +146,23 @@ function RLTrading({ home }) {
       `&page=${currentPage}` +
       `&limit=10`;
 
-    return route;
+      axios
+      .get(route)
+      .then((res) => { 
+        if (res.data.info === "success") {
+          setTradeInfo(res.data.trades);
+          setPageAmount(res.data.pages);
+        
+        }
+      })
+      .catch((err) => {
+        console.log(err.response);
+        createNotification(
+          "error",
+          "Oops, something went wrong",
+          "something went wrong"
+        );
+      });
   }
 }
 

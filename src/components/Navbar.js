@@ -111,7 +111,7 @@ function Navbar() {
     if (isLoggedIn)
       if (width > 1213)
         return (
-          <Link to="/account/settings" id="removeDecoration">
+          <Link to="/account/settings/username" id="removeDecoration">
             <div className="navRightItem profile">
               <ProfileIcon className="navRightContent" style={{ width: "40px", height: "40px"}}/>
               <p style={{ marginLeft: "10px" }}>{username}</p>
@@ -120,7 +120,7 @@ function Navbar() {
         );
       else
         return (
-           <Link to="/account/settings" id="removeDecoration">
+           <Link to="/account/settings/username" id="removeDecoration">
             <div className="nav-button-wrapper" style={{ marginRight: "15px" }}>
               <ProfileIconSmall style={{ width: "25px", height: "25px"}}/>
             </div>

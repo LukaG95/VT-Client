@@ -22,7 +22,7 @@ function AccountSidebar() {
 
   return (
     <div className="accountTb">
-      <Link to="/account/settings" id="removeDecoration">
+      <Link to="/account/settings/username" id="removeDecoration">
         <p className={`accountTb-nav ${account}`}>Account Settings</p>
       </Link>
 

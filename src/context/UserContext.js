@@ -40,7 +40,6 @@ function UserContextProvider({ children }) {
     axios
     .get("/api/auth/getUser")
     .then((res) => { 
-      // console.log('/api/auth/getUser', res)
       if (res.data.info === "success") {
         setUser(res.data.user);
         setIsLoggedIn(true);
@@ -67,7 +66,7 @@ function UserContextProvider({ children }) {
     })
     .catch((err) => {
       setDisplayWebsite(false);
-      console.log(err);
+      console.log(err.response);
       /*if (err.response)
       if (err.response.status === 400 || 401){}*/
     });

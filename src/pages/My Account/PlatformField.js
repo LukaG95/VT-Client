@@ -19,7 +19,7 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
 
     if (linkedPlatform){
       setUsername(linkedPlatform.username)
-      if ((name === "STEAM" || name === "DISCORD" || name === "XBOX") && linkedPlatform)
+      if (name === "STEAM" || name === "DISCORD" || name === "XBOX" || name === "SWITCH")
         setState("Connected")
       else if (linkedPlatform.verified)
         setState("Connected")
@@ -38,15 +38,7 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
       <div className={styles.header}>
         <div>
           {icon()}
-         
-          {
-            name === "SWITCH" ? 
-            <div className={styles.switch}>
-              <p className={styles.name}>{name}</p>
-              <div>Currently down</div>
-            </div>
-            : <p className={styles.name}>{name}</p>
-          }
+          <p className={styles.name}>{name}</p> 
         </div>
         <div>
           <p>{username}</p>
@@ -101,7 +93,7 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
       )
     else if (state === "Disconnected" && (name === "STEAM" || name === "DISCORD" || name === "XBOX"))
       return (
-          <button onClick={()=> handleSubmit2()} className={styles.signIn}>Sign in</button>
+          <button onClick={()=> window.open(`https://www.virtrade.gg/api/auth/${name==="STEAM" ? "linkSteam" : name==="DISCORD" ? "linkDiscord" : "xbox"}`)} className={styles.signIn}>Sign in</button>
       )
     else if (state === "Disconnected")
       return (
@@ -156,21 +148,6 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
       });
   }
 
-  function handleSubmit2(){
-    axios
-      .get(`/api/auth/${name.toLowerCase()}`)
-      .then((res) => { 
-        if (res.data.info === "success"){
-          console.log(res.data)
-          getUserInfo()
-        }
-        
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   function handleDisconnect(){
     axios
     .delete(`/api/auth/linkPlatform?platform=${name.toLowerCase()}`)
@@ -178,6 +155,13 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
       if (res.data.info === "success"){
         getUserInfo()
       }
+
+      if (res.data.info === "error")
+        createNotification(
+          "error",
+          res.data.message,
+          res.data.message
+        );
       
     })
     .catch((err) => {

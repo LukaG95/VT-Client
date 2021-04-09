@@ -564,6 +564,7 @@ html {
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .no-trades-found-wrapper img {
@@ -887,7 +888,7 @@ html {
 }
 
 .smallerIcon{
-  grid-template-columns: repeat(auto-fit, minmax(94px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(82px, 1fr));
 }
 
 .rl_notes_buttons_container {
@@ -895,7 +896,6 @@ html {
 
   justify-content: space-between;
   border-radius: 5px;
-
 }
 
 .notes-box {
@@ -1022,8 +1022,8 @@ html {
 
 @media screen and (max-width: 650px) {
   .buttons-box button{
-    font-size: 10px;
-    padding: 5px 0px 5px 0px;
+    font-size: 11px;
+    padding: 10px 0px 10px 0px;
   }
 }
 
@@ -2943,7 +2943,7 @@ html {
 }
 
 .displayTextWrapper {
-  background-color: #47384d;
+  background-color: #1d191f;
   border-radius: 5px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
   padding: 25px 30px 25px 30px;
@@ -2954,14 +2954,15 @@ html {
   margin-bottom: 20px;
 }
 
-.displayTextWrapper p:nth-child(2) {
+.displayTextWrapper p{
   color: #f6f6f6;
   font-size: 13px;
   margin-bottom: 20px;
 }
 
 .displayTextWrapper a {
-  color: #e7aa0f;
+  color: #6c63ff;
+  text-decoration: none;
 }
 
 .displayTextWrapper div {
@@ -2971,13 +2972,51 @@ html {
   margin-top: 15px;
 }
 
-.displayTextWrapper div p {
-  color: #f6f6f6;
-  font-size: 13px;
-}
-
 .displayTextWrapper img {
   margin-left: 5px;
+}
+
+.displayTextWrapper > div{
+  display: flex;
+  justify-content: space-between;
+}
+
+.displayTextWrapper > div button{
+  background-color: #fe3b3b;
+
+  color: #f6f6f6;
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+
+  padding: 10px 20px 10px 20px;
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.displayTextWrapper > div button:hover{
+  background-color: #ff4848;
+}
+
+@media screen and (max-width: 900px){
+  .displayTextWrapper h2 {
+    font-size: 16px;
+  }
+  
+  .displayTextWrapper p {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 600px){
+  .displayTextWrapper h2 {
+    font-size: 14px;
+  }
+  
+  .displayTextWrapper p {
+    font-size: 10px;
+  }
 }
 
 /*-----Password reset          ----*/
@@ -3405,7 +3444,7 @@ html {
   transition: min-width 250ms;
 }
 
-.account-settings-sidebar div {
+.account-settings-sidebar a {
   font-weight: 500;
   font-size: 16px;
   color: rgba(246, 246, 246, 0.5);
@@ -3414,9 +3453,11 @@ html {
   padding: 18px;
   cursor: pointer;
   transition: padding-left 0.3s;
+
+  text-decoration: none;
 }
 
-.account-settings-sidebar div:nth-child(1) {
+.account-settings-sidebar a:nth-child(1) {
   /*border-top: 1px solid #27212B;*/
   margin-top: 50px;
 }
@@ -3645,10 +3686,25 @@ html {
   color: #f6f6f6;
   font-weight: normal;
   font-size: 16px;
-
-  margin-bottom: 50px;
 }
 
+.resend-email-conf-text{
+  color: #f6f6f6;
+  background: #3452ff;
+  font-size: 12px;
+  
+  width: fit-content;
+
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 50px;
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.resend-email-conf-text:hover{
+  background: #415dff;
+}
 
 #accountUnError {
   position: absolute;

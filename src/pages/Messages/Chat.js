@@ -259,7 +259,7 @@ function validateMessage(){
 
   function getUserStatus(){
     axios
-      .get(`/api/messages/status/${conversation.conversationWith._id}`)
+      .get(`/api/messages/status/online/${conversation.conversationWith._id}`)
       .then((res) => {
         if (res.data.info === "success")
           setUserStatus(res.data.status)

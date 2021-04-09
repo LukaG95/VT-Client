@@ -163,7 +163,7 @@ function SignUpInfo({ closeForm }) {
       );
       return;
     }
-
+   
     axios
       .post("/api/auth/signup", {}, {
         auth: {
@@ -172,20 +172,21 @@ function SignUpInfo({ closeForm }) {
         }
       })
       .then((res) => {
-        console.log("POST /api/auth/signup", res);
-
-        createNotification(
-          "success",
-          "You have signed up",
-          "you have signed up"
-        );
-        setTimeout(() => {
+        if (res.data.status === 200){
+          closeForm()
           createNotification(
-            "info",
-            "Check your email for a confirmation link",
-            "confirmation link"
+            "success",
+            "You have signed up",
+            "you have signed up"
           );
-        }, 2000);
+          setTimeout(() => {
+            createNotification(
+              "info",
+              "Check your email for a confirmation link",
+              "confirmation link"
+            );
+          }, 1000);
+      }
       })
       .catch((err) => {
         if (err.response.status === 429)
@@ -205,6 +206,7 @@ function SignUpInfo({ closeForm }) {
             "something went wrong"
           );
       });
+      
   }
 }
 

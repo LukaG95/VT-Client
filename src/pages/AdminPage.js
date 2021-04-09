@@ -15,7 +15,6 @@ function AdminPage() {
     axios
       .get("/api/auth/getTestUsers")
       .then((res) => {
-        console.log("/api/auth/getTestUsers", res);
         const test_users = res.data.testers.map((item) => (
           <>
             <div className="testUserComponent">

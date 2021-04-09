@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import axios from "axios";
 
 import ConversationComponent from "./ConversationComponent"
 import styles from "./Conversations.module.scss";

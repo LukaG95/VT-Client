@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useLocation, Link } from "react-router-dom"
 import axios from "axios";
 import Filter from "bad-words";
 
@@ -12,8 +13,6 @@ import {Helmet} from "react-helmet";
 const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
 
 function MyAccount() {
-  const [sidebarChoice, setSidebarChoice] = useState("Username");
-
   const [view, setView] = useState()
 
   const [currentUsername, setCurrentUsername] = useState();
@@ -33,7 +32,8 @@ function MyAccount() {
   const [newPassErrorMsg, setNewPassErrorMsg] = useState("");
   const [newPass2ErrorMsg, setNewPass2ErrorMsg] = useState("");
 
-  const { username, email } = useContext(UserContext);
+  const { username, email, user } = useContext(UserContext);
+  const pathID = useLocation().pathname.slice(18)
 
   const { width } = useWindowDimensions()
 
@@ -72,49 +72,55 @@ function MyAccount() {
 
       <div className="account-settings-wrapper">
         <div className="account-settings-sidebar" id="account-sidebar">
-          <div
+          <Link
+            to="/account/settings/username"
             onClick={() => {
-              setSidebarChoice("Username")
               if (view === "small") show2ndPage()
             }}
-            style={sidebarChoice === "Username" && view === "big" ? chosenSidebarStyle : null}
+            style={pathID === "username" && view === "big" ? chosenSidebarStyle : null}
           >
             Username
-          </div>
-          <div
+          </Link>
+          {
+            !registeredWithPlatform() && 
+              <>
+                <Link
+                  to="/account/settings/password"
+                  onClick={() => {
+                    if (view === "small") show2ndPage()
+                  }}
+                  style={pathID === "password" && view === "big" ? chosenSidebarStyle : null}
+                >
+                  Password
+                </Link>
+              
+                <Link
+                  to="/account/settings/email"
+                  onClick={() => {
+                    if (view === "small") show2ndPage()
+                  }}
+                  style={pathID === "email" && view === "big" ? chosenSidebarStyle : null}
+                >
+                  Email
+                </Link>
+              </>
+          }
+          <Link
+            to="/account/settings/platforms"
             onClick={() => {
-              setSidebarChoice("Password")
-              if (view === "small")  show2ndPage()
+              if (view === "small") show2ndPage()
             }}
-            style={sidebarChoice === "Password" && view === "big" ? chosenSidebarStyle : null}
-          >
-            Password
-          </div>
-          <div
-            onClick={() => {
-              setSidebarChoice("Email")
-              if (view === "small")  show2ndPage()
-            }}
-            style={sidebarChoice === "Email" && view === "big" ? chosenSidebarStyle : null}
-          >
-            Email
-          </div>
-          <div
-            onClick={() => {
-              setSidebarChoice("Platforms")
-              if (view === "small")  show2ndPage()
-            }}
-            style={sidebarChoice === "Platforms" && view === "big" ? chosenSidebarStyle : null}
+            style={pathID === "platforms" && view === "big" ? chosenSidebarStyle : null}
           >
             Platforms
-          </div>
+          </Link>
         </div>
 
         <div className="account-settings-main" id="account-main">
-          {sidebarChoice === "Username" && Username()}
-          {sidebarChoice === "Password" && Password()}
-          {sidebarChoice === "Email" && Email()}
-          {sidebarChoice === "Platforms" && Platforms(view)}
+          {pathID === "username" && Username()}
+          {pathID === "password" && Password()}
+          {pathID === "email" && Email()}
+          {pathID === "platforms" && Platforms(view)}
         </div>
       </div>
       
@@ -153,12 +159,6 @@ function MyAccount() {
             "You have updated your username",
             "update username"
           );
-        } else if (res.data.status === "username") {
-          setUsernameErrorMsg("Username is taken");
-        } else if (res.data.status === "days30") {
-          setUsernameErrorMsg(
-            "You can only change your username once per month"
-          );
         } else
           createNotification(
             "error",
@@ -166,7 +166,20 @@ function MyAccount() {
             "something went wrong"
           );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.response.data.status === "days30") 
+          createNotification(
+            "error",
+            "You can only change your username once per 30 days",
+            "You can only change your username once per 30 days",
+          );
+        else if (err.response.data.status === "username") 
+          createNotification(
+            "error",
+            "Username is taken",
+            "Username is taken",
+          );
+      });
   }
 
   function handleUpdatePassword(e) {
@@ -372,13 +385,15 @@ function MyAccount() {
   function Email() {
     return (
       <div className="account-email-container">
-        {console.log("I've ran 2")}
         <div className="center-align">
-        {view === "small" && <div className="backArrow" onClick={()=> show1stPage()}>&#10140;</div>}
-        <h1 className="acSettings-currentUEmail">Current Email</h1>
+          {view === "small" && <div className="backArrow" onClick={()=> show1stPage()}>&#10140;</div>}
+          <h1 className="acSettings-currentUEmail">Current Email</h1>
         </div>
-        <h3 className="acSettings-email-text">{currentEmail}</h3>
 
+        <h3 className="acSettings-email-text" style={user.activatedAccount ? {marginBottom: "50px"} : {marginBottom: "5px"}}>{currentEmail}</h3>
+
+        {!user.activatedAccount && <div className="resend-email-conf-text" onClick={()=> resendConfirmationEmail()}>Resend confirmation email</div>}
+        
         <form onSubmit={(e) => handleUpdateEmail(e)}>
           <p>New Email</p>
           <input
@@ -428,6 +443,43 @@ function MyAccount() {
         </form>
       </div>
     );
+  }
+
+  function registeredWithPlatform(){
+    if (user.steam)
+      return user.steam.signedUpWith
+
+    if (user.discord)
+      return user.discord.signedUpWith
+    
+    return false
+  }
+
+  function resendConfirmationEmail(){
+    axios
+      .post(`/api/auth/resendSignupEmail`)
+      .then((res) => { 
+        if (res.data.info === "success")
+          createNotification(
+            "success",
+            `Confirmation email sent`,
+            `Confirmation email sent`
+          );
+        else
+          createNotification(
+            "error",
+            `Oops something went wrong`,
+            `Oops something went wrong`
+          );
+        
+      })
+      .catch((err) => {
+        createNotification(
+          "error",
+          `Oops something went wrong`,
+          `Oops something went wrong`
+        );
+      });
   }
 
   // phone view

@@ -1,4 +1,4 @@
-import RocketLeagueInfo from "./RocketLeagueInfo.json";
+import RLInfo from "./RLInfo.json";
 import All from "../images/icons/RL add trade filter icons/All.png";
 import Blueprint from "../images/icons/RL add trade filter icons/Blueprints.png";
 import Crate from "../images/icons/RL add trade filter icons/Gift_Packs.png";
@@ -19,16 +19,16 @@ let tradeableItems = null;
 export function getTradeableItems() {
   if (!tradeableItems) {
     tradeableItems = [];
-    RocketLeagueInfo.Slots.forEach((slot) => {
-      slot.Items.forEach((item) => {
+    RLInfo.items.forEach((item) => {
         if (item.Tradable)
           tradeableItems.push({
             itemID: item.ItemID,
             itemName: item.Name,
-            itemType: slot.Name,
+            itemType: item.Slot,
+            blueprintable: item.Blueprintable,
+            blueprint: false
           });
       });
-    });
   }
   return tradeableItems;
 }

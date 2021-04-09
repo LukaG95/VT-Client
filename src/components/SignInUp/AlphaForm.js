@@ -35,15 +35,17 @@ function AlphaForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     axios
       .post("/api/test/login", {
         username: username,
         password: password,
       })
       .then((res) => {
+        console.log(res.data)
         window.location.reload();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.response));
   }
 }
 

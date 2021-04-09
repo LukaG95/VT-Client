@@ -16,7 +16,7 @@ function AddReputation() {
   const [feedback, setFeedback] = useState();
   const [repErrorMessage, setRepErrorMessage] = useState("");
 
-  const { myID } = useContext(UserContext);
+  const { myID, user } = useContext(UserContext);
   const { pathID } = useParams()
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function AddReputation() {
 
     axios
       .get(`/api/reputation/${pathID}`)
-      .then((res) => {
+      .then((res) => { 
         if (res.data.info === "success") setRepInfo(res.data.rep);
         else setRepInfo("invalid");
       })
@@ -150,12 +150,14 @@ function AddReputation() {
   /*-----Functions                -------------*/
 
   function handleRepSubmit(good_bad) {
+
+    //Check if repping yourself
     if (myID === pathID) {
       setRepErrorMessage("You can't rep yourself");
       createNotification("error", "You can't rep yourself", "rep yourself");
       return;
     }
-
+    //Check category
     if (repCategory === undefined) {
       setRepErrorMessage("You have to pick a rep category 1st");
       createNotification(
@@ -165,7 +167,7 @@ function AddReputation() {
       );
       return;
     }
-
+    //Check feedback
     if (feedback === undefined || feedback.replace(/\s/g, "").length < 5) {
       setRepErrorMessage("Your message has to be at least 5 characters long");
       createNotification(
@@ -175,7 +177,7 @@ function AddReputation() {
       );
       return;
     }
-
+    //Check feedback2
     if (feedback.length > 300) {
       setRepErrorMessage("Your message is too long, max 300 characters");
       createNotification(
@@ -185,7 +187,7 @@ function AddReputation() {
       );
       return;
     }
-
+    //Check feedback3
     if (
       !feedback.match(
         /^[!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?a-zA-Z0-9 ]{5,100}$/gm
@@ -199,6 +201,7 @@ function AddReputation() {
       );
       return;
     }
+    //Check feedback4
     if (
       feedback.match(
         /\b(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+(?:[-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?\b/gm
@@ -213,13 +216,18 @@ function AddReputation() {
       return;
     }
 
+    //Check activated account
+    if (!user.activatedAccount){
+      createNotification("error", "Confirm your email before adding reputation", "Confirm your email before adding reputation", "/account/settings/email");
+    }
+
     axios
       .post(`/api/reputation/addRep/${pathID}`, {
         good: good_bad,
         category: repCategory,
         feedback: profanityFilter.clean(feedback),
       })
-      .then((res) => {
+      .then((res) => {  console.log(res.data)
         if (res.data.info === "success") {
           setFeedback("");
           setRepCategory();

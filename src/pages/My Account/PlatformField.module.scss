@@ -34,28 +34,6 @@
     color: #f6f6f6;
   }
 
-  & > div > .switch{
-    display: flex;
-    position: relative;
-
-    flex-direction: column;
-    justify-content: center;
-
-    align-items: flex-start;
-  }
-
-  & > div > .switch > div{
-    position: absolute;
-
-    margin-left: 7px;
-    font-size: 9px;
-
-    top: 27px;
-    white-space: nowrap;
-  
-    color: #C33030;
-    
-  }
 }
 
 .platformIcon{

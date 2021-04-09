@@ -45,13 +45,13 @@ function AddTradeRL() {
   useEffect(() => {
     if (pathID) {
       axios.get(`/api/trades/getTrade/${pathID}`)
-        .then(({ data }) => {
+        .then(({ data }) => { 
           if (data.idMatch) {
             dispatch({
               type: actions.SET_ITEMS,
               payload: {
                 notes: data.trade.notes,
-                platform: data.trade.platform,
+                platform: data.trade.platform.name,
                 have: [...data.trade.have, ...Array(12 - data.trade.have.length).fill(null)],
                 want: [...data.trade.want, ...Array(12 - data.trade.want.length).fill(null)]
               }
@@ -65,15 +65,24 @@ function AddTradeRL() {
   useEffect(() => {
     process.nextTick(() => {
       let RLitems = getTradeableItems();
-      if (filters.type !== "Any") {
-        RLitems = RLitems.filter((i) => i.itemType === filters.type);
+      if (filters.type === "Blueprint"){
+        RLitems = RLitems.filter((i) => i.blueprintable)
+      }
+      else if (filters.type !== "Any") {
+        RLitems = RLitems.filter((i) => i.itemType === filters.type)
       }
       if (filters.name) {
         RLitems = RLitems.filter(
           (i) => i.itemName.toLowerCase().search(filters.name) > -1
         );
       }
-
+      
+      if (filters.type === "Blueprint"){
+        RLitems = RLitems.map(item => ({...item, blueprint: true}))
+      } else{
+        RLitems = RLitems.map(item => ({...item, blueprint: false}))
+      }
+      
       setItems(RLitems); // "Offer" is added in the .json
     });
   }, [filters]);
@@ -103,7 +112,7 @@ function AddTradeRL() {
     </>
   )
 
-  function ItemClick(item) {
+  function ItemClick(item) { 
     setError({ ...error, trade: "" });
     dispatch({
       type: actions.ADD_ITEM,
@@ -269,12 +278,17 @@ function AddTradeRL() {
       setError({ ...error, notes: notesError });
       return createNotification("error", notesError, notesError);
     }
-    
+
     //Check Platforms
     const platformsError = checkPlatforms();
     if (platformsError) {
       setError({ ...error, notes: platformsError });
-      return createNotification("error", platformsError, platformsError);
+      return createNotification("error", platformsError, platformsError, "/account/settings/platforms");
+    }
+
+    //Check activated account
+    if (!user.activatedAccount){
+      createNotification("error", "Confirm your email before posting trades", "Confirm your email before posting trades", "/account/settings/email");
     }
 
     //Create or Edit Trade
@@ -293,7 +307,7 @@ function AddTradeRL() {
           platform: platform,
           notes: notes,
         })
-        .then((res) => {
+        .then((res) => { 
           if (res.data.info === "success") {
             //Trade Successfully Created
             dispatch({ type: actions.RESET });
@@ -333,7 +347,7 @@ function AddTradeRL() {
           platform: platform,
           notes: notes,
         })
-        .then((res) => {
+        .then((res) => { 
           if (res.data.info === "success") {
             //Successfully Edit Trade
             createNotification(
@@ -366,7 +380,7 @@ function AddTradeRL() {
   function checkPlatforms(){
     const userPlatform = platform.toLowerCase()
 
-    if (userPlatform === "switch"){
+    if (userPlatform === "xbox" || userPlatform === "steam" || userPlatform === "switch"){
       if (!user[userPlatform]) return `Link your ${platform} IGN in settings`}
     else {
       if (!user[userPlatform]) return `Verify your ${platform} IGN in settings`
@@ -384,6 +398,7 @@ function AddTradeRL() {
       cert: item.cert,
       itemType: "item",
       amount: item.amount,
+      blueprint: item.blueprint
     };
   }
 

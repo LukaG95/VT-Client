@@ -37,7 +37,7 @@ import { io } from "socket.io-client";
 import { createNotification } from "./misc/ToastNotification";
 
 export default function App() {
-  const { isLoggedIn, displayWebsite } = useContext(UserContext);
+  const { isLoggedIn, displayWebsite, user } = useContext(UserContext);
   const { setIsOpen_LeftSidebar } = useContext(LeftSidebarContext);
   const [newMessage, setNewMessage] = useState(null)
   const [displayFooter, setDisplayFooter] = useState(false)
@@ -110,8 +110,8 @@ export default function App() {
 
           <div className="mainWrapper" style={width > 1213 && displayFooter ? {paddingBottom: "350px"} : {paddingBottom: "0px"}}>
 
-            <div style={{position: "absolute", top: "5px", color: "white"}}>{width}</div>
-            <div style={{position: "absolute", top: "25px", color: "white"}}>{height}</div>
+            {/*<div style={{position: "absolute", top: "5px", color: "white"}}>{width}</div>
+            <div style={{position: "absolute", top: "25px", color: "white"}}>{height}</div>*/}
 
             <Navbar />
             <Switch>
@@ -174,7 +174,16 @@ export default function App() {
               <Route exact path="/security">
                 <PreventScam />
               </Route>
-              <Route exact path="/account/settings">
+              <Route exact path="/account/settings/username">
+                {handleRedirectOnRefresh(<Settings />)}
+              </Route>
+              <Route exact path="/account/settings/password">
+                {handleRedirectOnRefresh(!registeredWithPlatform() ? <Settings /> : <Redirect to="/" />)}
+              </Route>
+              <Route exact path="/account/settings/email">
+                {handleRedirectOnRefresh(!registeredWithPlatform() ? <Settings /> : <Redirect to="/" />)}
+              </Route>
+              <Route exact path="/account/settings/platforms">
                 {handleRedirectOnRefresh(<Settings />)}
               </Route>
               <Route exact path="/account/messages">
@@ -217,4 +226,14 @@ export default function App() {
     else if (isLoggedIn === false) return <Redirect to="/" />;
   }
 
+  function registeredWithPlatform(){
+    if(user){
+      if (user.steam)
+        return user.steam.signedUpWith
+
+      if (user.discord)
+        return user.discord.signedUpWith
+    }
+    return false
+  }
 }

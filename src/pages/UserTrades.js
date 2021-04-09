@@ -24,7 +24,7 @@ function UserTrades() {
   useEffect(() => {
     axios
       .get(`/api/trades/getUserTrades?searchId=${pathID}`)
-      .then((res) => { console.log(res.data.trades)
+      .then((res) => { 
         if (res.data.info === "success" || res.data.info === "no trades") {
           setUserTrades(res.data.trades);
           setUsername(res.data.username);
@@ -76,7 +76,7 @@ function UserTrades() {
     axios
       .delete(`/api/trades/deleteTrade?tradeId=${trade._id}`)
       .then((res) => {
-        if (res.data.info === "success") window.location.reload();
+        //if (res.data.info === "success") window.location.reload();
       })
       .catch((err) => console.log("Error: " + err));
   }
@@ -88,7 +88,7 @@ function UserTrades() {
   function bumpTrade(trade) {
     axios
       .put(`/api/trades/bumpTrade/?tradeId=${trade._id}`)
-      .then((res) => { console.log(res.data)
+      .then((res) => {
         if (res.data.info === "success")
           createNotification(
             "success",

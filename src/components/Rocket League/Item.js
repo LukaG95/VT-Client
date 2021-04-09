@@ -15,15 +15,17 @@ export default function Item({ item, lazy, hideName, added, ...props }) {
     >
       <div className={styles.content}>
         <div className={styles.imageContainer}>
+          
           <img
             className={styles.image}
             src={MissingImageIcon}
             alt={item.Name} // ?
           />
+          
           {lazy ? (
             <LazyLoadImage
               className={`${styles.image}`}
-              src={item.itemName !== "Offer" ? `/images/items/${item.itemID}.${item.colorID || "0"}.webp` : `/images/items/offer.png`}
+              src={imagePath()}
               threshold={100}
               delayTime={0}
               alt=""
@@ -31,7 +33,7 @@ export default function Item({ item, lazy, hideName, added, ...props }) {
           ) : (
             <img
               className={styles.image}
-              src={item.itemName !== "Offer" ? `/images/items/${item.itemID}.${item.colorID || "0"}.webp` : `/images/items/offer.png`}
+              src={imagePath()}
               alt=""
               style={added ? {borderRadius: "5px"} : null}
             />
@@ -64,6 +66,15 @@ export default function Item({ item, lazy, hideName, added, ...props }) {
     );
   } else {
     return content;
+  }
+
+  function imagePath(){
+    if (item.itemName === "Offer")
+      return `/images/items/offer.png`
+    else if (item.blueprint)
+      return `/images/blueprints/${item.itemID}.${item.colorID || "0"}.webp`
+    else
+      return `/images/items/${item.itemID}.${item.colorID || "0"}.webp`
   }
 
 }
