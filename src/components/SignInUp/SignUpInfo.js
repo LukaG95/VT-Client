@@ -172,7 +172,7 @@ function SignUpInfo({ closeForm }) {
         }
       })
       .then((res) => {
-        if (res.data.status === 200){
+        if (res.status === 200){
           closeForm()
           createNotification(
             "success",
@@ -180,11 +180,7 @@ function SignUpInfo({ closeForm }) {
             "you have signed up"
           );
           setTimeout(() => {
-            createNotification(
-              "info",
-              "Check your email for a confirmation link",
-              "confirmation link"
-            );
+            window.location.reload();
           }, 1000);
       }
       })

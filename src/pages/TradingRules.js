@@ -41,7 +41,7 @@ export default function TradingRules() {
           <li>No links allowed in the notes</li>
           <li>You must have all items that you are offering</li>
           <li>You can only trade items that are presented in the add trade page. Cash trading, and trading for anything else outside of the game you’re trading in is forbidden</li>
-          <li>Scamming and sharking is forbidden and will result in an instant ban (do not -rep scammers, please report them here: __)</li>
+          <li>Scamming and sharking is forbidden and will result in an instant ban (do not -rep scammers, please report them <a href="https://forms.gle/6tqsDSbeMz1q7NpY6" target="_blank">here</a>)</li>
           <li>Bots, scripts or any sort of automation that will in any way help you trade is forbidden</li>
         </ul>
 

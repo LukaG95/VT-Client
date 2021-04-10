@@ -4021,7 +4021,12 @@ html {
 
 .ToS-body p {
   font-size: 15px;
+}
 
+.ToS-body a{
+  text-decoration: none;
+
+  color: #fe3b3b;
 }
 
 /*-----Alpha              ----*/

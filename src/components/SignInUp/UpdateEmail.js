@@ -23,7 +23,7 @@ function UpdateEmail() {
       .catch((err) => console.log(err));
   }, [pathID]);
 
-  if (emailConfirmed)
+
     return (
       <div className="confirmEmailWrapper">
         <div style={{ textAlign: "center" }} className="displayTextWrapper">
@@ -34,8 +34,7 @@ function UpdateEmail() {
         </div>
       </div>
     );
-  else if (emailConfirmed === undefined) return null;
-  else return <Redirect to="/" />;
+
 
   /*-----Functions                -------------*/
 }

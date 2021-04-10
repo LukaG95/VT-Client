@@ -36,7 +36,7 @@ export default function PreventScam() {
 
         <p>
           Although this will not shield you from getting scammed, it’s worth noting you should take screenshots and/or record the whole trade as it goes on. 
-          If you get scammed, do not -rep the scammer, but report them here: __. <br />Also feel free to email the developers of that game, explain what exactly happened and attach the proof. 
+          If you get scammed, do not -rep the scammer, but report them <a href="https://forms.gle/6tqsDSbeMz1q7NpY6" target="_blank">here</a>. <br />Also feel free to email the developers of that game, explain what exactly happened and attach the proof. 
         </p>
 
         <h2>Indicators of potential scam</h2>

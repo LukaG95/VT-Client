@@ -46,7 +46,7 @@ export default function App() {
   const { width, height } = useWindowDimensions()
 
   useEffect(()=> { 
-    const socket = io(); // const socket = io("https://wwww.virtrade.gg");
+    const socket = io({transports: ['websocket']}); // const socket = io("https://wwww.virtrade.gg");
     socket.on('auth', status => { 
       if (status === 'success'){
         socket.on('message/new', message => {
