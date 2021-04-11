@@ -82,7 +82,7 @@ const rl_dd_names = {
     "Turtle",
     "Victor",
   ],
-  itemTypeDD: ["Any", "Items", "Blueprints"],
+  itemTypeDD: ["Any", "Item", "Blueprint"],
   platformDD: ["Any", "Steam", "PS4", "XBOX", "SWITCH", "EPIC"],
 };
 

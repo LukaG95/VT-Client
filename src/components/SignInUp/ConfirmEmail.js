@@ -9,12 +9,14 @@ import { ReactComponent as DiscordIcon } from "../../images/icons/discord.svg";
 import { ReactComponent as TwitterIcon } from "../../images/icons/twitter.svg";
 import { ReactComponent as FacebookIcon } from "../../images/icons/facebook.svg";
 import { ReactComponent as SteamIcon } from "../../images/icons/steam.svg";
+import { UserContext } from "../../context/index";
 
 function ConfirmEmail() {
   const [emailConfirmed, setEmailConfirmed] = useState();
 
   const { pathID } = useParams()
   const { setOpenForm } = useContext(PopupContext);
+  const { isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     axios
@@ -61,7 +63,7 @@ function ConfirmEmail() {
                 <FacebookIcon onClick={()=> window.open("https://www.facebook.com/Virtrade/")} className={styles.social} />
                 <SteamIcon onClick={()=> window.open("https://steamcommunity.com/groups/virtrade")} className={styles.social} />
               </div>
-              <button onClick={()=> setOpenForm(true)}>Login</button>
+              {!isLoggedIn && <button onClick={()=> setOpenForm(true)}>Login</button>}
             </div>
           </div>
         </div>

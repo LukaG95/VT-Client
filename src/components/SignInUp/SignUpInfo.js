@@ -172,17 +172,8 @@ function SignUpInfo({ closeForm }) {
         }
       })
       .then((res) => {
-        if (res.status === 200){
-          closeForm()
-          createNotification(
-            "success",
-            "You have signed up",
-            "you have signed up"
-          );
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
-      }
+        if (res.status === 200)
+          window.location.reload();
       })
       .catch((err) => {
         if (err.response.status === 429)

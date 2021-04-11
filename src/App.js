@@ -73,7 +73,6 @@ export default function App() {
     
   }, [])
 
-
   useEffect(()=> {
     if (newMessage && !path.includes('/account/messages'))
     createNotification(

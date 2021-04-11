@@ -78,9 +78,9 @@ function AddTradeRL() {
       }
       
       if (filters.type === "Blueprint"){
-        RLitems = RLitems.map(item => ({...item, blueprint: true}))
+        RLitems = RLitems.map(item => ({...item, itemType: "Blueprint"}))
       } else{
-        RLitems = RLitems.map(item => ({...item, blueprint: false}))
+        RLitems = RLitems.map(item => ({...item, itemType: "Item"}))
       }
       
       setItems(RLitems); // "Offer" is added in the .json
@@ -302,8 +302,8 @@ function AddTradeRL() {
         );
       axios
         .post("/api/trades/createTrade", {
-          have: filtered.have.map(preparePostItem),
-          want: filtered.want.map(preparePostItem),
+          have: filtered.have,
+          want: filtered.want,
           platform: platform,
           notes: notes,
         })
@@ -342,8 +342,8 @@ function AddTradeRL() {
       //Edit Trade
       axios
         .post(`/api/trades/editTrade?tradeId=${pathID}`, {
-          have: filtered.have.map(preparePostItem),
-          want: filtered.want.map(preparePostItem),
+          have: filtered.have,
+          want: filtered.want,
           platform: platform,
           notes: notes,
         })
@@ -389,18 +389,6 @@ function AddTradeRL() {
 
   }
 
-  function preparePostItem(item) {
-    return {
-      itemID: item.itemID,
-      itemName: item.itemName,
-      color: item.color,
-      colorID: item.colorID,
-      cert: item.cert,
-      itemType: "item",
-      amount: item.amount,
-      blueprint: item.blueprint
-    };
-  }
 
   function icon(p){
     const platforms={   

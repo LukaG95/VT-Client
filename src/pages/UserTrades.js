@@ -24,7 +24,7 @@ function UserTrades() {
   useEffect(() => {
     axios
       .get(`/api/trades/getUserTrades?searchId=${pathID}`)
-      .then((res) => { 
+      .then((res) => { console.log(res)
         if (res.data.info === "success" || res.data.info === "no trades") {
           setUserTrades(res.data.trades);
           setUsername(res.data.username);
