@@ -1,62 +1,67 @@
-import React, { useState, useContext } from "react";
-import { useParams, Redirect } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import {Helmet} from "react-helmet";
 
 import { createNotification } from "../../misc/ToastNotification";
-import { UserContext } from "../../context/UserContext";
 
 function ResetPassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const { isLoggedIn } = useContext(UserContext);
-
   const { pathID } = useParams()
 
-  if (isLoggedIn === false)
     return (
-      <div className="resetPassWrapper">
-        <form onSubmit={handleNewPassSubmit} className="resetPassForm">
-          <div className="formItem">
-            <p className="logFormText">New password</p>
-            <input
-              required
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              className="logFormInput"
-              value={password}
-            ></input>
-            <p className="formErrorMessage"></p>
-          </div>
+      <>
 
-          <div className="formItem">
-            <p className="logFormText">Confirm new password</p>
-            <input
-              required
-              type="password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="logFormInput"
-              value={confirmPassword}
-            ></input>
-          </div>
+        <Helmet>
+          <title>Reset password | VirTrade</title>
+          <description>Reset password notice</description>
+          <link rel="canonical" href="http://virtrade.gg/password/reset" />
+        </Helmet>
 
-          <button
-            type="submit"
-            style={{ marginTop: "15px" }}
-            className="formItem loginNowButton"
-          >
-            Confirm new password
-          </button>
-        </form>
-      </div>
+        <div className="resetPassWrapper">
+          <form onSubmit={handleNewPassSubmit} className="resetPassForm">
+            <div className="formItem">
+              <p className="logFormText">New password</p>
+              <input
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                className="logFormInput"
+                value={password}
+              ></input>
+              <p className="formErrorMessage"></p>
+            </div>
+
+            <div className="formItem">
+              <p className="logFormText">Confirm new password</p>
+              <input
+                type="password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="logFormInput"
+                value={confirmPassword}
+              ></input>
+            </div>
+
+            <button
+              type="submit"
+              style={{ marginTop: "15px" }}
+              className="formItem loginNowButton"
+            >
+              Confirm new password
+            </button>
+          </form>
+        </div>
+
+      </>
     );
-  else if (isLoggedIn === true) return <Redirect to="/" />;
-  else return null;
 
   /*-----Functions                -------------*/
 
   function handleNewPassSubmit(e) {
     e.preventDefault();
+
+    if (password === "" || confirmPassword === "") return
 
     if (password.length < 6 || password.length > 30) {
       createNotification(
@@ -92,34 +97,35 @@ function ResetPassword() {
         passwordConfirm: confirmPassword,
       })
       .then((res) => {
-        console.log(res);
-        if (res.data.status === "blocked") {
+        if (res.data.info === "blocked") {
           createNotification(
             "error",
             "Too many requests, please try again later",
-            "too many requests"
+            "Too many requests, please try again later"
           );
-        } else if (res.data.status === "success") {
+        } else if (res.data.info === "success") {
+          setPassword("")
+          setConfirmPassword("")
           createNotification(
             "success",
             "Your password has been changed",
-            "pass has been changed"
+            "Your password has been changed"
           );
           setTimeout(
             () =>
               createNotification(
                 "info",
                 "Redirecting in a few moments",
-                "redirecting in a few"
+                "Redirecting in a few moments"
               ),
-            1500
+            200
           );
-          setTimeout(() => (window.location.href = "/"), 4000);
+          setTimeout(() => (window.location.replace = "/"), 2500);
         } else
           createNotification(
             "error",
             "Oops, something went wrong...",
-            "something went wrong"
+            "Oops, something went wrong..."
           );
       })
       .catch((err) => console.log(err));

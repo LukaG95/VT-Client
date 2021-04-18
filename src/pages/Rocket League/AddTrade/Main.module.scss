@@ -48,6 +48,27 @@
   
 }
 
+.itemType{
+  color: #f6f6f6;
+  background: #120f13;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  padding-left: 30px;
+  padding-right: 30px;
+  
+  height: 100%;
+  width: 100%;
+
+  font-weight: 500;
+  
+  border: 1px dashed #f6f6f6;
+  border-radius: 5px;
+}
+
 .haveWant {
   @media only screen and (max-width: 1213px) {
     background: #1d191f;

@@ -16,6 +16,7 @@ import ClearItems from "../../../components/AddTrade/ClearItems";
 import { getTradeableItems } from "../../../constants/Items";
 import { useTradeFilters } from "../../../context/TradeFiltersContext";
 import { UserContext } from "../../../context/UserContext";
+import { PopupContext } from "../../../context/PopupContext";
 import PlusItem from "./PlusItem";
 import {Helmet} from "react-helmet";
 import {ReactComponent as Steam} from "../../../images/icons/steam.svg"
@@ -41,6 +42,7 @@ function AddTradeRL() {
   });
   const [items, setItems] = useState([]);
   const { width } = useWindowDimensions();
+  const { setOpenEditTradePopup } = useContext(PopupContext);
   //Edit Trade
   useEffect(() => {
     if (pathID) {
@@ -78,21 +80,66 @@ function AddTradeRL() {
       }
       
       if (filters.type === "Blueprint"){
-        RLitems = RLitems.map(item => ({...item, itemType: "Blueprint"}))
+        RLitems = RLitems.map(item => ({...item, blueprint: true}))
       } else{
-        RLitems = RLitems.map(item => ({...item, itemType: "Item"}))
+        RLitems = RLitems.map(item => ({...item, blueprint: false}))
       }
+
+      RLitems.sort((a, b)=> {
+        const x = a.itemName.toLowerCase();
+        const y = b.itemName.toLowerCase();
+        if (x < y) {return -1;}
+        if (x > y) {return 1;}
+        return 0;
+      })
       
+      RLitems.sort((a, b)=> {
+        const x = a.itemType.toLowerCase();
+        const y = b.itemType.toLowerCase();
+        if (x < y) {return -1;}
+        if (x > y) {return 1;}
+        return 0;
+      })
+
       setItems(RLitems); // "Offer" is added in the .json
     });
   }, [filters]);
 
+/*
   const inventoryItems = useMemo(
     () => 
-      items.map(item => ( 
-        <Item item={item} lazy={true} onClick={() => ItemClick(item)} key={item.itemID} />
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      )),
+      items.map((item,i) => {
+        if (i < 2)
+         return <><Item item={item} lazy={true} onClick={() => ItemClick(item)} key={item.itemID} /> <div className={styles.itemType}>{item.itemType}</div></>
+        else 
+          return <Item item={item} lazy={true} onClick={() => ItemClick(item)} key={item.itemID} />
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+      })
+    [items]
+  );
+*/
+
+  const inventoryItems = useMemo(
+    () => {
+      let returnedItems = []
+      for (let i = 0; i<items.length; i++){
+        if (i === 0){
+          returnedItems.push(<div className={styles.itemType}>{items[i].itemType==="1Special" ? "Special" : items[i].itemType}</div>)
+          returnedItems.push(<Item item={items[i]} lazy={true} onClick={() => ItemClick(items[i])} key={items[i].itemID} /> )
+        }
+        else if(!items[i+1])
+          returnedItems.push(<Item item={items[i]} lazy={true} onClick={() => ItemClick(items[i])} key={items[i].itemID} /> )
+        else if (items[i].itemType !== items[i+1].itemType){ // inserting item types
+          returnedItems.push(<Item item={items[i]} lazy={true} onClick={() => ItemClick(items[i])} key={items[i].itemID} /> )
+          returnedItems.push(<div className={styles.itemType}>{items[i+1].itemType==="1Special" ? "Special" : items[i+1].itemType}</div>)
+        }
+        else
+          returnedItems.push(<Item item={items[i]} lazy={true} onClick={() => ItemClick(items[i])} key={items[i].itemID} /> )
+        
+      }
+
+      return returnedItems
+    },
     [items]
   );
 
@@ -302,8 +349,8 @@ function AddTradeRL() {
         );
       axios
         .post("/api/trades/createTrade", {
-          have: filtered.have,
-          want: filtered.want,
+          have: filtered.have.map(preparePostItem),
+          want: filtered.want.map(preparePostItem),
           platform: platform,
           notes: notes,
         })
@@ -342,19 +389,15 @@ function AddTradeRL() {
       //Edit Trade
       axios
         .post(`/api/trades/editTrade?tradeId=${pathID}`, {
-          have: filtered.have,
-          want: filtered.want,
+          have: filtered.have.map(preparePostItem),
+          want: filtered.want.map(preparePostItem),
           platform: platform,
           notes: notes,
         })
         .then((res) => { 
           if (res.data.info === "success") {
             //Successfully Edit Trade
-            createNotification(
-              "success",
-              "You have edited your trade",
-              "you have edited the trade"
-            );
+            setOpenEditTradePopup(true)
           }
         })
         .catch((err) => {
@@ -389,6 +432,17 @@ function AddTradeRL() {
 
   }
 
+  function preparePostItem(item) {
+    return {
+      itemID: item.itemID,
+      itemName: item.itemName,
+      color: item.color,
+      colorID: item.colorID,
+      cert: item.cert,
+      blueprint: item.blueprint,
+      amount: item.amount
+    };
+  }
 
   function icon(p){
     const platforms={   

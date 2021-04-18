@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Redirect } from "react-router-dom";
 import axios from "axios";
+import {Helmet} from "react-helmet";
 
 function UpdateEmail() {
   const [emailConfirmed, setEmailConfirmed] = useState();
+  const [seconds, setSeconds] = useState(5)
 
   const { pathID } = useParams()
 
@@ -13,27 +15,52 @@ function UpdateEmail() {
         code: pathID,
       })
       .then((res) => {
-        console.log(res);
-        if (res.data.status === "success") {
-          setEmailConfirmed(true);
-        }
-        // else if (res.data.status === "OldOrInvalid")
+        if (res.data.info === "success") setEmailConfirmed(true);
         else setEmailConfirmed(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setEmailConfirmed(false)
+      });
   }, [pathID]);
 
+  useEffect(() => {
+    let counter = setInterval(()=> {
+      setSeconds(prev => prev-1)
+    }, 1000)
 
+    return ()=> clearInterval(counter) 
+  }, []);
+
+  useEffect(() => {
+    if (seconds <= 0)
+      window.location.replace("http://virtrade.gg");
+
+  }, [seconds]);
+
+  if (emailConfirmed)
     return (
-      <div className="confirmEmailWrapper">
-        <div style={{ textAlign: "center" }} className="displayTextWrapper">
-          <h2>Success! You have updated your email</h2>
-          <a href="/" style={{ textDecoration: "none" }}>
-            Back to trading
-          </a>
+      <>
+
+        <Helmet>
+          <title>Update email | VirTrade</title>
+          <description>Update email notice</description>
+          <link rel="canonical" href="http://virtrade.gg/email/update" />
+        </Helmet>
+
+        <div className="confirmEmailWrapper">
+          <div style={{ textAlign: "center" }} className="displayTextWrapper">
+            <h2>Success! You have updated your email</h2>
+            <p>Redirecting in: {seconds}</p>
+            <a href="/" style={{ textDecoration: "none" }}>
+              Back to trading
+            </a>
+          </div>
         </div>
-      </div>
+
+      </>
     );
+  else if (emailConfirmed === undefined) return null;
+  else return <Redirect to="/" />
 
 
   /*-----Functions                -------------*/

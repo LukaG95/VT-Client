@@ -267,6 +267,7 @@ function RLTradeComponent({ trade, manageTrade }) {
   }
 
   function tags() {
+
     if (trade.user.tags)
       return trade.user.tags.map((tag) => (
         <div

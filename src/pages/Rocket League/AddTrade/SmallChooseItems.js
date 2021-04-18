@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import styles from "./SmallChooseItems.module.scss";
+import styles2 from "./Main.module.scss";
 import ItemContainer from "../../../components/Rocket League/ItemContainer";
 import Item from "../../../components/Rocket League/Item";
 import { actions, useTrade } from "../../../context/TradeContext";
@@ -23,34 +24,69 @@ function SmallChooseItems({ setShowPage }) {
   //Filtered Items
   useEffect(() => {
     process.nextTick(() => {
-      let items = getTradeableItems();
-      if (filters.type !== "Any") {
-        items = items.filter((i) => i.itemType === filters.type);
+      let RLitems = getTradeableItems();
+      if (filters.type === "Blueprint"){
+        RLitems = RLitems.filter((i) => i.blueprintable)
+      }
+      else if (filters.type !== "Any") {
+        RLitems = RLitems.filter((i) => i.itemType === filters.type)
       }
       if (filters.name) {
-        items = items.filter(
+        RLitems = RLitems.filter(
           (i) => i.itemName.toLowerCase().search(filters.name) > -1
         );
       }
-      setItems(items);
+      
+      if (filters.type === "Blueprint"){
+        RLitems = RLitems.map(item => ({...item, blueprint: true}))
+      } else{
+        RLitems = RLitems.map(item => ({...item, blueprint: false}))
+      }
+
+      RLitems.sort((a, b)=> {
+        const x = a.itemName.toLowerCase();
+        const y = b.itemName.toLowerCase();
+        if (x < y) {return -1;}
+        if (x > y) {return 1;}
+        return 0;
+      })
+      
+      RLitems.sort((a, b)=> {
+        const x = a.itemType.toLowerCase();
+        const y = b.itemType.toLowerCase();
+        if (x < y) {return -1;}
+        if (x > y) {return 1;}
+        return 0;
+      })
+
+      setItems(RLitems); // "Offer" is added in the .json
     });
   }, [filters]);
 
   const inventoryItems = useMemo(
-    () =>
-      items.map((item) => (
-        <Item
-          item={item}
-          onClick={() => ItemClick(item)}
-          key={item.itemID}
-          lazy
-        >
-          <ItemConfirmIcon item={item} />
-        </Item>
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      )),
+    () => {
+      let returnedItems = []
+      for (let i = 0; i<items.length; i++){
+        if (i === 0){
+          returnedItems.push(<div className={styles2.itemType}>{items[i].itemType==="1Special" ? "Special" : items[i].itemType}</div>)
+          returnedItems.push(<Item item={items[i]} lazy={true} onClick={() => ItemClick(items[i])} key={items[i].itemID} > <ItemConfirmIcon item={items[i]} /> </Item> )
+        }
+        else if(!items[i+1])
+          returnedItems.push(<Item item={items[i]} lazy={true} onClick={() => ItemClick(items[i])} key={items[i].itemID}> <ItemConfirmIcon item={items[i]} /> </Item>)
+        else if (items[i].itemType !== items[i+1].itemType){ // inserting item types
+          returnedItems.push(<Item item={items[i]} lazy={true} onClick={() => ItemClick(items[i])} key={items[i].itemID} > <ItemConfirmIcon item={items[i]} /> </Item>)
+          returnedItems.push(<div className={styles2.itemType}>{items[i+1].itemType==="1Special" ? "Special" : items[i+1].itemType}</div>)
+        }
+        else
+          returnedItems.push(<Item item={items[i]} lazy={true} onClick={() => ItemClick(items[i])} key={items[i].itemID} > <ItemConfirmIcon item={items[i]} /> </Item> )
+        
+      }
+
+      return returnedItems
+    },
     [items]
   );
+
 
   return (
     <div id="add-trade-2nd-page">

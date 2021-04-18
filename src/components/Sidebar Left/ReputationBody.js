@@ -54,9 +54,7 @@ function ReputationBody() {
           <div className="leaderboards-component" id="firstPlace">
             <div>
               {goldTrophy} <span className="paddingBetween" />
-              {leadInfo
-                ? leadInfo[timeType][0] && leadInfo[timeType][0].username
-                : null}
+              {userName(0)}
             </div>
             {leadInfo
               ? leadInfo[timeType][0] && (
@@ -68,9 +66,7 @@ function ReputationBody() {
           <div className="leaderboards-component" id="secondPlace">
             <div>
               {silverTrophy} <span className="paddingBetween" />
-              {leadInfo
-                ? leadInfo[timeType][1] && leadInfo[timeType][1].username
-                : null}
+              {userName(1)}
             </div>
             {leadInfo
               ? leadInfo[timeType][1] && (
@@ -82,9 +78,7 @@ function ReputationBody() {
           <div className="leaderboards-component" id="thirdPlace">
             <div>
               {bronzeTrophy} <span className="paddingBetween" />
-              {leadInfo
-                ? leadInfo[timeType][2] && leadInfo[timeType][2].username
-                : null}
+              {userName(2)}
             </div>
             {leadInfo
               ? leadInfo[timeType][2] && (
@@ -96,9 +90,7 @@ function ReputationBody() {
           <div className="leaderboards-component">
             <div style={{ paddingLeft: "8px" }}>
               4 <span className="paddingBetween2" />
-              {leadInfo
-                ? leadInfo[timeType][3] && leadInfo[timeType][3].username
-                : null}
+              {userName(3)}
             </div>
             {leadInfo
               ? leadInfo[timeType][3] && (
@@ -110,9 +102,7 @@ function ReputationBody() {
           <div className="leaderboards-component">
             <div style={{ paddingLeft: "8px" }}>
               5 <span className="paddingBetween2" />
-              {leadInfo
-                ? leadInfo[timeType][4] && leadInfo[timeType][4].username
-                : null}
+              {userName(4)}
             </div>
             {leadInfo
               ? leadInfo[timeType][4] && (
@@ -124,9 +114,7 @@ function ReputationBody() {
           <div className="leaderboards-component">
             <div style={{ paddingLeft: "8px" }}>
               6 <span className="paddingBetween2" />
-              {leadInfo
-                ? leadInfo[timeType][5] && leadInfo[timeType][5].username
-                : null}
+              {userName(5)}
             </div>
             {leadInfo
               ? leadInfo[timeType][5] && (
@@ -138,9 +126,7 @@ function ReputationBody() {
           <div className="leaderboards-component">
             <div style={{ paddingLeft: "8px" }}>
               7 <span className="paddingBetween2" />
-              {leadInfo
-                ? leadInfo[timeType][6] && leadInfo[timeType][6].username
-                : null}
+              {userName(6)}
             </div>
             {leadInfo
               ? leadInfo[timeType][6] && (
@@ -152,9 +138,7 @@ function ReputationBody() {
           <div className="leaderboards-component">
             <div style={{ paddingLeft: "8px" }}>
               8 <span className="paddingBetween2" />
-              {leadInfo
-                ? leadInfo[timeType][7] && leadInfo[timeType][7].username
-                : null}
+              {userName(7)}
             </div>
             {leadInfo
               ? leadInfo[timeType][7] && (
@@ -166,9 +150,7 @@ function ReputationBody() {
           <div className="leaderboards-component">
             <div style={{ paddingLeft: "8px" }}>
               9 <span className="paddingBetween2" />
-              {leadInfo
-                ? leadInfo[timeType][8] && leadInfo[timeType][8].username
-                : null}
+              {userName(8)}
             </div>
             {leadInfo
               ? leadInfo[timeType][8] && (
@@ -178,11 +160,9 @@ function ReputationBody() {
           </div>
 
           <div className="leaderboards-component">
-            <div style={{ paddingLeft: "8px" }}>
-              10 <span className="paddingBetween2" />
-              {leadInfo
-                ? leadInfo[timeType][9] && leadInfo[timeType][9].username
-                : null}
+            <div style={{ paddingLeft: "6px" }}>
+              10 <span className="paddingBetween3" />
+              {userName(9)}
             </div>
             {leadInfo
               ? leadInfo[timeType][9] && (
@@ -200,6 +180,15 @@ function ReputationBody() {
   );
 
   /*-----Functions                -------------*/
+
+  function userName(position){
+    if (leadInfo)
+      if (leadInfo[timeType][position])
+        return leadInfo[timeType][position].username
+      else 
+        return "TBD"
+
+  }
 }
 
 export default ReputationBody;

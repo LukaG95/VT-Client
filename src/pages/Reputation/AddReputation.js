@@ -70,7 +70,7 @@ function AddReputation() {
 
         <div className="rep-category-buttons">
           <button
-            style={repCategory === "rl" ? { background: "#47384D" } : null}
+            style={repCategory === "rl" ? { background: "#1d191f" } : null}
             onClick={() => {
               setRepCategory("rl");
               if (repErrorMessage === "You have to pick a rep category 1st")
@@ -80,7 +80,7 @@ function AddReputation() {
             Rocket League
           </button>
           <button
-            style={repCategory === "csgo" ? { background: "#47384D" } : null}
+            style={repCategory === "csgo" ? { background: "#1d191f" } : null}
             onClick={() => {
               setRepCategory("csgo");
               if (repErrorMessage === "You have to pick a rep category 1st")
@@ -92,7 +92,7 @@ function AddReputation() {
           <button
             style={
               repCategory === "other"
-                ? { background: "#47384D", marginRight: "0px" }
+                ? { background: "#1d191f", marginRight: "0px" }
                 : { marginRight: "0px" }
             }
             onClick={() => {

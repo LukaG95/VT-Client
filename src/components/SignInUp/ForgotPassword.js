@@ -16,7 +16,6 @@ function ForgotPassword({ closeForm }) {
 
         <div style={{ marginBottom: "0px" }} className="formItem">
           <input
-            required
             placeholder="Enter your email address"
             type="email"
             onChange={(e) => setUnOrEmail(e.target.value)}
@@ -41,20 +40,31 @@ function ForgotPassword({ closeForm }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    createNotification(
-      "success",
-      "Password reset email sent",
-      "password email sent"
-    );
+
+    if (unOrEmail === "") return
+
+    setUnOrEmail("")
 
     axios
       .post(`/api/auth/sendResetPasswordToken`, {
         email: unOrEmail,
       })
-      .then((res) => {
-        console.log(res);
+      .then((res) => {  console.log(res);
+        if (res.data.info === "success")
+          createNotification(
+            "success",
+            "Password reset email sent",
+            "Password reset email sent",
+          );  
+       
+        else if (res.data.info === "error")
+          createNotification(
+            "error",
+            res.data.message || "Oops, something went wrong...",
+            "Oops, something went wrong..."
+          );  
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.response));
   }
 }
 

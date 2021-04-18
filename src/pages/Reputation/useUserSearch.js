@@ -30,8 +30,9 @@ export default function useUserSearch(username) {
       setLoading(false)
     }).catch(res => { 
       if (axios.isCancel(res)) return
-      if (res.response.data.info === "error")
-        setUsers([])
+      if (res.response)
+        if (res.response.data.info === "error")
+          setUsers([])
         
       setError(true)
     })

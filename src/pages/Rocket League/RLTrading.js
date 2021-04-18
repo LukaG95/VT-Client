@@ -3,7 +3,7 @@ import axios from "axios";
 import {Helmet} from "react-helmet";
 import useWindowDimensions from '../../misc/windowHW'
 
-import infoRL from "../../constants/RocketLeagueInfo.json";
+import infoRL from "../../constants/RLInfo.json";
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
 import RLTradeComponent from "../../components/Rocket League/RLTradeComponent";
 import { createNotification } from "../../misc/ToastNotification";
@@ -129,11 +129,9 @@ function RLTrading({ home }) {
     let id;
     if (name === "Any") id = "Any";
     else
-      infoRL.Slots.forEach((Slot) =>
-        Slot.Items.forEach((item) => {
+      infoRL.items.forEach((item) => {
           if (item.Name === name && item.Tradable) id = item.ItemID;
         })
-      );
 
     const route =
       `/api/trades/getTrades?` +

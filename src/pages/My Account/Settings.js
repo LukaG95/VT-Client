@@ -146,39 +146,44 @@ function MyAccount() {
       setUsernameErrorMsg("Username contains innapropriate words");
       return;
     }
-
+   
     // server request for username update
     axios
       .put(`/api/auth/updateUsername`, {
         newUsername: newUsername,
       })
       .then((res) => {
-        if (res.data.status === "success") {
+        if (res.data.info === "success") 
           createNotification(
             "success",
             "You have updated your username",
             "update username"
           );
-        } else
+        else if (res.data.message === "days30") 
+          createNotification(
+            "error",
+            "You can only change your username once per 30 days",
+            "You can only change your username once per 30 days",
+          );
+        else if (res.data.message === "username") 
+          createNotification(
+            "error",
+            "Username is taken",
+            "Username is taken",
+          );  
+        else
           createNotification(
             "error",
             "Oops something went wrong...",
             "something went wrong"
           );
       })
-      .catch((err) => {
-        if (err.response.data.status === "days30") 
-          createNotification(
-            "error",
-            "You can only change your username once per 30 days",
-            "You can only change your username once per 30 days",
-          );
-        else if (err.response.data.status === "username") 
-          createNotification(
-            "error",
-            "Username is taken",
-            "Username is taken",
-          );
+      .catch((err) => { 
+        createNotification(
+          "error",
+          "Oops something went wrong...",
+          "something went wrong"
+        );
       });
   }
 
@@ -247,7 +252,19 @@ function MyAccount() {
   function handleUpdateEmail(e) {
     e.preventDefault();
 
-    if (email === newEmail) return;
+    if (email === newEmail) {
+      createNotification(
+        "error",
+        "Your current email can not be the same as your new email",
+        "Your current email can not be the same as your new email"
+      );
+      return
+    };
+
+    if (newEmail === "" || confirmNewEmail === ""){
+      setEmailErrorMsg("Please fill both fields");
+      return
+    }
 
     if (newEmail !== confirmNewEmail) {
       setEmailErrorMsg("Emails don't match");
@@ -256,16 +273,19 @@ function MyAccount() {
 
     // server request for email update
     axios
-      .post(`/api/auth/sendResetEmailToken`, {
+      .post(`/api/auth/sendUpdateEmailToken`, {
         newEmail: newEmail,
       })
       .then((res) => {
-        if (res.data.status === "success")
+        if (res.data.info === "success"){
+          setNewEmail("")
+          setConfirmNewEmail("")
           createNotification(
             "success",
             "Success! Check your email for a confirmation link",
             "confirmation link"
           );
+        }
         else
           createNotification(
             "error",
@@ -402,11 +422,11 @@ function MyAccount() {
                 ? { border: "1px solid rgb(255, 61, 61)" }
                 : null
             }
-            required
             id="emailInput"
             type="email"
+            //type={newEmail !== "" ? "email" : "text"}
             placeholder="New Email..."
-            defaultValue={newEmail}
+            value={newEmail}
             onChange={(e) => setNewEmail(e.target.value)}
             onClick={(e) => {
               setEmailErrorMsg("");
@@ -421,11 +441,11 @@ function MyAccount() {
                 ? { border: "1px solid rgb(255, 61, 61)", marginTop: "10px" }
                 : { marginTop: "10px" }
             }
-            required
             id="emailInput"
             type="email"
+            //type={newEmail !== "" ? "email" : "text"}
             placeholder="Confirm New Email..."
-            defaultValue={confirmNewEmail}
+            value={confirmNewEmail}
             onChange={(e) => setConfirmNewEmail(e.target.value)}
             onClick={(e) => {
               setEmailErrorMsg("");

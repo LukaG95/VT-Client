@@ -39,7 +39,7 @@ function ConfirmEmail() {
       <>
       
         <Helmet>
-          <title>Email confirmation</title>
+          <title>Email confirmation | VirTrade</title>
           <description>Email confirmation notice</description>
           <link rel="canonical" href="http://virtrade.gg/email/confirm" />
         </Helmet>

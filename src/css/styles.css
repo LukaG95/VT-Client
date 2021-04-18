@@ -399,6 +399,10 @@ html {
   width: 17px;
 }
 
+.paddingBetween3 {
+  width: 15px;
+}
+
 .timeType {
   display: flex;
   justify-content: flex-end;
@@ -1646,7 +1650,7 @@ html {
   background: none;
   color: #f6f6f6;
   margin-right: 15px;
-  border: 1px solid #47384d;
+  border: 2px solid #262129;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -1656,7 +1660,7 @@ html {
 }
 
 .rep-category-buttons button:active {
-  background: rgb(99, 77, 107);
+  background: #262129;
 }
 
 @media screen and (max-width: 650px) {
@@ -2961,7 +2965,7 @@ html {
 }
 
 .displayTextWrapper a {
-  color: #6c63ff;
+  color: #2ca0ff;
   text-decoration: none;
 }
 
@@ -3034,7 +3038,7 @@ html {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: #47384d;
+  background-color: #1d191f;
   border-radius: 5px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
   padding: 22px 30px 15px 30px;
@@ -3399,7 +3403,7 @@ html {
   font-weight: 500;
   font-size: 16px;
   min-height: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 
   border: none;
   border-radius: 5px;

@@ -11,6 +11,8 @@ function Popups() {
     setOpenDeleteAllTrades,
     openLogoutPopup,
     setOpenLogoutPopup,
+    openEditTradePopup,
+    setOpenEditTradePopup
   } = useContext(PopupContext);
 
   // create a function, pass in setOpenTradeNotice as a parameter
@@ -114,7 +116,50 @@ function Popups() {
         </div>
       </div>
     );
-  } else return null;
+    
+  } 
+  else if (openEditTradePopup) 
+    return (
+      <div
+        className="shading"
+        onMouseDown={(e) => {
+          if (e.target.className === "shading") {
+            setOpenEditTradePopup(false)
+            window.location.replace("/trading/rl") 
+          };
+        }}
+      >
+        <div style={{ width: "500px" }} className="tradeNotice">
+          <p className="tradeNoticeTop">You have edited your trade</p>
+
+          <div
+            className="tradeNoticeBottom"
+            style={{ justifyContent: "space-evenly" }}
+          >
+            <button
+              onClick={() => {
+                setOpenEditTradePopup(false)
+                window.location.replace("/trading/rl/new") 
+              }}
+              className="tradeNoticeLeftButton"
+            >
+              New trade
+            </button>
+            <button
+              onClick={() => {
+                setOpenEditTradePopup(false)
+                window.location.replace("/trading/rl") 
+              }}
+              className="tradeNoticeRightButton"
+            >
+              Go to trading
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+    
+  else return null;
 
   /*-----Functions                -------------*/
 

@@ -79,8 +79,8 @@
     ],
     "items": [
         {
-          "ItemID": 9999,
-            "Slot": "Antenna",
+            "ItemID": 9999,
+            "Slot": "1Special",
             "Name": "Offer",
             "Blueprintable": false,
             "Tradable": true,
@@ -11233,7 +11233,7 @@
         },
         {
             "ItemID": 1786,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Aftershock",
             "Blueprintable": false,
             "Tradable": false,
@@ -11242,7 +11242,7 @@
         },
         {
             "ItemID": 1787,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Esper",
             "Blueprintable": false,
             "Tradable": false,
@@ -11251,7 +11251,7 @@
         },
         {
             "ItemID": 1788,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Armadillo",
             "Blueprintable": false,
             "Tradable": false,
@@ -11260,7 +11260,7 @@
         },
         {
             "ItemID": 1789,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Bone Shaker",
             "Blueprintable": false,
             "Tradable": false,
@@ -11269,7 +11269,7 @@
         },
         {
             "ItemID": 1790,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Breakout Type-S",
             "Blueprintable": false,
             "Tradable": false,
@@ -11278,7 +11278,7 @@
         },
         {
             "ItemID": 1791,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Breakout Type-S v2",
             "Blueprintable": false,
             "Tradable": false,
@@ -11287,7 +11287,7 @@
         },
         {
             "ItemID": 1792,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Triton",
             "Blueprintable": false,
             "Tradable": false,
@@ -11296,7 +11296,7 @@
         },
         {
             "ItemID": 1793,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "OEM-A",
             "Blueprintable": false,
             "Tradable": false,
@@ -11305,7 +11305,7 @@
         },
         {
             "ItemID": 1794,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "OEM-A v2",
             "Blueprintable": false,
             "Tradable": false,
@@ -11314,7 +11314,7 @@
         },
         {
             "ItemID": 1795,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "OEM-D",
             "Blueprintable": false,
             "Tradable": false,
@@ -11323,7 +11323,7 @@
         },
         {
             "ItemID": 1796,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "OEM-D v2",
             "Blueprintable": false,
             "Tradable": false,
@@ -11332,7 +11332,7 @@
         },
         {
             "ItemID": 1797,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "OEM-C",
             "Blueprintable": false,
             "Tradable": false,
@@ -11341,7 +11341,7 @@
         },
         {
             "ItemID": 1798,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "OEM-C v2",
             "Blueprintable": false,
             "Tradable": false,
@@ -11350,7 +11350,7 @@
         },
         {
             "ItemID": 1799,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "OEM-B",
             "Blueprintable": false,
             "Tradable": false,
@@ -11359,7 +11359,7 @@
         },
         {
             "ItemID": 1800,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "OEM-B v2",
             "Blueprintable": false,
             "Tradable": false,
@@ -11368,7 +11368,7 @@
         },
         {
             "ItemID": 1801,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "'16 Batmobile",
             "Blueprintable": false,
             "Tradable": false,
@@ -11377,7 +11377,7 @@
         },
         {
             "ItemID": 1802,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Dominus GT",
             "Blueprintable": false,
             "Tradable": false,
@@ -11386,7 +11386,7 @@
         },
         {
             "ItemID": 1803,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Dominus GT v2",
             "Blueprintable": false,
             "Tradable": false,
@@ -11395,7 +11395,7 @@
         },
         {
             "ItemID": 1804,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Endo",
             "Blueprintable": false,
             "Tradable": false,
@@ -11404,7 +11404,7 @@
         },
         {
             "ItemID": 1805,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Animus GP",
             "Blueprintable": false,
             "Tradable": false,
@@ -11413,7 +11413,7 @@
         },
         {
             "ItemID": 1806,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Mantis",
             "Blueprintable": false,
             "Tradable": false,
@@ -11422,7 +11422,7 @@
         },
         {
             "ItemID": 1807,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Vulcan",
             "Blueprintable": false,
             "Tradable": false,
@@ -11431,7 +11431,7 @@
         },
         {
             "ItemID": 1808,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "DeLorean Time Machine",
             "Blueprintable": false,
             "Tradable": false,
@@ -11440,7 +11440,7 @@
         },
         {
             "ItemID": 1809,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Grog",
             "Blueprintable": false,
             "Tradable": false,
@@ -11449,7 +11449,7 @@
         },
         {
             "ItemID": 1810,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Ice Charger",
             "Blueprintable": false,
             "Tradable": false,
@@ -11458,7 +11458,7 @@
         },
         {
             "ItemID": 1811,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Centio",
             "Blueprintable": false,
             "Tradable": false,
@@ -11467,7 +11467,7 @@
         },
         {
             "ItemID": 1812,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Marauder",
             "Blueprintable": false,
             "Tradable": false,
@@ -11476,7 +11476,7 @@
         },
         {
             "ItemID": 1813,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Masamune",
             "Blueprintable": false,
             "Tradable": false,
@@ -11485,7 +11485,7 @@
         },
         {
             "ItemID": 1814,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Proteus",
             "Blueprintable": false,
             "Tradable": false,
@@ -11494,7 +11494,7 @@
         },
         {
             "ItemID": 1815,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Octane ZSR",
             "Blueprintable": false,
             "Tradable": false,
@@ -11503,7 +11503,7 @@
         },
         {
             "ItemID": 1816,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Octane ZSR v2",
             "Blueprintable": false,
             "Tradable": false,
@@ -11512,7 +11512,7 @@
         },
         {
             "ItemID": 1817,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Road Hog XL",
             "Blueprintable": false,
             "Tradable": false,
@@ -11521,7 +11521,7 @@
         },
         {
             "ItemID": 1818,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Sweet Tooth",
             "Blueprintable": false,
             "Tradable": false,
@@ -11530,7 +11530,7 @@
         },
         {
             "ItemID": 1819,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Takumi RX-T",
             "Blueprintable": false,
             "Tradable": false,
@@ -11539,7 +11539,7 @@
         },
         {
             "ItemID": 1820,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Takumi RX-T v2",
             "Blueprintable": false,
             "Tradable": false,
@@ -11548,7 +11548,7 @@
         },
         {
             "ItemID": 1821,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Twin Mill III",
             "Blueprintable": false,
             "Tradable": false,
@@ -11557,7 +11557,7 @@
         },
         {
             "ItemID": 1822,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "HogSticker",
             "Blueprintable": false,
             "Tradable": false,
@@ -11566,7 +11566,7 @@
         },
         {
             "ItemID": 1823,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "X-Devil Mk2",
             "Blueprintable": false,
             "Tradable": false,
@@ -11575,7 +11575,7 @@
         },
         {
             "ItemID": 1824,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "X-Devil Mk2 v2",
             "Blueprintable": false,
             "Tradable": false,
@@ -11584,7 +11584,7 @@
         },
         {
             "ItemID": 1825,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Nemesis",
             "Blueprintable": false,
             "Tradable": false,
@@ -11653,7 +11653,7 @@
         },
         {
             "ItemID": 1834,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Triton v2",
             "Blueprintable": false,
             "Tradable": false,
@@ -11662,7 +11662,7 @@
         },
         {
             "ItemID": 1836,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Proteus v2",
             "Blueprintable": false,
             "Tradable": false,
@@ -11671,7 +11671,7 @@
         },
         {
             "ItemID": 1837,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Marauder v2",
             "Blueprintable": false,
             "Tradable": false,
@@ -11680,7 +11680,7 @@
         },
         {
             "ItemID": 1838,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Takumi",
             "Blueprintable": false,
             "Tradable": false,
@@ -11689,7 +11689,7 @@
         },
         {
             "ItemID": 1842,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Road Hog XL v2",
             "Blueprintable": false,
             "Tradable": false,
@@ -11704,7 +11704,7 @@
         },
         {
             "ItemID": 1845,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Dominus",
             "Blueprintable": false,
             "Tradable": false,
@@ -11731,7 +11731,7 @@
         },
         {
             "ItemID": 1849,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Ripper",
             "Blueprintable": false,
             "Tradable": false,
@@ -11740,7 +11740,7 @@
         },
         {
             "ItemID": 1850,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Scarab",
             "Blueprintable": false,
             "Tradable": false,
@@ -11767,7 +11767,7 @@
         },
         {
             "ItemID": 1861,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Zippy",
             "Blueprintable": false,
             "Tradable": false,
@@ -11785,7 +11785,7 @@
         },
         {
             "ItemID": 1868,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Maverick",
             "Blueprintable": false,
             "Tradable": false,
@@ -11794,7 +11794,7 @@
         },
         {
             "ItemID": 1869,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "J�ger 619",
             "Blueprintable": false,
             "Tradable": false,
@@ -11803,7 +11803,7 @@
         },
         {
             "ItemID": 1870,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Werewolf",
             "Blueprintable": false,
             "Tradable": false,
@@ -11818,7 +11818,7 @@
         },
         {
             "ItemID": 1873,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Aftershock v2",
             "Blueprintable": false,
             "Tradable": false,
@@ -12021,7 +12021,7 @@
         },
         {
             "ItemID": 1909,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Imperator DT5",
             "Blueprintable": false,
             "Tradable": false,
@@ -12344,7 +12344,7 @@
         },
         {
             "ItemID": 1961,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Samurai",
             "Blueprintable": false,
             "Tradable": false,
@@ -13351,7 +13351,7 @@
         },
         {
             "ItemID": 2083,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "NSR",
             "Blueprintable": false,
             "Tradable": false,
@@ -14061,7 +14061,7 @@
         },
         {
             "ItemID": 2358,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Samus's Gunship",
             "Blueprintable": false,
             "Tradable": false,
@@ -14108,7 +14108,7 @@
         },
         {
             "ItemID": 2373,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "'70 Dodge Charger R/T",
             "Blueprintable": false,
             "Tradable": false,
@@ -15011,7 +15011,7 @@
         },
         {
             "ItemID": 2490,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "'99 Nissan Skyline GT-R R34",
             "Blueprintable": false,
             "Tradable": false,
@@ -16942,7 +16942,7 @@
         },
         {
             "ItemID": 2768,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "The Dark Knight Rises Tumbler",
             "Blueprintable": false,
             "Tradable": false,
@@ -16951,7 +16951,7 @@
         },
         {
             "ItemID": 2769,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "'89 Batmobile",
             "Blueprintable": false,
             "Tradable": false,
@@ -17789,7 +17789,7 @@
         },
         {
             "ItemID": 2927,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Jurassic Jeep� Wrangler",
             "Blueprintable": false,
             "Tradable": false,
@@ -18303,7 +18303,7 @@
         },
         {
             "ItemID": 2999,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Twinzer",
             "Blueprintable": false,
             "Tradable": false,
@@ -18617,7 +18617,7 @@
         },
         {
             "ItemID": 3073,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Motormouth",
             "Blueprintable": false,
             "Tradable": true,
@@ -18639,7 +18639,7 @@
         },
         {
             "ItemID": 3080,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Go-Kart",
             "Blueprintable": false,
             "Tradable": true,
@@ -18648,7 +18648,7 @@
         },
         {
             "ItemID": 3081,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Muscle Car",
             "Blueprintable": false,
             "Tradable": true,
@@ -18675,7 +18675,7 @@
         },
         {
             "ItemID": 3091,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Cyclone",
             "Blueprintable": false,
             "Tradable": false,
@@ -20329,7 +20329,7 @@
         },
         {
             "ItemID": 3400,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Fast 4WD",
             "Blueprintable": false,
             "Tradable": false,
@@ -20338,7 +20338,7 @@
         },
         {
             "ItemID": 3401,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "MR11",
             "Blueprintable": false,
             "Tradable": false,
@@ -20347,7 +20347,7 @@
         },
         {
             "ItemID": 3402,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Gazella GT",
             "Blueprintable": false,
             "Tradable": false,
@@ -20575,7 +20575,7 @@
         },
         {
             "ItemID": 3436,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Diestro",
             "Blueprintable": false,
             "Tradable": false,
@@ -20638,7 +20638,7 @@
         },
         {
             "ItemID": 3444,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "McLaren 570S",
             "Blueprintable": false,
             "Tradable": false,
@@ -20679,7 +20679,7 @@
         },
         {
             "ItemID": 3452,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Nimbus",
             "Blueprintable": false,
             "Tradable": false,
@@ -20765,7 +20765,7 @@
         },
         {
             "ItemID": 3461,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Locomotive",
             "Blueprintable": false,
             "Tradable": false,
@@ -20783,7 +20783,7 @@
         },
         {
             "ItemID": 3465,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Rat Rod",
             "Blueprintable": false,
             "Tradable": false,
@@ -20846,7 +20846,7 @@
         },
         {
             "ItemID": 3475,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Artemis",
             "Blueprintable": false,
             "Tradable": false,
@@ -20909,7 +20909,7 @@
         },
         {
             "ItemID": 3485,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "R/C",
             "Blueprintable": false,
             "Tradable": false,
@@ -24484,7 +24484,7 @@
         },
         {
             "ItemID": 4075,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Electric Saw",
             "Blueprintable": false,
             "Tradable": false,
@@ -24493,7 +24493,7 @@
         },
         {
             "ItemID": 4076,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "String Trimmer",
             "Blueprintable": false,
             "Tradable": false,
@@ -24763,7 +24763,7 @@
         },
         {
             "ItemID": 4117,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Guardian",
             "Blueprintable": false,
             "Tradable": false,
@@ -24833,7 +24833,7 @@
         },
         {
             "ItemID": 4129,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Helicopter",
             "Blueprintable": false,
             "Tradable": false,
@@ -25077,7 +25077,7 @@
         },
         {
             "ItemID": 4175,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Ecto-1",
             "Blueprintable": false,
             "Tradable": false,
@@ -25622,7 +25622,7 @@
         },
         {
             "ItemID": 4267,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Mudcat",
             "Blueprintable": false,
             "Tradable": false,
@@ -25814,7 +25814,7 @@
         },
         {
             "ItemID": 4295,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Fennec",
             "Blueprintable": false,
             "Tradable": false,
@@ -25940,7 +25940,7 @@
         },
         {
             "ItemID": 4315,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Drude",
             "Blueprintable": false,
             "Tradable": false,
@@ -26003,7 +26003,7 @@
         },
         {
             "ItemID": 4324,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "K.I.T.T.",
             "Blueprintable": false,
             "Tradable": false,
@@ -26030,7 +26030,7 @@
         },
         {
             "ItemID": 4327,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Dirt Bike",
             "Blueprintable": false,
             "Tradable": false,
@@ -26245,7 +26245,7 @@
         },
         {
             "ItemID": 4359,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Rally",
             "Blueprintable": false,
             "Tradable": false,
@@ -26532,7 +26532,7 @@
         },
         {
             "ItemID": 4396,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Sentinel",
             "Blueprintable": false,
             "Tradable": false,
@@ -26669,7 +26669,7 @@
         },
         {
             "ItemID": 4416,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "UTV",
             "Blueprintable": false,
             "Tradable": false,
@@ -27041,7 +27041,7 @@
         },
         {
             "ItemID": 4483,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Insidio",
             "Blueprintable": false,
             "Tradable": false,
@@ -27472,7 +27472,7 @@
         },
         {
             "ItemID": 4565,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Pother",
             "Blueprintable": false,
             "Tradable": false,
@@ -27481,7 +27481,7 @@
         },
         {
             "ItemID": 4566,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Chikara",
             "Blueprintable": false,
             "Tradable": false,
@@ -27623,7 +27623,7 @@
         },
         {
             "ItemID": 4601,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Komodo",
             "Blueprintable": false,
             "Tradable": false,
@@ -27668,7 +27668,7 @@
         },
         {
             "ItemID": 4620,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Civet",
             "Blueprintable": false,
             "Tradable": false,
@@ -28015,7 +28015,7 @@
         },
         {
             "ItemID": 4691,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Austimiko",
             "Blueprintable": false,
             "Tradable": false,
@@ -28024,7 +28024,7 @@
         },
         {
             "ItemID": 4692,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Ronin",
             "Blueprintable": false,
             "Tradable": false,
@@ -28333,7 +28333,7 @@
         },
         {
             "ItemID": 4743,
-            "Slot": "Currency",
+            "Slot": "1Special",
             "Name": "Credits",
             "Blueprintable": false,
             "Tradable": true,
@@ -28625,7 +28625,7 @@
         },
         {
             "ItemID": 4797,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "UFO",
             "Blueprintable": false,
             "Tradable": false,
@@ -28954,7 +28954,7 @@
         },
         {
             "ItemID": 4865,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Electro-Mag",
             "Blueprintable": false,
             "Tradable": true,
@@ -29226,7 +29226,7 @@
         },
         {
             "ItemID": 4930,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Initializer",
             "Blueprintable": false,
             "Tradable": true,
@@ -29703,7 +29703,7 @@
         },
         {
             "ItemID": 5068,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Harbinger",
             "Blueprintable": false,
             "Tradable": false,
@@ -29853,7 +29853,7 @@
         },
         {
             "ItemID": 5096,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Motor Buggy",
             "Blueprintable": false,
             "Tradable": false,
@@ -29862,7 +29862,7 @@
         },
         {
             "ItemID": 5097,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Aught-O",
             "Blueprintable": false,
             "Tradable": false,
@@ -29871,7 +29871,7 @@
         },
         {
             "ItemID": 5098,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Battle Bus",
             "Blueprintable": false,
             "Tradable": false,
@@ -30265,7 +30265,7 @@
         },
         {
             "ItemID": 5194,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Peregrine TT",
             "Blueprintable": false,
             "Tradable": false,
@@ -31500,7 +31500,7 @@
         },
         {
             "ItemID": 5431,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "R3MX",
             "Blueprintable": false,
             "Tradable": false,
@@ -33444,7 +33444,7 @@
         },
         {
             "ItemID": 5848,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Tygris",
             "Blueprintable": false,
             "Tradable": false,
@@ -33534,7 +33534,7 @@
         },
         {
             "ItemID": 5933,
-            "Slot": "EngineAudio",
+            "Slot": "Engine Audio",
             "Name": "Ford F-150 RLE",
             "Blueprintable": false,
             "Tradable": false,

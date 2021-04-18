@@ -76,7 +76,7 @@ function UserTrades() {
     axios
       .delete(`/api/trades/deleteTrade?tradeId=${trade._id}`)
       .then((res) => {
-        //if (res.data.info === "success") window.location.reload();
+        if (res.data.info === "success") window.location.reload();
       })
       .catch((err) => console.log("Error: " + err));
   }

@@ -1,12 +1,10 @@
-import infoRL from "../constants/RocketLeagueInfo.json";
+import infoRL from "../constants/RLInfo.json";
 
 let rl_names = ["Any"];
 
-infoRL.Slots.forEach((Slot) =>
-  Slot.Items.forEach((item) => {
+infoRL.items.forEach((item) => {
     if (item.Tradable) rl_names.push(item.Name);
   })
-);
 
 const rl_dd_names = {
   gameDD: ["Rocket League"],

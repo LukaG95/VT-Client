@@ -95,7 +95,6 @@ export const ItemTypes = [
 export const DefaultItem = {
   itemID: 0,
   itemName: "Unknown",
-  Quality: "Common",
   itemType: "Body",
   color: "None",
   colorID: 0,

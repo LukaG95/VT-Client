@@ -4,7 +4,7 @@ import styles from "./EditItemDropdown.module.scss";
 import useWindowDimensions from "../../misc/windowHW";
 import Dropdown from "../Dropdown";
 import { rl_dd_names } from "../../info/DropdownNames";
-import rl_info from "../../constants/RocketLeagueInfo.json"
+import rl_info from "../../constants/RLInfo.json"
 
 import { ReactComponent as EditIcon } from "../../images/icons/edit.svg";
 
@@ -14,7 +14,7 @@ function EditItemDropdown({ item, index, type }) {
   const [visible, setVisible] = useState(false);
   const { height } = useWindowDimensions();
   const [_context, dispatch] = useTrade();
-  const [amountInput, setAmountInput] = useState(item.amount);
+  const [amountInput, setAmountInput] = useState();
   //Amount Changes
   useEffect(() => {
     dispatch({
@@ -123,6 +123,7 @@ function EditItemDropdown({ item, index, type }) {
               name="enableDropdown"
               style={{ justifyContent: "space-between" }}
               value={amountInput}
+              placeholder={1}
               onChange={(e) => {
                 const value = e.target.value.replace(/[^\d]/g, "");
                 const max = item.itemID === 4743 ? 100000 : 100;
