@@ -33,7 +33,7 @@ function FilterBar() {
               });
           }}
         />
-        {width >= 1778 ? (
+        {width >= 1785 ? (
           filterButtons()
         ) : (
           <div className="rl-filters-small-width">
@@ -89,7 +89,7 @@ function FilterBar() {
                 style={filters.type === type.type ? { filter: "brightness(1)" } : null}
               />
             </button>
-            <span>{type.type}</span>
+            {width >= 1785 && <span>{type.type}</span>}
           </div>
         ))}
       </section>

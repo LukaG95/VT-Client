@@ -1,4 +1,4 @@
-import RLInfo from "./RLInfo.json";
+import RLInfo from "./RLinfo.json";
 import All from "../images/icons/RL add trade filter icons/All.png";
 import Blueprint from "../images/icons/RL add trade filter icons/Blueprints.png";
 import Crate from "../images/icons/RL add trade filter icons/Gift_Packs.png";
@@ -25,6 +25,8 @@ export function getTradeableItems() {
             itemID: item.ItemID,
             itemName: item.Name,
             itemType: item.Slot,
+            quality: item.Quality,
+            paintable: item.Paintable,
             blueprintable: item.Blueprintable,
             blueprint: false
           });

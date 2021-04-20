@@ -11,6 +11,7 @@ import { ReactComponent as EditIcon } from "../../images/icons/edit.svg";
 const { colorEditDD, certEditDD } = rl_dd_names;
 
 function EditItemDropdown({ item, index, type }) {
+  console.log(item)
   const [visible, setVisible] = useState(false);
   const { height } = useWindowDimensions();
   const [_context, dispatch] = useTrade();
@@ -78,7 +79,7 @@ function EditItemDropdown({ item, index, type }) {
           <div className="item_name">{item.itemName}</div>
           <Dropdown
             name="Color"
-            items={colorEditDD}
+            items={item.paintable ? colorEditDD : ["None"]}
             className={styles.dropdowns}
             onChange={(color) =>
               dispatch({

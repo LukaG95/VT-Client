@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import axios from "axios";
 
 import Item from "./Item";
 import useWindowDimensions from "../../misc/windowHW";
@@ -22,7 +21,6 @@ const platformIcons = {
 };
 
 function RLTradeComponent({ trade, manageTrade }) {
-  const [rep, setRep] = useState();
   const [showFriendCode, setShowFriendCode] = useState(false)
 
   const { isLoggedIn } = useContext(UserContext);
@@ -35,20 +33,6 @@ function RLTradeComponent({ trade, manageTrade }) {
     setCustomHeight(`${noteBox.current.offsetHeight-60}px`)
        
   }, [noteBox.current])
-
-  useEffect(() => {
-    
-    axios
-      .get(`/api/reputation/compact/${trade.user._id}`)
-      .then((res) => {
-        if (res.status === 200) setRep(res.data.rep);
-      })
-      .catch((err) => {
-        console.log(err);
-        /*if (err.response)
-      if (err.response.status === 400 || 401){}*/
-      });
-  }, [trade]);
 
   return (
     <div className="rltrade-container">
@@ -152,17 +136,17 @@ function RLTradeComponent({ trade, manageTrade }) {
             </p>
             <div className="flex">
               <p className="trade-component-pozitiveRep">
-                +{rep ? rep.ups : null}
+                +{trade.rep.ups}
               </p>
               <p style={{ marginLeft: "6px" }}> </p>
               <p className="trade-component-negativeRep">
-                -{rep ? rep.downs : null}
+                -{trade.rep.downs}
               </p>
             </div>
           </div>
           <div className="trade-component-tagsAndTitle">
             <div className="trade-component-tags">{tags()}</div>
-            <p className="trade-component-title">{rep ? repTitle(rep.ups) : null}</p>
+            <p className="trade-component-title">{repTitle(trade.rep.ups)}</p>
           </div>
         </div>
 
@@ -195,20 +179,20 @@ function RLTradeComponent({ trade, manageTrade }) {
                   className="trade-component-pozitiveRep"
                   style={{ fontSize: "15px" }}
                 >
-                  +{rep ? rep.ups : null}
+                  +{trade.rep.ups}
                 </p>
                 <p style={{ marginLeft: "6px" }}> </p>
                 <p
                   className="trade-component-negativeRep"
                   style={{ fontSize: "15px" }}
                 >
-                  -{rep ? rep.downs : null}
+                  -{trade.rep.downs}
                 </p>
               </div>
             </div>
             <div className="trade-component-tagsAndTitle-PHONEVIEW">
               <p className="trade-component-title-PHONEVIEW">
-                {rep ? repTitle(rep.ups) : null}
+                {repTitle(trade.rep.ups)}
               </p>
               <div className="trade-component-tags-PHONEVIEW">{tags()}</div>
             </div>

@@ -3,7 +3,7 @@ import axios from "axios";
 import {Helmet} from "react-helmet";
 import useWindowDimensions from '../../misc/windowHW'
 
-import infoRL from "../../constants/RLInfo.json";
+import infoRL from "../../constants/RLinfo.json";
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
 import RLTradeComponent from "../../components/Rocket League/RLTradeComponent";
 import { createNotification } from "../../misc/ToastNotification";
@@ -148,6 +148,7 @@ function RLTrading({ home }) {
       .get(route)
       .then((res) => { 
         if (res.data.info === "success") {
+          console.log(res.data)
           setTradeInfo(res.data.trades);
           setPageAmount(res.data.pages);
         

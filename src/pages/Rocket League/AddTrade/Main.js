@@ -92,6 +92,14 @@ function AddTradeRL() {
         if (x > y) {return 1;}
         return 0;
       })
+
+      RLitems.sort((a, b)=> {
+        const x = a.quality.toLowerCase();
+        const y = b.quality.toLowerCase();
+        if (x < y) {return -1;}
+        if (x > y) {return 1;}
+        return 0;
+      })
       
       RLitems.sort((a, b)=> {
         const x = a.itemType.toLowerCase();

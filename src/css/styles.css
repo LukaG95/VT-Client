@@ -2347,13 +2347,16 @@ html {
 .RLfilter_icons_section {
   display: flex;
   flex-wrap: wrap;
-
+  height: fit-content;
   background-color: none;
+  
 }
 
 .RLfilter_iconWrapper{
   position: relative;
   margin-left: 12px;
+  height: fit-content;
+
 }
 
 .RLfilter_iconWrapper span{
