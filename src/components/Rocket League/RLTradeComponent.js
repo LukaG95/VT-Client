@@ -22,6 +22,7 @@ const platformIcons = {
 
 function RLTradeComponent({ trade, manageTrade }) {
   const [showFriendCode, setShowFriendCode] = useState(false)
+  const [showEpicUsername, setShowEpicUsername] = useState(false)
 
   const { isLoggedIn } = useContext(UserContext);
   const { width } = useWindowDimensions();
@@ -159,7 +160,7 @@ function RLTradeComponent({ trade, manageTrade }) {
 
           <div className="flex">
             <div className="trade-post-time">
-              {showFriendCode ? trade.platform.ID : `Active ${trade.bumpedAt}`}
+              {showFriendCode || showEpicUsername ? trade.platform.ID : `Active ${trade.bumpedAt}`}
             </div>
           </div>
         </div>
@@ -280,7 +281,7 @@ function RLTradeComponent({ trade, manageTrade }) {
     else if(trade.platform.name === "PSN")
       window.open(`https://my.playstation.com/profile/${trade.platform.ID}`)
     else if(trade.platform.name === "EPIC")
-      return
+      setShowEpicUsername(prev => !prev)
     else if(trade.platform.name === "SWITCH")
       setShowFriendCode(prev => !prev)
  

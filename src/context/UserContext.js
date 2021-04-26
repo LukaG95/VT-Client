@@ -7,12 +7,13 @@ function UserContextProvider({ children }) {
   const [user, setUser] = useState();
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
+  const [role, setRole] = useState();
+  
   const [isLoggedIn, setIsLoggedIn] = useState();
   const [myID, setMyID] = useState();
 
-  // testing
-  const [displayWebsite, setDisplayWebsite] = useState();
-  const [role, setRole] = useState();
+  // testing user
+  // const [displayWebsite, setDisplayWebsite] = useState();
 
   useEffect(() => {
     getUserInfo()
@@ -28,7 +29,7 @@ function UserContextProvider({ children }) {
         setIsLoggedIn,
         myID,
         role,
-        displayWebsite,
+        //displayWebsite,
         getUserInfo
       }}
     >
@@ -55,6 +56,8 @@ function UserContextProvider({ children }) {
       if (err.response.status === 400 || 401){}*/
     });
 
+  /*
+
   axios
     .get("/api/test/getUser")
     .then((res) => {
@@ -64,9 +67,9 @@ function UserContextProvider({ children }) {
     })
     .catch((err) => {
       setDisplayWebsite(false);
-      /*if (err.response)
-      if (err.response.status === 400 || 401){}*/
     });
+
+    */
   }
 }
 

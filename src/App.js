@@ -37,7 +37,7 @@ import { io } from "socket.io-client";
 import { createNotification } from "./misc/ToastNotification";
 
 export default function App() {
-  const { isLoggedIn, displayWebsite, user } = useContext(UserContext);
+  const { isLoggedIn, user } = useContext(UserContext);
   const { setIsOpen_LeftSidebar } = useContext(LeftSidebarContext);
   const [newMessage, setNewMessage] = useState(null)
   const [displayFooter, setDisplayFooter] = useState(false)
@@ -91,7 +91,7 @@ export default function App() {
       setDisplayFooter(false)
   }, [path])
 
-  if (displayWebsite === true) {
+ // if (displayWebsite === true) {
     return (
       <>
         <Sidebar />
@@ -215,8 +215,8 @@ export default function App() {
         <ToastContainer />
       </>
     );
-  } else if (displayWebsite === false) return <AlphaForm />;
-  else return null;
+  // } else if (displayWebsite === false) return <AlphaForm />;
+  //else return null;
 
   /*-----Functions                -------------*/
 
