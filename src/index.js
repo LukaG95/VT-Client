@@ -13,6 +13,9 @@ import "./css/animations.css";
 import "./css/template.css";
 import "react-toastify/dist/ReactToastify.css";
 
+import ReactGA from 'react-ga';
+ReactGA.initialize('G-GW7F7H0NST');
+
 ReactDOM.render(
   <UserContextProvider>
     <PopupContextProvider>
