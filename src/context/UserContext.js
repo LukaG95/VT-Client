@@ -51,7 +51,6 @@ function UserContextProvider({ children }) {
     })
     .catch((err) => {
       setIsLoggedIn(false);
-      console.log(err);
       /*if (err.response)
       if (err.response.status === 400 || 401){}*/
     });
@@ -59,14 +58,12 @@ function UserContextProvider({ children }) {
   axios
     .get("/api/test/getUser")
     .then((res) => {
-      // console.log('/api/test/getUser', res)
       if (res.status === 200) {
         setDisplayWebsite(true);
       }
     })
     .catch((err) => {
       setDisplayWebsite(false);
-      console.log(err.response);
       /*if (err.response)
       if (err.response.status === 400 || 401){}*/
     });

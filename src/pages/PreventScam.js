@@ -16,7 +16,7 @@ export default function PreventScam() {
 
       <Helmet>
         <title>Prevent Scam | VirTrade</title>
-        <description>Carefully read the prevent scam guide before engaging in trading with others</description>
+        <meta name="description" content="Carefully read the prevent scam guide before engaging in trading with others" />
         <link rel="canonical" href="http://virtrade.gg/security" />
       </Helmet>
 

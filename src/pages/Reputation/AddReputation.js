@@ -29,7 +29,6 @@ function AddReputation() {
         else setRepInfo("invalid");
       })
       .catch((err) => {
-        console.log(err);
         setRepInfo("invalid");
       });
   }, [myID, pathID]);
@@ -227,7 +226,7 @@ function AddReputation() {
         category: repCategory,
         feedback: profanityFilter.clean(feedback),
       })
-      .then((res) => {  console.log(res.data)
+      .then((res) => {  
         if (res.data.info === "success") {
           setFeedback("");
           setRepCategory();

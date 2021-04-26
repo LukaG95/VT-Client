@@ -15,7 +15,7 @@ export default function ReputationRules() {
     <>
       <Helmet>
         <title>Reputation Rules | VirTrade</title>
-        <description>Carefully read reputation rules before adding reputation to others</description>
+        <meta name="description" content="Carefully read reputation rules before adding reputation to others" />
         <link rel="canonical" href="http://virtrade.gg/rules/reputation" />
       </Helmet>
 

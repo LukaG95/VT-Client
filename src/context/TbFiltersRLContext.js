@@ -8,7 +8,7 @@ function TbFiltersRLContextProvider({ children }) {
   const [name, setName] = useState("Any");
   const [color, setColor] = useState("Any");
   const [cert, setCert] = useState("Any");
-  const [itemType, setItemType] = useState("Any");
+  const [blueprint, setBlueprint] = useState("Any");
   const [platform, setPlatform] = useState("Any");
 
   const [tradeInfo, setTradeInfo] = useState();
@@ -28,8 +28,8 @@ function TbFiltersRLContextProvider({ children }) {
         setColor,
         cert,
         setCert,
-        itemType,
-        setItemType,
+        blueprint,
+        setBlueprint,
         platform,
         setPlatform,
         resetFilters,
@@ -51,7 +51,7 @@ function TbFiltersRLContextProvider({ children }) {
     setName("Any");
     setColor("Any");
     setCert("Any");
-    setItemType("Any");
+    setBlueprint("Any");
     setPlatform("Any");
   }
 }

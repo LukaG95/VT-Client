@@ -45,7 +45,7 @@ function UserTrades() {
       <>
         <Helmet>
           {username ? <title>{username}'s Trades | VirTrade</title> : <title></title>}
-          <description>UserTrades page contains all trades from a user. Delete, edit or bump trades if they are yours</description>
+          <meta name="description" content="UserTrades page contains all trades from a user. Delete, edit or bump trades if they are yours" />
           <link rel="canonical" href="http://virtrade.gg/trades" />
         </Helmet>
 
@@ -78,7 +78,7 @@ function UserTrades() {
       .then((res) => {
         if (res.data.info === "success") window.location.reload();
       })
-      .catch((err) => console.log("Error: " + err));
+      .catch((err) => {});
   }
 
   function editTrade(trade) {

@@ -60,25 +60,26 @@ function AddTradeRL() {
             })
           }
         })
-        .catch(err => console.log("Error: " + err))
+        .catch(err => {})
     }
   }, [pathID])
   //Filtered Items
   useEffect(() => {
     process.nextTick(() => {
       let RLitems = getTradeableItems();
+   
       if (filters.type === "Blueprint"){
         RLitems = RLitems.filter((i) => i.blueprintable)
       }
       else if (filters.type !== "Any") {
         RLitems = RLitems.filter((i) => i.itemType === filters.type)
-      }
+      }  
       if (filters.name) {
         RLitems = RLitems.filter(
           (i) => i.itemName.toLowerCase().search(filters.name) > -1
         );
       }
-      
+    
       if (filters.type === "Blueprint"){
         RLitems = RLitems.map(item => ({...item, blueprint: true}))
       } else{
@@ -127,6 +128,7 @@ function AddTradeRL() {
   );
 */
 
+/*
   const inventoryItems = useMemo(
     () => {
       let returnedItems = []
@@ -150,13 +152,38 @@ function AddTradeRL() {
     },
     [items]
   );
+  */
+
+  const inventoryItems = useMemo(
+    () => {
+      let returnedItems = []
+      let currentType = ""
+      // inserting item types
+      for (let i = 0; i<items.length; i++){
+
+        if (items[i].itemType !== currentType){
+          returnedItems.push(<div className={styles.itemType}>{items[i].itemType==="1Special" ? "Special" : items[i].itemType}</div>)
+          returnedItems.push(<Item item={items[i]} lazy={true} onClick={() => ItemClick(items[i])} key={items[i].itemID} /> )
+
+          currentType = items[i].itemType
+        }
+
+        else
+          returnedItems.push(<Item item={items[i]} lazy={true} onClick={() => ItemClick(items[i])} key={items[i].itemID} /> )
+        
+      }
+
+      return returnedItems
+    },
+    [items]
+  );
 
   //Return Desktop or Mobile
   return (
     <>
       <Helmet>
         {!pathID ? <title>New Trade | VirTrade</title> : <title>Edit Trade | VirTrade</title>}
-        {!pathID ? <description>Create a new Rocket League trade post</description> : <description>Edit your Rocket League trade post</description>}
+        {!pathID ? <meta name="description" content="Create a new Rocket League trade post" /> : <meta name="description" content="Edit your Rocket League trade post" />}
         <link rel="canonical" href="http://virtrade.gg/trading/rl/new" />
       </Helmet>
       {
@@ -391,7 +418,6 @@ function AddTradeRL() {
               "Oops, something went wrong",
               "something went wrong"
             );
-          console.error(err.response);
         });
     } else {
       //Edit Trade
@@ -416,7 +442,6 @@ function AddTradeRL() {
               "Oops, something went wrong",
               "something went wrong"
             );
-            console.error(err.response);
         });
     }
   }

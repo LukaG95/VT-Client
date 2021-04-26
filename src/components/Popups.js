@@ -169,7 +169,7 @@ function Popups() {
       .then((res) => {
         if (res.data.info === "success") window.location.reload();
       })
-      .catch((err) => console.log("Error: " + err));
+      .catch((err) => {});
   }
 
   function handleLogout() {
@@ -178,7 +178,7 @@ function Popups() {
       .then((res) => {
         window.location.reload();
       })
-      .catch((err) => console.log("Error: " + err));
+      .catch((err) => {});
   }
 }
 

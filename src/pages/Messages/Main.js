@@ -18,7 +18,7 @@ function Main({newMessage}) {
   const [view, setView] = useState()
 
   const { width } = useWindowDimensions()
-  const { myID, username } = useContext(UserContext);
+  const { myID } = useContext(UserContext);
   const { pathID } = useParams()
  
   useEffect(() => {
@@ -42,9 +42,7 @@ function Main({newMessage}) {
         setConversations(dialogues)
         setConversationsSet(true)
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   // 2. On newMessage 
@@ -63,11 +61,11 @@ function Main({newMessage}) {
               setMessages(prev=> {
                 newMessage.displayAvatar = false
                 if (prev.length === 0) // if it's the very 1st message
-                  {console.log("1"); newMessage.displayAvatar = true}
+                  newMessage.displayAvatar = true
                 else if (Date.now() - prev[prev.length-1].createdAt.timestamp > 300000) // if last message is 5 minutes or older
-                {console.log("2"); newMessage.displayAvatar = true}
+                  newMessage.displayAvatar = true
                 else if (newMessage.sender._id !== prev[prev.length-1].sender._id) // if the last message was not sent my the same user (can replace prev[prev.length-1].sender._id with MyID)
-                {console.log("3"); newMessage.displayAvatar = true}
+                  newMessage.displayAvatar = true
                           
                 return [...prev, newMessage]
               })
@@ -136,9 +134,7 @@ function Main({newMessage}) {
 
             }
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch((err) => {});
       }  
     }
   }, [conversationsSet, pathID])

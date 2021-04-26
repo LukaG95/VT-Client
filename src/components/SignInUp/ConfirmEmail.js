@@ -24,12 +24,10 @@ function ConfirmEmail() {
         code: pathID,
       })
       .then((res) => {
-        console.log(res);
         if (res.data.info === "success") setEmailConfirmed(true);
         else setEmailConfirmed(false);
       })
       .catch((err) => {
-        console.log(err)
         setEmailConfirmed(false)
       });
   }, [pathID]);
@@ -40,7 +38,7 @@ function ConfirmEmail() {
       
         <Helmet>
           <title>Email confirmation | VirTrade</title>
-          <description>Email confirmation notice</description>
+          <meta name="description" content="Email confirmation notice" />
           <link rel="canonical" href="http://virtrade.gg/email/confirm" />
         </Helmet>
 

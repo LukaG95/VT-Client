@@ -15,7 +15,7 @@ function Terms() {
     <>
       <Helmet>
         <title>Terms and conditions | VirTrade</title>
-        <description>Carefully read terms and conditions before using features of this website</description>
+        <meta name="description" content="Carefully read terms and conditions before using features of this website" />
         <link rel="canonical" href="http://virtrade.gg/terms" />
       </Helmet>
 

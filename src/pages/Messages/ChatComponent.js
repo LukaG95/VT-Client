@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef } from "react";
+import React, { useContext } from "react";
 
 import styles from './ChatComponent.module.scss'
 import { UserContext } from "../../context/UserContext";

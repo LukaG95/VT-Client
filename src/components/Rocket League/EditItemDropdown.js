@@ -4,14 +4,13 @@ import styles from "./EditItemDropdown.module.scss";
 import useWindowDimensions from "../../misc/windowHW";
 import Dropdown from "../Dropdown";
 import { rl_dd_names } from "../../info/DropdownNames";
-import rl_info from "../../constants/RLInfo.json"
+import rl_info from "../../constants/RLinfo.json"
 
 import { ReactComponent as EditIcon } from "../../images/icons/edit.svg";
 
 const { colorEditDD, certEditDD } = rl_dd_names;
 
 function EditItemDropdown({ item, index, type }) {
-  console.log(item)
   const [visible, setVisible] = useState(false);
   const { height } = useWindowDimensions();
   const [_context, dispatch] = useTrade();

@@ -16,7 +16,7 @@ function ResetPassword() {
 
         <Helmet>
           <title>Reset password | VirTrade</title>
-          <description>Reset password notice</description>
+          <meta name="description" content="Reset password notice" />
           <link rel="canonical" href="http://virtrade.gg/password/reset" />
         </Helmet>
 
@@ -128,7 +128,7 @@ function ResetPassword() {
             "Oops, something went wrong..."
           );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   }
 }
 

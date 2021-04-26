@@ -22,7 +22,7 @@ function RLTrading({ home }) {
     name,
     color,
     cert,
-    itemType,
+    blueprint,
     platform,
     resetFilters,
     tradeInfo,
@@ -41,7 +41,7 @@ function RLTrading({ home }) {
   useEffect(() => {
     requestTrades(false)
 
-  }, [game, searchType, name, color, cert, itemType, platform, currentPage]);
+  }, [game, searchType, name, color, cert, blueprint, platform, currentPage]);
   
 
   // this is so that notes height doesn't get messed up 
@@ -70,7 +70,7 @@ function RLTrading({ home }) {
         <>
          <Helmet>
             {home ? <title>VirTrade</title> : <title>{game} Trading | VirTrade</title>}
-            <description>Trade your Rocket League items with others</description>
+            <meta name="description" content="Trade your Rocket League items with others" />
             <link rel="canonical" href="http://virtrade.gg/trading/rl" />
           </Helmet>
           {pageNumbers(currentPage, pageAmount, setCurrentPage)}
@@ -87,7 +87,7 @@ function RLTrading({ home }) {
         <>
           <Helmet>
             {home ? <title>VirTrade</title> : <title>{game} Trading | VirTrade</title>}
-            <description>Trade your Rocket League items with others</description>
+            <meta name="description" content="Trade your Rocket League items with others" />
             <link rel="canonical" href="http://virtrade.gg/trading/rl" />
           </Helmet>
           {PageNumbersSkeleton()} 
@@ -137,7 +137,7 @@ function RLTrading({ home }) {
       `/api/trades/getTrades?` +
       `search=${searchType}` +
       `&itemID=${id}` +
-      `&itemType=${itemType}` +
+      `&blueprint=${blueprint === "Blueprint" ? true : blueprint === "Item" ? false : blueprint}` +
       `&cert=${cert}` +
       `&color=${color}` +
       `&platform=${platform}` +
@@ -148,14 +148,13 @@ function RLTrading({ home }) {
       .get(route)
       .then((res) => { 
         if (res.data.info === "success") {
-          console.log(res.data)
           setTradeInfo(res.data.trades);
           setPageAmount(res.data.pages);
         
         }
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err.response)
         createNotification(
           "error",
           "Oops, something went wrong",

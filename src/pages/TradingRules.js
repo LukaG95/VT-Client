@@ -15,7 +15,7 @@ export default function TradingRules() {
     <>
       <Helmet>
         <title>Trading Rules | VirTrade</title>
-        <description>Carefully read trading rules before creating trade posts</description>
+        <meta name="description" content="Carefully read trading rules before creating trade posts" />
         <link rel="canonical" href="http://virtrade.gg/rules/trading" />
       </Helmet>
 

@@ -143,9 +143,7 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
         );
         
       })
-      .catch((err) => {
-        console.log(err.response);
-      });
+      .catch((err) => {});
   }
 
   function handleDisconnect(){
@@ -164,9 +162,7 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
         );
       
     })
-    .catch((err) => {
-      console.log(err.response);
-    });
+    .catch((err) => {});
   }
 
   function verifyFriendCode(nickname){

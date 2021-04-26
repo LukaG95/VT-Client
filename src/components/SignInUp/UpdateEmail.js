@@ -43,7 +43,7 @@ function UpdateEmail() {
 
         <Helmet>
           <title>Update email | VirTrade</title>
-          <description>Update email notice</description>
+          <meta name="description" content="Update email notice" />
           <link rel="canonical" href="http://virtrade.gg/email/update" />
         </Helmet>
 

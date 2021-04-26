@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import {Link, useLocation} from "react-router-dom"
 
 import SidebarFooter from "./Footer";
-import { closeSidebar, manageSidebarResize } from "../../misc/manageSidebar";
+import { closeSidebar } from "../../misc/manageSidebar";
 import { PopupContext } from "../../context/PopupContext";
 import { UserContext, LeftSidebarContext } from "../../context/index";
 

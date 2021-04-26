@@ -28,8 +28,8 @@ function FiltersRL() {
     setColor,
     cert,
     setCert,
-    itemType,
-    setItemType,
+    blueprint,
+    setBlueprint,
     platform,
     setPlatform,
     resetFilters,
@@ -74,9 +74,9 @@ function FiltersRL() {
       />
       <Dropdown
         name={`Item Type`}
-        value={itemType}
+        value={blueprint}
         items={itemTypeDD}
-        onChange={setItemType}
+        onChange={setBlueprint}
         className={styles.dropdown}
       />
       <Dropdown

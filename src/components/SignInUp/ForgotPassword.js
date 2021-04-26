@@ -49,7 +49,7 @@ function ForgotPassword({ closeForm }) {
       .post(`/api/auth/sendResetPasswordToken`, {
         email: unOrEmail,
       })
-      .then((res) => {  console.log(res);
+      .then((res) => { 
         if (res.data.info === "success")
           createNotification(
             "success",
@@ -64,7 +64,7 @@ function ForgotPassword({ closeForm }) {
             "Oops, something went wrong..."
           );  
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {});
   }
 }
 

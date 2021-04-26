@@ -20,7 +20,7 @@ function ReputationBody() {
       .then((res) => {
         setLeadInfo(res.data.top10);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   }, []);
 
   return (

@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function setAvatarLogic(messages) {
   const updatedMessages = messages.map((message, i) => {
     if (i === 0)

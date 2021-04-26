@@ -240,7 +240,6 @@ function MyAccount() {
           );
       })
       .catch((err) => {
-        console.log(err);
         createNotification(
           "error",
           "Oops something went wrong...",
@@ -293,7 +292,7 @@ function MyAccount() {
             "something went wrong 2"
           );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   }
 
   function Username() {

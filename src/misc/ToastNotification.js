@@ -1,5 +1,4 @@
 import { ToastContainer, toast } from "react-toastify";
-import { Link, Redirect } from "react-router-dom"
 
 function createNotification(type, message, customId, redirect) {
   toast[type](message, {

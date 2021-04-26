@@ -43,7 +43,7 @@ export default function App() {
   const [displayFooter, setDisplayFooter] = useState(false)
 
   const path = useLocation().pathname
-  const { width, height } = useWindowDimensions()
+  const { width } = useWindowDimensions()
 
   useEffect(()=> { 
     const socket = io({transports: ['websocket']}); // const socket = io("https://wwww.virtrade.gg");

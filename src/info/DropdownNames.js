@@ -1,4 +1,4 @@
-import infoRL from "../constants/RLInfo.json";
+import infoRL from "../constants/RLinfo.json";
 
 let rl_names = ["Any"];
 

@@ -27,7 +27,7 @@ function AdminPage() {
         ));
         setTestUsers(test_users);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   }, []);
 
   if (role === "admin")
@@ -54,10 +54,9 @@ function AdminPage() {
         username: newUsername,
       })
       .then((res) => {
-        // console.log(res)
         window.location.reload();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   }
 
   function deleteUser() {
@@ -68,10 +67,9 @@ function AdminPage() {
         },
       })
       .then((res) => {
-        // console.log(res)
         window.location.reload();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   }
 }
 

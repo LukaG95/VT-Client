@@ -42,10 +42,9 @@ function AlphaForm() {
         password: password,
       })
       .then((res) => {
-        console.log(res.data)
         window.location.reload();
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {});
   }
 }
 

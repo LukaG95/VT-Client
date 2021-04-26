@@ -59,8 +59,9 @@ export default function Dropdown({ name, items, onChange, value, light, floating
       {/* Dropdown Content */}
       {open && (
         <div className={styles.dropdown} style={floating ? {animation: "transitionFade 0.5s"} : {}}> 
+
           <input
-            onChange={(e) => setState({ ...state, search: e.target.value })}
+            onChange={(e) => setState({ ...state, search: e.target.value})}
             placeholder="Search"
             className={styles.search}
             autoFocus
@@ -71,6 +72,7 @@ export default function Dropdown({ name, items, onChange, value, light, floating
                 data-type="dropdown-item"
                 className={styles.item}
                 onClick={() => {
+           
                   if (item !== value && onChange) onChange(item);
                   setState({ ...state, open: false });
                 }}

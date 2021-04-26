@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useContext, useRef, useCallback } from "react";
 import axios from "axios";
 
 import styles from './Chat.module.scss'
@@ -13,9 +13,6 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
   const [view, setView] = useState()
   const [userStatus, setUserStatus] = useState("offline")
   const [blocked, setBlocked] = useState()
-  const [weSentMessage, setWeSentMessage] = useState(false)
-  const [weReceivedMessage, setWeReceivedMessage] = useState(false)
-  const [weFetchedMessages, setWeFetchedMessages] = useState(false)
 
   const { width, height } = useWindowDimensions()
   const { myID, username } = useContext(UserContext)
@@ -107,9 +104,7 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
                       )
                     }
                   })
-                  .catch((err) => {
-                    console.log(err.response);
-                  });
+                  .catch((err) => {});
               }} >Unblock
             </button> 
           : 
@@ -131,9 +126,7 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
                       )
                     }
                   })
-                  .catch((err) => {
-                    console.log(err.response);
-                  });
+                  .catch((err) => {});
               }}>Block
             </button> 
           : 
@@ -145,7 +138,6 @@ function Chat({conversation, conversations, messages, setMessages, setConversati
         <div className={styles.loading}>{(loading && conversation) && 'Loading...'}</div>
         {messages.map((message, i) => {
           if (i===0){
-            // console.log(message, i)
             return <ChatComponent lastMessageElement={lastMessageElement} message={message}/>
           }
           else
@@ -264,9 +256,7 @@ function validateMessage(){
         if (res.data.info === "success")
           setUserStatus(res.data.status)
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }
 
   function getUserBlockStatus(){
@@ -278,9 +268,7 @@ function validateMessage(){
         else
           setBlocked(false)
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }
 
   function scrollChatContainer(x = 1){
