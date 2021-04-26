@@ -345,7 +345,6 @@ function MyAccount() {
                 ? { border: "1px solid rgb(255, 61, 61)" }
                 : null
             }
-            id="passwordInput"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -363,7 +362,6 @@ function MyAccount() {
                 ? { border: "1px solid rgb(255, 61, 61)" }
                 : null
             }
-            id="passwordInput"
             type="password"
             placeholder="New Password..."
             value={newPass}
@@ -382,7 +380,6 @@ function MyAccount() {
                 ? { border: "1px solid rgb(255, 61, 61)", marginTop: "10px" }
                 : { marginTop: "10px" }
             }
-            id="passwordInput"
             type="password"
             placeholder="Confirm New Password..."
             value={newPass2}

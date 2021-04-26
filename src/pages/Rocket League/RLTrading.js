@@ -154,7 +154,6 @@ function RLTrading({ home }) {
         }
       })
       .catch((err) => {
-        console.log(err.response)
         createNotification(
           "error",
           "Oops, something went wrong",

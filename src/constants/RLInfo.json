@@ -79,9 +79,139 @@
     ],
     "items": [
         {
-          "ItemID": 9999,
+            "ItemID": 9999,
+            "Slot": "1Special",
+            "Name": "Offer",
+            "Quality": "Premium",
+            "Blueprintable": false,
+            "Tradable": true,
+            "Series": [],
+            "Rarities": []
+        },
+        {
+          "ItemID": 9998,
           "Slot": "1Special",
-          "Name": "Offer",
+          "Name": "Black Market Offer",
+          "Quality": "Premium",
+          "Blueprintable": false,
+          "Tradable": true,
+          "Series": [],
+          "Rarities": []
+        },
+        {
+          "ItemID": 9997,
+          "Slot": "1Special",
+          "Name": "Rare Offer",
+          "Quality": "Premium",
+          "Blueprintable": false,
+          "Tradable": true,
+          "Series": [],
+          "Rarities": []
+        },
+        {
+          "ItemID": 9996,
+          "Slot": "1Special",
+          "Name": "Exotic Offer",
+          "Quality": "Premium",
+          "Blueprintable": false,
+          "Tradable": true,
+          "Series": [],
+          "Rarities": []
+        },
+        {
+          "ItemID": 9995,
+          "Slot": "1Special",
+          "Name": "Import Offer",
+          "Quality": "Premium",
+          "Blueprintable": false,
+          "Tradable": true,
+          "Series": [],
+          "Rarities": []
+        },
+        {
+          "ItemID": 9994,
+          "Slot": "1Special",
+          "Name": "Credits Offer",
+          "Quality": "Premium",
+          "Blueprintable": false,
+          "Tradable": true,
+          "Series": [],
+          "Rarities": []
+        },
+        {
+          "ItemID": 9993,
+          "Slot": "1Special",
+          "Name": "Limited Offer",
+          "Quality": "Premium",
+          "Blueprintable": false,
+          "Tradable": true,
+          "Series": [],
+          "Rarities": []
+        },
+        {
+          "ItemID": 9992,
+          "Slot": "1Special",
+          "Name": "Uncommon Offer",
+          "Quality": "Premium",
+          "Blueprintable": false,
+          "Tradable": true,
+          "Series": [],
+          "Rarities": []
+        },
+        {
+          "ItemID": 9991,
+          "Slot": "1Special",
+          "Name": "Very Rare Offer",
+          "Quality": "Premium",
+          "Blueprintable": false,
+          "Tradable": true,
+          "Series": [],
+          "Rarities": []
+        },
+        {
+          "ItemID": 9990,
+          "Slot": "1Special",
+          "Name": "Non-Crate Rare Offer",
+          "Quality": "Premium",
+          "Blueprintable": false,
+          "Tradable": true,
+          "Series": [],
+          "Rarities": []
+        },
+        {
+          "ItemID": 9989,
+          "Slot": "1Special",
+          "Name": "Non-Crate Exotic Offer",
+          "Quality": "Premium",
+          "Blueprintable": false,
+          "Tradable": true,
+          "Series": [],
+          "Rarities": []
+        },
+        {
+          "ItemID": 9988,
+          "Slot": "1Special",
+          "Name": "Non-Crate Import Offer",
+          "Quality": "Premium",
+          "Blueprintable": false,
+          "Tradable": true,
+          "Series": [],
+          "Rarities": []
+        },
+        {
+          "ItemID": 9987,
+          "Slot": "1Special",
+          "Name": "Non-Crate Uncommon Offer",
+          "Quality": "Premium",
+          "Blueprintable": false,
+          "Tradable": true,
+          "Series": [],
+          "Rarities": []
+        },
+        {
+          "ItemID": 9986,
+          "Slot": "1Special",
+          "Name": "Non-Crate Very Rare Offer",
           "Quality": "Premium",
           "Blueprintable": false,
           "Tradable": true,
@@ -124,7 +254,7 @@
         {
             "ItemID": 6,
             "Slot": "Antenna",
-            "Name": "(Beta Reward) Gold Nugget",
+            "Name": "Gold Nugget (Beta Reward) ",
             "Quality": "Limited",
             "Paintable": false,
             "Blueprintable": false,
@@ -437,7 +567,7 @@
         {
             "ItemID": 32,
             "Slot": "Rocket Boost",
-            "Name": "(Alpha Reward) Gold Rush",
+            "Name": "Gold Rush (Alpha Reward)",
             "Quality": "Limited",
             "Paintable": false,
             "Blueprintable": false,
@@ -2539,7 +2669,7 @@
         {
             "ItemID": 224,
             "Slot": "Topper",
-            "Name": "(Alpha Reward) Gold Cap",
+            "Name": "Gold Cap (Alpha Reward) ",
             "Quality": "Limited",
             "Paintable": false,
             "Blueprintable": false,
@@ -3813,7 +3943,7 @@
         {
             "ItemID": 358,
             "Slot": "Wheels",
-            "Name": "(Alpha Reward) Goldstone",
+            "Name": "Goldstone (Alpha Reward) ",
             "Quality": "Limited",
             "Paintable": false,
             "Blueprintable": false,
