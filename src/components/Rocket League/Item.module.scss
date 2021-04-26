@@ -19,6 +19,18 @@
   left: 0;
   display: flex;
   flex-direction: column;
+  
+  &:hover .name{
+    height: fit-content;
+    overflow: visible;
+    white-space: normal;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-left: 7px;
+    padding-right: 7px;
+  
+    min-height: 20px;     // to ensure text doesn't move down on hover
+    padding-bottom: 1px;  // to ensure text doesn't move down on hover
+  }
 }
 
 .name {
@@ -50,17 +62,7 @@
   cursor: pointer;
 }
 
-.name:hover{
-  height: fit-content;
-  overflow: visible;
-  white-space: normal;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  padding-left: 7px;
-  padding-right: 7px;
 
-  min-height: 20px;     // to ensure text doesn't move down on hover
-  padding-bottom: 1px;  // to ensure text doesn't move down on hover
-}
 
 .imageContainer {
   position: relative;

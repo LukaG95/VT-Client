@@ -69,8 +69,8 @@ export default function Item({ item, lazy, hideName, added, ...props }) {
   }
 
   function imagePath(){
-    if (item.itemName === "Offer")
-      return `/images/items/offer.png`
+    if (item.itemID <= 9999 && item.itemID >= 9986)
+      return `/images/items/${item.itemID}.png`
     else if (item.blueprint)
       return `/images/blueprints/${item.itemID}.${item.colorID || "0"}.webp`
     else
