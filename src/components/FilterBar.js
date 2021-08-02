@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import TbFiltersRL from "./Rocket League/TbFiltersRL";
+import TbFiltersRL from "./Categories/Rocket League/TbFiltersRL";
 
 function FilterBar() {
   return (

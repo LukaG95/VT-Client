@@ -22,7 +22,7 @@ export default function PreventScam() {
 
       <div className="tos-header" ref={ref}>
         <h1>Prevent Scam</h1>
-        <p>Last revisioned: 05.03.2021</p>
+        <p>Last revisioned: 12.06.2021</p>
       </div>
 
       <div className="ToS-body">
@@ -65,7 +65,8 @@ export default function PreventScam() {
             Trading for cash is dangerous and usually against TOS so we suggest you avoid it unless you know what you are doing. 
           </li><br />
           <li><span style={{fontWeight: "bold"}}>Impersonation</span><br />
-            Scammers will often change their name and pretend to be someone else (usually a middleman or a reputable trader). 
+            Scammers will often change their name and pretend to be someone else (usually a reputable trader or a staff member), then persuade you to
+            give them your private information or items.
             It is very easy to fall for this. If you aren’t sure, open a support ticket.
           </li>
         </ol>

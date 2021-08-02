@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { actions, useTrade } from "../../context/TradeContext";
+import { actions, useTrade } from "../../../context/TradeContext";
 import styles from "./EditItemDropdown.module.scss";
-import useWindowDimensions from "../../misc/windowHW";
-import Dropdown from "../Dropdown";
-import { rl_dd_names } from "../../info/DropdownNames";
-import rl_info from "../../constants/RLinfo.json"
+import useWindowDimensions from "../../../misc/windowHW";
+import Dropdown from "../../Dropdown";
+import { rl_dd_names } from "../../../misc/DropdownNames";
+import rl_info from "../../../constants/Categories/RLinfo.json"
 
-import { ReactComponent as EditIcon } from "../../images/icons/edit.svg";
+import { ReactComponent as EditIcon } from "../../../images/icons/edit.svg";
 
 const { colorEditDD, certEditDD } = rl_dd_names;
 
@@ -69,7 +69,7 @@ function EditItemDropdown({ item, index, type }) {
   }, []);
   return (
     <div ref={ref}>
-      <EditIcon className="editIcon" style={item.amount <= 1 ? { top: "6px" } : null}/>
+      <EditIcon className="editIcon" style={item.amount <= (item.category === "Money" ? 0 : 1) ? { top: "6px" } : null}/>
       {visible && (
         <div
           className="rl-icon-dropdown" // style is small height positioning
@@ -117,7 +117,7 @@ function EditItemDropdown({ item, index, type }) {
           />
           <div className="rl-icon-dropdown-button-section">
             <label className="enableDropdown">
-              Amount - max {item.itemID === 4743 ? 100000 : 100}
+              Amount - max {item.category === "Money" ? "100,000$" : item.itemID === 4743 ? "100,000" : "100"}
             </label>
             <input
               name="enableDropdown"
@@ -125,8 +125,11 @@ function EditItemDropdown({ item, index, type }) {
               value={amountInput}
               placeholder={1}
               onChange={(e) => {
-                const value = e.target.value.replace(/[^\d]/g, "");
-                const max = item.itemID === 4743 ? 100000 : 100;
+                const value = item.category === "Money" ? e.target.value.replace(/[^\d.]/g, "") : e.target.value.replace(/[^\d]/g, "") // allow a dot and numbers if cash, or just numbers if not
+                if (value !== "") // so we can also leave empty space
+                  if (!value.match(/^\d*\.?\d{0,2}?$/)) return // check only 2 decimal points
+
+                const max = item.itemID === 4743 || item.category === "Money" ? 100000 : 100; // if item is credits or cash
                 if (Number(value) > max) setAmountInput("" + max);
                 else setAmountInput(value);
               }} 
@@ -156,6 +159,22 @@ function EditItemDropdown({ item, index, type }) {
       )}
     </div>
   );
+
+  function multipleCommas(value){
+    let multipleCommas = 0
+
+    console.log(value)
+    
+    for (var i = 0; i < value.length; i++) {
+      if (value[i] === ",") 
+        multipleCommas++
+    }
+    
+    if (multipleCommas > 1) 
+      return true 
+    else
+      return false
+  }
 }
 
 export default EditItemDropdown;

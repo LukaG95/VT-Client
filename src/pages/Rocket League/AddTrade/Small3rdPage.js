@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { actions, useTrade } from "../../../context/TradeContext";
 import Dropdown from "../../../components/Dropdown";
-import { rl_dd_names } from "../../../info/DropdownNames";
+import { rl_dd_names } from "../../../misc/DropdownNames";
 import styles from "./Small3rdPage.module.scss";
 
 const { colorDD, certDD } = rl_dd_names;

@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Games } from "../constants/Games";
+import { Categories } from "../constants/Categories/Categories";
 
 const TradeFiltersStateContext = React.createContext();
 const TradeFiltersDispatchContext = React.createContext();
 
+/*
 const defaultState = {
   game: Games.ROCKET_LEAGUE,
   search: "I want to buy",
@@ -12,6 +13,14 @@ const defaultState = {
   cert: "Any",
   type: "Any",
   platform: "Any",
+};*/
+
+const defaultState = {
+  category: Categories.MONEY,
+  name: "",
+  quality: "Any",
+  type: "Any",
+  platform: "Any"
 };
 
 function tradeFiltersReducer(state, action) {

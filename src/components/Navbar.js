@@ -15,9 +15,10 @@ import { ReactComponent as PlusIcon } from "../images/icons/plus.svg";
 function Navbar() {
   let location = useLocation();
   let trading = "",
-    reputation = "";
+    reputation = "",
+    admin = "";
 
-  const { isLoggedIn, username } = useContext(UserContext);
+  const { isLoggedIn, username, role } = useContext(UserContext);
   const { setOpenForm } = useContext(PopupContext);
 
   switch (location.pathname) {
@@ -29,6 +30,9 @@ function Navbar() {
       break;
     case "/reputation":
       reputation = "currentPage";
+      break;
+    case "/admin":
+      admin = "currentPage";
       break;
     default:
   }
@@ -69,6 +73,16 @@ function Navbar() {
             <div className={`navLeftContent ${reputation}`}>Reputation</div>
           </div>
         </Link>
+
+        {
+          role === "admin" &&
+          <Link to="/admin" id="removeDecoration">
+            <div className="navLeftItem hide" id="removeDecoration">
+              <div className={`navLeftContent ${admin}`}>Admin</div>
+            </div>
+          </Link>
+        
+        }
       </div>
 
       <div className="navRight">

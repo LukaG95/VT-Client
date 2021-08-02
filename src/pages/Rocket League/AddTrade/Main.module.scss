@@ -1,21 +1,20 @@
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 420px 360px;
-  gap: 16px;
+  grid-template-columns: 1fr 250px 420px 300px;
+  gap: 3px;
 
-  margin-top: 15px;
+  margin-top: 3px;
   &:global {
     animation: transitionLeft 0.4s;
   }
 
   width: 100%;
-  height: calc(100vh - 105px);
+  height: calc(100vh - 66px); /*was -105px*/
   overflow: hidden;
 
   > * {
     width: 100%;
     max-height: 100%;
-    background-color: #1d191f;
     border-radius: 5px;
     position: relative;
     display: flex;
@@ -35,11 +34,22 @@
   height: 100%;
 }
 
-.itemContainer {
+.leftSide{
+  display: flex;
+  flex-direction: column;
+}
+
+.itemsField{
   overflow-y: scroll;
+  background-color: #1d191f;
+  height: 100%;
+  padding: 10px 0;
+  border-radius: 5px;
+}
+
+.itemContainer {
   padding: 0 10px;
-  margin-bottom: 10px !important;
-  
+
   &::-webkit-scrollbar{
     background: #1a171d;
   }
@@ -68,9 +78,11 @@
   
   border: 1px solid #636363;
   border-radius: 5px;
+  overflow-wrap: break-word;
 }
 
 .haveWant {
+  background-color: #1d191f;
   @media only screen and (max-width: 1213px) {
     background: #1d191f;
     padding: 15px 10px 5px 10px;
@@ -279,7 +291,7 @@
   border: none;
   border-radius: 5px;
 
-  margin-top: 15px;
+  margin-top: 3px;
 
   transition: background-color 200ms;
 

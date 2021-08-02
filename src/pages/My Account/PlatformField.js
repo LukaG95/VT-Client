@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import styles from "./PlatformField.module.scss"
@@ -79,7 +80,7 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
     else if (state === "Unverified")
       return (
         <>
-          <p>To verify your IGN add our account: virtradeAuth <br/> Please wait up to 30 seconds</p>
+          <p>To verify your IGN add our account: <span>virtradeAuth</span> as a friend { name==="PSN" ? <a target="_blank" rel="noopener noreferrer" href="https://my.playstation.com/profile/virtradeAuth">here</a> : <>in the epic app</>} and then please wait up to 30 seconds</p>
           <button onClick={()=> handleDisconnect()}>Disconnect</button>
         </>
       )

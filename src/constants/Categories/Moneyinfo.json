@@ -1,0 +1,62 @@
+[
+  {
+    "itemID": 1,
+    "category": "Money",
+    "itemType": "All",
+    "itemName": "Money"
+  },
+  {
+    "itemID": 2,
+    "category": "Money",
+    "itemType": "All",
+    "itemName": "Money Offer"
+  },
+  {
+    "itemID": 3,
+    "category": "Money",
+    "itemType": "All",
+    "itemName": "PayPal"
+  },
+  {
+    "itemID": 4,
+    "category": "Money",
+    "itemType": "All",
+    "itemName": "Venmo"
+  },
+  {
+    "itemID": 5,
+    "category": "Money",
+    "itemType": "All",
+    "itemName": "Zelle"
+  },
+  {
+    "itemID": 6,
+    "category": "Money",
+    "itemType": "All",
+    "itemName": "Cash App"
+  },
+  {
+    "itemID": 7,
+    "category": "Money",
+    "itemType": "All",
+    "itemName": "Skrill"
+  },
+  {
+    "itemID": 8,
+    "category": "Money",
+    "itemType": "All",
+    "itemName": "Bitcoin"
+  },
+  {
+    "itemID": 9,
+    "category": "Money",
+    "itemType": "All",
+    "itemName": "Ethereum"
+  },
+  {
+    "itemID": 10,
+    "category": "Money",
+    "itemType": "All",
+    "itemName": "Other"
+  }
+]

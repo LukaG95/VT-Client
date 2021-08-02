@@ -1,4 +1,4 @@
-import RLInfo from "./RLinfo.json";
+import RLInfo from "./Categories/RLinfo.json";
 import All from "../images/icons/RL add trade filter icons/All.png";
 import Blueprint from "../images/icons/RL add trade filter icons/Blueprints.png";
 import Crate from "../images/icons/RL add trade filter icons/Gift_Packs.png";
@@ -20,20 +20,23 @@ export function getTradeableItems() {
   if (!tradeableItems) {
     tradeableItems = [];
     RLInfo.items.forEach((item) => {
-        if (item.Tradable)
-          tradeableItems.push({
-            itemID: item.ItemID,
-            itemName: item.Name,
-            itemType: item.Slot,
-            quality: item.Quality,
-            paintable: item.Paintable,
-            blueprintable: item.Blueprintable,
-            blueprint: false
-          });
-      });
+      if (item.Tradable)
+        tradeableItems.push({
+          category: "Rocket League",
+          itemID: item.ItemID,
+          itemName: item.Name,
+          itemType: item.Slot,
+          quality: item.Quality,
+          paintable: item.Paintable,
+          blueprintable: item.Blueprintable,
+          blueprint: false
+        });
+    });
   }
   return tradeableItems;
 }
+
+export const ItemQualities = ["Any", "Common", "Uncommon", "Rare", "Very Rare", "Import", "Exotic", "Limited", "Premium", "Black Market"]
 
 export const ItemTypes = [
   {

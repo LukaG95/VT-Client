@@ -27,7 +27,7 @@ function Terms() {
       <div className="ToS-body">
         <h2>VirTrade</h2>
         <p>
-          VirTrade (otherwise referred to as “We/we, Our/ouror Us/us”) is an online, 
+          VirTrade (otherwise referred to as “We/we, Our/our or Us/us”) is an online, 
           peer-to-peer trading platform which allows users to transact digital cosmetics 
           on a variety of different platforms. VirTrade operates under the internet 
           domain name “virtrade.gg”

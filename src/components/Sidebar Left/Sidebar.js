@@ -7,7 +7,7 @@ import ReputationBody from "./ReputationBody";
 import AccountBody from "./AccountBody";
 
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
-import { rl_dd_names } from "../../info/DropdownNames";
+import { rl_dd_names } from "../../misc/DropdownNames";
 import { closeSidebar, manageSidebarResize } from "../../misc/manageSidebar";
 import { LeftSidebarContext } from "../../context/LeftSidebar";
 import useWindowDimensions from "../../misc/windowHW";

@@ -4,7 +4,7 @@ import {
   LazyLoadComponent,
 } from "react-lazy-load-image-component";
 import styles from "./Item.module.scss";
-import MissingImageIcon from "../../images/icons/question.png";
+import MissingImageIcon from "../../../images/icons/question.png";
 
 export default function Item({ item, lazy, hideName, added, ...props }) {
 
@@ -15,12 +15,6 @@ export default function Item({ item, lazy, hideName, added, ...props }) {
     >
       <div className={styles.content}>
         <div className={styles.imageContainer}>
-          
-          <img
-            className={styles.image}
-            src={MissingImageIcon}
-            alt={item.Name} // ?
-          />
           
           {lazy ? (
             <LazyLoadImage
@@ -39,12 +33,15 @@ export default function Item({ item, lazy, hideName, added, ...props }) {
             />
           )}
         </div>
+        
         {!hideName && <span className={styles.name} >{item.itemName}</span>}
         {/* Icons + Overlays */}
         {item.cert && item.cert !== "None" && (
           <div className={[styles.cert, hideName ? styles.certAdjustment : ""].join(" ")}>{item.cert}</div>
         )}
-        {item.amount > 1 && <div className={styles.amount}>{item.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</div>}
+        {item.amount > (item.category === "Money" ? 0 : 1) && 
+          <div className={styles.amount}>{new Intl.NumberFormat('en-US').format(item.amount)}{item.category === "Money" && "$"}</div>   /*replace is for the dots separator*/
+        } 
         {item.color && item.color !== "None" && (
           <div className={`${styles.color} ${item.color.replace(/\s+/g, "")}`}>
             <span className={styles.tooltip}>{item.color}</span>
@@ -69,12 +66,17 @@ export default function Item({ item, lazy, hideName, added, ...props }) {
   }
 
   function imagePath(){
-    if (item.itemID <= 9999 && item.itemID >= 9986)
-      return `/images/items/${item.itemID}.png`
-    else if (item.blueprint)
-      return `/images/blueprints/${item.itemID}.${item.colorID || "0"}.webp`
-    else
-      return `/images/items/${item.itemID}.${item.colorID || "0"}.webp`
-  }
+    if (item.category === "Rocket League"){
+      if (item.itemID <= 9999 && item.itemID >= 9986)
+        return `/images/${item.category.replace(/ /g, "")}/items/${item.itemID}.png`
+      else if (item.blueprint)
+        return `/images/${item.category.replace(/ /g, "")}/blueprints/${item.itemID}.${item.colorID || "0"}.webp`
+      else
+        return `/images/${item.category.replace(/ /g, "")}/items/${item.itemID}.${item.colorID || "0"}.webp`
+    }
+    else {
+      return `/images/${item.category.replace(/ /g, "")}/${item.itemID}.png`
+    }
 
+  } 
 }

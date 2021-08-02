@@ -1,0 +1,32 @@
+.wrapper{
+  width: 100%;
+}
+
+.selectionHeader{
+  display: flex;
+  width: 100%;
+
+  height: 50px;
+  background: #1d191f;
+
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  padding-left: 10px;
+
+  border-radius: 5px;
+
+  button{
+    background: none;
+    color: #f6f6f6;
+
+    padding: 0px 10px 0px 10px;
+
+    border: none;
+    cursor: pointer;
+
+    &:hover{
+      filter: brightness(90%);
+    }
+  }
+}

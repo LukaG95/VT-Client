@@ -1,0 +1,56 @@
+[
+  {
+    "itemID": 1,
+    "category": "Design",
+    "itemType": "All",
+    "itemName": "Logo"
+  },
+  {
+    "itemID": 2,
+    "category": "Design",
+    "itemType": "All",
+    "itemName": "Banner"
+  },
+  {
+    "itemID": 3,
+    "category": "Design",
+    "itemType": "All",
+    "itemName": "Avatar"
+  },
+  {
+    "itemID": 4,
+    "category": "Design",
+    "itemType": "All",
+    "itemName": "Illustration"
+  },
+  {
+    "itemID": 5,
+    "category": "Design",
+    "itemType": "All",
+    "itemName": "Website Design"
+  },
+  {
+    "itemID": 6,
+    "category": "Design",
+    "itemType": "All",
+    "itemName": "Animation"
+  },
+  {
+    "itemID": 7,
+    "category": "Design",
+    "itemType": "All",
+    "itemName": "Icon"
+  },
+  {
+    "itemID": 8,
+    "category": "Design",
+    "itemType": "All",
+    "itemName": "Editing"
+  },
+  {
+    "itemID": 9,
+    "category": "Design",
+    "itemType": "All",
+    "itemName": "Other"
+  }
+]

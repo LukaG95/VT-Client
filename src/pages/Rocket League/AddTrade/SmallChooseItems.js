@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useMemo } from "react";
 import styles from "./SmallChooseItems.module.scss";
 import styles2 from "./Main.module.scss";
-import ItemContainer from "../../../components/Rocket League/ItemContainer";
-import Item from "../../../components/Rocket League/Item";
+import ItemContainer from "../../../components/Categories/Rocket League/ItemContainer";
+import Item from "../../../components/Categories/Rocket League/Item";
 import { actions, useTrade } from "../../../context/TradeContext";
 import { useTradeFilters } from "../../../context/TradeFiltersContext";
 import { getTradeableItems } from "../../../constants/Items";
-import FilterBar from "../../../components/Rocket League/FilterBar";
+import FilterBar from "../../../components/Categories/Rocket League/FilterBar";
 import ClearItems from "../../../components/AddTrade/ClearItems";
 import ItemConfirmIcon from "./ItemConfirmIcon";
 

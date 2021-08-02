@@ -6,7 +6,7 @@ import { ReactComponent as Badge1stIcon } from "../../images/icons/icon1st.svg";
 import { ReactComponent as Badge2ndIcon } from "../../images/icons/icon2nd.svg";
 import { ReactComponent as Badge3rdIcon } from "../../images/icons/icon3rd.svg";
 
-function ReputationBody() {
+function ReputationBody({ popup }) {
   const [leadInfo, setLeadInfo] = useState();
   const [timeType, setTimeType] = useState("Week");
 
@@ -24,7 +24,7 @@ function ReputationBody() {
   }, []);
 
   return (
-    <div className="sidebar-body-rep">
+    <div className="sidebar-body-rep" style={popup ? {background: "#141115", height: "410px", width: "400px", overflowY: "hidden", borderRadius: "5px"} : null}>
       <div className="leaderboards-wrapper">
         <div className="leaderboards-header">
           <p>LEADERBOARDS</p>
@@ -173,9 +173,16 @@ function ReputationBody() {
         </div>
       </div>
 
-      <div className="separator-horizontal"></div>
+      
 
-      <SidebarFooter />
+      {
+        !popup && 
+        <>
+          <div className="separator-horizontal"></div>
+          <SidebarFooter />
+        </>
+      }
+  
     </div>
   );
 

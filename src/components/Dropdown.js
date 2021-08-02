@@ -11,6 +11,7 @@ export default function Dropdown({ name, items, onChange, value, light, floating
   const { open, search, visibleItems } = state;
   const ref = useRef();
 
+  // when we close dropdown set search to ""
   useEffect(() => {
     const term = state.search.toLowerCase().trim();
     setState({
@@ -25,7 +26,7 @@ export default function Dropdown({ name, items, onChange, value, light, floating
   //Detect Clicks
   function onClick(e) {
     if (!ref.current || !ref.current.contains(e.target))
-      setState({ ...state, open: false });
+      setState({ ...state, open: false, search: "" });
   }
 
   useEffect(() => {
@@ -45,7 +46,7 @@ export default function Dropdown({ name, items, onChange, value, light, floating
     >
       <label onClick={() => {floating && setState({ ...state, open: !open })}} className={styles.label}>{name || "Dropdown"}</label>
       <div
-        onClick={() => setState({ ...state, open: !open })}
+        onClick={() => setState({ ...state, open: !open, search: "" })}
         className={`${styles.button} ${open ? styles.open : ""}`}
       >
           

@@ -17,6 +17,8 @@ function UserContextProvider({ children }) {
 
   useEffect(() => {
     getUserInfo()
+
+    return () => resetUserInfo() // not really needed
   }, []);
 
   return (
@@ -30,7 +32,8 @@ function UserContextProvider({ children }) {
         myID,
         role,
         //displayWebsite,
-        getUserInfo
+        getUserInfo,
+        handleLogout
       }}
     >
       {children}
@@ -56,7 +59,7 @@ function UserContextProvider({ children }) {
       if (err.response.status === 400 || 401){}*/
     });
 
-  /*
+  /* TEST USERS
 
   axios
     .get("/api/test/getUser")
@@ -70,6 +73,25 @@ function UserContextProvider({ children }) {
     });
 
     */
+  }
+
+  function resetUserInfo(){
+    setUser();
+    setIsLoggedIn();
+    setMyID();
+    setUsername();
+    setEmail();
+    setRole();
+  }
+
+  function handleLogout(){
+    axios
+      .delete(`/api/auth/logout`)
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((err) => {});
+    
   }
 }
 

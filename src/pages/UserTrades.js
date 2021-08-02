@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 import { createNotification } from "../misc/ToastNotification";
-import RLTradeComponent from "../components/Rocket League/RLTradeComponent";
+import RLTradeComponent from "../components/Categories/Rocket League/RLTradeComponent";
 import { UserContext } from "../context/UserContext";
 import { PopupContext } from "../context/PopupContext";
 import Topbar from "./My Account/Topbar";

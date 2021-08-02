@@ -8,7 +8,7 @@ import { createNotification } from "../../misc/ToastNotification";
 import useWindowDimensions from "../../misc/windowHW";
 import { RepCategories } from "../../constants/RepCategories"
 import useUserSearch from "./useUserSearch"
-import pageNumbers from "../../misc/pageNumbers"
+import pageNumbers from "../../components/pageNumbers"
 import repTitle from "../../constants/repTitle"
 import {Helmet} from "react-helmet";
 import {ReactComponent as NoReputationIcon} from "../../images/icons/no_reputation.svg"
@@ -26,7 +26,7 @@ function Reputation() {
   })
 
   const { myID, isLoggedIn } = useContext(UserContext);
-  const { setOpenForm } = useContext(PopupContext);
+  const { setOpenForm, setOpenRepLeaderboards} = useContext(PopupContext);
 
   const { pathID } = useParams()
   const { width } = useWindowDimensions();
@@ -92,8 +92,15 @@ function Reputation() {
     return (
       <>
         {helmet()}
-
-        {searchInput()}
+        <div className="rep-search-field-and-button">
+          {searchInput()}
+          {
+            width > 800 && 
+              <div className="showLeaderboardsButton" onClick={()=> setOpenRepLeaderboards(true)}>
+                <div className="gg-trophy"></div>
+              </div>
+          }
+        </div>
 
         <div className="reputation-topbar-field">
           <div className="rep-username">{repInfo.username}'s Reputation</div>
@@ -214,7 +221,7 @@ function Reputation() {
         {helmet()}
 
         <div className="rep-notLogged-in">
-          {searchInput()}
+          {searchInput(true)}
           <p className="sign-in-to-receive-rep-text">
             You need an account to receive reputation
           </p>
@@ -347,9 +354,9 @@ function Reputation() {
       return {borderRadius: "5px"} 
   }
 
-  function searchInput(){
+  function searchInput(x){
     return (
-      <form onSubmit={searchForUserRep} ref={ref} className="rep-form">
+      <form onSubmit={searchForUserRep} ref={ref} className="rep-form" style={x ? {marginTop: "15px"} : {}}>
         <input
           onChange={(e) => setSearch({...search, text: e.target.value})}
           placeholder="Search users ..."

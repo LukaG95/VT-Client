@@ -15,7 +15,9 @@ import {
   Terms,
   UserTrades,
   AdminPage,
-  Messages
+  AdminPage2,
+  Messages,
+  Partner
 } from "./pages/index";
 import { UserContext, LeftSidebarContext } from "./context/index";
 import { closeSidebar, ToastContainer, ScrollUpButton } from "./misc/index";
@@ -28,7 +30,6 @@ import {
   ResetPassword,
   ConfirmEmail,
   UpdateEmail,
-  AlphaForm,
   Footer
 } from "./components/index";
 import { TradeProvider } from "./context/TradeContext";
@@ -201,7 +202,10 @@ export default function App() {
                 <UpdateEmail />
               </Route>
               <Route path="/admin">
-                {handleRedirectOnRefresh(<AdminPage />)}
+                {handleRedirectOnRefresh(<AdminPage2 />)}
+              </Route>
+              <Route path="/partner/:tracking">
+                <Partner />
               </Route>
             </Switch>
             

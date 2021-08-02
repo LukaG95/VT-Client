@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 
-import { rl_dd_names } from "../../info/DropdownNames";
-import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
-import Dropdown from "../Dropdown";
+import { rl_dd_names } from "../../../misc/DropdownNames";
+import { TbFiltersRLContext } from "../../../context/TbFiltersRLContext";
+import Dropdown from "../../Dropdown";
 import styles from "./TbFiltersRL.module.scss";
-import ClearItems from "../AddTrade/ClearItems";
+import ClearItems from "../../AddTrade/ClearItems";
 
 const {
   gameDD,

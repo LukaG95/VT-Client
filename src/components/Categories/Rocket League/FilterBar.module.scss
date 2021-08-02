@@ -1,0 +1,30 @@
+.wrapper{
+  padding: 5px 15px 0px 15px;
+  background-color: #1d191f;
+}
+
+.spacer{
+  height: 10px;
+}
+
+.resetButton{
+  color: #C82525;
+  background-color: #1d191f;
+
+  font-weight: 500;
+  font-size: 14px;
+    
+  padding: 10px 0px 10px 0px;
+
+  border: 1px solid #C82525;
+  border-radius: 5px;
+
+  transition: background-color 200ms, color 200ms;
+
+  &:hover{
+    color: #F6F6F6;
+    background: #C82525;
+
+    cursor: pointer;
+  }
+}

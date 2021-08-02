@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import axios from "axios";
 
 import { PopupContext } from "../context/PopupContext";
+import { UserContext } from "../context/UserContext";
+import ReputationBody from "./Sidebar Left/ReputationBody"
 
 function Popups() {
   const {
@@ -12,8 +14,12 @@ function Popups() {
     openLogoutPopup,
     setOpenLogoutPopup,
     openEditTradePopup,
-    setOpenEditTradePopup
+    setOpenEditTradePopup,
+    openRepLeaderboards,
+    setOpenRepLeaderboards
   } = useContext(PopupContext);
+
+  const { handleLogout } = useContext(UserContext);
 
   // create a function, pass in setOpenTradeNotice as a parameter
   if (openTradeNotice)
@@ -158,6 +164,17 @@ function Popups() {
         </div>
       </div>
     );
+  else if (openRepLeaderboards)
+  return (
+    <div
+        className="shading"
+        onMouseDown={(e) => {
+          if (e.target.className === "shading") setOpenRepLeaderboards(false);
+        }}
+      >
+        <ReputationBody popup={true}/>
+      </div>
+  )
     
   else return null;
 
@@ -172,14 +189,6 @@ function Popups() {
       .catch((err) => {});
   }
 
-  function handleLogout() {
-    axios
-      .delete(`/api/auth/logout`)
-      .then((res) => {
-        window.location.reload();
-      })
-      .catch((err) => {});
-  }
 }
 
 export default Popups;

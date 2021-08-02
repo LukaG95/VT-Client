@@ -1,8 +1,8 @@
 import React from 'react'
-import ItemContainer from "../components/Rocket League/ItemContainer";
+import ItemContainer from "../components/Categories/Rocket League/ItemContainer";
 import useWindowDimensions from "../misc/windowHW";
 
-import styles from "../components/Rocket League/Item.module.scss"
+import styles from "../components/Categories/Rocket League/Item.module.scss"
 
 export default function PageNumbersSkeleton() {
 

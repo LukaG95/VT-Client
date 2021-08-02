@@ -1,6 +1,6 @@
 import React from "react";
 
-import imageExists from "../../misc/imageExists";
+import imageExists from "../../../misc/imageExists";
 import infoRL from "../../constants/RocketLeagueInfo.json";
 
 function TradepostIconRL({ item }) {

@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import {Helmet} from "react-helmet";
-import useWindowDimensions from '../../misc/windowHW'
+import useWindowDimensions from "../../misc/windowHW"
+import queryString from "query-string"
 
-import infoRL from "../../constants/RLinfo.json";
+import infoRL from "../../constants/Categories/RLinfo.json";
 import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
-import RLTradeComponent from "../../components/Rocket League/RLTradeComponent";
+import RLTradeComponent from "../../components/Categories/Rocket League/RLTradeComponent";
 import { createNotification } from "../../misc/ToastNotification";
 import NotFoundImage from "../../images/icons/not-found.png";
-import pageNumbers from "../../misc/pageNumbers"
+import pageNumbers from "../../components/pageNumbers"
 import PageNumbersSkeleton from "../../skeleton/PageNumbersSkeleton"
 import TradeComponentsSkeleton from "../../skeleton/TradeComponentsSkeleton"
-
+import GiveawayBanner from "../../components/GiveawayBanner"
 
 function RLTrading({ home }) {
   const [view, setView] = useState()
@@ -40,9 +41,22 @@ function RLTrading({ home }) {
 
   useEffect(() => {
     requestTrades(false)
-
+    
   }, [game, searchType, name, color, cert, blueprint, platform, currentPage]);
   
+  useEffect(()=> {
+    const parsed = queryString.parse(window.location.search)
+
+    if (parsed.ref){
+      axios
+        .post(`/api/ref/${parsed.ref}`)
+        .then(res => {
+          
+        })
+        .catch(err => {})
+    }
+
+  }, [])
 
   // this is so that notes height doesn't get messed up 
   // when refreshing page on small width then putting window full screen - when low amount of items in trade and a lot of notes
@@ -69,11 +83,15 @@ function RLTrading({ home }) {
       tradeInfo.length > 0 ? 
         <>
          <Helmet>
-            {home ? <title>VirTrade</title> : <title>{game} Trading | VirTrade</title>}
-            <meta name="description" content="Trade your Rocket League items with others" />
+            {home ? <title>Trade Items | VirTrade</title> : <title>{game} Trading | VirTrade</title>}
+            <meta name="description" content="Trade Rocket League items with others. 
+              The best new marketplace for trading in-game items on any platform with a reputation system for confidence and security." />
             <link rel="canonical" href="http://virtrade.gg/trading/rl" />
           </Helmet>
+
           {pageNumbers(currentPage, pageAmount, setCurrentPage)}
+
+          <GiveawayBanner />
 
           {tradeComponents}
 
@@ -86,8 +104,9 @@ function RLTrading({ home }) {
       return (
         <>
           <Helmet>
-            {home ? <title>VirTrade</title> : <title>{game} Trading | VirTrade</title>}
-            <meta name="description" content="Trade your Rocket League items with others" />
+            {home ? <title>Trade Items | VirTrade</title> : <title>{game} Trading | VirTrade</title>}
+            <meta name="description" content="Trade Rocket League items with others. 
+              The best new marketplace for trading in-game items on any platform with a reputation system for confidence and security." />
             <link rel="canonical" href="http://virtrade.gg/trading/rl" />
           </Helmet>
           {PageNumbersSkeleton()} 

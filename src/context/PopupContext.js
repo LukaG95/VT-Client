@@ -8,6 +8,7 @@ function PopupContextProvider({ children }) {
   const [openDeleteAllTrades, setOpenDeleteAllTrades] = useState(false);
   const [openLogoutPopup, setOpenLogoutPopup] = useState(false);
   const [openEditTradePopup, setOpenEditTradePopup] = useState(false);
+  const [openRepLeaderboards, setOpenRepLeaderboards] = useState(false);
 
   return (
     <PopupContext.Provider
@@ -21,7 +22,9 @@ function PopupContextProvider({ children }) {
         openLogoutPopup,
         setOpenLogoutPopup,
         openEditTradePopup,
-        setOpenEditTradePopup
+        setOpenEditTradePopup,
+        openRepLeaderboards,
+        setOpenRepLeaderboards
       }}
     >
       {children}

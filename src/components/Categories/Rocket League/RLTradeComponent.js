@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 
 import Item from "./Item";
-import useWindowDimensions from "../../misc/windowHW";
-import { UserContext } from "../../context/UserContext";
+import useWindowDimensions from "../../../misc/windowHW";
+import { UserContext } from "../../../context/UserContext";
 import ItemContainer from "./ItemContainer";
-import CrownImage from "../../images/icons/crown.svg";
-import { ReactComponent as SteamIcon } from "../../images/icons/steam.svg";
-import { ReactComponent as PSNIcon } from "../../images/icons/playstation.svg";
-import { ReactComponent as XBOXIcon } from "../../images/icons/xbox.svg";
-import { ReactComponent as SwitchIcon } from "../../images/icons/switch.svg";
-import { ReactComponent as EPICIcon } from "../../images/icons/epic.svg";
-import repTitle from "../../constants/repTitle"
+import CrownImage from "../../../images/icons/crown.svg";
+import { ReactComponent as SteamIcon } from "../../../images/icons/steam.svg";
+import { ReactComponent as PSNIcon } from "../../../images/icons/playstation.svg";
+import { ReactComponent as XBOXIcon } from "../../../images/icons/xbox.svg";
+import { ReactComponent as SwitchIcon } from "../../../images/icons/switch.svg";
+import { ReactComponent as EPICIcon } from "../../../images/icons/epic.svg";
+import { ReactComponent as BlueCheckIcon } from "../../../images/icons/check blue.svg";
+import repTitle from "../../../constants/repTitle"
 
 const platformIcons = {
   steam: <SteamIcon style={{ height: "20px", width: "20px", marginRight: "5px" }} />,
@@ -32,7 +33,7 @@ function RLTradeComponent({ trade, manageTrade }) {
 
   useEffect(() => {
     setCustomHeight(`${noteBox.current.offsetHeight-60}px`)
-       
+       // console.log(trade)
   }, [noteBox.current])
 
   return (
@@ -105,7 +106,7 @@ function RLTradeComponent({ trade, manageTrade }) {
         </div>
       </div>
       
-      {manageTrade &&
+      {/*manageTrade &&
           <p className="trade-expire-text">
           Expires 
           {trade.expiresIn.days < 1
@@ -113,7 +114,7 @@ function RLTradeComponent({ trade, manageTrade }) {
             : ` in ${trade.expiresIn.days} days `}
           at {trade.expiresIn.at}
         </p>
-      }
+          */}
       
     </div>
   );
@@ -160,7 +161,7 @@ function RLTradeComponent({ trade, manageTrade }) {
 
           <div className="flex">
             <div className="trade-post-time">
-              {showFriendCode || showEpicUsername ? trade.platform.ID : `Active ${trade.bumpedAt}`}
+              {showFriendCode || showEpicUsername ? trade.platform.ID : `${trade.bumped ? `Bumped ${trade.bumpedAt}` : `Created ${trade.createdAt}`} `}
             </div>
           </div>
         </div>
@@ -172,7 +173,7 @@ function RLTradeComponent({ trade, manageTrade }) {
     return (
       <div className="rltrade-cTopPlace">
         <div className="trade-component-header-left">
-          {userName()}
+          {userName("phone")}
           <div className="trade-component-header-repTitleTags-PHONEVIEW">
             <div className="trade-reputation">
               <div className="flex">
@@ -208,7 +209,7 @@ function RLTradeComponent({ trade, manageTrade }) {
 
           <div className="flex">
             <div className="trade-post-time-PHONEVIEW">
-              {showFriendCode ? trade.platform.ID : `Active ${trade.bumpedAt}`}
+              {showFriendCode ? trade.platform.ID : `${trade.bumped ? `Bumped ${trade.bumpedAt}` : `Created ${trade.createdAt}`} `}
             </div>
           </div>
         </div>
@@ -216,7 +217,7 @@ function RLTradeComponent({ trade, manageTrade }) {
     );
   }
 
-  function userName() {
+  function userName(size) {
     if (trade.user.isPremium)
       return (
         <div className="username premium">
@@ -247,6 +248,16 @@ function RLTradeComponent({ trade, manageTrade }) {
           >
             {trade.user.username}
           </p>
+
+      {
+        trade.platform.verified && 
+          <div className="confirmedPlatformWrapper" style={size === "phone" ? {bottom: "2px"} : null}>
+            <BlueCheckIcon className="platformCheckmark" />
+            <span className="platformVerified">Platform Verified</span>
+          </div>
+      }
+          
+          
         </div>
       );
   }
@@ -274,6 +285,8 @@ function RLTradeComponent({ trade, manageTrade }) {
   }
 
   function redirectToPlatformWebsite(){
+    if (trade.platform.name !== "SWITCH" && !trade.platform.verified) return
+
     if(trade.platform.name === "Steam")
       window.open(`https://steamcommunity.com/profiles/${trade.platform.ID}`)
     else if(trade.platform.name === "XBOX")
