@@ -86,7 +86,7 @@ function RLTrading({ home }) {
             {home ? <title>Trade Items | VirTrade</title> : <title>{game} Trading | VirTrade</title>}
             <meta name="description" content="Trade Rocket League items with others. 
               The best new marketplace for trading in-game items on any platform with a reputation system for confidence and security." />
-            <link rel="canonical" href="http://virtrade.gg/trading/rl" />
+            <link rel="canonical" href="http://virtrade.gg/trading" />
           </Helmet>
 
           {pageNumbers(currentPage, pageAmount, setCurrentPage)}
@@ -107,7 +107,7 @@ function RLTrading({ home }) {
             {home ? <title>Trade Items | VirTrade</title> : <title>{game} Trading | VirTrade</title>}
             <meta name="description" content="Trade Rocket League items with others. 
               The best new marketplace for trading in-game items on any platform with a reputation system for confidence and security." />
-            <link rel="canonical" href="http://virtrade.gg/trading/rl" />
+            <link rel="canonical" href="http://virtrade.gg/trading" />
           </Helmet>
           {PageNumbersSkeleton()} 
           <TradeComponentsSkeleton />

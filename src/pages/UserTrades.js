@@ -82,7 +82,7 @@ function UserTrades() {
   }
 
   function editTrade(trade) {
-    window.location.replace(`/trading/rl/edit/${trade._id}`);
+    window.location.replace(`/trading/edit/${trade._id}`);
   }
 
   function bumpTrade(trade) {
@@ -110,16 +110,18 @@ function UserTrades() {
   function NoTrades() {
     if (myID === pathID)
       return (
-        <div style={{ color: "#f6f6f6", marginTop: "30px" }}>
-          No active Rocket League trades. Create your<span> </span>
-          <Link to="/trading/rl/new" className="first-trade-text-button" id="">
-            first trade
-          </Link>
+        <div className="noTrades">
+          <p>
+            No active Rocket League trades. <br /> Create your<span> </span>
+            <Link to="/trading/new" className="first-trade-text-button">
+              first trade
+            </Link>
+          </p>
         </div>
       );
     else
       return (
-        <div style={{ color: "#f6f6f6", marginTop: "30px" }}>
+        <div className="noTrades">
           No active Rocket League trades.
         </div>
       );

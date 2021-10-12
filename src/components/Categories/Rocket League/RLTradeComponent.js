@@ -148,19 +148,25 @@ function RLTradeComponent({ trade, manageTrade }) {
           </div>
           <div className="trade-component-tagsAndTitle">
             <div className="trade-component-tags">{tags()}</div>
-            <p className="trade-component-title">{repTitle(trade.rep.ups)}</p>
+            <p className="trade-component-title">{repTitle(trade.rep.ups, true)}</p>
           </div>
         </div>
 
         <div className="rl-trade-component-top-right">
           <div onClick={()=> redirectToPlatformWebsite()} className="right-gamePlatform">
-            {platformIcons[trade.platform.name.toLowerCase()]}
-            {trade.platform.name}
-            {/*<p className="IGN">SW-1234-5267-5345</p>*/}
+            {
+              // if there's no RL items in the trade we don't need to display a platform
+              isRLitemPresent() && 
+                <>
+                  {platformIcons[trade.platform.name.toLowerCase()]}
+                  {trade.platform.name}
+                </>
+            }
           </div>
 
           <div className="flex">
             <div className="trade-post-time">
+              {console.log(trade)}
               {showFriendCode || showEpicUsername ? trade.platform.ID : `${trade.bumped ? `Bumped ${trade.bumpedAt}` : `Created ${trade.createdAt}`} `}
             </div>
           </div>
@@ -194,7 +200,7 @@ function RLTradeComponent({ trade, manageTrade }) {
             </div>
             <div className="trade-component-tagsAndTitle-PHONEVIEW">
               <p className="trade-component-title-PHONEVIEW">
-                {repTitle(trade.rep.ups)}
+                {repTitle(trade.rep.ups, true)}
               </p>
               <div className="trade-component-tags-PHONEVIEW">{tags()}</div>
             </div>
@@ -203,8 +209,14 @@ function RLTradeComponent({ trade, manageTrade }) {
 
         <div className="rl-trade-component-top-right">
           <div onClick={()=> redirectToPlatformWebsite()} className="right-gamePlatform" style={{fontSize: "15px"}}>
-            {platformIcons[trade.platform.name.toLowerCase()]}
-            {trade.platform.name}
+          {
+              // if there's no RL items in the trade we don't need to display a platform
+              isRLitemPresent() && 
+                <>
+                  {platformIcons[trade.platform.name.toLowerCase()]}
+                  {trade.platform.name}
+                </>
+            }
           </div>
 
           <div className="flex">
@@ -213,6 +225,7 @@ function RLTradeComponent({ trade, manageTrade }) {
             </div>
           </div>
         </div>
+        
       </div>
     );
   }
@@ -257,10 +270,22 @@ function RLTradeComponent({ trade, manageTrade }) {
           </div>
       }
           
-          
         </div>
       );
   }
+
+  
+  function isRLitemPresent(){
+    let isPresent = false
+    const haveWant = trade.have.concat(trade.want)
+
+    haveWant.forEach(item => {
+      if(item.category === "Rocket League") isPresent = true
+    })
+
+    return isPresent
+  }
+
 
   function tags() {
 

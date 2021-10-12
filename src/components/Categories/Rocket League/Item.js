@@ -7,21 +7,24 @@ import styles from "./Item.module.scss";
 import MissingImageIcon from "../../../images/icons/question.png";
 
 export default function Item({ item, lazy, hideName, added, ...props }) {
-
+  // return null
   const content = (
+    <div className={styles.wrapper}>
     <div
-      className={`${styles.item} ${hideName ? styles.hideName : ""}`}
+      className={`${styles.item} ${hideName ? styles.hideName : ""} ${styles[item.category.replace(/\s/g, '')]}`}
       {...props}
     >
       <div className={styles.content}>
         <div className={styles.imageContainer}>
-          
+
+         {/*
           <img
             className={styles.image}
             src={MissingImageIcon}
             alt={item.Name} // ?
           />
-          
+         */} 
+         
           {lazy ? (
             <LazyLoadImage
               className={`${styles.image}`}
@@ -40,11 +43,12 @@ export default function Item({ item, lazy, hideName, added, ...props }) {
           )}
         </div>
         
-        {!hideName && <span className={styles.name} >{item.itemName}</span>}
+        {!hideName && <span className={styles.name}>{item.itemName}</span>}
         {/* Icons + Overlays */}
         {item.cert && item.cert !== "None" && (
           <div className={[styles.cert, hideName ? styles.certAdjustment : ""].join(" ")}>{item.cert}</div>
         )}
+        
         {item.amount > (item.category === "Money" ? 0 : 1) && 
           <div className={styles.amount}>{new Intl.NumberFormat('en-US').format(item.amount)}{item.category === "Money" && "$"}</div>   /*replace is for the dots separator*/
         } 
@@ -55,6 +59,7 @@ export default function Item({ item, lazy, hideName, added, ...props }) {
         )}
       </div>
       {props.children}
+    </div>
     </div>
   );
   if (lazy) {

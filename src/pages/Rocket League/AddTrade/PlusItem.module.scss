@@ -1,20 +1,20 @@
 .plus {
-  background-color: #2b202f;
+  background-color: #1d191f;
   border-radius: 5px;
   padding-bottom: calc(100% - 2px);
   width: 100%;
   justify-self: center;
-  border: 1px solid #564b68;
+  border: none;
   cursor: pointer;
   position: relative;
 }
 
 .plus:hover{
-  background-color: #382a3d;
+  background-color: #281e2c;
 }
 
 .plus:active{
-  background-color: #423247;
+  background-color: #2b202e;
 }
 
 .selected {
@@ -26,7 +26,6 @@
 
   > span {
     margin: auto;
-    color: #564B68;
     position: absolute;
     top: 0;
     left: 0;
@@ -36,4 +35,21 @@
     align-items: center;
     justify-content: center;
   }
+
+}
+
+.have{
+  border: 1px solid #2196f3;
+
+  > span {
+    color: #2196f3;
+  }
+}
+
+.want{
+  border: 1px solid #fe3b3b;
+  >span {
+    color: #fe3b3b;
+  }
+  
 }

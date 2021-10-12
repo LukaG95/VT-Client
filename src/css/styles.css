@@ -5,6 +5,7 @@
 
   font-family: "Poppins", sans-serif;
   -webkit-tap-highlight-color: transparent; /*To remove the blue background when tapping on links & icons on phone*/
+
 }
 
 *:focus,
@@ -102,8 +103,8 @@ html {
   height: max-content;
   min-height: 100%;
 
-  margin-left: 0px; /*was 40px*/
-  margin-right: 0px; /*was 40px*/
+  margin-left: 3px; /*was 40px*/
+  margin-right: 3px; /*was 40px*/
 
   overflow: hidden;
   padding-bottom: 350px;
@@ -285,7 +286,7 @@ html {
 
 /*-----Filters              ----*/
 .filters-field {
-  margin-top: 15px;
+  margin-top: 3px;
   margin-right: 0px;
   margin-left: 0px;
 
@@ -489,18 +490,18 @@ html {
   padding-left: 10px;
 
   margin-top: 3px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .pageButton {
   background: none;
   color: #f6f6f6;
-  font-size: 13px;
+  font-size: 11px;
   border: none;
   cursor: pointer;
 
-  height: 26px;
-  width: 26px;
+  height: 22px;
+  width: 22px;
   border-radius: 50px;
 
   margin-right: 5px;
@@ -639,7 +640,7 @@ html {
   flex-direction: column;
   width: 100%;
 
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .rltrade-cTopPlace {
@@ -1089,6 +1090,41 @@ html {
 
 /*-----UserTrades              ----*/
 
+.noTrades{
+  display: flex;
+  color: #5b4e61;
+
+  padding-top: 40px;
+  padding-left: 50px;
+  padding-bottom: 175px;
+
+  font-size: 26px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 600px) {
+  .noTrades{
+    font-size: 20px;
+    font-weight: 400;
+
+    padding-top: 20px;
+    padding-left: 20px;
+  }
+  
+}
+
+
+@media screen and (max-width: 400px) {
+  .noTrades{
+    font-size: 18px;
+    font-weight: 400;
+
+    padding-top: 15px;
+    padding-left: 15px;
+  }
+  
+}
+
 .userTrades-page-wrapper {
   display: flex;
   flex-direction: column;
@@ -1105,8 +1141,8 @@ html {
   border-radius: 5px;
   width: 100%;
   align-items: center;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 3px;
+  margin-bottom: 10px;
   justify-content: space-between;
 
 }
@@ -1178,7 +1214,7 @@ html {
 }
 
 .first-trade-text-button {
-  color: #6c63ff;
+  color: #c53737;
   cursor: pointer;
   text-decoration: none;
 }
@@ -1199,7 +1235,7 @@ html {
 
 .rep-form{
   position: relative;
-  width: 400px;
+  width: 100%;
 }
 
 .rep-search-input {
@@ -1278,7 +1314,7 @@ html {
 }
 
 .sign-in-to-receive-rep-text {
-  color: #f6f6f6;
+  color: #F6F6F6;
   font-size: 28px;
   font-weight: 700;
 
@@ -1387,9 +1423,42 @@ html {
   background-color: #604d68;
 }
 
+.rep-wrapper{
+  animation: transitionLeft 0.4s;
+}
+
+.rep-header{
+  display: flex;
+  width: 100%;
+  
+  margin-top: 3px;
+
+}
+
+@media screen and (max-width: 915px) {
+  .rep-header{
+    flex-direction: column;
+  }
+}
+
+
+.rep-header-left{
+  display: flex;
+  flex-direction: column;
+  
+}
+
+@media screen and (max-width: 915px) {
+  .rep-header-left{
+    margin-bottom: 3px;
+  }
+}
+
 .rep-search-field-and-button{
   display: flex;
-  margin-top: 15px;
+  width: 100%;
+
+  margin-bottom: 3px;
 }
 
 .showLeaderboardsButton{
@@ -1401,7 +1470,7 @@ html {
   align-items: center;
   justify-content: center;
 
-  margin-left: 5px;
+  margin-left: 3px;
 
   background: #1d191f;
   border-radius: 5px;
@@ -1469,34 +1538,97 @@ html {
 .rep-username {
   display: flex;
   color: #f6f6f6;
+  background-color: #1D191F;
+
   font-weight: 500;
   font-size: 28px;
+
   min-width: fit-content;
 
-  margin-left: 25px;
-  align-self: center;
+  padding: 20px 35px;
+  white-space:nowrap;
+  
+  border-radius: 5px;
 }
 
 @media screen and (max-width: 1000px) {
   .reputation-topbar-field {
     flex-wrap: wrap;
   }
+}
 
+@media screen and (max-width: 600px) {
   .rep-username {
-    margin-bottom: 5px;
+    font-size: 24px;
+    padding: 17px 32px;
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 530px) {
+  .rep-username {
+    font-size: 20px;
+    padding: 15px 27px;
+  }
+}
+
+@media screen and (max-width: 450px) {
   .rep-username {
     font-size: 17px;
   }
 }
 
+@media screen and (max-width: 400px) {
+  .rep-username {
+    font-size: 16px;
+    padding: 12px 27px;
+  }
+}
+
+
 .rep-header-right {
   display: flex;
+  flex-direction: column;
+
   width: 100%;
   justify-content: space-between;
+
+  margin-left: 3px;
+}
+
+@media screen and (max-width: 915px) {
+  .rep-header-right{
+    margin-left: 0px;
+  }
+}
+
+.rep-filler{
+  background-color: #1D191F;
+  min-height: 33px;
+  width: 100%;
+
+  border-radius: 5px;
+}
+
+.right-middle{
+  display: flex;
+  height: 82px;
+}
+
+@media screen and (max-width: 600px) {
+  .right-middle {
+    height: 66px;
+  }
+}
+
+.rep-grade-wrapper{
+  display: flex;
+  background: #1D191F;
+
+  width: fit-content;
+  height: 100%;
+  
+  border-radius: 5px;
+  padding: 0px 20px;
 }
 
 .rep-grade {
@@ -1509,13 +1641,27 @@ html {
   align-items: center;
   justify-content: center;
   align-self: center;
-  margin-left: 25px;
 
   border: 3px solid #8f7f7f;
   border-radius: 50%;
 }
 
-@media screen and (max-width: 650px) {
+.rep-page-numbers{
+  height: 48px;
+  width: 100%;
+  background: #1D191F;
+
+  margin-top: 3px;
+  border-radius: 5px;
+}
+
+.rep-choose-category{
+  display: flex;
+
+  margin-top: 3px;
+}
+
+@media screen and (max-width: 600px) {
   .rep-grade {
     font-size: 20px;
     height: 50px;
@@ -1537,12 +1683,22 @@ html {
 .rep-title {
   display: flex;
   font-size: 15px;
-  line-height: 24px;
+  min-height: 33px;
+
   color: #766495;
-  justify-content: flex-end;
+  background: #1D191F;
+
+  margin-top: 3px;
+  padding: 5px 35px;
+  height: 100%;
+
+  border-radius: 5px;
+
+  justify-content: flex-start;
+  align-items: center;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 600px) {
   .rep-title-addrep-wrapper {
     margin-left: 15px;
   }
@@ -1556,27 +1712,33 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px 10px 5px 10px;
+
   font-size: 12px;
   color: #f6f6f6;
-  background: none;
-  margin-top: 3px;
-  border: 1px solid #2c8e54;
+  background: #392A3E;
+  border: none;
+
+  height: 100%;
+  padding: 0px 15px;
+
+  margin-left: 3px;
+
   border-radius: 5px;
   cursor: pointer;
   transition: background 150ms;
+
+  white-space: nowrap;
+
 }
 
 .rep-addrep-button:hover {
-  background: #2c8e5311;
+  background: #493650;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 600px) {
   .rep-addrep-button {
     padding: 4px 8px 4px 8px;
     font-size: 10px;
-
-    margin-top: 3px;
   }
 }
 
@@ -1622,7 +1784,7 @@ html {
   align-items: center;
   width: 100%;
   margin-bottom: 8px;
-
+  margin-top: 8px;
 }
 
 .rep-inbetween-section-left {
@@ -1651,7 +1813,7 @@ html {
 }
 
 .rep-inbetween-section-right button:hover {
-  color: #e7aa0f;
+  color: #FE3B3B;
 }
 
 .rep-inbetween-section-category-wrapper {
@@ -1787,49 +1949,63 @@ html {
 .rep-comment-input {
   display: flex;
   align-self: flex-start;
-  width: 588px;
-  height: 227px;
+  width: 100%;
+  height: 262px;
   font-size: 12px;
-  background: none;
-  border: 1px solid #47384d;
-  border-radius: 4px;
+  background: #1d191f;
+  border: none;
+  border-radius: 5px;
   color: #f6f6f6;
   overflow-wrap: break-word;
   resize: none;
 
+  margin-top: 3px;
+
   padding: 10px 10px 0px 15px;
 }
 
-@media screen and (max-width: 650px) {
-  .rep-comment-input {
-    width: 100%;
-  }
-}
 
 .repErrorText {
   color: rgb(255, 61, 61);
   font-size: 12px;
   height: 19px;
   margin-bottom: 10px;
+
+}
+
+.add-rep-bottom{
+  display: flex;
+  width: 100%;
+  
+  margin-top: 3px;
+}
+
+.add-rep-bottom .filler{
+  background: #1d191f;
+
+  width: 100%;
+  height: auto;
+  
 }
 
 .complete-rep-buttons-section {
   display: flex;
-  width: 100%;
+
+  margin-right: 3px;
 }
 
 .rep-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 165px;
+  width: 200px;
   height: 33px;
   font-weight: 500;
   font-size: 13px;
   color: #f6f6f6;
   background-color: #2c8e54;
   border-radius: 5px;
-  margin-right: 15px;
+  margin-right: 4px;
   border: none;
   cursor: pointer;
 
@@ -1843,7 +2019,7 @@ html {
 }
 
 .negative {
-  width: 170px;
+  width: 200px;
   background-color: #9f2727;
 }
 
@@ -2706,9 +2882,9 @@ html {
   min-height: 300px;
   width: 100%;
 
-  background-color: #1d191f;
   border-radius: 5px;
   margin-right: 15px;
+
 }
 
 .item-imagesRL-SMALL {
@@ -2774,7 +2950,7 @@ html {
   }
 }
 
-.added-items-notice-phone {
+.added-items-notice-phone { 
   display: flex;
   position: absolute;
 
@@ -2791,6 +2967,7 @@ html {
 
 .have-count-notice,
 .want-count-notice {
+
   display: flex;
   position: relative;
 
@@ -2811,12 +2988,12 @@ html {
 .have-count-notice span,
 .want-count-notice span {
   position: absolute;
-  right: 0px;
+  left: 0px;
 
   width: 5px;
   height: 100%;
 
-  border-radius: 0px 5px 5px 0px;
+  border-radius: 5px 0px 0px 5px;
 
   background: #2196f3;
 }
@@ -2833,9 +3010,9 @@ html {
 }
 
 .add-trade-done-button {
+  
   display: flex;
   color: #f6f6f6;
-  background: #3a3a3a;
 
   align-items: center;
   justify-content: center;
@@ -2849,11 +3026,12 @@ html {
   border: none;
   border-radius: 5px;
 
-  margin-top: 15px;
   margin-bottom: 15px;
+  margin-top: 15px;
 
   cursor: pointer;
   background: #2c8e54;
+
 }
 
 .success-added-have-items,
@@ -2885,26 +3063,17 @@ html {
 
   height: 100%;
   width: 100%;
-
 }
 
 .add-trade-3rd-page-header-field {
   display: flex;
   background: #1d191f;
 
-  padding: 20px;
+  padding: 10px;
   margin-bottom: 15px;
 
   height: fit-content;
   width: 100%;
-
-  border-radius: 5px;
- 
-}
-
-.add-trade-3rd-page-header-field img {
-  height: 95px;
-  width: 95px;
 
   border-radius: 5px;
 }
@@ -3134,7 +3303,7 @@ html {
   width: 100%;
   height: 100%;
 
-  z-index: 2;
+  z-index: 3;
 
   background-color: rgba(0, 0, 0, 0.8);
 
@@ -3499,15 +3668,16 @@ html {
 .account-settings-wrapper {
   display: flex;
   font-size: 18px;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 122px);
 
   animation: transitionLeft 0.4s;
 }
 
 @media screen and (max-width: 700px) {
   .account-settings-wrapper {
-    margin-top: 10px;
-    height: calc(100vh - 115px);
+   
+    margin-top: 3px;
+    height: calc(100vh - 67px);
   }
 }
 
@@ -3520,42 +3690,54 @@ html {
 .account-settings-sidebar {
   display: flex;
   flex-direction: column;
-  background-color: #1d191f;
+  
   min-width: 335px;
 
   border-radius: 5px;
   transition: min-width 250ms;
+
+}
+
+.account-settings-sidebar .filler{
+  max-height: 50px;
 }
 
 .account-settings-sidebar a {
   font-weight: 500;
   font-size: 16px;
   color: rgba(246, 246, 246, 0.5);
+  background-color: #1d191f;
 
-  border-bottom: 1px solid #27212b;
-  padding: 18px;
+  padding: 16px;
+  
   cursor: pointer;
   transition: padding-left 0.3s;
+
+  margin-top: 3px;
+  border-radius: 5px;
 
   text-decoration: none;
 }
 
+/*
 .account-settings-sidebar a:nth-child(1) {
-  /*border-top: 1px solid #27212B;*/
   margin-top: 50px;
-}
+}*/
 
 .account-settings-main {
   display: flex;
-  background-color: #1d191f;
+  flex-direction: column;
+  
   width: 100%;
 
-  margin-left: 10px;
+  margin-left: 3px;
   border-radius: 5px;
 
   transition: width 250ms;
 
   overflow: auto;
+  
+  overflow-x: hidden !important;
 }
 
 
@@ -3579,18 +3761,22 @@ html {
 }
 
 .account-username-container {
-  margin: 50px 0px 0px 70px;
+  padding: 50px 0px 50px 70px;
+  height: fit-content;
+
+  background-color: #1d191f;
+  border-radius: 5px;
 }
 
 @media screen and (max-width: 700px) {
   .account-username-container {
-    margin: 40px 0px 0px 40px;
+    padding: 40px 0px 40px 40px;
   }
 }
 
 @media screen and (max-width: 580px) {
   .account-username-container {
-    margin: 20px 0px 0px 20px;
+    padding: 20px 0px 20px 20px;
   }
 }
 
@@ -3599,6 +3785,7 @@ html {
   font-size: 14px;
   padding-right: 15px;
 
+  white-space: nowrap;
 }
 
 .acSettings-username-text {
@@ -3620,17 +3807,31 @@ html {
 .account-username-container input {
   display: flex;
   background: none;
-  border: 1px solid rgba(246, 246, 246, 0.5);
+  border: none;
+  background: #f6f6f6;
   border-radius: 5px;
   font-weight: 300;
-  color: #f6f6f6;
-  width: 358px;
+
+  width: 462px;
   padding: 7px 0 7px 15px;
   margin-top: 10px;
   font-size: 12px;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 520px) {
+  .acSettings-currentUsername  {
+    font-size: 28px;
+  }
+  .username-warning{
+    font-size: 15px !important;
+  }
+
+  .account-username-container input {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 1px) {
   .acSettings-currentUsername  {
     font-size: 28px;
   }
@@ -3639,34 +3840,28 @@ html {
   }
 }
 
-.account-username-container input:hover {
-  border: 1px solid rgb(88, 105, 117);
-}
-
-.account-username-container input:focus {
-  border: 1px solid #18a0fa;
-}
-
 .account-username-container button {
   display: block;
   font-weight: 500;
   font-size: 16px;
-  background: #141115;
-  border: none;
+  background: none;
+  border: 1px solid #2c8e54;
   border-radius: 5px;
   color: #f6f6f6;
   padding: 12px 18px;
   margin-top: 25px;
   cursor: pointer;
-  transition: background-color 200ms;
+  white-space: nowrap;
+  transition: background-color 200ms, color 200ms;
 }
 
 .account-username-container button:hover {
-  background-color: #0f0c0f;
+  background-color: #2c8e54;
+  color: #f6f6f6;
 }
 
 .account-username-container button:active {
-  background-color: #120f13;
+  background-color: #35a562;
 }
 
 .backArrow{
@@ -3685,7 +3880,9 @@ html {
 }
 
 .account-email-container {
-  margin: 50px 0px 0px 70px;
+  padding: 50px 0px 50px 70px;
+  
+  background-color: #1D191F;
 }
 
 .account-email-container p {
@@ -3693,15 +3890,16 @@ html {
   font-size: 14px;
 
   padding-right: 15px;
+  white-space: nowrap;
 }
 
 .account-email-container input {
   display: block;
   background: none;
-  border: 1px solid rgba(246, 246, 246, 0.5);
+  border: none;
   border-radius: 5px;
   font-weight: 300;
-  color: #f6f6f6;
+  background: #f6f6f6;
   width: 358px;
   padding: 7px 0 7px 15px;
   margin-top: 10px;
@@ -3710,13 +3908,13 @@ html {
 
 @media screen and (max-width: 700px) {
   .account-email-container {
-    margin: 40px 0px 0px 40px;
+    padding: 40px 0px 40px 40px;
   }
 }
 
 @media screen and (max-width: 580px) {
   .account-email-container {
-    margin: 20px 0px 0px 20px;
+    padding: 20px 0px 20px 20px;
   }
 }
 
@@ -3726,34 +3924,28 @@ html {
   }
 }
 
-.account-email-container input:hover {
-  border: 1px solid rgb(88, 105, 117);
-}
-
-.account-email-container input:focus {
-  border: 1px solid #18a0fa;
-}
-
 .account-email-container button {
   display: block;
   font-weight: 500;
   font-size: 16px;
-  background: #141115;
-  border: none;
+  background: none;
+  border: 1px solid #2c8e54;
   border-radius: 5px;
   color: #f6f6f6;
   padding: 12px 18px;
   margin-top: 15px;
   cursor: pointer;
-  transition: background-color 200ms;
+  transition: background-color 200ms, color 200ms;
+  white-space: nowrap;
 }
 
 .account-email-container button:hover {
-  background-color: #0f0c0f;
+  background-color: #23854b;
+  color: #f6f6f6;
 }
 
 .account-email-container button:active {
-  background-color: #120f13;
+  background-color: #35a562;
 }
 
 .acSettings-currentUEmail {
@@ -3802,22 +3994,27 @@ html {
 }
 
 .account-password-container {
-  margin: 50px 0px 0px 70px;
+  padding: 50px 0px 50px 70px;
+  background-color: #1D191F;
+
+  border-radius: 5px;
 }
 
 .account-password-container p {
   color: #f6f6f6;
   font-size: 14px;
+  white-space: nowrap;
 }
 
 
 .account-password-container input {
   display: block;
   background: none;
-  border: 1px solid rgba(246, 246, 246, 0.5);
+  border: none;
+  background: #f6f6f6;
   border-radius: 5px;
   font-weight: 300;
-  color: #f6f6f6;
+
   width: 358px;
   padding: 7px 0 7px 15px;
   margin-top: 10px;
@@ -3827,13 +4024,13 @@ html {
 
 @media screen and (max-width: 700px) {
   .account-password-container {
-    margin: 40px 0px 0px 40px;
+    padding: 40px 0px 40px 40px;
   }
 }
 
 @media screen and (max-width: 580px) {
   .account-password-container {
-    margin: 20px 0px 0px 20px;
+    padding: 20px 0px 20px 20px;
   }
 }
 
@@ -3847,34 +4044,28 @@ html {
   }
 }
 
-.account-password-container input:hover {
-  border: 1px solid rgb(88, 105, 117);
-}
-
-.account-password-container input:focus {
-  border: 1px solid #18a0fa;
-}
-
 .account-password-container button {
   display: block;
   font-weight: 500;
   font-size: 16px;
-  background: #141115;
-  border: none;
+  background: none;
+  border: 1px solid #2c8e54;
   border-radius: 5px;
   color: #f6f6f6;
   padding: 12px 18px;
   margin-top: 25px;
   cursor: pointer;
-  transition: background-color 200ms;
+  transition: background-color 200ms, color 200ms;
+  white-space: nowrap;
 }
 
 .account-password-container button:hover {
-  background-color: #0f0c0f;
+  background-color: #2c8e54;
+  color: #f6f6f6;
 }
 
 .account-password-container button:active {
-  background-color: #120f13;
+  background-color: #35a562;
 }
 
 #currentPassError {
@@ -3899,11 +4090,26 @@ html {
 
 /*-----Account Topbar              ----*/
 
+.filler{
+  background-color: #1D191F;
+
+  height: 100%;
+  width: 100%;
+
+  border-radius: 5px;
+}
+
 .accountTb {
   display: flex;
   width: 100%;
   
   overflow: auto;
+
+  margin-top: 3px;
+  margin-bottom: 3px;
+  
+  border-radius: 5px;
+  
 }
 
 @media screen and (max-width: 700px) {
@@ -3912,25 +4118,33 @@ html {
   }
 }
 
-.accountTb-nav {
+.accountTb-nav{
+  background: #1D191F;
   color: rgba(246, 246, 246, 0.5);
+
   font-size: 15px;
   font-weight: 500;
-  padding: 15px 20px 15px 20px;
+
+  border-radius: 5px;
+  margin-right: 3px;
+
+  padding: 15px 23px;
 
   white-space: nowrap;
 }
 
-.accountTb-nav:hover {
-  /*background: #171318;*/
-  border-bottom: 2px solid #fe3b3b6b;
+.accountTb .accountTb-nav:hover {
+  background: #2A242D;
 }
 
 .account-currentPage {
-  color: #f6f6f6;
+  color: #f6f6f6 !important;
+  background: #2A242D !important;
 
-  background: #0f0c0f;
-  border-bottom: 2px solid #fe3b3b;
+  border: 1px solid #413846;
+  border-radius: 5px;
+
+  padding: 14px 22px !important;
 }
 
 
@@ -4056,7 +4270,7 @@ html {
 .tos-header{
   display: flex;
   flex-direction: column;
-  margin-top: 15px;
+  margin-top: 3px;
   background: #1d191f;
   border-radius: 5px;
   padding: 20px 38px;
@@ -4163,6 +4377,10 @@ html {
   margin-left: 10px;
   margin-top: 20px;
   font-size: 12px;
+}
+
+.noBorderRadius{
+  border-radius: 0px;
 }
 
 .testUsersWrapper {
@@ -4725,6 +4943,7 @@ html {
 }
 
 .sidebar-filterdropdown-item {
+  display: flex;
   color: #f6f6f6;
   padding: 5px 0px 5px 0px;
   line-height: 175%;
@@ -4733,6 +4952,14 @@ html {
   border-radius: 5px;
 
   transition: background 250ms, padding 250ms;
+}
+
+
+.sidebar-filterdropdown-item p{
+  font-size: 9px;
+  color: grey;
+
+  margin-left: 5px;
 }
 
 .sidebar-filterdropdown-item:hover {

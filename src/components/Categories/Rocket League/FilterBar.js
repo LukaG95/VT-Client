@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useContext } from "react";
 
 import { ItemTypes, ItemQualities } from "../../../constants/Items";
 import { useTradeFilters } from "../../../context/TradeFiltersContext";
@@ -9,14 +9,10 @@ import { actions, useTrade } from "../../../context/TradeContext";
 import { platforms } from "../../../constants/platforms";
 import { Categories } from "../../../constants/Categories/Categories";
 import {Filters} from "../../AddTrade/Filters"
+import Footer from "../../Sidebar Left/Footer"
 
-function FilterBar() {
-  const [{platform}, dispatch] = useTrade();
+function FilterBar(props) {
   const [filters, dispatch2] = useTradeFilters();
-
-  const { width } = useWindowDimensions();
-
-  // const [Filter, setFilter] = useState(Filters[filters.category.replace(/ /g, "")])
 
   const Filter = Filters[filters.category.replace(/ /g, "")] // remove spaces from string with .replace
 
@@ -26,22 +22,47 @@ function FilterBar() {
       <Dropdown
         name="Category"
         items={Object.keys(Categories).map(c => Categories[c])}
-        className={styles.dropdowns}
-        onChange={(category) =>
+        onChange={(category) => {
           dispatch2({
             type: "setFilter",
             payload: {
               type: "category",
               value: category,
-            },
+            }
           })
-        }
+          // reset the filters for the category when switching to it
+          dispatch2({
+            type: "reset"
+          })
+        }}
         value={filters.category}
+        floating
+        {...props}
       />  
 
-      <div className={styles.spacer}></div>
+      <Filter props={props} sidebar={true}/>
+      
+      <button 
+        className={styles.resetButton}
+        style={props.className==="noBorderRadius" ? {borderRadius: "0px"} : null}
+        onClick={()=> {
+          dispatch2({
+            type: "reset"
+          })
+        }}>
+          RESET FILTERS
+      </button>
 
-     <Filter />
+      {
+        props.sidebar ? 
+            <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+              <div className="separator-horizontal"></div>
+              <Footer />
+            </div>
+      : 
+        <div className={styles.filler}></div>
+      }
+      
       
     </div>
   )

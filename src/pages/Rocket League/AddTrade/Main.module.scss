@@ -1,6 +1,6 @@
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 250px 420px 300px;
+  grid-template-columns: 1fr 250px auto 300px;
   gap: 3px;
 
   margin-top: 3px;
@@ -81,12 +81,13 @@
   overflow-wrap: break-word;
 }
 
-.haveWant {
-  background-color: #1d191f;
+.haveWant { 
+  display: flex;
+  max-width: 397px; 
+
   @media only screen and (max-width: 1213px) {
-    background: #1d191f;
-    padding: 15px 10px 5px 10px;
-    border-radius: 5px;
+    max-width: 100%;
+    flex-direction: column;
   }
 
   .section {
@@ -95,45 +96,61 @@
     flex-direction: column;
     height: auto;
     width: 100%;
-    padding: 16px;
+    margin-bottom: 2px;
+ 
     // height: 50% // to make them in the middle
 
     .items {
       overflow-y: hidden;
-      padding-bottom: 10px;
-      grid-template-rows: repeat(3, 94px);
-      grid-template-columns: repeat(4, 94px);
+      grid-template-rows: repeat(3, 97px);
+      grid-template-columns: repeat(4, 97px);
       scrollbar-width: thin;
       min-height: fit-content;
+      row-gap: 1px;
+      column-gap: 3px;
 
       &::-webkit-scrollbar{
         height: 5px;
       }
     }
+    
 
     @media only screen and (max-height: 830px) {
+      margin-bottom: 4px;
       .items{
         overflow-x: scroll;
         overflow-y: hidden;
-        grid-template-rows: 90px 90px;
-        grid-template-columns: repeat(6, 90px);
+        grid-template-rows: 97px 97px;
+        grid-template-columns: repeat(6, 97px);
+
+        padding-bottom: 3px;
       }
     }
 
     @media only screen and (max-height: 660px) {
       .items{
-        grid-template-rows: 90px;
-        grid-template-columns: repeat(12, 90px);
+        grid-template-rows: 97px;
+        grid-template-columns: repeat(12, 97px);
+
+        padding-bottom: 3px;
       }
     }
+
     
   }
+
+  .filler{
+    height: 100vh;
+    width: 100%;
+    background-color: #1d191f;
+    border-radius: 5px;
+  }
+  
 
   .sectionSmall {
     @extend .section;
     height: min-content;
-    padding: 4px;
-
+    margin-bottom: 10px;
     .items {
       display: grid;
       overflow-y: hidden;
@@ -149,15 +166,57 @@
 
   .title {
     display: flex;
-    justify-content: space-between;
     color: #f6f6f6;
     font-size: 18px;
 
-    padding-left: 6px;
-    margin-bottom: 10px;
+    height: 62px;
+    align-items: center;
 
+    
+    border-radius: 5px;
+
+    margin-bottom: 2px;
+
+    justify-content: space-between;
+
+    @media only screen and (max-width: 1213px) {
+      height: 50px;
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+     
+      height: 100%;
+      width: 100%;
+
+      background-color: #1d191f;
+      border-radius: 5px;
+    }
+
+    .haveBLUE{
+      width: 10px;
+      height: 100%;
+      background: #2196f3;
+    
+      border-radius: 5px 0px 0px 5px;
+    }
+    
+    .wantRED{
+      width: 10px;
+      height: 100%;
+      background: #fe3b3b;
+
+      border-radius: 5px 0px 0px 5px;
+    } 
+
+    p{
+      padding-left: 15px;
+    }
   }
 }
+
+
 
 .notes {
   display: flex;
@@ -184,8 +243,8 @@
 .notesSmall {
   max-height: calc(100% - 150px);
   min-height: 139px;
+  margin-bottom: 10px;
   @extend .notes;
-  margin-top: 15px;
 }
 
 
@@ -369,4 +428,4 @@
 
 .SWITCH:hover{
   background: #e70012;
-}ć*/
+}*/

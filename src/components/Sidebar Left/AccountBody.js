@@ -19,7 +19,16 @@ function AccountBody() {
     premium = "";
 
   switch (location.pathname) {
-    case "/account/settings":
+    case "/account/settings/username":
+      account = "account-currentPage-sidebar";
+      break;
+    case "/account/settings/email":
+      account = "account-currentPage-sidebar";
+      break;
+    case "/account/settings/password":
+      account = "account-currentPage-sidebar";
+      break;
+    case "/account/settings/platforms":
       account = "account-currentPage-sidebar";
       break;
     case "/account/messages":
@@ -37,10 +46,10 @@ function AccountBody() {
   return (
     <div className="sidebar-body-account">
 
-      <FilterButton name="Account settings" link="/account/settings" style={account} />
+      <FilterButton name="Account settings" link="/account/settings/username" style={account} />
       <FilterButton name="Messages" link="/account/messages" style={messages} />
       <FilterButton name="My Trades" link={`/trades/${myID}`} style={trades} />
-      <FilterButton name="Premium" link="/account/premium" style={premium} />
+      {/*<FilterButton name="Premium" link="/account/premium" style={premium} /> */}
       <FilterButton name="Logout" />
 
       <div className="separator-horizontal"></div>

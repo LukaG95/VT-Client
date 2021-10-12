@@ -1,21 +1,10 @@
 import * as React from "react";
-import { Categories } from "../constants/Categories/Categories";
+import { Categories, CategoryFilters } from "../constants/Categories/Categories";
 
 const TradeFiltersStateContext = React.createContext();
 const TradeFiltersDispatchContext = React.createContext();
 
-/*
-const defaultState = {
-  game: Games.ROCKET_LEAGUE,
-  search: "I want to buy",
-  name: "",
-  color: "Any",
-  cert: "Any",
-  type: "Any",
-  platform: "Any",
-};*/
-
-const defaultState = {
+const initialState = {
   category: Categories.MONEY,
   name: "",
   quality: "Any",
@@ -30,7 +19,7 @@ function tradeFiltersReducer(state, action) {
       return { ...state, [type]: action.payload.value };
     }
     case "reset": {
-      return { ...defaultState };
+      return { category: state.category, ...CategoryFilters[state.category] };
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -39,7 +28,7 @@ function tradeFiltersReducer(state, action) {
 }
 
 function TradeFiltersProvider({ children }) {
-  const [state, dispatch] = React.useReducer(tradeFiltersReducer, defaultState);
+  const [state, dispatch] = React.useReducer(tradeFiltersReducer, initialState);
   return (
     <TradeFiltersStateContext.Provider value={state}>
       <TradeFiltersDispatchContext.Provider value={dispatch}>

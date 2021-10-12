@@ -52,11 +52,5 @@
     "category": "Money",
     "itemType": "All",
     "itemName": "Ethereum"
-  },
-  {
-    "itemID": 10,
-    "category": "Money",
-    "itemType": "All",
-    "itemName": "Other"
   }
 ]

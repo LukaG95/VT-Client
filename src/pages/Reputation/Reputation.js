@@ -4,14 +4,13 @@ import axios from "axios";
 
 import { UserContext } from "../../context/UserContext";
 import { PopupContext } from "../../context/PopupContext";
-import { createNotification } from "../../misc/ToastNotification";
 import useWindowDimensions from "../../misc/windowHW";
 import { RepCategories } from "../../constants/RepCategories"
 import useUserSearch from "./useUserSearch"
 import pageNumbers from "../../components/pageNumbers"
 import repTitle from "../../constants/repTitle"
 import {Helmet} from "react-helmet";
-import {ReactComponent as NoReputationIcon} from "../../images/icons/no_reputation.svg"
+import { createNotification } from "../../misc/ToastNotification";
 
 function Reputation() {
   const [repInfo, setRepInfo] = useState();
@@ -24,7 +23,7 @@ function Reputation() {
     open: false,
     text: ""
   })
-
+ 
   const { myID, isLoggedIn } = useContext(UserContext);
   const { setOpenForm, setOpenRepLeaderboards} = useContext(PopupContext);
 
@@ -90,26 +89,34 @@ function Reputation() {
 
   if (repInfo !== undefined && repInfo !== "invalid")
     return (
-      <>
-        {helmet()}
-        <div className="rep-search-field-and-button">
-          {searchInput()}
-          {
-            width > 800 && 
-              <div className="showLeaderboardsButton" onClick={()=> setOpenRepLeaderboards(true)}>
-                <div className="gg-trophy"></div>
-              </div>
-          }
-        </div>
+      <div className="rep-wrapper">
+      {helmet()}
 
-        <div className="reputation-topbar-field">
-          <div className="rep-username">{repInfo.username}'s Reputation</div>
+        <div className="rep-header">
+          <div className="rep-header-left">
+            <div className="rep-search-field-and-button">
+              {searchInput()}
+              {
+                width > 800 && 
+                  <div className="showLeaderboardsButton" onClick={()=> setOpenRepLeaderboards(true)}>
+                    <div className="gg-trophy"></div>
+                  </div>
+              }
+            </div>
+
+            <div className="rep-username">{repInfo.username}'s Reputation</div>
+
+            <div className="rep-title">{repTitle(repInfo.ups)}</div>
+
+          </div>
 
           <div className="rep-header-right">
-            <div className="flex">
-              <div className="rep-grade">{repInfo.grade}</div>
-              <div className="rep-title-addrep-wrapper">
-                <p className="rep-title">{repTitle(repInfo.ups)}</p>
+            {width > 915 && <div className="rep-filler" style={{marginBottom: "3px"}}></div>}
+            
+              <div className="right-middle">
+                <div className="rep-grade-wrapper">
+                  <div className="rep-grade">{repInfo.grade}</div>
+                </div>
                 {isLoggedIn ? (
                   <Link
                     style={{ textDecoration: "none" }}
@@ -127,18 +134,20 @@ function Reputation() {
                     + Add reputation
                   </button>
                 )}
+                <div className="filler" style={{marginLeft: "3px"}}></div>
               </div>
-            </div>
-
-            <div className="rep-ups-downs">
-              <span className="rep-ups">+{repInfo.ups}</span>
-              <span className="rep-middle"> </span>
-              <span className="rep-downs">-{repInfo.downs}</span>
-            </div>
+            <div className="rep-page-numbers">{pageNumbers(currentPage, pageAmount(), setCurrentPage, repInfo.amount.all)}</div>
           </div>
+
+          {/*
+          <div className="filler" style={{marginLeft: "3px", height: "auto"}}></div>
+          */}
+          
         </div>
 
-        {repInfo.amount.all > 0 && pageNumbers(currentPage, pageAmount(), setCurrentPage)}
+        {/*
+          {repInfo.amount.all > 0 && pageNumbers(currentPage, pageAmount(), setCurrentPage)}
+        */}
 
         {repInfo.amount.all > 0 ? (
           <>
@@ -184,23 +193,31 @@ function Reputation() {
             </div>
           </>
         ) : (
-          <div className="noReputationWrapper">
-          <NoReputationIcon style={{ width: "150px", height: "150px"}} />
-          <div className="noReputationMsg">
-            
-            <h2>User has no rep in the database.</h2>
+          <div className="noTrades">
+            {/* <NoReputationIcon style={{ width: "150px", height: "150px"}} /> */}
+            <p>User has no rep in the database.<br />
             Be the 1st one to <span> </span>
-            <Link
-              to={`/reputation/add/${repInfo.userId}`}
-              className="first-trade-text-button"
-              id=""
-            >
-              add reputation
-            </Link>
-          </div>
+            
+            {isLoggedIn ? (
+                  <Link
+                  to={`/reputation/add/${repInfo.userId}`}
+                  className="first-trade-text-button"
+                >
+                  add reputation
+                </Link>
+                ) : (
+                  <span
+                    onClick={() => setOpenForm(true)}
+                    className="first-trade-text-button"
+                  >
+                    add reputation
+                  </span>
+                )}
+
+            </p> 
           </div>
         )}
-      </>
+      </div>
     );
   else if (repInfo === "invalid")
     return (
@@ -236,24 +253,7 @@ function Reputation() {
 
   /*-----Functions                -------------*/
 
-  function searchForUserRep(e) {
-    e.preventDefault();
 
-    axios
-      .get(`/api/auth/getUserByUsername/${search.text}`)
-      .then((res) => {
-        if (res.data.info === "success")
-          window.location.href = `/reputation/${res.data.user._id}`;
-      })
-      .catch((err) => {
-        if (err.response.data.info === "no user")
-          createNotification(
-            "error",
-            "That user doesn't exist",
-            "user doesn't exist"
-          );
-      });
-  }
 
   function Categories(){
     let count = 0
@@ -274,7 +274,7 @@ function Reputation() {
               setCurrentPage(1);
               setRepType(category);
             }}
-            style={repType === category ? { color: "#E7AA0F" } : null}
+            style={repType === category ? { color: "#FE3B3B" } : null}
           >
             {cat} ({repInfo.amount[category]}) {count === 0 ? <span>&nbsp;</span> : <span>/&nbsp;</span>}
          </button>
@@ -354,9 +354,28 @@ function Reputation() {
       return {borderRadius: "5px"} 
   }
 
+  function searchForUserRep(e, search) {
+    e.preventDefault();
+  
+    axios
+      .get(`/api/auth/getUserByUsername/${search.text}`)
+      .then((res) => {
+        if (res.data.info === "success")
+          window.location.href = `/reputation/${res.data.user._id}`;
+      })
+      .catch((err) => {
+        if (err.response.data.info === "no user")
+          createNotification(
+            "error",
+            "That user doesn't exist",
+            "user doesn't exist"
+          );
+      });
+  }
+
   function searchInput(x){
     return (
-      <form onSubmit={searchForUserRep} ref={ref} className="rep-form" style={x ? {marginTop: "15px"} : {}}>
+      <form onSubmit={e=> searchForUserRep(e, search)} ref={ref} className="rep-form" style={x ? {marginTop: "15px", width: "400px"} : {}}>
         <input
           onChange={(e) => setSearch({...search, text: e.target.value})}
           placeholder="Search users ..."

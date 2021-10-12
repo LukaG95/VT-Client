@@ -1,6 +1,39 @@
 .button {
   display: flex;
   background: none;
+  font-weight: 600;
+  font-size: 13px;
+  height: 100%;
+  min-width: 62px;
+  background: #1D191F;
+  border: 1px solid #49414E;
+  border-radius: 5px;
+  margin-left: 3px;
+  width: min-content !important;
+
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid #C82525;
+   
+  }
+
+  &:active {
+    background: #301c21;
+  }
+}
+
+.icon {
+  height: 40px;
+  width: 40px;
+}
+
+/*
+.button {
+  display: flex;
+  background: none;
   color: #f6f6f6;
   font-weight: 600;
   font-size: 13px;
@@ -30,3 +63,5 @@
   height: 14px;
   width: 14px;
 }
+
+*/

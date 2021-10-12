@@ -38,10 +38,10 @@ function MyAccount() {
   const { width } = useWindowDimensions()
 
   let chosenSidebarStyle = {
-    border: "1px solid rgba(0, 0, 0, 0.8)",
-    paddingTop: "17px",
+    border: "1px solid #413846",
+    padding: "15px",
     paddingLeft: "35px",
-    backgroundColor: "#141115",
+    backgroundColor: "#2A242D",
     color: "#f6f6f6",
   };
 
@@ -72,6 +72,7 @@ function MyAccount() {
 
       <div className="account-settings-wrapper">
         <div className="account-settings-sidebar" id="account-sidebar">
+          <div className="filler"></div>
           <Link
             to="/account/settings/username"
             onClick={() => {
@@ -114,6 +115,7 @@ function MyAccount() {
           >
             Platforms
           </Link>
+          <div className="filler" style={{marginTop: "3px", maxHeight: "none"}}></div>
         </div>
 
         <div className="account-settings-main" id="account-main">
@@ -121,6 +123,7 @@ function MyAccount() {
           {pathID === "password" && Password()}
           {pathID === "email" && Email()}
           {pathID === "platforms" && Platforms(view)}
+          <div className="filler" style={{marginTop: "3px"}}></div>
         </div>
       </div>
       
@@ -302,9 +305,9 @@ function MyAccount() {
         <h3 className="acSettings-username-text">Username</h3>
         <h1 className="acSettings-currentUsername">{currentUsername}</h1>
 
-        <p>
+        <p className="username-warning" >
           <span style={{ color: "#C33030" }}>!warning</span> you can only change
-          your username once every 30 days
+          your {width <= 520 && <br />} username once every 30 days
         </p>
         <form onSubmit={(e) => handleUpdateUsername(e)}>
           <input
@@ -373,7 +376,7 @@ function MyAccount() {
           />
           <p id="newPassError">{newPassErrorMsg}</p>
 
-          <p style={{ marginTop: "10px" }}>Confirm New Password</p>
+          <p style={{ marginTop: "25px" }}>Confirm New Password</p>
           <input
             style={
               newPass2ErrorMsg !== ""
@@ -430,7 +433,7 @@ function MyAccount() {
             }}
           />
 
-          <p style={{ marginTop: "10px" }}>Confirm New Email</p>
+          <p style={{ marginTop: "25px" }}>Confirm New Email</p>
           <input
             style={
               emailErrorMsg !== ""
@@ -453,7 +456,7 @@ function MyAccount() {
 
           <p style={{ fontSize: "14px", marginTop: "30px" }}>
             <span style={{ color: "#34CEFF" }}>!info</span> we will send a
-            confirmation link to the new email
+            confirmation link {width <= 425 && <br />} to the new email
           </p>
           <button>Update email</button>
         </form>

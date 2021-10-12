@@ -39,7 +39,7 @@ import { createNotification } from "./misc/ToastNotification";
 
 export default function App() {
   const { isLoggedIn, user } = useContext(UserContext);
-  const { setIsOpen_LeftSidebar } = useContext(LeftSidebarContext);
+  const { setIsOpen_LeftSidebar, setOpenHeader } = useContext(LeftSidebarContext);
   const [newMessage, setNewMessage] = useState(null)
   const [displayFooter, setDisplayFooter] = useState(false)
 
@@ -95,128 +95,126 @@ export default function App() {
  // if (displayWebsite === true) {
     return (
       <>
-        <Sidebar />
-        <Popups />
-        <LoginForm />
+        <TradeProvider>
+        <TradeFiltersProvider>
+          <Sidebar />
+        
+          <Popups />
+          <LoginForm />
 
-        <div className="shader_wrapper" id="main">
-          <div
-            id="shader"
-            onClick={() => {
-              closeSidebar();
-              setIsOpen_LeftSidebar(false);
-            }}
-          ></div>
+          <div className="shader_wrapper" id="main">
+            <div
+              id="shader"
+              onClick={() => {
+                closeSidebar();
+                setIsOpen_LeftSidebar(false);
+                setOpenHeader(false)
+              }}
+            ></div>
 
-          <div className="mainWrapper" style={width > 1213 && displayFooter ? {paddingBottom: "350px"} : {paddingBottom: "0px"}}>
+            <div className="mainWrapper" style={width > 1213 && displayFooter ? {paddingBottom: "350px"} : {paddingBottom: "0px"}}>
 
-            {/*<div style={{position: "absolute", top: "5px", color: "white"}}>{width}</div>
-            <div style={{position: "absolute", top: "25px", color: "white"}}>{height}</div>*/}
+              {/*<div style={{position: "absolute", top: "5px", color: "white"}}>{width}</div>
+              <div style={{position: "absolute", top: "25px", color: "white"}}>{height}</div>*/}
 
-            <Navbar />
-            <Switch>
-              <Route exact path="/">
-                <>
-                  <FilterBar />
-                  <RLTrading home={true} />
-                </>
-              </Route>
-              <Route exact path="/trading/rl">
-                <>
-                  <FilterBar />
-                  <RLTrading />
-                </>
-              </Route>
-              <Route path="/reputation/add/:pathID">
-                {handleRedirectOnRefresh(<AddReputation />)}
-              </Route>
-              <Route exact path="/reputation">
-                <Reputation />
-              </Route>
-              <Route path="/reputation/:pathID">
-                <Reputation />
-              </Route>
-              <Route exact path="/trading/rl/new">
-                {handleRedirectOnRefresh(
-                  <TradeProvider>
-                    <TradeFiltersProvider>
-                      <RLAddTrade />
-                    </TradeFiltersProvider>
-                  </TradeProvider>
-                )}
-              </Route>
-              <Route path="/trading/rl/edit/:pathID">
-                {handleRedirectOnRefresh(
-                  <TradeProvider>
-                    <TradeFiltersProvider>
-                      <RLAddTrade />
-                    </TradeFiltersProvider>
-                  </TradeProvider>
-                )}
-              </Route>
-              <Route path="/trades/:pathID">
-                {handleRedirectOnRefresh(
+              <Navbar />
+              <Switch>
+                <Route exact path="/">
                   <>
                     <FilterBar />
-                    <UserTrades />
+                    <RLTrading home={true} />
                   </>
-                )}
-              </Route>
-              <Route exact path="/terms">
-                <Terms />
-              </Route>
-              <Route exact path="/rules/trading">
-                <TradingRules />
-              </Route>
-              <Route exact path="/rules/reputation">
-                <ReputationRules />
-              </Route>
-              <Route exact path="/security">
-                <PreventScam />
-              </Route>
-              <Route exact path="/account/settings/username">
-                {handleRedirectOnRefresh(<Settings />)}
-              </Route>
-              <Route exact path="/account/settings/password">
-                {handleRedirectOnRefresh(!registeredWithPlatform() ? <Settings /> : <Redirect to="/" />)}
-              </Route>
-              <Route exact path="/account/settings/email">
-                {handleRedirectOnRefresh(!registeredWithPlatform() ? <Settings /> : <Redirect to="/" />)}
-              </Route>
-              <Route exact path="/account/settings/platforms">
-                {handleRedirectOnRefresh(<Settings />)}
-              </Route>
-              <Route exact path="/account/messages">
-                {handleRedirectOnRefresh(<Messages newMessage={newMessage}/>)}
-              </Route>
-              <Route path="/account/messages/:pathID">
-                {handleRedirectOnRefresh(<Messages newMessage={newMessage}/>)}
-              </Route>
-              <Route path="/password/reset/:pathID">
-                <ResetPassword />
-              </Route>
-              <Route path="/email/confirm/:pathID">
-                <ConfirmEmail /> 
-              </Route>
-              <Route path="/email/update/:pathID">
-                <UpdateEmail />
-              </Route>
-              <Route path="/admin">
-                {handleRedirectOnRefresh(<AdminPage2 />)}
-              </Route>
-              <Route path="/partner/:tracking">
-                <Partner />
-              </Route>
-            </Switch>
-            
-            {(displayFooter && width > 1213) ? <Footer /> : null}
+                </Route>
+                <Route exact path="/trading">
+                  <>
+                    <FilterBar />
+                    <RLTrading />
+                  </>
+                </Route>
+                <Route path="/reputation/add/:pathID">
+                  {handleRedirectOnRefresh(<AddReputation />)}
+                </Route>
+                <Route exact path="/reputation">
+                  <Reputation />
+                </Route>
+                <Route path="/reputation/:pathID">
+                  <Reputation />
+                </Route>
+                <Route exact path="/trading/new">
+                  {handleRedirectOnRefresh(<RLAddTrade />)}
+                </Route>
+                <Route path="/trading/edit/:pathID">
+                  {handleRedirectOnRefresh(
+                    
+                        <RLAddTrade />
+                    
+                  )}
+                </Route>
+                <Route path="/trades/:pathID">
+                  {handleRedirectOnRefresh(
+                    <>
+                      <FilterBar />
+                      <UserTrades />
+                    </>
+                  )}
+                </Route>
+                <Route exact path="/terms">
+                  <Terms />
+                </Route>
+                <Route exact path="/rules/trading">
+                  <TradingRules />
+                </Route>
+                <Route exact path="/rules/reputation">
+                  <ReputationRules />
+                </Route>
+                <Route exact path="/security">
+                  <PreventScam />
+                </Route>
+                <Route exact path="/account/settings/username">
+                  {handleRedirectOnRefresh(<Settings />)}
+                </Route>
+                <Route exact path="/account/settings/password">
+                  {handleRedirectOnRefresh(!registeredWithPlatform() ? <Settings /> : <Redirect to="/" />)}
+                </Route>
+                <Route exact path="/account/settings/email">
+                  {handleRedirectOnRefresh(!registeredWithPlatform() ? <Settings /> : <Redirect to="/" />)}
+                </Route>
+                <Route exact path="/account/settings/platforms">
+                  {handleRedirectOnRefresh(<Settings />)}
+                </Route>
+                <Route exact path="/account/messages">
+                  {handleRedirectOnRefresh(<Messages newMessage={newMessage}/>)}
+                </Route>
+                <Route path="/account/messages/:pathID">
+                  {handleRedirectOnRefresh(<Messages newMessage={newMessage}/>)}
+                </Route>
+                <Route path="/password/reset/:pathID">
+                  <ResetPassword />
+                </Route>
+                <Route path="/email/confirm/:pathID">
+                  <ConfirmEmail /> 
+                </Route>
+                <Route path="/email/update/:pathID">
+                  <UpdateEmail />
+                </Route>
+                <Route path="/admin">
+                  {handleRedirectOnRefresh(<AdminPage2 />)}
+                </Route>
+                <Route path="/partner/:tracking">
+                  <Partner />
+                </Route>
+              </Switch>
+              
+              {(displayFooter && width > 1213) ? <Footer /> : null}
 
+            </div>
           </div>
-        </div>
 
-        <ScrollUpButton />
+          <ScrollUpButton />
 
-        <ToastContainer />
+          <ToastContainer />
+          </TradeFiltersProvider>
+        </TradeProvider>
       </>
     );
   // } else if (displayWebsite === false) return <AlphaForm />;

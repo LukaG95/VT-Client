@@ -43,13 +43,13 @@ function Popups() {
             style={{ justifyContent: "space-evenly" }}
           >
             <button
-              onClick={() => (window.location.href = "/trading/rl/new")}
+              onClick={() => (window.location.href = "/trading/new")}
               className="tradeNoticeLeftButton"
             >
               Create new trade
             </button>
             <button
-              onClick={() => (window.location.href = "/trading/rl")}
+              onClick={() => (window.location.href = "/trading")}
               className="tradeNoticeRightButton"
             >
               Trading page
@@ -131,7 +131,7 @@ function Popups() {
         onMouseDown={(e) => {
           if (e.target.className === "shading") {
             setOpenEditTradePopup(false)
-            window.location.replace("/trading/rl") 
+            window.location.replace("/trading") 
           };
         }}
       >
@@ -145,7 +145,7 @@ function Popups() {
             <button
               onClick={() => {
                 setOpenEditTradePopup(false)
-                window.location.replace("/trading/rl/new") 
+                window.location.replace("/trading/new") 
               }}
               className="tradeNoticeLeftButton"
             >
@@ -154,7 +154,7 @@ function Popups() {
             <button
               onClick={() => {
                 setOpenEditTradePopup(false)
-                window.location.replace("/trading/rl") 
+                window.location.replace("/trading") 
               }}
               className="tradeNoticeRightButton"
             >

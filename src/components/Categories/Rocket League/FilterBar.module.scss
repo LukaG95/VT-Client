@@ -1,6 +1,11 @@
 .wrapper{
-  padding: 5px 15px 0px 15px;
-  background-color: #1d191f;
+  display: grid;
+ 
+  align-items: flex-start;
+  row-gap: 3px;
+  width: 100%;
+
+  scrollbar-color: #929292 #131014;
 }
 
 .spacer{
@@ -14,7 +19,7 @@
   font-weight: 500;
   font-size: 14px;
     
-  padding: 10px 0px 10px 0px;
+  padding: 20px 0px;
 
   border: 1px solid #C82525;
   border-radius: 5px;
@@ -24,6 +29,41 @@
   &:hover{
     color: #F6F6F6;
     background: #C82525;
+
+    cursor: pointer;
+  }
+}
+
+.filler{
+
+
+  height: 100vh;
+  width: 100%;
+  background-color: #1d191f;
+  border-radius: 5px;
+}
+
+.sidebar{
+  border-radius: 0px;
+}
+
+.confirmButton{
+  color: #2c8e54;
+  background-color: #1d191f;
+
+  font-weight: 500;
+  font-size: 14px;
+    
+  padding: 20px 0px;
+
+  border: 1px solid #2c8e54;
+  border-radius: 5px;
+
+  transition: background-color 200ms, color 200ms;
+
+  &:hover{
+    color: #F6F6F6;
+    background: #2c8e54;
 
     cursor: pointer;
   }

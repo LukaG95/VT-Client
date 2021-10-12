@@ -39,7 +39,7 @@ export default function ReputationRules() {
             <li> Amount of positive reputation, relative to negative</li>
           </ul> <br/>
           <span style={{color: "yellow"}}>&#9888;</span> By no means does this mean we vouch or state you should trust someone, regardless of their 
-          reputation, grade, titles, tags or status and aren’t responsible for any potential scams. Full in depth <Link to="/rules/trading">prevent scam</Link> guide
+          reputation, grade, titles, tags or status and aren’t responsible for any potential scams. Full in depth <Link to="/security">prevent scam</Link> guide
         </p>
 
         <h2>Reputation Rules</h2>

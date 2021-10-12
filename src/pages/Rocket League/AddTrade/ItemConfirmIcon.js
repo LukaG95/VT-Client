@@ -8,10 +8,10 @@ export default function ItemConfirmIcon({ item }) {
   const [{ have, want }] = useTrade();
   let icons = [];
   //If item is in have, display have check
-  if (have.find((h) => h && h.itemID === item.itemID))
+  if (have.find((h) => h && (h.itemID === item.itemID && h.category === item.category)))
   icons.push(<BlueCheckIcon className={styles.have}/>);
   //If item is in want, display want check
-  if (want.find((w) => w && w.itemID === item.itemID))
+  if (want.find((w) => w && (w.itemID === item.itemID && w.category === item.category)))
     icons.push(<RedCheckIcon className={styles.want}/>);
   return icons;
 }

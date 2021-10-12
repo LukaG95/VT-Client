@@ -3,6 +3,9 @@
   flex-direction: column;
 
   width: 100%;
+  
+  background-color: #1D191F;
+  border-radius: 5px;
 }
 
 .platforms{
@@ -16,8 +19,6 @@
 
   column-gap: 50px;
   row-gap: 50px;
-
-
 
   @media only screen and (max-width: 1600px) {
     grid-template-columns: 1fr 1fr;

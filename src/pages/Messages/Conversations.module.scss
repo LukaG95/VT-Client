@@ -9,6 +9,15 @@
   transition: min-width 250ms;
 
   overflow-y: auto;
+  //align-items: center;
+}
+
+.conversationsWrapper .noMessages {
+  font-weight: 500;
+  font-size: 28px;  
+  color: #5B4E61;
+
+  align-self: center;
 }
 
 @media screen and (max-width: 1065px) {
@@ -19,5 +28,6 @@
   .conversationsWrapper div {
     display: flex;
     justify-content: center;
+    
   }
 }

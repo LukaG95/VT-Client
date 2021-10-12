@@ -3,15 +3,16 @@ import styles from "./Dropdown.module.scss";
 
 export default function Dropdown({ name, items, onChange, value, light, floating, ...props }) {
   const [state, setState] = useState({
-    open: false,
+    // open: false,
     search: "",
     visibleItems: items,
   });
-  
-  const { open, search, visibleItems } = state;
+  /* separate state for opened, there was a bug when closing the dropdown when clicking outside on the AddRep page (the state didn't update for some reason) */
+  const [open, setOpen] = useState(false)
+
+  const { search, visibleItems } = state;
   const ref = useRef();
 
-  // when we close dropdown set search to ""
   useEffect(() => {
     const term = state.search.toLowerCase().trim();
     setState({
@@ -25,8 +26,10 @@ export default function Dropdown({ name, items, onChange, value, light, floating
 
   //Detect Clicks
   function onClick(e) {
-    if (!ref.current || !ref.current.contains(e.target))
-      setState({ ...state, open: false, search: "" });
+    if (!ref.current || !ref.current.contains(e.target)){
+      setState({ ...state, search: ""});
+      setOpen(false)
+    }
   }
 
   useEffect(() => {
@@ -41,16 +44,16 @@ export default function Dropdown({ name, items, onChange, value, light, floating
     <div
       {...props}
       className={[styles.wrapper, light ? styles.light : "", floating ? styles.floating : "", props.className || ""].join(" ")}
-      style={floating && open ? { transform: `translateY(${floating})`, zIndex: 5} : {}}
+      style={floating && open ? { transform: `translateY(${floating})`, zIndex: 3} : {}}
       ref={ref}
     >
-      <label onClick={() => {floating && setState({ ...state, open: !open })}} className={styles.label}>{name || "Dropdown"}</label>
+      <label onClick={() => {if (floating) {setState({ ...state, search: ""  }); setOpen(!open)}}} className={styles.label}>{name || "Dropdown"}</label>
       <div
-        onClick={() => setState({ ...state, open: !open, search: "" })}
+        onClick={() => {setState({ ...state, search: ""  }); setOpen(!open)}}
         className={`${styles.button} ${open ? styles.open : ""}`}
       >
           
-        <div className={styles.content}>
+        <div className={styles.content} style={!floating && open ? {paddingBottom: "1px"} : null}>
           <span>{value}</span>
         </div>
 
@@ -74,12 +77,16 @@ export default function Dropdown({ name, items, onChange, value, light, floating
                 className={styles.item}
                 onClick={() => {
            
-                  if (item !== value && onChange) onChange(item);
-                  setState({ ...state, open: false });
+                  if (item !== value && onChange) 
+                    onChange(item)
+                    
+                  setState({ ...state, search: ""  })
+                  setOpen(!open)
                 }}
                 key={index}
               >
                 {item}
+                {item === "CSGO" || item === "Keys And Currency" ? <p>coming soon</p> : null}
               </div>
             ))}
           </div>

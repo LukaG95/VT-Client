@@ -6,12 +6,14 @@ import Footer from "./Footer";
 import ReputationBody from "./ReputationBody";
 import AccountBody from "./AccountBody";
 
-import { TbFiltersRLContext } from "../../context/TbFiltersRLContext";
-import { rl_dd_names } from "../../misc/DropdownNames";
-import { closeSidebar, manageSidebarResize } from "../../misc/manageSidebar";
+import { manageSidebarResize } from "../../misc/manageSidebar";
 import { LeftSidebarContext } from "../../context/LeftSidebar";
 import useWindowDimensions from "../../misc/windowHW";
 import { UserContext } from "../../context/UserContext";
+import {goTo1stPage} from "./misc"
+import RLBody from "./RLBody"
+import AddTradeBody from "./AddTradeBody"
+import SecondPage from "./SecondPage"
 
 function Sidebar() {
   const [selectedFilter, setSelectedFilter] = useState("");
@@ -19,34 +21,8 @@ function Sidebar() {
   const [displayedDropdown, setDisplayedDropdown] = useState([]);
   const [selectedFunction, setSelectedFunction] = useState();
 
-  const [gameDD] = useState(rl_dd_names.gameDD);
-  const [searchTypeDD] = useState(rl_dd_names.searchTypeDD);
-  const [namesDD] = useState(rl_dd_names.namesDD);
-  const [colorDD] = useState(rl_dd_names.colorDD);
-  const [certDD] = useState(rl_dd_names.certDD);
-  const [itemTypeDD] = useState(rl_dd_names.itemTypeDD);
-  const [platformDD] = useState(rl_dd_names.platformDD);
-
   const pathID = useLocation().pathname.slice(8)
   const { myID } = useContext(UserContext);
-
-  const {
-    game,
-    setGame,
-    searchType,
-    setSearchType,
-    name,
-    setName,
-    color,
-    setColor,
-    cert,
-    setCert,
-    itemType,
-    setItemType,
-    platform,
-    setPlatform,
-    resetFilters,
-  } = useContext(TbFiltersRLContext);
 
   const { isOpen_LeftSidebar, setIsOpen_LeftSidebar } = useContext(
     LeftSidebarContext
@@ -63,10 +39,20 @@ function Sidebar() {
 
         <Switch>
           <Route exact path="/">
-            <RLBody />
+            <RLBody
+              setSelectedFilter={setSelectedFilter}
+              setSelectedDropdown={setSelectedDropdown}
+              setDisplayedDropdown={setDisplayedDropdown}
+              setSelectedFunction={setSelectedFunction}
+            />
           </Route>
-          <Route exact path="/trading/rl">
-            <RLBody />
+          <Route exact path="/trading">
+            <RLBody 
+              setSelectedFilter={setSelectedFilter}
+              setSelectedDropdown={setSelectedDropdown}
+              setDisplayedDropdown={setDisplayedDropdown}
+              setSelectedFunction={setSelectedFunction}
+            />
           </Route>
           <Route path="/reputation/add">
             <ReputationBody />
@@ -77,197 +63,38 @@ function Sidebar() {
           <Route path="/account"> 
             <AccountBody />
           </Route>
-          <Route exact path="/trading/rl/new"><div className="separator-horizontal"></div><Footer /></Route>
-          <Route path="/trading/rl/edit"> <div className="separator-horizontal"></div><Footer /></Route>
+          <Route exact path="/trading/new">
+            <AddTradeBody 
+              setSelectedFilter={setSelectedFilter}
+              setSelectedDropdown={setSelectedDropdown}
+              setDisplayedDropdown={setDisplayedDropdown}
+              setSelectedFunction={setSelectedFunction}
+            />
+          </Route>
+          <Route path="/trading/edit"> <div className="separator-horizontal"></div><Footer /></Route>
           <Route path="/trades">{pathID === myID ? <AccountBody /> : <><div className="separator-horizontal"></div><Footer /></>}</Route>
           <Route exact path="/terms"><div className="separator-horizontal"></div><Footer /></Route>
           <Route exact path="/privacy"><div className="separator-horizontal"></div><Footer /></Route>
-          <Route path="/password/reset"> <div className="separator-horizontal"></div><Footer /> </Route>
-          <Route path="/email/confirm"> <div className="separator-horizontal"></div><Footer /> </Route>
-          <Route path="/email/update"> <div className="separator-horizontal"></div><Footer /> </Route>
-          <Route path="/admin"> <div className="separator-horizontal"></div><Footer /> </Route>
-          <Route path="/rules"> <div className="separator-horizontal"></div><Footer /> </Route>
-          <Route path="/security"> <div className="separator-horizontal"></div><Footer /> </Route>
+          <Route path="/password/reset"> <div className="separator-horizontal"></div><Footer /></Route>
+          <Route path="/email/confirm"> <div className="separator-horizontal"></div><Footer /></Route>
+          <Route path="/email/update"> <div className="separator-horizontal"></div><Footer /></Route>
+          <Route path="/admin"> <div className="separator-horizontal"></div><Footer /></Route>
+          <Route path="/rules"> <div className="separator-horizontal"></div><Footer /></Route>
+          <Route path="/security"> <div className="separator-horizontal"></div><Footer /></Route>
         </Switch>
       </div>
 
-      {/*Change the name of this id because there will be more "2nd" pages, for rep etc*/}
-      <div id="sidebar-2nd-page">
-        <div className="sidebar-header-2nd-page" onClick={goTo1stPage}>
-          <span id="back-arrow"> &lt; </span>
+      <SecondPage 
+        selectedFilter={selectedFilter}
+        selectedDropdown={selectedDropdown}
+        displayedDropdown={displayedDropdown} 
+        selectedFunction={selectedFunction}
+        setDisplayedDropdown={setDisplayedDropdown}
+      />
 
-          <div className="header-selection-2nd-page">{selectedFilter}</div>
-        </div>
-
-        <input
-          onChange={(e) => {
-            let names = [];
-
-            selectedDropdown.forEach((itemName) => {
-              if (itemName.toLowerCase().includes(e.target.value.toLowerCase()))
-                names.push(itemName);
-            });
-
-            setDisplayedDropdown(names);
-          }}
-          className="sidebar-input"
-          placeholder="Search..."
-        ></input>
-
-        <div className="sidebar-body-rl" id="2nd-page-dropdown">
-          {Dropdown()}
-        </div>
-      </div>
     </div>
   );
-
-
-  function RLBody() {
-    return (
-      <div className="sidebar-body-rl">
-        <div className="sidebar-filters-rl">
-          <FilterButton
-            text={"Game"}
-            value={game}
-            dd={gameDD}
-            setFunction={setGame}
-            id={1}
-          />
-          <FilterButton
-            text={"Search"}
-            value={searchType}
-            dd={searchTypeDD}
-            setFunction={setSearchType}
-            id={2}
-          />
-          <FilterButton
-            text={"Name"}
-            value={name}
-            dd={namesDD}
-            setFunction={setName}
-            id={3}
-          />
-          <FilterButton
-            text={"Color"}
-            value={color}
-            dd={colorDD}
-            setFunction={setColor}
-            id={4}
-          />
-          <FilterButton
-            text={"Certification"}
-            value={cert}
-            dd={certDD}
-            setFunction={setCert}
-            id={5}
-          />
-          <FilterButton
-            text={"Item Type"}
-            value={itemType}
-            dd={itemTypeDD}
-            setFunction={setItemType}
-            id={6}
-          />
-          <FilterButton
-            text={"Platform"}
-            value={platform}
-            dd={platformDD}
-            setFunction={setPlatform}
-            id={7}
-          />
-        </div>
-
-        <div
-          onClick={() => {
-            closeSidebar();
-            setIsOpen_LeftSidebar(false);
-          }}
-          className="sidebar-reset-filters-button"
-        >
-          Confirm filters
-        </div>
-
-        <div
-          onClick={() => resetFilters()}
-          className="sidebar-reset-filters-button"
-        >
-          Reset filters
-        </div>
-
-        <div className="separator-horizontal"></div>
-
-        <Footer />
-      </div>
-    );
-  }
-
-  function FilterButton({ text, value, dd, setFunction, id }) {
-    return (
-      <>
-        <div
-          className="sidebar-filter-button-rl"
-          onMouseEnter={() =>
-            (document.getElementById(`underline ${id}`).style.width = "100%")
-          }
-          onMouseLeave={() =>
-            (document.getElementById(`underline ${id}`).style.width = "0px")
-          }
-          onClick={() => {
-            setSelectedFilter(text);
-            setSelectedDropdown(dd);
-            setDisplayedDropdown(dd);
-            setSelectedFunction({ setFunction });
-            goTo2ndPage();
-            setTimeout(
-              () => document.getElementById("2nd-page-dropdown").focus(),
-              300
-            ); // should most likely be changed to something better (although it takes 250ms to load 2nd page, theoretically it should always work)
-          }}
-        >
-          <div>
-            <label>{text}</label>
-            <p>{value}</p>
-          </div>
-          <span>&gt;</span>
-        </div>
-
-        <div
-          id={`underline ${id}`}
-          className="side-filter-button-underline"
-        ></div>
-      </>
-    );
-  }
-
-  function Dropdown() {
-    const dd = displayedDropdown.map((name) => (
-      <div
-        onClick={(e) => {
-          selectedFunction.setFunction(e.target.innerHTML);
-          goTo1stPage();
-        }}
-        className="sidebar-filterdropdown-item"
-      >
-        {name}
-      </div>
-    ));
-
-    return <div className="sidebar-filterdropdown-wrapper">{dd}</div>;
-  }
-
-  function goTo1stPage() {
-    document.getElementById("sidebar-2nd-page").style.transform =
-      "translateX(100%)";
-    document.getElementById("sidebar-1st-page").style.transform =
-      "translateX(0%)";
-  }
-
-  function goTo2ndPage() {
-    document.getElementById("sidebar-1st-page").style.transform =
-      "translateX(-100%)";
-    document.getElementById("sidebar-2nd-page").style.transform =
-      "translateX(0%)";
-  }
+  
 }
 
 export default Sidebar;

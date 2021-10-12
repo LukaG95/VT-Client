@@ -7,12 +7,10 @@ import { createNotification } from "../../../misc/ToastNotification";
 import FilterBar from "../../../components/Categories/Rocket League/FilterBar";
 import EditItemDropdown from "../../../components/Categories/Rocket League/EditItemDropdown";
 import Item from "../../../components/Categories/Rocket League/Item";
-import ItemOther from "../../../components/Categories/Money/Item";
 import ItemContainer from "../../../components/Categories/Rocket League/ItemContainer";
 import SmallHome from "./SmallHome";
 import useWindowDimensions from "../../../misc/windowHW";
 import { actions, useTrade } from "../../../context/TradeContext";
-import { platforms } from "../../../constants/platforms";
 import ClearItems from "../../../components/AddTrade/ClearItems";
 import { getTradeableItems } from "../../../constants/Items";
 import { useTradeFilters } from "../../../context/TradeFiltersContext";
@@ -21,11 +19,6 @@ import { PopupContext } from "../../../context/PopupContext";
 import {CategoriesJson} from "../../../constants/Categories/Categories";
 import PlusItem from "./PlusItem";
 import {Helmet} from "react-helmet";
-import {ReactComponent as Steam} from "../../../images/icons/steam.svg"
-import {ReactComponent as PSN} from "../../../images/icons/playstation.svg"
-import {ReactComponent as Nintendo} from "../../../images/icons/switch.svg"
-import {ReactComponent as Xbox} from "../../../images/icons/xbox.svg"
-import {ReactComponent as Epic} from "../../../images/icons/epic.svg"
 import { ReactComponent as MagnifyingGlass } from "../../../images/icons/magnifying glass.svg";
 
 // const profanityFilter = new Filter({ regex: /^\*|\.|$/gi });
@@ -46,12 +39,6 @@ function AddTradeRL() {
   const [items, setItems] = useState([]);
   const { width } = useWindowDimensions();
   const { setOpenEditTradePopup } = useContext(PopupContext);
-
-  let DisplayItem = null
-  if (filters.category === "Rocket League")
-    DisplayItem = Item
-  else 
-    DisplayItem = ItemOther
 
   //Edit Trade
   useEffect(() => {
@@ -87,15 +74,16 @@ function AddTradeRL() {
     () => {
       let returnedItems = []
       let currentType = ""
+
       // inserting item types
       for (let i = 0; i<items.length; i++){
         if (items[i].itemType !== currentType){
           returnedItems.push(<div className={styles.itemType}>{items[i].itemType==="1Special" ? "Special" : items[i].itemType}</div>)
-          returnedItems.push(<DisplayItem category={filters.category} item={items[i]} lazy={true} onClick={() => ItemClick(items[i])} key={items[i].itemID} /> )
+          returnedItems.push(<Item item={items[i]} lazy={true} onClick={() => ItemClick(items[i])} key={items[i].itemID} /> )
           currentType = items[i].itemType
         }
         else
-          returnedItems.push(<DisplayItem category={filters.category} item={items[i]} lazy={true} onClick={() => ItemClick(items[i])} key={items[i].itemID} /> )
+          returnedItems.push(<Item item={items[i]} lazy={true} onClick={() => ItemClick(items[i])} key={items[i].itemID} /> )
         
       }
       return returnedItems
@@ -109,7 +97,7 @@ function AddTradeRL() {
       <Helmet>
         {!pathID ? <title>New Trade | VirTrade</title> : <title>Edit Trade | VirTrade</title>}
         {!pathID ? <meta name="description" content="Create a new Rocket League trade post" /> : <meta name="description" content="Edit your Rocket League trade post" />}
-        <link rel="canonical" href="http://virtrade.gg/trading/rl/new" />
+        <link rel="canonical" href="http://virtrade.gg/trading/new" />
       </Helmet>
       {
         width > 1213 ? AddTrade()
@@ -150,8 +138,8 @@ function AddTradeRL() {
           </div>
 
           <div className={styles.itemsField}>
-            <ItemContainer className={styles.itemContainer} csgo={filters.category === "CSGO"}>
-              {filters.category === "CSGO" ? "Coming Soon" : inventoryItems}
+            <ItemContainer className={styles.itemContainer} comingSoon={filters.category === "CSGO" || filters.category === "Keys And Currency"}>
+              {filters.category === "CSGO" || filters.category === "Keys And Currency" ? "Coming Soon" : inventoryItems}
             </ItemContainer>
           </div>
           
@@ -160,9 +148,12 @@ function AddTradeRL() {
         <div className={styles.haveWant}>
           <div className={styles.section}>
             <div className={styles.title}>
-              <p>
-                You <b>have</b>
-              </p>
+              <div className={styles.left}>
+                <div className={styles.haveBLUE}></div>
+                <p>
+                  You <b>have</b>
+                </p>
+              </div>
               <ClearItems
                 onClick={() =>
                   dispatch({
@@ -172,15 +163,17 @@ function AddTradeRL() {
                 }
               />
             </div>
+            
             <ItemContainer className={styles.items}>
               {have.map((item, index) =>
                 item ? (
-                  <DisplayItem item={item} key={index} added={true} hideName>
+                  <Item item={item} key={index} added={true} hideName>
                     <EditItemDropdown {...{ item, index, type: "have" }} />
-                  </DisplayItem>
+                  </Item>
                 ) : (
                     <PlusItem
                       key={index}
+                      type={selected.type}
                       selected={
                         index === selected.index && selected.type === "have"
                       }
@@ -198,11 +191,14 @@ function AddTradeRL() {
               )}
             </ItemContainer>
           </div>
-          <div className={styles.section} style={{ marginBottom: "20px" }}>
+          <div className={styles.section}>
             <div className={styles.title}>
-              <p>
-                You <b>want</b>
-              </p>
+            <div className={styles.left}>
+                <div className={styles.wantRED}></div>
+                <p>
+                  You <b>want</b>
+                </p>
+              </div>
               <ClearItems
                 onClick={() =>
                   dispatch({
@@ -212,15 +208,17 @@ function AddTradeRL() {
                 }
               />
             </div>
+
             <ItemContainer className={styles.items}>
               {want.map((item, index) =>
                 item ? (
-                  <DisplayItem item={item} key={index} added={true} hideName>
+                  <Item item={item} key={index} added={true} hideName>
                     <EditItemDropdown {...{ item, index, type: "want" }} />
-                  </DisplayItem>
+                  </Item>
                 ) : (
                     <PlusItem
                       key={index}
+                      type={selected.type}
                       selected={
                         index === selected.index && selected.type === "want"
                       }
@@ -238,6 +236,8 @@ function AddTradeRL() {
               )}
             </ItemContainer>
           </div>
+          <div className={styles.filler}></div>
+
         </div>
         <div className={styles.notesSection}>
           <div
@@ -331,6 +331,7 @@ function AddTradeRL() {
           "You reached the limit of 15 trades",
           "limit 15 trades"
         );
+        console.log(filtered.have.map(preparePostItem))
       axios
         .post("/api/trades/createTrade", {
           have: filtered.have.map(preparePostItem),
@@ -415,10 +416,12 @@ function AddTradeRL() {
 
   }
   */
-
+  
   function preparePostItem(item) {
+    if (item.category === "Rocket League")
     return {
       itemID: item.itemID,
+      category: item.category,
       itemName: item.itemName,
       color: item.color,
       colorID: item.colorID,
@@ -426,6 +429,15 @@ function AddTradeRL() {
       blueprint: item.blueprint,
       amount: item.amount
     };
+
+    else
+    return {
+      itemID: item.itemID,
+      category: item.category,
+      itemName: item.itemName,
+      amount: item.amount
+    }
+    
   }
 
   /*
@@ -443,13 +455,22 @@ function AddTradeRL() {
   */
 
   function getManualItems(){
-    return CategoriesJson[filters.category].map(item => item).sort((a, b)=> {
+
+    let manualItems = CategoriesJson[filters.category].map(item => item).sort((a, b)=> {
       const x = a.itemName.toLowerCase();
       const y = b.itemName.toLowerCase();
       if (x < y) {return -1;}
       if (x > y) {return 1;}
       return 0;
     })
+
+    if (filters.name) {
+      manualItems = manualItems.filter(
+        (i) => i.itemName.toLowerCase().search(filters.name) > -1
+      );
+    }
+
+    return manualItems
   }
 
   function getRocketLeagueItems(){

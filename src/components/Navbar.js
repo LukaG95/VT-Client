@@ -22,7 +22,7 @@ function Navbar() {
   const { setOpenForm } = useContext(PopupContext);
 
   switch (location.pathname) {
-    case "/trading/rl":
+    case "/trading":
       trading = "currentPage";
       break;
     case "/":
@@ -59,7 +59,7 @@ function Navbar() {
         <div className="hide" id="separator"></div>
 
         <Link
-          to="/trading/rl"
+          to="/trading"
           id="removeDecoration"
           style={{ marginLeft: "20px" }}
         >
@@ -87,7 +87,7 @@ function Navbar() {
 
       <div className="navRight">
         {width <= 1213 && isLoggedIn ? (
-          <Link to="/trading/rl/new" id="removeDecoration">
+          <Link to="/trading/new" id="removeDecoration">
             <div className="nav-button-wrapper">
               <PlusIcon style={{ width: "25px", height: "25px" }} />
             </div>
@@ -96,7 +96,7 @@ function Navbar() {
 
         {isLoggedIn && (
           <Link
-            to="/trading/rl/new"
+            to="/trading/new"
             className="addTrade hide"
             id="removeDecoration"
           >
@@ -109,10 +109,12 @@ function Navbar() {
           </div>
         )}
 
-        <div
-          className={`navRightItem ${isLoggedIn && "hide"}`}
-          id="separator"
-        ></div>
+        {isLoggedIn &&
+          <div
+            className={`navRightItem ${isLoggedIn && "hide"}`}
+            id="separator"
+          ></div>
+        }
 
         {handleIconDisplay()}
       </div>

@@ -7,16 +7,16 @@ import { LeftSidebarContext } from "../../context/LeftSidebar";
 import { UserContext } from "../../context/UserContext";
 
 function Header() {
-  const [openHeader, setOpenHeader] = useState(false);
   const [headerSelection, setHeaderSelection] = useState("Trading");
   const [allOptions] = useState([
+    { path: "/trading/new", name: "Add Trade" },
     { path: "/", name: "Trading" },
     { path: "/reputation", name: "Reputation" },
-    { path: "/account/settings", name: "My Account" },
+    { path: "/account/settings/username", name: "My Account" },
   ]);
 
   const { isLoggedIn, myID } = useContext(UserContext);
-  const { setIsOpen_LeftSidebar } = useContext(
+  const { setIsOpen_LeftSidebar, openHeader, setOpenHeader } = useContext(
     LeftSidebarContext
   );
 
@@ -27,12 +27,17 @@ function Header() {
     else if (path === "/" || path === "/trading/rl")
       setHeaderSelection("Trading");
     else if (
-      path === "/account/settings" ||
+      path === "/account/settings/username" ||
+      path === "/account/settings/email" ||
+      path === "/account/settings/password" ||
+      path === "/account/settings/platforms" ||
       path === "/account/messages" ||
       path === "/account/premium" ||
       path === `/trades/${myID}`
     )
       setHeaderSelection("My Account");
+    else if (path === "/trading/new" || path === "/trading/edit")
+      setHeaderSelection("Add Trade")
     else
       setHeaderSelection("Navigate to")
   }, [path]);

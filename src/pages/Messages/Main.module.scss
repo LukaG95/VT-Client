@@ -3,15 +3,15 @@
 .accountWrapper {
   display: flex;
   font-size: 18px;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 122px);
 
   animation: transitionLeft 0.4s;
 }
 
 @media screen and (max-width: 700px) {
   .accountWrapper {
-    margin-top: 10px;
-    height: calc(100vh - 155px);
+    margin-top: 3px;
+    height: calc(100vh - 67px);
   }
 }
 

@@ -14,9 +14,12 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
     <div className={styles.wrapperSmall}>
       <div className={styles.haveWant}>
         <div className={styles.title}>
-          <p>
-            You <b>have</b>
-          </p>
+          <div className={styles.left}>
+            <div className={styles.haveBLUE}></div>
+            <p>
+              You <b>have</b>
+            </p>
+          </div>
           <ClearItems
             onClick={() =>
               dispatch({
@@ -26,7 +29,7 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
             }
           />
         </div>
-        <div className={styles.sectionSmall} style={{ marginBottom: "10px" }}>
+        <div className={styles.sectionSmall}>
           <ItemContainer className={styles.items}>
             {have.map((item, index) =>
               item ? (
@@ -43,6 +46,7 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
               ) : (
                 <PlusItem
                   key={index}
+                  type={selected.type}
                   selected={
                     index === selected.index && selected.type === "have"
                   }
@@ -62,9 +66,12 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
           </ItemContainer>
         </div>
         <div className={styles.title}>
-          <p>
-            You <b>want</b>
-          </p>
+          <div className={styles.left}>
+            <div className={styles.wantRED}></div>
+            <p>
+              You <b>want</b>
+            </p>
+          </div>
           <ClearItems
             onClick={() =>
               dispatch({
@@ -91,6 +98,7 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
               ) : (
                 <PlusItem
                   key={index}
+                  type={selected.type}
                   selected={
                     index === selected.index && selected.type === "want"
                   }
@@ -123,10 +131,10 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
               })
             }
           />
-          <div className={styles.platformsWrapper}>
+          {/*
+           <div className={styles.platformsWrapper}>
             <h4>PLATFORM:</h4>
             <div className={styles.platforms}>
-              {/* Map platforms */}
               {Object.keys(platforms).map((p) => (
                 <label className={styles.platform} key={p}>
                   <input
@@ -146,6 +154,9 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
               ))}
             </div>
           </div>
+          */
+          }
+         
         </div>
         <button onClick={() => handleTradeSubmit()} className={styles.submit}>
           SUBMIT TRADE

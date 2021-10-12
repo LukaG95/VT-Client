@@ -16,6 +16,14 @@ export default function Item({ item, lazy, hideName, added, ...props }) {
       <div className={styles.content}>
         <div className={styles.imageContainer}>
           
+           {/*
+          <img
+            className={styles.image}
+            src={MissingImageIcon}
+            alt={item.Name} // ?
+          />
+         */} 
+         
           {lazy ? (
             <LazyLoadImage
               className={`${styles.image}`}

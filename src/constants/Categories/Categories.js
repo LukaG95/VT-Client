@@ -4,17 +4,43 @@ import KACinfo from "./KACinfo.json";
 import CSGOinfo from "./CSGOinfo.json";
 
 export const Categories = {
-  CSGO: "CSGO",
-  DESIGN: "Design",
   ROCKET_LEAGUE: "Rocket League",
   MONEY: "Money",
+  DESIGN: "Design",
+  CSGO: "CSGO",
   KEYS_AND_CURRENCY: "Keys And Currency"
 };
 
 export const CategoriesJson = {
-  "CSGO": CSGOinfo,
-  "Design": Designinfo,
   "Money": Moneyinfo,
+  "Design": Designinfo,
   "Keys And Currency": KACinfo,
-  RLinfo: "Rocket League"
+  "CSGO": CSGOinfo
+}
+
+export const CategoryFilters = {
+  "Rocket League": {
+    name: "",
+    quality: "Any",
+    type: "Any",
+    platform: "Any"
+  },
+
+  "Money": {
+
+  },
+
+  "Design": {
+
+  },
+
+  "CSGO": {
+    
+  },
+
+  "Keys And Currency": {
+
+  }
+
+
 }

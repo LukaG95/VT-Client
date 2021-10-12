@@ -1,11 +1,17 @@
 @import '../../../css/animations';
 
+.wrapper{
+  background: linear-gradient(180deg, rgba(196, 196, 196, 0) 25%, #474747 100%);
+  padding: 1px;
+  border-radius: 5px;
+}
+
 .item {
   position: relative;
   width: 100%;
   padding-top: calc(100% + 20px);
   border-radius: 5px;
-
+  
   &.hideName {
     padding-top: 100%;
   }
@@ -24,7 +30,7 @@
     height: fit-content;
     overflow: visible;
     white-space: normal;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    // border-top: 1px solid rgba(255, 255, 255, 0.15);
     padding-left: 7px;
     padding-right: 7px;
   
@@ -55,7 +61,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  z-index: 2;
+
+  // border: 1px solid rgba(255, 255, 255, 0.15);
   border-top: 0;
   border-radius: 0px 0px 5px 5px;
 
@@ -180,3 +188,33 @@
   }
   */
 }
+
+.Money{
+  background: linear-gradient(180deg, #2B252D 0%, #1A141C 100%);
+  
+  .name{
+    border: none;
+    margin-bottom: 3px;
+  }
+
+  &:hover .name{
+    border: none;
+    
+  }
+}
+
+
+.Design{
+  background: linear-gradient(180deg, #2B252D 0%, #1A141C 100%);
+  
+  .name{
+    border: none;
+    margin-bottom: 3px;
+  }
+
+  &:hover .name{
+    border: none;
+    
+  }
+}
+

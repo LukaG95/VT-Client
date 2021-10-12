@@ -1,4 +1,4 @@
-export default function pageNumbers(currentPage, pageAmount, setCurrentPage) {
+export default function pageNumbers(currentPage, pageAmount, setCurrentPage, amount) {
   const pageButtons = [];
 
   const starting_number = () => {
@@ -24,14 +24,14 @@ export default function pageNumbers(currentPage, pageAmount, setCurrentPage) {
     );
 
   return (
-    <section className="page-numbers-field">
+    <section className="page-numbers-field" style={{margin: "none", padding: "none",}}>
       <div
         onClick={() =>
           currentPage > 1 && setCurrentPage((prev) => prev - 1)
         }
         className="page-left noUserInteraction"
       ></div>
-      {pageButtons}
+      {amount > 0 ? pageButtons : <button className="pageButton highlighted-page">1</button>}
       <div
         onClick={() =>
           currentPage < pageAmount && setCurrentPage((prev) => prev + 1)

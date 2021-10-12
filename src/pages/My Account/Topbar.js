@@ -22,30 +22,32 @@ function AccountSidebar() {
 
   return (
     <div className="accountTb">
-      <Link to="/account/settings/username" id="removeDecoration">
-        <p className={`accountTb-nav ${account}`}>Account Settings</p>
+
+      <Link to="/account/settings/username" id="removeDecoration" className={`accountTb-nav ${account}`}>
+        Account Settings
       </Link>
 
-      <Link to="/account/messages" id="removeDecoration">
-        <p className={`accountTb-nav ${messages}`}>Messages</p>
+      <Link to="/account/messages" id="removeDecoration" className={`accountTb-nav ${messages}`}>
+        Messages
       </Link>
 
-      <Link to={`/trades/${myID}`} id="removeDecoration">
-        <p className={`accountTb-nav ${trades}`}>My Trades</p>
+      <Link to={`/trades/${myID}`} id="removeDecoration" className={`accountTb-nav ${trades}`}>
+        My Trades
       </Link>
 
-{/*
-      <Link to="/account/premium" id="removeDecoration">
-        <p
-          className={`accountTb-nav ${premium}`}
-          style={{
-            color: premium === "" ? "rgba(52, 206, 255, 0.5)" : "#34CEFF",
-          }}
-        >
-          Premium
-        </p>
-      </Link>
-        */}
+      {/*
+        <Link to="/account/premium" id="removeDecoration">
+          <p
+            className={`accountTb-nav ${premium}`}
+            style={{
+              color: premium === "" ? "rgba(52, 206, 255, 0.5)" : "#34CEFF",
+            }}
+          >
+            Premium
+          </p>
+        </Link>
+      */}
+
       <div
         onClick={() => setOpenLogoutPopup(true)}
         className="accountTb-nav"
@@ -53,6 +55,9 @@ function AccountSidebar() {
       >
         Logout
       </div>
+
+      <div className="filler" style={{height: "auto"}} ></div>
+
     </div>
   );
 }

@@ -156,6 +156,7 @@ function Main({newMessage}) {
           conversations={conversations} 
           setConversations={setConversations}
           setPageNumber={setPageNumber}
+          conversationsSet={conversationsSet}
         />
 
         <Chat 
