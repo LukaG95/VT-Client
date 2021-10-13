@@ -35,7 +35,6 @@ function RLTrading({ home }) {
   } = useContext(TbFiltersRLContext);
   
   const { width } = useWindowDimensions()
-
   const tradeComponents = useMemo(() => tradeInfo && 
   tradeInfo.map(trade => <RLTradeComponent trade={trade} />), [tradeInfo])
 

@@ -331,7 +331,6 @@ function AddTradeRL() {
           "You reached the limit of 15 trades",
           "limit 15 trades"
         );
-        console.log(filtered.have.map(preparePostItem))
       axios
         .post("/api/trades/createTrade", {
           have: filtered.have.map(preparePostItem),

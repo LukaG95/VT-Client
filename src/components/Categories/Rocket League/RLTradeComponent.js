@@ -166,7 +166,6 @@ function RLTradeComponent({ trade, manageTrade }) {
 
           <div className="flex">
             <div className="trade-post-time">
-              {console.log(trade)}
               {showFriendCode || showEpicUsername ? trade.platform.ID : `${trade.bumped ? `Bumped ${trade.bumpedAt}` : `Created ${trade.createdAt}`} `}
             </div>
           </div>

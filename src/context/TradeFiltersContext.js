@@ -5,7 +5,7 @@ const TradeFiltersStateContext = React.createContext();
 const TradeFiltersDispatchContext = React.createContext();
 
 const initialState = {
-  category: Categories.MONEY,
+  category: Categories.ROCKET_LEAGUE,
   name: "",
   quality: "Any",
   type: "Any",

@@ -1,3 +1,4 @@
+/*
 import React from "react";
 
 export default (url, itemID) => {
@@ -14,3 +15,4 @@ export default (url, itemID) => {
     return "/images/icons/question.png";
   }
 };
+*/
