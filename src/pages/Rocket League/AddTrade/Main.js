@@ -40,7 +40,7 @@ function AddTradeRL() {
   const { width } = useWindowDimensions();
   const { setOpenEditTradePopup } = useContext(PopupContext);
 
-  //Edit Trade
+  // Edit Trade
   useEffect(() => {
     if (pathID) {
       axios.get(`/api/trades/getTrade/${pathID}`)
@@ -56,11 +56,13 @@ function AddTradeRL() {
               }
             })
           }
+          
         })
         .catch(err => {})
     }
   }, [pathID])
-  //Filtered Items
+
+  // Filtered Items
   useEffect(() => {
     process.nextTick(() => {
       if(filters.category === "Rocket League")
@@ -69,6 +71,14 @@ function AddTradeRL() {
         setItems(getManualItems())
     });
   }, [filters]);
+
+   // clean up 
+   useEffect(() => {
+    return ()=> {
+      dispatch({ type: actions.RESET })  // reset items and notes
+      dispatch2({type: "completeReset"}) // reset filters
+    }
+  }, []); 
 
   const inventoryItems = useMemo(
     () => {
@@ -279,7 +289,7 @@ function AddTradeRL() {
               onClick={() => handleTradeSubmit()}
               className={styles.submit}
             >
-              SUBMIT TRADE
+              {pathID ? "EDIT TRADE" : "SUBMIT TRADE"}
             </button>
           </div>
         </div>
@@ -380,6 +390,7 @@ function AddTradeRL() {
         .then((res) => { 
           if (res.data.info === "success") {
             //Successfully Edit Trade
+            //window.location.replace("http://www.w3schools.com");
             setOpenEditTradePopup(true)
           }
         })
@@ -417,8 +428,10 @@ function AddTradeRL() {
   */
   
   function preparePostItem(item) {
+    let returnedItem
+    
     if (item.category === "Rocket League")
-    return {
+    returnedItem = {
       itemID: item.itemID,
       category: item.category,
       itemName: item.itemName,
@@ -429,13 +442,25 @@ function AddTradeRL() {
       amount: item.amount
     };
 
-    else
-    return {
+    else if (item.category !== "Design")
+    returnedItem = {
       itemID: item.itemID,
       category: item.category,
       itemName: item.itemName,
       amount: item.amount
     }
+
+    else
+    returnedItem = {
+      itemID: item.itemID,
+      category: item.category,
+      itemName: item.itemName
+    }
+
+    if (typeof item.amount !== "number")
+      delete returnedItem.amount
+
+    return returnedItem
     
   }
 

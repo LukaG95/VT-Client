@@ -2983,6 +2983,8 @@ html {
   border: 1px solid black;
 
   background: rgb(14, 14, 14);
+
+  z-index: 2;
 }
 
 .have-count-notice span,
@@ -2996,6 +2998,7 @@ html {
   border-radius: 5px 0px 0px 5px;
 
   background: #2196f3;
+  
 }
 
 .want-count-notice span {

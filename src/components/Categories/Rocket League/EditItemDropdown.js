@@ -11,24 +11,13 @@ import { ReactComponent as EditIcon } from "../../../images/icons/edit.svg";
 const { colorEditDD, certEditDD } = rl_dd_names;
 
 function EditItemDropdown({ item, index, type }) {
+  console.log(item.amount)
   const [visible, setVisible] = useState(false);
   const { height } = useWindowDimensions();
   const [_context, dispatch] = useTrade();
   const [amountInput, setAmountInput] = useState();
   //Amount Changes
-  useEffect(() => {
-    dispatch({
-      type: actions.UPDATE_ITEM,
-      payload: {
-        type,
-        index,
-        item: {
-          amount: Number(amountInput) || 1,
-        },
-      },
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [amountInput]);
+  
   const ref = useRef();
   //Detect Clicks
   function onClick(e) {
@@ -132,7 +121,7 @@ function EditItemDropdown({ item, index, type }) {
                 <input
                   name="enableDropdown"
                   style={{ justifyContent: "space-between" }}
-                  value={amountInput}
+                  value={item.amount}
                   placeholder={1}
                   onChange={(e) => {
                     const value = item.category === "Money" ? e.target.value.replace(/[^\d.]/g, "") : e.target.value.replace(/[^\d]/g, "") // allow a dot and numbers if cash, or just numbers if not
@@ -140,8 +129,19 @@ function EditItemDropdown({ item, index, type }) {
                       if (!value.match(/^\d*\.?\d{0,2}?$/)) return // check only 2 decimal points
 
                     const max = item.itemID === 4743 || item.category === "Money" ? 100000 : 100; // if item is credits or cash
-                    if (Number(value) > max) setAmountInput("" + max);
-                    else setAmountInput(value);
+
+                    dispatch({
+                      type: actions.UPDATE_ITEM,
+                      payload: {
+                        type,
+                        index,
+                        item: {
+                          amount: Number(value) > max ? Number("" + max) : value
+                        },
+                      },
+                    });
+
+                
                   }} 
                 />
               </>
@@ -150,7 +150,22 @@ function EditItemDropdown({ item, index, type }) {
           </div>
           <button
             id="submit-rl-filters-button"
-            onClick={() => {if (Number(amountInput) <= 0) setAmountInput(1); setVisible(false)}}
+            onClick={() => {
+              /*
+              if (Number(amountInput) <= 0) {
+                dispatch({
+                  type: actions.UPDATE_ITEM,
+                  payload: {
+                    type,
+                    index,
+                    item: {
+                      amount: 1
+                    },
+                  },
+                });
+              }; */
+              setVisible(false)
+            }}
           >
             Done
           </button>
@@ -175,8 +190,6 @@ function EditItemDropdown({ item, index, type }) {
 
   function multipleCommas(value){
     let multipleCommas = 0
-
-    console.log(value)
     
     for (var i = 0; i < value.length; i++) {
       if (value[i] === ",") 

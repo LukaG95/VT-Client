@@ -4,6 +4,7 @@ module.exports = function (app) {
     "/api",
     createProxyMiddleware({
       target: "https://virtrade.gg",
+      //target: "http://localhost:5000",
       changeOrigin: true,
     })
   );

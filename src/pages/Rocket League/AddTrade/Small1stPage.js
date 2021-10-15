@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Main.module.scss";
-import { PlatformColours, platforms } from "../../../constants/platforms";
 import { actions, useTrade } from "../../../context/TradeContext";
 import Item from "../../../components/Categories/Rocket League/Item";
 import ItemContainer from "../../../components/Categories/Rocket League/ItemContainer";

@@ -89,6 +89,7 @@ function UserTrades() {
     axios
       .put(`/api/trades/bumpTrade/?tradeId=${trade._id}`)
       .then((res) => {
+        console.log(res.data)
         if (res.data.info === "success")
           createNotification(
             "success",
@@ -97,6 +98,7 @@ function UserTrades() {
           );
       })
       .catch((err) => {
+        console.log(err.response)
         if (err.response.data.info === "already bumped"){
           createNotification(
             "info",

@@ -7,7 +7,6 @@ import styles from "./Item.module.scss";
 import MissingImageIcon from "../../../images/icons/question.png";
 
 export default function Item({ item, lazy, hideName, added, ...props }) {
-  // return null
   const content = (
     <div className={styles.wrapper}>
     <div

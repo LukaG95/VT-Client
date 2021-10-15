@@ -104,5 +104,5 @@ export const DefaultItem = {
   color: "None",
   colorID: 0,
   cert: "None",
-  amount: 1,
+  amount: null,
 };

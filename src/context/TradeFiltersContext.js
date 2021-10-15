@@ -21,6 +21,9 @@ function tradeFiltersReducer(state, action) {
     case "reset": {
       return { category: state.category, ...CategoryFilters[state.category] };
     }
+    case "completeReset": {
+      return initialState
+    }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }

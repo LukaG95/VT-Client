@@ -254,7 +254,7 @@
         {
             "ItemID": 6,
             "Slot": "Antenna",
-            "Name": "Gold Nugget (Beta Reward) ",
+            "Name": "Gold Nugget (Beta Reward)",
             "Quality": "Limited",
             "Paintable": false,
             "Blueprintable": false,
@@ -2669,7 +2669,7 @@
         {
             "ItemID": 224,
             "Slot": "Topper",
-            "Name": "Gold Cap (Alpha Reward) ",
+            "Name": "Gold Cap (Alpha Reward)",
             "Quality": "Limited",
             "Paintable": false,
             "Blueprintable": false,
@@ -3943,7 +3943,7 @@
         {
             "ItemID": 358,
             "Slot": "Wheels",
-            "Name": "Goldstone (Alpha Reward) ",
+            "Name": "Goldstone (Alpha Reward)",
             "Quality": "Limited",
             "Paintable": false,
             "Blueprintable": false,

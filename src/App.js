@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react"
 import { useLocation, Redirect, Route, Switch } from "react-router-dom"
+import axios from 'axios'
 
 import useWindowDimensions from './misc/windowHW'
 import checkPath from './constants/FooterPath'
@@ -45,6 +46,10 @@ export default function App() {
 
   const path = useLocation().pathname
   const { width } = useWindowDimensions()
+
+  useEffect(()=> {
+    
+  }, [])
 
   useEffect(()=> { 
     const socket = io({transports: ['websocket']}); // const socket = io("https://wwww.virtrade.gg");
