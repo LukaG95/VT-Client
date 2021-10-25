@@ -18,6 +18,19 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
 
   useEffect(() => {
 
+    if (linkedPlatform.username){
+      setUsername(linkedPlatform.username)
+      if (linkedPlatform.verified)
+        setState("Connected")
+      else
+        setState("Unverified")
+    }
+    else {
+      setState("Disconnected")
+      setUsername()
+    }
+
+    /*
     if (linkedPlatform){
       setUsername(linkedPlatform.username)
       if (name === "STEAM" || name === "DISCORD" || name === "XBOX" || name === "SWITCH")
@@ -31,6 +44,7 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
       setState("Disconnected")
       setUsername()
     }
+    */
 
   }, [linkedPlatform])
 
@@ -73,14 +87,15 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
   }
 
   function text(){
-    if (state === "Disconnected" && (name !== "STEAM" && name !== "DISCORD" && name !== "XBOX"))
+    if (state === "Disconnected" && (name !== "STEAM" && name !== "DISCORD"))
       return (
         <p>What is your {name==="SWITCH" ? "Friend code" : "IGN"}</p>
       )
     else if (state === "Unverified")
       return (
         <>
-          <p>To verify your IGN add our account: <span>virtradeAuth</span> as a friend { name==="PSN" ? <a target="_blank" rel="noopener noreferrer" href="https://my.playstation.com/profile/virtradeAuth">here</a> : <>in the epic app</>} and then please wait up to 30 seconds</p>
+          <p>Verify bot is currently down</p>
+          {/*<p>To verify your IGN send a friend request to: <span>virtradeAuth</span> { name==="PSN" ? <a target="_blank" rel="noopener noreferrer" href="https://my.playstation.com/profile/virtradeAuth"><br />here</a> : <>in the epic app</>} and then please wait up to 30 seconds</p>*/}
           <button onClick={()=> handleDisconnect()}>Disconnect</button>
         </>
       )
@@ -92,9 +107,9 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
       return (
         <button onClick={()=> handleDisconnect()} className={styles.signOut}>Sign out</button>
       )
-    else if (state === "Disconnected" && (name === "STEAM" || name === "DISCORD" || name === "XBOX"))
+    else if (state === "Disconnected" && (name === "STEAM" || name === "DISCORD"))
       return (
-          <button onClick={()=> window.open(`https://www.virtrade.gg/api/auth/${name==="STEAM" ? "linkSteam" : name==="DISCORD" ? "linkDiscord" : "xbox"}`)} className={styles.signIn}>Sign in</button>
+          <button onClick={()=> window.open(`https://www.virtrade.gg/api/auth/${name==="STEAM" ? "linkSteam" : "linkDiscord"}`)} className={styles.signIn}>Sign in</button>
       )
     else if (state === "Disconnected")
       return (
@@ -132,6 +147,7 @@ export default function PlatformField({ name, linkedPlatform, getUserInfo }) {
         username: unverifiedUsername
       })
       .then((res) => { 
+        
         if (res.data.info === "success"){
           getUserInfo()
         }

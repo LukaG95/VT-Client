@@ -11,12 +11,17 @@ export default function Partner() {
   useEffect(()=> {
     axios
       .get(`/api/ref/tracking/${tracking}`)
-      .then((res) => { console.log(res.data)
+      .then((res) => { 
+        console.log(res.data)
         if (res.data.info === "success")
           setPartner(res.data)
+        if (res.data.info === "error")
+          setPartner(false)
       })
       .catch((err) => { setPartner(false) });
   }, [])
+
+  console.log(partner)
 
   if (partner)
     return (

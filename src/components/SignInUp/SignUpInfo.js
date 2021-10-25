@@ -163,7 +163,6 @@ function SignUpInfo({ closeForm }) {
       );
       return;
     }
-   
     axios
       .post("/api/auth/signup", {}, {
         auth: {

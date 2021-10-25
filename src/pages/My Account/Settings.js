@@ -119,10 +119,15 @@ function MyAccount() {
         </div>
 
         <div className="account-settings-main" id="account-main">
-          {pathID === "username" && Username()}
-          {pathID === "password" && Password()}
-          {pathID === "email" && Email()}
-          {pathID === "platforms" && Platforms(view)}
+          {
+            user && 
+            <>
+              {pathID === "username" && Username()}
+              {pathID === "password" && Password()}
+              {pathID === "email" && Email()}
+              {pathID === "platforms" && Platforms(view)}
+              </>
+          }
           <div className="filler" style={{marginTop: "3px"}}></div>
         </div>
       </div>

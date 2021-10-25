@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom"
 import styles from "./Main.module.scss";
 import { actions, useTrade } from "../../../context/TradeContext";
 import Item from "../../../components/Categories/Rocket League/Item";
@@ -8,6 +9,8 @@ import ClearItems from "../../../components/AddTrade/ClearItems";
 
 function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
   const [{ have, want, platform, notes, selected }, dispatch] = useTrade();
+
+  const { pathID } = useParams() 
 
   return (
     <div className={styles.wrapperSmall}>
@@ -158,7 +161,7 @@ function Small1stPage({ handleTradeSubmit, setShowPage, setClickedItem }) {
          
         </div>
         <button onClick={() => handleTradeSubmit()} className={styles.submit}>
-          SUBMIT TRADE
+          {pathID ? "EDIT TRADE" : "SUBMIT TRADE"}
         </button>
       </div>
     </div>

@@ -370,6 +370,7 @@ function AddTradeRL() {
           }
         })
         .catch((err) => {
+          console.log(err.response)
           //Error While Creating Trade
           if (err.response)
             createNotification(
